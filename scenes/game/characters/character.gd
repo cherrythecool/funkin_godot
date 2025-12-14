@@ -4,6 +4,7 @@ class_name Character extends Node2D
 @export_category("Visuals")
 @export var icon: Icon = Icon.new()
 @export var starts_as_player: bool = false
+@export var swap_sing_animations: bool = false
 
 @export_category("Animations")
 @export var dances: bool = true
@@ -18,7 +19,6 @@ var dance_step: int = 0
 @onready var camera_offset: Node2D = $camera_offset
 @onready var animation_player: AnimationPlayer = $animation_player
 
-var swap_sing_animations: bool = false
 var animation: StringName = &""
 var singing: bool = false
 var sing_timer: float = 0.0

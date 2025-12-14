@@ -168,9 +168,9 @@ centered = false
 [node name="skybox" type="Parallax2D" parent="."]
 scale = Vector2(0.65, 0.65)
 scroll_scale = Vector2(0.1, 0.1)
-repeat_size = Vector2(1899.19, 0)
+repeat_size = Vector2(2921.839, 0)
 autoscroll = Vector2(-22, 0)
-repeat_times = 2
+repeat_times = 3
 
 [node name="sprite" type="Sprite2D" parent="skybox"]
 z_index = 10

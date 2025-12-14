@@ -23,6 +23,7 @@ var centered_receptors: bool = false:
 @onready var note_fields: Node2D = %note_fields
 @onready var health_bar: HealthBar = %health_bar
 @onready var countdown_container: CountdownContainer = %countdown_container
+@onready var song_label: Label = %song_label
 
 @onready var rating_calculator: RatingCalculator:
 	get:
@@ -64,7 +65,8 @@ func _ready() -> void:
 	if note_fields.has_node(^'opponent'):
 		opponent_field = note_fields.get_node(^'opponent')
 	
-	rating_container.visible = false
+	rating_container.visible = true
+	rating_container.modulate.a = 0.0
 	downscroll = Config.get_value('gameplay', 'scroll_direction') == &'down'
 	centered_receptors = Config.get_value('gameplay', 'centered_receptors')
 
@@ -105,6 +107,21 @@ func _process(delta: float) -> void:
 	scale = scale.lerp(Vector2.ONE, delta * 3.0)
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_echo():
+		return
+	if not event.is_pressed():
+		return
+	if event.is_action(&"toggle_game_hud"):
+		health_bar.visible = not health_bar.visible
+		if not rating_container.visible:
+			rating_container.modulate.a = 0.0
+		
+		rating_container.visible = health_bar.visible
+		countdown_container.visible = health_bar.visible
+		song_label.visible = health_bar.visible
+
+
 func _on_first_opponent_note(_note: Note) -> void:
 	bumps = true
 
@@ -134,14 +151,11 @@ func _on_note_hit(note: Note) -> void:
 	if rating.name == &'marvelous' or rating.name == &'sick':
 		spawn_splash(note, player_field.skin, note.field.receptors[note.lane])
 
-	rating_container.visible = true
-	rating_container.modulate.a = 1.0
-	rating_container.scale = Vector2(1.1, 1.1)
+	rating_container.modulate.a = Config.get_value("interface", "rating_alpha") / 100.0
+	rating_container.scale = Vector2.ONE * 1.1
 	rating_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	rating_tween.tween_property(rating_container, 'scale', Vector2.ONE, 0.15)
 	rating_tween.tween_property(rating_container, 'modulate:a', 0.0, 0.25).set_delay(0.25)
-	rating_tween.tween_callback(func() -> void:
-		rating_container.visible = false).set_delay(0.5)
 
 	var combo_str: String = str(game.combo).pad_zeros(3)
 	var num_count: int = combo_str.length()

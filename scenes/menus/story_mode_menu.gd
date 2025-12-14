@@ -66,8 +66,8 @@ func _input(event: InputEvent) -> void:
 		if _load_first_song():
 			GlobalAudio.get_player('MENU/CONFIRM').play()
 			if is_instance_valid(props.props[2]):
-				props.tween_prop_out(1)
-				props.tween_prop_out(3)
+				props.tween_prop_out(1, Vector2(280.0, 720.0))
+				props.tween_prop_out(3, Vector2(1000.0, 720.0))
 				props.props[2].play_anim('confirm', true)
 				await props.props[2].animation_finished
 
@@ -122,11 +122,11 @@ func change_selection(amount: int = 0) -> void:
 	props.update_props(selected_week.props)
 	
 	if previous_week.props.left != selected_week.props.left:
-		props.tween_prop_in(1)
+		props.tween_prop_in(1, 280.0, Vector2(-400.0, 200.0))
 	if previous_week.props.center != selected_week.props.center:
-		props.tween_prop_in(2)
+		props.tween_prop_in(2, 640.0, Vector2(640.0, 720.0))
 	if previous_week.props.right != selected_week.props.right:
-		props.tween_prop_in(3)
+		props.tween_prop_in(3, 1000.0, Vector2(1280.0+400.0, 200.0))
 	
 	week_name.text = selected_week.display_name
 	difficulties.difficulties = selected_week.difficulties
@@ -149,7 +149,7 @@ func change_selection(amount: int = 0) -> void:
 	
 	week_name.visible_ratio = 0.0
 	week_name_tween = create_tween()
-	week_name_tween.tween_property(week_name, ^"visible_ratio", 1.0, 1.0)
+	week_name_tween.tween_property(week_name, ^"visible_ratio", 1.0, 0.067 * week_name.text.length())
 
 	if amount != 0:
 		GlobalAudio.get_player('MENU/SCROLL').play()

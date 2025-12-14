@@ -188,6 +188,16 @@ func _on_game_song_exited() -> void:
 	reset_persistent_values()
 
 
+func snap_to_position(new_position: Vector2) -> void:
+	position_target = new_position
+	position = new_position
+
+
+func snap_to_zoom(new_zoom: Vector2) -> void:
+	zoom_target = new_zoom
+	zoom = new_zoom
+
+
 static func reset_persistent_values() -> void:
 	camera_position = Vector2.INF
 	camera_zoom = Vector2.INF

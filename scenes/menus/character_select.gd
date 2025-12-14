@@ -170,16 +170,17 @@ func finish_selection(icon: AnimatedSprite, scene_path: String) -> void:
 	icon.playing = true
 	await confirm.finished
 	
-	camera_2d.set_script(null)
-	camera_2d.limit_enabled = false
-	
-	var alpha_tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	alpha_tween.tween_property(fade_rect, ^"color:a", 1.0, 0.5).set_delay(0.7)
-	
-	var camera_tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT)
-	camera_tween.tween_property(camera_2d, ^"offset:y", 30.0, 0.5).set_trans(Tween.TRANS_SINE)
-	camera_tween.tween_property(camera_2d, ^"offset:y", -150.0, 0.7).set_trans(Tween.TRANS_QUAD)
-	await camera_tween.finished
+	if Config.get_value("interface", "scene_transitions"):
+		camera_2d.set_script(null)
+		camera_2d.limit_enabled = false
+		
+		var alpha_tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+		alpha_tween.tween_property(fade_rect, ^"color:a", 1.0, 0.5).set_delay(0.7)
+		
+		var camera_tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT)
+		camera_tween.tween_property(camera_2d, ^"offset:y", 30.0, 0.5).set_trans(Tween.TRANS_SINE)
+		camera_tween.tween_property(camera_2d, ^"offset:y", -150.0, 0.7).set_trans(Tween.TRANS_QUAD)
+		await camera_tween.finished
 	
 	FreeplayMenu.index = 0
 	FreeplayMenu.difficulty_index = 0

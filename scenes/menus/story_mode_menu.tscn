@@ -231,7 +231,7 @@ offset_bottom = -264.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.976471, 0.811765, 0.317647, 1)
+color = Color(0.9764706, 0.8117647, 0.31764707, 1)
 
 [node name="props" type="Control" parent="."]
 unique_name_in_owner = true
@@ -261,6 +261,26 @@ layout_mode = 0
 offset_top = 440.0
 offset_right = 1280.0
 offset_bottom = 456.0
+texture = SubResource("GradientTexture2D_hkev1")
+expand_mode = 1
+
+[node name="left_side" type="TextureRect" parent="week_gradient"]
+layout_mode = 0
+offset_top = -400.0
+offset_right = 400.0
+offset_bottom = -384.0
+rotation = 1.5707964
+pivot_offset = Vector2(0, 16)
+texture = SubResource("GradientTexture2D_hkev1")
+expand_mode = 1
+
+[node name="right_side" type="TextureRect" parent="week_gradient"]
+layout_mode = 0
+offset_left = 1280.0
+offset_right = 1680.0
+offset_bottom = 16.0
+rotation = -1.5707964
+pivot_offset = Vector2(0, 16)
 texture = SubResource("GradientTexture2D_hkev1")
 expand_mode = 1
 
