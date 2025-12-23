@@ -42,6 +42,9 @@ func _ready() -> void:
 	animation_player.animation_finished.connect(func(anim_name: StringName) -> void:
 		animation_finished.emit(anim_name)
 	)
+	
+	if is_instance_valid(Conductor.instance):
+		Conductor.instance.beat_hit.connect(_on_beat_hit)
 
 
 func _process(delta: float) -> void:
@@ -138,3 +141,7 @@ func offset_camera_position(added: Vector2) -> void:
 		return
 
 	camera_offset.position += added
+
+
+func _on_beat_hit(_beat: int) -> void:
+	dance()

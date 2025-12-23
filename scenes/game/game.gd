@@ -169,15 +169,6 @@ func _input(event: InputEvent) -> void:
 		skip_to(conductor.raw_time + 10.0)
 
 
-func _on_beat_hit(_beat: int) -> void:
-	if is_instance_valid(player):
-		player.dance()
-	if is_instance_valid(opponent):
-		opponent.dance()
-	if is_instance_valid(spectator):
-		spectator.dance()
-
-
 func _on_note_miss(note: Note) -> void:
 	misses += 1
 	score -= 10
@@ -406,7 +397,6 @@ func setup_hud() -> void:
 
 func reset_conductor() -> void:
 	conductor.reset()
-	conductor.beat_hit.connect(_on_beat_hit)
 	conductor.get_bpm_changes(chart.events)
 	conductor.calculate_beat()
 	conductor.raw_time = -4.0 * conductor.beat_delta

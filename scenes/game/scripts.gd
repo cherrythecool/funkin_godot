@@ -1,4 +1,5 @@
-class_name Scripts extends Node
+extends Node
+class_name Scripts
 
 
 func load_scripts(song: StringName, song_path: String = '') -> void:

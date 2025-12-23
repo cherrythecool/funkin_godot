@@ -65,7 +65,7 @@ func adjust_character(input: Character, is_player: bool = false) -> void:
 		input.camera_offset.reparent(input)
 
 
-func instance_character(player: bool = false, insert: bool = true) -> Character:
+func instance_character(is_player: bool = false, insert: bool = true, adjust: bool = true) -> Character:
 	if not ResourceLoader.exists(character_path):
 		printerr("Couldn't find character at path %s!" % [character_path])
 		return null
@@ -74,18 +74,22 @@ func instance_character(player: bool = false, insert: bool = true) -> Character:
 	var instanced: Character = scene.instantiate()
 	if flipped:
 		instanced.scale.x *= -1.0
-	instanced.is_player = player
+	instanced.swap_sing_animations = is_player != instanced.starts_as_player
 	instanced.scale *= scale
 	instanced.z_index += z_index
+	
 	if insert:
 		add_sibling(instanced)
-	
-	if is_instance_valid(material):
-		instanced.set_character_material(material)
-	if has_node(^"camera_offset"):
-		if is_instance_valid(instanced.camera_offset):
-			instanced.camera_offset.queue_free()
-		instanced.camera_offset = get_node(^"camera_offset")
+	if adjust:
+		adjust_character(instanced, is_player)
+	else:
+		if is_instance_valid(material):
+			instanced.set_character_material(material)
+		
+		if has_node(^"camera_offset"):
+			if is_instance_valid(instanced.camera_offset):
+				instanced.camera_offset.queue_free()
+			instanced.camera_offset = get_node(^"camera_offset")
 	
 	return instanced
 
