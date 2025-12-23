@@ -34,21 +34,21 @@ signal animation_played(animation: StringName)
 signal animation_finished(animation: StringName)
 
 
-func _ready() -> void:
-	if has_node(^"sprite"):
-		sprite = get_node(^"sprite")
-
-	dance(true)
-	animation_player.animation_finished.connect(func(anim_name: StringName) -> void:
-		animation_finished.emit(anim_name)
-	)
+func _enter_tree() -> void:
+	sprite = get_node_or_null(^"sprite")
+	animation_player = get_node_or_null(^"animation_player")
+	if animation_player != null:
+		animation_player.animation_finished.connect(animation_finished.emit)
 	
+	dance(true)
 	if is_instance_valid(Conductor.instance):
 		Conductor.instance.beat_hit.connect(_on_beat_hit)
 
 
 func _process(delta: float) -> void:
 	if not singing:
+		return
+	if not is_instance_valid(Conductor.instance):
 		return
 
 	sing_timer += delta / Conductor.instance.beat_delta
@@ -57,6 +57,9 @@ func _process(delta: float) -> void:
 
 
 func play_anim(anim: StringName, force: bool = false, special: bool = false) -> void:
+	if not is_instance_valid(animation_player):
+		push_warning("Failed to play animation in Character without animation_player Node")
+		return
 	if (in_special_anim and not special) and animation_player.is_playing():
 		return
 	if not has_anim(anim):
@@ -78,6 +81,9 @@ func play_anim(anim: StringName, force: bool = false, special: bool = false) -> 
 
 
 func has_anim(anim: StringName) -> bool:
+	if not is_instance_valid(animation_player):
+		return false
+	
 	return animation_player.has_animation(anim)
 
 
@@ -100,8 +106,7 @@ func sing_miss(note: Note, force: bool = false) -> void:
 
 	var direction: StringName = Note.directions[note.lane]
 	if swap_sing_animations and swapped_directions.has(direction):
-			direction = swapped_directions.get(direction)
-
+		direction = swapped_directions.get(direction)
 	play_anim(&"sing_%s_miss" % direction.to_lower(), force)
 
 

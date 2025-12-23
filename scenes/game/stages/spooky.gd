@@ -12,7 +12,7 @@ var lightning_offset: int = 8
 
 func _enter_tree() -> void:
 	previous_clear_color = RenderingServer.get_default_clear_color()
-	RenderingServer.set_default_clear_color(Color('#242336'))
+	RenderingServer.set_default_clear_color(Color("#242336"))
 
 
 func _exit_tree() -> void:
@@ -26,7 +26,7 @@ func _ready() -> void:
 func _on_beat_hit(beat: int) -> void:
 	super(beat)
 
-	if beat == 4 and game.song.to_lower() == &'spookeez':
+	if beat == 4 and game.song.to_lower() == &"spookeez":
 		strike(beat, false)
 	if randf_range(0.0, 100.0) >= 90.0 and beat > lightning_beat + lightning_offset:
 		strike(beat, true)
@@ -44,9 +44,9 @@ func strike(beat: int, play_sound: bool = true) -> void:
 		thunder.play()
 		thunder.finished.connect(thunder.queue_free)
 
-	background.play(&'halloweem bg lightning strike')
+	background.play(&"halloweem bg lightning strike")
 
-	if game.spectator.has_anim(&'scared'):
-		game.spectator.play_anim(&'scared', true, true)
-	if game.player.has_anim(&'scared'):
-		game.player.play_anim(&'scared', true, true)
+	if game.spectator.has_anim(&"scared"):
+		game.spectator.play_anim(&"scared", true, true)
+	if game.player.has_anim(&"scared"):
+		game.player.play_anim(&"scared", true, true)

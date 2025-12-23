@@ -10,7 +10,6 @@ var camera_side: int = 0
 
 
 func _ready() -> void:
-	super()
 	if not is_instance_valid(Game.instance):
 		return
 
