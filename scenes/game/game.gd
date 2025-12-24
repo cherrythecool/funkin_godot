@@ -442,7 +442,9 @@ func skip_to(seconds: float) -> void:
 			conductor.raw_time = seconds
 		else:
 			if is_instance_valid(conductor.target_audio.stream):
-				seconds = minf(seconds, conductor.target_audio.stream.get_length())
+				if seconds >= conductor.target_audio.stream.get_length():
+					finish_song(false, false)
+					return
 			
 			if not conductor.target_audio.playing:
 				conductor.target_audio.play(seconds)

@@ -5,7 +5,13 @@ static var camera_position: Vector2 = Vector2.INF
 static var camera_zoom: Vector2 = Vector2.INF
 static var instance: GameCamera2D = null
 
-@export var conductor: Conductor = null
+@export var conductor: Conductor = null:
+	get:
+		if not is_instance_valid(conductor):
+			conductor = Conductor.instance
+		
+		return conductor
+
 @export var persistent_position: bool = true
 @export var persistent_zoom: bool = true
 
@@ -90,7 +96,7 @@ func _on_game_event_hit(event: EventData) -> void:
 			
 			var ease_string: String = event.data[1]
 			position_lerps = true
-			position_target = target.get_camera_position() + event.data[3]
+			position_target = target.get_camera_position() - event.data[3]
 			if event.time <= 0.0 or ease_string == "INSTANT":
 				position = position_target
 			if ease_string == "CLASSIC" or ease_string == "INSTANT":

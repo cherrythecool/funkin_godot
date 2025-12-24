@@ -10,7 +10,7 @@ func _ready() -> void:
 		queue_free()
 		return
 
-	spectator.offset_camera_position(Vector2(50.0, -200.0))
+	spectator.offset_camera_position(Vector2(0.0, -50.0))
 
 	if is_instance_valid(camera):
 		create_tween().set_trans(Tween.TRANS_ELASTIC).tween_property(
