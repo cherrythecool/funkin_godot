@@ -2,7 +2,7 @@ extends Stage
 
 
 func _ready() -> void:
-	super()
+	pass
 
 
 func _ready_post() -> void:
@@ -26,6 +26,14 @@ func _on_measure_hit(_measure: int) -> void:
 
 
 func _on_song_start() -> void:
+	pass
+
+
+func _on_song_finished() -> void:
+	pass
+
+
+func _on_back_to_menus() -> void:
 	pass
 
 
