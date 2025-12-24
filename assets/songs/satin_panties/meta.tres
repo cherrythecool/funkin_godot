@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SongMetadata" load_steps=5 format=3 uid="uid://bbjhujb00cq67"]
 
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_ovi2r"]
-[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/song_metadata.gd" id="2_7b6qm"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="2_7b6qm"]
 [ext_resource type="Texture2D" uid="uid://qvp8tkrjr2l7" path="res://assets/game/characters/mom/icon.png" id="2_ji3gq"]
 
 [sub_resource type="Resource" id="Resource_25amm"]

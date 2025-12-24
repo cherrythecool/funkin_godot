@@ -4,12 +4,12 @@ class_name StoryWeekNode extends TextureRect
 @export var songs: PackedStringArray
 @export var difficulties: PackedStringArray
 
-@export_category('Visuals')
+@export_group('Visuals')
 @export var display_name: StringName
 @export var background_color: Color = Color('#f9cf51')
 @export var props: StoryWeekProps
 
-@export_category('Advanced')
+@export_group('Advanced')
 @export var difficulty_suffixes: DifficultyMap = DifficultyMap.new()
 
 

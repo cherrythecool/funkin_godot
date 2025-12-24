@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SongMetadata" load_steps=5 format=3 uid="uid://0bcwrmqhqsfq"]
 
-[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/song_metadata.gd" id="1_axign"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="1_axign"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_e4y8u"]
 [ext_resource type="Texture2D" uid="uid://bfd6qv0m2yna6" path="res://assets/game/characters/parents_christmas/icon.png" id="2_fc7tr"]
 

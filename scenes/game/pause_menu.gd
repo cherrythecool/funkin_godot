@@ -14,7 +14,7 @@ var selected: int = 0
 
 func _ready() -> void:
 	Engine.time_scale = 1.0
-	_change_selection()
+	change_selection()
 
 	root.modulate.a = 0.5
 	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT)\
@@ -52,7 +52,7 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if event.is_action(&"ui_down") or event.is_action(&"ui_up"):
-		_change_selection(roundi(Input.get_axis("ui_up", "ui_down")))
+		change_selection(roundi(Input.get_axis("ui_up", "ui_down")))
 	if event.is_action(&"ui_accept"):
 		for option: ListedAlphabet in options.get_children():
 			if option.target_y != 0:
@@ -60,22 +60,22 @@ func _input(event: InputEvent) -> void:
 			var type: StringName = option.name.to_lower()
 			match type:
 				&"resume":
-					_close()
+					close()
 				&"restart":
-					_close()
+					close()
 					get_tree().reload_current_scene()
 				&"options":
 					OptionsMenu.target_scene = "res://scenes/game/game.tscn"
-					_close()
+					close()
 					SceneManager.switch_to(load("res://scenes/menus/options_menu.tscn"))
 				&"quit":
-					_close()
+					close()
 					Game.instance.finish_song(true)
 				_:
 					printerr("Pause Option %s unimplemented." % type)
 
 
-func _change_selection(amount: int = 0) -> void:
+func change_selection(amount: int = 0) -> void:
 	selected = wrapi(selected + amount, 0, options.get_child_count())
 
 	if amount != 0:
@@ -86,7 +86,7 @@ func _change_selection(amount: int = 0) -> void:
 		option.modulate.a = 1.0 if option.target_y == 0 else 0.6
 
 
-func _close() -> void:
+func close() -> void:
 	queue_free()
 	get_viewport().set_input_as_handled()
 	active = false

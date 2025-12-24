@@ -10,9 +10,7 @@ static var exit_scene: String = ""
 static var instance: Game = null
 static var playlist: Array[GamePlaylistEntry] = []
 
-var persistent_camera_position: bool = true
 var events_index: int = 0
-
 var pause_menu: PackedScene
 
 @onready var rating_calculator: RatingCalculator = %rating_calculator
@@ -73,7 +71,7 @@ signal song_start
 signal event_prepare(event: EventData)
 signal event_hit(event: EventData)
 signal song_finished
-signal song_exited
+signal back_to_menus
 signal scroll_speed_changed(value: float)
 signal died
 signal botplay_changed(botplay: bool)
@@ -232,7 +230,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 			)
 			printerr("Song at path %s doesn\'t exist!" % json_path)
 			GlobalAudio.get_player("MENU/CANCEL").play()
-			song_exited.emit()
+			back_to_menus.emit()
 			SceneManager.switch_to(load("uid://b7fwxsepnt38j"))
 			playlist.clear()
 			return
@@ -248,7 +246,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 	if sound:
 		GlobalAudio.get_player("MENU/CANCEL").play()
 
-	song_exited.emit()
+	back_to_menus.emit()
 	if not exit_scene.is_empty():
 		SceneManager.switch_to(load(exit_scene))
 		exit_scene = ""

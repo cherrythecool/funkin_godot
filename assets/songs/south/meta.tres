@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_fghlj"]
 [ext_resource type="Texture2D" uid="uid://5ad1jmxs576c" path="res://assets/game/characters/spooky/icon.png" id="2_05h5v"]
-[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/song_metadata.gd" id="2_c2qgm"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="2_c2qgm"]
 
 [sub_resource type="Resource" id="Resource_v2qrg"]
 script = ExtResource("1_fghlj")

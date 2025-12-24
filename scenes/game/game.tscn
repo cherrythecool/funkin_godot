@@ -85,7 +85,7 @@ bumps = false
 [node name="hud_layer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
+[connection signal="back_to_menus" from="." to="camera_2d" method="_on_game_back_to_menus"]
 [connection signal="event_hit" from="." to="camera_2d" method="_on_game_event_hit"]
 [connection signal="ready_post" from="." to="camera_2d" method="_on_game_ready_post"]
-[connection signal="song_exited" from="." to="camera_2d" method="_on_game_song_exited"]
 [connection signal="beat_hit" from="conductor" to="camera_2d" method="_on_beat_hit"]

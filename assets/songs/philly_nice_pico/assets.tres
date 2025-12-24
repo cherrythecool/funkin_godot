@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SongAssets" load_steps=7 format=3 uid="uid://il1jsps0puyr"]
 
 [ext_resource type="Resource" uid="uid://b50qb5a7wlrmn" path="res://assets/game/hud_skins/pico_mixes.tres" id="1_0jppv"]
-[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://scripts/resources/song_assets.gd" id="1_2lx8s"]
+[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://scripts/resources/songs/assets.gd" id="1_2lx8s"]
 [ext_resource type="PackedScene" uid="uid://dr24tjg5bcvow" path="res://scenes/game/characters/pico.tscn" id="1_xx0gk"]
 [ext_resource type="PackedScene" uid="uid://bh5vnsmdwoatu" path="res://scenes/game/characters/pico_player.tscn" id="2_0jppv"]
 [ext_resource type="PackedScene" uid="uid://chcrerdnievt5" path="res://scenes/game/characters/nene_with_hair_blowing.tscn" id="4_h16du"]

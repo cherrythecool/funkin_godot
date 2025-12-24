@@ -62,6 +62,14 @@ func _on_song_start() -> void:
 	pass
 
 
+func _on_song_finished() -> void:
+	pass
+
+
+func _on_back_to_menus() -> void:
+	pass
+
+
 func _on_event_prepare(_event: EventData) -> void:
 	pass
 
@@ -86,6 +94,8 @@ func _initialize_variables() -> void:
 
 	camera = GameCamera2D.instance
 	game.song_start.connect(_on_song_start)
+	game.song_finished.connect(_on_song_finished)
+	game.back_to_menus.connect(_on_back_to_menus)
 	game.event_prepare.connect(_on_event_prepare)
 	game.event_hit.connect(_on_event_hit)
 	game.ready_post.connect(_ready_post)

@@ -1,4 +1,5 @@
-class_name CameraPan extends EventData
+extends EventData
+class_name CameraPan
 
 
 enum Side {

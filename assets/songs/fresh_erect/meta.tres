@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SongMetadata" load_steps=2 format=3 uid="uid://3wegg23v5ak3"]
 
-[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/song_metadata.gd" id="2_iciq6"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="2_iciq6"]
 
 [resource]
 script = ExtResource("2_iciq6")

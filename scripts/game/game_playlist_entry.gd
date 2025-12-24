@@ -1,4 +1,5 @@
-class_name GamePlaylistEntry extends RefCounted
+extends RefCounted
+class_name GamePlaylistEntry
 
 
 var name: StringName

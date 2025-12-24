@@ -1,4 +1,5 @@
-class_name SongMetadata extends Resource
+extends Resource
+class_name SongMetadata
 
 
 @export_group("Display Info")
@@ -19,5 +20,4 @@ class_name SongMetadata extends Resource
 func get_full_name() -> StringName:
 	if mix != &"Default":
 		return &"%s [%s Mix]" % [display_name, mix]
-
 	return display_name

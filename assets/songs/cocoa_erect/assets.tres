@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bm0fb28jg0uki" path="res://scenes/game/characters/parents_christmas.tscn" id="1_0yxr3"]
 [ext_resource type="PackedScene" uid="uid://ct1tgudr3ft86" path="res://scenes/game/notes/alt_note.tscn" id="1_amgjv"]
-[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://scripts/resources/song_assets.gd" id="1_cgg62"]
+[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://scripts/resources/songs/assets.gd" id="1_cgg62"]
 
 [resource]
 script = ExtResource("1_cgg62")

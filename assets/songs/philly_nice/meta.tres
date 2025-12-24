@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_b2hbs"]
 [ext_resource type="Texture2D" uid="uid://cbpmx024rn06u" path="res://assets/game/characters/pico/icon.png" id="2_8ej5a"]
-[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/song_metadata.gd" id="2_adble"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="2_adble"]
 
 [sub_resource type="Resource" id="Resource_adble"]
 script = ExtResource("1_b2hbs")

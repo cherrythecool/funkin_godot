@@ -182,7 +182,7 @@ func _on_game_ready_post() -> void:
 	reset_persistent_values()
 
 
-func _on_game_song_exited() -> void:
+func _on_game_back_to_menus() -> void:
 	persistent_position = false
 	persistent_zoom = false
 	reset_persistent_values()

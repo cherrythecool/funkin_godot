@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_j60a3"]
 [ext_resource type="Texture2D" uid="uid://c8gwllfuq3f1a" path="res://assets/game/characters/dad/icon.png" id="2_jqxd6"]
-[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/song_metadata.gd" id="2_yn8lc"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="2_yn8lc"]
 
 [sub_resource type="Resource" id="Resource_fu8uf"]
 script = ExtResource("1_j60a3")

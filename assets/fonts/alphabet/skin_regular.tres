@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AlphabetSkin" load_steps=40 format=3 uid="uid://br1jxqfifysrp"]
 
-[ext_resource type="Script" uid="uid://6tbbvcxey6ba" path="res://scripts/resources/alphabet_skin_character.gd" id="1_56bwc"]
-[ext_resource type="Script" uid="uid://iqrb44umgj2s" path="res://scripts/resources/alphabet_skin.gd" id="2_mcaus"]
+[ext_resource type="Script" uid="uid://6tbbvcxey6ba" path="res://scripts/resources/alphabet/skin_character.gd" id="1_56bwc"]
+[ext_resource type="Script" uid="uid://iqrb44umgj2s" path="res://scripts/resources/alphabet/skin.gd" id="2_mcaus"]
 [ext_resource type="SpriteFrames" path="res://assets/fonts/alphabet/alphabet_regular.res" id="3_mcaus"]
 
 [sub_resource type="Resource" id="Resource_7kt6j"]
