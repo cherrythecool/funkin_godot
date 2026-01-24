@@ -9,7 +9,7 @@ static var instance: GameCamera2D = null
 	get:
 		if not is_instance_valid(conductor):
 			conductor = Conductor.instance
-		
+
 		return conductor
 
 @export var persistent_position: bool = true
@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 		camera_position = position
 	if persistent_zoom:
 		camera_zoom = zoom
-	
+
 	if position_lerps:
 		position = position.lerp(position_target, GameUtils.lerp_weight(delta, 3.0 * position_lerp_speed))
 	if zoom_lerps:
@@ -93,18 +93,18 @@ func _on_game_event_hit(event: EventData) -> void:
 					target = game.spectator
 			if not is_instance_valid(target):
 				return
-			
+
 			if is_instance_valid(pan_event_tween) and pan_event_tween.is_running():
 				pan_event_tween.kill()
-			
+
 			var ease_string: String = event.data[1]
 			position_lerps = true
-			position_target = target.get_camera_position() - event.data[3]
+			position_target = target.get_camera_position() + event.data[3]
 			if event.time <= 0.0 or ease_string == "INSTANT":
 				position = position_target
 			if ease_string == "CLASSIC" or ease_string == "INSTANT":
 				return
-			
+
 			var steps: float = event.data[2]
 			pan_event_tween = create_tween()
 			pan_event_tween.set_ease(GameUtils.convert_flixel_tween_ease(ease_string))
@@ -115,14 +115,14 @@ func _on_game_event_hit(event: EventData) -> void:
 				false,
 				0.0
 			)
-			
+
 			pan_event_tween.tween_property(
 				self,
 				^"position",
 				position_target,
 				conductor.beat_delta / 4.0 * float(steps)
 			)
-			
+
 			pan_event_tween.tween_property(
 				self,
 				^"position_lerps",
@@ -151,7 +151,7 @@ func _on_game_event_hit(event: EventData) -> void:
 				conductor = Conductor.instance
 			if not is_instance_valid(conductor):
 				return
-			
+
 			zoom_event_tween = create_tween().set_parallel()
 			zoom_event_tween.set_ease(GameUtils.convert_flixel_tween_ease(ease_string))
 			zoom_event_tween.set_trans(GameUtils.convert_flixel_tween_trans(ease_string))
@@ -172,7 +172,7 @@ func _on_game_event_hit(event: EventData) -> void:
 func _on_game_ready_post() -> void:
 	if not is_instance_valid(conductor):
 		conductor = Conductor.instance
-	
+
 	if is_instance_valid(game.stage):
 		zoom_target = Vector2.ONE * game.stage.default_zoom
 		zoom = zoom_target
@@ -182,12 +182,12 @@ func _on_game_ready_post() -> void:
 			_on_first_opponent_note,
 			CONNECT_ONE_SHOT
 		)
-	
+
 	if camera_position != Vector2.INF and persistent_position:
 		position = camera_position
 	if camera_zoom != Vector2.INF and persistent_zoom:
 		zoom = camera_zoom
-	
+
 	reset_persistent_values()
 
 

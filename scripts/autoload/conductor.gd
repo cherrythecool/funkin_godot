@@ -26,7 +26,7 @@ var internal_rate: float = 1.0
 	get:
 		if is_instance_valid(target_audio):
 			return target_audio.pitch_scale
-		
+
 		return internal_rate
 @export var active: bool = true
 
@@ -85,7 +85,7 @@ func _exit_tree() -> void:
 func _ready() -> void:
 	if not is_instance_valid(instance):
 		instance = self
-	
+
 	Config.value_changed.connect(_on_config_value_changed)
 	_on_config_value_changed("gameplay", "manual_offset",
 			Config.get_value("gameplay", "manual_offset"))
@@ -117,7 +117,7 @@ func calculate_beat() -> void:
 	var last_step: int = floori(step)
 	var last_beat: int = floori(beat)
 	var last_measure: int = floori(measure)
-	
+
 	if tempo_changes.is_empty():
 		beat = time / beat_delta
 		calculate_hits(last_step, last_beat, last_measure)
@@ -185,7 +185,7 @@ static func reset_offset() -> void:
 		"Linux",
 		"Web",
 	]
-	
+
 	if SUPPORTED_PLATFORMS.has(OS.get_name()):
 		offset = audio_offset - manual_offset
 	else:

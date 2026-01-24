@@ -81,7 +81,7 @@ signal botplay_changed(botplay: bool)
 func _ready() -> void:
 	if not is_instance_valid(instance):
 		instance = self
-	
+
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	Input.use_accumulated_input = false
 	GlobalAudio.music.stop()
@@ -150,7 +150,7 @@ func _input(event: InputEvent) -> void:
 		add_child(menu)
 		process_mode = Node.PROCESS_MODE_DISABLED
 		conductor.active = false
-	
+
 	if event.is_action(&"toggle_botplay") and is_instance_valid(player_field):
 		save_score = false
 		player_field.takes_input = not player_field.takes_input
@@ -159,7 +159,7 @@ func _input(event: InputEvent) -> void:
 			receptor.takes_input = player_field.takes_input
 			receptor.automatically_play_static = not player_field.takes_input
 		botplay_changed.emit(not player_field.takes_input)
-	
+
 	if not OS.is_debug_build():
 		return
 	if event.is_action(&"skip_time"):
@@ -196,7 +196,7 @@ func start_song(from_position: float = 0.0) -> void:
 	conductor.target_audio = tracks.player
 	conductor.sync_to_target(0.0)
 	conductor.rate = conductor.internal_rate
-	
+
 	song_start.emit()
 	song_started = true
 
@@ -263,7 +263,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 func load_chart() -> void:
 	if not is_instance_valid(chart):
 		chart = Chart.load_song(song, difficulty)
-	
+
 	var custom_speed: float = Config.get_value("gameplay", "custom_scroll_speed")
 	match Config.get_value("gameplay", "scroll_speed_method"):
 		"chart", "chart_based":
@@ -300,7 +300,7 @@ func load_assets() -> void:
 	if not is_instance_valid(metadata):
 		metadata = SongMetadata.new()
 		metadata.display_name = song.to_pascal_case()
-	
+
 	if ResourceLoader.exists("res://assets/songs/%s/assets.tres" % song):
 		assets = load("res://assets/songs/%s/assets.tres" % song)
 	if not is_instance_valid(assets):
@@ -325,19 +325,19 @@ func load_from_assets() -> void:
 			player_point.adjust_character(player, true)
 	if not player.starts_as_player:
 		player.scale *= Vector2(-1.0, 1.0)
-	
+
 	if stage.has_node(^"opponent"):
 		var opponent_point: CharacterPlacement = stage.get_node(^"opponent")
 		if is_instance_valid(opponent_point):
 			opponent_point.adjust_character(opponent)
 	if opponent.starts_as_player:
 		opponent.scale *= Vector2(-1.0, 1.0)
-	
+
 	if stage.has_node(^"spectator"):
 		var spectator_point: CharacterPlacement = stage.get_node(^"spectator")
 		if is_instance_valid(spectator_point):
 			spectator_point.adjust_character(spectator)
-	
+
 	stage_container.add_child(stage)
 
 	## HUD Assets
@@ -345,7 +345,7 @@ func load_from_assets() -> void:
 	if "hud_skin" in hud:
 		hud.hud_skin = assets.get_hud_skin()
 	hud_layer.add_child(hud)
-	
+
 	if "player_field" in hud:
 		player_field = hud.player_field
 	if "opponent_field" in hud:
@@ -356,13 +356,13 @@ func load_from_assets() -> void:
 		player_field.target_character = player
 		if is_instance_valid(assets.player_note_skin):
 			player_field.skin = assets.player_note_skin
-		
+
 		player_field.reload_skin()
 	if is_instance_valid(opponent_field):
 		opponent_field.target_character = opponent
 		if is_instance_valid(assets.opponent_note_skin):
 			opponent_field.skin = assets.opponent_note_skin
-		
+
 		opponent_field.reload_skin()
 
 	if is_instance_valid(assets.get_hud_skin().pause_menu):
@@ -445,13 +445,13 @@ func skip_to(seconds: float) -> void:
 				if seconds >= conductor.target_audio.stream.get_length():
 					finish_song(false, false)
 					return
-			
+
 			if not conductor.target_audio.playing:
 				conductor.target_audio.play(seconds)
 			else:
 				conductor.target_audio.seek(seconds)
 			conductor.sync_to_target(0.0)
-	
+
 	conductor.calculate_beat()
 
 	if is_instance_valid(opponent_field):

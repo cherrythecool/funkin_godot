@@ -20,7 +20,7 @@ func _draw() -> void:
 		return
 	var item: RID = get_canvas_item()
 	RenderingServer.canvas_item_clear(item)
-	
+
 	var atlas: AtlasTexture = texture as AtlasTexture
 	if (not tile_x) and tile_y:
 		var step: float = texture.get_height()
@@ -29,7 +29,7 @@ func _draw() -> void:
 		var scaling: Vector2 = size / atlas.get_size()
 		var offset: Vector2 = atlas.margin.position
 		offset *= scaling
-		
+
 		for i: int in steps:
 			draw_texture_rect_region(atlas.atlas,
 				Rect2(
@@ -41,10 +41,10 @@ func _draw() -> void:
 					atlas.region.size * Vector2(1.0, mirror_multiplier)
 				),
 			)
-			
+
 			if mirror_every_other:
 				mirror_multiplier *= -1.0
-		
+
 		if size.y > steps * step:
 			var src_region: Rect2 = Rect2(
 				atlas.region.position,
@@ -53,7 +53,7 @@ func _draw() -> void:
 					(size.y - (float(steps) * step))
 				),
 			)
-			
+
 			if mirror_multiplier == -1.0:
 				var tiled: float = (size.y - (float(steps) * step))
 				src_region = Rect2(
@@ -65,7 +65,7 @@ func _draw() -> void:
 						-tiled
 					),
 				)
-			
+
 			draw_texture_rect_region(atlas.atlas,
 				Rect2(
 					Vector2(0.0, (float(steps) * step)) + offset,

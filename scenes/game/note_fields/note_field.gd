@@ -41,7 +41,7 @@ func _ready() -> void:
 		scroll_speed = game.scroll_speed
 	if is_instance_valid(Conductor.instance):
 		conductor = Conductor.instance
-	
+
 	note_splash_alpha = Config.get_value('interface', 'note_splash_alpha') / 100.0
 
 	if note_types.is_empty():
@@ -98,7 +98,7 @@ func update_note(note: Note, delta: float = 0.0) -> void:
 				receptor.last_anim != &"confirm"
 			):
 				receptor.hit_note(null)
-		
+
 		if note.sustain_timer <= 0.0:
 			miss_note(note)
 			return
@@ -199,7 +199,7 @@ func hit_note(note: Note) -> void:
 	if note.is_sustain:
 		note.sustain_end_time = note.data.time + note.data.length
 		note.sustain_length_offset = note.data.time - conductor.time
-	
+
 	note.note_hit()
 	note.hit = true
 	note._process(0.0)
@@ -209,7 +209,7 @@ func miss_note(note: Note) -> void:
 	if not takes_input:
 		hit_note(note)
 		return
-	
+
 	var target: Character = target_character
 	if is_instance_valid(note.character):
 		target = note.character
@@ -254,7 +254,9 @@ func spawn_note(data: NoteData) -> void:
 	if data.length > 0.0 and data.length < conductor.step_delta:
 		data.length = 0.0
 
-	var scene: PackedScene = note_types.get(data.type.to_snake_case())
+	var scene: PackedScene = note_types.get(
+		data.type.to_snake_case(), note_types.get(data.type)
+	)
 	if not is_instance_valid(scene):
 		scene = note_types.get(&'default')
 	if not is_instance_valid(scene):
@@ -301,20 +303,20 @@ func try_spawning(skip: bool = false) -> void:
 func get_receptor_from_lane(lane: int) -> Receptor:
 	if receptors.is_empty():
 		return null
-	
+
 	return receptors[clampi(lane, 0, receptors.size() - 1)]
 
 
 func is_receptor_held(lane: int) -> bool:
 	if not takes_input:
 		return true
-	
+
 	var receptor: Receptor = get_receptor_from_lane(lane)
 	if is_instance_valid(receptor):
 		return Input.is_action_pressed(&"input_%s" % [
 			receptor.direction
 		])
-	
+
 	return false
 
 
