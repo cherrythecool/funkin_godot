@@ -77,6 +77,9 @@ func _on_first_opponent_note(_note: Note) -> void:
 
 
 func _on_game_event_hit(event: EventData) -> void:
+	if not is_instance_valid(conductor):
+		conductor = Conductor.instance
+
 	match event.name.to_lower():
 		&"camera pan":
 			var target: Character = null
