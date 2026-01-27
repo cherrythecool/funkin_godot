@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongAssets" load_steps=4 format=3 uid="uid://dq1qmytcseh7s"]
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://dq1qmytcseh7s"]
 
 [ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://scripts/resources/songs/assets.gd" id="1_kpb18"]
 [ext_resource type="PackedScene" uid="uid://l1dqw6ovt7lg" path="res://scenes/game/characters/null.tscn" id="1_x1u0m"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HUDSkin" load_steps=10 format=3 uid="uid://b50qb5a7wlrmn"]
+[gd_resource type="Resource" script_class="HUDSkin" format=3 uid="uid://b50qb5a7wlrmn"]
 
 [ext_resource type="AudioStream" uid="uid://cdx006xagoh7x" path="res://assets/menus/pause_menu/pico_theme.ogg" id="1_jafyk"]
 [ext_resource type="Script" uid="uid://bwjjpqxupvxcc" path="res://scripts/resources/hud_skin.gd" id="1_tmgmm"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dh0j85o8ohuon"]
+[gd_scene format=3 uid="uid://dh0j85o8ohuon"]
 
 [ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="1_3bcht"]
 
@@ -130,13 +130,11 @@ _data = {
 &"exit": SubResource("Animation_nfc17")
 }
 
-[node name="spectator" type="Node2D"]
+[node name="spectator" type="Node2D" unique_id=247289044]
 script = ExtResource("1_3bcht")
 atlas = "res://assets/menus/character_select/bf/spectator"
 loop_mode = "Play Once"
 metadata/_custom_type_script = "uid://diqmdngjb60u2"
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_eqng3")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1453352712]
+libraries/ = SubResource("AnimationLibrary_eqng3")

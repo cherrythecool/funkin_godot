@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhbryleu1jjq0"]
+[gd_scene format=3 uid="uid://bhbryleu1jjq0"]
 
 [ext_resource type="Script" uid="uid://d3gp8t7bd34mv" path="res://scenes/autoload/mixer_control.gd" id="1_fobyb"]
 [ext_resource type="Theme" uid="uid://o8lle0eu7wkh" path="res://assets/resources/themes/general_theme.tres" id="2_baism"]
@@ -48,13 +48,13 @@ font_color = Color(0.5, 0.5, 0.5, 1)
 font_size = 10
 font_color = Color(0.501961, 0.501961, 0.501961, 1)
 
-[node name="mixer_control" type="CanvasLayer"]
+[node name="mixer_control" type="CanvasLayer" unique_id=2135155222]
 process_mode = 3
 layer = 48
 script = ExtResource("1_fobyb")
 icons = Array[Texture2D]([ExtResource("3_f6m6h"), ExtResource("3_d0bi8"), ExtResource("4_rgfc6")])
 
-[node name="root" type="Control" parent="."]
+[node name="root" type="Control" parent="." unique_id=1216102772]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,7 +64,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_baism")
 
-[node name="main_panel" type="Panel" parent="root"]
+[node name="main_panel" type="Panel" parent="root" unique_id=1400028386]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -78,7 +78,7 @@ grow_horizontal = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_upr3n")
 
-[node name="outline" type="Panel" parent="root/main_panel"]
+[node name="outline" type="Panel" parent="root/main_panel" unique_id=853303920]
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
@@ -93,7 +93,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qapov")
 
-[node name="bar" type="ProgressBar" parent="root/main_panel/outline"]
+[node name="bar" type="ProgressBar" parent="root/main_panel/outline" unique_id=109429811]
 unique_name_in_owner = true
 show_behind_parent = true
 layout_mode = 1
@@ -112,7 +112,7 @@ value = 50.0
 fill_mode = 3
 show_percentage = false
 
-[node name="volume_label" type="Label" parent="root/main_panel/outline"]
+[node name="volume_label" type="Label" parent="root/main_panel/outline" unique_id=600497203]
 unique_name_in_owner = true
 show_behind_parent = true
 layout_mode = 1
@@ -130,7 +130,7 @@ text = "50% Volume"
 label_settings = SubResource("LabelSettings_4lv5x")
 vertical_alignment = 2
 
-[node name="icon" type="TextureRect" parent="root/main_panel/outline"]
+[node name="icon" type="TextureRect" parent="root/main_panel/outline" unique_id=1143935163]
 unique_name_in_owner = true
 modulate = Color(0.5, 0.5, 0.5, 1)
 show_behind_parent = true
@@ -151,7 +151,7 @@ texture = ExtResource("3_f6m6h")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="icon_label" type="Label" parent="root/main_panel/outline"]
+[node name="icon_label" type="Label" parent="root/main_panel/outline" unique_id=1886255636]
 unique_name_in_owner = true
 show_behind_parent = true
 layout_mode = 1
@@ -171,7 +171,7 @@ label_settings = SubResource("LabelSettings_vo63s")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="left" type="Label" parent="root/main_panel/outline/icon_label"]
+[node name="left" type="Label" parent="root/main_panel/outline/icon_label" unique_id=962479424]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -187,7 +187,7 @@ text = "<"
 label_settings = SubResource("LabelSettings_vo63s")
 vertical_alignment = 1
 
-[node name="right" type="Label" parent="root/main_panel/outline/icon_label"]
+[node name="right" type="Label" parent="root/main_panel/outline/icon_label" unique_id=1631326104]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

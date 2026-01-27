@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://s7la6mup6cwb"]
+[gd_scene format=3 uid="uid://s7la6mup6cwb"]
 
 [ext_resource type="Script" uid="uid://cbvhb58xsq20k" path="res://scenes/game/characters/nene.gd" id="1_wgx2l"]
 [ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="2_7sfqk"]
@@ -246,35 +246,35 @@ _data = {
 &"dance_right": SubResource("Animation_2gr36")
 }
 
-[node name="nene" type="Node2D"]
+[node name="nene" type="Node2D" unique_id=1793526993]
 script = ExtResource("1_wgx2l")
 dance_steps = Array[StringName]([&"dance_left", &"dance_right"])
 
-[node name="eye_whites" type="ColorRect" parent="."]
+[node name="eye_whites" type="ColorRect" parent="." unique_id=1396650016]
 offset_left = -373.0
 offset_top = -90.0
 offset_right = -248.0
 offset_bottom = -45.0
 
-[node name="eyes" type="Node2D" parent="."]
+[node name="eyes" type="Node2D" parent="." unique_id=1080860315]
 position = Vector2(-356, -98)
 script = ExtResource("2_7sfqk")
 atlas = "res://assets/game/characters/nene/abot/eyes"
 loop_mode = "Play Once"
 metadata/_custom_type_script = "uid://diqmdngjb60u2"
 
-[node name="background" type="ColorRect" parent="."]
+[node name="background" type="ColorRect" parent="." unique_id=857189350]
 offset_left = -230.0
 offset_top = -293.0
 offset_right = 218.0
 offset_bottom = -30.0
 color = Color(0.109804, 0.117647, 0.14902, 1)
 
-[node name="visualizer" type="Node2D" parent="."]
+[node name="visualizer" type="Node2D" parent="." unique_id=1228932354]
 position = Vector2(-3, -159)
 script = ExtResource("3_wgx2l")
 
-[node name="1" type="AnimatedSprite2D" parent="visualizer"]
+[node name="1" type="AnimatedSprite2D" parent="visualizer" unique_id=1501944887]
 material = SubResource("CanvasItemMaterial_wgx2l")
 position = Vector2(-173, 6.5)
 sprite_frames = ExtResource("3_hhb55")
@@ -283,7 +283,7 @@ frame = 5
 script = ExtResource("5_fff1a")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="2" type="AnimatedSprite2D" parent="visualizer"]
+[node name="2" type="AnimatedSprite2D" parent="visualizer" unique_id=2120086799]
 material = SubResource("CanvasItemMaterial_wgx2l")
 position = Vector2(-115, 6.5)
 sprite_frames = ExtResource("3_hhb55")
@@ -293,7 +293,7 @@ frame_progress = 1.0
 script = ExtResource("5_fff1a")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="3" type="AnimatedSprite2D" parent="visualizer"]
+[node name="3" type="AnimatedSprite2D" parent="visualizer" unique_id=1854619644]
 material = SubResource("CanvasItemMaterial_wgx2l")
 position = Vector2(-57, 3.5)
 sprite_frames = ExtResource("3_hhb55")
@@ -303,7 +303,7 @@ frame_progress = 1.0
 script = ExtResource("5_fff1a")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="4" type="AnimatedSprite2D" parent="visualizer"]
+[node name="4" type="AnimatedSprite2D" parent="visualizer" unique_id=1307724801]
 material = SubResource("CanvasItemMaterial_wgx2l")
 position = Vector2(5, 4.5)
 sprite_frames = ExtResource("3_hhb55")
@@ -313,7 +313,7 @@ frame_progress = 1.0
 script = ExtResource("5_fff1a")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="5" type="AnimatedSprite2D" parent="visualizer"]
+[node name="5" type="AnimatedSprite2D" parent="visualizer" unique_id=1242045368]
 material = SubResource("CanvasItemMaterial_wgx2l")
 position = Vector2(62, 6.5)
 sprite_frames = ExtResource("3_hhb55")
@@ -323,7 +323,7 @@ frame_progress = 1.0
 script = ExtResource("5_fff1a")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="6" type="AnimatedSprite2D" parent="visualizer"]
+[node name="6" type="AnimatedSprite2D" parent="visualizer" unique_id=1670003383]
 material = SubResource("CanvasItemMaterial_wgx2l")
 position = Vector2(115, 6.5)
 sprite_frames = ExtResource("3_hhb55")
@@ -333,7 +333,7 @@ frame_progress = 1.0
 script = ExtResource("5_fff1a")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="7" type="AnimatedSprite2D" parent="visualizer"]
+[node name="7" type="AnimatedSprite2D" parent="visualizer" unique_id=1901801875]
 material = SubResource("CanvasItemMaterial_wgx2l")
 position = Vector2(168, 7.5)
 sprite_frames = ExtResource("3_hhb55")
@@ -343,24 +343,22 @@ frame_progress = 1.0
 script = ExtResource("5_fff1a")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="speakers" type="Node2D" parent="."]
+[node name="speakers" type="Node2D" parent="." unique_id=1508916267]
 position = Vector2(-413, -337)
 script = ExtResource("2_7sfqk")
 atlas = "res://assets/game/characters/nene/abot/speaker"
 loop_mode = "Play Once"
 metadata/_custom_type_script = "uid://diqmdngjb60u2"
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=2051816380]
 position = Vector2(-284, -649)
 sprite_frames = ExtResource("4_7sfqk")
 animation = &"Idle"
 centered = false
 script = ExtResource("5_fff1a")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1966948836]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=1402284156]
 position = Vector2(11, -346)

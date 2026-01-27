@@ -1,12 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://8ynd81bqjpe8"]
+[gd_scene format=3 uid="uid://8ynd81bqjpe8"]
 
 [ext_resource type="Script" uid="uid://cfoo44n1adnya" path="res://scripts/game/cutscenes/video_cutscene.gd" id="1_q08p3"]
 
-[node name="video_example" type="CanvasLayer"]
+[node name="video_example" type="CanvasLayer" unique_id=1576883825]
 layer = 32
 script = ExtResource("1_q08p3")
 
-[node name="video_player" type="VideoStreamPlayer" parent="."]
+[node name="video_player" type="VideoStreamPlayer" parent="." unique_id=1172277455]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0

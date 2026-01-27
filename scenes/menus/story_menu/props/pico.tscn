@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://hs0eb1ifd534"]
+[gd_scene format=3 uid="uid://hs0eb1ifd534"]
 
 [ext_resource type="Script" uid="uid://ca2370vvlh2g8" path="res://scenes/menus/story_menu/props/story_menu_prop.gd" id="1_oyyu8"]
-[ext_resource type="SpriteFrames" path="res://assets/menus/story_menu/characters/pico.res" id="2_oyyu8"]
+[ext_resource type="SpriteFrames" uid="uid://c0bxdgdljwnvi" path="res://assets/menus/story_menu/characters/pico.res" id="2_oyyu8"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="3_j5p2k"]
 
 [sub_resource type="Animation" id="Animation_mynvx"]
@@ -114,18 +114,16 @@ _data = {
 &"idle": SubResource("Animation_gufny")
 }
 
-[node name="pico" type="Node2D"]
+[node name="pico" type="Node2D" unique_id=1570898375]
 script = ExtResource("1_oyyu8")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1565970718]
 position = Vector2(-75, 50)
 sprite_frames = ExtResource("2_oyyu8")
 animation = &"idle"
 frame = 13
 script = ExtResource("3_j5p2k")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=2005295711]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_2nnyj")
-}
+libraries/ = SubResource("AnimationLibrary_2nnyj")

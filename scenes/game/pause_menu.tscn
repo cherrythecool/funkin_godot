@@ -1,22 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3n853hu8o3ik"]
+[gd_scene format=3 uid="uid://d3n853hu8o3ik"]
 
 [ext_resource type="Script" uid="uid://bwmixxli8w6c0" path="res://scenes/game/pause_menu.gd" id="1_vrvda"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="2_1gnl8"]
 [ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://scenes/interface/listed_alphabet.gd" id="3_380tn"]
+[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://assets/fonts/alphabet/skin_bold.tres" id="3_lalf1"]
 [ext_resource type="AudioStream" uid="uid://cvhdcl07i6lt1" path="res://assets/menus/pause_menu/main_theme.ogg" id="4_6wbaw"]
 
-[node name="pause_menu" type="CanvasLayer"]
+[node name="pause_menu" type="CanvasLayer" unique_id=1041939476]
 process_mode = 3
 layer = 2
 script = ExtResource("1_vrvda")
 
-[node name="root" type="Control" parent="."]
+[node name="root" type="Control" parent="." unique_id=85552725]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="blur" type="ColorRect" parent="root"]
+[node name="blur" type="ColorRect" parent="root" unique_id=930454785]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -29,57 +30,63 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.5)
 
-[node name="song_name" type="Node2D" parent="root"]
+[node name="song_name" type="Node2D" parent="root" unique_id=90593815]
 unique_name_in_owner = true
 z_index = 4
 position = Vector2(1068, 16)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("2_1gnl8")
+skin = ExtResource("3_lalf1")
 text = "Penis
 (HARD)"
 horizontal_alignment = "Right"
 metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
 
-[node name="play_type" type="Node2D" parent="root"]
+[node name="play_type" type="Node2D" parent="root" unique_id=185377642]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.564)
 z_index = 4
 position = Vector2(982, 649)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("2_1gnl8")
+skin = ExtResource("3_lalf1")
 text = "Freeplay"
 metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
 
-[node name="options" type="Node2D" parent="."]
+[node name="options" type="Node2D" parent="." unique_id=1633957123]
 unique_name_in_owner = true
 
-[node name="resume" type="Node2D" parent="options"]
-position = Vector2(90, 326.5)
+[node name="resume" type="Node2D" parent="options" unique_id=29791263]
+position = Vector2(90, 326.68652)
 script = ExtResource("3_380tn")
+skin = ExtResource("3_lalf1")
 text = "resume"
 
-[node name="restart" type="Node2D" parent="options"]
+[node name="restart" type="Node2D" parent="options" unique_id=422190198]
 modulate = Color(1, 1, 1, 0.7)
-position = Vector2(110, 482)
+position = Vector2(110, 482.18652)
 script = ExtResource("3_380tn")
 target_y = 1
+skin = ExtResource("3_lalf1")
 text = "restart"
 
-[node name="options" type="Node2D" parent="options"]
+[node name="options" type="Node2D" parent="options" unique_id=1594949867]
 modulate = Color(1, 1, 1, 0.7)
-position = Vector2(130, 636.5)
+position = Vector2(130, 636.6865)
 script = ExtResource("3_380tn")
 target_y = 2
+skin = ExtResource("3_lalf1")
 text = "options"
 
-[node name="quit" type="Node2D" parent="options"]
+[node name="quit" type="Node2D" parent="options" unique_id=1410297465]
 modulate = Color(1, 1, 1, 0.7)
-position = Vector2(150, 794)
+position = Vector2(150, 794.1865)
 script = ExtResource("3_380tn")
 target_y = 3
+skin = ExtResource("3_lalf1")
 text = "quit"
 
-[node name="music" type="AudioStreamPlayer" parent="."]
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=980516486]
 process_mode = 1
 stream = ExtResource("4_6wbaw")
 volume_db = -80.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://k1d367s1as6d"]
+[gd_scene format=3 uid="uid://k1d367s1as6d"]
 
 [ext_resource type="Script" uid="uid://b6pvuwsnfdwtj" path="res://scenes/game/stages/limo.gd" id="1_11vc5"]
 [ext_resource type="AudioStream" uid="uid://d3dsst4t3xlnc" path="res://assets/game/stages/limo/car_0.ogg" id="2_8o2p2"]
@@ -17,25 +17,25 @@
 shader = ExtResource("4_2gosj")
 shader_parameter/funnyShit = ExtResource("5_1nyvw")
 
-[node name="limo" type="Node2D"]
+[node name="limo" type="Node2D" unique_id=2141360635]
 script = ExtResource("1_11vc5")
 car_sounds = Array[AudioStream]([ExtResource("2_8o2p2"), ExtResource("3_xtsds")])
 default_zoom = 0.9
 
-[node name="sunset" type="Parallax2D" parent="."]
+[node name="sunset" type="Parallax2D" parent="." unique_id=1610912083]
 scroll_scale = Vector2(0.1, 0.1)
 
-[node name="sprite" type="Sprite2D" parent="sunset"]
+[node name="sprite" type="Sprite2D" parent="sunset" unique_id=2117964312]
 z_index = 10
 material = SubResource("ShaderMaterial_ylkxk")
 position = Vector2(-120, -50)
 texture = ExtResource("2_potqh")
 centered = false
 
-[node name="bg_limo" type="Parallax2D" parent="."]
+[node name="bg_limo" type="Parallax2D" parent="." unique_id=1004692345]
 scroll_scale = Vector2(0.4, 0.4)
 
-[node name="sprite" type="AnimatedSprite2D" parent="bg_limo"]
+[node name="sprite" type="AnimatedSprite2D" parent="bg_limo" unique_id=2128826861]
 z_index = 20
 position = Vector2(-200, 480)
 sprite_frames = ExtResource("3_8o2p2")
@@ -46,7 +46,7 @@ script = ExtResource("4_xtsds")
 playing = true
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="fg_limo" type="AnimatedSprite2D" parent="."]
+[node name="fg_limo" type="AnimatedSprite2D" parent="." unique_id=1000834276]
 z_index = 150
 position = Vector2(-120, 550)
 sprite_frames = ExtResource("5_axglq")
@@ -57,26 +57,26 @@ script = ExtResource("4_xtsds")
 playing = true
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="fast_car" type="Sprite2D" parent="."]
+[node name="fast_car" type="Sprite2D" parent="." unique_id=1457524160]
 unique_name_in_owner = true
 z_index = 500
 position = Vector2(-26000, 160)
 texture = ExtResource("7_2gosj")
 centered = false
 
-[node name="car_timer" type="Timer" parent="."]
+[node name="car_timer" type="Timer" parent="." unique_id=934252569]
 unique_name_in_owner = true
 wait_time = 2.0
 one_shot = true
 
-[node name="car_pass" type="AudioStreamPlayer" parent="."]
+[node name="car_pass" type="AudioStreamPlayer" parent="." unique_id=1716118330]
 unique_name_in_owner = true
 
-[node name="dancers" type="Parallax2D" parent="."]
+[node name="dancers" type="Parallax2D" parent="." unique_id=249883978]
 unique_name_in_owner = true
 scroll_scale = Vector2(0.4, 0.4)
 
-[node name="0" type="AnimatedSprite2D" parent="dancers"]
+[node name="0" type="AnimatedSprite2D" parent="dancers" unique_id=479708961]
 z_index = 30
 position = Vector2(100, 100)
 sprite_frames = ExtResource("9_xtsds")
@@ -85,7 +85,7 @@ centered = false
 script = ExtResource("4_xtsds")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="1" type="AnimatedSprite2D" parent="dancers"]
+[node name="1" type="AnimatedSprite2D" parent="dancers" unique_id=1688809252]
 z_index = 30
 position = Vector2(400, 100)
 sprite_frames = ExtResource("9_xtsds")
@@ -94,7 +94,7 @@ centered = false
 script = ExtResource("4_xtsds")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="2" type="AnimatedSprite2D" parent="dancers"]
+[node name="2" type="AnimatedSprite2D" parent="dancers" unique_id=1826526929]
 z_index = 30
 position = Vector2(700, 100)
 sprite_frames = ExtResource("9_xtsds")
@@ -103,7 +103,7 @@ centered = false
 script = ExtResource("4_xtsds")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="3" type="AnimatedSprite2D" parent="dancers"]
+[node name="3" type="AnimatedSprite2D" parent="dancers" unique_id=16875184]
 z_index = 30
 position = Vector2(1000, 100)
 sprite_frames = ExtResource("9_xtsds")
@@ -112,7 +112,7 @@ centered = false
 script = ExtResource("4_xtsds")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="4" type="AnimatedSprite2D" parent="dancers"]
+[node name="4" type="AnimatedSprite2D" parent="dancers" unique_id=772945008]
 z_index = 30
 position = Vector2(1300, 100)
 sprite_frames = ExtResource("9_xtsds")
@@ -121,20 +121,20 @@ centered = false
 script = ExtResource("4_xtsds")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="spectator" type="Marker2D" parent="."]
+[node name="spectator" type="Marker2D" parent="." unique_id=1771025256]
 unique_name_in_owner = true
 z_index = 100
 position = Vector2(755, 790)
 script = ExtResource("5_8o2p2")
 character_path = "uid://cfd0vee7ua8k7"
 
-[node name="player" type="Marker2D" parent="."]
+[node name="player" type="Marker2D" parent="." unique_id=1328564153]
 unique_name_in_owner = true
 z_index = 300
 position = Vector2(1274, 595)
 script = ExtResource("5_8o2p2")
 
-[node name="opponent" type="Marker2D" parent="."]
+[node name="opponent" type="Marker2D" parent="." unique_id=1464205059]
 unique_name_in_owner = true
 z_index = 200
 position = Vector2(263, 831)

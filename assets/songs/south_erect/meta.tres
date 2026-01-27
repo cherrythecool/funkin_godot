@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongMetadata" load_steps=2 format=3 uid="uid://r5ndj56t1mi4"]
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://r5ndj56t1mi4"]
 
 [ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="2_64mbi"]
 
@@ -6,6 +6,4 @@
 script = ExtResource("2_64mbi")
 display_name = &"South"
 mix = &"Erect"
-difficulties = ["easy", "normal", "hard"]
-difficulty_song_overrides = Dictionary[String, StringName]({})
 metadata/_custom_type_script = "uid://3bi6wwv6us1w"

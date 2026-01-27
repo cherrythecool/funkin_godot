@@ -1,78 +1,84 @@
-[gd_scene load_steps=5 format=3 uid="uid://c54n5pwgvqym0"]
+[gd_scene format=3 uid="uid://c54n5pwgvqym0"]
 
 [ext_resource type="SpriteFrames" uid="uid://y8en4nx7mbuw" path="res://assets/game/skins/default/receptors.res" id="1_dgmlx"]
 [ext_resource type="Script" uid="uid://deu38koiq5osv" path="res://scenes/menus/options/previews/keybinds.gd" id="1_ol6wa"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="2_d1c8h"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="3_g24lb"]
+[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://assets/fonts/alphabet/skin_bold.tres" id="3_yk8oi"]
 
-[node name="keybinds" type="Node2D"]
+[node name="keybinds" type="Node2D" unique_id=1464591229]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_ol6wa")
 
-[node name="label" type="Node2D" parent="."]
+[node name="label" type="Node2D" parent="." unique_id=1954395223]
 position = Vector2(0, -326)
 script = ExtResource("3_g24lb")
+skin = ExtResource("3_yk8oi")
 text = "click on the
 arrows to
 change binds"
 centered = true
 horizontal_alignment = "Center"
 
-[node name="left" type="AnimatedSprite2D" parent="."]
+[node name="left" type="AnimatedSprite2D" parent="." unique_id=168531004]
 position = Vector2(-236, 0)
 sprite_frames = ExtResource("1_dgmlx")
 animation = &"left static"
 script = ExtResource("2_d1c8h")
 
-[node name="key" type="Node2D" parent="left"]
+[node name="key" type="Node2D" parent="left" unique_id=1813753089]
 position = Vector2(0, -128)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_g24lb")
+skin = ExtResource("3_yk8oi")
 text = "D"
 centered = true
 no_offset = true
 horizontal_alignment = "Center"
 
-[node name="down" type="AnimatedSprite2D" parent="."]
+[node name="down" type="AnimatedSprite2D" parent="." unique_id=1039354808]
 position = Vector2(-79, 0)
 sprite_frames = ExtResource("1_dgmlx")
 animation = &"down static"
 script = ExtResource("2_d1c8h")
 
-[node name="key" type="Node2D" parent="down"]
+[node name="key" type="Node2D" parent="down" unique_id=943231021]
 position = Vector2(0, -128)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_g24lb")
+skin = ExtResource("3_yk8oi")
 text = "F"
 centered = true
 no_offset = true
 horizontal_alignment = "Center"
 
-[node name="up" type="AnimatedSprite2D" parent="."]
+[node name="up" type="AnimatedSprite2D" parent="." unique_id=551774116]
 position = Vector2(79, 0)
 sprite_frames = ExtResource("1_dgmlx")
 animation = &"up static"
 script = ExtResource("2_d1c8h")
 
-[node name="key" type="Node2D" parent="up"]
+[node name="key" type="Node2D" parent="up" unique_id=1847462011]
 position = Vector2(0, -128)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_g24lb")
+skin = ExtResource("3_yk8oi")
 text = "J"
 centered = true
 no_offset = true
 horizontal_alignment = "Center"
 
-[node name="right" type="AnimatedSprite2D" parent="."]
+[node name="right" type="AnimatedSprite2D" parent="." unique_id=1250714935]
 position = Vector2(236, 0)
 sprite_frames = ExtResource("1_dgmlx")
 animation = &"right static"
 script = ExtResource("2_d1c8h")
 
-[node name="key" type="Node2D" parent="right"]
+[node name="key" type="Node2D" parent="right" unique_id=1515700636]
 position = Vector2(0, -128)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_g24lb")
+skin = ExtResource("3_yk8oi")
 text = "K"
 centered = true
 no_offset = true

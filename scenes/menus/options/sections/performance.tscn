@@ -1,31 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://jmkjkp1jvkpj"]
+[gd_scene format=3 uid="uid://jmkjkp1jvkpj"]
 
 [ext_resource type="Script" uid="uid://c7iq5ek2ivhku" path="res://scenes/menus/options/sections/interface.gd" id="1_lsu8b"]
 [ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://scenes/menus/options/checkbox_option.gd" id="2_4cqv6"]
 [ext_resource type="Script" uid="uid://dkkhrn1co2t6t" path="res://scenes/menus/options/list_number_option.gd" id="2_a8kn0"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="3_p1may"]
 [ext_resource type="SpriteFrames" uid="uid://oksqh74ocs1w" path="res://assets/menus/options/checkbox.res" id="4_j1leb"]
+[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://assets/fonts/alphabet/skin_bold.tres" id="4_mctce"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="5_7omr5"]
 [ext_resource type="Script" uid="uid://cvona80crsbei" path="res://scenes/menus/options/list_option.gd" id="7_a8kn0"]
 
-[node name="performance" type="Node2D" node_paths=PackedStringArray("options")]
+[node name="performance" type="Node2D" unique_id=344179767 node_paths=PackedStringArray("options")]
 position = Vector2(-320, 0)
 script = ExtResource("1_lsu8b")
-options = [NodePath("intensive_visuals"), NodePath("fps_cap"), NodePath("vsync_mode"), NodePath("auto_pause"), NodePath("debug_label_visible"), NodePath("debug_label")]
-max_distance = 100.0
+options = [NodePath("intensive_visuals"), NodePath("fps_cap"), NodePath("vsync_mode"), NodePath("auto_pause"), NodePath("dpi_awareness"), NodePath("debug_label_visible"), NodePath("debug_label")]
+max_distance = 260.0
 
-[node name="intensive_visuals" type="Node2D" parent="."]
+[node name="intensive_visuals" type="Node2D" parent="." unique_id=677384584]
 position = Vector2(144, -169)
 script = ExtResource("2_4cqv6")
 section = &"performance"
 key = &"intensive_visuals"
 
-[node name="alphabet" type="Node2D" parent="intensive_visuals"]
+[node name="alphabet" type="Node2D" parent="intensive_visuals" unique_id=732150428]
 script = ExtResource("3_p1may")
+skin = ExtResource("4_mctce")
 text = "intensive visuals"
 centered = true
 
-[node name="checkbox" type="AnimatedSprite2D" parent="intensive_visuals"]
+[node name="checkbox" type="AnimatedSprite2D" parent="intensive_visuals" unique_id=2067246571]
 position = Vector2(462, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_j1leb")
@@ -33,53 +35,58 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_7omr5")
 
-[node name="fps_cap" type="Node2D" parent="."]
+[node name="fps_cap" type="Node2D" parent="." unique_id=2011964035]
 position = Vector2(66, -70)
 script = ExtResource("2_a8kn0")
 list = Array[float]([0.0, 30.0, 60.0, 120.0, 144.0, 165.0, 240.0, 360.0, 1000.0])
 display_float = false
 
-[node name="label" type="Node2D" parent="fps_cap"]
+[node name="label" type="Node2D" parent="fps_cap" unique_id=1836413960]
 position = Vector2(-140, 0)
 script = ExtResource("3_p1may")
+skin = ExtResource("4_mctce")
 text = "fps cap:"
 centered = true
 
-[node name="value" type="Node2D" parent="fps_cap"]
+[node name="value" type="Node2D" parent="fps_cap" unique_id=1521074740]
 position = Vector2(68, -34)
 script = ExtResource("3_p1may")
+skin = ExtResource("4_mctce")
 text = "< 0 >"
 
-[node name="vsync_mode" type="Node2D" parent="."]
+[node name="vsync_mode" type="Node2D" parent="." unique_id=2048900203]
 position = Vector2(139, 27)
 script = ExtResource("7_a8kn0")
 section = &"performance"
 key = &"vsync_mode"
 list = Array[String](["disabled", "enabled", "adaptive", "mailbox"])
 
-[node name="label" type="Node2D" parent="vsync_mode"]
+[node name="label" type="Node2D" parent="vsync_mode" unique_id=1781573908]
 position = Vector2(-135, 0)
 script = ExtResource("3_p1may")
+skin = ExtResource("4_mctce")
 text = "vsync mode:"
 centered = true
 
-[node name="value" type="Node2D" parent="vsync_mode"]
+[node name="value" type="Node2D" parent="vsync_mode" unique_id=773011865]
 position = Vector2(152, -34)
 script = ExtResource("3_p1may")
+skin = ExtResource("4_mctce")
 text = "disabled"
 
-[node name="auto_pause" type="Node2D" parent="."]
+[node name="auto_pause" type="Node2D" parent="." unique_id=1218604123]
 position = Vector2(-17, 174)
 script = ExtResource("2_4cqv6")
 section = &"performance"
 key = &"auto_pause"
 
-[node name="alphabet" type="Node2D" parent="auto_pause"]
+[node name="alphabet" type="Node2D" parent="auto_pause" unique_id=1168870364]
 script = ExtResource("3_p1may")
+skin = ExtResource("4_mctce")
 text = "auto pause"
 centered = true
 
-[node name="checkbox" type="AnimatedSprite2D" parent="auto_pause"]
+[node name="checkbox" type="AnimatedSprite2D" parent="auto_pause" unique_id=584308001]
 position = Vector2(307, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_j1leb")
@@ -87,18 +94,39 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_7omr5")
 
-[node name="debug_label_visible" type="Node2D" parent="."]
-position = Vector2(2, 277)
+[node name="dpi_awareness" type="Node2D" parent="." unique_id=2031384203]
+position = Vector2(61, 268)
+script = ExtResource("2_4cqv6")
+section = &"performance"
+key = &"dpi_awareness"
+
+[node name="alphabet" type="Node2D" parent="dpi_awareness" unique_id=1469192814]
+script = ExtResource("3_p1may")
+skin = ExtResource("4_mctce")
+text = "dpi awareness"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="dpi_awareness" unique_id=665540961]
+position = Vector2(371, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_j1leb")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_7omr5")
+
+[node name="debug_label_visible" type="Node2D" parent="." unique_id=788984032]
+position = Vector2(2, 448)
 script = ExtResource("2_4cqv6")
 section = &"performance"
 key = &"debug_label_visible"
 
-[node name="alphabet" type="Node2D" parent="debug_label_visible"]
+[node name="alphabet" type="Node2D" parent="debug_label_visible" unique_id=1251655064]
 script = ExtResource("3_p1may")
+skin = ExtResource("4_mctce")
 text = "debug label"
 centered = true
 
-[node name="checkbox" type="AnimatedSprite2D" parent="debug_label_visible"]
+[node name="checkbox" type="AnimatedSprite2D" parent="debug_label_visible" unique_id=1252067311]
 position = Vector2(341, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_j1leb")
@@ -106,24 +134,27 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_7omr5")
 
-[node name="debug_label" type="Node2D" parent="."]
-position = Vector2(131, 374)
+[node name="debug_label" type="Node2D" parent="." unique_id=1633305983]
+position = Vector2(131, 545)
 script = ExtResource("7_a8kn0")
 section = &"performance"
 key = &"debug_label"
 list = Array[String](["default", "debug"])
 
-[node name="label" type="Node2D" parent="debug_label"]
+[node name="label" type="Node2D" parent="debug_label" unique_id=490640766]
 position = Vector2(-135, 0)
 script = ExtResource("3_p1may")
+skin = ExtResource("4_mctce")
 text = "debug mode:"
 centered = true
 
-[node name="value" type="Node2D" parent="debug_label"]
+[node name="value" type="Node2D" parent="debug_label" unique_id=2031845935]
 position = Vector2(152, -34)
 script = ExtResource("3_p1may")
+skin = ExtResource("4_mctce")
 text = "disabled"
 
 [connection signal="animation_finished" from="intensive_visuals/checkbox" to="intensive_visuals" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="auto_pause/checkbox" to="auto_pause" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="dpi_awareness/checkbox" to="dpi_awareness" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="debug_label_visible/checkbox" to="debug_label_visible" method="_on_checkbox_animation_finished"]

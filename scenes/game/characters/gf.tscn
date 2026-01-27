@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bragoy3tisav2"]
+[gd_scene format=3 uid="uid://bragoy3tisav2"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_bbqcr"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_jrmk7"]
@@ -620,12 +620,12 @@ _data = {
 &"sing_up": SubResource("Animation_rvqok")
 }
 
-[node name="gf" type="Node2D"]
+[node name="gf" type="Node2D" unique_id=1784103068]
 script = ExtResource("1_bbqcr")
 icon = SubResource("Resource_1qgms")
 dance_steps = Array[StringName]([&"dance_left", &"dance_right"])
 
-[node name="sprite" type="Node2D" parent="."]
+[node name="sprite" type="Node2D" parent="." unique_id=1185828068]
 position = Vector2(-218, -341)
 script = ExtResource("4_nbymw")
 atlas = "res://assets/game/characters/gf/default_spritemap"
@@ -633,10 +633,8 @@ symbol = "GF Dancing Beat"
 loop_mode = "Play Once"
 metadata/_custom_type_script = "uid://diqmdngjb60u2"
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1081631293]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=1605101436]
 position = Vector2(-5, -353)

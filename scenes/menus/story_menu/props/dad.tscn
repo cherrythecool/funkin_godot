@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmjlw8331xjs2"]
+[gd_scene format=3 uid="uid://bmjlw8331xjs2"]
 
 [ext_resource type="Script" uid="uid://ca2370vvlh2g8" path="res://scenes/menus/story_menu/props/story_menu_prop.gd" id="1_lq57p"]
 [ext_resource type="SpriteFrames" uid="uid://cgmlpe20xxn4o" path="res://assets/menus/story_menu/characters/dad.res" id="2_8lm2c"]
@@ -114,18 +114,16 @@ _data = {
 &"idle": SubResource("Animation_gufny")
 }
 
-[node name="dad" type="Node2D"]
+[node name="dad" type="Node2D" unique_id=1124854161]
 script = ExtResource("1_lq57p")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=352032526]
 position = Vector2(-56, 0)
 sprite_frames = ExtResource("2_8lm2c")
 animation = &"idle"
 frame = 13
 script = ExtResource("3_gek0x")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=875214778]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_2nnyj")
-}
+libraries/ = SubResource("AnimationLibrary_2nnyj")

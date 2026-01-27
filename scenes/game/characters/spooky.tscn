@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4dbyolh86dgm"]
+[gd_scene format=3 uid="uid://d4dbyolh86dgm"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_43mb2"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_pnq3w"]
@@ -10,8 +10,6 @@
 script = ExtResource("2_pnq3w")
 texture = ExtResource("3_43mb2")
 color = Color(0.835294, 0.494118, 0, 1)
-frames = Vector2i(2, 1)
-filter = 0
 
 [sub_resource type="Animation" id="Animation_bgpi6"]
 length = 0.001
@@ -446,13 +444,13 @@ _data = {
 &"sing_up": SubResource("Animation_5fv6i")
 }
 
-[node name="spooky" type="Node2D"]
+[node name="spooky" type="Node2D" unique_id=850268009]
 script = ExtResource("1_43mb2")
 icon = SubResource("Resource_pnq3w")
 dance_steps = Array[StringName]([&"dance_left", &"dance_right"])
 sing_steps = 8.0
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=588414045]
 position = Vector2(-289, -542)
 sprite_frames = ExtResource("4_43mb2")
 animation = &"Idle"
@@ -460,10 +458,8 @@ centered = false
 script = ExtResource("5_nljr1")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=694571933]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=248201209]
 position = Vector2(232, -362)

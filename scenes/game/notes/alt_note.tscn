@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct1tgudr3ft86"]
+[gd_scene format=3 uid="uid://ct1tgudr3ft86"]
 
 [ext_resource type="Script" uid="uid://dj0ps70uiqehu" path="res://scenes/game/notes/note.gd" id="1_5077g"]
 [ext_resource type="Texture2D" uid="uid://bbc06fsifnyro" path="res://assets/game/skins/default/notes.png" id="2_qge85"]
@@ -13,12 +13,12 @@ region = Rect2(207, 312, 50, 41)
 atlas = ExtResource("2_qge85")
 region = Rect2(314, 197, 50, 63)
 
-[node name="note" type="Node2D"]
+[node name="note" type="Node2D" unique_id=901893216]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_5077g")
 sing_suffix = &"_alt"
 
-[node name="clip_rect" type="Control" parent="."]
+[node name="clip_rect" type="Control" parent="." unique_id=369286507]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 5
@@ -30,7 +30,7 @@ offset_right = 64.0
 grow_horizontal = 2
 pivot_offset = Vector2(64, 1280)
 
-[node name="sustain" type="TextureRect" parent="clip_rect"]
+[node name="sustain" type="TextureRect" parent="clip_rect" unique_id=1187901286]
 modulate = Color(1, 1, 1, 0.7)
 layout_mode = 1
 anchors_preset = 5
@@ -44,7 +44,7 @@ grow_horizontal = 2
 texture = SubResource("AtlasTexture_q8m8o")
 expand_mode = 1
 
-[node name="tail" type="TextureRect" parent="clip_rect/sustain"]
+[node name="tail" type="TextureRect" parent="clip_rect/sustain" unique_id=319649663]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -62,7 +62,7 @@ expand_mode = 1
 flip_h = true
 flip_v = true
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=858513590]
 sprite_frames = ExtResource("3_5601r")
 animation = &"left note"
 script = ExtResource("4_i2jgu")

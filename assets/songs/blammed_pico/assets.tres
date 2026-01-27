@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongAssets" load_steps=7 format=3 uid="uid://0d2300ny4ef7"]
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://0d2300ny4ef7"]
 
 [ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://scripts/resources/songs/assets.gd" id="1_afwdb"]
 [ext_resource type="PackedScene" uid="uid://dr24tjg5bcvow" path="res://scenes/game/characters/pico.tscn" id="1_ftqq6"]
@@ -14,5 +14,4 @@ spectator = ExtResource("4_eb4af")
 opponent = ExtResource("1_ftqq6")
 stage = ExtResource("5_1bq5s")
 hud_skin = ExtResource("1_plcvh")
-scripts = Array[PackedScene]([])
 metadata/_custom_type_script = "uid://dk2lxfhv5lvf4"

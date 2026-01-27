@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://6evx44stb57w"]
+[gd_scene format=3 uid="uid://6evx44stb57w"]
 
 [ext_resource type="Script" uid="uid://dj0ps70uiqehu" path="res://scenes/game/notes/note.gd" id="1_il0a2"]
 [ext_resource type="Texture2D" uid="uid://bbc06fsifnyro" path="res://assets/game/skins/default/notes.png" id="2_hte7g"]
-[ext_resource type="SpriteFrames" path="res://assets/game/skins/default/notes.res" id="3_41rcl"]
+[ext_resource type="SpriteFrames" uid="uid://b3r2xop0whqyf" path="res://assets/game/skins/default/notes.res" id="3_41rcl"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="4_fq1k2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8m8o"]
@@ -13,12 +13,12 @@ region = Rect2(207, 312, 50, 41)
 atlas = ExtResource("2_hte7g")
 region = Rect2(314, 197, 50, 63)
 
-[node name="censor" type="Node2D"]
+[node name="censor" type="Node2D" unique_id=644632254]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_il0a2")
 sing_suffix = &"_censor"
 
-[node name="clip_rect" type="Control" parent="."]
+[node name="clip_rect" type="Control" parent="." unique_id=1883328666]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 5
@@ -30,7 +30,7 @@ offset_right = 64.0
 grow_horizontal = 2
 pivot_offset = Vector2(64, 1280)
 
-[node name="sustain" type="TextureRect" parent="clip_rect"]
+[node name="sustain" type="TextureRect" parent="clip_rect" unique_id=806454102]
 modulate = Color(1, 1, 1, 0.7)
 layout_mode = 1
 anchors_preset = 5
@@ -44,7 +44,7 @@ grow_horizontal = 2
 texture = SubResource("AtlasTexture_q8m8o")
 expand_mode = 1
 
-[node name="tail" type="TextureRect" parent="clip_rect/sustain"]
+[node name="tail" type="TextureRect" parent="clip_rect/sustain" unique_id=1593399852]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -62,7 +62,7 @@ expand_mode = 1
 flip_h = true
 flip_v = true
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1614694510]
 sprite_frames = ExtResource("3_41rcl")
 animation = &"left note"
 script = ExtResource("4_fq1k2")

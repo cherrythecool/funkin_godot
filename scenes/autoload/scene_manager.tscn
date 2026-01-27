@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmy8a7dh1kvs4"]
+[gd_scene format=3 uid="uid://cmy8a7dh1kvs4"]
 
 [ext_resource type="Script" uid="uid://dhvmq8a4h56fu" path="res://scenes/autoload/scene_manager.gd" id="1_qc8cf"]
 [ext_resource type="Shader" uid="uid://bgnejcmia023f" path="res://assets/shaders/scene_transition.gdshader" id="2_aqmu4"]
@@ -8,12 +8,12 @@ shader = ExtResource("2_aqmu4")
 shader_parameter/progress = 0.0
 shader_parameter/diamondPixelSize = 32.0
 
-[node name="scene_manager" type="CanvasLayer"]
+[node name="scene_manager" type="CanvasLayer" unique_id=1107837109]
 process_mode = 3
 layer = 32
 script = ExtResource("1_qc8cf")
 
-[node name="transition" type="ColorRect" parent="."]
+[node name="transition" type="ColorRect" parent="." unique_id=1989548389]
 material = SubResource("ShaderMaterial_twpq6")
 offset_right = 1280.0
 offset_bottom = 720.0

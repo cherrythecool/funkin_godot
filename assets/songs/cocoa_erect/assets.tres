@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongAssets" load_steps=4 format=3 uid="uid://dfmtwdecde37o"]
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://dfmtwdecde37o"]
 
 [ext_resource type="PackedScene" uid="uid://bm0fb28jg0uki" path="res://scenes/game/characters/parents_christmas.tscn" id="1_0yxr3"]
 [ext_resource type="PackedScene" uid="uid://ct1tgudr3ft86" path="res://scenes/game/notes/alt_note.tscn" id="1_amgjv"]

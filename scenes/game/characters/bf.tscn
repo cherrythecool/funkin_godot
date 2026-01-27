@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bu44d2he2dxm3"]
+[gd_scene format=3 uid="uid://bu44d2he2dxm3"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_qpuwd"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_nvsa7"]
@@ -819,22 +819,20 @@ _data = {
 &"sing_up_miss": SubResource("Animation_4o0ab")
 }
 
-[node name="bf" type="Node2D"]
+[node name="bf" type="Node2D" unique_id=1298651439]
 script = ExtResource("1_qpuwd")
 icon = SubResource("Resource_04pdi")
 starts_as_player = true
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1630777912]
 position = Vector2(-208, -392)
 sprite_frames = ExtResource("4_n76qh")
 animation = &"BF idle dance"
 centered = false
 script = ExtResource("5_cqlbl")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=610591396]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=340436572]
 position = Vector2(-116, -268)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cr0c14kq4sye1"]
+[gd_scene format=3 uid="uid://cr0c14kq4sye1"]
 
 [ext_resource type="Script" uid="uid://cuh3v6jw2ti70" path="res://scenes/game/huds/default_hud.gd" id="1_hv0yb"]
 [ext_resource type="PackedScene" uid="uid://3diy2p3nknpi" path="res://scenes/game/note_fields/4_lanes.tscn" id="2_0rw2j"]
@@ -49,7 +49,7 @@ font_size = 64
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
-[node name="hud" type="Control"]
+[node name="hud" type="Control" unique_id=1372711265]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,12 +61,12 @@ mouse_filter = 2
 script = ExtResource("1_hv0yb")
 metadata/_edit_lock_ = true
 
-[node name="health_bar" type="Node2D" parent="."]
+[node name="health_bar" type="Node2D" parent="." unique_id=1819531785]
 unique_name_in_owner = true
 position = Vector2(640, 640)
 script = ExtResource("4_spp67")
 
-[node name="bar" type="ProgressBar" parent="health_bar"]
+[node name="bar" type="ProgressBar" parent="health_bar" unique_id=18660581]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -84,7 +84,7 @@ value = 50.0
 fill_mode = 1
 show_percentage = false
 
-[node name="outline" type="Panel" parent="health_bar/bar"]
+[node name="outline" type="Panel" parent="health_bar/bar" unique_id=1733593882]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,9 +93,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wblnk")
 
-[node name="icons" type="Node2D" parent="health_bar"]
+[node name="icons" type="Node2D" parent="health_bar" unique_id=26115744]
 
-[node name="score_label" type="Label" parent="health_bar"]
+[node name="score_label" type="Label" parent="health_bar" unique_id=670898774]
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = -640.0
@@ -109,7 +109,7 @@ text = "Score:0 • Misses:0 • Accuracy:N/A (N/A)
 label_settings = SubResource("LabelSettings_ku58i")
 horizontal_alignment = 1
 
-[node name="song_label" type="Label" parent="."]
+[node name="song_label" type="Label" parent="." unique_id=1150879665]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.74902)
 layout_mode = 0
@@ -123,23 +123,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("9_mucs8")
 
-[node name="rating_container" type="Node2D" parent="."]
+[node name="rating_container" type="Node2D" parent="." unique_id=969389249]
 unique_name_in_owner = true
 position = Vector2(640, 328)
 
-[node name="rating" type="Sprite2D" parent="rating_container"]
+[node name="rating" type="Sprite2D" parent="rating_container" unique_id=1424953406]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_mktee")
 
-[node name="combo" type="Node2D" parent="rating_container"]
+[node name="combo" type="Node2D" parent="rating_container" unique_id=428517287]
 position = Vector2(0, 75)
 scale = Vector2(0.5, 0.5)
 
-[node name="1" type="Sprite2D" parent="rating_container/combo"]
+[node name="1" type="Sprite2D" parent="rating_container/combo" unique_id=1560006949]
 texture = ExtResource("7_7svf3")
 hframes = 10
 
-[node name="difference_label" type="Label" parent="rating_container"]
+[node name="difference_label" type="Label" parent="rating_container" unique_id=1563367086]
 offset_left = -640.0
 offset_top = 106.0
 offset_right = 640.0
@@ -150,22 +150,22 @@ label_settings = SubResource("LabelSettings_6egcm")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="countdown_container" type="Marker2D" parent="." node_paths=PackedStringArray("hud")]
+[node name="countdown_container" type="Marker2D" parent="." unique_id=1614052304 node_paths=PackedStringArray("hud")]
 unique_name_in_owner = true
 position = Vector2(640, 360)
 script = ExtResource("9_6w54d")
 hud = NodePath("..")
 
-[node name="note_fields" type="Node2D" parent="."]
+[node name="note_fields" type="Node2D" parent="." unique_id=2028384754]
 unique_name_in_owner = true
 z_index = 1
 
-[node name="opponent" parent="note_fields" instance=ExtResource("2_0rw2j")]
+[node name="opponent" parent="note_fields" unique_id=788558760 instance=ExtResource("2_0rw2j")]
 position = Vector2(320, 100)
 use_note_splashes = false
 default_note_splash = ExtResource("3_1ubyb")
 
-[node name="player" parent="note_fields" instance=ExtResource("2_0rw2j")]
+[node name="player" parent="note_fields" unique_id=827080627 instance=ExtResource("2_0rw2j")]
 position = Vector2(960, 100)
 takes_input = true
 side = 1

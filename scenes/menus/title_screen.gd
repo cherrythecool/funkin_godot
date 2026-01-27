@@ -28,13 +28,12 @@ var last_music_time: float = 0.0
 
 
 func _ready() -> void:
-	if Config.first_launch:
-		Config.first_launch = false
+	if not Config.had_user_config:
+		Config.had_user_config = true
 		SceneManager.switch_to(load('res://scenes/menus/first_launch.tscn'), false)
 		return
 
-	enter_animation.play('loop')
-
+	enter_animation.play(&"loop")
 	conductor.tempo = 102.0
 	var music_player: AudioStreamPlayer = GlobalAudio.music
 	if not music_player.playing:
@@ -86,7 +85,7 @@ func _on_beat_hit(beat: int) -> void:
 				_add_random_line()
 			if alphabet.text.begins_with("#include"):
 				alphabet.horizontal_alignment = "Left"
-			
+
 		if alphabet.text == '!keep':
 			alphabet.text = previous
 
@@ -134,7 +133,7 @@ func _start_intro() -> void:
 	if lines_array.is_empty():
 		random_lines = ["hey!", "why did...", "you remove..!", "intro_messages.txt", "??!"]
 		return
-	
+
 	var index: int = randi_range(0, lines_array.size() - 1)
 	random_lines = Array(lines_array[index].split('--'))
 

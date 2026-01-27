@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://3daku38i1a50"]
+[gd_scene format=3 uid="uid://3daku38i1a50"]
 
 [ext_resource type="Script" uid="uid://b81xaok1c5hyh" path="res://scenes/menus/options_menu.gd" id="1_cbibk"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://assets/menus/background.png" id="1_jmigv"]
@@ -16,20 +16,20 @@
 [ext_resource type="Script" uid="uid://plhr68emm461" path="res://scenes/menus/options/category.gd" id="11_3cmdf"]
 [ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://assets/fonts/alphabet/skin_bold.tres" id="13_ygobi"]
 
-[node name="options_menu" type="Node2D"]
+[node name="options_menu" type="Node2D" unique_id=1964132103]
 script = ExtResource("1_cbibk")
 
-[node name="conductor" type="Node" parent="."]
+[node name="conductor" type="Node" parent="." unique_id=909012637]
 unique_name_in_owner = true
 script = ExtResource("2_pqks5")
 metadata/_custom_type_script = "uid://djsxumpddydxq"
 
-[node name="backdrop" type="Sprite2D" parent="."]
+[node name="backdrop" type="Sprite2D" parent="." unique_id=1096006807]
 modulate = Color(0.541176, 0.827451, 0.87451, 1)
 position = Vector2(640, 360)
 texture = ExtResource("1_jmigv")
 
-[node name="interface" type="Control" parent="."]
+[node name="interface" type="Control" parent="." unique_id=1846687671]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -40,7 +40,7 @@ offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="categories" type="HBoxContainer" parent="interface"]
+[node name="categories" type="HBoxContainer" parent="interface" unique_id=2036793647]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 14
@@ -53,13 +53,13 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="gameplay" type="Control" parent="interface/categories"]
+[node name="gameplay" type="Control" parent="interface/categories" unique_id=191551518]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 script = ExtResource("11_3cmdf")
 category = ExtResource("7_6v5hh")
 
-[node name="sprite" type="AnimatedSprite2D" parent="interface/categories/gameplay"]
+[node name="sprite" type="AnimatedSprite2D" parent="interface/categories/gameplay" unique_id=829061760]
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"gameplay"
@@ -67,13 +67,13 @@ frame_progress = 0.49935737
 script = ExtResource("4_k5v7g")
 playing = true
 
-[node name="interface" type="Control" parent="interface/categories"]
+[node name="interface" type="Control" parent="interface/categories" unique_id=440121986]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 script = ExtResource("11_3cmdf")
 category = ExtResource("7_u8bnw")
 
-[node name="sprite" type="AnimatedSprite2D" parent="interface/categories/interface"]
+[node name="sprite" type="AnimatedSprite2D" parent="interface/categories/interface" unique_id=1564963516]
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"interface"
@@ -81,13 +81,13 @@ frame_progress = 0.21162796
 script = ExtResource("4_k5v7g")
 playing = true
 
-[node name="performance" type="Control" parent="interface/categories"]
+[node name="performance" type="Control" parent="interface/categories" unique_id=130435505]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 script = ExtResource("11_3cmdf")
 category = ExtResource("8_26on6")
 
-[node name="sprite" type="AnimatedSprite2D" parent="interface/categories/performance"]
+[node name="sprite" type="AnimatedSprite2D" parent="interface/categories/performance" unique_id=936929223]
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"performance"
@@ -95,13 +95,13 @@ frame_progress = 0.81131375
 script = ExtResource("4_k5v7g")
 playing = true
 
-[node name="sound" type="Control" parent="interface/categories"]
+[node name="sound" type="Control" parent="interface/categories" unique_id=356151389]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 script = ExtResource("11_3cmdf")
 category = ExtResource("9_23plx")
 
-[node name="sprite" type="AnimatedSprite2D" parent="interface/categories/sound"]
+[node name="sprite" type="AnimatedSprite2D" parent="interface/categories/sound" unique_id=1757859474]
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"sound"
@@ -109,13 +109,13 @@ frame_progress = 0.7781072
 script = ExtResource("4_k5v7g")
 playing = true
 
-[node name="accessibility" type="Control" parent="interface/categories"]
+[node name="accessibility" type="Control" parent="interface/categories" unique_id=773796349]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 script = ExtResource("11_3cmdf")
 category = ExtResource("7_0g68v")
 
-[node name="sprite" type="AnimatedSprite2D" parent="interface/categories/accessibility"]
+[node name="sprite" type="AnimatedSprite2D" parent="interface/categories/accessibility" unique_id=76133333]
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"accessibility"
@@ -123,11 +123,11 @@ frame_progress = 0.8418398
 script = ExtResource("4_k5v7g")
 playing = true
 
-[node name="section" type="Node2D" parent="."]
+[node name="section" type="Node2D" parent="." unique_id=725752799]
 unique_name_in_owner = true
 position = Vector2(1920, 360)
 
-[node name="bar_background" type="ColorRect" parent="."]
+[node name="bar_background" type="ColorRect" parent="." unique_id=217595242]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -137,7 +137,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5)
 
-[node name="section_label" type="Node2D" parent="."]
+[node name="section_label" type="Node2D" parent="." unique_id=713277252]
 unique_name_in_owner = true
 position = Vector2(640, 32)
 scale = Vector2(0.75, 0.75)
@@ -146,7 +146,7 @@ skin = ExtResource("13_ygobi")
 text = "Gameplay"
 centered = true
 
-[node name="options_label" type="AnimatedSprite2D" parent="."]
+[node name="options_label" type="AnimatedSprite2D" parent="." unique_id=1836989782]
 unique_name_in_owner = true
 position = Vector2(163, 48)
 rotation = -0.062804356

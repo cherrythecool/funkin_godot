@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dvw6bjqx07lwq"]
+[gd_scene format=3 uid="uid://dvw6bjqx07lwq"]
 
 [ext_resource type="Script" uid="uid://cfcm0avtkih5m" path="res://scenes/game/stages/limo_erect.gd" id="1_kku1o"]
 [ext_resource type="AudioStream" uid="uid://d3dsst4t3xlnc" path="res://assets/game/stages/limo/car_0.ogg" id="2_bfmtg"]
@@ -58,27 +58,27 @@ shader_parameter/saturation = -20.0
 shader_parameter/contrast = 0.0
 shader_parameter/brightness = -30.0
 
-[node name="limo_erect" type="Node2D"]
+[node name="limo_erect" type="Node2D" unique_id=2010360086]
 script = ExtResource("1_kku1o")
 car_sounds = Array[AudioStream]([ExtResource("2_bfmtg"), ExtResource("3_cr4ss")])
 default_zoom = 0.9
 
-[node name="sunset" type="Parallax2D" parent="."]
+[node name="sunset" type="Parallax2D" parent="." unique_id=680463113]
 scroll_scale = Vector2(0.1, 0.1)
 
-[node name="sprite" type="Sprite2D" parent="sunset"]
+[node name="sprite" type="Sprite2D" parent="sunset" unique_id=2080070856]
 z_index = 10
 position = Vector2(-120, -50)
 texture = ExtResource("4_rgi3v")
 centered = false
 
-[node name="mist_5" type="Parallax2D" parent="."]
+[node name="mist_5" type="Parallax2D" parent="." unique_id=179264399]
 scroll_scale = Vector2(0.2, 0.2)
 repeat_size = Vector2(3072, 0)
 autoscroll = Vector2(100, 0)
 repeat_times = 2
 
-[node name="sprite" type="Sprite2D" parent="mist_5"]
+[node name="sprite" type="Sprite2D" parent="mist_5" unique_id=188380314]
 modulate = Color(0.905882, 0.643137, 0.501961, 1)
 z_index = 98
 material = ExtResource("4_6tkr4")
@@ -87,10 +87,10 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_bfmtg")
 centered = false
 
-[node name="stars" type="Parallax2D" parent="."]
+[node name="stars" type="Parallax2D" parent="." unique_id=133057238]
 scroll_scale = Vector2(0.12, 0.12)
 
-[node name="sprite" type="AnimatedSprite2D" parent="stars"]
+[node name="sprite" type="AnimatedSprite2D" parent="stars" unique_id=145724043]
 z_index = 20
 material = ExtResource("4_6tkr4")
 position = Vector2(200, 0)
@@ -100,10 +100,10 @@ centered = false
 script = ExtResource("8_gyo08")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="bg_limo" type="Parallax2D" parent="."]
+[node name="bg_limo" type="Parallax2D" parent="." unique_id=1886658867]
 scroll_scale = Vector2(0.4, 0.4)
 
-[node name="sprite" type="AnimatedSprite2D" parent="bg_limo"]
+[node name="sprite" type="AnimatedSprite2D" parent="bg_limo" unique_id=1911522606]
 z_index = 20
 position = Vector2(-200, 480)
 sprite_frames = ExtResource("7_dqopq")
@@ -114,7 +114,7 @@ script = ExtResource("8_gyo08")
 playing = true
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="fg_limo" type="AnimatedSprite2D" parent="."]
+[node name="fg_limo" type="AnimatedSprite2D" parent="." unique_id=8213595]
 z_index = 150
 position = Vector2(-120, 550)
 sprite_frames = ExtResource("8_dqopq")
@@ -125,7 +125,7 @@ script = ExtResource("8_gyo08")
 playing = true
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="fast_car" type="Sprite2D" parent="."]
+[node name="fast_car" type="Sprite2D" parent="." unique_id=61614143]
 unique_name_in_owner = true
 z_index = 500
 material = SubResource("ShaderMaterial_l4vvd")
@@ -133,19 +133,19 @@ position = Vector2(-26000, 160)
 texture = ExtResource("10_gwn6i")
 centered = false
 
-[node name="car_timer" type="Timer" parent="."]
+[node name="car_timer" type="Timer" parent="." unique_id=1605016406]
 unique_name_in_owner = true
 wait_time = 2.0
 one_shot = true
 
-[node name="car_pass" type="AudioStreamPlayer" parent="."]
+[node name="car_pass" type="AudioStreamPlayer" parent="." unique_id=204851505]
 unique_name_in_owner = true
 
-[node name="dancers" type="Parallax2D" parent="."]
+[node name="dancers" type="Parallax2D" parent="." unique_id=1005069651]
 unique_name_in_owner = true
 scroll_scale = Vector2(0.4, 0.4)
 
-[node name="0" type="AnimatedSprite2D" parent="dancers"]
+[node name="0" type="AnimatedSprite2D" parent="dancers" unique_id=457136541]
 z_index = 30
 material = SubResource("ShaderMaterial_17t55")
 position = Vector2(100, 100)
@@ -155,7 +155,7 @@ centered = false
 script = ExtResource("8_gyo08")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="1" type="AnimatedSprite2D" parent="dancers"]
+[node name="1" type="AnimatedSprite2D" parent="dancers" unique_id=609912037]
 z_index = 30
 material = SubResource("ShaderMaterial_6bf0j")
 position = Vector2(400, 100)
@@ -165,7 +165,7 @@ centered = false
 script = ExtResource("8_gyo08")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="2" type="AnimatedSprite2D" parent="dancers"]
+[node name="2" type="AnimatedSprite2D" parent="dancers" unique_id=2092425506]
 z_index = 30
 material = SubResource("ShaderMaterial_afjqi")
 position = Vector2(700, 100)
@@ -175,7 +175,7 @@ centered = false
 script = ExtResource("8_gyo08")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="3" type="AnimatedSprite2D" parent="dancers"]
+[node name="3" type="AnimatedSprite2D" parent="dancers" unique_id=39650477]
 z_index = 30
 material = SubResource("ShaderMaterial_gyo08")
 position = Vector2(1000, 100)
@@ -185,7 +185,7 @@ centered = false
 script = ExtResource("8_gyo08")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="4" type="AnimatedSprite2D" parent="dancers"]
+[node name="4" type="AnimatedSprite2D" parent="dancers" unique_id=1752723175]
 z_index = 30
 material = SubResource("ShaderMaterial_if4vr")
 position = Vector2(1300, 100)
@@ -195,13 +195,13 @@ centered = false
 script = ExtResource("8_gyo08")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="mist_4" type="Parallax2D" parent="."]
+[node name="mist_4" type="Parallax2D" parent="." unique_id=1721128465]
 scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(3072, 0)
 autoscroll = Vector2(700, 0)
 repeat_times = 2
 
-[node name="sprite" type="Sprite2D" parent="mist_4"]
+[node name="sprite" type="Sprite2D" parent="mist_4" unique_id=1790739982]
 modulate = Color(0.611765, 0.466667, 0.780392, 1)
 z_index = 98
 material = ExtResource("4_6tkr4")
@@ -210,13 +210,13 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("13_bfmtg")
 centered = false
 
-[node name="mist_3" type="Parallax2D" parent="."]
+[node name="mist_3" type="Parallax2D" parent="." unique_id=1255486752]
 scroll_scale = Vector2(0.8, 0.8)
 repeat_size = Vector2(3072, 0)
 autoscroll = Vector2(900, 0)
 repeat_times = 2
 
-[node name="sprite" type="Sprite2D" parent="mist_3"]
+[node name="sprite" type="Sprite2D" parent="mist_3" unique_id=1091664270]
 modulate = Color(0.655, 0.851, 0.745, 0.5)
 z_index = 99
 material = ExtResource("4_6tkr4")
@@ -225,36 +225,36 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_bfmtg")
 centered = false
 
-[node name="spectator" type="Marker2D" parent="."]
+[node name="spectator" type="Marker2D" parent="." unique_id=680684617]
 unique_name_in_owner = true
 z_index = 100
 position = Vector2(755, 790)
 script = ExtResource("12_re7xl")
 character_path = "uid://cfd0vee7ua8k7"
 
-[node name="camera_offset" type="Marker2D" parent="spectator"]
+[node name="camera_offset" type="Marker2D" parent="spectator" unique_id=906098998]
 position = Vector2(107, -599)
 
-[node name="player" type="Marker2D" parent="."]
+[node name="player" type="Marker2D" parent="." unique_id=472062035]
 unique_name_in_owner = true
 z_index = 300
 position = Vector2(1274, 595)
 script = ExtResource("12_re7xl")
 
-[node name="opponent" type="Marker2D" parent="."]
+[node name="opponent" type="Marker2D" parent="." unique_id=690791128]
 unique_name_in_owner = true
 z_index = 200
 position = Vector2(263, 831)
 script = ExtResource("12_re7xl")
 character_path = "uid://cdxxht68lxv1a"
 
-[node name="mist_1" type="Parallax2D" parent="."]
+[node name="mist_1" type="Parallax2D" parent="." unique_id=212071724]
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(2048, 0)
 autoscroll = Vector2(1700, 0)
 repeat_times = 3
 
-[node name="sprite" type="Sprite2D" parent="mist_1"]
+[node name="sprite" type="Sprite2D" parent="mist_1" unique_id=2128740000]
 modulate = Color(0.776471, 0.74902, 0.870588, 0.4)
 z_index = 400
 material = ExtResource("4_6tkr4")
@@ -262,13 +262,13 @@ position = Vector2(-650, -100)
 texture = ExtResource("12_bfmtg")
 centered = false
 
-[node name="mist_2" type="Parallax2D" parent="."]
+[node name="mist_2" type="Parallax2D" parent="." unique_id=13746106]
 scroll_scale = Vector2(1.2, 1.2)
 repeat_size = Vector2(2662.4, 0)
 autoscroll = Vector2(2100, 0)
 repeat_times = 2
 
-[node name="sprite" type="Sprite2D" parent="mist_2"]
+[node name="sprite" type="Sprite2D" parent="mist_2" unique_id=527814661]
 modulate = Color(0.415686, 0.301961, 0.631373, 1)
 z_index = 400
 material = ExtResource("4_6tkr4")

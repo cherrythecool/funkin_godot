@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongMetadata" load_steps=5 format=3 uid="uid://dj55gon15pu45"]
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://dj55gon15pu45"]
 
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_b2hbs"]
 [ext_resource type="Texture2D" uid="uid://cbpmx024rn06u" path="res://assets/game/characters/pico/icon.png" id="2_8ej5a"]

@@ -107,8 +107,8 @@ func _on_game_event_hit(event: EventData) -> void:
 
 			var steps: float = event.data[2]
 			pan_event_tween = create_tween()
-			pan_event_tween.set_ease(GameUtils.convert_flixel_tween_ease(ease_string))
-			pan_event_tween.set_trans(GameUtils.convert_flixel_tween_trans(ease_string))
+			pan_event_tween.set_ease(GameUtils.get_ease_from_fnfc(ease_string))
+			pan_event_tween.set_trans(GameUtils.get_trans_from_fnfc(ease_string))
 			pan_event_tween.tween_property(
 				self,
 				^"position_lerps",
@@ -153,8 +153,8 @@ func _on_game_event_hit(event: EventData) -> void:
 				return
 
 			zoom_event_tween = create_tween().set_parallel()
-			zoom_event_tween.set_ease(GameUtils.convert_flixel_tween_ease(ease_string))
-			zoom_event_tween.set_trans(GameUtils.convert_flixel_tween_trans(ease_string))
+			zoom_event_tween.set_ease(GameUtils.get_ease_from_fnfc(ease_string))
+			zoom_event_tween.set_trans(GameUtils.get_trans_from_fnfc(ease_string))
 			zoom_event_tween.tween_property(
 				self,
 				^"zoom_target",

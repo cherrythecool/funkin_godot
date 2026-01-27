@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://7b20rlie68yo"]
+[gd_scene format=3 uid="uid://7b20rlie68yo"]
 
 [ext_resource type="Script" uid="uid://bu5rt58v1uns0" path="res://assets/songs/tutorial/scripts/tutorial.gd" id="1_iwyrr"]
 
-[node name="tutorial" type="Node"]
+[node name="tutorial" type="Node" unique_id=176431057]
 script = ExtResource("1_iwyrr")

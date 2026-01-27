@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b7fwxsepnt38j"]
+[gd_scene format=3 uid="uid://b7fwxsepnt38j"]
 
 [ext_resource type="Script" uid="uid://blahra5leclk" path="res://scenes/menus/main_menu.gd" id="1_mwtkx"]
 [ext_resource type="Texture2D" uid="uid://ltkynwwp1o8s" path="res://assets/menus/main_menu/background.png" id="1_wymee"]
@@ -79,41 +79,39 @@ font_size = 12
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
-[node name="main_menu" type="Node2D"]
+[node name="main_menu" type="Node2D" unique_id=1131183700]
 script = ExtResource("1_mwtkx")
 
-[node name="timer" type="Timer" parent="."]
+[node name="timer" type="Timer" parent="." unique_id=558933507]
 unique_name_in_owner = true
 wait_time = 1.1
 one_shot = true
 
-[node name="background" type="Parallax2D" parent="."]
+[node name="background" type="Parallax2D" parent="." unique_id=1543059190]
 unique_name_in_owner = true
 scale = Vector2(1.1, 1.1)
 scroll_scale = Vector2(0, 0.1)
 scroll_offset = Vector2(640, 360)
 
-[node name="sprite" type="Sprite2D" parent="background"]
+[node name="sprite" type="Sprite2D" parent="background" unique_id=685855177]
 texture = ExtResource("1_wymee")
 
-[node name="sprite_pink" type="Sprite2D" parent="background"]
+[node name="sprite_pink" type="Sprite2D" parent="background" unique_id=1905381358]
 visible = false
 texture = ExtResource("2_dbg3w")
 
-[node name="animation_player" type="AnimationPlayer" parent="background"]
-libraries = {
-&"": SubResource("AnimationLibrary_08ydn")
-}
+[node name="animation_player" type="AnimationPlayer" parent="background" unique_id=1339924607]
+libraries/ = SubResource("AnimationLibrary_08ydn")
 
-[node name="camera" type="Camera2D" parent="."]
+[node name="camera" type="Camera2D" parent="." unique_id=1616268641]
 unique_name_in_owner = true
 position = Vector2(640, 360)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
-[node name="ui_layer" type="CanvasLayer" parent="."]
+[node name="ui_layer" type="CanvasLayer" parent="." unique_id=1707456745]
 
-[node name="version_label" type="Label" parent="ui_layer"]
+[node name="version_label" type="Label" parent="ui_layer" unique_id=1878566145]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -126,7 +124,7 @@ text = "Funkin' Godot v$VERSION"
 label_settings = SubResource("LabelSettings_lig6g")
 vertical_alignment = 2
 
-[node name="scroll_container" type="ScrollContainer" parent="ui_layer"]
+[node name="scroll_container" type="ScrollContainer" parent="ui_layer" unique_id=650336102]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -134,14 +132,14 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="container" type="VBoxContainer" parent="ui_layer/scroll_container"]
+[node name="container" type="VBoxContainer" parent="ui_layer/scroll_container" unique_id=788825582]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="story_mode" type="Control" parent="ui_layer/scroll_container/container"]
+[node name="story_mode" type="Control" parent="ui_layer/scroll_container/container" unique_id=1889209392]
 custom_minimum_size = Vector2(0, 122)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -149,7 +147,7 @@ script = ExtResource("4_4uv5u")
 scene_path = "res://scenes/menus/story_mode_menu.tscn"
 animation_name = &"storymode"
 
-[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/story_mode"]
+[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/story_mode" unique_id=803161499]
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"storymode idle"
@@ -157,14 +155,14 @@ frame_progress = 0.48985183
 script = ExtResource("4_emyfo")
 playing = true
 
-[node name="freeplay" type="Control" parent="ui_layer/scroll_container/container"]
+[node name="freeplay" type="Control" parent="ui_layer/scroll_container/container" unique_id=1818888720]
 custom_minimum_size = Vector2(0, 122)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("7_1hnlc")
 animation_name = &"freeplay"
 
-[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/freeplay"]
+[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/freeplay" unique_id=1752211736]
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
@@ -172,7 +170,7 @@ frame_progress = 0.8404492
 script = ExtResource("4_emyfo")
 playing = true
 
-[node name="credits" type="Control" parent="ui_layer/scroll_container/container"]
+[node name="credits" type="Control" parent="ui_layer/scroll_container/container" unique_id=461284960]
 custom_minimum_size = Vector2(0, 124)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -180,7 +178,7 @@ script = ExtResource("4_4uv5u")
 scene_path = "uid://b6gvgi7qjy176"
 animation_name = &"credits"
 
-[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/credits"]
+[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/credits" unique_id=1926702981]
 position = Vector2(0, 62)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"credits idle"
@@ -188,7 +186,7 @@ frame_progress = 0.019190092
 script = ExtResource("4_emyfo")
 playing = true
 
-[node name="options" type="Control" parent="ui_layer/scroll_container/container"]
+[node name="options" type="Control" parent="ui_layer/scroll_container/container" unique_id=161792120]
 custom_minimum_size = Vector2(0, 111)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -196,7 +194,7 @@ script = ExtResource("4_4uv5u")
 scene_path = "res://scenes/menus/options_menu.tscn"
 animation_name = &"options"
 
-[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/options"]
+[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/options" unique_id=1641720325]
 position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"

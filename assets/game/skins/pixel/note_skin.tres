@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="NoteSkin" load_steps=3 format=3 uid="uid://pv1ounxci6y8"]
+[gd_resource type="Resource" script_class="NoteSkin" format=3 uid="uid://pv1ounxci6y8"]
 
 [ext_resource type="Script" uid="uid://dfdr435gif8gk" path="res://scripts/resources/note_skin.gd" id="1_3wmws"]
 [ext_resource type="SpriteFrames" uid="uid://k4nxchq8jovk" path="res://assets/game/skins/pixel/arrows.res" id="1_dt0y4"]

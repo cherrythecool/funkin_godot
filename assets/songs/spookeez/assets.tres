@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongAssets" load_steps=5 format=3 uid="uid://dsujgwpj373gg"]
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://dsujgwpj373gg"]
 
 [ext_resource type="PackedScene" uid="uid://d4dbyolh86dgm" path="res://scenes/game/characters/spooky.tscn" id="1_l6j4e"]
 [ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://scripts/resources/songs/assets.gd" id="1_r1or1"]
@@ -10,5 +10,4 @@ script = ExtResource("1_r1or1")
 player = ExtResource("2_cm13r")
 opponent = ExtResource("1_l6j4e")
 stage = ExtResource("3_pa7xj")
-scripts = Array[PackedScene]([])
 metadata/_custom_type_script = "uid://dk2lxfhv5lvf4"

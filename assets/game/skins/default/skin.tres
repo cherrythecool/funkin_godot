@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HUDSkin" load_steps=15 format=3 uid="uid://oxo327xfxemo"]
+[gd_resource type="Resource" script_class="HUDSkin" format=3 uid="uid://oxo327xfxemo"]
 
 [ext_resource type="Texture2D" uid="uid://bfte1efl00hqd" path="res://assets/game/skins/default/ratings/bad.png" id="1_xxv5p"]
 [ext_resource type="Texture2D" uid="uid://ds3g63uwcq4jw" path="res://assets/game/skins/default/combo.png" id="2_nfcec"]

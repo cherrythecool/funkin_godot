@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1hkc3byawumw"]
+[gd_scene format=3 uid="uid://c1hkc3byawumw"]
 
 [ext_resource type="PackedScene" uid="uid://b6ejs2wvgt8fc" path="res://addons/funkin_tools/sparrow_importer.tscn" id="1_6xjsh"]
 
-[node name="main_screen" type="TabContainer"]
+[node name="main_screen" type="TabContainer" unique_id=1267126330]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,5 +12,5 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 current_tab = 0
 
-[node name="Sparrow Importer" parent="." instance=ExtResource("1_6xjsh")]
+[node name="Sparrow Importer" parent="." unique_id=1702259660 instance=ExtResource("1_6xjsh")]
 layout_mode = 2

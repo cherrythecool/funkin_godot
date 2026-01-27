@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://xbtjrkc4puc7"]
+[gd_scene format=3 uid="uid://xbtjrkc4puc7"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_46obf"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_wimd4"]
@@ -10,8 +10,6 @@
 script = ExtResource("2_wimd4")
 texture = ExtResource("3_hwwj4")
 color = Color(0.717647, 0.847059, 0.333333, 1)
-frames = Vector2i(2, 1)
-filter = 0
 
 [sub_resource type="Animation" id="Animation_bgpi6"]
 length = 0.001
@@ -1071,23 +1069,21 @@ _data = {
 &"sing_up_miss": SubResource("Animation_4o0ab")
 }
 
-[node name="pico_player_swears" type="Node2D"]
+[node name="pico_player_swears" type="Node2D" unique_id=718035416]
 script = ExtResource("1_46obf")
 icon = SubResource("Resource_vmsim")
 starts_as_player = true
 death_character = "uid://lxm28lqknvjd"
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1927221784]
 position = Vector2(-215, -441)
 sprite_frames = ExtResource("4_46obf")
 animation = &"Pico Idle Dance"
 centered = false
 script = ExtResource("5_7nyou")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1414639860]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=5028545]
 position = Vector2(-127, -322)

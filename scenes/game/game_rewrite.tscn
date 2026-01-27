@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtdc7d8yyi32g"]
+[gd_scene format=3 uid="uid://dtdc7d8yyi32g"]
 
 [ext_resource type="Script" uid="uid://daqx3dqsh6846" path="res://scenes/game/game_rewrite.gd" id="1_nsxwh"]
 [ext_resource type="Script" uid="uid://djsxumpddydxq" path="res://scripts/autoload/conductor.gd" id="1_ou6ox"]
@@ -6,25 +6,25 @@
 [ext_resource type="Script" uid="uid://1dwo0trw3je2" path="res://scripts/game/rating_calculator.gd" id="3_64wgr"]
 [ext_resource type="Script" uid="uid://cm308tpfbi72q" path="res://scenes/game/scripts.gd" id="4_r2w2h"]
 
-[node name="game_rewrite" type="Node"]
+[node name="game_rewrite" type="Node" unique_id=2135675176]
 script = ExtResource("1_nsxwh")
 
-[node name="conductor" type="Node" parent="."]
+[node name="conductor" type="Node" parent="." unique_id=775784721]
 unique_name_in_owner = true
 script = ExtResource("1_ou6ox")
 metadata/_custom_type_script = "uid://djsxumpddydxq"
 
-[node name="tracks" type="Node" parent="."]
+[node name="tracks" type="Node" parent="." unique_id=658787421]
 unique_name_in_owner = true
 script = ExtResource("2_ltsch")
 metadata/_custom_type_script = "uid://bbfskuw2fyle3"
 
-[node name="rating_calculator" type="Node" parent="."]
+[node name="rating_calculator" type="Node" parent="." unique_id=1387693070]
 unique_name_in_owner = true
 script = ExtResource("3_64wgr")
 metadata/_custom_type_script = "uid://1dwo0trw3je2"
 
-[node name="scripts" type="Node" parent="."]
+[node name="scripts" type="Node" parent="." unique_id=749769698]
 unique_name_in_owner = true
 script = ExtResource("4_r2w2h")
 metadata/_custom_type_script = "uid://cm308tpfbi72q"

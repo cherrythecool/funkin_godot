@@ -1,27 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://drcqw4es4j7q4"]
+[gd_scene format=3 uid="uid://drcqw4es4j7q4"]
 
 [ext_resource type="Script" uid="uid://8peekichuo8h" path="res://scenes/menus/options/sections/accessibility.gd" id="1_1hocu"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="2_1fbt3"]
 [ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://scenes/menus/options/checkbox_option.gd" id="2_c2csa"]
 [ext_resource type="SpriteFrames" uid="uid://oksqh74ocs1w" path="res://assets/menus/options/checkbox.res" id="4_7yydl"]
+[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://assets/fonts/alphabet/skin_bold.tres" id="4_afy66"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="5_2odut"]
 
-[node name="accessibility" type="Node2D"]
+[node name="accessibility" type="Node2D" unique_id=836521435]
 position = Vector2(-320, 0)
 script = ExtResource("1_1hocu")
 
-[node name="flashing_lights" type="Node2D" parent="."]
+[node name="flashing_lights" type="Node2D" parent="." unique_id=1168581670]
 position = Vector2(73, 0)
 script = ExtResource("2_c2csa")
 section = &"accessibility"
 key = &"flashing_lights"
 
-[node name="alphabet" type="Node2D" parent="flashing_lights"]
+[node name="alphabet" type="Node2D" parent="flashing_lights" unique_id=1130308851]
 script = ExtResource("2_1fbt3")
+skin = ExtResource("4_afy66")
 text = "flashing lights"
 centered = true
 
-[node name="checkbox" type="AnimatedSprite2D" parent="flashing_lights"]
+[node name="checkbox" type="AnimatedSprite2D" parent="flashing_lights" unique_id=259587310]
 position = Vector2(421, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_7yydl")

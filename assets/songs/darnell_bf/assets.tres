@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongAssets" load_steps=4 format=3 uid="uid://bkpmothden5ls"]
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://bkpmothden5ls"]
 
 [ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://scripts/resources/songs/assets.gd" id="1_ruvv4"]
 [ext_resource type="PackedScene" uid="uid://dx13k6w54if1l" path="res://scenes/game/characters/darnell.tscn" id="2_g4hj6"]

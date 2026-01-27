@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bo61teq831cd6"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bo61teq831cd6"]
 
 [ext_resource type="Shader" uid="uid://b1cg727toe7oh" path="res://assets/shaders/title_screen.gdshader" id="1_y134v"]
 

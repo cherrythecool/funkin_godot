@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dln7pilk4eccf"]
+[gd_scene format=3 uid="uid://dln7pilk4eccf"]
 
 [ext_resource type="Script" uid="uid://chr6gh7537dwm" path="res://scenes/autoload/touch_controls.gd" id="1_wcbf3"]
 [ext_resource type="Texture2D" uid="uid://ciiyghjt8ttyu" path="res://assets/touch/arrow_base.png" id="2_dn4ts"]
@@ -19,12 +19,12 @@ size = Vector2(320, 720)
 [sub_resource type="CircleShape2D" id="CircleShape2D_wcbf3"]
 radius = 28.0
 
-[node name="touch_controls" type="CanvasLayer"]
+[node name="touch_controls" type="CanvasLayer" unique_id=461542984]
 process_mode = 3
 layer = 128
 script = ExtResource("1_wcbf3")
 
-[node name="menus" type="Control" parent="."]
+[node name="menus" type="Control" parent="." unique_id=71277730]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -35,7 +35,7 @@ grow_vertical = 2
 mouse_filter = 1
 metadata/_edit_lock_ = true
 
-[node name="left" type="TouchScreenButton" parent="menus"]
+[node name="left" type="TouchScreenButton" parent="menus" unique_id=1481230585]
 position = Vector2(66, 590)
 rotation = -1.5708
 scale = Vector2(1.75, 1.75)
@@ -46,7 +46,7 @@ passby_press = true
 action = "ui_left"
 visibility_mode = 1
 
-[node name="down" type="TouchScreenButton" parent="menus"]
+[node name="down" type="TouchScreenButton" parent="menus" unique_id=757714994]
 position = Vector2(253, 686)
 rotation = 3.14159
 scale = Vector2(1.75, 1.75)
@@ -57,7 +57,7 @@ passby_press = true
 action = "ui_down"
 visibility_mode = 1
 
-[node name="up" type="TouchScreenButton" parent="menus"]
+[node name="up" type="TouchScreenButton" parent="menus" unique_id=287631027]
 position = Vector2(162, 403)
 scale = Vector2(1.75, 1.75)
 texture_normal = ExtResource("2_dn4ts")
@@ -67,7 +67,7 @@ passby_press = true
 action = "ui_up"
 visibility_mode = 1
 
-[node name="right" type="TouchScreenButton" parent="menus"]
+[node name="right" type="TouchScreenButton" parent="menus" unique_id=271482993]
 position = Vector2(349, 499)
 rotation = 1.5708
 scale = Vector2(1.75, 1.75)
@@ -78,7 +78,7 @@ passby_press = true
 action = "ui_right"
 visibility_mode = 1
 
-[node name="cancel" type="TouchScreenButton" parent="menus"]
+[node name="cancel" type="TouchScreenButton" parent="menus" unique_id=615485729]
 position = Vector2(1034, 688)
 rotation = -1.5708
 scale = Vector2(1.75, 1.75)
@@ -89,7 +89,7 @@ passby_press = true
 action = "ui_cancel"
 visibility_mode = 1
 
-[node name="accept" type="TouchScreenButton" parent="menus"]
+[node name="accept" type="TouchScreenButton" parent="menus" unique_id=589905947]
 position = Vector2(1157, 597)
 scale = Vector2(1.75, 1.75)
 texture_normal = ExtResource("4_uejki")
@@ -99,7 +99,7 @@ passby_press = true
 action = "ui_accept"
 visibility_mode = 1
 
-[node name="freeplay" type="Control" parent="menus"]
+[node name="freeplay" type="Control" parent="menus" unique_id=763624923]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -111,7 +111,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="switch" type="TouchScreenButton" parent="menus/freeplay"]
+[node name="switch" type="TouchScreenButton" parent="menus/freeplay" unique_id=343961192]
 position = Vector2(594, 597)
 scale = Vector2(1.75, 1.75)
 texture_normal = ExtResource("6_kk16y")
@@ -121,7 +121,7 @@ passby_press = true
 action = "freeplay_open_characters"
 visibility_mode = 1
 
-[node name="game" type="Control" parent="."]
+[node name="game" type="Control" parent="." unique_id=679655625]
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
@@ -133,7 +133,7 @@ grow_vertical = 2
 mouse_filter = 1
 metadata/_edit_lock_ = true
 
-[node name="left" type="ColorRect" parent="game"]
+[node name="left" type="ColorRect" parent="game" unique_id=1280801000]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 320.0
@@ -141,14 +141,14 @@ offset_bottom = 720.0
 mouse_filter = 2
 color = Color(0.757, 0.294, 0.6, 0)
 
-[node name="button" type="TouchScreenButton" parent="game/left"]
+[node name="button" type="TouchScreenButton" parent="game/left" unique_id=319656990]
 position = Vector2(160, 360)
 shape = SubResource("RectangleShape2D_wcbf3")
 passby_press = true
 action = "input_left"
 visibility_mode = 1
 
-[node name="down" type="ColorRect" parent="game"]
+[node name="down" type="ColorRect" parent="game" unique_id=1797184710]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 320.0
@@ -157,14 +157,14 @@ offset_bottom = 720.0
 mouse_filter = 2
 color = Color(0, 1, 1, 0)
 
-[node name="button" type="TouchScreenButton" parent="game/down"]
+[node name="button" type="TouchScreenButton" parent="game/down" unique_id=1921398230]
 position = Vector2(160, 360)
 shape = SubResource("RectangleShape2D_wcbf3")
 passby_press = true
 action = "input_down"
 visibility_mode = 1
 
-[node name="up" type="ColorRect" parent="game"]
+[node name="up" type="ColorRect" parent="game" unique_id=383368020]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 640.0
@@ -173,14 +173,14 @@ offset_bottom = 720.0
 mouse_filter = 2
 color = Color(0.071, 0.98, 0.016, 0)
 
-[node name="button" type="TouchScreenButton" parent="game/up"]
+[node name="button" type="TouchScreenButton" parent="game/up" unique_id=119080982]
 position = Vector2(160, 360)
 shape = SubResource("RectangleShape2D_wcbf3")
 passby_press = true
 action = "input_up"
 visibility_mode = 1
 
-[node name="right" type="ColorRect" parent="game"]
+[node name="right" type="ColorRect" parent="game" unique_id=322390288]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 960.0
@@ -189,14 +189,14 @@ offset_bottom = 720.0
 mouse_filter = 2
 color = Color(0.976, 0.224, 0.247, 0)
 
-[node name="button" type="TouchScreenButton" parent="game/right"]
+[node name="button" type="TouchScreenButton" parent="game/right" unique_id=134444641]
 position = Vector2(160, 360)
 shape = SubResource("RectangleShape2D_wcbf3")
 passby_press = true
 action = "input_right"
 visibility_mode = 1
 
-[node name="pause" type="TouchScreenButton" parent="game"]
+[node name="pause" type="TouchScreenButton" parent="game" unique_id=634855048]
 position = Vector2(32, 32)
 scale = Vector2(1.75, 1.75)
 texture_normal = ExtResource("2_mq6jc")

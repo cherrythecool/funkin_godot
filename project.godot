@@ -15,7 +15,7 @@ config/description="Friday Night Funkin' remade in Godot for performance and sta
 config/version="3.0.0-recode/gameplay"
 config/tags=PackedStringArray("2d", "modding", "rhythm")
 run/main_scene="uid://cxk008iuw4n7u"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="res://assets/icon.png"
@@ -23,7 +23,7 @@ config/macos_native_icon="res://assets/apple_icon.icns"
 
 [audio]
 
-buses/default_bus_layout="res://assets/resources/default_bus_layout.tres"
+buses/default_bus_layout="uid://dfk8owu2dipxx"
 general/ios/session_category=3
 general/ios/mix_with_others=true
 
@@ -274,3 +274,4 @@ buffering/agile_event_flushing=true
 
 textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
+renderer/rendering_method.editor_runtime="gl_compatibility"

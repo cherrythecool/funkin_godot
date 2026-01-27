@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bx6f5ldidoswy"]
+[gd_scene format=3 uid="uid://bx6f5ldidoswy"]
 
 [ext_resource type="Shader" uid="uid://cqme286ehx6n7" path="res://assets/shaders/note_splash.gdshader" id="1_1cbmv"]
 [ext_resource type="SpriteFrames" uid="uid://bw4etux81oui3" path="res://assets/game/skins/default/splashes.res" id="1_qpt8d"]
@@ -9,7 +9,7 @@ resource_local_to_scene = true
 shader = ExtResource("1_1cbmv")
 shader_parameter/base_color = Color(1, 0, 1, 1)
 
-[node name="note_splash" type="AnimatedSprite2D"]
+[node name="note_splash" type="AnimatedSprite2D" unique_id=1044379751]
 modulate = Color(1, 1, 1, 0.75)
 material = SubResource("ShaderMaterial_uaa61")
 sprite_frames = ExtResource("1_qpt8d")

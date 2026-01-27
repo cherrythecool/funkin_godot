@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt7vny7nmtw41"]
+[gd_scene format=3 uid="uid://dt7vny7nmtw41"]
 
 [ext_resource type="Script" uid="uid://bgoj5fedfmju5" path="res://scenes/autoload/global_audio.gd" id="1_ete5d"]
 [ext_resource type="AudioStream" uid="uid://dergcpn8f5cju" path="res://assets/menus/main_theme.ogg" id="2_ew3pn"]
@@ -6,29 +6,29 @@
 [ext_resource type="AudioStream" uid="uid://cw4cxfwsg33fg" path="res://assets/menus/confirm.ogg" id="5_fbmua"]
 [ext_resource type="AudioStream" uid="uid://ks4syot2ec3p" path="res://assets/menus/cancel.ogg" id="6_i8ihw"]
 
-[node name="global_audio" type="Node"]
+[node name="global_audio" type="Node" unique_id=1820826613]
 script = ExtResource("1_ete5d")
 
-[node name="MUSIC" type="AudioStreamPlayer" parent="."]
+[node name="MUSIC" type="AudioStreamPlayer" parent="." unique_id=1505970123]
 stream = ExtResource("2_ew3pn")
 bus = &"Music"
 parameters/looping = true
 
-[node name="MENU" type="Node" parent="."]
+[node name="MENU" type="Node" parent="." unique_id=1361182230]
 
-[node name="SCROLL" type="AudioStreamPlayer" parent="MENU"]
+[node name="SCROLL" type="AudioStreamPlayer" parent="MENU" unique_id=1299172272]
 stream = ExtResource("4_2sg76")
 volume_db = -10.0
 max_polyphony = 16
 bus = &"SFX"
 
-[node name="CONFIRM" type="AudioStreamPlayer" parent="MENU"]
+[node name="CONFIRM" type="AudioStreamPlayer" parent="MENU" unique_id=1130258454]
 stream = ExtResource("5_fbmua")
 volume_db = -10.0
 max_polyphony = 4
 bus = &"SFX"
 
-[node name="CANCEL" type="AudioStreamPlayer" parent="MENU"]
+[node name="CANCEL" type="AudioStreamPlayer" parent="MENU" unique_id=1578359029]
 stream = ExtResource("6_i8ihw")
 volume_db = -10.0
 max_polyphony = 2

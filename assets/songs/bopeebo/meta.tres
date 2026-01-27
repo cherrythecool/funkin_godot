@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongMetadata" load_steps=5 format=3 uid="uid://c5d47mbdc14ja"]
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://c5d47mbdc14ja"]
 
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_i8til"]
 [ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="1_ubbcs"]

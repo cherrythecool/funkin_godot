@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bv6yjr8gjtef4"]
+[gd_scene format=3 uid="uid://bv6yjr8gjtef4"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_0ef7e"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_ymkn7"]
@@ -689,13 +689,13 @@ _data = {
 &"sing_up_miss": SubResource("Animation_f7oj6")
 }
 
-[node name="bf_pixel" type="Node2D"]
+[node name="bf_pixel" type="Node2D" unique_id=142755749]
 script = ExtResource("1_0ef7e")
 icon = SubResource("Resource_04pdi")
 starts_as_player = true
 death_character = "uid://5rxh788gk1wf"
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1397576278]
 texture_filter = 1
 position = Vector2(-208, -392)
 scale = Vector2(6, 6)
@@ -704,10 +704,8 @@ animation = &"BF IDLE instance 1"
 centered = false
 script = ExtResource("5_f7oj6")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1690865763]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=683694014]
 position = Vector2(-116, -268)

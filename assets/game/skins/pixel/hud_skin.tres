@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HUDSkin" load_steps=2 format=3 uid="uid://bx66ixfj76oix"]
+[gd_resource type="Resource" script_class="HUDSkin" format=3 uid="uid://bx66ixfj76oix"]
 
 [ext_resource type="Script" uid="uid://bwjjpqxupvxcc" path="res://scripts/resources/hud_skin.gd" id="1_nl67s"]
 

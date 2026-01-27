@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://md8gwoxxlk00"]
+[gd_scene format=3 uid="uid://md8gwoxxlk00"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_q7vog"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_cgiuh"]
@@ -10,8 +10,6 @@
 script = ExtResource("2_cgiuh")
 texture = ExtResource("3_cgiuh")
 color = Color(0.952941, 1, 0.431373, 1)
-frames = Vector2i(2, 1)
-filter = 0
 
 [sub_resource type="Animation" id="Animation_bgpi6"]
 length = 0.001
@@ -411,21 +409,19 @@ _data = {
 &"sing_up": SubResource("Animation_m87l6")
 }
 
-[node name="monster" type="Node2D"]
+[node name="monster" type="Node2D" unique_id=664751489]
 script = ExtResource("1_q7vog")
 icon = SubResource("Resource_aw77d")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=686664903]
 position = Vector2(-283, -636)
 sprite_frames = ExtResource("4_cgiuh")
 animation = &"monster idle"
 centered = false
 script = ExtResource("5_aw77d")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1707409769]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=1931662682]
 position = Vector2(206, -432)

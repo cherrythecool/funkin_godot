@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://w4x38w0bt6n1"]
+[gd_scene format=3 uid="uid://w4x38w0bt6n1"]
 
 [ext_resource type="Script" uid="uid://c7iq5ek2ivhku" path="res://scenes/menus/options/sections/interface.gd" id="1_6p62e"]
 [ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://scenes/menus/options/checkbox_option.gd" id="2_422dy"]
@@ -8,13 +8,13 @@
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://scripts/animated_sprite.gd" id="5_fu6tn"]
 [ext_resource type="Script" uid="uid://dpnfmug35vwfs" path="res://scenes/menus/options/number_option.gd" id="6_1836p"]
 
-[node name="interface" type="Node2D" node_paths=PackedStringArray("options")]
+[node name="interface" type="Node2D" unique_id=2111672686 node_paths=PackedStringArray("options")]
 position = Vector2(-320, 0)
 script = ExtResource("1_6p62e")
 options = [NodePath("underlay_alpha"), NodePath("rating_alpha"), NodePath("splash_alpha"), NodePath("cpu_strums_press"), NodePath("sustain_layer"), NodePath("song_label_show"), NodePath("scene_transitions"), NodePath("countdown_on_resume")]
 max_distance = 320.0
 
-[node name="underlay_alpha" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+[node name="underlay_alpha" type="Node2D" parent="." unique_id=925156825 node_paths=PackedStringArray("root")]
 position = Vector2(6, -146)
 script = ExtResource("6_1836p")
 section = &"interface"
@@ -30,19 +30,19 @@ value_suffix = &"%"
 root = NodePath("..")
 PREVIEW = ""
 
-[node name="label" type="Node2D" parent="underlay_alpha"]
+[node name="label" type="Node2D" parent="underlay_alpha" unique_id=690664164]
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "LANE ALPHA:"
 centered = true
 
-[node name="value" type="Node2D" parent="underlay_alpha"]
+[node name="value" type="Node2D" parent="underlay_alpha" unique_id=1022669805]
 position = Vector2(272, -34)
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "0%"
 
-[node name="rating_alpha" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+[node name="rating_alpha" type="Node2D" parent="." unique_id=591998113 node_paths=PackedStringArray("root")]
 position = Vector2(60, -61)
 script = ExtResource("6_1836p")
 section = &"interface"
@@ -58,19 +58,19 @@ value_suffix = &"%"
 root = NodePath("..")
 PREVIEW = ""
 
-[node name="label" type="Node2D" parent="rating_alpha"]
+[node name="label" type="Node2D" parent="rating_alpha" unique_id=427025558]
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "RATING ALPHA:"
 centered = true
 
-[node name="value" type="Node2D" parent="rating_alpha"]
+[node name="value" type="Node2D" parent="rating_alpha" unique_id=1078053864]
 position = Vector2(321, -34)
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "0%"
 
-[node name="splash_alpha" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+[node name="splash_alpha" type="Node2D" parent="." unique_id=797866145 node_paths=PackedStringArray("root")]
 position = Vector2(6, 24)
 script = ExtResource("6_1836p")
 section = &"interface"
@@ -86,33 +86,33 @@ value_suffix = &"%"
 root = NodePath("..")
 PREVIEW = ""
 
-[node name="label" type="Node2D" parent="splash_alpha"]
+[node name="label" type="Node2D" parent="splash_alpha" unique_id=1094598369]
 position = Vector2(47, 0)
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "SPLASH ALPHA:"
 centered = true
 
-[node name="value" type="Node2D" parent="splash_alpha"]
+[node name="value" type="Node2D" parent="splash_alpha" unique_id=17153174]
 position = Vector2(366, -34)
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "0%"
 
-[node name="cpu_strums_press" type="Node2D" parent="."]
+[node name="cpu_strums_press" type="Node2D" parent="." unique_id=1594006114]
 position = Vector2(6, 156)
 script = ExtResource("2_422dy")
 section = &"interface"
 key = &"cpu_strums_press"
 
-[node name="alphabet" type="Node2D" parent="cpu_strums_press"]
+[node name="alphabet" type="Node2D" parent="cpu_strums_press" unique_id=685439113]
 position = Vector2(85, 0)
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "cpu strum glow"
 centered = true
 
-[node name="checkbox" type="AnimatedSprite2D" parent="cpu_strums_press"]
+[node name="checkbox" type="AnimatedSprite2D" parent="cpu_strums_press" unique_id=1875720379]
 position = Vector2(506, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_abqtr")
@@ -120,21 +120,21 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_fu6tn")
 
-[node name="sustain_layer" type="Node2D" parent="."]
+[node name="sustain_layer" type="Node2D" parent="." unique_id=364311376]
 position = Vector2(6, 255)
 script = ExtResource("2_422dy")
 section = &"interface"
 key = &"sustain_layer"
 strings = Array[String](["above", "below"])
 
-[node name="alphabet" type="Node2D" parent="sustain_layer"]
+[node name="alphabet" type="Node2D" parent="sustain_layer" unique_id=1335330600]
 position = Vector2(243, 0)
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "sustains below strums"
 centered = true
 
-[node name="checkbox" type="AnimatedSprite2D" parent="sustain_layer"]
+[node name="checkbox" type="AnimatedSprite2D" parent="sustain_layer" unique_id=1145184616]
 position = Vector2(812, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_abqtr")
@@ -142,20 +142,20 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_fu6tn")
 
-[node name="song_label_show" type="Node2D" parent="."]
+[node name="song_label_show" type="Node2D" parent="." unique_id=1465903622]
 position = Vector2(6, 408)
 script = ExtResource("2_422dy")
 section = &"interface"
 key = &"song_label_show"
 
-[node name="alphabet" type="Node2D" parent="song_label_show"]
+[node name="alphabet" type="Node2D" parent="song_label_show" unique_id=1607077160]
 position = Vector2(99, 0)
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "Show Song Label"
 centered = true
 
-[node name="checkbox" type="AnimatedSprite2D" parent="song_label_show"]
+[node name="checkbox" type="AnimatedSprite2D" parent="song_label_show" unique_id=1072530484]
 position = Vector2(520, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_abqtr")
@@ -163,20 +163,20 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_fu6tn")
 
-[node name="scene_transitions" type="Node2D" parent="."]
+[node name="scene_transitions" type="Node2D" parent="." unique_id=2138152291]
 position = Vector2(6, 495)
 script = ExtResource("2_422dy")
 section = &"interface"
 key = &"scene_transitions"
 
-[node name="alphabet" type="Node2D" parent="scene_transitions"]
+[node name="alphabet" type="Node2D" parent="scene_transitions" unique_id=1370226885]
 position = Vector2(140, 0)
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "scene transitions"
 centered = true
 
-[node name="checkbox" type="AnimatedSprite2D" parent="scene_transitions"]
+[node name="checkbox" type="AnimatedSprite2D" parent="scene_transitions" unique_id=8751382]
 position = Vector2(609, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_abqtr")
@@ -184,20 +184,20 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_fu6tn")
 
-[node name="countdown_on_resume" type="Node2D" parent="."]
+[node name="countdown_on_resume" type="Node2D" parent="." unique_id=1696832797]
 position = Vector2(6, 594)
 script = ExtResource("2_422dy")
 section = &"interface"
 key = &"countdown_on_resume"
 
-[node name="alphabet" type="Node2D" parent="countdown_on_resume"]
+[node name="alphabet" type="Node2D" parent="countdown_on_resume" unique_id=1087776169]
 position = Vector2(187, -11.399994)
 script = ExtResource("3_ih51s")
 skin = ExtResource("4_fkvco")
 text = "countdown on resume"
 centered = true
 
-[node name="checkbox" type="AnimatedSprite2D" parent="countdown_on_resume"]
+[node name="checkbox" type="AnimatedSprite2D" parent="countdown_on_resume" unique_id=1458941066]
 position = Vector2(718, -11.399993)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_abqtr")

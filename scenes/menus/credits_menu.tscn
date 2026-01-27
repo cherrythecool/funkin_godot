@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b6gvgi7qjy176"]
+[gd_scene format=3 uid="uid://b6gvgi7qjy176"]
 
 [ext_resource type="Script" uid="uid://ck4pjp7k3k745" path="res://scenes/menus/credits_menu.gd" id="1_536xp"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://assets/menus/background.png" id="1_due5w"]
@@ -51,19 +51,19 @@ bg_color = Color(0, 0, 0, 0.5)
 font = ExtResource("4_d74go")
 font_size = 24
 
-[node name="credits_menu" type="Node2D"]
+[node name="credits_menu" type="Node2D" unique_id=816495922]
 script = ExtResource("1_536xp")
 
-[node name="background" type="Sprite2D" parent="."]
+[node name="background" type="Sprite2D" parent="." unique_id=1581091074]
 modulate = Color(0.524323, 0.552343, 0.972656, 1)
 position = Vector2(640, 360)
 texture = ExtResource("1_due5w")
 
-[node name="list" type="Node2D" parent="."]
+[node name="list" type="Node2D" parent="." unique_id=328085113]
 unique_name_in_owner = true
 position = Vector2(520, -90)
 
-[node name="engine_contributors" type="Node2D" parent="list"]
+[node name="engine_contributors" type="Node2D" parent="list" unique_id=1372672573]
 position = Vector2(-480, 137)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_xtkoc")
@@ -74,7 +74,7 @@ skin = ExtResource("4_0ng60")
 text = "engine contributors"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="cherry" type="Node2D" parent="list"]
+[node name="cherry" type="Node2D" parent="list" unique_id=977500252]
 position = Vector2(-480, 325.5)
 script = ExtResource("4_wywfy")
 link = "https://goddess.nekoweb.org"
@@ -86,7 +86,7 @@ skin = ExtResource("4_0ng60")
 text = "cherry"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="gorkil" type="Node2D" parent="list"]
+[node name="gorkil" type="Node2D" parent="list" unique_id=1965816180]
 material = SubResource("ShaderMaterial_0ng60")
 position = Vector2(-480, 481)
 script = ExtResource("4_wywfy")
@@ -100,7 +100,7 @@ skin = ExtResource("4_0ng60")
 text = "gorkil"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="siwsi" type="Node2D" parent="list"]
+[node name="siwsi" type="Node2D" parent="list" unique_id=707442528]
 position = Vector2(-480, 639)
 script = ExtResource("4_wywfy")
 link = "https://github.com/pisayesiwsi"
@@ -113,7 +113,7 @@ skin = ExtResource("4_0ng60")
 text = "siwsi"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="nebula" type="Node2D" parent="list"]
+[node name="nebula" type="Node2D" parent="list" unique_id=1515844015]
 position = Vector2(-480, 793)
 script = ExtResource("4_wywfy")
 link = "https://github.com/nebulazorua"
@@ -126,7 +126,7 @@ skin = ExtResource("4_0ng60")
 text = "nebula"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="spacer" type="Node2D" parent="list"]
+[node name="spacer" type="Node2D" parent="list" unique_id=593375683]
 position = Vector2(0, 984)
 script = ExtResource("3_xtkoc")
 target_y = 4
@@ -135,7 +135,7 @@ skin = ExtResource("4_0ng60")
 centered = true
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="special_thanks" type="Node2D" parent="list"]
+[node name="special_thanks" type="Node2D" parent="list" unique_id=1627242772]
 position = Vector2(-480, 1073)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_xtkoc")
@@ -146,7 +146,7 @@ skin = ExtResource("4_0ng60")
 text = "special thanks"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="funkin_crew" type="Node2D" parent="list"]
+[node name="funkin_crew" type="Node2D" parent="list" unique_id=741503976]
 position = Vector2(-480, 1261.5)
 script = ExtResource("4_wywfy")
 link = "https://github.com/FunkinCrew"
@@ -159,7 +159,7 @@ skin = ExtResource("4_0ng60")
 text = "the funkin crew"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="godot_devs" type="Node2D" parent="list"]
+[node name="godot_devs" type="Node2D" parent="list" unique_id=1111019336]
 position = Vector2(-480, 1417)
 script = ExtResource("4_wywfy")
 link = "https://github.com/godotengine/godot/graphs/contributors"
@@ -172,7 +172,7 @@ skin = ExtResource("4_0ng60")
 text = "godot developers"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="eir_team" type="Node2D" parent="list"]
+[node name="eir_team" type="Node2D" parent="list" unique_id=259700794]
 position = Vector2(-480, 1574.5)
 script = ExtResource("4_wywfy")
 link = "https://github.com/EIRTeam"
@@ -185,7 +185,7 @@ skin = ExtResource("4_0ng60")
 text = "eir team"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="swordcube" type="Node2D" parent="list"]
+[node name="swordcube" type="Node2D" parent="list" unique_id=1716439119]
 material = SubResource("ShaderMaterial_33ree")
 position = Vector2(-480, 1729)
 script = ExtResource("13_aave4")
@@ -199,13 +199,13 @@ skin = ExtResource("4_0ng60")
 text = "swordcube"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="info_panel" type="Panel" parent="."]
+[node name="info_panel" type="Panel" parent="." unique_id=1677369682]
 offset_left = 800.0
 offset_right = 1280.0
 offset_bottom = 720.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xtkoc")
 
-[node name="label" type="Label" parent="info_panel"]
+[node name="label" type="Label" parent="info_panel" unique_id=681302773]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
@@ -217,7 +217,7 @@ label_settings = SubResource("LabelSettings_325oc")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="texture" type="TextureRect" parent="info_panel"]
+[node name="texture" type="TextureRect" parent="info_panel" unique_id=1233850997]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -233,7 +233,7 @@ texture = ExtResource("5_325oc")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="music" type="AudioStreamPlayer" parent="."]
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=1866985725]
 unique_name_in_owner = true
 stream = ExtResource("13_b34ng")
 volume_db = -6.0

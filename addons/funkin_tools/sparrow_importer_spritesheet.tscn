@@ -1,25 +1,25 @@
 [gd_scene format=3 uid="uid://eiv8nrtiovmp"]
 
-[node name="panel" type="PanelContainer"]
+[node name="panel" type="PanelContainer" unique_id=1843023582]
 
-[node name="margin_container" type="MarginContainer" parent="."]
+[node name="margin_container" type="MarginContainer" parent="." unique_id=946407825]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="h_box_container" type="HBoxContainer" parent="margin_container"]
+[node name="h_box_container" type="HBoxContainer" parent="margin_container" unique_id=1544782172]
 layout_mode = 2
 
-[node name="scroll_container" type="ScrollContainer" parent="margin_container/h_box_container"]
+[node name="scroll_container" type="ScrollContainer" parent="margin_container/h_box_container" unique_id=318709430]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_scroll_mode = 4
 vertical_scroll_mode = 0
 
-[node name="spritesheet_label" type="Label" parent="margin_container/h_box_container/scroll_container"]
+[node name="spritesheet_label" type="Label" parent="margin_container/h_box_container/scroll_container" unique_id=308254951]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -27,45 +27,45 @@ size_flags_vertical = 3
 text = "Spritesheet Name"
 vertical_alignment = 1
 
-[node name="v_separator" type="VSeparator" parent="margin_container/h_box_container"]
+[node name="v_separator" type="VSeparator" parent="margin_container/h_box_container" unique_id=657906896]
 layout_mode = 2
 
-[node name="fps_box" type="SpinBox" parent="margin_container/h_box_container"]
+[node name="fps_box" type="SpinBox" parent="margin_container/h_box_container" unique_id=1784187076]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1000.0
 value = 24.0
 rounded = true
 
-[node name="fps_label" type="Label" parent="margin_container/h_box_container"]
+[node name="fps_label" type="Label" parent="margin_container/h_box_container" unique_id=1492863718]
 layout_mode = 2
 text = "FPS"
 vertical_alignment = 1
 
-[node name="v_separator_2" type="VSeparator" parent="margin_container/h_box_container"]
+[node name="v_separator_2" type="VSeparator" parent="margin_container/h_box_container" unique_id=1723788671]
 layout_mode = 2
 
-[node name="looping_checkbox" type="CheckBox" parent="margin_container/h_box_container"]
+[node name="looping_checkbox" type="CheckBox" parent="margin_container/h_box_container" unique_id=629919461]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Looping"
 
-[node name="v_separator_3" type="VSeparator" parent="margin_container/h_box_container"]
+[node name="v_separator_3" type="VSeparator" parent="margin_container/h_box_container" unique_id=2079709733]
 layout_mode = 2
 
-[node name="path_prefix" type="CheckBox" parent="margin_container/h_box_container"]
+[node name="path_prefix" type="CheckBox" parent="margin_container/h_box_container" unique_id=1430530386]
 unique_name_in_owner = true
 layout_mode = 2
 text = "File Name Prefix"
 
-[node name="spacer" type="Control" parent="margin_container/h_box_container"]
+[node name="spacer" type="Control" parent="margin_container/h_box_container" unique_id=315277238]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="aspect_ratio_container" type="AspectRatioContainer" parent="margin_container/h_box_container"]
+[node name="aspect_ratio_container" type="AspectRatioContainer" parent="margin_container/h_box_container" unique_id=28589628]
 layout_mode = 2
 
-[node name="remove_button" type="Button" parent="margin_container/h_box_container/aspect_ratio_container"]
+[node name="remove_button" type="Button" parent="margin_container/h_box_container/aspect_ratio_container" unique_id=1691957981]
 unique_name_in_owner = true
 layout_mode = 2
 text = " X "

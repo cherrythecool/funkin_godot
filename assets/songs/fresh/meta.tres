@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongMetadata" load_steps=5 format=3 uid="uid://ww12w128nxsv"]
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://ww12w128nxsv"]
 
 [ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="1_1uh87"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_7mmo4"]
@@ -9,13 +9,11 @@ script = ExtResource("1_7mmo4")
 texture = ExtResource("2_pheod")
 color = Color(0.686275, 0.4, 0.807843, 1)
 frames = Vector2i(1, 1)
-filter = 0
 metadata/_custom_type_script = "uid://b7lu04jsahckp"
 
 [resource]
 script = ExtResource("1_1uh87")
 display_name = &"Fresh"
-mix = &"Default"
 icon = SubResource("Resource_fv7qy")
 difficulties = ["easy", "normal", "hard", "erect", "nightmare"]
 difficulty_song_overrides = Dictionary[String, StringName]({

@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dasf7d5k8p30f"]
+[gd_scene format=3 uid="uid://dasf7d5k8p30f"]
 
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="1_8fdwr"]
 [ext_resource type="Script" uid="uid://hukwrwmjwblw" path="res://scenes/menus/first_launch.gd" id="1_tlkk5"]
+[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://assets/fonts/alphabet/skin_bold.tres" id="3_6gnh1"]
 
-[node name="first_launch" type="Node2D"]
+[node name="first_launch" type="Node2D" unique_id=1683777405]
 position = Vector2(640, 360)
 script = ExtResource("1_tlkk5")
 
-[node name="main_label" type="Node2D" parent="."]
+[node name="main_label" type="Node2D" parent="." unique_id=212462775]
 position = Vector2(0, -64)
 script = ExtResource("1_8fdwr")
+skin = ExtResource("3_6gnh1")
 text = "Hey! It seems this
 is your first time!
 
@@ -19,17 +21,19 @@ before playing?"
 centered = true
 horizontal_alignment = "Center"
 
-[node name="yes" type="Node2D" parent="."]
+[node name="yes" type="Node2D" parent="." unique_id=916286500]
 position = Vector2(-180, 240)
 script = ExtResource("1_8fdwr")
+skin = ExtResource("3_6gnh1")
 text = "yes"
 centered = true
 horizontal_alignment = "Center"
 
-[node name="no" type="Node2D" parent="."]
+[node name="no" type="Node2D" parent="." unique_id=1999909321]
 modulate = Color(1, 1, 1, 0.6)
 position = Vector2(180, 240)
 script = ExtResource("1_8fdwr")
+skin = ExtResource("3_6gnh1")
 text = "no"
 centered = true
 horizontal_alignment = "Center"

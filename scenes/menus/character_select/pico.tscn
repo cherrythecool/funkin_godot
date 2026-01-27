@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6to8sv86340c"]
+[gd_scene format=3 uid="uid://c6to8sv86340c"]
 
 [ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="1_bdv53"]
 
@@ -112,13 +112,11 @@ _data = {
 &"idle": SubResource("Animation_q61be")
 }
 
-[node name="player" type="Node2D"]
+[node name="player" type="Node2D" unique_id=1096064306]
 script = ExtResource("1_bdv53")
 atlas = "res://assets/menus/character_select/pico/player"
 loop_mode = "Play Once"
 metadata/_custom_type_script = "uid://diqmdngjb60u2"
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_s4ft7")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1914100702]
+libraries/ = SubResource("AnimationLibrary_s4ft7")

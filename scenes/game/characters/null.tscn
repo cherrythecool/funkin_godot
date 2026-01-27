@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://l1dqw6ovt7lg"]
+[gd_scene format=3 uid="uid://l1dqw6ovt7lg"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_ym6ae"]
 
@@ -32,20 +32,18 @@ step = 0.0416667
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mki60"]
 _data = {
-"RESET": SubResource("Animation_bgpi6"),
-"idle": SubResource("Animation_ud1jc"),
-"sing_down": SubResource("Animation_wgt05"),
-"sing_left": SubResource("Animation_0v5yh"),
-"sing_right": SubResource("Animation_2i71f"),
-"sing_up": SubResource("Animation_m87l6")
+&"RESET": SubResource("Animation_bgpi6"),
+&"idle": SubResource("Animation_ud1jc"),
+&"sing_down": SubResource("Animation_wgt05"),
+&"sing_left": SubResource("Animation_0v5yh"),
+&"sing_right": SubResource("Animation_2i71f"),
+&"sing_up": SubResource("Animation_m87l6")
 }
 
-[node name="null" type="Node2D"]
+[node name="null" type="Node2D" unique_id=32175279]
 script = ExtResource("1_ym6ae")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=255405431]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=538730571]

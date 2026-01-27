@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="AlphabetSkin" load_steps=40 format=3 uid="uid://5kr5cxye6wyn"]
+[gd_resource type="Resource" script_class="AlphabetSkin" format=3 uid="uid://5kr5cxye6wyn"]
 
 [ext_resource type="Script" uid="uid://6tbbvcxey6ba" path="res://scripts/resources/alphabet/skin_character.gd" id="1_3283i"]
 [ext_resource type="Script" uid="uid://iqrb44umgj2s" path="res://scripts/resources/alphabet/skin.gd" id="2_3m1ex"]
-[ext_resource type="SpriteFrames" path="res://assets/fonts/alphabet/alphabet_bold.res" id="3_e0ouc"]
+[ext_resource type="SpriteFrames" uid="uid://d1b32ft1u6n8r" path="res://assets/fonts/alphabet/alphabet_bold.res" id="3_e0ouc"]
 
 [sub_resource type="Resource" id="Resource_7kt6j"]
 script = ExtResource("1_3283i")

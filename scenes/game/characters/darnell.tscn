@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dx13k6w54if1l"]
+[gd_scene format=3 uid="uid://dx13k6w54if1l"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_tc5gy"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_cf3ry"]
@@ -409,21 +409,19 @@ _data = {
 &"sing_up": SubResource("Animation_m87l6")
 }
 
-[node name="darnell" type="Node2D"]
+[node name="darnell" type="Node2D" unique_id=1554177453]
 script = ExtResource("1_tc5gy")
 icon = SubResource("Resource_cf3ry")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=806311329]
 position = Vector2(-230, -525)
 sprite_frames = ExtResource("4_tc5gy")
 animation = &"Idle"
 centered = false
 script = ExtResource("5_8k5q6")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1793266690]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=996067345]
 position = Vector2(314, -350)

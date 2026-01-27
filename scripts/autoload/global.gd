@@ -36,15 +36,10 @@ func _ready() -> void:
 	main_window.focus_entered.connect(_on_focus_enter)
 	main_window.focus_exited.connect(_on_focus_exit)
 
-	version = ProjectSettings.get_setting("application/config/version", "0.0.0")
+	version = ProjectSettings.get_setting("application/config/version", "0.0.0-unknown")
 
+	Config.value_changed.connect(_on_config_value_changed)
 	Config.loaded.connect(_on_config_loaded)
-	Config.value_changed.connect(_on_value_changed)
-
-	var dpi_scale: float = DisplayServer.screen_get_scale()
-	if OS.has_feature("pc") and dpi_scale != 1.0 and not Engine.is_embedded_in_editor():
-		get_window().size *= dpi_scale
-		get_window().move_to_center()
 
 
 func _on_focus_enter() -> void:
@@ -79,7 +74,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return
 
 
-func _on_value_changed(section: String, key: String, value: Variant) -> void:
+func _on_config_value_changed(section: String, key: String, value: Variant) -> void:
 	if value == null:
 		return
 	if section != "performance":
@@ -88,19 +83,31 @@ func _on_value_changed(section: String, key: String, value: Variant) -> void:
 		"fps_cap":
 			Engine.max_fps = value
 		"vsync_mode":
-			match value:
-				"enabled":
-					DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
-				"adaptive":
-					DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
-				"mailbox":
-					DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_MAILBOX)
-				_:
-					DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+			DisplayServer.window_set_vsync_mode(
+				Config.get_vsync_mode_from_string(value)
+			)
 
 
 func _on_config_loaded() -> void:
-	_on_value_changed("performance", "fps_cap",
-			Config.get_value("performance", "fps_cap"))
-	_on_value_changed("performance", "vsync_mode",
-			Config.get_value("performance", "vsync_mode"))
+	_on_config_value_changed(
+		"performance",
+		"fps_cap",
+		Config.get_value("performance", "fps_cap"),
+	)
+
+	_on_config_value_changed(
+		"performance",
+		"vsync_mode",
+		Config.get_value("performance", "vsync_mode"),
+	)
+
+	if not Config.get_value("performance", "dpi_awareness"):
+		return
+	if not OS.has_feature("pc"):
+		return
+	if Engine.is_embedded_in_editor():
+		return
+	var dpi_scale: float = DisplayServer.screen_get_scale()
+	if dpi_scale != 1.0:
+		get_window().size *= dpi_scale
+		get_window().move_to_center()

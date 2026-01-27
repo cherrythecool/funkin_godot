@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongAssets" load_steps=5 format=3 uid="uid://cht6iq8f10ycv"]
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://cht6iq8f10ycv"]
 
 [ext_resource type="PackedScene" uid="uid://bv6yjr8gjtef4" path="res://scenes/game/characters/bf_pixel.tscn" id="1_qw5sw"]
 [ext_resource type="Resource" uid="uid://pv1ounxci6y8" path="res://assets/game/skins/pixel/note_skin.tres" id="2_qw5sw"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongAssets" load_steps=6 format=3 uid="uid://vs7hbvr4nd7g"]
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://vs7hbvr4nd7g"]
 
 [ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://scripts/resources/songs/assets.gd" id="1_torvt"]
 [ext_resource type="PackedScene" uid="uid://cdxxht68lxv1a" path="res://scenes/game/characters/mom.tscn" id="2_yclb7"]
@@ -12,5 +12,4 @@ player = ExtResource("3_8nhnv")
 spectator = ExtResource("4_7uvcd")
 opponent = ExtResource("2_yclb7")
 stage = ExtResource("5_5sw1m")
-scripts = Array[PackedScene]([])
 metadata/_custom_type_script = ExtResource("1_torvt")

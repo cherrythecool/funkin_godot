@@ -1,16 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctp6qq4w60hkd"]
+[gd_scene format=3 uid="uid://ctp6qq4w60hkd"]
 
 [ext_resource type="Script" uid="uid://2441ftrjfyr7" path="res://scenes/menus/options/previews/offset.gd" id="1_508hw"]
 [ext_resource type="PackedScene" uid="uid://3diy2p3nknpi" path="res://scenes/game/note_fields/4_lanes.tscn" id="2_5bgr3"]
 [ext_resource type="PackedScene" uid="uid://f75xq2p53bpl" path="res://scenes/game/notes/note.tscn" id="4_e1622"]
 
-[node name="offset" type="Node2D"]
+[node name="offset" type="Node2D" unique_id=2094019831]
 script = ExtResource("1_508hw")
 
-[node name="notes" parent="." node_paths=PackedStringArray("conductor") instance=ExtResource("2_5bgr3")]
+[node name="notes" parent="." unique_id=182197152 instance=ExtResource("2_5bgr3")]
 position = Vector2(0, -240)
 side = 1
 note_types = Dictionary[StringName, PackedScene]({
 &"default": ExtResource("4_e1622")
 })
-conductor = NodePath("")

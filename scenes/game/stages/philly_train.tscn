@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cr1y6ckgvprb6"]
+[gd_scene format=3 uid="uid://cr1y6ckgvprb6"]
 
 [ext_resource type="Script" uid="uid://t7ptunydfk7u" path="res://scenes/game/stages/philly_train.gd" id="1_r13m0"]
 [ext_resource type="Texture2D" uid="uid://ccalaeucl8di1" path="res://assets/game/stages/philly_train/sky.png" id="2_66wy7"]
@@ -15,34 +15,34 @@
 shader = ExtResource("4_6ah8b")
 shader_parameter/fade = 0.0
 
-[node name="philly_train" type="Node2D"]
+[node name="philly_train" type="Node2D" unique_id=1603892609]
 script = ExtResource("1_r13m0")
 default_zoom = 1.1
 
-[node name="sky" type="Parallax2D" parent="."]
+[node name="sky" type="Parallax2D" parent="." unique_id=1322228519]
 z_index = 10
 scroll_scale = Vector2(0.1, 0.1)
 
-[node name="sprite" type="Sprite2D" parent="sky"]
+[node name="sprite" type="Sprite2D" parent="sky" unique_id=847069512]
 position = Vector2(-100, 0)
 texture = ExtResource("2_66wy7")
 centered = false
 
-[node name="city" type="Parallax2D" parent="."]
+[node name="city" type="Parallax2D" parent="." unique_id=1789449687]
 z_index = 20
 scroll_scale = Vector2(0.3, 0.3)
 
-[node name="sprite" type="Sprite2D" parent="city"]
+[node name="sprite" type="Sprite2D" parent="city" unique_id=1332518279]
 position = Vector2(-10, 0)
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("3_vfoc4")
 centered = false
 
-[node name="window" type="Parallax2D" parent="."]
+[node name="window" type="Parallax2D" parent="." unique_id=1537640176]
 z_index = 30
 scroll_scale = Vector2(0.3, 0.3)
 
-[node name="window" type="Sprite2D" parent="window"]
+[node name="window" type="Sprite2D" parent="window" unique_id=1079913680]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_oe5j7")
 position = Vector2(-10, 0)
@@ -50,50 +50,50 @@ scale = Vector2(0.85, 0.85)
 texture = ExtResource("4_r13m0")
 centered = false
 
-[node name="behind_train" type="Parallax2D" parent="."]
+[node name="behind_train" type="Parallax2D" parent="." unique_id=258200264]
 z_index = 50
 
-[node name="sprite" type="Sprite2D" parent="behind_train"]
+[node name="sprite" type="Sprite2D" parent="behind_train" unique_id=1516490171]
 position = Vector2(-40, 50)
 texture = ExtResource("5_6ah8b")
 centered = false
 
-[node name="train" type="Parallax2D" parent="."]
+[node name="train" type="Parallax2D" parent="." unique_id=1633691598]
 z_index = 60
 
-[node name="train" type="Sprite2D" parent="train"]
+[node name="train" type="Sprite2D" parent="train" unique_id=888332300]
 unique_name_in_owner = true
 position = Vector2(2000, 360)
 texture = ExtResource("6_oe5j7")
 centered = false
 
-[node name="street" type="Parallax2D" parent="."]
+[node name="street" type="Parallax2D" parent="." unique_id=2134181394]
 z_index = 70
 
-[node name="sprite" type="Sprite2D" parent="street"]
+[node name="sprite" type="Sprite2D" parent="street" unique_id=1835387467]
 position = Vector2(-40, 50)
 texture = ExtResource("7_vfoc4")
 centered = false
 
-[node name="spectator" type="Marker2D" parent="."]
+[node name="spectator" type="Marker2D" parent="." unique_id=1723473148]
 z_index = 100
 position = Vector2(751.1, 787)
 script = ExtResource("5_r13m0")
 character_path = "uid://bragoy3tisav2"
 
-[node name="player" type="Marker2D" parent="."]
+[node name="player" type="Marker2D" parent="." unique_id=938420812]
 z_index = 300
 position = Vector2(989.5, 885)
 script = ExtResource("5_r13m0")
 
-[node name="opponent" type="Marker2D" parent="."]
+[node name="opponent" type="Marker2D" parent="." unique_id=739593646]
 z_index = 200
 position = Vector2(468, 885)
 script = ExtResource("5_r13m0")
 character_path = "uid://dr24tjg5bcvow"
 flipped = true
 
-[node name="train_passes" type="AudioStreamPlayer" parent="."]
+[node name="train_passes" type="AudioStreamPlayer" parent="." unique_id=2106255940]
 unique_name_in_owner = true
 stream = ExtResource("9_6ah8b")
 bus = &"SFX"

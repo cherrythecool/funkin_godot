@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://3rua2gpac5p8"]
+[gd_scene format=3 uid="uid://3rua2gpac5p8"]
 
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://assets/menus/background.png" id="1_2q4rq"]
 [ext_resource type="Script" uid="uid://buarre8s3ld28" path="res://scenes/menus/freeplay_menu.gd" id="1_p2lt6"]
@@ -34,28 +34,28 @@ font_size = 12
 font = ExtResource("4_7yg7l")
 font_size = 10
 
-[node name="freeplay_menu" type="Node2D"]
+[node name="freeplay_menu" type="Node2D" unique_id=1705804318]
 script = ExtResource("1_p2lt6")
 list = Array[String](["tutorial", "bopeebo", "fresh", "dad_battle", "spookeez", "south", "monster", "pico", "philly_nice", "blammed", "satin_panties", "high", "milf", "cocoa", "darnell_bf", "lit_up_bf", "test"])
 
-[node name="track_timer" type="Timer" parent="."]
+[node name="track_timer" type="Timer" parent="." unique_id=981534588]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="tracks" type="Node" parent="."]
+[node name="tracks" type="Node" parent="." unique_id=1402350992]
 unique_name_in_owner = true
 script = ExtResource("2_fq3va")
 metadata/_custom_type_script = "uid://bbfskuw2fyle3"
 
-[node name="background" type="Sprite2D" parent="."]
+[node name="background" type="Sprite2D" parent="." unique_id=505659536]
 unique_name_in_owner = true
 position = Vector2(640, 360)
 texture = ExtResource("1_2q4rq")
 
-[node name="songs" type="Node2D" parent="."]
+[node name="songs" type="Node2D" parent="." unique_id=280316050]
 unique_name_in_owner = true
 
-[node name="root_control" type="Control" parent="."]
+[node name="root_control" type="Control" parent="." unique_id=951275181]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,7 +66,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="info_panel" type="Panel" parent="root_control" node_paths=PackedStringArray("parent")]
+[node name="info_panel" type="Panel" parent="root_control" unique_id=760316165 node_paths=PackedStringArray("parent")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -79,7 +79,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_h4xxx")
 script = ExtResource("4_5dymk")
 parent = NodePath("../..")
 
-[node name="song_label" type="Label" parent="root_control/info_panel"]
+[node name="song_label" type="Label" parent="root_control/info_panel" unique_id=1582851987]
 layout_mode = 1
 offset_top = 7.0
 offset_right = 256.0
@@ -90,7 +90,7 @@ label_settings = SubResource("LabelSettings_mco15")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="difficulty_label" type="Label" parent="root_control/info_panel"]
+[node name="difficulty_label" type="Label" parent="root_control/info_panel" unique_id=429183604]
 layout_mode = 1
 offset_top = 29.0
 offset_right = 256.0
@@ -101,7 +101,7 @@ label_settings = SubResource("LabelSettings_1ivw4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="score_panel" type="Panel" parent="root_control"]
+[node name="score_panel" type="Panel" parent="root_control" unique_id=147684747]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 1
@@ -115,7 +115,7 @@ grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_i7glp")
 script = ExtResource("6_mti1l")
 
-[node name="score_label" type="Label" parent="root_control/score_panel"]
+[node name="score_label" type="Label" parent="root_control/score_panel" unique_id=573466709]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -131,7 +131,7 @@ label_settings = SubResource("LabelSettings_06b8i")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="misses_label" type="Label" parent="root_control/score_panel"]
+[node name="misses_label" type="Label" parent="root_control/score_panel" unique_id=367286657]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -147,7 +147,7 @@ label_settings = SubResource("LabelSettings_06b8i")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="accuracy_label" type="Label" parent="root_control/score_panel"]
+[node name="accuracy_label" type="Label" parent="root_control/score_panel" unique_id=457228626]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -163,7 +163,7 @@ label_settings = SubResource("LabelSettings_06b8i")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="rank_label" type="Label" parent="root_control/score_panel"]
+[node name="rank_label" type="Label" parent="root_control/score_panel" unique_id=425577298]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -179,7 +179,7 @@ label_settings = SubResource("LabelSettings_06b8i")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="reset_label" type="Label" parent="root_control/score_panel"]
+[node name="reset_label" type="Label" parent="root_control/score_panel" unique_id=901491931]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -195,7 +195,7 @@ label_settings = SubResource("LabelSettings_s0bc2")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="reset_panel" type="Panel" parent="root_control"]
+[node name="reset_panel" type="Panel" parent="root_control" unique_id=644795363]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 1
@@ -209,7 +209,7 @@ grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_i7glp")
 script = ExtResource("7_detv5")
 
-[node name="question_label" type="Label" parent="root_control/reset_panel"]
+[node name="question_label" type="Label" parent="root_control/reset_panel" unique_id=43930808]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -226,7 +226,7 @@ label_settings = SubResource("LabelSettings_06b8i")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="answers_label" type="Label" parent="root_control/reset_panel"]
+[node name="answers_label" type="Label" parent="root_control/reset_panel" unique_id=1139474315]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5

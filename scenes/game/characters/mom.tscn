@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdxxht68lxv1a"]
+[gd_scene format=3 uid="uid://cdxxht68lxv1a"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_tui1q"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_vq5fi"]
@@ -10,8 +10,6 @@
 script = ExtResource("2_vq5fi")
 texture = ExtResource("3_tui1q")
 color = Color(0.847059, 0.333333, 0.556863, 1)
-frames = Vector2i(2, 1)
-filter = 0
 metadata/_custom_type_script = ExtResource("2_vq5fi")
 
 [sub_resource type="Animation" id="Animation_bgpi6"]
@@ -413,21 +411,19 @@ _data = {
 &"sing_up": SubResource("Animation_m87l6")
 }
 
-[node name="mom" type="Node2D"]
+[node name="mom" type="Node2D" unique_id=1914771471]
 script = ExtResource("1_tui1q")
 icon = SubResource("Resource_vq5fi")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=176042494]
 position = Vector2(-169, -755)
 sprite_frames = ExtResource("4_tui1q")
 animation = &"Mom Idle"
 centered = false
 script = ExtResource("5_c60j0")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=2041159782]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=1572177520]
 position = Vector2(181, -517)

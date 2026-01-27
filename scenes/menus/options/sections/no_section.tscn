@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://di58m2bnkbajd"]
+[gd_scene format=3 uid="uid://di58m2bnkbajd"]
 
-[ext_resource type="Script" path="res://scenes/menus/options/base_options_section.gd" id="1_48ko1"]
-[ext_resource type="Script" path="res://scenes/interface/alphabet.gd" id="2_it2mv"]
+[ext_resource type="Script" uid="uid://0p2ytefjgc4v" path="res://scenes/menus/options/base_options_section.gd" id="1_48ko1"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="2_it2mv"]
+[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://assets/fonts/alphabet/skin_bold.tres" id="3_n4wpy"]
 
-[node name="none" type="Node2D"]
+[node name="none" type="Node2D" unique_id=258251732]
 script = ExtResource("1_48ko1")
 
-[node name="alphabet" type="Node2D" parent="."]
+[node name="alphabet" type="Node2D" parent="." unique_id=757009502]
 script = ExtResource("2_it2mv")
+skin = ExtResource("3_n4wpy")
 text = "sorry!
 this section is unfinished!"
 centered = true

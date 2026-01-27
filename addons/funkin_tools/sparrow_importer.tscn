@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6ejs2wvgt8fc"]
+[gd_scene format=3 uid="uid://b6ejs2wvgt8fc"]
 
 [ext_resource type="Script" uid="uid://dbridha1ib24a" path="res://addons/funkin_tools/sparrow_importer.gd" id="1_wy6ij"]
 [ext_resource type="Script" uid="uid://stecdjsveru4" path="res://addons/funkin_tools/sparrow_importer/import_spritesheets.gd" id="2_g586u"]
 
-[node name="Sparrow Importer" type="ScrollContainer"]
+[node name="Sparrow Importer" type="ScrollContainer" unique_id=522038997]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,7 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_wy6ij")
 metadata/_tab_index = 0
 
-[node name="h_split_container" type="HSplitContainer" parent="."]
+[node name="h_split_container" type="HSplitContainer" parent="." unique_id=1317473324]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -20,7 +20,7 @@ theme_override_constants/separation = 8
 theme_override_constants/minimum_grab_thickness = 8
 theme_override_constants/autohide = 0
 
-[node name="margin_container" type="MarginContainer" parent="h_split_container"]
+[node name="margin_container" type="MarginContainer" parent="h_split_container" unique_id=202462875]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 8
@@ -28,27 +28,27 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="v_box" type="VBoxContainer" parent="h_split_container/margin_container"]
+[node name="v_box" type="VBoxContainer" parent="h_split_container/margin_container" unique_id=1235361769]
 layout_mode = 2
 
-[node name="label" type="Label" parent="h_split_container/margin_container/v_box"]
+[node name="label" type="Label" parent="h_split_container/margin_container/v_box" unique_id=384297583]
 layout_mode = 2
 text = "Use this tool to convert Sparrow Atlases to Godot's native SpriteFrames resources!"
 autowrap_mode = 3
 
-[node name="h_separator" type="HSeparator" parent="h_split_container/margin_container/v_box"]
+[node name="h_separator" type="HSeparator" parent="h_split_container/margin_container/v_box" unique_id=1142561575]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="import_label" type="Label" parent="h_split_container/margin_container/v_box"]
+[node name="import_label" type="Label" parent="h_split_container/margin_container/v_box" unique_id=1148032193]
 layout_mode = 2
 text = "Animation Import Settings"
 
-[node name="import_options" type="VBoxContainer" parent="h_split_container/margin_container/v_box"]
+[node name="import_options" type="VBoxContainer" parent="h_split_container/margin_container/v_box" unique_id=882601088]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="fps_box" type="SpinBox" parent="h_split_container/margin_container/v_box/import_options"]
+[node name="fps_box" type="SpinBox" parent="h_split_container/margin_container/v_box/import_options" unique_id=1931057880]
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "Default framerate of all animations imported"
@@ -56,7 +56,7 @@ max_value = 1000.0
 value = 24.0
 rounded = true
 
-[node name="label" type="Label" parent="h_split_container/margin_container/v_box/import_options/fps_box"]
+[node name="label" type="Label" parent="h_split_container/margin_container/v_box/import_options/fps_box" unique_id=1529303080]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -66,59 +66,59 @@ offset_left = 4.0
 text = "FPS"
 vertical_alignment = 1
 
-[node name="looping" type="CheckBox" parent="h_split_container/margin_container/v_box/import_options"]
+[node name="looping" type="CheckBox" parent="h_split_container/margin_container/v_box/import_options" unique_id=616923307]
 layout_mode = 2
 tooltip_text = "Default looping value of all animations imported"
 text = "Looping"
 
-[node name="path_prefix" type="CheckBox" parent="h_split_container/margin_container/v_box/import_options"]
+[node name="path_prefix" type="CheckBox" parent="h_split_container/margin_container/v_box/import_options" unique_id=1994565422]
 layout_mode = 2
 tooltip_text = "Adds the name of the spritesheet (without file extension) to the start of each animation name
 
 Useful for multiple files with colliding names"
 text = "Use File Name as Prefix"
 
-[node name="import_spritesheets" type="Button" parent="h_split_container/margin_container/v_box"]
+[node name="import_spritesheets" type="Button" parent="h_split_container/margin_container/v_box" unique_id=354221627]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Import Spritesheets"
 script = ExtResource("2_g586u")
 
-[node name="h_separator_2" type="HSeparator" parent="h_split_container/margin_container/v_box"]
+[node name="h_separator_2" type="HSeparator" parent="h_split_container/margin_container/v_box" unique_id=703281737]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="clear_on_export" type="CheckBox" parent="h_split_container/margin_container/v_box"]
+[node name="clear_on_export" type="CheckBox" parent="h_split_container/margin_container/v_box" unique_id=1881482230]
 layout_mode = 2
 tooltip_text = "Removes all imported spritesheeets automatically after exporting your sprites
 
 Useful if you're exporting a lot of individual sprites in a row"
 text = "Clear Imports After Export"
 
-[node name="filter_clips" type="CheckBox" parent="h_split_container/margin_container/v_box"]
+[node name="filter_clips" type="CheckBox" parent="h_split_container/margin_container/v_box" unique_id=748300720]
 layout_mode = 2
 tooltip_text = "Exports all frames with the region around them being clipped to avoid bleeding from pixels around them (disable if it somehow causes issues with your sprites)"
 button_pressed = true
 text = "Filter Edges of Frames"
 
-[node name="merge_spritesheets" type="CheckBox" parent="h_split_container/margin_container/v_box"]
+[node name="merge_spritesheets" type="CheckBox" parent="h_split_container/margin_container/v_box" unique_id=936388840]
 layout_mode = 2
 tooltip_text = "Merges all imported spritesheets into one single file or folder (depending on the way you export)
 
 Useful for easily combining animations into one resource"
 text = "Merge All Spritesheets"
 
-[node name="export_to_spriteframes" type="Button" parent="h_split_container/margin_container/v_box"]
+[node name="export_to_spriteframes" type="Button" parent="h_split_container/margin_container/v_box" unique_id=886929936]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Export All to SpriteFrames"
 
-[node name="export_to_pngs" type="Button" parent="h_split_container/margin_container/v_box"]
+[node name="export_to_pngs" type="Button" parent="h_split_container/margin_container/v_box" unique_id=373774286]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Export All to PNGs"
 
-[node name="margin_container_2" type="MarginContainer" parent="h_split_container"]
+[node name="margin_container_2" type="MarginContainer" parent="h_split_container" unique_id=943521314]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 8
@@ -126,16 +126,16 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="h_box_container" type="HBoxContainer" parent="h_split_container/margin_container_2"]
+[node name="h_box_container" type="HBoxContainer" parent="h_split_container/margin_container_2" unique_id=1236300492]
 layout_mode = 2
 
-[node name="spritesheet_container" type="BoxContainer" parent="h_split_container/margin_container_2/h_box_container"]
+[node name="spritesheet_container" type="BoxContainer" parent="h_split_container/margin_container_2/h_box_container" unique_id=18772460]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 vertical = true
 
-[node name="open_dialog" type="FileDialog" parent="."]
+[node name="open_dialog" type="FileDialog" parent="." unique_id=542802301]
 unique_name_in_owner = true
 disable_3d = true
 oversampling_override = 1.0
@@ -149,7 +149,7 @@ folder_creation_enabled = false
 favorites_enabled = false
 recent_list_enabled = false
 
-[node name="save_dialog" type="FileDialog" parent="."]
+[node name="save_dialog" type="FileDialog" parent="." unique_id=24363397]
 unique_name_in_owner = true
 disable_3d = true
 oversampling_override = 1.0
@@ -163,7 +163,7 @@ recent_list_enabled = false
 option_0/name = "Compressed"
 option_0/default = 1
 
-[node name="save_pngs_dialog" type="FileDialog" parent="."]
+[node name="save_pngs_dialog" type="FileDialog" parent="." unique_id=1325887618]
 unique_name_in_owner = true
 disable_3d = true
 oversampling_override = 1.0

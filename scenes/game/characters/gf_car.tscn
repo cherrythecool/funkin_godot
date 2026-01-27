@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfd0vee7ua8k7"]
+[gd_scene format=3 uid="uid://cfd0vee7ua8k7"]
 
 [ext_resource type="Script" uid="uid://bdoqh1blda6fx" path="res://scenes/game/characters/gf_car.gd" id="1_bi3vf"]
 [ext_resource type="SpriteFrames" path="res://assets/game/characters/gf/speakers.res" id="4_uloin"]
@@ -277,28 +277,26 @@ _data = {
 &"dance_right": SubResource("Animation_2gr36")
 }
 
-[node name="gf_car" type="Node2D"]
+[node name="gf_car" type="Node2D" unique_id=794078086]
 script = ExtResource("1_bi3vf")
 dance_steps = Array[StringName]([&"dance_left", &"dance_right"])
 
-[node name="speakers" type="AnimatedSprite2D" parent="."]
+[node name="speakers" type="AnimatedSprite2D" parent="." unique_id=1316625258]
 position = Vector2(-366, -354)
 sprite_frames = ExtResource("4_uloin")
 animation = &"speakers"
 centered = false
 script = ExtResource("5_4ddhu")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1167605754]
 position = Vector2(-135, -655)
 sprite_frames = ExtResource("6_j7cp1")
 animation = &"GF Dancing Beat Hair blowing CAR"
 centered = false
 script = ExtResource("5_4ddhu")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1146632966]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=1456387916]
 position = Vector2(5, -414)

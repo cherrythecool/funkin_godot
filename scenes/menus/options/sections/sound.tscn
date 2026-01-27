@@ -1,15 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dd76grrhumccf"]
+[gd_scene format=3 uid="uid://dd76grrhumccf"]
 
 [ext_resource type="Script" uid="uid://c7iq5ek2ivhku" path="res://scenes/menus/options/sections/interface.gd" id="1_fujo8"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://scenes/interface/alphabet.gd" id="2_rqn5q"]
+[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://assets/fonts/alphabet/skin_bold.tres" id="4_aj75y"]
 [ext_resource type="Script" uid="uid://bfvypstga7ch8" path="res://scenes/menus/options/volume_slider.gd" id="6_efc3u"]
 
-[node name="sound" type="Node2D" node_paths=PackedStringArray("options")]
+[node name="sound" type="Node2D" unique_id=29367316 node_paths=PackedStringArray("options")]
 script = ExtResource("1_fujo8")
 options = [NodePath("master_volume"), NodePath("music_volume"), NodePath("sfx_volume")]
 max_distance = 0.0
 
-[node name="master_volume" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+[node name="master_volume" type="Node2D" parent="." unique_id=238260379 node_paths=PackedStringArray("root")]
 position = Vector2(-264, -60)
 script = ExtResource("6_efc3u")
 section = &"sound"
@@ -21,18 +22,20 @@ value_suffix = &"%"
 root = NodePath("..")
 PREVIEW = ""
 
-[node name="label" type="Node2D" parent="master_volume"]
+[node name="label" type="Node2D" parent="master_volume" unique_id=1169113267]
 position = Vector2(-140, 0)
 script = ExtResource("2_rqn5q")
+skin = ExtResource("4_aj75y")
 text = "master:"
 centered = true
 
-[node name="value" type="Node2D" parent="master_volume"]
+[node name="value" type="Node2D" parent="master_volume" unique_id=1189295515]
 position = Vector2(38, -32)
 script = ExtResource("2_rqn5q")
+skin = ExtResource("4_aj75y")
 text = "< 0% >"
 
-[node name="music_volume" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+[node name="music_volume" type="Node2D" parent="." unique_id=371396805 node_paths=PackedStringArray("root")]
 position = Vector2(-287, 36)
 script = ExtResource("6_efc3u")
 bus = &"Music"
@@ -45,18 +48,20 @@ value_suffix = &"%"
 root = NodePath("..")
 PREVIEW = ""
 
-[node name="label" type="Node2D" parent="music_volume"]
+[node name="label" type="Node2D" parent="music_volume" unique_id=937756468]
 position = Vector2(-140, 0)
 script = ExtResource("2_rqn5q")
+skin = ExtResource("4_aj75y")
 text = "music:"
 centered = true
 
-[node name="value" type="Node2D" parent="music_volume"]
+[node name="value" type="Node2D" parent="music_volume" unique_id=2120686870]
 position = Vector2(60, -33)
 script = ExtResource("2_rqn5q")
+skin = ExtResource("4_aj75y")
 text = "< 0% >"
 
-[node name="sfx_volume" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+[node name="sfx_volume" type="Node2D" parent="." unique_id=1953408017 node_paths=PackedStringArray("root")]
 position = Vector2(-336, 134)
 script = ExtResource("6_efc3u")
 bus = &"SFX"
@@ -69,13 +74,15 @@ value_suffix = &"%"
 root = NodePath("..")
 PREVIEW = ""
 
-[node name="label" type="Node2D" parent="sfx_volume"]
+[node name="label" type="Node2D" parent="sfx_volume" unique_id=854779378]
 position = Vector2(-140, 0)
 script = ExtResource("2_rqn5q")
+skin = ExtResource("4_aj75y")
 text = "sfx:"
 centered = true
 
-[node name="value" type="Node2D" parent="sfx_volume"]
+[node name="value" type="Node2D" parent="sfx_volume" unique_id=1929155117]
 position = Vector2(109, -33)
 script = ExtResource("2_rqn5q")
+skin = ExtResource("4_aj75y")
 text = "< 0% >"

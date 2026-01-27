@@ -1,29 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://m26q2fyumltr"]
+[gd_scene format=3 uid="uid://m26q2fyumltr"]
 
 [ext_resource type="Script" uid="uid://bn5n82vuwrrl8" path="res://scenes/game/stages/stage.gd" id="1_pjpgi"]
 [ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://scenes/game/stages/character_preview.gd" id="5_1l8vu"]
 
-[node name="template" type="Node2D"]
+[node name="template" type="Node2D" unique_id=741115307]
 script = ExtResource("1_pjpgi")
 default_zoom = 0.9
 
-[node name="background_color_rect" type="ColorRect" parent="."]
+[node name="background_color_rect" type="ColorRect" parent="." unique_id=2021814570]
 offset_left = -320.0
 offset_top = -180.0
 offset_right = 1600.0
 offset_bottom = 900.0
 color = Color(0.5078125, 0.5078125, 0.5078125, 1)
 
-[node name="spectator" type="Marker2D" parent="."]
+[node name="spectator" type="Marker2D" parent="." unique_id=1964904064]
 position = Vector2(625, 750)
 script = ExtResource("5_1l8vu")
 character_path = "uid://bragoy3tisav2"
 
-[node name="player" type="Marker2D" parent="."]
+[node name="player" type="Marker2D" parent="." unique_id=1242627047]
 position = Vector2(1000, 800)
 script = ExtResource("5_1l8vu")
 
-[node name="opponent" type="Marker2D" parent="."]
+[node name="opponent" type="Marker2D" parent="." unique_id=1894938374]
 position = Vector2(256, 800)
 script = ExtResource("5_1l8vu")
 character_path = "uid://cdlt4jc7j8122"

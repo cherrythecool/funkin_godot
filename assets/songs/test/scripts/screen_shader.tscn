@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://12gni0aoyu7u"]
+[gd_scene format=3 uid="uid://12gni0aoyu7u"]
 
 [ext_resource type="Shader" uid="uid://c5yog0baapoao" path="res://assets/songs/test/scripts/shader.gdshader" id="1_jo7ew"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h30eh"]
 shader = ExtResource("1_jo7ew")
 
-[node name="screen_shader" type="CanvasLayer"]
+[node name="screen_shader" type="CanvasLayer" unique_id=18256182]
 layer = 0
 
-[node name="color_rect" type="ColorRect" parent="."]
+[node name="color_rect" type="ColorRect" parent="." unique_id=638678164]
 material = SubResource("ShaderMaterial_h30eh")
 anchors_preset = 15
 anchor_right = 1.0

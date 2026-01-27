@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdlt4jc7j8122"]
+[gd_scene format=3 uid="uid://cdlt4jc7j8122"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_6r3o0"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_2fkqd"]
@@ -410,22 +410,20 @@ _data = {
 &"sing_up": SubResource("Animation_m87l6")
 }
 
-[node name="dad" type="Node2D"]
+[node name="dad" type="Node2D" unique_id=1233869213]
 script = ExtResource("1_6r3o0")
 icon = SubResource("Resource_4ohel")
 sing_steps = 6.1
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1114793117]
 position = Vector2(-177, -756)
 sprite_frames = ExtResource("4_24ktn")
 animation = &"idle"
 centered = false
 script = ExtResource("5_r6lww")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=1908106853]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=1170275825]
 position = Vector2(166, -521)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://lxm28lqknvjd"]
+[gd_scene format=3 uid="uid://lxm28lqknvjd"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_uujnk"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_owvcu"]
@@ -482,21 +482,21 @@ _data = {
 &"retry": SubResource("Animation_motvc")
 }
 
-[node name="pico-dead" type="CanvasGroup"]
+[node name="pico-dead" type="CanvasGroup" unique_id=1520797474]
 script = ExtResource("1_uujnk")
 icon = SubResource("Resource_vmsim")
 starts_as_player = true
 dance_steps = Array[StringName]([])
 gameover_assets = SubResource("Resource_60rey")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1927676992]
 position = Vector2(-421, -529)
 sprite_frames = ExtResource("4_owvcu")
 animation = &"Pico Death Stab"
 centered = false
 script = ExtResource("5_vu483")
 
-[node name="retry" type="AnimatedSprite2D" parent="."]
+[node name="retry" type="AnimatedSprite2D" parent="." unique_id=1381218694]
 visible = false
 position = Vector2(4, -476)
 sprite_frames = ExtResource("6_motvc")
@@ -504,10 +504,8 @@ animation = &"Retry Text Loop"
 centered = false
 script = ExtResource("5_vu483")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=674556475]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=1978342522]
 position = Vector2(112, -251)

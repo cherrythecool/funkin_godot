@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongMetadata" load_steps=2 format=3 uid="uid://djsvc13ty8i26"]
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://djsvc13ty8i26"]
 
 [ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="2_bcala"]
 
@@ -6,5 +6,3 @@
 script = ExtResource("2_bcala")
 display_name = &"Bopeebo"
 mix = &"Erect"
-difficulties = ["easy", "normal", "hard"]
-difficulty_song_overrides = Dictionary[String, StringName]({})

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://w4v0gymuehdt"]
+[gd_scene format=3 uid="uid://w4v0gymuehdt"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://scenes/game/characters/character.gd" id="1_rkxpw"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="2_jqq76"]
@@ -278,23 +278,21 @@ _data = {
 &"retry": SubResource("Animation_lqyyf")
 }
 
-[node name="bf_dead" type="Node2D"]
+[node name="bf_dead" type="Node2D" unique_id=115123107]
 script = ExtResource("1_rkxpw")
 icon = SubResource("Resource_e6vli")
 starts_as_player = true
 dance_steps = Array[StringName]([])
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=376282385]
 position = Vector2(-236, -392)
 sprite_frames = ExtResource("4_o3v6h")
 animation = &"BF dies"
 centered = false
 script = ExtResource("5_xir7k")
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mki60")
-}
+[node name="animation_player" type="AnimationPlayer" parent="." unique_id=764994207]
+libraries/ = SubResource("AnimationLibrary_mki60")
 
-[node name="camera_offset" type="Marker2D" parent="."]
+[node name="camera_offset" type="Marker2D" parent="." unique_id=1796055195]
 position = Vector2(9, -250)

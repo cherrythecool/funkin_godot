@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cxk008iuw4n7u"]
+[gd_scene format=3 uid="uid://cxk008iuw4n7u"]
 
 [ext_resource type="Script" uid="uid://dno3ea8v3s7gx" path="res://scenes/menus/title_screen.gd" id="1_0m8ln"]
 [ext_resource type="SpriteFrames" uid="uid://dkgusfub7fbij" path="res://assets/menus/title/gf.res" id="1_ii0wr"]
@@ -363,78 +363,72 @@ _data = {
 &"intro": SubResource("Animation_0iyna")
 }
 
-[node name="title_screen" type="Node2D"]
+[node name="title_screen" type="Node2D" unique_id=610167585]
 script = ExtResource("1_0m8ln")
 swag_material = ExtResource("2_grdy1")
 
-[node name="conductor" type="Node" parent="."]
+[node name="conductor" type="Node" parent="." unique_id=1122116043]
 unique_name_in_owner = true
 script = ExtResource("3_ssxho")
 metadata/_custom_type_script = "uid://djsxumpddydxq"
 
-[node name="post_intro" type="Node2D" parent="."]
+[node name="post_intro" type="Node2D" parent="." unique_id=1918716990]
 visible = false
 
-[node name="girlfriend" type="Node2D" parent="post_intro"]
+[node name="girlfriend" type="Node2D" parent="post_intro" unique_id=841461104]
 position = Vector2(891, 373)
 
-[node name="sprite" type="AnimatedSprite2D" parent="post_intro/girlfriend"]
+[node name="sprite" type="AnimatedSprite2D" parent="post_intro/girlfriend" unique_id=1022928287]
 material = ExtResource("2_grdy1")
 sprite_frames = ExtResource("1_ii0wr")
 animation = &"gfDance"
 script = ExtResource("3_s2rvo")
 
-[node name="animation_player" type="AnimationPlayer" parent="post_intro/girlfriend"]
-libraries = {
-&"": SubResource("AnimationLibrary_j25c3")
-}
+[node name="animation_player" type="AnimationPlayer" parent="post_intro/girlfriend" unique_id=201242509]
+libraries/ = SubResource("AnimationLibrary_j25c3")
 
-[node name="logo" type="Node2D" parent="post_intro"]
+[node name="logo" type="Node2D" parent="post_intro" unique_id=741380354]
 position = Vector2(354, 246)
 
-[node name="sprite" type="AnimatedSprite2D" parent="post_intro/logo"]
+[node name="sprite" type="AnimatedSprite2D" parent="post_intro/logo" unique_id=681811415]
 material = ExtResource("2_grdy1")
 sprite_frames = ExtResource("5_nv456")
 animation = &"bump"
 script = ExtResource("3_s2rvo")
 
-[node name="enter" type="Node2D" parent="post_intro"]
+[node name="enter" type="Node2D" parent="post_intro" unique_id=497100013]
 position = Vector2(805, 636)
 
-[node name="sprite" type="AnimatedSprite2D" parent="post_intro/enter"]
+[node name="sprite" type="AnimatedSprite2D" parent="post_intro/enter" unique_id=1680006475]
 material = ExtResource("2_grdy1")
 sprite_frames = ExtResource("6_hraot")
 animation = &"Press Enter to Begin"
 frame = 8
 script = ExtResource("3_s2rvo")
 
-[node name="animation_player" type="AnimationPlayer" parent="post_intro/enter"]
-libraries = {
-&"": SubResource("AnimationLibrary_4274r")
-}
+[node name="animation_player" type="AnimationPlayer" parent="post_intro/enter" unique_id=1284167027]
+libraries/ = SubResource("AnimationLibrary_4274r")
 
-[node name="intro_sequence" type="Node2D" parent="."]
+[node name="intro_sequence" type="Node2D" parent="." unique_id=1181948435]
 position = Vector2(640, 360)
 
-[node name="newgrounds_logo" type="Sprite2D" parent="intro_sequence"]
+[node name="newgrounds_logo" type="Sprite2D" parent="intro_sequence" unique_id=2102314791]
 position = Vector2(-21, 204)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_fhw6b")
 
-[node name="alphabet" type="Node2D" parent="intro_sequence"]
+[node name="alphabet" type="Node2D" parent="intro_sequence" unique_id=828383561]
 unique_name_in_owner = true
 script = ExtResource("7_al1xt")
 skin = ExtResource("10_30q4t")
 centered = true
 horizontal_alignment = "Center"
 
-[node name="animation_player" type="AnimationPlayer" parent="intro_sequence"]
+[node name="animation_player" type="AnimationPlayer" parent="intro_sequence" unique_id=233742057]
 callback_mode_process = 2
-libraries = {
-&"": SubResource("AnimationLibrary_v06vg")
-}
+libraries/ = SubResource("AnimationLibrary_v06vg")
 
-[node name="flash" type="ColorRect" parent="."]
+[node name="flash" type="ColorRect" parent="." unique_id=450789777]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

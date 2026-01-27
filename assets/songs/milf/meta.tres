@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongMetadata" load_steps=5 format=3 uid="uid://bus1smo2ydsp0"]
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://bus1smo2ydsp0"]
 
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://scripts/resources/icon.gd" id="1_pkbnp"]
 [ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://scripts/resources/songs/metadata.gd" id="2_b3vpo"]
@@ -8,15 +8,10 @@
 script = ExtResource("1_pkbnp")
 texture = ExtResource("2_qw23w")
 color = Color(0.847059, 0.333333, 0.556863, 1)
-frames = Vector2i(2, 1)
-filter = 0
 metadata/_custom_type_script = "uid://b7lu04jsahckp"
 
 [resource]
 script = ExtResource("2_b3vpo")
 display_name = &"M.I.L.F"
-mix = &"Default"
 icon = SubResource("Resource_u8xlr")
-difficulties = ["easy", "normal", "hard"]
-difficulty_song_overrides = Dictionary[String, StringName]({})
 metadata/_custom_type_script = "uid://3bi6wwv6us1w"
