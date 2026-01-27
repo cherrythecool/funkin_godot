@@ -19,11 +19,23 @@ func parse(difficulty: StringName) -> Chart:
 				# jesus christ focus camera
 				if event.get("v") is Dictionary:
 					var values: Dictionary = event.get("v", {})
+
+					# Do not need the `easeDir` fixes.
+					const BASIC_EASINGS: PackedStringArray = [
+						"linear",
+						"classic",
+						"instant",
+					]
+
+					var ease_string: String = values.get("ease", "CLASSIC")
+					if values.has("easeDir") and not BASIC_EASINGS.has(ease_string.to_lower()):
+						ease_string += values.get("easeDir")
+
 					chart.events.push_back(
 						CameraPan.new(
 							float(event.get("t") / 1000.0),
 							int(values.get("char", 0)),
-							values.get("ease", "CLASSIC"),
+							ease_string,
 							float(values.get("duration", 32.0)),
 							Vector2(
 								float(values.get("x", 0.0)),
@@ -41,13 +53,13 @@ func parse(difficulty: StringName) -> Chart:
 	# sucky fix but this happens more than once so
 	if not chart.events.is_empty() and chart.events[0] is CameraPan:
 		chart.events[0].time = floorf(chart.events[0].time)
-	
+
 	var found_starter: bool = false
 	for event: EventData in chart.events:
 		if event is CameraPan and event.time <= 0.0:
 			found_starter = true
 			break
-	
+
 	if not found_starter:
 		chart.events.push_front(CameraPan.new())
 

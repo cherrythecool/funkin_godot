@@ -151,6 +151,8 @@ func _on_game_event_hit(event: EventData) -> void:
 				return
 			if not is_instance_valid(conductor):
 				return
+			if ease_string != "linear" and data.has("easeDir"):
+				ease_string += data.get("easeDir")
 
 			zoom_event_tween = create_tween().set_parallel()
 			zoom_event_tween.set_ease(
