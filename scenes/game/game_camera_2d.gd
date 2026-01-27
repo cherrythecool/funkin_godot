@@ -104,6 +104,8 @@ func _on_game_event_hit(event: EventData) -> void:
 				position = position_target
 			if ease_string == "CLASSIC" or ease_string == "INSTANT":
 				return
+			if not is_instance_valid(conductor):
+				return
 
 			var steps: float = event.data[2]
 			pan_event_tween = create_tween()
@@ -148,13 +150,15 @@ func _on_game_event_hit(event: EventData) -> void:
 				zoom = Vector2.ONE * data_zoom
 				return
 			if not is_instance_valid(conductor):
-				conductor = Conductor.instance
-			if not is_instance_valid(conductor):
 				return
 
 			zoom_event_tween = create_tween().set_parallel()
-			zoom_event_tween.set_ease(GameUtils.get_ease_from_fnfc(ease_string))
-			zoom_event_tween.set_trans(GameUtils.get_trans_from_fnfc(ease_string))
+			zoom_event_tween.set_ease(
+				GameUtils.get_ease_from_fnfc(ease_string)
+			)
+			zoom_event_tween.set_trans(
+				GameUtils.get_trans_from_fnfc(ease_string)
+			)
 			zoom_event_tween.tween_property(
 				self,
 				^"zoom_target",
