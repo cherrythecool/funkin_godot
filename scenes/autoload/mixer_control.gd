@@ -11,6 +11,7 @@ extends CanvasLayer
 
 var tween: Tween
 var target_bus: StringName = &'Master'
+var preMuteVolume: float = 0.0
 var volume: float = 0.5:
 	set(value):
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(target_bus),
@@ -40,18 +41,29 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if not event is InputEventKey:
 		return
-	if not (event.is_action('volume_down') or event.is_action('volume_up')):
+	if not (event.is_action('volume_down') or event.is_action('volume_up') or event.is_action("volume_mute")):
 		return
 
 	var direction: int = roundi(Input.get_axis('volume_down', 'volume_up'))
-	if direction == 0:
-		return
+	#if direction == 0:
+		#return
 
 	if is_instance_valid(tween) and tween.is_running():
 		tween.kill()
 
+	
 	tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(main_panel, 'size:y', 92, 0.5)
+	if not event.is_action_pressed("volume_mute"):
+		tween.tween_property(main_panel, 'size:y', 92, 0.5)
+	else:
+		#skips the tween and mutes
+		main_panel.size.y = 92
+		if (volume == 0): 
+			volume = preMuteVolume
+		else:
+			preMuteVolume = volume
+			volume = 0
+			
 	tween.tween_property(main_panel, 'size:y', 0, 0.5).set_delay(1.0)
 	tween.tween_property(self, 'visible', false, 0.0)
 	visible = true

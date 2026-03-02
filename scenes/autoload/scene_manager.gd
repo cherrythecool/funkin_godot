@@ -2,7 +2,7 @@ extends CanvasLayer
 
 
 var current_path: String = ""
-
+var tweenDur: float = 0.367
 @onready var transition: ColorRect = $transition
 var tween: Tween
 
@@ -31,14 +31,14 @@ func switch_to(scene: PackedScene, use_transition: bool = true) -> void:
 		visible = true
 		transition.scale = Vector2.ONE
 		tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		tween.tween_property(transition.material, "shader_parameter/progress", 1.0, 0.367)
+		tween.tween_property(transition.material, "shader_parameter/progress", 1.0, tweenDur)
 		tween.tween_callback(func() -> void:
 			transition.scale = Vector2.ONE * -1.0
 			tree.change_scene_to_packed.call_deferred(scene)
 			scene_changed.emit()
 
 			tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-			tween.tween_property(transition.material, "shader_parameter/progress", 0.0, 0.367)
+			tween.tween_property(transition.material, "shader_parameter/progress", 0.0, tweenDur)
 			tween.tween_callback(func() -> void:
 				visible = false)
 		)
