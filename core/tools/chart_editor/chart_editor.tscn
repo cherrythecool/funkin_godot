@@ -1,0 +1,181 @@
+[gd_scene format=3 uid="uid://csnprcxwpw805"]
+
+[ext_resource type="Script" uid="uid://bvummk0v2bhdo" path="res://core/tools/chart_editor/chart_editor.gd" id="1_v8k0a"]
+[ext_resource type="Script" uid="uid://bbfskuw2fyle3" path="res://core/gameplay/songs/tracks.gd" id="2_yujpr"]
+[ext_resource type="Script" uid="uid://djsxumpddydxq" path="res://core/autoloads/conductor.gd" id="3_6mjv1"]
+[ext_resource type="Texture2D" uid="uid://c3x06i25jm34a" path="res://core/tools/chart_editor/background_inverted.png" id="4_ls84a"]
+[ext_resource type="Script" uid="uid://b5ihuoh8ox8xb" path="res://core/tools/chart_editor/grid.gd" id="5_f0vu5"]
+[ext_resource type="PackedScene" uid="uid://b3mjv4e8vba4d" path="res://core/tools/chart_editor/charter_line.tscn" id="6_k67cn"]
+[ext_resource type="PackedScene" uid="uid://b0qhyxlpd3kr2" path="res://core/tools/chart_editor/charter_note.tscn" id="7_e2wge"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85dxy"]
+bg_color = Color(0.195313, 0.195313, 0.195313, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lks1s"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.501961, 0.501961, 0.501961, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="chart_editor" type="Control" unique_id=1164786429]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_v8k0a")
+
+[node name="tracks" type="Node" parent="." unique_id=1775953363]
+unique_name_in_owner = true
+script = ExtResource("2_yujpr")
+metadata/_custom_type_script = "uid://bbfskuw2fyle3"
+
+[node name="conductor" type="Node" parent="." unique_id=1286291002]
+unique_name_in_owner = true
+script = ExtResource("3_6mjv1")
+metadata/_custom_type_script = "uid://djsxumpddydxq"
+
+[node name="background_layer" type="CanvasLayer" parent="." unique_id=270795977]
+layer = -1
+
+[node name="background" type="TextureRect" parent="background_layer" unique_id=892736929]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("4_ls84a")
+expand_mode = 1
+
+[node name="ui_layer" type="CanvasLayer" parent="." unique_id=2120969162]
+
+[node name="opponent_icon" type="Node2D" parent="ui_layer" unique_id=1170935378]
+unique_name_in_owner = true
+position = Vector2(347, 75)
+
+[node name="player_icon" type="Node2D" parent="ui_layer" unique_id=397243668]
+unique_name_in_owner = true
+position = Vector2(933, 75)
+
+[node name="panel" type="Panel" parent="ui_layer" unique_id=562584789]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -384.0
+offset_top = 448.0
+offset_right = -24.0
+offset_bottom = 700.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_85dxy")
+
+[node name="outline" type="Panel" parent="ui_layer/panel" unique_id=1561142341]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lks1s")
+
+[node name="camera" type="Camera2D" parent="." unique_id=872633494]
+unique_name_in_owner = true
+position = Vector2(640, 360)
+limit_top = 0
+
+[node name="grid_parallax" type="Parallax2D" parent="." unique_id=1410120247]
+unique_name_in_owner = true
+repeat_size = Vector2(0, 1440)
+limit_begin = Vector2(0, 0)
+
+[node name="opponent_grid" type="Control" parent="grid_parallax" unique_id=483809527]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 456.0
+offset_top = 192.0
+offset_right = 640.0
+offset_bottom = 1632.0
+pivot_offset = Vector2(180, 360)
+script = ExtResource("5_f0vu5")
+columns = 4
+rows = 32
+
+[node name="player_grid" type="Control" parent="grid_parallax" unique_id=1797973195]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 640.0
+offset_top = 192.0
+offset_right = 824.0
+offset_bottom = 1632.0
+pivot_offset = Vector2(180, 360)
+script = ExtResource("5_f0vu5")
+columns = 4
+rows = 32
+
+[node name="event_grid" type="Control" parent="grid_parallax" unique_id=816820269]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 824.0
+offset_top = 192.0
+offset_right = 870.0
+offset_bottom = 1632.0
+pivot_offset = Vector2(180, 360)
+script = ExtResource("5_f0vu5")
+columns = 1
+rows = 32
+
+[node name="separator" type="ColorRect" parent="grid_parallax" unique_id=653639000]
+offset_left = 638.0
+offset_top = 192.0
+offset_right = 642.0
+offset_bottom = 1632.0
+color = Color(0, 0, 0, 1)
+
+[node name="separator_2" type="ColorRect" parent="grid_parallax" unique_id=77066379]
+offset_left = 822.0
+offset_top = 192.0
+offset_right = 826.0
+offset_bottom = 1632.0
+color = Color(0.48, 0.48, 0.48, 1)
+
+[node name="separators" type="Node2D" parent="." unique_id=627600238]
+unique_name_in_owner = true
+position = Vector2(456, 192)
+
+[node name="notes" type="Node2D" parent="." unique_id=1334355912]
+unique_name_in_owner = true
+position = Vector2(0, 192)
+
+[node name="strum_line" parent="." unique_id=63541634 instance=ExtResource("6_k67cn")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 456.0
+offset_top = 192.0
+offset_right = 824.0
+offset_bottom = 196.0
+color = Color(1, 0, 0, 1)
+
+[node name="cursor_note" parent="." unique_id=1339103819 instance=ExtResource("7_e2wge")]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.14509805)
+position = Vector2(479, 216)
