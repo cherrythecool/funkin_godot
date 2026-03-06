@@ -256,6 +256,8 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 			SceneManager.switch_to(load("uid://dcf86iwg6mn3d"))
 		PlayMode.FREEPLAY:
 			SceneManager.switch_to(load(MainMenu.freeplay_scene))
+		PlayMode.PLAYTEST:
+			SceneManager.switch_to(load("uid://csnprcxwpw805"))
 		_:
 			SceneManager.switch_to(load("uid://cxk008iuw4n7u"))
 
@@ -465,5 +467,6 @@ func skip_to(seconds: float) -> void:
 enum PlayMode {
 	FREEPLAY = 0,
 	STORY = 1,
-	OTHER = 2,
+	PLAYTEST = 2,
+	OTHER = 3,
 }
