@@ -4,7 +4,7 @@ extends BaseCutscene
 func _ready() -> void:
 	super()
 	
-	# Do your cool event stuff here
+	# Do your cool cutscene stuff here
 	# (CALL FINISH WHEN YOU'RE DONE!!!)
 
 
