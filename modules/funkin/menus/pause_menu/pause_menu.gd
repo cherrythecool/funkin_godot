@@ -63,11 +63,11 @@ func _input(event: InputEvent) -> void:
 					close()
 				&"restart":
 					close()
-					get_tree().reload_current_scene()
+					SceneManager.reload_current_scene()
 				&"options":
 					OptionsMenu.target_scene = "uid://da8mu3oqto3qq"
 					close()
-					SceneManager.switch_to(load("uid://3daku38i1a50"))
+					SceneManager.transition_to_packed(load("uid://3daku38i1a50"))
 				&"quit":
 					close()
 					Game.instance.finish_song(true)
@@ -79,7 +79,7 @@ func change_selection(amount: int = 0) -> void:
 	selected = wrapi(selected + amount, 0, options.get_child_count())
 
 	if amount != 0:
-		GlobalAudio.get_player("MENU/SCROLL").play()
+		GlobalAudio.get_player(^"MENU/SCROLL").play()
 	for i: int in options.get_child_count():
 		var option: ListedAlphabet = options.get_child(i)
 		option.target_y = i - selected
@@ -91,10 +91,10 @@ func close() -> void:
 	get_viewport().set_input_as_handled()
 	active = false
 	visible = false
-	get_tree().current_scene.process_mode = Node.PROCESS_MODE_INHERIT
 
 	if is_instance_valid(Conductor.instance):
 		Engine.time_scale = Conductor.instance.rate
 	if is_instance_valid(Game.instance):
+		Game.instance.process_mode = Node.PROCESS_MODE_INHERIT
 		Game.instance.conductor.active = true
 		Game.instance.unpaused.emit()

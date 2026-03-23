@@ -62,15 +62,14 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return
 	if not event.is_pressed():
 		return
-	if event.is_action("menu_fullscreen"):
+
+	if event.is_action(&"menu_fullscreen"):
 		get_viewport().set_input_as_handled()
 		fullscreened = not fullscreened
 		return
-	var tree: SceneTree = get_tree()
-	if event.is_action("menu_reload") and is_instance_valid(tree) \
-			and is_instance_valid(tree.current_scene):
-		tree.reload_current_scene()
-		tree.paused = false
+
+	if event.is_action(&"menu_reload"):
+		SceneManager.reload_current_scene()
 		return
 
 

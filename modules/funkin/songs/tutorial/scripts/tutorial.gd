@@ -16,15 +16,12 @@ func _ready() -> void:
 		create_tween().set_trans(Tween.TRANS_ELASTIC).tween_property(
 			camera, ^"zoom", Vector2(1.3, 1.3), game.conductor.beat_delta)
 
-	if opponent.name == &'null':
-		game.opponent = spectator
-		game.spectator = null
+	if opponent.name == &"null":
 		opponent = spectator
-		spectator = game.spectator
+		spectator = null
 
-		if is_instance_valid(camera):
-			camera.position_target = opponent.get_camera_position()
-			camera.position = camera.position_target
+		camera.position_target = opponent.get_camera_position()
+		camera.position = camera.position_target
 
 		game.hud.health_bar.reload_icons()
 		opponent_field.target_character = opponent

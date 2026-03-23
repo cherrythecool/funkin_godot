@@ -1,4 +1,5 @@
-class_name HealthBar extends Node2D
+class_name HealthBar
+extends Node2D
 
 
 @onready var bar: ProgressBar = $bar
@@ -52,10 +53,22 @@ func _process(delta: float) -> void:
 
 
 func update_score_label() -> void:
-	score_label.text = 'Score:%d • Misses:%d • Accuracy:%.3f%% (%s)' % [
+	var accuracy_string: String = "N/A"
+	if game.rating_calculator.hit_count > 0:
+		var decimal_points: int = 2
+		if game.accuracy >= 100.0:
+			decimal_points = 2
+		elif game.accuracy >= 99.9:
+			decimal_points = 5
+		elif game.accuracy >= 99.0:
+			decimal_points = 3
+
+		accuracy_string = "%.*f%%" % [decimal_points, game.accuracy]
+
+	score_label.text = "Score:%d • Misses:%d • Accuracy:%s (%s)" % [
 		game.score,
 		game.misses,
-		GameUtils.truncate_float_to(game.accuracy, 3),
+		accuracy_string,
 		game.rank,
 	]
 

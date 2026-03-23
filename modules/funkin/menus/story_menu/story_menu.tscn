@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dcf86iwg6mn3d"]
 
 [ext_resource type="Script" uid="uid://df3do7nvg4as7" path="res://modules/funkin/menus/story_menu/story_menu.gd" id="1_el8f4"]
-[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://core/fonts/vcr_jp.ttf" id="2_3esc8"]
 [ext_resource type="Script" uid="uid://djsxumpddydxq" path="res://core/autoloads/conductor.gd" id="2_nlhku"]
 [ext_resource type="Script" uid="uid://bfydji5l6juhk" path="res://modules/funkin/menus/story_menu/props_container.gd" id="3_64j2x"]
 [ext_resource type="Script" uid="uid://ceghwb3yjt8wp" path="res://modules/funkin/menus/story_menu/songs_label.gd" id="3_552ey"]
@@ -9,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bsjowh7qqed78" path="res://modules/funkin/menus/story_menu/difficulties/normal.png" id="4_j0vh7"]
 [ext_resource type="Script" uid="uid://bp07frgyvgscl" path="res://modules/funkin/menus/story_menu/weeks.gd" id="4_owtj4"]
 [ext_resource type="Texture2D" uid="uid://g4kew3bfwjeq" path="res://modules/funkin/menus/story_menu/weeks/week1.png" id="5_1dfdl"]
+[ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://core/fonts/vcr_osd_mono.ttf" id="5_4wpxw"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_61vqd"]
 [ext_resource type="SpriteFrames" uid="uid://dgm7jwe1ek04e" path="res://modules/funkin/menus/story_menu/difficulties/arrows.res" id="6_kynlf"]
 [ext_resource type="Script" uid="uid://btmma2a3qu1e6" path="res://modules/funkin/menus/story_menu/week_node.gd" id="6_qh5s5"]
@@ -36,17 +36,17 @@ gradient = SubResource("Gradient_f5xgx")
 fill_to = Vector2(0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kq7xu"]
-font = ExtResource("2_3esc8")
-font_size = 24
+font = ExtResource("5_4wpxw")
+font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_uaspw"]
-font = ExtResource("2_3esc8")
-font_size = 24
+font = ExtResource("5_4wpxw")
+font_size = 32
 font_color = Color(0.929688, 0.403107, 0.625258, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_c4fjc"]
-font = ExtResource("2_3esc8")
-font_size = 24
+font = ExtResource("5_4wpxw")
+font_size = 32
 font_color = Color(0.929688, 0.403107, 0.625258, 1)
 
 [sub_resource type="Resource" id="Resource_imiqu"]

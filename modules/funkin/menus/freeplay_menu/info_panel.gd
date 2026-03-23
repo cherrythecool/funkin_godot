@@ -23,13 +23,15 @@ func _ready() -> void:
 	parent.song_changed.connect(_on_song_changed)
 	parent.difficulty_changed.connect(_on_difficulty_changed)
 
+	_process(0.0)
+
 
 func _process(_delta: float) -> void:
-	size.x = maxf(256.0, song_label.size.x)
+	size.x = 256.0
+	size.x = max(256.0, song_label.size.x, difficulty_label.size.x)
 	position.x = Global.game_size.x - size.x
-	difficulty_label.size.x = size.x
-	
-	score_panel.position.y = size.y + 24.0
+
+	score_panel.position.y = size.y + 16.0
 	reset_panel.position.y = score_panel.position.y + score_panel.size.y + 16.0
 
 

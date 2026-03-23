@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://buarre8s3ld28" path="res://modules/funkin/menus/freeplay_menu/freeplay_menu.gd" id="1_p2lt6"]
 [ext_resource type="Script" uid="uid://bbfskuw2fyle3" path="res://core/gameplay/songs/tracks.gd" id="2_fq3va"]
 [ext_resource type="Script" uid="uid://4r8crqqwxnyk" path="res://modules/funkin/menus/freeplay_menu/info_panel.gd" id="4_5dymk"]
-[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://core/fonts/vcr_jp.ttf" id="4_7yg7l"]
+[ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://core/fonts/vcr_osd_mono.ttf" id="5_q45ui"]
 [ext_resource type="Script" uid="uid://di5oncp1uonwm" path="res://modules/funkin/menus/freeplay_menu/score_panel.gd" id="6_mti1l"]
 [ext_resource type="Script" uid="uid://b3d82j8exp4ge" path="res://modules/funkin/menus/freeplay_menu/reset_panel.gd" id="7_detv5"]
 
@@ -15,11 +15,11 @@ expand_margin_left = 8.0
 expand_margin_bottom = 8.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_mco15"]
-font = ExtResource("4_7yg7l")
+font = ExtResource("5_q45ui")
+font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_1ivw4"]
-font = ExtResource("4_7yg7l")
-font_size = 14
+font = ExtResource("5_q45ui")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7glp"]
 bg_color = Color(0, 0, 0, 0.5)
@@ -27,14 +27,13 @@ corner_radius_top_left = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_06b8i"]
-font = ExtResource("4_7yg7l")
-font_size = 12
+font = ExtResource("5_q45ui")
 
 [sub_resource type="LabelSettings" id="LabelSettings_s0bc2"]
-font = ExtResource("4_7yg7l")
-font_size = 10
+font = ExtResource("5_q45ui")
+font_size = 12
 
-[node name="freeplay_menu" type="Node2D" unique_id=1705804318]
+[node name="freeplay_menu_bf" type="Node2D" unique_id=1705804318]
 script = ExtResource("1_p2lt6")
 list = Array[String](["tutorial", "bopeebo", "fresh", "dad_battle", "spookeez", "south", "monster", "pico", "philly_nice", "blammed", "satin_panties", "high", "milf", "cocoa", "darnell_bf", "lit_up_bf", "test"])
 
@@ -69,21 +68,22 @@ mouse_filter = 2
 [node name="info_panel" type="Panel" parent="root_control" unique_id=760316165 node_paths=PackedStringArray("parent")]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -256.0
 offset_bottom = 45.0
-grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_h4xxx")
 script = ExtResource("4_5dymk")
 parent = NodePath("../..")
 
 [node name="song_label" type="Label" parent="root_control/info_panel" unique_id=1582851987]
 layout_mode = 1
-offset_top = 7.0
-offset_right = 256.0
-offset_bottom = 23.0
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 6.0
+offset_bottom = 16.0
+grow_horizontal = 0
 size_flags_vertical = 10
 text = "Test"
 label_settings = SubResource("LabelSettings_mco15")
@@ -92,9 +92,11 @@ vertical_alignment = 1
 
 [node name="difficulty_label" type="Label" parent="root_control/info_panel" unique_id=429183604]
 layout_mode = 1
-offset_top = 29.0
-offset_right = 256.0
-offset_bottom = 45.0
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 46.0
+grow_horizontal = 0
 size_flags_vertical = 3
 text = "< NORMAL >"
 label_settings = SubResource("LabelSettings_1ivw4")
@@ -105,13 +107,12 @@ vertical_alignment = 1
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -264.0
-offset_top = 80.0
-offset_bottom = 176.0
-grow_horizontal = 0
+offset_top = 61.0
+offset_bottom = 157.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_i7glp")
 script = ExtResource("6_mti1l")
 
@@ -199,13 +200,12 @@ vertical_alignment = 2
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -264.0
-offset_top = 184.0
-offset_bottom = 280.0
-grow_horizontal = 0
+offset_top = 165.0
+offset_bottom = 261.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_i7glp")
 script = ExtResource("7_detv5")
 

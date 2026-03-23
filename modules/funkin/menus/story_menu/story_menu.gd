@@ -30,6 +30,7 @@ func _ready() -> void:
 	conductor.beat_hit.connect(_on_beat_hit)
 
 	change_selection()
+	weeks.position.y = _get_weeks_target_y()
 
 
 func _on_beat_hit(_beat: int) -> void:
@@ -40,8 +41,11 @@ func _on_beat_hit(_beat: int) -> void:
 
 
 func _process(delta: float) -> void:
-	var target_y: float = 86.0 - weeks.get_child(weeks.selected).position.y
-	weeks.position.y = lerpf(weeks.position.y, target_y, minf(delta * 6.0, 1.0))
+	weeks.position.y = lerpf(
+		weeks.position.y,
+		_get_weeks_target_y(),
+		minf(delta * 6.0, 1.0)
+	)
 
 	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
 	week_color.color = week_color.color.lerp(selected_week.background_color, minf(delta * 6.0, 1.0))
@@ -58,7 +62,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action('ui_cancel'):
 		active = false
 		GlobalAudio.get_player('MENU/CANCEL').play()
-		SceneManager.switch_to(load('uid://b7fwxsepnt38j'))
+		SceneManager.transition_to_packed(load('uid://b7fwxsepnt38j'))
 	if event.is_action('ui_accept'):
 		active = false
 		_load_active_playlist()
@@ -71,12 +75,16 @@ func _input(event: InputEvent) -> void:
 				props.props[2].play_anim('confirm', true)
 				await props.props[2].animation_finished
 
-			SceneManager.switch_to(load("uid://da8mu3oqto3qq"))
+			SceneManager.transition_to_packed(load("uid://da8mu3oqto3qq"))
 		else:
 			active = true
 	if event.is_action('ui_up') or event.is_action('ui_down'):
 		var movement: int = int(Input.get_axis('ui_up', 'ui_down'))
 		change_selection(movement)
+
+
+func _get_weeks_target_y() -> float:
+	return 86.0 - weeks.get_child(weeks.selected).position.y
 
 
 func _load_active_playlist() -> void:

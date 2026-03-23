@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://dr7nt5bym5lmh" path="res://modules/funkin/module.gd" id="1_m2i8h"]
 
-[node name="main" type="Node" unique_id=1092177004]
+[node name="funkin" type="Node" unique_id=1092177004]
 script = ExtResource("1_m2i8h")

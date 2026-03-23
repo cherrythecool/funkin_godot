@@ -1,5 +1,6 @@
 @tool
-class_name CreditsContributor extends ListedAlphabet
+class_name CreditsContributor
+extends ListedAlphabet
 
 
 @export var link: String = ''

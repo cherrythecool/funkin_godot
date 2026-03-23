@@ -1,38 +1,37 @@
 [gd_scene format=3 uid="uid://cbp5qie32cehq"]
 
 [ext_resource type="Script" uid="uid://buarre8s3ld28" path="res://modules/funkin/menus/freeplay_menu/freeplay_menu.gd" id="1_qs7yu"]
+[ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://core/fonts/vcr_osd_mono.ttf" id="5_c8pqh"]
 [ext_resource type="Script" uid="uid://bbfskuw2fyle3" path="res://core/gameplay/songs/tracks.gd" id="12_8fnfx"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://modules/funkin/menus/background.png" id="13_cethf"]
 [ext_resource type="Script" uid="uid://4r8crqqwxnyk" path="res://modules/funkin/menus/freeplay_menu/info_panel.gd" id="14_e44qf"]
-[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://core/fonts/vcr_jp.ttf" id="15_q56ni"]
 [ext_resource type="Script" uid="uid://di5oncp1uonwm" path="res://modules/funkin/menus/freeplay_menu/score_panel.gd" id="16_8grxc"]
 [ext_resource type="Script" uid="uid://b3d82j8exp4ge" path="res://modules/funkin/menus/freeplay_menu/reset_panel.gd" id="17_y7lii"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4xxx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yal8t"]
 bg_color = Color(0, 0, 0, 0.5)
 corner_radius_bottom_left = 10
 expand_margin_left = 8.0
 expand_margin_bottom = 8.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_mco15"]
-font = ExtResource("15_q56ni")
+[sub_resource type="LabelSettings" id="LabelSettings_yal8t"]
+font = ExtResource("5_c8pqh")
+font_size = 20
 
-[sub_resource type="LabelSettings" id="LabelSettings_1ivw4"]
-font = ExtResource("15_q56ni")
-font_size = 14
+[sub_resource type="LabelSettings" id="LabelSettings_c8pqh"]
+font = ExtResource("5_c8pqh")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7glp"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcy02"]
 bg_color = Color(0, 0, 0, 0.5)
 corner_radius_top_left = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="LabelSettings" id="LabelSettings_06b8i"]
-font = ExtResource("15_q56ni")
-font_size = 12
+[sub_resource type="LabelSettings" id="LabelSettings_0ljfu"]
+font = ExtResource("5_c8pqh")
 
-[sub_resource type="LabelSettings" id="LabelSettings_s0bc2"]
-font = ExtResource("15_q56ni")
-font_size = 10
+[sub_resource type="LabelSettings" id="LabelSettings_fekjp"]
+font = ExtResource("5_c8pqh")
+font_size = 12
 
 [node name="freeplay_menu_pico" type="Node2D" unique_id=1968503998]
 script = ExtResource("1_qs7yu")
@@ -55,7 +54,7 @@ texture = ExtResource("13_cethf")
 [node name="songs" type="Node2D" parent="." unique_id=841418624]
 unique_name_in_owner = true
 
-[node name="root_control" type="Control" parent="." unique_id=1117445647]
+[node name="root_control" type="Control" parent="." unique_id=1056170485]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,56 +65,56 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="info_panel" type="Panel" parent="root_control" unique_id=49440044 node_paths=PackedStringArray("parent")]
+[node name="info_panel" type="Panel" parent="root_control" unique_id=1922589898]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -256.0
 offset_bottom = 45.0
-grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_h4xxx")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yal8t")
 script = ExtResource("14_e44qf")
-parent = NodePath("../..")
 
-[node name="song_label" type="Label" parent="root_control/info_panel" unique_id=1696244006]
-layout_mode = 0
-offset_top = 7.0
-offset_right = 256.0
-offset_bottom = 23.0
+[node name="song_label" type="Label" parent="root_control/info_panel" unique_id=148374420]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 6.0
+offset_bottom = 16.0
 size_flags_vertical = 10
 text = "Test"
-label_settings = SubResource("LabelSettings_mco15")
+label_settings = SubResource("LabelSettings_yal8t")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="difficulty_label" type="Label" parent="root_control/info_panel" unique_id=1099060994]
-layout_mode = 0
-offset_top = 29.0
-offset_right = 256.0
-offset_bottom = 45.0
+[node name="difficulty_label" type="Label" parent="root_control/info_panel" unique_id=517907699]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 46.0
+grow_horizontal = 0
 size_flags_vertical = 3
 text = "< NORMAL >"
-label_settings = SubResource("LabelSettings_1ivw4")
+label_settings = SubResource("LabelSettings_c8pqh")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="score_panel" type="Panel" parent="root_control" unique_id=239692630]
+[node name="score_panel" type="Panel" parent="root_control" unique_id=1008470231]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -264.0
-offset_top = 80.0
-offset_bottom = 176.0
-grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_i7glp")
+offset_top = 61.0
+offset_bottom = 157.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pcy02")
 script = ExtResource("16_8grxc")
 
-[node name="score_label" type="Label" parent="root_control/score_panel" unique_id=960940697]
+[node name="score_label" type="Label" parent="root_control/score_panel" unique_id=575630987]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -127,11 +126,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 text = "Score: N/A"
-label_settings = SubResource("LabelSettings_06b8i")
+label_settings = SubResource("LabelSettings_0ljfu")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="misses_label" type="Label" parent="root_control/score_panel" unique_id=1590438709]
+[node name="misses_label" type="Label" parent="root_control/score_panel" unique_id=1668307590]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -143,11 +142,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 text = "Misses: N/A"
-label_settings = SubResource("LabelSettings_06b8i")
+label_settings = SubResource("LabelSettings_0ljfu")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="accuracy_label" type="Label" parent="root_control/score_panel" unique_id=1988733793]
+[node name="accuracy_label" type="Label" parent="root_control/score_panel" unique_id=210782100]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -159,11 +158,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 text = "Accuracy: N/A"
-label_settings = SubResource("LabelSettings_06b8i")
+label_settings = SubResource("LabelSettings_0ljfu")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="rank_label" type="Label" parent="root_control/score_panel" unique_id=978590652]
+[node name="rank_label" type="Label" parent="root_control/score_panel" unique_id=310308329]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -175,11 +174,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 text = "Rank: N/A"
-label_settings = SubResource("LabelSettings_06b8i")
+label_settings = SubResource("LabelSettings_0ljfu")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="reset_label" type="Label" parent="root_control/score_panel" unique_id=247507443]
+[node name="reset_label" type="Label" parent="root_control/score_panel" unique_id=133070408]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -191,25 +190,24 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
 text = "(R to reset)"
-label_settings = SubResource("LabelSettings_s0bc2")
+label_settings = SubResource("LabelSettings_fekjp")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="reset_panel" type="Panel" parent="root_control" unique_id=1311668532]
+[node name="reset_panel" type="Panel" parent="root_control" unique_id=2113752400]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -264.0
-offset_top = 184.0
-offset_bottom = 280.0
-grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_i7glp")
+offset_top = 165.0
+offset_bottom = 261.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pcy02")
 script = ExtResource("17_y7lii")
 
-[node name="question_label" type="Label" parent="root_control/reset_panel" unique_id=266869675]
+[node name="question_label" type="Label" parent="root_control/reset_panel" unique_id=203763193]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -222,11 +220,11 @@ grow_vertical = 2
 size_flags_vertical = 8
 text = "Are you sure you want to
 reset your score?"
-label_settings = SubResource("LabelSettings_06b8i")
+label_settings = SubResource("LabelSettings_0ljfu")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="answers_label" type="Label" parent="root_control/reset_panel" unique_id=1888647639]
+[node name="answers_label" type="Label" parent="root_control/reset_panel" unique_id=1766931797]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -238,7 +236,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 text = "[Y]es / [N]o"
-label_settings = SubResource("LabelSettings_06b8i")
+label_settings = SubResource("LabelSettings_0ljfu")
 horizontal_alignment = 1
 vertical_alignment = 1
 

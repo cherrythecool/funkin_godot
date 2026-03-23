@@ -45,10 +45,14 @@ func display() -> void:
 	var total_memory_current: float = video_memory_current + static_memory_current
 	var total_memory_peak: float = video_memory_peak + static_memory_peak
 
-	var scene_name: StringName = &"N/A"
-	var current_scene: Node = get_tree().current_scene
+	var scene_name: String = "N/A"
+	var current_scene: Node = SceneManager.current_scene
 	if is_instance_valid(current_scene):
-		scene_name = current_scene.name.to_pascal_case()
+		scene_name = current_scene.name
+
+	var tree_scene: Node = get_tree().current_scene
+	if is_instance_valid(tree_scene):
+		scene_name = "%s (from %s)" % [scene_name, tree_scene.name]
 
 	var avg: float = 0.0
 	for time: float in times:
@@ -84,7 +88,7 @@ func display() -> void:
 			RenderingServer.get_current_rendering_method(),
 			RenderingServer.get_video_adapter_name(),
 		]
-		
+
 		if is_instance_valid(Conductor.instance):
 			text_output += "\n\n[Music]\n%.2fms AudioServer Offset (raw)\n%.2fms Offset (%.2fms manual)\n%.3fs Time (%.2fx Speed)\n%.2f Beat, %.2f Step, %.2f Measure\n%.2f BPM" % [
 				-AudioServer.get_output_latency() * 1000.0,
@@ -94,7 +98,7 @@ func display() -> void:
 				Conductor.instance.beat, Conductor.instance.step, Conductor.instance.measure,
 				Conductor.instance.tempo,
 			]
-		
+
 		if is_instance_valid(Game.instance):
 			text_output += "\n\n[Game]\n%.2f Scroll Speed\nIs Playing: %s\nHealth: %.2f\nCombo: %d" % [
 				Game.instance.scroll_speed,

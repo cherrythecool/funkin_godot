@@ -26,16 +26,24 @@ var player_anim: AnimationPlayer
 @onready var confirm: AudioStreamPlayer = %confirm
 @onready var deny: AudioStreamPlayer = %deny
 
-@onready var characters: Node2D = %characters
+var characters: Node2D
 @onready var title: Sprite2D = %title
 var title_tween: Tween
 
 @onready var atlas_characters: Node2D = %atlas_characters
 
-@onready var selector: AnimatedSprite = %selector
+var selector: AnimatedSprite
 var locked: bool = false
 
 var dipshit_tween: Tween
+
+
+func _enter_tree() -> void:
+	characters = %characters
+	selector = %selector
+
+	var icon: Node2D = characters.get_child(selected_x + (selected_y * 3))
+	selector.global_position = icon.global_position
 
 
 func _ready() -> void:
@@ -47,7 +55,7 @@ func _ready() -> void:
 	conductor.beat_hit.connect(_on_beat_hit)
 	music.play()
 
-	dipshit_tween = create_tween().set_trans(Tween.TRANS_EXPO)\
+	dipshit_tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)\
 			.set_ease(Tween.EASE_OUT).set_parallel()
 	character_selector.position.y += 220.0
 	dipshit_tween.tween_property(character_selector, ^'position:y',
@@ -63,10 +71,21 @@ func _ready() -> void:
 
 	spectator_anim = spectator.get_node(^'animation_player')
 	spectator_anim.play(&'enter')
+
 	player_anim = player.get_node(^'animation_player')
 	player_anim.play(&'enter')
 
 	_update_selection(false)
+
+	if "smoothed_offset" in camera_2d:
+		camera_2d.smoothed_offset = get_camera_offset()
+
+
+func _exit_tree() -> void:
+	# just in case we exit the menu while the tween is still
+	# running on the SceneTree, i guess?
+	if is_instance_valid(dipshit_tween):
+		dipshit_tween.kill()
 
 
 func _process(delta: float) -> void:
@@ -79,10 +98,7 @@ func _process(delta: float) -> void:
 			icon.scale = icon.scale.lerp(Vector2.ONE, GameUtils.lerp_weight(delta, 9.0))
 
 	if "smoothed_offset" in camera_2d:
-		camera_2d.smoothed_offset = Vector2(
-			10.0 * float(selected_x - 1),
-			8.0 * float(selected_y - 1),
-		)
+		camera_2d.smoothed_offset = get_camera_offset()
 
 
 func _input(event: InputEvent) -> void:
@@ -110,7 +126,7 @@ func _input(event: InputEvent) -> void:
 
 			selector.play(&'idle')
 		else:
-			SceneManager.switch_to(load('uid://b7fwxsepnt38j'))
+			SceneManager.transition_to_packed(load('uid://b7fwxsepnt38j'))
 	if event.is_action(&'ui_accept') and not locked:
 		locked = true
 
@@ -161,6 +177,13 @@ func _update_selection(sound: bool = true) -> void:
 			_load_characters('uid://bydgpm6a02kid', 'uid://bydgpm6a02kid', load('uid://ncq3u01qhoh8'))
 
 
+func get_camera_offset() -> Vector2:
+	return Vector2(
+		10.0 * float(selected_x - 1),
+		8.0 * float(selected_y - 1),
+	)
+
+
 func finish_selection(icon: AnimatedSprite, scene_path: String) -> void:
 	confirm.play()
 	player_anim.play(&'confirm')
@@ -186,7 +209,7 @@ func finish_selection(icon: AnimatedSprite, scene_path: String) -> void:
 	FreeplayMenu.difficulty_index = 0
 
 	MainMenu.freeplay_scene = scene_path
-	SceneManager.switch_to(load(MainMenu.freeplay_scene))
+	SceneManager.transition_to_packed(load(MainMenu.freeplay_scene))
 
 
 func _load_characters(player_path: String, spectator_path: String, logo: Texture2D) -> void:

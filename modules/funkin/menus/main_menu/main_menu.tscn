@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://ltkynwwp1o8s" path="res://modules/funkin/menus/main_menu/background.png" id="1_wymee"]
 [ext_resource type="Texture2D" uid="uid://bcq8cfghjibg1" path="res://modules/funkin/menus/main_menu/background_pink.png" id="2_dbg3w"]
 [ext_resource type="Script" uid="uid://xx5djqhvae85" path="res://modules/funkin/menus/main_menu/button_scene.gd" id="4_4uv5u"]
-[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://core/fonts/vcr_jp.ttf" id="4_7kxsk"]
 [ext_resource type="SpriteFrames" uid="uid://f3lhnid62rym" path="res://modules/funkin/menus/main_menu/buttons.res" id="4_c5hes"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="4_emyfo"]
+[ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://core/fonts/vcr_osd_mono.ttf" id="4_pi00p"]
 [ext_resource type="Script" uid="uid://c1hs6aw4yq5p" path="res://modules/funkin/menus/main_menu/button_freeplay.gd" id="7_1hnlc"]
 
 [sub_resource type="Animation" id="Animation_58e2s"]
@@ -74,8 +74,7 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_lig6g"]
 resource_local_to_scene = true
-font = ExtResource("4_7kxsk")
-font_size = 12
+font = ExtResource("4_pi00p")
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
@@ -116,10 +115,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
-offset_top = 21.0
+offset_top = 8.0
+offset_right = -8.0
 offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
 text = "Funkin' Godot v$VERSION"
 label_settings = SubResource("LabelSettings_lig6g")
 vertical_alignment = 2
@@ -151,7 +149,7 @@ animation_name = &"storymode"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"storymode idle"
-frame_progress = 0.960009
+frame_progress = 0.9065598
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -166,7 +164,7 @@ animation_name = &"freeplay"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
-frame_progress = 0.3106147
+frame_progress = 0.25723028
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -182,7 +180,7 @@ animation_name = &"credits"
 position = Vector2(0, 62)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"credits idle"
-frame_progress = 0.48935255
+frame_progress = 0.43593433
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -198,6 +196,6 @@ animation_name = &"options"
 position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"
-frame_progress = 0.45367932
+frame_progress = 0.40025914
 script = ExtResource("4_emyfo")
 playing = true

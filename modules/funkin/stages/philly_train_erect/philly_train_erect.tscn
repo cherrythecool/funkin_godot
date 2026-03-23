@@ -99,7 +99,6 @@ z_index = 300
 material = SubResource("ShaderMaterial_vd8c5")
 position = Vector2(989.5, 885)
 script = ExtResource("9_t736h")
-character_path = "uid://bu44d2he2dxm3"
 
 [node name="opponent" type="Marker2D" parent="." unique_id=1056301982]
 z_index = 200

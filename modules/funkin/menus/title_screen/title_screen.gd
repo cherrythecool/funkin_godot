@@ -30,7 +30,7 @@ var last_music_time: float = 0.0
 func _ready() -> void:
 	if not Config.had_user_config:
 		Config.had_user_config = true
-		SceneManager.switch_to(load("uid://dasf7d5k8p30f"), false)
+		SceneManager.swap_to_packed(load("uid://dasf7d5k8p30f"))
 		return
 
 	enter_animation.play(&"loop")
@@ -120,7 +120,7 @@ func _input(event: InputEvent) -> void:
 
 		tween = create_tween()
 		tween.tween_property(flash, 'color:a', 0.0, 1.0)
-		tween.tween_callback(SceneManager.switch_to.bind(load("uid://b7fwxsepnt38j")))
+		tween.tween_callback(SceneManager.transition_to_packed.bind(load("uid://b7fwxsepnt38j")))
 
 
 func _start_intro() -> void:

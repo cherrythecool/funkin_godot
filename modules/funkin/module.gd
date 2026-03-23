@@ -2,4 +2,5 @@ extends Node
 
 
 func _ready() -> void:
-	SceneManager.switch_to(load("uid://cxk008iuw4n7u"), false)
+	SceneManager.replace_transitions_with(load("uid://6c6svnfsdils"))
+	SceneManager.swap_to_packed(load("uid://cxk008iuw4n7u"))

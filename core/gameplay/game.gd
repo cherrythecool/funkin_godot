@@ -1,4 +1,5 @@
-class_name Game extends Node
+extends Node
+class_name Game
 
 
 static var song: StringName = &"bopeebo"
@@ -82,8 +83,14 @@ func _ready() -> void:
 	if not is_instance_valid(instance):
 		instance = self
 
+	# we set to inherit to bypass the automatic pausing
+	# from scene transitions (it makes the countdown &
+	# potentially other things a lil' wonky, mostly sounds)
+	process_mode = Node.PROCESS_MODE_INHERIT
+
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	Input.use_accumulated_input = false
+
 	GlobalAudio.music.stop()
 	tracks.load_tracks(song)
 	tracks.finished.connect(finish_song.bind(false, false))
@@ -118,7 +125,7 @@ func _process(delta: float) -> void:
 		died.emit()
 		Gameover.character_path = player.death_character
 		Gameover.character_position = player.global_position
-		SceneManager.switch_to(load("uid://c05dah5aarqg8"), false)
+		SceneManager.swap_to_packed(load("uid://c05dah5aarqg8"))
 		return
 
 	if is_instance_valid(tracks) and not song_started:
@@ -231,7 +238,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 			printerr("Song at path %s doesn\'t exist!" % json_path)
 			GlobalAudio.get_player("MENU/CANCEL").play()
 			back_to_menus.emit()
-			SceneManager.switch_to(load("uid://b7fwxsepnt38j"))
+			SceneManager.transition_to_packed(load("uid://b7fwxsepnt38j"))
 			playlist.clear()
 			return
 
@@ -248,16 +255,16 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 
 	back_to_menus.emit()
 	if not exit_scene.is_empty():
-		SceneManager.switch_to(load(exit_scene))
+		SceneManager.transition_to_packed(load(exit_scene))
 		exit_scene = ""
 		return
 	match mode:
 		PlayMode.STORY:
-			SceneManager.switch_to(load("uid://dcf86iwg6mn3d"))
+			SceneManager.transition_to_packed(load("uid://dcf86iwg6mn3d"))
 		PlayMode.FREEPLAY:
-			SceneManager.switch_to(load(MainMenu.freeplay_scene))
+			SceneManager.transition_to_packed(load(MainMenu.freeplay_scene))
 		_:
-			SceneManager.switch_to(load("uid://cxk008iuw4n7u"))
+			SceneManager.transition_to_packed(load("uid://cxk008iuw4n7u"))
 
 
 func load_chart() -> void:
@@ -284,10 +291,10 @@ func load_chart() -> void:
 			continue
 
 		# check both full name and snake_case version
-		var path: String = "res://scenes/game/notes/%s.tscn" % [type]
+		var path: String = "res://core/notes/types/%s.tscn" % [type]
 		if not ResourceLoader.exists(path):
 			type = type.to_snake_case()
-			path = "res://scenes/game/notes/%s.tscn" % [type]
+			path = "res://core/notes/types/%s.tscn" % [type]
 			if not ResourceLoader.exists(path):
 				continue
 
@@ -414,7 +421,7 @@ func load_events() -> void:
 				continue
 			exceptions.push_back(event_name)
 
-			var path: String = "res://scenes/game/events/%s.tscn" % [event_name]
+			var path: String = "res://modules/funkin/events/%s.tscn" % [event_name]
 			if not ResourceLoader.exists(path):
 				continue
 

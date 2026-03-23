@@ -24,15 +24,15 @@ func _on_hud_setup() -> void:
 	game = Game.instance
 	if game.metadata.skip_countdown:
 		do_countdown = false
-	
+
 	game.ready_post.connect(_ready_post)
 	game.unpaused.connect(countdown_resume)
 	game.conductor.beat_hit.connect(_on_beat_hit)
-	
+
 	var found: Resource = null
 	if is_instance_valid(hud) and 'hud_skin' in hud:
 		found = hud.hud_skin
-	
+
 	hud_skin = (
 		found if is_instance_valid(found) else
 		load('uid://oxo327xfxemo')
@@ -127,4 +127,5 @@ func play_countdown_sound(index: int) -> void:
 	player.bus = &'SFX'
 	player.finished.connect(player.queue_free)
 	add_child(player)
+
 	player.play()

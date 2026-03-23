@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://modules/funkin/menus/background.png" id="1_due5w"]
 [ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://modules/funkin/menus/alphabet/listed_alphabet.gd" id="3_xtkoc"]
 [ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://modules/funkin/menus/alphabet/skins/bold_skin.tres" id="4_0ng60"]
-[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://core/fonts/vcr_jp.ttf" id="4_d74go"]
 [ext_resource type="Script" uid="uid://xex6ryb2bo7" path="res://modules/funkin/menus/credits_menu/contributors/contributor.gd" id="4_wywfy"]
 [ext_resource type="Texture2D" uid="uid://boevu3c5gntxa" path="res://modules/funkin/menus/credits_menu/contributors/cherry.jpg" id="5_0ng60"]
 [ext_resource type="Texture2D" uid="uid://b3ac3wi373b11" path="res://transgender_flag.svg" id="5_325oc"]
@@ -19,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bk4kpu0r530gd" path="res://modules/funkin/menus/credits_menu/contributors/swordcube.gd" id="13_aave4"]
 [ext_resource type="AudioStream" uid="uid://cdx006xagoh7x" path="res://modules/funkin/menus/pause_menu/pico_mix_theme.ogg" id="13_b34ng"]
 [ext_resource type="Texture2D" uid="uid://cdtbh4yrt24tn" path="res://modules/funkin/menus/credits_menu/contributors/sword.png" id="14_71dcr"]
+[ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://core/fonts/vcr_osd_mono.ttf" id="17_svqsb"]
 
 [sub_resource type="Shader" id="Shader_33ree"]
 code = "shader_type canvas_item;
@@ -38,9 +38,9 @@ shader = SubResource("Shader_33ree")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtkoc"]
 bg_color = Color(0, 0, 0, 0.5)
 
-[sub_resource type="LabelSettings" id="LabelSettings_325oc"]
-font = ExtResource("4_d74go")
-font_size = 24
+[sub_resource type="LabelSettings" id="LabelSettings_tnsff"]
+font = ExtResource("17_svqsb")
+font_size = 30
 
 [node name="credits_menu" type="Node2D" unique_id=816495922]
 script = ExtResource("1_536xp")
@@ -221,7 +221,7 @@ offset_right = 1280.0
 offset_bottom = 720.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xtkoc")
 
-[node name="label" type="Label" parent="info_panel" unique_id=681302773]
+[node name="label" type="Label" parent="info_panel" unique_id=472444648]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
@@ -229,7 +229,7 @@ anchor_right = 1.0
 offset_bottom = 48.0
 grow_horizontal = 2
 text = "Main Developer"
-label_settings = SubResource("LabelSettings_325oc")
+label_settings = SubResource("LabelSettings_tnsff")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -239,12 +239,11 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 56.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 16.0
+offset_top = 64.0
+offset_right = -16.0
+offset_bottom = -16.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("5_325oc")
 expand_mode = 1
 stretch_mode = 5

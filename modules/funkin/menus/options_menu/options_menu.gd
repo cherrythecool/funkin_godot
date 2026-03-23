@@ -2,7 +2,9 @@ class_name OptionsMenu extends Node2D
 
 
 const DEFAULT_TARGET_SCENE: String = "uid://b7fwxsepnt38j"
+
 static var target_scene: String = DEFAULT_TARGET_SCENE
+static var selected: int = 0
 
 @onready var interface: Control = %interface
 @onready var categories: HBoxContainer = %categories
@@ -13,7 +15,6 @@ static var target_scene: String = DEFAULT_TARGET_SCENE
 
 var section_tween: Tween
 
-var selected: int = 0
 var active: bool = true
 
 
@@ -21,11 +22,16 @@ func _ready() -> void:
 	var music_player: AudioStreamPlayer = GlobalAudio.music
 	music_player.stream = load('uid://ddoyqrhrcjw1j')
 	music_player.play()
+
 	conductor.reset()
 	conductor.tempo = 137.0
 	conductor.target_audio = music_player
 	conductor.beat_hit.connect(_on_beat_hit)
+
 	change_selection()
+
+	for child: CategoryIcon in categories.get_children():
+		child._ready()
 
 
 func _input(event: InputEvent) -> void:
@@ -44,23 +50,29 @@ func _input(event: InputEvent) -> void:
 	if event.is_action(&'ui_cancel'):
 		active = false
 		GlobalAudio.get_player('MENU/CANCEL').play()
-		SceneManager.switch_to(load(target_scene))
+		SceneManager.transition_to_packed(load(target_scene))
 		target_scene = DEFAULT_TARGET_SCENE
 
 
 func change_selection(amount: int = 0) -> void:
-	GlobalAudio.get_player('MENU/SCROLL').play()
 	selected = wrapi(selected + amount, 0, categories.get_child_count())
-
 	section_label.text = categories.get_child(selected).name.to_upper()
-	section_label.position.y = 40.0
-	section_label.modulate.a = 0.75
 
-	if is_instance_valid(section_tween) and section_tween.is_running():
-		section_tween.kill()
-	section_tween = create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT).set_parallel()
-	section_tween.tween_property(section_label, ^'position:y', 48.0, 0.5)
-	section_tween.tween_property(section_label, ^'modulate:a', 1.0, 0.5).set_trans(Tween.TRANS_CUBIC)
+	if amount != 0:
+		GlobalAudio.get_player(^'MENU/SCROLL').play()
+
+		section_label.position.y = 40.0
+		section_label.modulate.a = 0.75
+
+		if is_instance_valid(section_tween) and section_tween.is_running():
+			section_tween.kill()
+
+		section_tween = create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT).set_parallel()
+		section_tween.tween_property(section_label, ^'position:y', 48.0, 0.5)
+		section_tween.tween_property(section_label, ^'modulate:a', 1.0, 0.5).set_trans(Tween.TRANS_CUBIC)
+	else:
+		section_label.position.y = 48.0
+		section_label.modulate.a = 1.0
 
 	for i: int in categories.get_child_count():
 		var child: CategoryIcon = categories.get_child(i)

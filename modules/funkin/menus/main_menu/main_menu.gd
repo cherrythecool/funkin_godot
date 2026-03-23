@@ -18,7 +18,15 @@ func _ready() -> void:
 		GlobalAudio.music.play()
 
 	version_label.text = version_label.text.replace('$VERSION', Global.version)
+
+	# thank you https://github.com/godotengine/godot-proposals/issues/12058#issuecomment-2748489241
+	# needed to recompute the layout manually to make sure that
+	# positions of the buttons would be fine... :sob:
+	items.notification(Container.NOTIFICATION_SORT_CHILDREN)
 	change_selection()
+
+	camera.reset_smoothing()
+	camera.force_update_scroll()
 
 
 func _input(event: InputEvent) -> void:
@@ -31,7 +39,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action('ui_cancel'):
 		GlobalAudio.get_player('MENU/CANCEL').play()
 		active = false
-		SceneManager.switch_to(load("uid://cxk008iuw4n7u"))
+		SceneManager.transition_to_packed(load("uid://cxk008iuw4n7u"))
 	if event.is_action('ui_accept'):
 		GlobalAudio.get_player('MENU/CONFIRM').play()
 		active = false
@@ -95,4 +103,4 @@ func change_selection(amount: int = 0) -> void:
 	camera.position.y = current_item.global_position.y
 
 	if amount != 0:
-		GlobalAudio.get_player('MENU/SCROLL').play()
+		GlobalAudio.get_player(^'MENU/SCROLL').play()

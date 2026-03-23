@@ -37,11 +37,10 @@ func _process(delta: float) -> void:
 		else:
 			rects[i].color.a = lerpf(rects[i].color.a, 0.0, delta * 6.0)
 
-	var tree: SceneTree = get_tree()
-	if (not is_instance_valid(tree)) or not is_instance_valid(tree.current_scene):
+	if not is_instance_valid(SceneManager.current_scene):
 		return
 
-	var current: Node = get_tree().current_scene
+	var current: Node = SceneManager.current_scene
 	if current is Game and current.process_mode == Node.PROCESS_MODE_DISABLED:
 		menus.visible = true
 	else:
@@ -52,16 +51,16 @@ func _process(delta: float) -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		if game.visible:
-			fake_input('pause_game')
-			fake_input('pause_game', false)
-		else:
-			fake_input('ui_cancel')
-			fake_input('ui_cancel', false)
+		fake_action_press(&"pause_game" if game.visible else &"ui_cancel")
 
 
-func fake_input(action: String, press: bool = true) -> void:
+func fake_input(action: StringName, press: bool) -> void:
 	var ev: InputEventAction = InputEventAction.new()
 	ev.action = action
 	ev.pressed = press
 	Input.parse_input_event(ev)
+
+
+func fake_action_press(action: StringName) -> void:
+	fake_input(action, true)
+	fake_input(action, false)

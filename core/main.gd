@@ -1,3 +1,4 @@
+class_name ModuleHandler
 extends Node
 
 
@@ -8,7 +9,7 @@ extends Node
 
 func _ready() -> void:
 	if hardcoded_enabled:
-		SceneManager.switch_to(load(hardcoded_scene_path), false)
+		SceneManager.swap_to_packed(load(hardcoded_scene_path))
 	else:
 		# TODO: Actually make the softmodded module system
-		SceneManager.switch_to(load("res://modules/funkin/module.tscn"), false)
+		SceneManager.swap_to_packed(load("res://modules/funkin/module.tscn"))

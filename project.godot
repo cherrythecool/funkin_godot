@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Friday Night Funkin'"
 config/description="Friday Night Funkin' remade in Godot for extensibility and performance."
-config/version="3.0.0-recode"
+config/version="3.0.0-rewrite"
 config/tags=PackedStringArray("2d")
 run/main_scene="uid://bwcdjku7iww5m"
 config/quit_on_go_back=false
@@ -34,9 +34,9 @@ GlobalAudio="*res://core/autoloads/global_audio.tscn"
 Config="*res://core/autoloads/config.gd"
 Scores="*res://core/autoloads/scores.gd"
 Keybinds="*res://core/autoloads/keybinds.gd"
+SoundTray="*uid://bhbryleu1jjq0"
+SceneManager="*uid://cmy8a7dh1kvs4"
 GameOverlay="*res://core/autoloads/game_overlay.tscn"
-SoundTray="*res://core/autoloads/sound_tray/sound_tray.tscn"
-SceneManager="*res://core/autoloads/scene_manager/scene_manager.tscn"
 TouchControls="*res://core/autoloads/touch_controls/touch_controls.tscn"
 
 [debug]

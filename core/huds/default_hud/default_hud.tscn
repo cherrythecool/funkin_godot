@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://cuh3v6jw2ti70" path="res://core/huds/default_hud/default_hud.gd" id="1_hv0yb"]
 [ext_resource type="PackedScene" uid="uid://3diy2p3nknpi" path="res://core/notes/note_fields/4_lanes.tscn" id="2_0rw2j"]
 [ext_resource type="PackedScene" uid="uid://bx6f5ldidoswy" path="res://core/notes/splashes/note_splash.tscn" id="3_1ubyb"]
+[ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://core/fonts/vcr_osd_mono.ttf" id="3_ecfub"]
 [ext_resource type="Script" uid="uid://nb701n0rtr0l" path="res://core/huds/default_hud/health_bar.gd" id="4_spp67"]
-[ext_resource type="FontFile" uid="uid://dipxuxqymub2c" path="res://core/fonts/vcr_jp.ttf" id="5_gpwne"]
 [ext_resource type="Texture2D" uid="uid://cn6fmp8et8ktw" path="res://core/styles/default/ratings/marvelous.png" id="6_mktee"]
 [ext_resource type="Texture2D" uid="uid://ds3g63uwcq4jw" path="res://core/styles/default/combo.png" id="7_7svf3"]
 [ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://modules/funkin/funkin.ttf" id="8_in2av"]
@@ -34,13 +34,15 @@ expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ku58i"]
-font = ExtResource("5_gpwne")
-outline_size = 6
+font = ExtResource("3_ecfub")
+font_size = 20
+outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_odcbh"]
-font = ExtResource("5_gpwne")
-outline_size = 6
+font = ExtResource("3_ecfub")
+font_size = 18
+outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_6egcm"]

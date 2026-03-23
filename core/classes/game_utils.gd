@@ -1,15 +1,12 @@
-extends Object
 class_name GameUtils
-
-
-# fix pesky 99.9999999999% accuracy or whatever with this simple trick
-static func truncate_float_to(input: float, precision: int) -> float:
-	var multiplier: float = pow(10.0, float(precision))
-	return floori(input * multiplier) / multiplier
+extends Object
 
 
 static func free_children_from(node: Node, immediate: bool = false) -> void:
-	for child: Node in node.get_children():
+	while node.get_child_count() > 0:
+		var child: Node = node.get_child(0)
+		node.remove_child(child)
+
 		if immediate:
 			child.free()
 		else:

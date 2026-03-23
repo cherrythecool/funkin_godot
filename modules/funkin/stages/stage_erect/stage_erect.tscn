@@ -113,7 +113,6 @@ position = Vector2(47, -248)
 z_index = 300
 position = Vector2(960, 861)
 script = ExtResource("5_gyln2")
-character_path = "uid://bu44d2he2dxm3"
 
 [node name="opponent" type="Marker2D" parent="." unique_id=847478879]
 z_index = 200

@@ -1,8 +1,9 @@
-class_name Gameover extends Node2D
+extends Node2D
+class_name Gameover
 
 
 static var character_position: Vector2 = Vector2.ZERO
-static var character_path: String = "res://scenes/game/characters/bf_dead.tscn"
+static var character_path: String = "uid://w4v0gymuehdt"
 
 @onready var camera: GameCamera2D = %camera_2d
 @onready var initial_focus_timer: Timer = %initial_focus_timer
@@ -79,15 +80,15 @@ func _input(event: InputEvent) -> void:
 		active = false
 		GlobalAudio.get_player(^"MENU/CANCEL").play()
 		GameCamera2D.reset_persistent_values()
-		
+
 		match Game.mode:
 			Game.PlayMode.FREEPLAY:
-				SceneManager.switch_to(load(MainMenu.freeplay_scene))
+				SceneManager.transition_to_packed(load(MainMenu.freeplay_scene))
 			Game.PlayMode.STORY:
-				SceneManager.switch_to(load("uid://dcf86iwg6mn3d"))
+				SceneManager.transition_to_packed(load("uid://dcf86iwg6mn3d"))
 			_:
-				SceneManager.switch_to(load("uid://cxk008iuw4n7u"))
-	
+				SceneManager.transition_to_packed(load("uid://cxk008iuw4n7u"))
+
 	if event.is_action(&"ui_accept"):
 		active = false
 		character.play_anim(&"retry")
@@ -112,5 +113,5 @@ func _on_fade_out_timer_timeout() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(character, ^"modulate:a", 0.0, 2.0)
 	tween.tween_callback(func() -> void:
-		SceneManager.switch_to(load("uid://da8mu3oqto3qq"))
+		SceneManager.transition_to_packed(load("uid://da8mu3oqto3qq"))
 	)

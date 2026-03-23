@@ -1,5 +1,6 @@
 @tool
-class_name Alphabet extends Node2D
+class_name Alphabet
+extends Node2D
 
 
 @export_enum("Inherit", "Force Upper", "Force Lower") var casing: String = "Inherit":
@@ -74,7 +75,7 @@ func _ready() -> void:
 func _create_characters() -> void:
 	if not is_instance_valid(skin):
 		skin = load("uid://5kr5cxye6wyn")
-	
+
 	for child: AnimatedSprite2D in get_children():
 		child.queue_free()
 
@@ -153,21 +154,21 @@ func _create_character(x: float, y: float, character: String) -> Array:
 			character = character.to_lower()
 		'Inherit':
 			pass
-	
+
 	var skin_char: AlphabetSkinCharacter = overwrite_map.get(
 		character,
 		skin.optimized_map.get(character)
 	)
-	
+
 	var node: AnimatedSprite2D = AnimatedSprite2D.new()
 	node.use_parent_material = true
 	node.centered = false
 	node.sprite_frames = skin.sprite_frames
 	node.position = Vector2(x, y)
-	
+
 	if is_instance_valid(skin_char):
 		node.offset = skin_char.offset
-		
+
 		if node.sprite_frames.has_animation(skin_char.animation + suffix):
 			node.animation = skin_char.animation + suffix
 		elif node.sprite_frames.has_animation(skin_char.animation.to_upper() + suffix):
@@ -176,21 +177,21 @@ func _create_character(x: float, y: float, character: String) -> Array:
 			node.visible = false
 	else:
 		node.offset = Vector2.ZERO
-		
+
 		if node.sprite_frames.has_animation(character + suffix):
 			node.animation = character + suffix
 		elif node.sprite_frames.has_animation(character.to_upper() + suffix):
 			node.animation = character.to_upper() + suffix
 		else:
 			node.visible = false
-	
+
 	node.play()
 
 	var character_size: Vector2 = Vector2.ZERO
 	if node.visible:
 		var frame_texture: Texture2D = node.sprite_frames.get_frame_texture(node.animation, 0)
 		character_size = frame_texture.get_size()
-	
+
 	match vertical_alignment:
 		'Bottom':
 			node.offset.y += 60.0 - character_size.y
@@ -198,7 +199,7 @@ func _create_character(x: float, y: float, character: String) -> Array:
 			node.offset.y = node.offset.y
 		_:
 			node.offset.y -= (character_size.y - 65.0) / 2.0
-	
+
 	return [node, character_size]
 
 

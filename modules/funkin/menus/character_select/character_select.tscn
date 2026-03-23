@@ -146,7 +146,7 @@ scroll_scale = Vector2(0.3, 0.3)
 position = Vector2(-75, 209)
 script = ExtResource("2_rptr7")
 atlas = "res://modules/funkin/menus/character_select/background/crowd"
-frame = 7
+frame = 11
 playing = true
 metadata/_custom_type_script = "uid://diqmdngjb60u2"
 
@@ -154,7 +154,7 @@ metadata/_custom_type_script = "uid://diqmdngjb60u2"
 position = Vector2(-40, 391)
 sprite_frames = ExtResource("7_5ydai")
 animation = &"stage full instance 1"
-frame_progress = 0.6072903
+frame_progress = 0.81418574
 centered = false
 script = ExtResource("4_xae3q")
 playing = true

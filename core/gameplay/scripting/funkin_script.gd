@@ -1,36 +1,87 @@
-class_name FunkinScript extends Node
+class_name FunkinScript
+extends Node
 
 
-var game: Game
+var conductor: Conductor:
+	get:
+		if is_instance_valid(Conductor.instance):
+			return Conductor.instance
+		else:
+			return null
+
+var game: Game:
+	get:
+		if is_instance_valid(Game.instance):
+			return Game.instance
+		else:
+			return null
 
 var player: Character:
+	set(value):
+		if is_instance_valid(game):
+			game.player = value
 	get:
 		if is_instance_valid(game):
 			return game.player
-		return null
+		else:
+			return null
 
 var opponent: Character:
+	set(value):
+		if is_instance_valid(game):
+			game.opponent = value
 	get:
 		if is_instance_valid(game):
 			return game.opponent
-		return null
+		else:
+			return null
 
 var spectator: Character:
+	set(value):
+		if is_instance_valid(game):
+			game.spectator = value
 	get:
 		if is_instance_valid(game):
 			return game.spectator
-		return null
+		else:
+			return null
 
 var stage: Stage:
+	set(value):
+		if is_instance_valid(game):
+			game.stage = value
 	get:
 		if is_instance_valid(game):
 			return game.stage
-		return null
+		else:
+			return null
 
-var player_field: NoteField
-var opponent_field: NoteField
+var player_field: NoteField:
+	set(value):
+		if is_instance_valid(game):
+			game.player_field = value
+	get:
+		if is_instance_valid(game):
+			return game.player_field
+		else:
+			return null
 
-var camera: GameCamera2D
+var opponent_field: NoteField:
+	set(value):
+		if is_instance_valid(game):
+			game.opponent_field = value
+	get:
+		if is_instance_valid(game):
+			return game.opponent_field
+		else:
+			return null
+
+var camera: GameCamera2D:
+	get:
+		if is_instance_valid(GameCamera2D.instance):
+			return GameCamera2D.instance
+		else:
+			return null
 
 
 func _init() -> void:
@@ -79,24 +130,16 @@ func _on_event_hit(_event: EventData) -> void:
 
 
 func _initialize_variables() -> void:
-	if is_instance_valid(Conductor.instance):
-		Conductor.instance.beat_hit.connect(_on_beat_hit)
-		Conductor.instance.step_hit.connect(_on_step_hit)
-		Conductor.instance.measure_hit.connect(_on_measure_hit)
-	
-	if not is_instance_valid(Game.instance):
-		return
-	
-	game = Game.instance
+	if is_instance_valid(conductor):
+		conductor.beat_hit.connect(_on_beat_hit)
+		conductor.step_hit.connect(_on_step_hit)
+		conductor.measure_hit.connect(_on_measure_hit)
 
-	player_field = game.player_field
-	opponent_field = game.opponent_field
-
-	camera = GameCamera2D.instance
-	game.song_start.connect(_on_song_start)
-	game.song_finished.connect(_on_song_finished)
-	game.back_to_menus.connect(_on_back_to_menus)
-	game.event_prepare.connect(_on_event_prepare)
-	game.event_hit.connect(_on_event_hit)
-	game.ready_post.connect(_ready_post)
-	game.process_post.connect(_process_post)
+	if is_instance_valid(game):
+		game.song_start.connect(_on_song_start)
+		game.song_finished.connect(_on_song_finished)
+		game.back_to_menus.connect(_on_back_to_menus)
+		game.event_prepare.connect(_on_event_prepare)
+		game.event_hit.connect(_on_event_hit)
+		game.ready_post.connect(_ready_post)
+		game.process_post.connect(_process_post)

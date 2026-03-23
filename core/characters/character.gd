@@ -1,4 +1,5 @@
-class_name Character extends Node2D
+extends Node2D
+class_name Character
 
 
 @export_category("Visuals")
@@ -39,7 +40,7 @@ func _enter_tree() -> void:
 	animation_player = get_node_or_null(^"animation_player")
 	if animation_player != null:
 		animation_player.animation_finished.connect(animation_finished.emit)
-	
+
 	dance(true)
 	if is_instance_valid(Conductor.instance):
 		Conductor.instance.beat_hit.connect(_on_beat_hit)
@@ -83,7 +84,7 @@ func play_anim(anim: StringName, force: bool = false, special: bool = false) -> 
 func has_anim(anim: StringName) -> bool:
 	if not is_instance_valid(animation_player):
 		return false
-	
+
 	return animation_player.has_animation(anim)
 
 
@@ -121,7 +122,7 @@ func dance(force: bool = false) -> void:
 		var base: int = dance_step + 1
 		if is_instance_valid(Conductor.instance):
 			base = floori(Conductor.instance.beat)
-		
+
 		dance_step = wrapi(base, 0, dance_steps.size())
 		play_anim(dance_steps[dance_step], force)
 		return

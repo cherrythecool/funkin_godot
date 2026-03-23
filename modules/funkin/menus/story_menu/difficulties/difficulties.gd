@@ -49,8 +49,9 @@ func change_selection(amount: int = 0) -> void:
 		return
 
 	reload_difficulty_sprite()
-	tween_difficulty_sprite()
 	calculate_high_score()
+	if amount != 0:
+		tween_difficulty_sprite()
 
 
 func reload_difficulty_sprite() -> void:

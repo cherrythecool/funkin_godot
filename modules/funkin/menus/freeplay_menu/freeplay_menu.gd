@@ -48,13 +48,17 @@ func _ready() -> void:
 	if song_nodes.is_empty():
 		active = false
 		GlobalAudio.get_player("MENU/CANCEL").play()
-		SceneManager.switch_to(load("uid://b7fwxsepnt38j"))
+		SceneManager.transition_to_packed(load("uid://b7fwxsepnt38j"))
 		printerr("Freeplay has no songs, returning.")
 		return
 
 	tracks.finished.connect(_on_finished)
 
 	change_selection()
+
+	for node: FreeplaySongNode in song_nodes:
+		node.position = node.get_target_position()
+
 	target_background_color = song_nodes[index].meta.icon.color
 	background.modulate = target_background_color
 
@@ -72,14 +76,14 @@ func _input(event: InputEvent) -> void:
 	if event.is_action("ui_cancel"):
 		active = false
 		GlobalAudio.get_player("MENU/CANCEL").play()
-		SceneManager.switch_to(load("uid://b7fwxsepnt38j"))
+		SceneManager.transition_to_packed(load("uid://b7fwxsepnt38j"))
 	if event.is_action("ui_accept"):
 		active = false
 		call_deferred("select_song")
 	if event.is_action(&"freeplay_open_characters"):
 		active = false
 		GlobalAudio.get_player("MENU/CANCEL").play()
-		SceneManager.switch_to(load("uid://62vvv8x8t7nm"))
+		SceneManager.transition_to_packed(load("uid://62vvv8x8t7nm"))
 
 	if event.is_action("ui_up") or event.is_action("ui_down"):
 		change_selection(roundi(Input.get_axis("ui_up", "ui_down")))
@@ -166,7 +170,7 @@ func select_song() -> void:
 	Game.difficulty = difficulty.to_lower()
 	Game.mode = Game.PlayMode.FREEPLAY
 	Game.playlist.clear()
-	SceneManager.switch_to(load("uid://da8mu3oqto3qq"))
+	SceneManager.transition_to_packed(load("uid://da8mu3oqto3qq"))
 
 
 func load_song(i: int) -> void:

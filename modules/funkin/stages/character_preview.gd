@@ -2,7 +2,7 @@
 class_name CharacterPlacement extends Node2D
 
 
-@export_file('*.tscn') var character_path: String = "res://scenes/game/characters/bf.tscn":
+@export_file('*.tscn') var character_path: String = "uid://bu44d2he2dxm3":
 	set(value):
 		character_path = value
 		if Engine.is_editor_hint():
@@ -17,7 +17,7 @@ class_name CharacterPlacement extends Node2D
 @export_range(0.0, 1.0, 0.01) var alpha: float = 0.5:
 	set(value):
 		alpha = value
-		
+
 		if Engine.is_editor_hint():
 			if is_instance_valid(character):
 				character.modulate.a = alpha
@@ -54,7 +54,7 @@ func adjust_character(input: Character, is_player: bool = false) -> void:
 	input.swap_sing_animations = is_player != input.starts_as_player
 	input.scale *= scale
 	input.z_index += z_index
-	
+
 	if is_instance_valid(material):
 		input.set_character_material(material)
 	if has_node(^"camera_offset"):
@@ -77,7 +77,7 @@ func instance_character(is_player: bool = false, insert: bool = true, adjust: bo
 	instanced.swap_sing_animations = is_player != instanced.starts_as_player
 	instanced.scale *= scale
 	instanced.z_index += z_index
-	
+
 	if insert:
 		add_sibling(instanced)
 	if adjust:
@@ -85,24 +85,24 @@ func instance_character(is_player: bool = false, insert: bool = true, adjust: bo
 	else:
 		if is_instance_valid(material):
 			instanced.set_character_material(material)
-		
+
 		if has_node(^"camera_offset"):
 			if is_instance_valid(instanced.camera_offset):
 				instanced.camera_offset.queue_free()
 			instanced.camera_offset = get_node(^"camera_offset")
-	
+
 	return instanced
 
 
 func make_camera_offset_node() -> void:
 	if has_node(^"camera_offset"):
 		return
-	
+
 	var offset: Marker2D = Marker2D.new()
 	offset.name = &"camera_offset"
 	add_child(offset)
 	offset.owner = get_parent()
-	
+
 	if not is_instance_valid(character):
 		return
 	if not character.has_node(^"camera_offset"):

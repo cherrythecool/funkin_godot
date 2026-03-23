@@ -25,7 +25,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action(&'ui_cancel'):
 		music.stop()
 		GlobalAudio.music.play()
-		SceneManager.switch_to(load('uid://b7fwxsepnt38j'))
+		SceneManager.transition_to_packed(load('uid://b7fwxsepnt38j'))
 	if event.is_action(&'ui_accept'):
 		var item: ListedAlphabet = list.get_child(selected)
 		if item is CreditsContributor:
@@ -44,15 +44,16 @@ func change_selection(amount: int = 0) -> void:
 		else:
 			item.modulate.a = 1.0
 
+	var selected_item: ListedAlphabet = list.get_child(selected)
+	if selected_item is CreditsContributor:
+		info_label.text = selected_item.role
+		info_texture.texture = selected_item.texture
+
 	if amount == 0:
 		return
 
-	var selected_item: ListedAlphabet = list.get_child(selected)
 	if selected_item.text.is_empty() or selected_item.scale != Vector2.ONE:
 		change_selection(signi(amount))
 		return
 
-	if selected_item is CreditsContributor:
-		info_label.text = selected_item.role
-		info_texture.texture = selected_item.texture
 	GlobalAudio.get_player(^"MENU/SCROLL").play()
