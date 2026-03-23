@@ -50,10 +50,6 @@ func display() -> void:
 	if is_instance_valid(current_scene):
 		scene_name = current_scene.name
 
-	var tree_scene: Node = get_tree().current_scene
-	if is_instance_valid(tree_scene):
-		scene_name = "%s (from %s)" % [scene_name, tree_scene.name]
-
 	var avg: float = 0.0
 	for time: float in times:
 		avg += time / float(times.size())
