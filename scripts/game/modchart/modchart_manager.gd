@@ -70,8 +70,8 @@ func get_submod_value(mod: String, submod: String, player: int = 0) -> float:
 func get_submod_percent(mod: String, submod: String, player: int = 0) -> float:
 	return get_submod_value(mod, submod, player) * 100
 
-# Queue Events
-var queues:Array = []
+# Queue/Events
+var queues: Array[ModchartEvent] = []
 
 func _on_beat_hit(beat:int):
 	pass
