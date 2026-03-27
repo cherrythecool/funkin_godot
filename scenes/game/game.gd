@@ -64,7 +64,10 @@ var rank: StringName:
 		return &"N/A"
 var skin: HUDSkin
 
+var modchart_manager:ModchartManager
+
 signal hud_setup
+signal modchart_setup
 signal ready_post
 signal process_post(delta: float)
 signal song_start
@@ -94,6 +97,8 @@ func _ready() -> void:
 	load_assets()
 	load_from_assets()
 	setup_hud()
+	
+	setup_modchart()
 
 	scripts.load_scripts(song)
 	load_events()
@@ -393,6 +398,14 @@ func setup_hud() -> void:
 
 	hud_setup.emit()
 
+func setup_modchart() -> void:
+	modchart_manager = ModchartManager.new()
+	modchart_manager.add_note_field(player_field)
+	modchart_manager.add_note_field(opponent_field)
+	
+	add_child(modchart_manager)
+	
+	modchart_setup.emit()
 
 func reset_conductor() -> void:
 	conductor.reset()

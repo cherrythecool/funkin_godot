@@ -30,6 +30,7 @@ var game: Game = null
 var note_splash_alpha: float = 0.6
 var target_character: Character = null
 
+signal note_update(note: Note)
 signal note_hit(note: Note)
 signal note_miss(note: Note)
 
@@ -84,8 +85,10 @@ func _process(delta: float) -> void:
 
 func update_note(note: Note, delta: float = 0.0) -> void:
 	var receptor: Receptor = get_receptor_from_lane(note.lane)
-	note.position.y = receptor.position.y
+	note.position = receptor.position
 	note.position.y -= (conductor.time - note.data.time) * 1000.0 * 0.45 * get_scroll_speed()
+	
+	note_update.emit(note)
 
 	if note.is_sustain and note.hit:
 		if not is_receptor_held(note.lane):
