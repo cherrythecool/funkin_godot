@@ -21,6 +21,6 @@ func set_value(value:float, player:int) -> void:
 		values[player] = value
 
 @warning_ignore("unused_parameter")
-func note(note:Note, player:int) -> void: pass
+func get_note(note: Note, player: int) -> void: pass
 @warning_ignore("unused_parameter")
-func receptor(receptor:Receptor, field:NoteField, player:int) -> void:pass
+func get_receptor(receptor: Receptor, field: NoteField, player: int) -> void:pass
