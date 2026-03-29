@@ -11,7 +11,7 @@ func _init(_modchart_manager: ModchartManager) -> void:
 func _sort_events(array: Array) -> void:
 	array.sort_custom(func(a: ModchartEvent, b: ModchartEvent) -> bool: return a.exec_step < b.exec_step)
 
-func add_event(event: ModchartEvent) -> void:
+func add_event(event: ModchartSetEvent) -> void:
 	if !modifier_events.has(event.modifier):
 		modifier_events.set(event.modifier, [])
 	var schedule: Array = modifier_events.get(event.modifier)
@@ -20,9 +20,9 @@ func add_event(event: ModchartEvent) -> void:
 	_sort_events(schedule)
 
 func process_mods(step: float) -> void:
-	for modifier in modifier_events.keys():
-		var garbage: Array[ModchartEvent] = []
-		for event in modifier_events.get(modifier):
+	for modifier: ModchartSetEvent in modifier_events.keys():
+		var garbage: Array[ModchartSetEvent] = []
+		for event: ModchartSetEvent in modifier_events.get(modifier):
 			if event.finished:
 				garbage.push_back(event)
 				continue
