@@ -29,23 +29,29 @@ func _process(delta: float) -> void:
 	for i:int in note_fields.size():
 		var field: NoteField = note_fields[i]
 		for receptor: Receptor in field.receptors:
-			receptor.global_position = initial_receptor_data.get(receptor).position
+			receptor.position = initial_receptor_data.get(receptor).position
 			receptor.scale = initial_receptor_data.get(receptor).scale
+			receptor.z_index = 0
+			receptor.rotation = 0
+			
 			for mod: ModchartModifier in modifiers.values(): mod.get_receptor(receptor, field, i)
 		
 func add_note_field(field: NoteField) -> void:
 	note_fields.push_back(field)
 	for receptor: Receptor in field.receptors:
-		initial_receptor_data.set(receptor, ModchartObjectData.new(receptor.global_position, receptor.scale))
+		initial_receptor_data.set(receptor, ModchartObjectData.new(receptor.position, receptor.scale))
 	
 	field.note_update.connect(func(note: Note) -> void:
 		note.z_index = 0
-		note.global_position.x = initial_receptor_data.get(field.receptors[note.data.direction % 4]).position.x
-		note.scale = initial_receptor_data.get(field.receptors[note.data.direction % 4]).scale * 0.7
+		note.rotation = 0
+		if _note_scales.has(note): note.scale =_note_scales.get(note)
+		else: _note_scales.set(note, Vector2(note.scale))
 		
 		for mod: ModchartModifier in modifiers.values():
 			mod.get_note(note, note_fields.size() - 1)
 	)
+
+var _note_scales:Dictionary[Note, Vector2] = {}
 
 func get_modifier(mod: String) -> ModchartModifier:
 	if !modifiers.has(mod): 

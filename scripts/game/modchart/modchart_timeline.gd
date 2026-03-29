@@ -20,7 +20,7 @@ func add_event(event: ModchartSetEvent) -> void:
 	_sort_events(schedule)
 
 func process_mods(step: float) -> void:
-	for modifier: ModchartSetEvent in modifier_events.keys():
+	for modifier: String in modifier_events.keys():
 		var garbage: Array[ModchartSetEvent] = []
 		for event: ModchartSetEvent in modifier_events.get(modifier):
 			if event.finished:
