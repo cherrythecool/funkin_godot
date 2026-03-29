@@ -43,7 +43,6 @@ var sustain_timer: float = 0.0:
 var sustain_length_offset: float = 0.0
 var sustain_tail_offset: float = 0.0
 
-
 func _ready() -> void:
 	length = data.length
 

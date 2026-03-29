@@ -3,13 +3,14 @@ class_name ModchartManager extends Node
 # TODO: Implement z-pos modifiers
 
 var modifiers: Dictionary = {}
+var timeline: ModchartTimeline
 
 var note_fields: Array[NoteField] = []
 var initial_receptor_data: Dictionary[Receptor, ModchartObjectData] = {}
 
-func _init() -> void: 
+func _init() -> void:
 	_register_default_modifiers()
-	Game.instance.conductor.step_hit.connect(_on_step_hit)
+	timeline = ModchartTimeline.new(self)
 	
 func _register_default_modifiers() -> void: 
 	modifiers.set("__fallback_modifier", ModchartModifier.new())
@@ -23,6 +24,8 @@ func _register_default_modifiers() -> void:
 	modifiers.set("invert", InvertModifier.new())
 
 func _process(delta: float) -> void:
+	timeline.process_mods(Conductor.instance.step)
+	
 	for i:int in note_fields.size():
 		var field: NoteField = note_fields[i]
 		for receptor: Receptor in field.receptors:
@@ -36,8 +39,10 @@ func add_note_field(field: NoteField) -> void:
 		initial_receptor_data.set(receptor, ModchartObjectData.new(receptor.global_position, receptor.scale))
 	
 	field.note_update.connect(func(note: Note) -> void:
+		note.z_index = 0
 		note.global_position.x = initial_receptor_data.get(field.receptors[note.data.direction % 4]).position.x
 		note.scale = initial_receptor_data.get(field.receptors[note.data.direction % 4]).scale * 0.7
+		
 		for mod: ModchartModifier in modifiers.values():
 			mod.get_note(note, note_fields.size() - 1)
 	)
@@ -80,25 +85,20 @@ func get_submod_value(mod: String, submod: String, player: int = 0) -> float:
 func get_submod_percent(mod: String, submod: String, player: int = 0) -> float:
 	return get_submod_value(mod, submod, player) * 100
 
-# Queue/Events
-var queues: Array[ModchartEvent] = []
-
 func queue_set_value(step: int, mod: String, value: float, player: int = -1) -> void:
-	var event: ModchartEvent = ModchartEvent.new(self)
-	event.start_step = step
+	var event: ModchartSetEvent = ModchartSetEvent.new(self, timeline)
+	event.exec_step = step
 	event.modifier = mod
 	event.value = value
 	event.player = player
-	queues.push_back(event)
-	add_child(event)
-	_sort_queues()
+	timeline.add_event(event)
 
 func queue_set_percent(step: int, mod: String, percent: float, player: int = -1) -> void:
 	queue_set_value(step, mod, percent/100, player)
-	
-func queue_ease_value(start_step: int, end_step: int, mod: String, value: float, target_trans:Tween.TransitionType, target_ease:Tween.EaseType, player: int = -1, start_value: Variant = null) -> void:
-	var event: ModchartEvent = ModchartEaseEvent.new(self)
-	event.start_step = start_step
+
+func queue_ease_value(exec_step: int, end_step: int, mod: String, value: float, target_trans:Tween.TransitionType, target_ease:Tween.EaseType, player: int = -1, start_value: Variant = null) -> void:
+	var event: ModchartEaseEvent = ModchartEaseEvent.new(self, timeline)
+	event.exec_step = exec_step
 	event.end_step = end_step
 	event.modifier = mod
 	event.value = value
@@ -106,32 +106,28 @@ func queue_ease_value(start_step: int, end_step: int, mod: String, value: float,
 	event.target_ease = target_ease
 	event.player = player
 	if start_value != null: event.start_value = start_value
-	queues.push_back(event)
-	add_child(event)
-	_sort_queues()
+	timeline.add_event(event)
 
-func queue_ease_percent(start_step: int, end_step: int, mod: String, percent: float, target_trans:Tween.TransitionType, target_ease:Tween.EaseType, player: int = -1, start_percent: Variant = null) -> void:
+func queue_ease_percent(exec_step: int, end_step: int, mod: String, percent: float, target_trans:Tween.TransitionType, target_ease:Tween.EaseType, player: int = -1, start_percent: Variant = null) -> void:
 	var start_value: Variant = null
 	if start_percent != null: start_value = start_percent / 100
-	queue_ease_value(start_step, end_step, mod, percent/100, target_trans, target_ease, player, start_value)
+	queue_ease_value(exec_step, end_step, mod, percent/100, target_trans, target_ease, player, start_value)
 
 func queue_set_submod_value(step: int, mod: String, submod: String, value: float, player: int = -1) -> void:
-	var event: ModchartEvent = ModchartEvent.new(self)
-	event.start_step = step
+	var event: ModchartSetEvent = ModchartSetEvent.new(self, timeline)
+	event.exec_step = step
 	event.modifier = mod
 	event.sub_modifier = submod
 	event.value = value
 	event.player = player
-	queues.push_back(event)
-	add_child(event)
-	_sort_queues()
+	timeline.add_event(event)
 
 func queue_set_submod_percent(step: int, mod: String, submod: String, percent: float, player: int = -1) -> void:
 	queue_set_submod_value(step, mod, submod, percent/100, player)
-	
-func queue_submod_ease_value(start_step: int, end_step: int, mod: String, submod: String, value: float, target_trans:Tween.TransitionType, target_ease:Tween.EaseType, player: int = -1, start_value: Variant = null) -> void:
-	var event: ModchartEvent = ModchartEaseEvent.new(self)
-	event.start_step = start_step
+
+func queue_submod_ease_value(exec_step: int, end_step: int, mod: String, submod: String, value: float, target_trans:Tween.TransitionType, target_ease:Tween.EaseType, player: int = -1, start_value: Variant = null) -> void:
+	var event: ModchartEaseEvent = ModchartEaseEvent.new(self, timeline)
+	event.exec_step = exec_step
 	event.end_step = end_step
 	event.modifier = mod
 	event.sub_modifier = submod
@@ -140,24 +136,9 @@ func queue_submod_ease_value(start_step: int, end_step: int, mod: String, submod
 	event.target_ease = target_ease
 	event.player = player
 	if start_value != null: event.start_value = start_value
-	queues.push_back(event)
-	add_child(event)
-	_sort_queues()
+	timeline.add_event(event)
 
-func queue_submod_ease_percent(start_step: int, end_step: int, mod: String, submod: String, percent: float, target_trans:Tween.TransitionType, target_ease:Tween.EaseType, player: int = -1, start_percent: Variant = null) -> void:
+func queue_submod_ease_percent(exec_step: int, end_step: int, mod: String, submod: String, percent: float, target_trans:Tween.TransitionType, target_ease:Tween.EaseType, player: int = -1, start_percent: Variant = null) -> void:
 	var start_value: Variant = null
 	if start_percent != null: start_value = start_percent / 100
-	queue_submod_ease_value(start_step, end_step, mod, submod, percent/100, target_trans, target_ease, player, start_value)
-
-
-func _sort_queues() -> void:
-	queues.sort_custom(func(a: ModchartEvent, b: ModchartEvent) -> bool:
-		return a.start_step < b.start_step)
-
-func _on_step_hit(step:int) -> void:
-	if !queues.is_empty():
-		for event in queues:
-			if step >= event.start_step:
-				event.run()
-				queues.erase(event)
-				event.kill()
+	queue_submod_ease_value(exec_step, end_step, mod, submod, percent/100, target_trans, target_ease, player, start_value)

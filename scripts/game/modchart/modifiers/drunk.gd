@@ -56,10 +56,10 @@ func _get_drunk(obj:Node2D, player:int, column: int) -> void:
 	if tip_z_perc != 0:
 		var speed: float = submods.get("tip_z_speed").get_value(player)
 		var offset: float = submods.get("tip_z_offset").get_value(player)
-		# pos.z += tipZPerc * (FlxMath.fastCos((time * ((speed * 1.2) + 1.2) + data * ((offset * 1.8) + 3.2))) * 0.15)
+		obj.z_index += tip_z_perc * (cos((time * ((speed * 1.2) + 1.2) + column * ((offset * 1.8) + 3.2))) * 0.15)
 	
 	if bumpy_perc != 0:
 		var period: float = submods.get("bumpy_period").get_value(player)
 		var offset: float = submods.get("bumpy_offset").get_value(player)
 		var angle = (vis_diff + (100.0 * offset)) / ((period * 16.0) + 16.0)
-		#pos.z += (bumpyPerc * 40 * FlxMath.fastSin(angle))/250;
+		obj.z_index += (bumpy_perc * 40 * sin(angle))/250
