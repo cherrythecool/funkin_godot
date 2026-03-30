@@ -4,14 +4,14 @@ class_name BeatModifier extends ModchartModifier
 func _init() -> void:
 	super([])
 
-func _get_shift(obj: Node2D, player: int) -> float:
-	var percent = get_value(player)
+func get_object(object: Node, _field: NoteField, _column:int, player: int) -> void:
+	var percent: float = get_value(player)
 	if percent == 0:
-		return 0.0
+		return
 		
 	var visual_diff: float = 0
-	if obj is Note:
-		visual_diff = -((Conductor.instance.time - obj.data.time) * 450.0 * Game.instance.scroll_speed)
+	if object is Note:
+		visual_diff = -((Conductor.instance.time - object.data.time) * 450.0 * Game.instance.scroll_speed)
 
 	var accel_time: float = 0.3 
 	var total_time: float = 0.7 
@@ -20,12 +20,12 @@ func _get_shift(obj: Node2D, player: int) -> float:
 	var even_beat: bool = fmod(beat, 2.0) >= 1.0
 
 	if beat < 0:
-		return 0.0 
+		return
 
 	beat = fmod(beat, 1.0)
 	
 	if beat >= total_time:
-		return 0.0 
+		return
 
 	var amount: float = 0.0
 	if beat < accel_time:
@@ -39,10 +39,4 @@ func _get_shift(obj: Node2D, player: int) -> float:
 		amount *= -1.0
 
 	var shift: float = 40.0 * amount * sin((visual_diff / 30.0) + (PI / 2.0))
-	return percent * shift
-
-func get_receptor(receptor: Receptor, field: NoteField, player: int) -> void:
-	receptor.position.x += _get_shift(receptor, player)
-
-func get_note(note: Note, player: int) -> void:
-	note.position.x += _get_shift(note, player)
+	object.position.x += percent * shift

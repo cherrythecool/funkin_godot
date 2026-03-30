@@ -4,10 +4,6 @@ class_name OpponentModifier extends ModchartModifier
 func _init() -> void:
 	super([])
 
-func get_receptor(receptor:Receptor, field:NoteField, player:int) -> void:
-	var dist = Global.game_size.x / values.size()
-	receptor.position.x += dist * sign((player + 1) * 2 - 3) * get_value(player)
-
-func get_note(note:Note, player:int) -> void:
-	var dist = Global.game_size.x / values.size()
-	note.position.x += dist * sign((player + 1) * 2 - 3) * get_value(player)
+func get_object(object: Node, _field: NoteField, _column:int, player: int) -> void:
+	var dist: float = Global.game_size.x / values.size()
+	object.position.x += dist * sign((player + 1) * 2 - 3) * get_value(player)

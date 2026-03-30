@@ -10,13 +10,7 @@ func _init() -> void:
 		_submods.push_back('stretch%s' % [i])
 	super(_submods)
 
-func get_note(note:Note, player:int) -> void:
-	_scale(note, player, note.data.direction  % note.directions.size())
-	
-func get_receptor(receptor:Receptor, field:NoteField, player:int) -> void:
-	_scale(receptor, player, field.receptors.find(receptor))
-
-func _scale(object: Node2D, player: int, column: int) -> void:
+func get_object(object: Node, _field: NoteField, column:int, player: int) -> void:
 	object.scale.x *= 1 - get_value(player)
 	object.scale.y *= 1 - get_value(player)
 	var miniX: float = submods.get("mini_x").get_value(player) + submods.get("mini%s_x" % [column]).get_value(player)

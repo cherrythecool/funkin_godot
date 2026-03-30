@@ -11,21 +11,10 @@ func _init() -> void:
 		_submods.push_back('move%sY' % [i])
 		_submods.push_back('move%sZ' % [i])
 	super(_submods)
-
-func get_receptor(receptor:Receptor, field:NoteField, player:int) -> void:
-	var receptor_id: int = field.receptors.find(receptor)
 	
-	receptor.position.x += submods.get("transformX").get_value(player) + submods.get("transform%sX" % [receptor_id]).get_value(player)
-	receptor.position.y += submods.get("transformY").get_value(player) + submods.get("transform%sY" % [receptor_id]).get_value(player)
+func get_object(object: Node, _field: NoteField, column:int, player: int) -> void:
+	object.position.x += submods.get("transformX").get_value(player) + submods.get("transform%sX" % [column]).get_value(player)
+	object.position.y += submods.get("transformY").get_value(player) + submods.get("transform%sY" % [column]).get_value(player)
 	
-	receptor.position.x += (submods.get("moveX").get_value(player) + submods.get("move%sX" % [receptor_id]).get_value(player)) * 112
-	receptor.position.y += (submods.get("moveY").get_value(player) + submods.get("move%sY" % [receptor_id]).get_value(player)) * 112
-
-func get_note(note:Note, player:int) -> void:
-	var note_id: int = note.data.direction % 4
-	
-	note.position.x += submods.get("transformX").get_value(player) + submods.get("transform%sX" % [note_id]).get_value(player)
-	note.position.y += submods.get("transformY").get_value(player) + submods.get("transform%sY" % [note_id]).get_value(player)
-	
-	note.position.x += (submods.get("moveX").get_value(player) + submods.get("move%sX" % [note_id]).get_value(player)) * 112
-	note.position.y += (submods.get("moveY").get_value(player) + submods.get("move%sY" % [note_id]).get_value(player)) * 112
+	object.position.x += (submods.get("moveX").get_value(player) + submods.get("move%sX" % [column]).get_value(player)) * 112
+	object.position.y += (submods.get("moveY").get_value(player) + submods.get("move%sY" % [column]).get_value(player)) * 112
