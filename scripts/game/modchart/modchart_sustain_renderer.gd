@@ -48,9 +48,13 @@ func draw() -> void:
 				line.begin_cap_mode = Line2D.LINE_CAP_BOX
 				line.end_cap_mode = Line2D.LINE_CAP_BOX
 				
+				if Config.get_value("interface", "sustain_layer") == "below":
+					line.z_index -= 1
+				
 				note.add_child(line)
 				
 			line.clear_points()
+			line.modulate.a = note.sustain.modulate.a
 			
 			var start_time: float = maxf(note.data.time, Conductor.instance.time)
 			var end_time: float = note.data.time + note.data.length

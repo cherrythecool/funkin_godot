@@ -87,7 +87,7 @@ func update_note(note: Note, delta: float = 0.0) -> void:
 	var receptor: Receptor = get_receptor_from_lane(note.lane)
 	
 	if update_note_positions:
-		note.position = receptor.position
+		note.position.y = receptor.position.y
 		note.position.y -= (conductor.time - note.data.time) * 1000.0 * 0.45 * get_scroll_speed()
 
 	if note.is_sustain and note.hit:

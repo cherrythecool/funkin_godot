@@ -64,11 +64,7 @@ var rank: StringName:
 		return &"N/A"
 var skin: HUDSkin
 
-var modchart_manager:ModchartManager:
-	get():
-		if !is_instance_valid(modchart_manager):
-			printerr("modchart_manager is null! call game.setup_modchart() first!")
-		return modchart_manager
+var modchart_manager:ModchartManager
 
 signal hud_setup
 signal modchart_setup
@@ -403,7 +399,7 @@ func setup_hud() -> void:
 	hud_setup.emit()
 
 func setup_modchart() -> void:
-	if is_instance_valid(modchart_manager):
+	if modchart_manager != null:
 		return
 	modchart_manager = ModchartManager.new()
 	modchart_manager.add_note_field(player_field)

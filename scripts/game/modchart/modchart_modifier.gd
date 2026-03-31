@@ -3,6 +3,10 @@ class_name ModchartModifier extends Object
 var values:Array[float] = [0, 0]
 var submods:Dictionary[String, ModchartModifier] = {}
 
+var modchart_manager: ModchartManager:
+	get():
+		return Game.instance.modchart_manager
+
 func _init(_submods:Array[String] = []) -> void:
 	for mod:String in _submods:
 		submods.set(mod, ModchartModifier.new())
