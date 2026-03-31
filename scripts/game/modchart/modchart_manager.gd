@@ -2,15 +2,20 @@ class_name ModchartManager extends Node
 
 # TODO: Implement z-pos modifiers
 
+var sustain_subdivisions: int = 8
+
 var modifiers: Dictionary = {}
 var timeline: ModchartTimeline
+var sustain_renderer: ModchartSustainRenderer
 
 var note_fields: Array[NoteField] = []
 var object_data: Dictionary[Node2D, ModchartObjectData] = {}
 
 func _init() -> void:
 	_register_default_modifiers()
+	
 	timeline = ModchartTimeline.new(self)
+	sustain_renderer = ModchartSustainRenderer.new(self)
 	
 func _register_default_modifiers() -> void: 
 	modifiers.set("__fallback_modifier", ModchartModifier.new())
@@ -45,6 +50,8 @@ func _process(delta: float) -> void:
 			note.rotation = 0
 			
 			for mod: ModchartModifier in modifiers.values(): mod.get_object(note, field, note.lane, i)
+	
+	sustain_renderer.draw()
 		
 func add_note_field(field: NoteField) -> void:
 	note_fields.push_back(field)
