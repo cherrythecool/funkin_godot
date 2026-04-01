@@ -2,7 +2,7 @@ class_name ModchartSustainRenderer extends Object
 
 # so basically, we use fake notes to calculate the modifier
 # and then use that position to draw the Line2D
-# and finally, we add a tail to the last point of the Line2D and rotate it
+# and finally, we add a tail to the last point of the line and rotate it
 
 var modchart_manager: ModchartManager
 var fake_note: Note

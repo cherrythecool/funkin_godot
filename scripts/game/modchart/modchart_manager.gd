@@ -28,6 +28,7 @@ func _register_default_modifiers() -> void:
 	modifiers.set("opponent_swap", OpponentModifier.new())
 	modifiers.set("beat", BeatModifier.new())
 	modifiers.set("invert", InvertModifier.new())
+	modifiers.set("accel", AccelModifier.new())
 
 func _process(delta: float) -> void:
 	timeline.process_mods(Conductor.instance.step)
