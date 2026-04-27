@@ -7,6 +7,8 @@ class_name ModchartSustainRenderer extends Object
 var modchart_manager: ModchartManager
 var fake_note: Note
 
+var texture_cache:Dictionary[Texture2D, ImageTexture] = {}
+
 func _init(_modchart_manager: ModchartManager) -> void:
 	modchart_manager = _modchart_manager
 	
@@ -32,12 +34,14 @@ func draw() -> void:
 				var orig_tex: Texture2D = note.sustain.texture
 				# Extract the texture as a single image
 				if orig_tex is AtlasTexture:
-					var atlas_img: Image = orig_tex.atlas.get_image()
-					var cropped_img: Image = Image.create(orig_tex.region.size.x, orig_tex.region.size.y, false, atlas_img.get_format())
-					cropped_img.blit_rect(atlas_img, orig_tex.region, Vector2i.ZERO)
-					cropped_img.rotate_90(CLOCKWISE)
-					
-					line.texture = ImageTexture.create_from_image(cropped_img)
+					if !texture_cache.has(note.sustain.texture):
+						var atlas_img: Image = note.sustain.texture.atlas.get_image()
+						var cropped_img: Image = Image.create(note.sustain.texture.region.size.x, note.sustain.texture.region.size.y, false, atlas_img.get_format())
+						cropped_img.blit_rect(atlas_img, note.sustain.texture.region, Vector2i.ZERO)
+						cropped_img.rotate_90(CLOCKWISE)
+						
+						texture_cache.set(note.sustain.texture, ImageTexture.create_from_image(cropped_img))
+					line.texture = texture_cache.get(note.sustain.texture)
 				else:
 					line.texture = orig_tex
 				
