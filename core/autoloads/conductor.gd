@@ -121,22 +121,21 @@ func calculate_beat() -> void:
 
 	if tempo_changes.is_empty():
 		beat = time / beat_delta
-		calculate_hits(last_step, last_beat, last_measure)
-		return
+	else:
+		beat = 0.0
+		tempo = tempo_changes[0].data[0]
 
-	beat = 0.0
-	tempo = tempo_changes[0].data[0]
+		var last_time: float = 0.0
+		for change: BPMChange in tempo_changes:
+			if maxf(time, 0.0) < change.time:
+				break
 
-	var last_time: float = 0.0
-	for change: BPMChange in tempo_changes:
-		if maxf(time, 0.0) < change.time:
-			break
+			beat += (change.time - last_time) / beat_delta
+			last_time = change.time
+			tempo = change.data[0]
 
-		beat += (change.time - last_time) / beat_delta
-		last_time = change.time
-		tempo = change.data[0]
+		beat += (time - last_time) / beat_delta
 
-	beat += (time - last_time) / beat_delta
 	calculate_hits(last_step, last_beat, last_measure)
 
 
