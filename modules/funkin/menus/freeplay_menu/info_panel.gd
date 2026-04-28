@@ -27,12 +27,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	size.x = 256.0
-	size.x = max(256.0, song_label.size.x, difficulty_label.size.x)
-	position.x = Global.game_size.x - size.x
-
-	score_panel.position.y = size.y + 16.0
-	reset_panel.position.y = score_panel.position.y + score_panel.size.y + 16.0
+	update_other_panels()
 
 
 func _on_song_changed(index: int) -> void:
@@ -68,3 +63,15 @@ func _on_difficulty_changed(new_difficulty: StringName) -> void:
 	else:
 		difficulty_label.visible = false
 		size.y = 24.0
+
+	update_other_panels()
+
+
+# TODO: make this a less stupid idea for organization of code-
+func update_other_panels() -> void:
+	size.x = 256.0
+	size.x = max(256.0, song_label.size.x, difficulty_label.size.x)
+	position.x = Global.game_size.x - size.x
+
+	score_panel.position.y = size.y + 16.0
+	reset_panel.position.y = score_panel.position.y + score_panel.size.y + 16.0

@@ -90,9 +90,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action("ui_left") or event.is_action("ui_right"):
 		change_difficulty(roundi(Input.get_axis("ui_left", "ui_right")))
 
-	if event.is_action("freeplay_random"):
-		change_selection(randi_range(-song_nodes.size() + 1, song_nodes.size() - 1))
-
 
 func get_song_name(song: String, diff: String) -> String:
 	if not ResourceLoader.exists("res://modules/funkin/songs/%s/meta.tres" % [song]):

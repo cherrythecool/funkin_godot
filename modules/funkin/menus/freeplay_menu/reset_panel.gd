@@ -8,6 +8,10 @@ var song: StringName = &''
 var difficulty: StringName = &''
 
 
+func _ready() -> void:
+	_process(0.0)
+
+
 func _process(_delta: float) -> void:
 	visible = active
 
@@ -16,8 +20,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
 	if not event.is_pressed():
-		return
-	if event.is_action(&'freeplay_random'): # same keybind moment
 		return
 	if event.is_action(&'freeplay_reset_score'):
 		active = true
