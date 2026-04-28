@@ -68,3 +68,10 @@ static func get_accurate_time(player: AudioStreamPlayer) -> float:
 
 static func lerp_weight(delta: float, constant: float) -> float:
 	return minf(1.0 - exp(-constant * delta), 1.0)
+
+
+static func replace_tween(node: Node, tween: Tween) -> Tween:
+	if is_instance_valid(tween) and tween.is_running():
+		tween.kill()
+
+	return node.create_tween()

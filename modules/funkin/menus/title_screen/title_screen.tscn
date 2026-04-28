@@ -8,7 +8,7 @@
 [ext_resource type="SpriteFrames" uid="uid://srbxpow67jf1" path="res://modules/funkin/menus/title_screen/logo.res" id="5_nv456"]
 [ext_resource type="SpriteFrames" uid="uid://diaqnypewr3ov" path="res://modules/funkin/menus/title_screen/enter.res" id="6_hraot"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://modules/funkin/menus/alphabet/alphabet.gd" id="7_al1xt"]
-[ext_resource type="Texture2D" uid="uid://d1ovx7oy0v4qy" path="res://modules/funkin/menus/title_screen/newgrounds_logo.png" id="7_fhw6b"]
+[ext_resource type="Texture2D" uid="uid://qqx4a0cwgl4s" path="res://icon.svg" id="8_xwi85"]
 [ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://modules/funkin/menus/alphabet/skins/bold_skin.tres" id="10_30q4t"]
 
 [sub_resource type="Animation" id="Animation_6rots"]
@@ -297,14 +297,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("newgrounds_logo:visible")
+tracks/2/path = NodePath("godot_logo:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_0iyna"]
@@ -321,15 +321,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": ["", "cherry (thecool)", "cherry (thecool)
-presents", "", "in no association
-with", "in no association
-with
-newgrounds", "", "!random", "!keep", "!randomall", "", "Friday", "Friday
-Night", "Friday
-Night
-Funkin'
-(Godot)", ""]
+"values": ["", "cherrythecool", "cherrythecool
+presents", "", "made with", "made with
+godot", "", "!random", "!keep", "!randomall", "", "Funkin'", "Funkin'
+Godot", "Funkin'
+Godot
+Framework", ""]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -341,18 +338,18 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 4, 5, 7, 8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -72), Vector2(0, -36), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -72), Vector2(0, -35.5), Vector2(0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("newgrounds_logo:visible")
-tracks/2/interp = 1
+tracks/2/path = NodePath("godot_logo:visible")
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 7, 8),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
+"update": 0,
 "values": [false, true, false]
 }
 
@@ -364,7 +361,8 @@ _data = {
 
 [node name="title_screen" type="Node2D" unique_id=610167585]
 script = ExtResource("1_0m8ln")
-swag_material = ExtResource("2_grdy1")
+randomized_lines = Array[String](["rate five--pls no blam", "women are real--this is official", "better than geometry dash--fight me robtop", "this is a god damn prototype--we workin on it okay", "newgrounds--forever", "refined taste in music--if i say so myself", "good bye--my penis", "fashionably late--but here it is", "yooooooooooo--yooooooooo", "pico funny--pico funny", "updates each friday--on time every time", "cussing--we have it", "pico says--trans rights", "parental advisory--explicit content", "to enable pen pressure--disable windows ink", "godot--or something", "gabriel--ultrakill", "a release?--what's that?", "listen to--femtanyl", "sub to--technoblade", "i'm so--vslicey", "#include <stdio.h>----int main(void) {--    puts(\"Hello world!\")--} // c program in fnf text", "cd--44.1khz--everyday", "opinionated--funkin' distro", "how to--exit vim?-- -- --:q! ?", "gdscript is--my life", "welcome to--the rewrite", "funkin module--more like--fuckin' uhm", "what the--fuck godot???"])
+hue_shift_material = ExtResource("2_grdy1")
 
 [node name="conductor" type="Node" parent="." unique_id=1122116043]
 unique_name_in_owner = true
@@ -407,14 +405,16 @@ script = ExtResource("3_s2rvo")
 
 [node name="animation_player" type="AnimationPlayer" parent="post_intro/enter" unique_id=1284167027]
 libraries/ = SubResource("AnimationLibrary_4274r")
+autoplay = &"loop"
 
 [node name="intro_sequence" type="Node2D" parent="." unique_id=1181948435]
 position = Vector2(640, 360)
 
-[node name="newgrounds_logo" type="Sprite2D" parent="intro_sequence" unique_id=2102314791]
-position = Vector2(-21, 204)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("7_fhw6b")
+[node name="godot_logo" type="Sprite2D" parent="intro_sequence" unique_id=2102314791]
+visible = false
+position = Vector2(0, 200)
+scale = Vector2(2, 2)
+texture = ExtResource("8_xwi85")
 
 [node name="alphabet" type="Node2D" parent="intro_sequence" unique_id=828383561]
 unique_name_in_owner = true

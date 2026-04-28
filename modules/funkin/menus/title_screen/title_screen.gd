@@ -1,9 +1,11 @@
-class_name TitleScreen extends Node2D
+class_name TitleScreen
+extends Node2D
 
 
-static var first_open: bool = true
+static var in_intro: bool = true
 
-@export var swag_material: ShaderMaterial
+@export var randomized_lines: Array[String] = []
+@export var hue_shift_material: ShaderMaterial
 
 @onready var conductor: Conductor = %conductor
 
@@ -15,139 +17,125 @@ static var first_open: bool = true
 
 @onready var intro_sequence: Node2D = $intro_sequence
 @onready var intro_animation: AnimationPlayer = $intro_sequence/animation_player
-@onready var alphabet: Alphabet = %alphabet
-var introing: bool = false
+@onready var intro_alphabet: Alphabet = %alphabet
 
-var dance_left: bool = false
-var active: bool = true
-
-var random_lines: Array = ['test1', 'test2']
-var random_line_index: int = 0
-var tween: Tween
-var last_music_time: float = 0.0
+var transitioning: bool = false
+var current_randomized_lines: PackedStringArray = ["Line 1", "Other Lines"]
+var flash_tween: Tween
+var hue_shift: float = 0.0
 
 
 func _ready() -> void:
 	if not Config.had_user_config:
 		Config.had_user_config = true
-		SceneManager.swap_to_packed(load("uid://dasf7d5k8p30f"))
+		SceneManager.swap_to_path("uid://dasf7d5k8p30f")
 		return
 
-	enter_animation.play(&"loop")
-	conductor.tempo = 102.0
 	var music_player: AudioStreamPlayer = GlobalAudio.music
 	if not music_player.playing:
 		conductor.reset()
 		music_player.play()
-		last_music_time = music_player.get_playback_position()
-		conductor.target_audio = music_player
 
-	if first_open:
-		_start_intro()
+	conductor.target_audio = music_player
+	conductor.tempo = 102.0
+
+	if in_intro:
+		start_intro()
+		post_intro.visible = false
 	else:
 		intro_sequence.queue_free()
 		post_intro.visible = true
 
-	first_open = false
 	conductor.beat_hit.connect(_on_beat_hit)
-	_on_beat_hit(0)
+	conductor.calculate_beat()
 
 
 func _process(delta: float) -> void:
-	if not is_instance_valid(swag_material):
+	if not is_instance_valid(hue_shift_material):
 		return
 
-	var swag_axis: float = Input.get_axis('ui_left', 'ui_right')
-	swag_material.set_shader_parameter('value',
-			swag_material.get_shader_parameter('value') + delta * 0.1 * swag_axis)
-
-
-func _on_beat_hit(beat: int) -> void:
-	dance_left = not dance_left
-	girlfriend_animation.play('dance_left' if dance_left else 'dance_right')
-	logo_sprite.play('bump')
-	logo_sprite.frame = 0
-
-	if introing:
-		if float(beat) >= intro_animation.current_animation_length:
-			_skip_intro()
-			return
-
-		var previous: String = alphabet.text
-		intro_animation.seek(float(beat), true)
-		alphabet.horizontal_alignment = "Center"
-		if alphabet.text == '!random':
-			alphabet.text = previous
-			_add_random_line()
-		if alphabet.text == '!randomall':
-			alphabet.text = previous
-			while random_line_index <= random_lines.size() - 1 and random_line_index > 0:
-				_add_random_line()
-			if alphabet.text.begins_with("#include"):
-				alphabet.horizontal_alignment = "Left"
-
-		if alphabet.text == '!keep':
-			alphabet.text = previous
+	var swag_axis: float = Input.get_axis(&"ui_left", &"ui_right")
+	hue_shift += swag_axis * delta * 0.1
+	hue_shift_material.set_shader_parameter(&"value", hue_shift)
 
 
 func _input(event: InputEvent) -> void:
-	if not active:
+	if transitioning or event.is_echo() or not event.is_pressed():
 		return
-	if event.is_echo():
-		return
-	if not event.is_pressed():
-		return
-	if event.is_action(&'ui_cancel') and not DisplayServer.is_touchscreen_available():
+	if event.is_action(&"ui_cancel") and not Global.is_mobile:
 		get_tree().quit()
-	if event.is_action(&'ui_accept'):
-		if introing:
-			_skip_intro()
-			return
-
-		active = false
-		GlobalAudio.get_player('MENU/CONFIRM').play()
-
-		if Config.get_value('accessibility', 'flashing_lights'):
-			enter_animation.play('press')
-			flash.color = Color.WHITE
+	if event.is_action(&"ui_accept"):
+		if in_intro:
+			skip_intro()
 		else:
-			flash.color = Color.TRANSPARENT
-			enter_animation.play('press')
-			enter_animation.speed_scale = 0.0
+			transitioning = true
+			GlobalAudio.get_player(^"MENU/CONFIRM").play()
 
-		if is_instance_valid(tween) and tween.is_running():
-			tween.kill()
+			if Config.get_value("accessibility", "flashing_lights"):
+				flash.color = Color.WHITE
+			else:
+				flash.color = Color.TRANSPARENT
+				enter_animation.speed_scale = 0.0
 
-		tween = create_tween()
-		tween.tween_property(flash, 'color:a', 0.0, 1.0)
-		tween.tween_callback(SceneManager.transition_to_packed.bind(load("uid://b7fwxsepnt38j")))
+			enter_animation.play(&"press")
+
+			flash_tween = GameUtils.replace_tween(self, flash_tween)
+			flash_tween.tween_property(flash, ^"color:a", 0.0, 1.0)
+			flash_tween.tween_callback(SceneManager.transition_to_file.bind("uid://b7fwxsepnt38j"))
 
 
-func _start_intro() -> void:
-	introing = true
-	intro_animation.play(&'intro')
+func _on_beat_hit(beat: int) -> void:
+	girlfriend_animation.play(&"dance_%s" % ["left" if beat % 2 == 0 else "right"])
+	logo_sprite.play(&"bump")
+	logo_sprite.frame = 0
 
-	var lines: String = FileAccess.get_file_as_string("res://modules/funkin/menus/title_screen/messages.txt")
-	lines = lines.strip_edges()
-	var lines_array: PackedStringArray = lines.split('\n', false)
-	if lines_array.is_empty():
-		random_lines = ["hey!", "why did...", "you remove..!", "intro_messages.txt", "??!"]
+	if not in_intro:
 		return
 
-	var index: int = randi_range(0, lines_array.size() - 1)
-	random_lines = Array(lines_array[index].split('--'))
+	if beat >= int(intro_animation.current_animation_length):
+		skip_intro()
+		return
+
+	var previous: String = intro_alphabet.text
+	intro_animation.seek(float(beat), true)
+	intro_alphabet.horizontal_alignment = "Center"
+
+	match intro_alphabet.text:
+		"!random":
+			if current_randomized_lines.is_empty():
+				intro_alphabet.text = ""
+			else:
+				intro_alphabet.text = current_randomized_lines[0]
+		"!randomall":
+			intro_alphabet.text = ""
+
+			for line: String in current_randomized_lines:
+				intro_alphabet.text += line + "\n"
+
+			# le funni
+			if intro_alphabet.text.begins_with("#include"):
+				intro_alphabet.horizontal_alignment = "Left"
+		"!keep":
+			intro_alphabet.text = previous
 
 
-func _add_random_line() -> void:
-	alphabet.text += random_lines[random_line_index] + '\n'
-	random_line_index = wrapi(random_line_index + 1, 0, random_lines.size())
+func start_intro() -> void:
+	intro_animation.play(&"intro")
+
+	if randomized_lines.is_empty():
+		return
+
+	var index: int = randi_range(0, randomized_lines.size() - 1)
+	current_randomized_lines = randomized_lines[index].replace("--", "\n").split("\n")
 
 
-func _skip_intro() -> void:
-	introing = false
+func skip_intro() -> void:
+	in_intro = false
+	intro_sequence.hide()
 	intro_sequence.queue_free()
-	post_intro.visible = true
-	flash.color = Color.WHITE
 
-	tween = create_tween()
-	tween.tween_property(flash, 'color:a', 0.0, 1.0)
+	post_intro.visible = true
+
+	flash.color = Color.WHITE
+	flash_tween = GameUtils.replace_tween(self, flash_tween)
+	flash_tween.tween_property(flash, ^"color:a", 0.0, 1.0)

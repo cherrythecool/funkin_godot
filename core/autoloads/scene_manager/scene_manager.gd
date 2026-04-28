@@ -39,6 +39,10 @@ func replace_transitions_with(scene: PackedScene) -> void:
 		transition_player.play(animation)
 
 
+func swap_to_path(scene_path: String) -> void:
+	swap_to_packed(load(scene_path))
+
+
 func swap_to_packed(scene: PackedScene) -> void:
 	swap_to_node(scene.instantiate())
 
@@ -47,6 +51,10 @@ func swap_to_node(node: Node) -> void:
 	get_tree().change_scene_to_node.call_deferred(node)
 	current_scene = node
 	scene_changed.emit.call_deferred()
+
+
+func transition_to_file(scene_path: String) -> void:
+	transition_to_packed(load(scene_path))
 
 
 func transition_to_packed(scene: PackedScene) -> void:
