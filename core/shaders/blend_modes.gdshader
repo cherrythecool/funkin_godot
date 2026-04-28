@@ -90,6 +90,8 @@ void fragment() {
 				COLOR.rgb = invert(screen_c.rgb);
 				break;
 			case 11: // adobe animate skill issue
+				discard;
+				break;
 			case 12:
 				discard;
 				break;
