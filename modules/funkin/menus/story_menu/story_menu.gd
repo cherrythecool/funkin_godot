@@ -16,6 +16,7 @@ var week_name_tween: Tween
 
 @onready var week_color: ColorRect = %week_color
 @onready var week_gradient: TextureRect = %week_gradient
+@onready var week_flash_timer: Timer = %week_flash_timer
 
 var active: bool = true
 
@@ -62,20 +63,32 @@ func _input(event: InputEvent) -> void:
 	if event.is_action('ui_cancel'):
 		active = false
 		GlobalAudio.get_player('MENU/CANCEL').play()
-		SceneManager.transition_to_packed(load('uid://b7fwxsepnt38j'))
-	if event.is_action('ui_accept'):
+		SceneManager.transition_to_file("uid://b7fwxsepnt38j")
+	if event.is_action(&"ui_accept"):
 		active = false
 		_load_active_playlist()
 
 		if _load_first_song():
-			GlobalAudio.get_player('MENU/CONFIRM').play()
+			GlobalAudio.get_player(^"MENU/CONFIRM").play()
+
+			if Config.get_value("accessibility", "flashing_lights"):
+				week_flash_timer.start()
+				week_flash_timer.timeout.emit()
+
 			if is_instance_valid(props.props[2]):
-				props.tween_prop_out(1, Vector2(280.0, 720.0))
-				props.tween_prop_out(3, Vector2(1000.0, 720.0))
-				props.props[2].play_anim('confirm', true)
+				props.tween_prop_out(1)
+				props.tween_prop_out(3)
+
+				var og_scale: Vector2 = props.props[2].scale
+				props.props[2].scale *= 1.1
+
+				var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+				tween.tween_property(props.props[2], ^"scale", og_scale, 0.5)
+
+				props.props[2].play_anim(&"confirm", true)
 				await props.props[2].animation_finished
 
-			SceneManager.transition_to_packed(load("uid://da8mu3oqto3qq"))
+			SceneManager.transition_to_file("uid://da8mu3oqto3qq")
 		else:
 			active = true
 	if event.is_action('ui_up') or event.is_action('ui_down'):
@@ -84,7 +97,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _get_weeks_target_y() -> float:
-	return 86.0 - weeks.get_child(weeks.selected).position.y
+	return 48.0 - weeks.get_child(weeks.selected).position.y
 
 
 func _load_active_playlist() -> void:
@@ -161,3 +174,11 @@ func change_selection(amount: int = 0) -> void:
 
 	if amount != 0:
 		GlobalAudio.get_player('MENU/SCROLL').play()
+
+
+func _on_week_flash_timer_timeout() -> void:
+	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
+	if selected_week.modulate == Color.WHITE:
+		selected_week.modulate = Color.CYAN
+	else:
+		selected_week.modulate = Color.WHITE

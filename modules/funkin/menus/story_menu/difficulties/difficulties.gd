@@ -69,14 +69,15 @@ func reload_difficulty_sprite() -> void:
 
 func tween_difficulty_sprite() -> void:
 	difficulty_sprite.modulate.a = 0.5
-	difficulty_sprite.position.y = 132.0 - 25.0
+	difficulty_sprite.position.y = 96.0 - 25.0
 	difficulty_sprite.scale.x = 0.95
 	difficulty_sprite.scale.y = 1.05
-	if is_instance_valid(tween) and tween.is_running():
-		tween.kill()
-	tween = create_tween().set_parallel().set_ease(Tween.EASE_OUT)
+
+	tween = GameUtils.replace_tween(self, tween)\
+		.set_parallel()\
+		.set_ease(Tween.EASE_OUT)
 	tween.tween_property(difficulty_sprite, 'modulate:a', 1.0, 0.25).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(difficulty_sprite, 'position:y', 132.0, 0.25).set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(difficulty_sprite, 'position:y', 96.0, 0.25).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(difficulty_sprite, 'scale', Vector2.ONE, 0.25).set_trans(Tween.TRANS_BOUNCE)
 
 
