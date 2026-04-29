@@ -30,16 +30,16 @@ var timer: float = 0.0
 
 
 func _ready() -> void:
-	if not Config.get_value("performance", "intensive_visuals"):
+	if Settings.get_setting(&"core", "performance_mode"):
 		for mist: Node2D in mists:
 			mist.free()
 		mists.clear()
-	
+
 	if not game.player.name.contains("pico"):
 		game.player.offset_camera_position(Vector2(-250.0, -20.0))
 	else:
 		game.player.offset_camera_position(Vector2(-250.0, 35.0))
-	
+
 	game.opponent.offset_camera_position(Vector2(230.0, 75.0))
 
 	var color_material: ShaderMaterial = ShaderMaterial.new()
@@ -76,10 +76,10 @@ func _on_beat_hit(beat: int) -> void:
 
 func _process(delta: float) -> void:
 	timer += delta
-	
+
 	if mists.is_empty():
 		return
-	
+
 	mists[0].position.y = 660.0 + (sin(timer * 0.35) * 70.0) + 50.0
 	mists[1].position.y = 500.0 + (sin(timer * 0.3) * 80.0) + 100.0
 	mists[2].position.y = 540.0 + (sin(timer * 0.4) * 50.0) + 80.0
@@ -179,7 +179,7 @@ func finish_car_1_lights() -> void:
 
 func drive_car_2_back() -> void:
 	car_2_interruptable = false
-	
+
 	var variant: int = randi_range(1, 4)
 	car_2.play(&'car%d' % [variant,])
 	car_2.flip_h = true

@@ -7,9 +7,9 @@ var lane: int = 0
 
 
 func _ready() -> void:
-	Config.value_changed.connect(_on_value_changed)
+	Settings.setting_changed.connect(_on_setting_changed)
 	Conductor.instance.beat_hit.connect(_on_beat_hit)
-	notes.scroll_speed = Config.get_value("gameplay", "custom_scroll_speed")
+	notes.scroll_speed = Settings.get_setting(&"core", "note_scroll_value")
 
 
 func _process(_delta: float) -> void:
@@ -30,6 +30,6 @@ func _on_beat_hit(beat: int) -> void:
 	lane = wrapi(lane + 1, 0, 4)
 
 
-func _on_value_changed(section: String, key: String, value: Variant) -> void:
-	if section == "gameplay" and key == "custom_scroll_speed":
-		notes.scroll_speed = value
+func _on_setting_changed(file: StringName, key: Variant) -> void:
+	if file == &"core" and key == "note_scroll_value":
+		notes.scroll_speed = Settings.get_setting(file, key, 0.0)

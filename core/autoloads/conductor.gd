@@ -77,6 +77,18 @@ signal measure_hit(measure: int)
 signal rate_changed(rate: float)
 
 
+static func reset_offset() -> void:
+	const SUPPORTED_PLATFORMS: PackedStringArray = [
+		"Linux",
+		"Web",
+	]
+
+	if SUPPORTED_PLATFORMS.has(OS.get_name()):
+		offset = audio_offset - manual_offset
+	else:
+		offset = -manual_offset
+
+
 func _exit_tree() -> void:
 	if instance == self:
 		rate = 1.0
@@ -87,9 +99,7 @@ func _ready() -> void:
 	if not is_instance_valid(instance):
 		instance = self
 
-	Config.value_changed.connect(_on_config_value_changed)
-	_on_config_value_changed("gameplay", "manual_offset",
-			Config.get_value("gameplay", "manual_offset"))
+	Settings.setting_changed.connect(_on_setting_changed)
 	SceneManager.scene_changed.connect(_on_scene_changed)
 
 
@@ -167,26 +177,17 @@ func get_bpm_changes(events: Array[EventData], clear: bool = true) -> void:
 		if event is BPMChange:
 			tempo_changes.push_back(event as BPMChange)
 
-	tempo_changes.sort_custom(func(a: BPMChange, b: BPMChange) -> bool:
-		return a.time < b.time)
+	tempo_changes.sort_custom(_sort_tempo_changes_by_time)
 
 
-func _on_config_value_changed(section: String, key: String, value: Variant) -> void:
-	if section == "gameplay" and key == "manual_offset":
-		manual_offset = value / 1000.0
+func _sort_tempo_changes_by_time(a: BPMChange, b: BPMChange) -> bool:
+	return a.time < b.time
+
+
+func _on_setting_changed(file: StringName, key: Variant) -> void:
+	if file == &"core" and key == "note_offset":
+		manual_offset = Settings.get_setting(file, key) / 1000.0
 
 
 func _on_scene_changed() -> void:
 	reset_offset()
-
-
-static func reset_offset() -> void:
-	const SUPPORTED_PLATFORMS: PackedStringArray = [
-		"Linux",
-		"Web",
-	]
-
-	if SUPPORTED_PLATFORMS.has(OS.get_name()):
-		offset = audio_offset - manual_offset
-	else:
-		offset = -manual_offset

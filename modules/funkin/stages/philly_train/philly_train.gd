@@ -32,8 +32,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if Config.get_value('accessibility', 'flashing_lights'):
+	if Settings.get_setting(&"core", "flashing_lights"):
 		window_fade_value += game.conductor.beat_delta * delta * 1.5
+
 	window.material.set_shader_parameter(&'fade', window_fade_value)
 
 	if not train_started:

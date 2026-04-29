@@ -42,7 +42,7 @@ func _ready() -> void:
 	if is_instance_valid(Conductor.instance):
 		conductor = Conductor.instance
 
-	note_splash_alpha = Config.get_value('interface', 'note_splash_alpha') / 100.0
+	note_splash_alpha = Settings.get_setting(&"core", "note_splash_alpha")
 
 	if note_types.is_empty():
 		note_types[&"default"] = load(Note.DEFAULT_PATH)
@@ -129,7 +129,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	var receptor: Receptor = null
 	for selected: Receptor in receptors:
-		if event.is_action(&'input_%s' % selected.direction):
+		if event.is_action(&'note_%s' % selected.direction):
 			receptor = selected
 			break
 	if not is_instance_valid(receptor):
@@ -313,7 +313,7 @@ func is_receptor_held(lane: int) -> bool:
 
 	var receptor: Receptor = get_receptor_from_lane(lane)
 	if is_instance_valid(receptor):
-		return Input.is_action_pressed(&"input_%s" % [
+		return Input.is_action_pressed(&"note_%s" % [
 			receptor.direction
 		])
 

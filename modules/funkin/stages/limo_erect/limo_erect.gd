@@ -33,11 +33,11 @@ var mist_timer: float = 0.0
 
 
 func _ready() -> void:
-	if not Config.get_value("performance", "intensive_visuals"):
+	if Settings.get_setting(&"core", "performance_mode"):
 		for mist: Node2D in mists:
 			mist.free()
 		mists.clear()
-	
+
 	game.player.offset_camera_position(Vector2(-225.0, -25.0))
 	game.player.set_character_material(fast_car.material)
 	game.opponent.set_character_material(fast_car.material)
@@ -52,6 +52,7 @@ func _process(delta: float) -> void:
 
 	if mists.is_empty():
 		return
+
 	mist_timer += delta
 
 	mists[0].position.y = 100.0 + (sin(mist_timer) * 200.0)

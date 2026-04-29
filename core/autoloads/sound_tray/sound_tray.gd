@@ -20,28 +20,32 @@ var muted: bool = false:
 
 var volume: float = 0.5:
 	set(value):
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(target_bus),
-				linear_to_db(value))
+		AudioServer.set_bus_volume_db(
+			AudioServer.get_bus_index(target_bus),
+			linear_to_db(value),
+		)
 
-		var buses: Dictionary = Config.get_value("sound", "buses")
-		buses[target_bus] = value * 100.0
-		Config.set_value("sound", "buses", buses)
+		var buses: Dictionary = Settings.get_setting(&"core", "volume", {})
+		buses[target_bus] = value
+		Settings.set_setting(&"core", "volume", buses)
 	get:
-		return db_to_linear(AudioServer.get_bus_volume_db(\
-				AudioServer.get_bus_index(target_bus)))
+		return db_to_linear(
+			AudioServer.get_bus_volume_db(
+				AudioServer.get_bus_index(target_bus)
+			)
+		)
 
 
 func _ready() -> void:
-	visible = false
-	var buses: Dictionary = Config.get_value("sound", "buses")
+	hide()
 
+	var buses: Dictionary = Settings.get_setting(&"core", "volume", {})
 	for bus: String in buses.keys():
 		var bus_index: int = AudioServer.get_bus_index(bus)
 		if bus_index < 0:
 			continue
 
-		AudioServer.set_bus_volume_db(bus_index, \
-				linear_to_db(buses.get(bus, 100.0) * 0.01))
+		AudioServer.set_bus_volume_db(bus_index, linear_to_db(buses.get(bus, 1.0)))
 
 
 func _input(event: InputEvent) -> void:

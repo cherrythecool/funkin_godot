@@ -59,7 +59,7 @@ func _ready() -> void:
 	if length > 0.0:
 		is_sustain = true
 		reload_sustain_sprites()
-		if Config.get_value("interface", "sustain_layer") == "below":
+		if Settings.get_setting(&"core", "holds_below_receptors"):
 			sustain.z_index -= 1
 		update_sustain()
 	else:

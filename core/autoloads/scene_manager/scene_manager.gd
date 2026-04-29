@@ -17,7 +17,13 @@ signal transitioned_out
 			transition_player.animation_finished.connect(_on_animation_finished)
 @export_range(0.0, 5.0, 0.01, "or_greater") var transition_speed_scale: float = 1.0
 
-var current_scene: Node = null
+var current_scene: Node = null:
+	get:
+		if current_scene == null and is_inside_tree():
+			current_scene = get_tree().current_scene
+
+		return current_scene
+
 var target_scene: PackedScene = null
 
 
@@ -61,7 +67,7 @@ func transition_to_packed(scene: PackedScene) -> void:
 	reset_transition()
 
 	if (
-		(not Config.get_value("interface", "scene_transitions")) or
+		Settings.get_setting(&"core", "skip_scene_transitions") or
 		(not is_instance_valid(transition_player))
 	):
 		swap_to_packed(scene)

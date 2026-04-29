@@ -36,26 +36,25 @@ func _ready() -> void:
 
 	version = ProjectSettings.get_setting("application/config/version", "0.0.0-unknown")
 
-	Config.value_changed.connect(_on_config_value_changed)
-	Config.loaded.connect(_on_config_loaded)
+	Settings.setting_changed.connect(_on_setting_changed)
+	Settings.settings_loaded.connect(_on_settings_loaded)
 
 	is_mobile = DisplayServer.is_touchscreen_available() and OS.has_feature("mobile")
 
 
 func _on_focus_enter() -> void:
-	if not Config.get_value("performance", "auto_pause"):
+	if not Settings.get_setting(&"core", "pause_when_unfocused"):
 		return
 
-	get_tree().paused = false
+	get_tree().paused = was_paused
 
 
 func _on_focus_exit() -> void:
-	if not Config.get_value("performance", "auto_pause"):
+	if not Settings.get_setting(&"core", "pause_when_unfocused"):
 		return
 
-	var tree: SceneTree = get_tree()
-	was_paused = tree.paused
-	tree.paused = true
+	was_paused = get_tree().paused
+	get_tree().paused = true
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -71,37 +70,39 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return
 
 
-func _on_config_value_changed(section: String, key: String, value: Variant) -> void:
-	if value == null or section != "performance":
+func get_supported_vsync() -> DisplayServer.VSyncMode:
+	if RenderingServer.get_rendering_device() == null:
+		return DisplayServer.VSYNC_ENABLED
+
+	# Automatically will fallback if not supported
+	# (would default to MAILBOX but it's not very well supported atm)
+	return DisplayServer.VSYNC_ADAPTIVE
+
+
+func _on_setting_changed(file: StringName, key: Variant) -> void:
+	var value: Variant = Settings.get_setting(file, key)
+	if file != &"core" or value == null:
 		return
 
 	match key:
-		"fps_cap":
+		"max_fps":
 			Engine.max_fps = value
-		"vsync_mode":
-			DisplayServer.window_set_vsync_mode(
-				Config.get_vsync_mode_from_string(value)
-			)
+		"vsync_enabled":
+			if value:
+				DisplayServer.window_set_vsync_mode(get_supported_vsync())
+			else:
+				DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
 
-func _on_config_loaded() -> void:
-	_on_config_value_changed(
-		"performance",
-		"fps_cap",
-		Config.get_value("performance", "fps_cap"),
-	)
-
-	_on_config_value_changed(
-		"performance",
-		"vsync_mode",
-		Config.get_value("performance", "vsync_mode"),
-	)
+func _on_settings_loaded(file: StringName) -> void:
+	if file != &"core":
+		return
 
 	use_high_dpi = (
 		not Engine.is_embedded_in_editor() and
 		OS.has_feature("pc") and
 		ProjectSettings.get_setting("display/window/dpi/allow_hidpi", true) and
-		Config.get_value("performance", "dpi_awareness")
+		Settings.get_setting(&"core", "scale_with_dpi", true)
 	)
 
 	if use_high_dpi:

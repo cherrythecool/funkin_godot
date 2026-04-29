@@ -20,13 +20,13 @@ change binds"
 centered = true
 horizontal_alignment = "Center"
 
-[node name="left" type="AnimatedSprite2D" parent="." unique_id=168531004]
+[node name="note_left" type="AnimatedSprite2D" parent="." unique_id=168531004]
 position = Vector2(-236, 0)
 sprite_frames = ExtResource("1_dgmlx")
 animation = &"left static"
 script = ExtResource("2_d1c8h")
 
-[node name="key" type="Node2D" parent="left" unique_id=1813753089]
+[node name="key" type="Node2D" parent="note_left" unique_id=1813753089]
 position = Vector2(0, -128)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_g24lb")
@@ -36,13 +36,13 @@ centered = true
 no_offset = true
 horizontal_alignment = "Center"
 
-[node name="down" type="AnimatedSprite2D" parent="." unique_id=1039354808]
+[node name="note_down" type="AnimatedSprite2D" parent="." unique_id=1039354808]
 position = Vector2(-79, 0)
 sprite_frames = ExtResource("1_dgmlx")
 animation = &"down static"
 script = ExtResource("2_d1c8h")
 
-[node name="key" type="Node2D" parent="down" unique_id=943231021]
+[node name="key" type="Node2D" parent="note_down" unique_id=943231021]
 position = Vector2(0, -128)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_g24lb")
@@ -52,13 +52,13 @@ centered = true
 no_offset = true
 horizontal_alignment = "Center"
 
-[node name="up" type="AnimatedSprite2D" parent="." unique_id=551774116]
+[node name="note_up" type="AnimatedSprite2D" parent="." unique_id=551774116]
 position = Vector2(79, 0)
 sprite_frames = ExtResource("1_dgmlx")
 animation = &"up static"
 script = ExtResource("2_d1c8h")
 
-[node name="key" type="Node2D" parent="up" unique_id=1847462011]
+[node name="key" type="Node2D" parent="note_up" unique_id=1847462011]
 position = Vector2(0, -128)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_g24lb")
@@ -68,13 +68,13 @@ centered = true
 no_offset = true
 horizontal_alignment = "Center"
 
-[node name="right" type="AnimatedSprite2D" parent="." unique_id=1250714935]
+[node name="note_right" type="AnimatedSprite2D" parent="." unique_id=1250714935]
 position = Vector2(236, 0)
 sprite_frames = ExtResource("1_dgmlx")
 animation = &"right static"
 script = ExtResource("2_d1c8h")
 
-[node name="key" type="Node2D" parent="right" unique_id=1515700636]
+[node name="key" type="Node2D" parent="note_right" unique_id=1515700636]
 position = Vector2(0, -128)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_g24lb")

@@ -26,8 +26,8 @@ var hue_shift: float = 0.0
 
 
 func _ready() -> void:
-	if not Config.had_user_config:
-		Config.had_user_config = true
+	if not Settings.user_had_core_settings:
+		Settings.user_had_core_settings = true
 		SceneManager.swap_to_path("uid://dasf7d5k8p30f")
 		return
 
@@ -71,7 +71,7 @@ func _input(event: InputEvent) -> void:
 			transitioning = true
 			GlobalAudio.get_player(^"MENU/CONFIRM").play()
 
-			if Config.get_value("accessibility", "flashing_lights"):
+			if Settings.get_setting(&"core", "flashing_lights"):
 				flash.color = Color.WHITE
 			else:
 				flash.color = Color.TRANSPARENT

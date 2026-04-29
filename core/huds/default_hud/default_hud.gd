@@ -67,8 +67,8 @@ func _ready() -> void:
 
 	rating_container.visible = true
 	rating_container.modulate.a = 0.0
-	downscroll = Config.get_value('gameplay', 'scroll_direction') == &'down'
-	centered_receptors = Config.get_value('gameplay', 'centered_receptors')
+	downscroll = Settings.get_setting(&"core", "downscroll")
+	centered_receptors = Settings.get_setting(&"core", "middlescroll")
 
 
 func _on_setup() -> void:
@@ -151,7 +151,7 @@ func _on_note_hit(note: Note) -> void:
 	if rating.name == &'marvelous' or rating.name == &'sick':
 		spawn_splash(note, player_field.skin, note.field.receptors[note.lane])
 
-	rating_container.modulate.a = Config.get_value("interface", "rating_alpha") / 100.0
+	rating_container.modulate.a = Settings.get_setting(&"core", "rating_alpha")
 	rating_container.scale = Vector2.ONE * 1.1
 	rating_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	rating_tween.tween_property(rating_container, 'scale', Vector2.ONE, 0.15)

@@ -7,23 +7,20 @@ var hovering: int = -1
 
 
 func _ready() -> void:
-	var binds: Dictionary = Config.get_value('gameplay', 'binds')
-
+	var binds: Dictionary = Settings.get_setting(&"core", "controls_keybinds")
 	keys = keys.filter(func(node: Node) -> bool:
 		return node is AnimatedSprite
 	)
+
 	for key: Node in keys:
 		key.get_node('key').text = Alphabet.keycode_to_character(binds[key.name])
 		key.modulate.a = 0.6
+		key.set_meta(&"target_alpha", 0.6)
 
 
 func _process(delta: float) -> void:
-	# lmao
 	for key: Node2D in keys:
-		if key.editor_description.is_empty():
-			key.editor_description = '0.6'
-		key.modulate.a = lerpf(key.modulate.a, float(key.editor_description),
-				delta * 9.0)
+		key.modulate.a = lerpf(key.modulate.a, key.get_meta(&"target_alpha", 0.6), delta * 9.0)
 
 
 func _input(event: InputEvent) -> void:
@@ -36,17 +33,14 @@ func _input(event: InputEvent) -> void:
 
 
 func _handle_key(event: InputEventKey) -> void:
-	# set display
 	var key: Node = keys[selected]
 	key.get_node('key').text = Alphabet.keycode_to_character(event.keycode)
-	key.editor_description = '0.6'
+	key.set_meta(&"target_alpha", 0.6)
 
-	# set config
-	var binds: Dictionary = Config.get_value('gameplay', 'binds').duplicate()
+	var binds: Dictionary = Settings.get_setting(&"core", "controls_keybinds")
 	binds[key.name] = event.keycode
-	Config.set_value('gameplay', 'binds', binds)
+	Settings.set_setting(&"core", "controls_keybinds", binds)
 
-	# reset selected
 	selected = -1
 	GlobalAudio.get_player(^'MENU/CONFIRM').play()
 
@@ -62,10 +56,10 @@ func _handle_motion(event: InputEventMouseMotion) -> void:
 				key.global_position.y - 50.0,
 				100.0, 100.0,)
 		if key_rect.has_point(event.global_position):
-			key.editor_description = '1.0'
+			key.set_meta(&"target_alpha", 1.0)
 			hovering = i
 		else:
-			key.editor_description = '0.6'
+			key.set_meta(&"target_alpha", 0.6)
 
 
 func _handle_button(event: InputEventMouseButton) -> void:

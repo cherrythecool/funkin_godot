@@ -42,8 +42,7 @@ centered = true
 [node name="downscroll" type="Node2D" parent="the_list/options" unique_id=1772824742]
 position = Vector2(-32, 96)
 script = ExtResource("4_2w5sj")
-key = &"scroll_direction"
-strings = Array[String](["up", "down"])
+key = &"downscroll"
 
 [node name="alphabet" type="Node2D" parent="the_list/options/downscroll" unique_id=1678682315]
 script = ExtResource("2_getyr")
@@ -62,6 +61,7 @@ script = ExtResource("6_ubeli")
 [node name="middlescroll" type="Node2D" parent="the_list/options" unique_id=788844534]
 position = Vector2(6, 192)
 script = ExtResource("4_2w5sj")
+key = &"middlescroll"
 
 [node name="alphabet" type="Node2D" parent="the_list/options/middlescroll" unique_id=1201887809]
 script = ExtResource("2_getyr")
@@ -100,7 +100,10 @@ text = "< 0 >"
 [node name="method" type="Node2D" parent="the_list/options" unique_id=476497392]
 position = Vector2(0, 533)
 script = ExtResource("8_8o1re")
-list = ["chart", "constant"]
+list = ["chart_multiplier", "constant"]
+display_overrides = Dictionary[Variant, String]({
+"chart_multiplier": "chart"
+})
 display_raw = false
 
 [node name="label" type="Node2D" parent="the_list/options/method" unique_id=1383171770]
@@ -119,7 +122,7 @@ text = "chart"
 [node name="value" type="Node2D" parent="the_list/options" unique_id=610762522 node_paths=PackedStringArray("root", "current_preview")]
 position = Vector2(-22, 629)
 script = ExtResource("7_gp12a")
-key = &"custom_scroll_speed"
+key = &"note_scroll_value"
 integers = false
 ranged = true
 minimum = 0.1

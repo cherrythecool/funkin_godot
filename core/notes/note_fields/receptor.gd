@@ -3,11 +3,7 @@ class_name Receptor extends Node2D
 
 @export var direction: StringName = &'left'
 @export var lane: int = 0
-@export var takes_input: bool = false:
-	set(value):
-		takes_input = value
-		if (not takes_input) and not Config.get_value('interface', 'cpu_receptors_press'):
-			play_confirm = false
+@export var takes_input: bool = false
 
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var automatically_play_static: bool = false:

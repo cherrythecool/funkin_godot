@@ -53,9 +53,10 @@ func _update_items(delta: float) -> void:
 	# 0.0714 ~~ 1 / 14 aka the max amount of delta allowed in our lerpfs
 	delta = minf(delta, 0.0714)
 	position.y = lerpf(
-			position.y,
-			clampf(-selected_option.position.y, -max_distance, 0.0),
-			delta * 4.0)
+		position.y,
+		clampf(-selected_option.position.y, -max_distance, 0.0),
+		delta * 4.0
+	)
 
 	for i: int in options.size():
 		var target_alpha: float = 1.0 if i == selected else 0.5

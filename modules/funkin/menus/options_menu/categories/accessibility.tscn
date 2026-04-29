@@ -14,7 +14,6 @@ script = ExtResource("1_1hocu")
 [node name="flashing_lights" type="Node2D" parent="." unique_id=1168581670]
 position = Vector2(73, 0)
 script = ExtResource("2_c2csa")
-section = &"accessibility"
 key = &"flashing_lights"
 
 [node name="alphabet" type="Node2D" parent="flashing_lights" unique_id=1130308851]

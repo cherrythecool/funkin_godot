@@ -7,22 +7,21 @@ extends CanvasLayer
 var video_memory_peak: float = 0.0
 var texture_memory_peak: float = 0.0
 var static_memory_peak: float = 0.0
-var info_mode: String = "default"
+var info_mode: String = "minimal"
 
 var tween: Tween
 var times: Array[float] = []
 
 
 func _ready() -> void:
-	visible = Config.get_value("performance", "debug_label_visible")
-	info_mode = Config.get_value("performance", "debug_label")
-	Config.value_changed.connect(_on_value_changed)
-
-	_update_timer()
-	display()
+	Settings.setting_changed.connect(_on_setting_changed)
+	_update_from_settings()
 
 
 func _process(delta: float) -> void:
+	if visible:
+		label.size = Vector2.ZERO
+
 	times.push_back(delta)
 
 
@@ -53,20 +52,23 @@ func display() -> void:
 	var avg: float = 0.0
 	for time: float in times:
 		avg += time / float(times.size())
+
 	times.clear()
 
 	label.size = Vector2.ZERO
-	var text_output: String = \
-		"%d FPS (%.2fms)\n%s / %s %s\nFunkin' Godot v%s" % [
-		Performance.get_monitor(Performance.TIME_FPS),
-		avg * 1000.0,
-		String.humanize_size(floori(total_memory_current)),
-		String.humanize_size(floori(total_memory_peak)),
-		"(CPU + GPU)" if static_memory_current > 0.0 else "<GPU>",
-		Global.version,
-	]
 
-	if info_mode == "debug":
+	var text_output: String = (
+		"%d FPS (%.2fms)\n%s / %s %s\nFunkin' Godot v%s" % [
+			Performance.get_monitor(Performance.TIME_FPS),
+			avg * 1000.0,
+			String.humanize_size(floori(total_memory_current)),
+			String.humanize_size(floori(total_memory_peak)),
+			"(CPU + GPU)" if static_memory_current > 0.0 else "<GPU>",
+			Global.version,
+		]
+	)
+
+	if info_mode == "full":
 		text_output += "\n\n[Usage]\n%s / %s <GPU>\n%s / %s <TEX>\n%s / %s <CPU>\n\n[Engine]\nScene: %s\n%d Nodes (%d Orphaned)\nInput Accumulation: %s\n\n[Rendering]\n%d Draw Calls (%d Drawn Objects)\nAPI: %s (%s)\nGPU: %s" % [
 			String.humanize_size(floori(video_memory_current)),
 			String.humanize_size(floori(video_memory_peak)),
@@ -86,7 +88,7 @@ func display() -> void:
 		]
 
 		if is_instance_valid(Conductor.instance):
-			text_output += "\n\n[Music]\n%.2fms AudioServer Offset (raw)\n%.2fms Offset (%.2fms manual)\n%.3fs Time (%.2fx Speed)\n%.2f Beat, %.2f Step, %.2f Measure\n%.2f BPM" % [
+			text_output += "\n\n[Conductor]\n%.2fms AudioServer Offset (raw)\n%.2fms Offset (%.2fms manual)\n%.3fs Time (%.2fx Speed)\n%.2f Beat, %.2f Step, %.2f Measure\n%.2f BPM" % [
 				-AudioServer.get_output_latency() * 1000.0,
 				Conductor.instance.offset * 1000.0,
 				Conductor.instance.manual_offset * 1000.0,
@@ -107,39 +109,41 @@ func display() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if (not event.is_pressed()) or event.is_echo():
+	if event.is_echo() or not event.is_pressed():
 		return
+
 	if event.is_action(&"toggle_debug"):
-		Config.set_value("performance", "debug_label_visible", not visible)
-		_update_timer()
-		display()
+		Settings.set_setting(&"core", "overlay_visible", not visible)
 	if event.is_action(&"toggle_extra_info"):
-		if info_mode == "default":
-			info_mode = "debug"
+		if info_mode == "minimal":
+			info_mode = "full"
 		else:
-			info_mode = "default"
-		Config.set_value("performance", "debug_label", info_mode)
+			info_mode = "minimal"
 
+		Settings.set_setting(&"core", "overlay_mode", info_mode)
+
+
+func _on_setting_changed(file: StringName, key: Variant) -> void:
+	if file != &"core" or (key != "overlay_visible" and key != "overlay_mode"):
+		return
+
+	_update_from_settings()
+
+
+func _update_from_settings() -> void:
+	visible = Settings.get_setting(&"core", "overlay_visible", false)
+	info_mode = Settings.get_setting(&"core", "overlay_mode", "minimal")
+
+	if visible:
 		_update_timer()
 		display()
-
-
-func _on_value_changed(section: String, key: String, value: Variant) -> void:
-	if section != "performance":
-		return
-	if value == null:
-		return
-	if key == "debug_label_visible":
-		visible = value
-	if key == "debug_label":
-		info_mode = value
-		_update_timer()
-		display()
+	else:
+		timer.wait_time = 10.0
 
 
 func _update_timer() -> void:
 	match info_mode:
-		"debug":
+		"full":
 			timer.wait_time = 0.2
 		_:
 			timer.wait_time = 1.0

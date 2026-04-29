@@ -204,7 +204,7 @@ func _on_confirm_finished() -> void:
 
 	transitioning = true
 
-	if Config.get_value("interface", "scene_transitions"):
+	if not Settings.get_setting(&"core", "skip_scene_transitions"):
 		camera_2d.set_script(null)
 		camera_2d.limit_enabled = false
 

@@ -5,14 +5,14 @@ extends NumberOption
 
 
 func _ready() -> void:
-	var buses: Dictionary = Config.get_value('sound', 'buses')
-	value = buses[bus]
+	var buses: Dictionary = Settings.get_setting(&"core", "volume")
+	value = buses[bus] * 100.0
 
 
-func set_value(_value: Variant) -> void:
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus),
-			linear_to_db(_value / 100.0))
+func set_value(value_: Variant) -> void:
+	value_ /= 100.0
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus), linear_to_db(value_))
 
-	var buses: Dictionary = Config.get_value('sound', 'buses')
-	buses[bus] = _value
-	Config.set_value('sound', 'buses', buses)
+	var buses: Dictionary = Settings.get_setting(&"core", "volume")
+	buses[bus] = value_
+	Settings.set_setting(&"core", "volume", buses)

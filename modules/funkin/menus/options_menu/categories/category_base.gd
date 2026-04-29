@@ -26,6 +26,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action(&'ui_cancel'):
 		get_viewport().set_input_as_handled()
 		active = false
+
 		# TODO: fix this because it's like... really bad code-style lol
 		SceneManager.current_scene.deselect_current()
 		return

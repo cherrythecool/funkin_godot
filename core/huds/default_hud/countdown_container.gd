@@ -26,7 +26,6 @@ func _on_hud_setup() -> void:
 		do_countdown = false
 
 	game.ready_post.connect(_ready_post)
-	game.unpaused.connect(countdown_resume)
 	game.conductor.beat_hit.connect(_on_beat_hit)
 
 	var found: Resource = null
@@ -38,34 +37,6 @@ func _on_hud_setup() -> void:
 		load('uid://oxo327xfxemo')
 	)
 	scale = hud_skin.countdown_scale
-
-
-func countdown_resume() -> void:
-	if not Config.get_value('interface', 'countdown_on_resume'):
-		return
-	if not is_instance_valid(game):
-		return
-	if not game.song_started:
-		return
-	if game.conductor.beat < 4.0:
-		return
-	if force_countdown:
-		return
-
-	game.conductor.target_audio.seek(
-		maxf(game.conductor.raw_time - (4.0 * game.conductor.beat_delta), 0.0)
-	)
-	countdown_offset = -floori(game.conductor.beat) - 1
-	force_countdown = true
-	pause_countdown = false
-
-	game.conductor.target_audio.volume_linear = 0.0
-	create_tween().tween_property(
-		game.conductor.target_audio,
-		^'volume_linear',
-		1.0,
-		3.5 * game.conductor.beat_delta
-	)
 
 
 func _ready_post() -> void:

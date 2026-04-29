@@ -2,12 +2,12 @@ extends Label
 
 
 func _ready() -> void:
-	visible = Config.get_value("interface", "song_label_show")
+	visible = Settings.get_setting(&"core", "song_label_show")
 
 
 func _on_botplay_changed(botplay: bool) -> void:
 	update_label()
-	
+
 	if botplay:
 		text += ' [BOT]'
 
