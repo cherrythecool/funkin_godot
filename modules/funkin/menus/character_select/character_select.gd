@@ -33,7 +33,10 @@ var title_tween: Tween
 @onready var atlas_characters: Node2D = %atlas_characters
 
 var selector: AnimatedSprite
+
+# TODO: just use a state variable or smth bro
 var locked: bool = false
+var transitioning: bool = false
 
 var dipshit_tween: Tween
 
@@ -48,6 +51,8 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	GlobalAudio.music.stop()
+
+	confirm.finished.connect(_on_confirm_finished)
 
 	conductor.reset()
 	conductor.target_audio = music
@@ -102,9 +107,9 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_echo():
+	if transitioning:
 		return
-	if not event.is_pressed():
+	if event.is_echo() or not event.is_pressed():
 		return
 
 	if event.is_action(&'ui_cancel'):
@@ -185,13 +190,19 @@ func get_camera_offset() -> Vector2:
 
 
 func finish_selection(icon: AnimatedSprite, scene_path: String) -> void:
+	MainMenu.freeplay_scene = scene_path
 	confirm.play()
 	player_anim.play(&'confirm')
 	spectator_anim.play(&'confirm')
 	selector.play(&'confirm')
-
 	icon.playing = true
-	await confirm.finished
+
+
+func _on_confirm_finished() -> void:
+	if not locked:
+		return
+
+	transitioning = true
 
 	if Config.get_value("interface", "scene_transitions"):
 		camera_2d.set_script(null)
@@ -208,7 +219,6 @@ func finish_selection(icon: AnimatedSprite, scene_path: String) -> void:
 	FreeplayMenu.index = 0
 	FreeplayMenu.difficulty_index = 0
 
-	MainMenu.freeplay_scene = scene_path
 	SceneManager.transition_to_packed(load(MainMenu.freeplay_scene))
 
 
