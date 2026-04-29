@@ -164,8 +164,4 @@ func queue_func(exec_step: int, end_step: int, function: Callable) -> void:
 	timeline.add_event(event)
 
 func queue_func_once(exec_step: int, function: Callable) -> void:
-	var event: ModchartFunctionEvent = ModchartFunctionEvent.new(self, timeline)
-	event.exec_step = exec_step
-	event.end_step = -1
-	event.function = function
-	timeline.add_event(event)
+	queue_func(exec_step, -1, function)
