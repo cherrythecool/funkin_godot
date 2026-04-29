@@ -5,7 +5,7 @@ var sub_modifier: String
 var player: int
 var value: float
 
-func run(step: float) -> void:
+func run(_step: float) -> void:
 	if !sub_modifier.is_empty():
 		modchart_manager.set_submod_value(modifier, sub_modifier, value, player)
 	else:

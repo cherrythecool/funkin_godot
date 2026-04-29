@@ -155,3 +155,17 @@ func queue_submod_ease_percent(exec_step: int, end_step: int, mod: String, submo
 	var start_value: Variant = null
 	if start_percent != null: start_value = start_percent / 100
 	queue_submod_ease_value(exec_step, end_step, mod, submod, percent/100, target_trans, target_ease, player, start_value)
+
+func queue_func(exec_step: int, end_step: int, function: Callable) -> void:
+	var event: ModchartFunctionEvent = ModchartFunctionEvent.new(self, timeline)
+	event.exec_step = exec_step
+	event.end_step = end_step
+	event.function = function
+	timeline.add_event(event)
+
+func queue_func_once(exec_step: int, function: Callable) -> void:
+	var event: ModchartFunctionEvent = ModchartFunctionEvent.new(self, timeline)
+	event.exec_step = exec_step
+	event.end_step = -1
+	event.function = function
+	timeline.add_event(event)
