@@ -24,8 +24,7 @@ static func free_from_array(nodes: Array[Node], immediate: bool = false) -> void
 			child.queue_free()
 
 
-# Shit from V-Slice mostly
-static func get_ease_from_fnfc(string: String) -> Tween.EaseType:
+static func get_ease_from_str(string: String) -> Tween.EaseType:
 	if string.ends_with("Out"):
 		return Tween.EASE_OUT
 	if string.ends_with("InOut"):
@@ -36,8 +35,8 @@ static func get_ease_from_fnfc(string: String) -> Tween.EaseType:
 	return Tween.EASE_IN
 
 
-static func get_trans_from_fnfc(string: String) -> Tween.TransitionType:
-	const KNOWN_MAP: Dictionary[StringName, Tween.TransitionType] = {
+static func get_trans_from_str(string: String) -> Tween.TransitionType:
+	const KNOWN_TYPES: Dictionary[StringName, Tween.TransitionType] = {
 		&"sine": Tween.TRANS_SINE,
 		&"circ": Tween.TRANS_CIRC,
 		&"cube": Tween.TRANS_CUBIC,
@@ -51,23 +50,26 @@ static func get_trans_from_fnfc(string: String) -> Tween.TransitionType:
 		# natively by Godot. It could technically be added with
 		# custom tween functions, but that is not currently top
 		# priority, so this is the solution for now.
-		&"smoothStep": Tween.TRANS_CUBIC
+		&"smoothStep": Tween.TRANS_CUBIC,
 	}
 
-	for key: StringName in KNOWN_MAP.keys():
-		if string.begins_with(key):
-			return KNOWN_MAP[key]
+	for transition_name: StringName in KNOWN_TYPES.keys():
+		if string.begins_with(transition_name):
+			return KNOWN_TYPES[transition_name]
 
 	return Tween.TRANS_LINEAR
 
 
 static func get_accurate_time(player: AudioStreamPlayer) -> float:
-	return (player.get_playback_position() + (
-		AudioServer.get_time_since_last_mix() * player.pitch_scale))
+	return (
+		player.get_playback_position() +
+		(AudioServer.get_time_since_last_mix() * player.pitch_scale)
+	)
 
 
+# From Godot docs
 static func lerp_weight(delta: float, constant: float) -> float:
-	return minf(1.0 - exp(-constant * delta), 1.0)
+	return minf(1.0 - exp(delta * -constant), 1.0)
 
 
 static func replace_tween(node: Node, tween: Tween) -> Tween:
