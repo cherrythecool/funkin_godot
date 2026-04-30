@@ -448,22 +448,28 @@ func import_sparrow_atlas(path: String) -> SpriteFrames:
 
 func parse_animation_name(frame_name: String) -> PackedStringArray:
 	const NUMBERS: String = "0123456789"
+
 	if frame_name.is_empty():
 		return ["", ""]
 
 	var found_numbers: bool = false
-	var starting_numbers: bool = true
+	var starting_numbers: bool = false
 	var index: int = frame_name.length() - 1
 	var stop_index: int = frame_name.length() - 1
+	var start_index: int = 0
+
 	while index >= 0:
 		var character: String = frame_name[index]
 		if starting_numbers:
-			if (not NUMBERS.contains(character)) or index < frame_name.length() - 4:
+			if index < start_index - 3 or not NUMBERS.contains(character):
 				starting_numbers = false
 				stop_index = index + 1
 				break
-			else:
-				found_numbers = true
+		elif NUMBERS.contains(character):
+			found_numbers = true
+			starting_numbers = true
+			start_index = index
+			continue
 
 		index -= 1
 
