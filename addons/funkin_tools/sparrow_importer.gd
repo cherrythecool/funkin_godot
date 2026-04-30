@@ -275,6 +275,7 @@ func import_sparrow_atlas(path: String) -> SpriteFrames:
 	var source_image: Image = null
 	var cached_frames: Dictionary[Array, AtlasTexture] = {}
 	var frames: Array[Array] = []
+	var max_frame_sizes: Dictionary[String, Vector2] = {}
 
 	while xml_parser.read() != ERR_FILE_EOF:
 		# We only need elements for this format,
@@ -343,12 +344,27 @@ func import_sparrow_atlas(path: String) -> SpriteFrames:
 				var offset_y: String = xml_parser.get_named_attribute_value_safe("frameY")
 				var bounds_width: String = xml_parser.get_named_attribute_value_safe("frameWidth")
 				var bounds_height: String = xml_parser.get_named_attribute_value_safe("frameHeight")
+
+				var bounds_rect: Vector2 = source_rect.size
+
 				if offset_x.is_valid_float() and bounds_width.is_valid_float():
 					offset_rect.position.x = absf(float(offset_x))
-					offset_rect.size.x = int(bounds_width) - source_rect.size.x
+					bounds_rect.x = float(bounds_width)
 				if offset_y.is_valid_float() and bounds_height.is_valid_float():
 					offset_rect.position.y = absf(float(offset_y))
-					offset_rect.size.y = float(bounds_height) - source_rect.size.y
+					bounds_rect.y = float(bounds_height)
+
+				if not max_frame_sizes.has(parsed_name):
+					max_frame_sizes[parsed_name] = bounds_rect
+				else:
+					var target := max_frame_sizes[parsed_name]
+
+					if bounds_rect.x > target.x:
+						target.x = bounds_rect.x
+					if bounds_rect.y > target.y:
+						target.y = bounds_rect.y
+
+					max_frame_sizes[parsed_name] = target
 
 				var texture: Texture2D = null
 				for pair: Array in cached_frames.keys():
@@ -409,6 +425,12 @@ func import_sparrow_atlas(path: String) -> SpriteFrames:
 				)
 			_:
 				pass
+
+	for frame_data: Array in frames:
+		var atlas: AtlasTexture = frame_data[2]
+		var target := max_frame_sizes[frame_data[1]]
+		atlas.margin.size.x = target.x - atlas.region.size.x
+		atlas.margin.size.y = target.y - atlas.region.size.y
 
 	# Sort based on lowest frame count first.
 	frames.sort_custom(func(a: Array, b: Array) -> bool:

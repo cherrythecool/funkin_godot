@@ -196,6 +196,7 @@ func hit_note(note: Note) -> void:
 		return
 
 	note_hit.emit(note)
+
 	if note.is_sustain:
 		note.sustain_end_time = note.data.time + note.data.length
 		note.sustain_length_offset = note.data.time - conductor.time
@@ -239,7 +240,8 @@ func clear_notes() -> void:
 func append_chart(chart: Chart) -> void:
 	note_data.append_array(chart.notes)
 	note_data.sort_custom(func(a: NoteData, b: NoteData) -> bool:
-		return a.time < b.time)
+		return a.time < b.time
+	)
 
 
 func spawn_note(data: NoteData) -> void:
@@ -257,6 +259,7 @@ func spawn_note(data: NoteData) -> void:
 	var scene: PackedScene = note_types.get(
 		data.type.to_snake_case(), note_types.get(data.type)
 	)
+
 	if not is_instance_valid(scene):
 		scene = note_types.get(&'default')
 	if not is_instance_valid(scene):
