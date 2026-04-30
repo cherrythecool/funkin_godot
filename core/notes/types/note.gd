@@ -42,6 +42,7 @@ var sustain_timer: float = 0.0:
 		sustain.modulate.a = clampf(v / sustain_release_when_hit, 0.0, 1.0)
 var sustain_length_offset: float = 0.0
 var sustain_tail_offset: float = 0.0
+var sustain_score_value: float = 0.0
 
 
 func _ready() -> void:

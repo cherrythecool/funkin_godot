@@ -122,3 +122,8 @@ func _on_hud_note_miss(_note: Note) -> void:
 
 func _on_hud_setup() -> void:
 	reload_icons()
+	game.score_changed.connect(_on_score_changed)
+
+
+func _on_score_changed(_value: int) -> void:
+	update_score_label()

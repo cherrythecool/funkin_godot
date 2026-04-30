@@ -48,7 +48,12 @@ var spectator: Character
 var stage: Stage
 
 var health: float = 50.0
-var score: int = 0
+var score: int = 0:
+	set(value):
+		if score != value:
+			score = value
+			score_changed.emit(score)
+
 var misses: int = 0
 var combo: int = 0
 var accuracy: float = 0.0:
@@ -76,6 +81,7 @@ signal back_to_menus
 signal scroll_speed_changed(value: float)
 signal died
 signal botplay_changed(botplay: bool)
+signal score_changed(value: int)
 @warning_ignore("unused_signal") signal unpaused
 
 

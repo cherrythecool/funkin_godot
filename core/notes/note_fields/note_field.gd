@@ -6,6 +6,7 @@ class_name NoteField extends Node2D
 @export_enum('Opponent', 'Player') var side: int = 0
 @export var note_types: Dictionary[StringName, PackedScene] = {}
 @export var conductor: Conductor = null
+@export var score_holds: bool = true
 
 @export_category('Visuals')
 @export var use_note_splashes: bool = true
@@ -65,6 +66,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	try_spawning()
+
 	if not takes_input:
 		auto_input()
 
@@ -96,6 +98,15 @@ func update_note(note: Note, delta: float = 0.0) -> void:
 		else:
 			note.sustain_timer = conductor.sustain_release_delta
 			note.sustain_release_when_hit = conductor.sustain_release_delta
+
+			if takes_input and score_holds and conductor.time >= note.data.time:
+				note.sustain_score_value += (delta / conductor.step_delta) * 10.0
+
+				var change := int(note.sustain_score_value)
+				if change > 0:
+					game.score += change
+					note.sustain_score_value -= change
+
 			if (
 				receptor.play_confirm and
 				receptor.last_anim != &"confirm"
