@@ -30,6 +30,9 @@ var game: Game = null
 var note_splash_alpha: float = 0.6
 var target_character: Character = null
 
+var tracks_stream: AudioStreamSynchronized
+var track_index: int = -1
+
 signal note_hit(note: Note)
 signal note_miss(note: Note)
 
@@ -192,6 +195,13 @@ func hit_note(note: Note) -> void:
 	if is_instance_valid(target):
 		target.sing(note, true)
 
+	if (
+		is_instance_valid(tracks_stream) and
+		track_index > -1 and
+		track_index < tracks_stream.stream_count
+	):
+		tracks_stream.set_sync_stream_volume(track_index, 0.0)
+
 	if note.hit:
 		return
 
@@ -210,6 +220,13 @@ func miss_note(note: Note) -> void:
 	if not takes_input:
 		hit_note(note)
 		return
+
+	if (
+		is_instance_valid(tracks_stream) and
+		track_index > -1 and
+		track_index < tracks_stream.stream_count
+	):
+		tracks_stream.set_sync_stream_volume(track_index, linear_to_db(0.0))
 
 	var target: Character = target_character
 	if is_instance_valid(note.character):

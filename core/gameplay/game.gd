@@ -368,11 +368,19 @@ func load_from_assets() -> void:
 
 		player_field.reload_skin()
 
+		if metadata.player_audio_track_index > -1:
+			player_field.tracks_stream = tracks.player.stream
+			player_field.track_index = metadata.player_audio_track_index
+
 	if is_instance_valid(opponent_field):
 		opponent_field.target_character = opponent
 		opponent_field.skin = assets.get_opponent_note_skin()
 
 		opponent_field.reload_skin()
+
+		if metadata.opponent_audio_track_index > -1:
+			opponent_field.tracks_stream = tracks.player.stream
+			opponent_field.track_index = metadata.opponent_audio_track_index
 
 	pause_menu = hud_skin.get_pause_menu()
 

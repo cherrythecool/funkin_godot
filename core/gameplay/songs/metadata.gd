@@ -1,5 +1,5 @@
-extends Resource
 class_name SongMetadata
+extends Resource
 
 
 @export_group("Display Info")
@@ -15,9 +15,12 @@ class_name SongMetadata
 
 @export_group("Game Properties")
 @export var skip_countdown: bool = false
+@export var player_audio_track_index: int = -1
+@export var opponent_audio_track_index: int = -1
 
 
 func get_full_name() -> StringName:
 	if mix != &"Default":
 		return &"%s [%s Mix]" % [display_name, mix]
-	return display_name
+	else:
+		return display_name

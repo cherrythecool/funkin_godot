@@ -3,7 +3,6 @@ class_name SongAssets
 
 
 @export_group("Art")
-
 @export var player: PackedScene = null
 @export var spectator: PackedScene = null
 @export var opponent: PackedScene = null
@@ -11,7 +10,6 @@ class_name SongAssets
 @export var stage: PackedScene = null
 
 @export_group("HUD")
-
 @export var hud: PackedScene = null
 @export var hud_skin: HUDSkin = null
 
@@ -20,7 +18,6 @@ class_name SongAssets
 @export var opponent_note_skin: NoteSkin = null
 
 @export_group("Miscellaneous")
-
 @export var scripts: Array[PackedScene] = []
 @export var note_types: Dictionary[StringName, PackedScene] = {}
 
