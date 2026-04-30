@@ -71,7 +71,7 @@ func _input(event: InputEvent) -> void:
 		if _load_first_song():
 			GlobalAudio.get_player(^"MENU/CONFIRM").play()
 
-			if Config.get_value("accessibility", "flashing_lights"):
+			if Settings.get_setting(&"core", "flashing_lights"):
 				week_flash_timer.start()
 				week_flash_timer.timeout.emit()
 
