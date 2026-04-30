@@ -18,8 +18,11 @@ var muted: bool = false:
 	get:
 		return AudioServer.is_bus_mute(AudioServer.get_bus_index(target_bus))
 
-var volume: float = 0.5:
+var volume: float = -1.0:
 	set(value):
+		if volume == value:
+			return
+
 		AudioServer.set_bus_volume_db(
 			AudioServer.get_bus_index(target_bus),
 			linear_to_db(value),
@@ -28,6 +31,9 @@ var volume: float = 0.5:
 		var buses: Dictionary = Settings.get_setting(&"core", "volume", {})
 		buses[target_bus] = value
 		Settings.set_setting(&"core", "volume", buses)
+
+		if volume > 0.0:
+			muted = false
 	get:
 		return db_to_linear(
 			AudioServer.get_bus_volume_db(
