@@ -444,6 +444,9 @@ func load_events() -> void:
 		# then we should still call it lmfao (like camera pans)
 		while (not chart.events.is_empty()) and events_index < chart.events.size() \
 				and int(chart.events[events_index].time * 1000.0) <= 0.0:
+			if not chart.events[events_index].trigger_before_countdown:
+				break
+
 			event_hit.emit(chart.events[events_index])
 			events_index += 1
 

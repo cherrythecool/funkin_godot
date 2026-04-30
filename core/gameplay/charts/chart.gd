@@ -33,12 +33,14 @@ static func _print_time_elapsed(start: int) -> void:
 
 static func sort_chart_notes(chart: Chart) -> void:
 	chart.notes.sort_custom(func(a: NoteData, b: NoteData) -> bool:
-		return a.time < b.time)
+		return a.time < b.time
+	)
 
 
 static func sort_chart_events(chart: Chart) -> void:
 	chart.events.sort_custom(func(a: EventData, b: EventData) -> bool:
-		return a.time < b.time)
+		return a.time < b.time
+	)
 
 
 static func remove_stacked_notes(chart: Chart) -> int:

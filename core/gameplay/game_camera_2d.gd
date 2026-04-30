@@ -145,12 +145,14 @@ func _on_game_event_hit(event: EventData) -> void:
 				"direct":
 					pass
 
-			if ease_string == "INSTANT" or event.time <= 0.0:
+			if ease_string == "INSTANT":
 				zoom_target = Vector2.ONE * data_zoom
 				zoom = Vector2.ONE * data_zoom
 				return
+
 			if not is_instance_valid(conductor):
 				return
+
 			if ease_string != "linear" and data.has("easeDir"):
 				ease_string += data.get("easeDir")
 
