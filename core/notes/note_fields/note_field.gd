@@ -359,4 +359,5 @@ func get_scroll_speed() -> float:
 func _on_scroll_speed_changed(value: float) -> void:
 	if ignore_speed_changes:
 		return
+
 	scroll_speed = value

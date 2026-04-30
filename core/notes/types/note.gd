@@ -155,7 +155,7 @@ func reload_sustain_sprites(skin: NoteSkin = null) -> void:
 	if not use_skin:
 		return
 	if not is_instance_valid(skin):
-		skin = NoteSkin.new()
+		skin = load("uid://fctf0ejurlbg")
 
 	var sustain_anim: StringName = &"%s sustain" % [directions[lane],]
 	if sprite.sprite_frames.has_animation(sustain_anim):

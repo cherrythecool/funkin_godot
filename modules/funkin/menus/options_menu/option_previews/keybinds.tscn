@@ -3,8 +3,8 @@
 [ext_resource type="SpriteFrames" uid="uid://y8en4nx7mbuw" path="res://core/styles/default/receptors.res" id="1_dgmlx"]
 [ext_resource type="Script" uid="uid://deu38koiq5osv" path="res://modules/funkin/menus/options_menu/option_previews/keybinds.gd" id="1_ol6wa"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="2_d1c8h"]
-[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://modules/funkin/menus/alphabet/alphabet.gd" id="3_g24lb"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://modules/funkin/menus/alphabet/skins/bold_skin.tres" id="3_yk8oi"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="3_g24lb"]
+[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="3_yk8oi"]
 
 [node name="keybinds" type="Node2D" unique_id=1464591229]
 scale = Vector2(0.7, 0.7)

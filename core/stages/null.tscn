@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dhgxccn0eo4sy"]
 
-[ext_resource type="Script" uid="uid://bn5n82vuwrrl8" path="res://modules/funkin/stages/stage.gd" id="1_3aodj"]
-[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://modules/funkin/stages/character_preview.gd" id="2_lilti"]
+[ext_resource type="Script" uid="uid://bn5n82vuwrrl8" path="res://core/stages/stage.gd" id="1_3aodj"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://core/stages/character_preview.gd" id="2_lilti"]
 
 [node name="null" type="Node2D" unique_id=367971697]
 script = ExtResource("1_3aodj")

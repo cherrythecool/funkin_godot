@@ -64,4 +64,5 @@ func get_splash_material() -> ShaderMaterial:
 		material.shader = splash_shader_shader
 		material.emit_changed()
 		return material
-	return null
+	else:
+		return null

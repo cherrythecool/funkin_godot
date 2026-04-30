@@ -311,7 +311,7 @@ func load_assets() -> void:
 	if ResourceLoader.exists("res://modules/funkin/songs/%s/assets.tres" % song):
 		assets = load("res://modules/funkin/songs/%s/assets.tres" % song)
 	if not is_instance_valid(assets):
-		assets = SongAssets.new()
+		assets = load("uid://dm8kpip52j8kf")
 
 
 func load_from_assets() -> void:
@@ -349,8 +349,11 @@ func load_from_assets() -> void:
 
 	## HUD Assets
 	hud = assets.get_hud().instantiate()
+
+	var hud_skin := assets.get_hud_skin()
 	if "hud_skin" in hud:
-		hud.hud_skin = assets.get_hud_skin()
+		hud.hud_skin = hud_skin
+
 	hud_layer.add_child(hud)
 
 	if "player_field" in hud:
@@ -361,21 +364,17 @@ func load_from_assets() -> void:
 	# Set the NoteField characters.
 	if is_instance_valid(player_field):
 		player_field.target_character = player
-		if is_instance_valid(assets.player_note_skin):
-			player_field.skin = assets.player_note_skin
+		player_field.skin = assets.get_player_note_skin()
 
 		player_field.reload_skin()
+
 	if is_instance_valid(opponent_field):
 		opponent_field.target_character = opponent
-		if is_instance_valid(assets.opponent_note_skin):
-			opponent_field.skin = assets.opponent_note_skin
+		opponent_field.skin = assets.get_opponent_note_skin()
 
 		opponent_field.reload_skin()
 
-	if is_instance_valid(assets.get_hud_skin().pause_menu):
-		pause_menu = assets.get_hud_skin().pause_menu
-	else:
-		pause_menu = load("uid://d3n853hu8o3ik")
+	pause_menu = hud_skin.get_pause_menu()
 
 	for key: StringName in assets.note_types.keys():
 		var scene: PackedScene = assets.note_types.get(key)
@@ -457,6 +456,7 @@ func skip_to(seconds: float) -> void:
 				conductor.target_audio.play(seconds)
 			else:
 				conductor.target_audio.seek(seconds)
+
 			conductor.sync_to_target(0.0)
 
 	conductor.calculate_beat()

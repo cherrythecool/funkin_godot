@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://5wjcw14c4ehl" path="res://modules/funkin/stages/limo/sunset_shader.gdshader" id="4_2gosj"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="4_xtsds"]
 [ext_resource type="Texture2D" uid="uid://beyfiss15cjmj" path="res://modules/funkin/stages/limo/limoOverlay.png" id="5_1nyvw"]
-[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://modules/funkin/stages/character_preview.gd" id="5_8o2p2"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://core/stages/character_preview.gd" id="5_8o2p2"]
 [ext_resource type="SpriteFrames" uid="uid://d1vhwrlofvmka" path="res://modules/funkin/stages/limo/limoDrive.res" id="5_axglq"]
 [ext_resource type="Texture2D" uid="uid://2vt2m2655uu" path="res://modules/funkin/stages/limo/fastCarLol.png" id="7_2gosj"]
 [ext_resource type="SpriteFrames" uid="uid://co1ft38yoprcq" path="res://modules/funkin/stages/limo/henchmen.res" id="9_xtsds"]

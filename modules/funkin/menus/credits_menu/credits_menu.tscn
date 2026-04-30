@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ck4pjp7k3k745" path="res://modules/funkin/menus/credits_menu/credits_menu.gd" id="1_536xp"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://modules/funkin/menus/background.png" id="1_due5w"]
-[ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://modules/funkin/menus/alphabet/listed_alphabet.gd" id="3_xtkoc"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://modules/funkin/menus/alphabet/skins/bold_skin.tres" id="4_0ng60"]
+[ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://core/classes/alphabet/listed_alphabet.gd" id="3_xtkoc"]
+[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="4_0ng60"]
 [ext_resource type="Script" uid="uid://xex6ryb2bo7" path="res://modules/funkin/menus/credits_menu/contributors/contributor.gd" id="4_wywfy"]
 [ext_resource type="Texture2D" uid="uid://boevu3c5gntxa" path="res://modules/funkin/menus/credits_menu/contributors/cherry.jpg" id="5_0ng60"]
 [ext_resource type="Texture2D" uid="uid://b3ac3wi373b11" path="res://transgender_flag.svg" id="5_325oc"]
@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dvl1c52hghiew" path="res://modules/funkin/menus/credits_menu/contributors/eir_team.png" id="11_71dcr"]
 [ext_resource type="Texture2D" uid="uid://ddbakd725242s" path="res://modules/funkin/menus/credits_menu/contributors/luscious77_github.jpeg" id="11_tnsff"]
 [ext_resource type="Script" uid="uid://bk4kpu0r530gd" path="res://modules/funkin/menus/credits_menu/contributors/swordcube.gd" id="13_aave4"]
-[ext_resource type="AudioStream" uid="uid://cdx006xagoh7x" path="res://modules/funkin/menus/pause_menu/pico_mix_theme.ogg" id="13_b34ng"]
+[ext_resource type="AudioStream" uid="uid://cdx006xagoh7x" path="res://modules/funkin/styles/pico_mix/pause_menu.ogg" id="13_b34ng"]
 [ext_resource type="Texture2D" uid="uid://cdtbh4yrt24tn" path="res://modules/funkin/menus/credits_menu/contributors/sword.png" id="14_71dcr"]
 [ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://core/fonts/vcr_osd_mono.ttf" id="17_svqsb"]
 

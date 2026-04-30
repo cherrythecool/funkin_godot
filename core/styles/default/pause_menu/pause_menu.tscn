@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://d3n853hu8o3ik"]
 
-[ext_resource type="Script" uid="uid://bwmixxli8w6c0" path="res://modules/funkin/menus/pause_menu/pause_menu.gd" id="1_vrvda"]
-[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://modules/funkin/menus/alphabet/alphabet.gd" id="2_1gnl8"]
-[ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://modules/funkin/menus/alphabet/listed_alphabet.gd" id="3_380tn"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://modules/funkin/menus/alphabet/skins/bold_skin.tres" id="3_lalf1"]
-[ext_resource type="AudioStream" uid="uid://cvhdcl07i6lt1" path="res://modules/funkin/menus/pause_menu/default_theme.ogg" id="4_6wbaw"]
+[ext_resource type="Script" uid="uid://bwmixxli8w6c0" path="res://core/styles/default/pause_menu/pause_menu.gd" id="1_vrvda"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="2_1gnl8"]
+[ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://core/classes/alphabet/listed_alphabet.gd" id="3_380tn"]
+[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="3_lalf1"]
+[ext_resource type="AudioStream" uid="uid://cvhdcl07i6lt1" path="res://core/styles/default/pause_menu/default_theme.ogg" id="4_6wbaw"]
 
 [node name="pause_menu" type="CanvasLayer" unique_id=1041939476]
 process_mode = 3

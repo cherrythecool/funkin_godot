@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://0ih6j18ov417"]
 
-[ext_resource type="Script" uid="uid://bn5n82vuwrrl8" path="res://modules/funkin/stages/stage.gd" id="1_j6jli"]
+[ext_resource type="Script" uid="uid://bn5n82vuwrrl8" path="res://core/stages/stage.gd" id="1_j6jli"]
 [ext_resource type="Texture2D" uid="uid://c57ymqk8sdl5u" path="res://modules/funkin/stages/stage/backdrop.png" id="3_xw3u5"]
 [ext_resource type="Texture2D" uid="uid://86bapobu21kd" path="res://modules/funkin/stages/stage/front.png" id="4_l4wy2"]
 [ext_resource type="Texture2D" uid="uid://d3kftbmmrheuw" path="res://modules/funkin/stages/stage/curtains.png" id="5_lk1og"]
-[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://modules/funkin/stages/character_preview.gd" id="5_wl1cv"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://core/stages/character_preview.gd" id="5_wl1cv"]
 
 [node name="stage" type="Node2D" unique_id=238825755]
 script = ExtResource("1_j6jli")

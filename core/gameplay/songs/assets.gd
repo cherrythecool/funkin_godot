@@ -28,34 +28,54 @@ class_name SongAssets
 func get_player() -> PackedScene:
 	if is_instance_valid(player):
 		return player
+
 	return load("uid://bu44d2he2dxm3")
 
 
 func get_opponent() -> PackedScene:
 	if is_instance_valid(opponent):
 		return opponent
+
 	return load("uid://cdlt4jc7j8122")
 
 
 func get_spectator() -> PackedScene:
 	if is_instance_valid(spectator):
 		return spectator
+
 	return load("uid://bragoy3tisav2")
 
 
 func get_stage() -> PackedScene:
 	if is_instance_valid(stage):
 		return stage
+
 	return load("uid://0ih6j18ov417")
 
 
 func get_hud_skin() -> HUDSkin:
 	if is_instance_valid(hud_skin):
 		return hud_skin
+
 	return load("uid://oxo327xfxemo")
 
 
 func get_hud() -> PackedScene:
 	if is_instance_valid(hud):
 		return hud
+
 	return load("uid://cr0c14kq4sye1")
+
+
+func get_player_note_skin() -> NoteSkin:
+	if player_note_skin:
+		return player_note_skin
+	else:
+		return load("uid://fctf0ejurlbg")
+
+
+func get_opponent_note_skin() -> NoteSkin:
+	if opponent_note_skin:
+		return opponent_note_skin
+	else:
+		return load("uid://fctf0ejurlbg")

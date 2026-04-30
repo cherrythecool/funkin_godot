@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HUDSkin" format=3 uid="uid://b50qb5a7wlrmn"]
 
-[ext_resource type="AudioStream" uid="uid://cdx006xagoh7x" path="res://modules/funkin/menus/pause_menu/pico_mix_theme.ogg" id="1_jafyk"]
+[ext_resource type="AudioStream" uid="uid://cdx006xagoh7x" path="res://modules/funkin/styles/pico_mix/pause_menu.ogg" id="1_jafyk"]
 [ext_resource type="Script" uid="uid://bwjjpqxupvxcc" path="res://core/huds/hud_skin.gd" id="1_tmgmm"]
 [ext_resource type="AudioStream" uid="uid://vusu7c2ire01" path="res://core/styles/default/countdown/3.ogg" id="3_hmnrq"]
 [ext_resource type="AudioStream" uid="uid://dj08aj6avwys5" path="res://core/styles/default/countdown/2.ogg" id="4_qgq13"]

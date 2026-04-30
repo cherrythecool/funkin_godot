@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://i7wldmqqojxv" path="res://modules/funkin/stages/philly_streets_erect/sky/phillySkybox.png" id="15_j2dnk"]
 [ext_resource type="Texture2D" uid="uid://c1f1eyos87sev" path="res://modules/funkin/stages/philly_streets_erect/mist/mistMid.png" id="16_8xh06"]
 [ext_resource type="Texture2D" uid="uid://bhhmtkl0te62f" path="res://modules/funkin/stages/philly_streets_erect/mist/mistBack.png" id="17_gl3gy"]
-[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://modules/funkin/stages/character_preview.gd" id="17_hydkt"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://core/stages/character_preview.gd" id="17_hydkt"]
 [ext_resource type="Shader" uid="uid://dk80a2761duv" path="res://modules/funkin/stages/philly_streets/rain_shader.gdshader" id="19_26rwe"]
 [ext_resource type="Script" uid="uid://dufg5dnuu2huq" path="res://modules/funkin/stages/philly_streets_erect/philly_streets_erect_rain.gd" id="19_enjn8"]
 

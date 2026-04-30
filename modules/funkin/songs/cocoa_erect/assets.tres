@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://dfmtwdecde37o"]
 
 [ext_resource type="PackedScene" uid="uid://bm0fb28jg0uki" path="res://modules/funkin/characters/parents_christmas/parents_christmas.tscn" id="1_0yxr3"]
-[ext_resource type="PackedScene" uid="uid://ct1tgudr3ft86" path="res://core/notes/types/alt_note.tscn" id="1_amgjv"]
+[ext_resource type="PackedScene" uid="uid://ct1tgudr3ft86" path="res://modules/funkin/notes/types/alt_note.tscn" id="1_amgjv"]
 [ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://core/gameplay/songs/assets.gd" id="1_cgg62"]
 
 [resource]

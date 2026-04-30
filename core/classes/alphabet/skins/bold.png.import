@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvvt8gfjmvgvd"
-path="res://.godot/imported/regular.png-c1d2a08d26633d295e6b0d41b067cb49.ctex"
+uid="uid://f5o62ent1pis"
+path="res://.godot/imported/bold.png-dd261d354799202b07146b387acc8e7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://modules/funkin/menus/alphabet/skins/regular.png"
-dest_files=["res://.godot/imported/regular.png-c1d2a08d26633d295e6b0d41b067cb49.ctex"]
+source_file="res://core/classes/alphabet/skins/bold.png"
+dest_files=["res://.godot/imported/bold.png-dd261d354799202b07146b387acc8e7a.ctex"]
 
 [params]
 

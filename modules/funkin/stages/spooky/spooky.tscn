@@ -5,7 +5,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bmnb7p8am7vg0" path="res://modules/funkin/stages/spooky/bg.res" id="2_wmj7i"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="3_jds1s"]
 [ext_resource type="AudioStream" uid="uid://dmak0jirhk2pj" path="res://modules/funkin/stages/spooky/sounds/thunder_2.ogg" id="3_tyw1g"]
-[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://modules/funkin/stages/character_preview.gd" id="5_m434m"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://core/stages/character_preview.gd" id="5_m434m"]
 
 [node name="spooky" type="Node2D" unique_id=1632799468]
 script = ExtResource("1_ouhng")

@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://2vt2m2655uu" path="res://modules/funkin/stages/limo/fastCarLol.png" id="10_gwn6i"]
 [ext_resource type="SpriteFrames" uid="uid://co1ft38yoprcq" path="res://modules/funkin/stages/limo/henchmen.res" id="11_g8tp8"]
 [ext_resource type="Texture2D" uid="uid://bdvbvk2gtlsac" path="res://modules/funkin/stages/limo_erect/mistMid.png" id="12_bfmtg"]
-[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://modules/funkin/stages/character_preview.gd" id="12_re7xl"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://core/stages/character_preview.gd" id="12_re7xl"]
 [ext_resource type="Texture2D" uid="uid://bf0yvjn8cji58" path="res://modules/funkin/stages/limo_erect/mistBack.png" id="13_bfmtg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l4vvd"]

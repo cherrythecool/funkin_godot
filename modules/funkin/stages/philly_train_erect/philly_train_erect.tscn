@@ -9,7 +9,7 @@
 [ext_resource type="Shader" uid="uid://bgwusoh6kicj3" path="res://core/shaders/adjust_hscb.gdshader" id="7_beb4g"]
 [ext_resource type="Texture2D" uid="uid://dalxwasyw76dq" path="res://modules/funkin/stages/philly_train/train.png" id="7_bf3ax"]
 [ext_resource type="Texture2D" uid="uid://djci2ets06ofw" path="res://modules/funkin/stages/philly_train_erect/street.png" id="8_4ryuo"]
-[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://modules/funkin/stages/character_preview.gd" id="9_t736h"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://core/stages/character_preview.gd" id="9_t736h"]
 [ext_resource type="AudioStream" uid="uid://dt3ot3o508nk" path="res://modules/funkin/stages/philly_train/sounds/train_passes.ogg" id="10_wnwyq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oe5j7"]

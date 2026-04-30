@@ -47,6 +47,7 @@ class_name HUDSkin
 func get_combo_atlas() -> Texture2D:
 	if is_instance_valid(combo_atlas):
 		return combo_atlas
+
 	return load("uid://ds3g63uwcq4jw")
 
 
@@ -108,3 +109,17 @@ func get_rating_textures() -> Dictionary[StringName, Texture2D]:
 			textures[key] = load(DEFAULT_PATHS[key])
 
 	return textures
+
+
+func get_pause_menu() -> PackedScene:
+	if pause_menu:
+		return pause_menu
+	else:
+		return load("uid://d3n853hu8o3ik")
+
+
+func get_pause_music() -> AudioStream:
+	if pause_music:
+		return pause_music
+	else:
+		return load("uid://cvhdcl07i6lt1")
