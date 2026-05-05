@@ -18,13 +18,13 @@ func _ready() -> void:
 	)
 
 	for node: Node in keys:
-		for i: int in 2:
+		for i: int in node.get_child_count() - 1:
 			var n := node.get_node(str(i))
 			if n is not Button:
 				continue
 
 			var b := n as Button
-			b.text = Alphabet.keycode_to_character(binds[node.name][i])
+			b.text = Alphabet.keycode_to_character(binds[node.name][i]).to_upper()
 			b.pressed.connect(select_key.bind(b, node.name, i))
 			b.focus_mode = Control.FOCUS_ACCESSIBILITY
 
@@ -42,7 +42,7 @@ func _input(event: InputEvent) -> void:
 	var input := event as InputEventKey
 	var binds: Dictionary = Settings.get_setting(&"core", "controls_keybinds")
 	binds[key][selected] = input.keycode
-	button.text = Alphabet.keycode_to_character(input.keycode)
+	button.text = Alphabet.keycode_to_character(input.keycode).to_upper()
 	Settings.set_setting(&"core", "controls_keybinds", binds)
 
 	selecting = false
