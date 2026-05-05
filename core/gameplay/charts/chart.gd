@@ -1,4 +1,5 @@
-class_name Chart extends Resource
+class_name Chart
+extends Resource
 
 
 var notes: Array[NoteData] = []
@@ -45,23 +46,22 @@ static func sort_chart_events(chart: Chart) -> void:
 
 static func remove_stacked_notes(chart: Chart) -> int:
 	var index: int = 0
-	var last_note: NoteData = null
+	var last_times: Dictionary[int, float] = {}
 	var stacked_notes: int = 0
 
 	while (not chart.notes.is_empty()) and index < chart.notes.size():
 		var note: NoteData = chart.notes[index]
-		if not is_instance_valid(last_note):
+		if not last_times.has(note.direction):
+			last_times[note.direction] = note.time
 			index += 1
-			last_note = note
 			continue
 
-		if last_note.direction == note.direction and \
-				absf(last_note.time - note.time) <= 25.0 / 1000.0:
+		if absf(last_times[note.direction] - note.time) <= 25.0 / 1000.0:
 			chart.notes.remove_at(index)
 			stacked_notes += 1
 			continue
 
-		last_note = note
+		last_times[note.direction] = note.time
 		index += 1
 
 	return stacked_notes

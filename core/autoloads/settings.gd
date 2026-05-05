@@ -120,10 +120,22 @@ func _get_core_defaults() -> Dictionary:
 		},
 
 		"controls_keybinds": {
-			"note_left": KEY_D,
-			"note_down": KEY_F,
-			"note_up": KEY_J,
-			"note_right": KEY_K,
+			"note_left": [KEY_LEFT, KEY_D],
+			"note_down": [KEY_DOWN, KEY_F],
+			"note_up": [KEY_UP, KEY_J],
+			"note_right": [KEY_RIGHT, KEY_K],
+
+			"menu_left": [KEY_LEFT, KEY_A],
+			"menu_down": [KEY_DOWN, KEY_S],
+			"menu_up": [KEY_UP, KEY_W],
+			"menu_right": [KEY_RIGHT, KEY_D],
+
+			"menu_cancel": [KEY_ESCAPE, KEY_BACKSPACE],
+			"menu_accept": [KEY_ENTER, KEY_SPACE],
+
+			"menu_fullscreen": [KEY_F11],
+
+			"game_pause": [KEY_ENTER, KEY_ESCAPE],
 		},
 
 		"downscroll": false,

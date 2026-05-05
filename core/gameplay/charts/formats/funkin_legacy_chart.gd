@@ -1,4 +1,5 @@
-class_name FunkinLegacyChart extends Resource
+class_name FunkinLegacyChart
+extends Resource
 
 
 var json: Dictionary
@@ -67,7 +68,7 @@ func parse() -> Chart:
 	Chart.sort_chart_notes(chart)
 
 	var stacked_notes: int = Chart.remove_stacked_notes(chart)
-	print("Loaded FunkinChart(%s) with %s stacked notes detected." % [
+	print("Loaded FunkinLegacyChart(%s) with %s stacked notes detected." % [
 		data.song, stacked_notes
 	])
 

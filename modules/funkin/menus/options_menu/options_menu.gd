@@ -41,13 +41,13 @@ func _input(event: InputEvent) -> void:
 		return
 	if not event.is_pressed():
 		return
-	if event.is_action(&'ui_left') or event.is_action(&'ui_right'):
-		change_selection(roundi(Input.get_axis(&'ui_left', &'ui_right')))
-	if event.is_action(&'ui_up') or event.is_action(&'ui_down'):
-		change_selection(roundi(Input.get_axis(&'ui_up', &'ui_down')))
-	if event.is_action(&'ui_accept'):
+	if event.is_action(&'menu_left') or event.is_action(&'menu_right'):
+		change_selection(roundi(Input.get_axis(&'menu_left', &'menu_right')))
+	if event.is_action(&'menu_up') or event.is_action(&'menu_down'):
+		change_selection(roundi(Input.get_axis(&'menu_up', &'menu_down')))
+	if event.is_action(&'menu_accept'):
 		select_current()
-	if event.is_action(&'ui_cancel'):
+	if event.is_action(&'menu_cancel'):
 		active = false
 		GlobalAudio.get_player('MENU/CANCEL').play()
 		SceneManager.transition_to_packed(load(target_scene))

@@ -156,13 +156,14 @@ func _input(event: InputEvent) -> void:
 		return
 	if not playing:
 		return
-	if event.is_action(&"ui_cancel"):
-		finish_song(true)
-	if event.is_action(&"pause_game"):
+
+	if event.is_action(&"game_pause"):
 		var menu: CanvasLayer = pause_menu.instantiate()
 		add_child(menu)
 		process_mode = Node.PROCESS_MODE_DISABLED
 		conductor.active = false
+	elif event.is_action(&"menu_cancel"):
+		finish_song(true)
 
 	if event.is_action(&"toggle_botplay") and is_instance_valid(player_field):
 		save_score = false

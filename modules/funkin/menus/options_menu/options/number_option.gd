@@ -74,12 +74,12 @@ func _process(delta: float) -> void:
 	if not selected:
 		return
 
-	var axis: float = Input.get_axis(&"ui_left", &"ui_right")
+	var axis: float = Input.get_axis(&"menu_left", &"menu_right")
 	if axis == 0.0:
 		timer = 0.0
 		return
 
-	if Input.is_action_just_pressed(&"ui_left") or Input.is_action_just_pressed(&"ui_right"):
+	if Input.is_action_just_pressed(&"menu_left") or Input.is_action_just_pressed(&"menu_right"):
 		timer = increment_delay
 
 	timer += delta
@@ -109,7 +109,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
 
-	if event.is_action(&"ui_accept") or event.is_action(&"ui_cancel"):
+	if event.is_action(&"menu_accept") or event.is_action(&"menu_cancel"):
 		get_viewport().set_input_as_handled()
 		_select()
 		GlobalAudio.get_player(^"MENU/CONFIRM").play()

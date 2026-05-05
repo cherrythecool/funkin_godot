@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		fake_action_press(&"pause_game" if game.visible else &"ui_cancel")
+		fake_action_press(&"game_pause" if game.visible else &"menu_cancel")
 
 
 func fake_input(action: StringName, press: bool) -> void:

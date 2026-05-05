@@ -112,7 +112,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_echo() or not event.is_pressed():
 		return
 
-	if event.is_action(&'ui_cancel'):
+	if event.is_action(&'menu_cancel'):
 		if locked:
 			locked = false
 			deny.play()
@@ -132,7 +132,7 @@ func _input(event: InputEvent) -> void:
 			selector.play(&'idle')
 		else:
 			SceneManager.transition_to_packed(load('uid://b7fwxsepnt38j'))
-	if event.is_action(&'ui_accept') and not locked:
+	if event.is_action(&'menu_accept') and not locked:
 		locked = true
 
 		var index: int = selected_x + (selected_y * 3)
@@ -151,16 +151,17 @@ func _input(event: InputEvent) -> void:
 	# TODO: make this cleaner
 	if locked:
 		return
-	if event.is_action(&'ui_left'):
+
+	if event.is_action(&'menu_left'):
 		selected_x = wrapi(selected_x - 1, 0, 3)
 		_update_selection()
-	if event.is_action(&'ui_right'):
+	if event.is_action(&'menu_right'):
 		selected_x = wrapi(selected_x + 1, 0, 3)
 		_update_selection()
-	if event.is_action(&'ui_up'):
+	if event.is_action(&'menu_up'):
 		selected_y = wrapi(selected_y - 1, 0, 3)
 		_update_selection()
-	if event.is_action(&'ui_down'):
+	if event.is_action(&'menu_down'):
 		selected_y = wrapi(selected_y + 1, 0, 3)
 		_update_selection()
 

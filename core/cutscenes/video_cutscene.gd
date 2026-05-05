@@ -9,7 +9,7 @@ signal on_video_ended
 @export var hide_game: bool = true
 
 ## Whether or not to allow players to skip the
-## cutscene by pressing enter or space (action ui_accept).
+## cutscene by pressing enter or space (action menu_accept).
 @export var allow_skipping: bool = true
 
 ## Whether to autoplay the video once its stream is set
@@ -34,7 +34,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if not event.is_pressed():
 		return
-	if event.is_action(&"ui_accept"):
+	if event.is_action(&"menu_accept"):
 		finish()
 
 ## Plays the video if it isn't already playing.[br]

@@ -1,73 +1,58 @@
 extends Node2D
 
 
-@onready var keys: Array[Node] = get_children()
-var selected: int = -1
-var hovering: int = -1
+@export var key_container: Node
+
+@onready var keys: Array[Node] = key_container.get_children()
+
+var button: Button
+var key: StringName
+var selected: int
+var selecting: bool = false
 
 
 func _ready() -> void:
 	var binds: Dictionary = Settings.get_setting(&"core", "controls_keybinds")
 	keys = keys.filter(func(node: Node) -> bool:
-		return node is AnimatedSprite
+		return node is HBoxContainer
 	)
 
-	for key: Node in keys:
-		key.get_node('key').text = Alphabet.keycode_to_character(binds[key.name])
-		key.modulate.a = 0.6
-		key.set_meta(&"target_alpha", 0.6)
+	for node: Node in keys:
+		for i: int in 2:
+			var n := node.get_node(str(i))
+			if n is not Button:
+				continue
 
-
-func _process(delta: float) -> void:
-	for key: Node2D in keys:
-		key.modulate.a = lerpf(key.modulate.a, key.get_meta(&"target_alpha", 0.6), delta * 9.0)
+			var b := n as Button
+			b.text = Alphabet.keycode_to_character(binds[node.name][i])
+			b.pressed.connect(select_key.bind(b, node.name, i))
+			b.focus_mode = Control.FOCUS_ACCESSIBILITY
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		_handle_motion(event)
-	if event is InputEventMouseButton:
-		_handle_button(event)
-	if event is InputEventKey and selected != -1:
-		_handle_key(event)
+	if not selecting:
+		return
+	if event is not InputEventKey:
+		return
+	if event.is_echo() or not event.is_pressed():
+		return
 
+	get_viewport().set_input_as_handled()
 
-func _handle_key(event: InputEventKey) -> void:
-	var key: Node = keys[selected]
-	key.get_node('key').text = Alphabet.keycode_to_character(event.keycode)
-	key.set_meta(&"target_alpha", 0.6)
-
+	var input := event as InputEventKey
 	var binds: Dictionary = Settings.get_setting(&"core", "controls_keybinds")
-	binds[key.name] = event.keycode
+	binds[key][selected] = input.keycode
+	button.text = Alphabet.keycode_to_character(input.keycode)
 	Settings.set_setting(&"core", "controls_keybinds", binds)
 
-	selected = -1
-	GlobalAudio.get_player(^'MENU/CONFIRM').play()
+	selecting = false
 
 
-func _handle_motion(event: InputEventMouseMotion) -> void:
-	if selected != -1:
-		return
+func select_key(b: Button, k: StringName, s: int) -> void:
+	key = k
+	selected = s
+	button = b
 
-	hovering = -1
-	for i: int in keys.size():
-		var key: Node2D = keys[i]
-		var key_rect: Rect2 = Rect2(key.global_position.x - 50.0,
-				key.global_position.y - 50.0,
-				100.0, 100.0,)
-		if key_rect.has_point(event.global_position):
-			key.set_meta(&"target_alpha", 1.0)
-			hovering = i
-		else:
-			key.set_meta(&"target_alpha", 0.6)
-
-
-func _handle_button(event: InputEventMouseButton) -> void:
-	if hovering == -1:
-		return
-	if not event.pressed:
-		return
-
-	selected = hovering
-	keys[selected].get_node('key').text = '#'
+	selecting = true
+	button.text = "[Press a Key]"
 	GlobalAudio.get_player(^'MENU/CONFIRM').play()

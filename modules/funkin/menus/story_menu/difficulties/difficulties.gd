@@ -29,12 +29,12 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
-	if event.is_action('ui_left'):
+	if event.is_action('menu_left'):
 		left_arrow.play(&'leftConfirm' if event.is_pressed() else &'leftIdle')
 
 		if event.is_pressed():
 			change_selection(-1)
-	if event.is_action('ui_right'):
+	if event.is_action('menu_right'):
 		right_arrow.play(&'rightConfirm' if event.is_pressed() else &'rightIdle')
 
 		if event.is_pressed():

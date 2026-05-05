@@ -1,85 +1,289 @@
 [gd_scene format=3 uid="uid://c54n5pwgvqym0"]
 
-[ext_resource type="SpriteFrames" uid="uid://y8en4nx7mbuw" path="res://core/styles/default/receptors.res" id="1_dgmlx"]
 [ext_resource type="Script" uid="uid://deu38koiq5osv" path="res://modules/funkin/menus/options_menu/option_previews/keybinds.gd" id="1_ol6wa"]
-[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="2_d1c8h"]
-[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="3_g24lb"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="3_yk8oi"]
+[ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://modules/funkin/funkin.ttf" id="2_plrfs"]
 
-[node name="keybinds" type="Node2D" unique_id=1464591229]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2w0a"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.563)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plrfs"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.75000006)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gpko"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.874)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_plrfs"]
+color = Color(1, 1, 1, 0.25)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+
+[sub_resource type="Theme" id="Theme_t2w0a"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(1, 1, 1, 0.38900003)
+Button/constants/outline_size = 4
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("2_plrfs")
+Button/styles/hover = SubResource("StyleBoxFlat_t2w0a")
+Button/styles/normal = SubResource("StyleBoxFlat_plrfs")
+Button/styles/pressed = SubResource("StyleBoxFlat_1gpko")
+HBoxContainer/constants/separation = 8
+HSeparator/constants/separation = 16
+HSeparator/styles/separator = SubResource("StyleBoxLine_plrfs")
+Label/constants/outline_size = 16
+Label/font_sizes/font_size = 40
+Label/fonts/font = ExtResource("2_plrfs")
+
+[node name="keybinds" type="Node2D" unique_id=1464591229 node_paths=PackedStringArray("key_container")]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_ol6wa")
+key_container = NodePath("scroll/margin_container/vbox")
 
-[node name="label" type="Node2D" parent="." unique_id=1954395223]
-position = Vector2(0, -326)
-script = ExtResource("3_g24lb")
-skin = ExtResource("3_yk8oi")
-text = "click on the
-arrows to
-change binds"
-centered = true
-horizontal_alignment = "Center"
+[node name="scroll" type="ScrollContainer" parent="." unique_id=268987225]
+offset_left = -342.857
+offset_top = -445.714
+offset_right = 342.857
+offset_bottom = 445.71503
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = SubResource("Theme_t2w0a")
 
-[node name="note_left" type="AnimatedSprite2D" parent="." unique_id=168531004]
-position = Vector2(-236, 0)
-sprite_frames = ExtResource("1_dgmlx")
-animation = &"left static"
-script = ExtResource("2_d1c8h")
+[node name="margin_container" type="MarginContainer" parent="scroll" unique_id=1091275936]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="key" type="Node2D" parent="note_left" unique_id=1813753089]
-position = Vector2(0, -128)
-scale = Vector2(1.2, 1.2)
-script = ExtResource("3_g24lb")
-skin = ExtResource("3_yk8oi")
+[node name="vbox" type="VBoxContainer" parent="scroll/margin_container" unique_id=482026520]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="note_left" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=290282849]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="scroll/margin_container/vbox/note_left" unique_id=764906678]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Left Note"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/note_left" unique_id=1522815305]
+layout_mode = 2
+text = "LEFT"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/note_left" unique_id=1389091907]
+layout_mode = 2
 text = "D"
-centered = true
-no_offset = true
-horizontal_alignment = "Center"
 
-[node name="note_down" type="AnimatedSprite2D" parent="." unique_id=1039354808]
-position = Vector2(-79, 0)
-sprite_frames = ExtResource("1_dgmlx")
-animation = &"down static"
-script = ExtResource("2_d1c8h")
+[node name="note_down" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=1533694405]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="key" type="Node2D" parent="note_down" unique_id=943231021]
-position = Vector2(0, -128)
-scale = Vector2(1.2, 1.2)
-script = ExtResource("3_g24lb")
-skin = ExtResource("3_yk8oi")
+[node name="label" type="Label" parent="scroll/margin_container/vbox/note_down" unique_id=1202157135]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Down Note"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/note_down" unique_id=441922960]
+layout_mode = 2
+text = "DOWN"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/note_down" unique_id=880085951]
+layout_mode = 2
 text = "F"
-centered = true
-no_offset = true
-horizontal_alignment = "Center"
 
-[node name="note_up" type="AnimatedSprite2D" parent="." unique_id=551774116]
-position = Vector2(79, 0)
-sprite_frames = ExtResource("1_dgmlx")
-animation = &"up static"
-script = ExtResource("2_d1c8h")
+[node name="note_up" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=1760832280]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="key" type="Node2D" parent="note_up" unique_id=1847462011]
-position = Vector2(0, -128)
-scale = Vector2(1.2, 1.2)
-script = ExtResource("3_g24lb")
-skin = ExtResource("3_yk8oi")
+[node name="label" type="Label" parent="scroll/margin_container/vbox/note_up" unique_id=1307938144]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Up Note"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/note_up" unique_id=302057851]
+layout_mode = 2
+text = "UP"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/note_up" unique_id=1327970348]
+layout_mode = 2
 text = "J"
-centered = true
-no_offset = true
-horizontal_alignment = "Center"
 
-[node name="note_right" type="AnimatedSprite2D" parent="." unique_id=1250714935]
-position = Vector2(236, 0)
-sprite_frames = ExtResource("1_dgmlx")
-animation = &"right static"
-script = ExtResource("2_d1c8h")
+[node name="note_right" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=193479132]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="key" type="Node2D" parent="note_right" unique_id=1515700636]
-position = Vector2(0, -128)
-scale = Vector2(1.2, 1.2)
-script = ExtResource("3_g24lb")
-skin = ExtResource("3_yk8oi")
+[node name="label" type="Label" parent="scroll/margin_container/vbox/note_right" unique_id=1378054794]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Right Note"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/note_right" unique_id=419871674]
+layout_mode = 2
+text = "RIGHT"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/note_right" unique_id=1096822074]
+layout_mode = 2
 text = "K"
-centered = true
-no_offset = true
-horizontal_alignment = "Center"
+
+[node name="game_pause" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=1403814870]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="scroll/margin_container/vbox/game_pause" unique_id=1445024340]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pause Game"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/game_pause" unique_id=4818863]
+layout_mode = 2
+text = "ENTER"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/game_pause" unique_id=256576002]
+layout_mode = 2
+text = "ESCAPE"
+
+[node name="h_separator" type="HSeparator" parent="scroll/margin_container/vbox" unique_id=249945377]
+layout_mode = 2
+
+[node name="menu_left" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=760509338]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="scroll/margin_container/vbox/menu_left" unique_id=369567964]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Left in Menus"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/menu_left" unique_id=824036128]
+layout_mode = 2
+text = "LEFT"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/menu_left" unique_id=1138008533]
+layout_mode = 2
+text = "A"
+
+[node name="menu_down" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=273369717]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="scroll/margin_container/vbox/menu_down" unique_id=1505305001]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Down in Menus"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/menu_down" unique_id=1881542015]
+layout_mode = 2
+text = "DOWN"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/menu_down" unique_id=367857708]
+layout_mode = 2
+text = "S"
+
+[node name="menu_up" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=1691681911]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="scroll/margin_container/vbox/menu_up" unique_id=2115276808]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Up in Menus"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/menu_up" unique_id=1221983824]
+layout_mode = 2
+text = "UP"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/menu_up" unique_id=528735514]
+layout_mode = 2
+text = "W"
+
+[node name="menu_right" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=344976485]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="scroll/margin_container/vbox/menu_right" unique_id=128092748]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Right in Menus"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/menu_right" unique_id=60395363]
+layout_mode = 2
+text = "RIGHT"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/menu_right" unique_id=745840826]
+layout_mode = 2
+text = "D"
+
+[node name="menu_cancel" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=1696101468]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="scroll/margin_container/vbox/menu_cancel" unique_id=158236090]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Exit Menus"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/menu_cancel" unique_id=1852223164]
+layout_mode = 2
+text = "ESCAPE"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/menu_cancel" unique_id=1420755416]
+layout_mode = 2
+text = "BACKSPACE"
+
+[node name="menu_accept" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=209098842]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="scroll/margin_container/vbox/menu_accept" unique_id=239951192]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Select in Menus"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/menu_accept" unique_id=1469233102]
+layout_mode = 2
+text = "ENTER"
+
+[node name="1" type="Button" parent="scroll/margin_container/vbox/menu_accept" unique_id=163108678]
+layout_mode = 2
+text = "SPACE"
+
+[node name="menu_fullscreen" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=1269087224]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="scroll/margin_container/vbox/menu_fullscreen" unique_id=283544259]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Toggle Fullscreen"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/menu_fullscreen" unique_id=179668767]
+layout_mode = 2
+text = "F11"

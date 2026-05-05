@@ -28,7 +28,7 @@ centered = true
 [node name="options" type="Node2D" parent="the_list" unique_id=389505798]
 
 [node name="keybinds" type="Node2D" parent="the_list/options" unique_id=1202440570 node_paths=PackedStringArray("current_preview")]
-position = Vector2(-91, 0)
+position = Vector2(-84, 0)
 script = ExtResource("3_uqgqk")
 preview_path = "uid://c54n5pwgvqym0"
 current_preview = NodePath("../../../preview_bg/preview_marker")
@@ -77,7 +77,7 @@ animation = &"unselected"
 script = ExtResource("6_ubeli")
 
 [node name="offset" type="Node2D" parent="the_list/options" unique_id=1554961303 node_paths=PackedStringArray("root", "current_preview")]
-position = Vector2(0, 288)
+position = Vector2(9, 288)
 script = ExtResource("7_wvbcq")
 value_suffix = &"ms"
 root = NodePath("../../..")
@@ -98,7 +98,7 @@ skin = ExtResource("3_r0pnr")
 text = "< 0 >"
 
 [node name="method" type="Node2D" parent="the_list/options" unique_id=476497392]
-position = Vector2(0, 533)
+position = Vector2(7, 533)
 script = ExtResource("8_8o1re")
 list = ["chart_multiplier", "constant"]
 display_overrides = Dictionary[Variant, String]({
@@ -120,7 +120,7 @@ skin = ExtResource("3_r0pnr")
 text = "chart"
 
 [node name="value" type="Node2D" parent="the_list/options" unique_id=610762522 node_paths=PackedStringArray("root", "current_preview")]
-position = Vector2(-22, 629)
+position = Vector2(-16, 629)
 script = ExtResource("7_gp12a")
 key = &"note_scroll_value"
 integers = false

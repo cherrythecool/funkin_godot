@@ -57,14 +57,14 @@ metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
 unique_name_in_owner = true
 
 [node name="resume" type="Node2D" parent="options" unique_id=29791263]
-position = Vector2(90, 326.68652)
+position = Vector2(90, 327)
 script = ExtResource("3_380tn")
 skin = ExtResource("3_lalf1")
 text = "resume"
 
 [node name="restart" type="Node2D" parent="options" unique_id=422190198]
 modulate = Color(1, 1, 1, 0.7)
-position = Vector2(110, 482.18652)
+position = Vector2(110, 482.5)
 script = ExtResource("3_380tn")
 target_y = 1
 skin = ExtResource("3_lalf1")
@@ -72,7 +72,7 @@ text = "restart"
 
 [node name="options" type="Node2D" parent="options" unique_id=1594949867]
 modulate = Color(1, 1, 1, 0.7)
-position = Vector2(130, 636.6865)
+position = Vector2(130, 637)
 script = ExtResource("3_380tn")
 target_y = 2
 skin = ExtResource("3_lalf1")
@@ -80,7 +80,7 @@ text = "options"
 
 [node name="quit" type="Node2D" parent="options" unique_id=1410297465]
 modulate = Color(1, 1, 1, 0.7)
-position = Vector2(150, 794.1865)
+position = Vector2(150, 794.5)
 script = ExtResource("3_380tn")
 target_y = 3
 skin = ExtResource("3_lalf1")

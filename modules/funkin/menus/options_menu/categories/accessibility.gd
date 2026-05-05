@@ -15,5 +15,5 @@ func _input(event: InputEvent) -> void:
 
 	super(event)
 
-	if event.is_action('ui_accept'):
+	if event.is_action('menu_accept'):
 		selected_option._select()

@@ -34,13 +34,13 @@ func _input(event: InputEvent) -> void:
 		return
 	if not active:
 		return
-	if event.is_action('ui_down') or event.is_action('ui_up'):
-		change_selection(roundi(Input.get_axis('ui_up', 'ui_down')))
-	if event.is_action('ui_cancel'):
-		GlobalAudio.get_player('MENU/CANCEL').play()
+	if event.is_action(&"menu_up") or event.is_action(&"menu_down"):
+		change_selection(roundi(Input.get_axis(&"menu_up", &"menu_down")))
+	if event.is_action(&"menu_cancel"):
+		GlobalAudio.get_player(^"MENU/CANCEL").play()
 		active = false
 		SceneManager.transition_to_packed(load("uid://cxk008iuw4n7u"))
-	if event.is_action('ui_accept'):
+	if event.is_action(&"menu_accept"):
 		GlobalAudio.get_player('MENU/CONFIRM').play()
 		active = false
 		_press_animation()
@@ -59,7 +59,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_press(item: MainMenuButton) -> void:
 	if not item.accept():
-		GlobalAudio.get_player('MENU/CANCEL').play()
+		GlobalAudio.get_player(^"MENU/CANCEL").play()
 		active = true
 		_cancel_animation()
 

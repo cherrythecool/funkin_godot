@@ -63,7 +63,7 @@ category = ExtResource("7_6v5hh")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"gameplay"
-frame_progress = 0.80179244
+frame_progress = 0.50514656
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -77,7 +77,7 @@ category = ExtResource("7_u8bnw")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"interface"
-frame_progress = 0.5140651
+frame_progress = 0.21741927
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -91,7 +91,7 @@ category = ExtResource("8_26on6")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"performance"
-frame_progress = 0.11375166
+frame_progress = 0.8171058
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -105,7 +105,7 @@ category = ExtResource("9_23plx")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"sound"
-frame_progress = 0.08054388
+frame_progress = 0.78389806
 script = ExtResource("4_k5v7g")
 playing = true
 

@@ -1,11 +1,12 @@
-class_name MainMenuButton extends Control
+class_name MainMenuButton
+extends Control
 
 
 @export var animation_name: StringName = &'story_mode'
 @onready var sprite: AnimatedSprite = $sprite
 
 
-## This function is triggered when the `ui_accept` action is
+## This function is triggered when the `menu_accept` action is
 ## pressed while selecting this button.
 func press() -> void:
 	pass

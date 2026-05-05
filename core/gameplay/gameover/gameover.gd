@@ -76,7 +76,7 @@ func _input(event: InputEvent) -> void:
 	if not active:
 		return
 
-	if event.is_action(&"ui_cancel"):
+	if event.is_action(&"menu_cancel"):
 		active = false
 		GlobalAudio.get_player(^"MENU/CANCEL").play()
 		GameCamera2D.reset_persistent_values()
@@ -89,7 +89,7 @@ func _input(event: InputEvent) -> void:
 			_:
 				SceneManager.transition_to_packed(load("uid://cxk008iuw4n7u"))
 
-	if event.is_action(&"ui_accept"):
+	if event.is_action(&"menu_accept"):
 		active = false
 		character.play_anim(&"retry")
 		music_player.stop()

@@ -51,9 +51,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
 
-	if event.is_action(&"ui_down") or event.is_action(&"ui_up"):
-		change_selection(roundi(Input.get_axis(&"ui_up", &"ui_down")))
-	if event.is_action(&"ui_accept"):
+	if event.is_action(&"menu_down") or event.is_action(&"menu_up"):
+		change_selection(roundi(Input.get_axis(&"menu_up", &"menu_down")))
+	if event.is_action(&"menu_accept"):
 		for option: ListedAlphabet in options.get_children():
 			if option.target_y != 0:
 				continue

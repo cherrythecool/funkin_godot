@@ -1,4 +1,5 @@
-class_name CodenameChart extends Resource
+class_name CodenameChart
+extends Resource
 
 
 static func parse(base_path: String, data: Dictionary) -> Chart:
@@ -44,11 +45,12 @@ static func parse(base_path: String, data: Dictionary) -> Chart:
 			chart.notes.push_back(note_data)
 
 	Chart.sort_chart_notes(chart)
+
 	var stacked_notes: int = Chart.remove_stacked_notes(chart)
 	print("Loaded CodenameChart(%s) with %s stacked notes detected." % [
 		meta.get("displayName", meta.get("name", "Unknown Name")), stacked_notes
 	])
-	
+
 	var events_path: String = "%s/charts/events.json" % [base_path]
 	if ResourceLoader.exists(events_path):
 		var events: Dictionary = load(events_path).data
@@ -71,7 +73,7 @@ static func parse_events(chart: Chart,
 			"Camera Zoom":
 				if str(params[2]) != "camGame":
 					continue
-				
+
 				chart.events.append(DynamicEvent.new(&"ZoomCamera", time, {
 					"duration": float(params[3]),
 					"ease": str(params[4]) + str(params[5]),

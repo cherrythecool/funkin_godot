@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 	if not is_instance_valid(hue_shift_material):
 		return
 
-	var swag_axis: float = Input.get_axis(&"ui_left", &"ui_right")
+	var swag_axis: float = Input.get_axis(&"menu_left", &"menu_right")
 	hue_shift += swag_axis * delta * 0.1
 	hue_shift_material.set_shader_parameter(&"value", hue_shift)
 
@@ -62,9 +62,9 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if transitioning or event.is_echo() or not event.is_pressed():
 		return
-	if event.is_action(&"ui_cancel") and not Global.is_mobile:
+	if event.is_action(&"menu_cancel") and not Global.is_mobile:
 		get_tree().quit()
-	if event.is_action(&"ui_accept"):
+	if event.is_action(&"menu_accept"):
 		if in_intro:
 			skip_intro()
 		else:

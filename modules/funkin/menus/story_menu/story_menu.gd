@@ -60,11 +60,11 @@ func _input(event: InputEvent) -> void:
 		return
 	if not event.is_pressed():
 		return
-	if event.is_action('ui_cancel'):
+	if event.is_action('menu_cancel'):
 		active = false
 		GlobalAudio.get_player('MENU/CANCEL').play()
 		SceneManager.transition_to_file("uid://b7fwxsepnt38j")
-	if event.is_action(&"ui_accept"):
+	if event.is_action(&"menu_accept"):
 		active = false
 		_load_active_playlist()
 
@@ -91,8 +91,8 @@ func _input(event: InputEvent) -> void:
 			SceneManager.transition_to_file("uid://da8mu3oqto3qq")
 		else:
 			active = true
-	if event.is_action('ui_up') or event.is_action('ui_down'):
-		var movement: int = int(Input.get_axis('ui_up', 'ui_down'))
+	if event.is_action('menu_up') or event.is_action('menu_down'):
+		var movement: int = int(Input.get_axis('menu_up', 'menu_down'))
 		change_selection(movement)
 
 
