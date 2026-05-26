@@ -43,7 +43,7 @@ func _ready() -> void:
 		game = Game.instance
 		game.scroll_speed_changed.connect(_on_scroll_speed_changed)
 		scroll_speed = game.scroll_speed
-	if is_instance_valid(Conductor.instance):
+	if is_instance_valid(Conductor.instance) and not is_instance_valid(conductor):
 		conductor = Conductor.instance
 
 	note_splash_alpha = Settings.get_setting(&"core", "note_splash_alpha")

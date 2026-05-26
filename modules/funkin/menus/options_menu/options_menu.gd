@@ -11,7 +11,6 @@ static var selected: int = 0
 @onready var section: Node2D = %section
 @onready var options_label: AnimatedSprite2D = %options_label
 @onready var section_label: Alphabet = %section_label
-@onready var conductor: Conductor = %conductor
 
 var section_tween: Tween
 
@@ -23,10 +22,10 @@ func _ready() -> void:
 	music_player.stream = load('uid://ddoyqrhrcjw1j')
 	music_player.play()
 
-	conductor.reset()
-	conductor.tempo = 137.0
-	conductor.target_audio = music_player
-	conductor.beat_hit.connect(_on_beat_hit)
+	Conductor.reset()
+	Conductor.tempo = 137.0
+	Conductor.target_audio = music_player
+	Conductor.beat_hit.connect(_on_beat_hit)
 
 	change_selection()
 

@@ -96,5 +96,5 @@ func close() -> void:
 		Engine.time_scale = Conductor.instance.rate
 	if is_instance_valid(Game.instance):
 		Game.instance.process_mode = Node.PROCESS_MODE_INHERIT
-		Game.instance.conductor.active = true
+		Conductor.active = true
 		Game.instance.unpaused.emit()

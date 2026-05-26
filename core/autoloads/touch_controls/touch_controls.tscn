@@ -43,7 +43,7 @@ texture_normal = ExtResource("2_dn4ts")
 texture_pressed = ExtResource("3_8o8lk")
 shape = SubResource("CircleShape2D_uejki")
 passby_press = true
-action = "ui_left"
+action = "menu_left"
 visibility_mode = 1
 
 [node name="down" type="TouchScreenButton" parent="menus" unique_id=757714994]
@@ -54,7 +54,7 @@ texture_normal = ExtResource("2_dn4ts")
 texture_pressed = ExtResource("3_8o8lk")
 shape = SubResource("CircleShape2D_uejki")
 passby_press = true
-action = "ui_down"
+action = "menu_down"
 visibility_mode = 1
 
 [node name="up" type="TouchScreenButton" parent="menus" unique_id=287631027]
@@ -64,7 +64,7 @@ texture_normal = ExtResource("2_dn4ts")
 texture_pressed = ExtResource("3_8o8lk")
 shape = SubResource("CircleShape2D_uejki")
 passby_press = true
-action = "ui_up"
+action = "menu_up"
 visibility_mode = 1
 
 [node name="right" type="TouchScreenButton" parent="menus" unique_id=271482993]
@@ -75,7 +75,7 @@ texture_normal = ExtResource("2_dn4ts")
 texture_pressed = ExtResource("3_8o8lk")
 shape = SubResource("CircleShape2D_uejki")
 passby_press = true
-action = "ui_right"
+action = "menu_right"
 visibility_mode = 1
 
 [node name="cancel" type="TouchScreenButton" parent="menus" unique_id=615485729]
@@ -86,7 +86,7 @@ texture_normal = ExtResource("2_dn4ts")
 texture_pressed = ExtResource("3_8o8lk")
 shape = SubResource("CircleShape2D_uejki")
 passby_press = true
-action = "ui_cancel"
+action = "menu_cancel"
 visibility_mode = 1
 
 [node name="accept" type="TouchScreenButton" parent="menus" unique_id=589905947]
@@ -96,7 +96,7 @@ texture_normal = ExtResource("4_uejki")
 texture_pressed = ExtResource("5_8dfaf")
 shape = SubResource("CircleShape2D_uejki")
 passby_press = true
-action = "ui_accept"
+action = "menu_accept"
 visibility_mode = 1
 
 [node name="freeplay" type="Control" parent="menus" unique_id=763624923]
@@ -145,7 +145,7 @@ color = Color(0.757, 0.294, 0.6, 0)
 position = Vector2(160, 360)
 shape = SubResource("RectangleShape2D_wcbf3")
 passby_press = true
-action = "input_left"
+action = "note_left"
 visibility_mode = 1
 
 [node name="down" type="ColorRect" parent="game" unique_id=1797184710]
@@ -161,7 +161,7 @@ color = Color(0, 1, 1, 0)
 position = Vector2(160, 360)
 shape = SubResource("RectangleShape2D_wcbf3")
 passby_press = true
-action = "input_down"
+action = "note_down"
 visibility_mode = 1
 
 [node name="up" type="ColorRect" parent="game" unique_id=383368020]
@@ -177,7 +177,7 @@ color = Color(0.071, 0.98, 0.016, 0)
 position = Vector2(160, 360)
 shape = SubResource("RectangleShape2D_wcbf3")
 passby_press = true
-action = "input_up"
+action = "note_up"
 visibility_mode = 1
 
 [node name="right" type="ColorRect" parent="game" unique_id=322390288]
@@ -193,7 +193,7 @@ color = Color(0.976, 0.224, 0.247, 0)
 position = Vector2(160, 360)
 shape = SubResource("RectangleShape2D_wcbf3")
 passby_press = true
-action = "input_right"
+action = "note_right"
 visibility_mode = 1
 
 [node name="pause" type="TouchScreenButton" parent="game" unique_id=634855048]
@@ -202,7 +202,7 @@ scale = Vector2(1.75, 1.75)
 texture_normal = ExtResource("2_mq6jc")
 texture_pressed = ExtResource("3_4ikyy")
 shape = SubResource("CircleShape2D_wcbf3")
-action = "pause_game"
+action = "game_pause"
 visibility_mode = 1
 
 [connection signal="gui_input" from="game/left" to="." method="_on_left_gui_input"]

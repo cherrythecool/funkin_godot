@@ -9,7 +9,6 @@ static var character_path: String = "uid://w4v0gymuehdt"
 @onready var initial_focus_timer: Timer = %initial_focus_timer
 @onready var fade_out_delay: Timer = %fade_out_delay
 
-@onready var conductor: Conductor = %conductor
 @onready var music_player: AudioStreamPlayer = %music
 @onready var on_death: AudioStreamPlayer = %on_death
 @onready var retry: AudioStreamPlayer = %retry
@@ -40,12 +39,14 @@ func _ready() -> void:
 	else:
 		secret.queue_free()
 
-	conductor.reset()
-	conductor.target_audio = music_player
+	Conductor.reset()
+	Conductor.target_audio = music_player
+
 	initial_focus_timer.start()
 
 	if not ResourceLoader.exists(character_path):
 		character_path = "uid://w4v0gymuehdt"
+
 	character = load(character_path).instantiate()
 
 	if is_instance_valid(character.gameover_assets):

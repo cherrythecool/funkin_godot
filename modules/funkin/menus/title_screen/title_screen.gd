@@ -7,8 +7,6 @@ static var in_intro: bool = true
 @export var randomized_lines: Array[String] = []
 @export var hue_shift_material: ShaderMaterial
 
-@onready var conductor: Conductor = %conductor
-
 @onready var post_intro: Node2D = $post_intro
 @onready var girlfriend_animation: AnimationPlayer = $post_intro/girlfriend/animation_player
 @onready var logo_sprite: AnimatedSprite = $post_intro/logo/sprite
@@ -33,11 +31,11 @@ func _ready() -> void:
 
 	var music_player: AudioStreamPlayer = GlobalAudio.music
 	if not music_player.playing:
-		conductor.reset()
+		Conductor.reset()
 		music_player.play()
 
-	conductor.target_audio = music_player
-	conductor.tempo = 102.0
+	Conductor.target_audio = music_player
+	Conductor.tempo = 102.0
 
 	if in_intro:
 		start_intro()
@@ -46,8 +44,8 @@ func _ready() -> void:
 		intro_sequence.queue_free()
 		post_intro.visible = true
 
-	conductor.beat_hit.connect(_on_beat_hit)
-	conductor.calculate_beat()
+	Conductor.beat_hit.connect(_on_beat_hit)
+	Conductor.calculate_beat()
 
 
 func _process(delta: float) -> void:

@@ -26,7 +26,7 @@ func _on_hud_setup() -> void:
 		do_countdown = false
 
 	game.ready_post.connect(_ready_post)
-	game.conductor.beat_hit.connect(_on_beat_hit)
+	Conductor.beat_hit.connect(_on_beat_hit)
 
 	var found: Resource = null
 	if is_instance_valid(hud) and 'hud_skin' in hud:
@@ -41,7 +41,7 @@ func _on_hud_setup() -> void:
 
 func _ready_post() -> void:
 	if not do_countdown:
-		game.conductor.raw_time = 0.0
+		Conductor.raw_time = 0.0
 
 
 func _on_beat_hit(beat: int) -> void:
@@ -53,7 +53,7 @@ func _on_beat_hit(beat: int) -> void:
 		return
 
 	if pause_countdown:
-		game.conductor.raw_time = -5.0 * game.conductor.beat_delta
+		Conductor.raw_time = -5.0 * Conductor.beat_delta
 		return
 
 	# countdown lol
@@ -82,9 +82,9 @@ func display_countdown_sprite(index: int) -> void:
 
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)\
 			.set_ease(Tween.EASE_OUT).set_parallel()
-	tween.tween_property(sprite, ^'modulate:a', 0.0, game.conductor.beat_delta)
-	tween.tween_property(sprite, ^'scale', Vector2.ONE, game.conductor.beat_delta)
-	tween.tween_callback(sprite.queue_free).set_delay(game.conductor.beat_delta)
+	tween.tween_property(sprite, ^'modulate:a', 0.0, Conductor.beat_delta)
+	tween.tween_property(sprite, ^'scale', Vector2.ONE, Conductor.beat_delta)
+	tween.tween_callback(sprite.queue_free).set_delay(Conductor.beat_delta)
 
 
 func play_countdown_sound(index: int) -> void:

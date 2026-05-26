@@ -1,9 +1,10 @@
-class_name GameCamera2D extends Camera2D
+class_name GameCamera2D
+extends Camera2D
 
 
+static var instance: GameCamera2D = null
 static var camera_position: Vector2 = Vector2.INF
 static var camera_zoom: Vector2 = Vector2.INF
-static var instance: GameCamera2D = null
 
 @export var conductor: Conductor = null:
 	get:
@@ -35,6 +36,11 @@ var game: Game:
 		return Game.instance
 var zoom_event_tween: Tween
 var pan_event_tween: Tween
+
+
+static func reset_persistent_values() -> void:
+	camera_position = Vector2.INF
+	camera_zoom = Vector2.INF
 
 
 func _ready() -> void:
@@ -213,8 +219,3 @@ func snap_to_position(new_position: Vector2) -> void:
 func snap_to_zoom(new_zoom: Vector2) -> void:
 	zoom_target = new_zoom
 	zoom = new_zoom
-
-
-static func reset_persistent_values() -> void:
-	camera_position = Vector2.INF
-	camera_zoom = Vector2.INF

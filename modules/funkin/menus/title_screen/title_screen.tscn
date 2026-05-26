@@ -4,7 +4,6 @@
 [ext_resource type="SpriteFrames" uid="uid://dkgusfub7fbij" path="res://modules/funkin/menus/title_screen/gf.res" id="1_ii0wr"]
 [ext_resource type="Material" uid="uid://bo61teq831cd6" path="res://modules/funkin/menus/title_screen/hue_shift.tres" id="2_grdy1"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="3_s2rvo"]
-[ext_resource type="Script" uid="uid://djsxumpddydxq" path="res://core/autoloads/conductor.gd" id="3_ssxho"]
 [ext_resource type="SpriteFrames" uid="uid://srbxpow67jf1" path="res://modules/funkin/menus/title_screen/logo.res" id="5_nv456"]
 [ext_resource type="SpriteFrames" uid="uid://diaqnypewr3ov" path="res://modules/funkin/menus/title_screen/enter.res" id="6_hraot"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="7_al1xt"]
@@ -363,11 +362,6 @@ _data = {
 script = ExtResource("1_0m8ln")
 randomized_lines = Array[String](["rate five--pls no blam", "women are real--this is official", "better than geometry dash--fight me robtop", "this is a god damn prototype--we workin on it okay", "newgrounds--forever", "refined taste in music--if i say so myself", "good bye--my penis", "fashionably late--but here it is", "yooooooooooo--yooooooooo", "pico funny--pico funny", "updates each friday--on time every time", "cussing--we have it", "pico says--trans rights", "parental advisory--explicit content", "to enable pen pressure--disable windows ink", "godot--or something", "gabriel--ultrakill", "a release?--what's that?", "listen to--femtanyl", "sub to--technoblade", "i'm so--vslicey", "#include <stdio.h>----int main(void) {--    puts(\"Hello world!\")--} // c program in fnf text", "cd--44.1khz--everyday", "opinionated--funkin' distro", "how to--exit vim?-- -- --:q! ?", "gdscript is--my life", "welcome to--the rewrite", "funkin module--more like--fuckin' uhm", "what the--fuck godot???"])
 hue_shift_material = ExtResource("2_grdy1")
-
-[node name="conductor" type="Node" parent="." unique_id=1122116043]
-unique_name_in_owner = true
-script = ExtResource("3_ssxho")
-metadata/_custom_type_script = "uid://djsxumpddydxq"
 
 [node name="post_intro" type="Node2D" parent="." unique_id=1918716990]
 visible = false

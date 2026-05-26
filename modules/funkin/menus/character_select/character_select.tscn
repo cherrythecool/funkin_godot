@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://uy8oihb6pd4m" path="res://modules/funkin/menus/character_select/background/bg.png" id="1_oablf"]
 [ext_resource type="Script" uid="uid://p52omju8wqak" path="res://modules/funkin/menus/character_select/character_select.gd" id="1_tjis5"]
-[ext_resource type="Script" uid="uid://djsxumpddydxq" path="res://core/autoloads/conductor.gd" id="2_7dv0l"]
 [ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="2_rptr7"]
 [ext_resource type="AudioStream" uid="uid://dagd7ek6gmogr" path="res://modules/funkin/menus/character_select/scroll.ogg" id="2_twrlh"]
 [ext_resource type="AudioStream" uid="uid://b41lp4n5nd3dk" path="res://modules/funkin/menus/character_select/confirm.ogg" id="3_0awtx"]
@@ -109,11 +108,6 @@ shader_parameter/block_size = Vector2(1, 1)
 [node name="character_select" type="Node2D" unique_id=1836175676]
 script = ExtResource("1_tjis5")
 
-[node name="conductor" type="Node" parent="." unique_id=400995873]
-unique_name_in_owner = true
-script = ExtResource("2_7dv0l")
-metadata/_custom_type_script = "uid://djsxumpddydxq"
-
 [node name="music" type="AudioStreamPlayer" parent="." unique_id=1334339865]
 unique_name_in_owner = true
 stream = ExtResource("3_4fbts")
@@ -146,7 +140,6 @@ scroll_scale = Vector2(0.3, 0.3)
 position = Vector2(-75, 209)
 script = ExtResource("2_rptr7")
 atlas = "res://modules/funkin/menus/character_select/background/crowd"
-frame = 8
 playing = true
 metadata/_custom_type_script = "uid://diqmdngjb60u2"
 
@@ -154,7 +147,7 @@ metadata/_custom_type_script = "uid://diqmdngjb60u2"
 position = Vector2(-40, 391)
 sprite_frames = ExtResource("7_5ydai")
 animation = &"stage full instance 1"
-frame_progress = 0.26544952
+frame_progress = 0.67080957
 centered = false
 script = ExtResource("4_xae3q")
 playing = true
@@ -176,7 +169,6 @@ material = SubResource("CanvasItemMaterial_xae3q")
 position = Vector2(0, 55)
 script = ExtResource("2_rptr7")
 atlas = "res://modules/funkin/menus/character_select/background/bar"
-frame = 3
 playing = true
 metadata/_custom_type_script = "uid://diqmdngjb60u2"
 

@@ -44,14 +44,7 @@ var volume: float = -1.0:
 
 func _ready() -> void:
 	hide()
-
-	var buses: Dictionary = Settings.get_setting(&"core", "volume", {})
-	for bus: String in buses.keys():
-		var bus_index: int = AudioServer.get_bus_index(bus)
-		if bus_index < 0:
-			continue
-
-		AudioServer.set_bus_volume_db(bus_index, linear_to_db(buses.get(bus, 1.0)))
+	Settings.settings_loaded.connect(_on_settings_loaded)
 
 
 func _input(event: InputEvent) -> void:
@@ -97,3 +90,16 @@ func _input(event: InputEvent) -> void:
 	icon_label.text = target_bus
 	icon.texture = icons[bus_index] if bus_index < icons.size() else icons[0]
 	icon.modulate = Color.INDIAN_RED if muted else Color(0.502, 0.502, 0.502, 1.0)
+
+
+func _on_settings_loaded(file: StringName) -> void:
+	if file != &"core":
+		return
+
+	var buses: Dictionary = Settings.get_setting(&"core", "volume", {})
+	for bus: String in buses.keys():
+		var bus_index: int = AudioServer.get_bus_index(bus)
+		if bus_index < 0:
+			continue
+
+		AudioServer.set_bus_volume_db(bus_index, linear_to_db(buses.get(bus, 1.0)))

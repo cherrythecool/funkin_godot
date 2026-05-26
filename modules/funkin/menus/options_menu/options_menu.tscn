@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b81xaok1c5hyh" path="res://modules/funkin/menus/options_menu/options_menu.gd" id="1_cbibk"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://modules/funkin/menus/background.png" id="1_jmigv"]
-[ext_resource type="Script" uid="uid://djsxumpddydxq" path="res://core/autoloads/conductor.gd" id="2_pqks5"]
 [ext_resource type="SpriteFrames" uid="uid://f3lhnid62rym" path="res://modules/funkin/menus/main_menu/buttons.res" id="3_yv0yv"]
 [ext_resource type="Script" uid="uid://y6vnycva8tfq" path="res://modules/funkin/menus/options_menu/options_label.gd" id="4_6ck0r"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="4_k5v7g"]
@@ -18,11 +17,6 @@
 
 [node name="options_menu" type="Node2D" unique_id=1964132103]
 script = ExtResource("1_cbibk")
-
-[node name="conductor" type="Node" parent="." unique_id=909012637]
-unique_name_in_owner = true
-script = ExtResource("2_pqks5")
-metadata/_custom_type_script = "uid://djsxumpddydxq"
 
 [node name="backdrop" type="Sprite2D" parent="." unique_id=1096006807]
 modulate = Color(0.541176, 0.827451, 0.87451, 1)
@@ -63,7 +57,7 @@ category = ExtResource("7_6v5hh")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"gameplay"
-frame_progress = 0.50514656
+frame_progress = 0.8600953
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -77,7 +71,7 @@ category = ExtResource("7_u8bnw")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"interface"
-frame_progress = 0.21741927
+frame_progress = 0.57236814
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -91,7 +85,7 @@ category = ExtResource("8_26on6")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"performance"
-frame_progress = 0.8171058
+frame_progress = 0.17205414
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -105,7 +99,7 @@ category = ExtResource("9_23plx")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"sound"
-frame_progress = 0.78389806
+frame_progress = 0.13884655
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -119,7 +113,7 @@ category = ExtResource("7_0g68v")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"accessibility"
-frame_progress = 0.14427751
+frame_progress = 0.49922627
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -149,11 +143,11 @@ centered = true
 [node name="options_label" type="AnimatedSprite2D" parent="." unique_id=1836989782]
 unique_name_in_owner = true
 position = Vector2(163, 48)
-rotation = -0.0036289876
+rotation = -0.0006921438
 scale = Vector2(0.6, 0.6)
 sprite_frames = ExtResource("3_yv0yv")
 animation = &"options idle"
-frame_progress = 0.48702142
-offset = Vector2(0, -3.9945922)
+frame_progress = 0.8419702
+offset = Vector2(0, 3.9998033)
 script = ExtResource("4_6ck0r")
 playing = true

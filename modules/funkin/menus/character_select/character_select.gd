@@ -20,7 +20,6 @@ var player_anim: AnimationPlayer
 
 @onready var speakers: AnimateSymbol = $speakers/sprite
 
-@onready var conductor: Conductor = %conductor
 @onready var music: AudioStreamPlayer = %music
 @onready var select: AudioStreamPlayer = %select
 @onready var confirm: AudioStreamPlayer = %confirm
@@ -54,10 +53,10 @@ func _ready() -> void:
 
 	confirm.finished.connect(_on_confirm_finished)
 
-	conductor.reset()
-	conductor.target_audio = music
-	conductor.tempo = 90.0
-	conductor.beat_hit.connect(_on_beat_hit)
+	Conductor.reset()
+	Conductor.target_audio = music
+	Conductor.tempo = 90.0
+	Conductor.beat_hit.connect(_on_beat_hit)
 	music.play()
 
 	dipshit_tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)\

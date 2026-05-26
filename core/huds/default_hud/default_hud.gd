@@ -58,7 +58,7 @@ func _ready() -> void:
 		process_mode = Node.PROCESS_MODE_DISABLED
 		return
 
-	game.conductor.beat_hit.connect(_on_beat_hit)
+	Conductor.beat_hit.connect(_on_beat_hit)
 
 	if note_fields.has_node(^'player'):
 		player_field = note_fields.get_node(^'player')
@@ -127,7 +127,7 @@ func _on_first_opponent_note(_note: Note) -> void:
 
 
 func _on_note_hit(note: Note) -> void:
-	var difference: float = game.conductor.time - note.data.time
+	var difference: float = Conductor.time - note.data.time
 	if not player_field.takes_input:
 		difference = 0.0
 

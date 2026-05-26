@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dcf86iwg6mn3d"]
 
 [ext_resource type="Script" uid="uid://df3do7nvg4as7" path="res://modules/funkin/menus/story_menu/story_menu.gd" id="1_el8f4"]
-[ext_resource type="Script" uid="uid://djsxumpddydxq" path="res://core/autoloads/conductor.gd" id="2_nlhku"]
 [ext_resource type="Script" uid="uid://bfydji5l6juhk" path="res://modules/funkin/menus/story_menu/props_container.gd" id="3_64j2x"]
 [ext_resource type="Script" uid="uid://ceghwb3yjt8wp" path="res://modules/funkin/menus/story_menu/songs_label.gd" id="3_552ey"]
 [ext_resource type="Texture2D" uid="uid://vbft4ijb0s4b" path="res://modules/funkin/menus/story_menu/weeks/tutorial.png" id="4_3r44s"]
@@ -99,11 +98,6 @@ metadata/_edit_lock_ = true
 [node name="week_flash_timer" type="Timer" parent="." unique_id=1680428688]
 unique_name_in_owner = true
 wait_time = 0.055
-
-[node name="conductor" type="Node" parent="." unique_id=1365763560]
-unique_name_in_owner = true
-script = ExtResource("2_nlhku")
-metadata/_custom_type_script = "uid://djsxumpddydxq"
 
 [node name="background_color" type="ColorRect" parent="." unique_id=2052416452]
 layout_mode = 1

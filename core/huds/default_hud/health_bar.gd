@@ -101,7 +101,7 @@ func icon_ease(x: float) -> float:
 
 
 func icon_lerp() -> float:
-	return icon_ease(game.conductor.beat - floorf(game.conductor.beat))
+	return icon_ease(Conductor.beat - floorf(Conductor.beat))
 
 
 func position_icons(health: float) -> void:

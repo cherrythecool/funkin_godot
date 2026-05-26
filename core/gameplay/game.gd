@@ -15,7 +15,6 @@ var events_index: int = 0
 var pause_menu: PackedScene
 
 @onready var rating_calculator: RatingCalculator = %rating_calculator
-@onready var conductor: Conductor = %conductor
 @onready var tracks: Tracks = %tracks
 @onready var scripts: Scripts = %scripts
 
@@ -135,11 +134,11 @@ func _process(delta: float) -> void:
 		return
 
 	if is_instance_valid(tracks) and not song_started:
-		if conductor.raw_time >= 0.0 and conductor.active and not tracks.playing:
+		if Conductor.raw_time >= 0.0 and Conductor.active and not tracks.playing:
 			start_song()
 
 	while events_index < chart.events.size() and \
-			conductor.time >= chart.events[events_index].time:
+			Conductor.time >= chart.events[events_index].time:
 		var event: EventData = chart.events[events_index]
 		event_hit.emit(event)
 		events_index += 1
@@ -161,7 +160,7 @@ func _input(event: InputEvent) -> void:
 		var menu: CanvasLayer = pause_menu.instantiate()
 		add_child(menu)
 		process_mode = Node.PROCESS_MODE_DISABLED
-		conductor.active = false
+		Conductor.active = false
 	elif event.is_action(&"menu_cancel"):
 		finish_song(true)
 
@@ -178,7 +177,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action(&"skip_time"):
 		save_score = false
-		skip_to(conductor.raw_time + 10.0)
+		skip_to(Conductor.raw_time + 10.0)
 
 
 func _on_note_miss(note: Note) -> void:
@@ -195,7 +194,7 @@ func _on_note_hit(note: Note) -> void:
 	if not is_instance_valid(rating_calculator):
 		return
 
-	var difference: float = conductor.time - note.data.time
+	var difference: float = Conductor.time - note.data.time
 	if is_instance_valid(player_field):
 		if not player_field.takes_input:
 			difference = 0.0
@@ -205,11 +204,12 @@ func _on_note_hit(note: Note) -> void:
 	health = clampf(health + rating.health, 0.0, 100.0)
 	score += rating.score
 
+
 func start_song(from_position: float = 0.0) -> void:
 	tracks.play(from_position)
-	conductor.target_audio = tracks.player
-	conductor.sync_to_target(0.0)
-	conductor.rate = conductor.internal_rate
+	Conductor.target_audio = tracks.player
+	Conductor.sync_to_target(0.0)
+	Conductor.rate = Conductor.internal_rate
 
 	song_start.emit()
 	song_started = true
@@ -415,11 +415,11 @@ func setup_hud() -> void:
 
 
 func reset_conductor() -> void:
-	conductor.reset()
-	conductor.get_bpm_changes(chart.events)
-	conductor.calculate_beat()
-	conductor.raw_time = -4.0 * conductor.beat_delta
-	conductor.beat_hit.emit.call_deferred(-4)
+	Conductor.reset()
+	Conductor.get_bpm_changes(chart.events)
+	Conductor.calculate_beat()
+	Conductor.raw_time = -4.0 * Conductor.beat_delta
+	Conductor.beat_hit.emit.call_deferred(-4)
 
 
 func load_events() -> void:
@@ -462,22 +462,22 @@ func skip_to(seconds: float) -> void:
 	if not song_started:
 		start_song(seconds)
 	else:
-		if not is_instance_valid(conductor.target_audio):
-			conductor.raw_time = seconds
+		if not is_instance_valid(Conductor.target_audio):
+			Conductor.raw_time = seconds
 		else:
-			if is_instance_valid(conductor.target_audio.stream):
-				if seconds >= conductor.target_audio.stream.get_length():
+			if is_instance_valid(Conductor.target_audio.stream):
+				if seconds >= Conductor.target_audio.stream.get_length():
 					finish_song(false, false)
 					return
 
-			if not conductor.target_audio.playing:
-				conductor.target_audio.play(seconds)
+			if not Conductor.target_audio.playing:
+				Conductor.target_audio.play(seconds)
 			else:
-				conductor.target_audio.seek(seconds)
+				Conductor.target_audio.seek(seconds)
 
-			conductor.sync_to_target(0.0)
+			Conductor.sync_to_target(0.0)
 
-	conductor.calculate_beat()
+	Conductor.calculate_beat()
 
 	if is_instance_valid(opponent_field):
 		opponent_field.try_spawning(true)

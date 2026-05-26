@@ -31,6 +31,7 @@ general/ios/mix_with_others=true
 
 Global="*res://core/autoloads/global.gd"
 GlobalAudio="*res://core/autoloads/global_audio.tscn"
+Conductor="*uid://djsxumpddydxq"
 Scores="*res://core/autoloads/scores.gd"
 Controls="*res://core/autoloads/controls.gd"
 SoundTray="*uid://bhbryleu1jjq0"

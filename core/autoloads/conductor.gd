@@ -1,15 +1,37 @@
 extends Node
-class_name Conductor
 
+
+const MAX_DESYNC: float = 20.0 / 1000.0
 
 static var instance: Conductor = null
 
 static var audio_offset: float:
 	get:
-		return -AudioServer.get_output_latency()
-static var manual_offset: float = 0.0
-static var offset: float = audio_offset - manual_offset
+		return AudioServer.get_output_latency()
 
+static var manual_offset: float = 0.0
+static var offset: float = audio_offset + manual_offset
+
+@export var rate: float = 1.0:
+	set(value):
+		Engine.time_scale = maxf(value, 0.0)
+
+		if is_instance_valid(target_audio):
+			target_audio.pitch_scale = value
+
+		internal_rate = value
+		rate_changed.emit(value)
+	get:
+		if is_instance_valid(target_audio):
+			return target_audio.pitch_scale
+		else:
+			return internal_rate
+
+@export var active: bool = true
+@export var tempo: float = 0.0
+@export var tempo_changes: Array[BPMChange] = []
+
+var raw_time: float = 0.0
 var time: float:
 	get:
 		return raw_time + offset
@@ -17,25 +39,6 @@ var time: float:
 # We need this internal variable to let you
 # properly modify rate in editor export at runtime
 var internal_rate: float = 1.0
-@export var rate: float = 1.0:
-	set(value):
-		Engine.time_scale = maxf(value, 0.0)
-		if is_instance_valid(target_audio):
-			target_audio.pitch_scale = value
-		internal_rate = value
-		rate_changed.emit(value)
-	get:
-		if is_instance_valid(target_audio):
-			return target_audio.pitch_scale
-
-		return internal_rate
-@export var active: bool = true
-
-var raw_time: float = 0.0
-const MAX_DESYNC: float = 20.0 / 1000.0
-
-@export var tempo: float = 0.0
-@export var tempo_changes: Array[BPMChange] = []
 
 var beat: float = 0.0
 
@@ -69,7 +72,8 @@ var target_length: float:
 	get:
 		if is_instance_valid(target_audio) and is_instance_valid(target_audio.stream):
 			return target_audio.stream.get_length()
-		return 1.0
+		else:
+			return 1.0
 
 signal step_hit(step: int)
 signal beat_hit(beat: int)
@@ -78,15 +82,7 @@ signal rate_changed(rate: float)
 
 
 static func reset_offset() -> void:
-	const SUPPORTED_PLATFORMS: PackedStringArray = [
-		"Linux",
-		"Web",
-	]
-
-	if SUPPORTED_PLATFORMS.has(OS.get_name()):
-		offset = audio_offset - manual_offset
-	else:
-		offset = -manual_offset
+	offset = audio_offset + manual_offset
 
 
 func _exit_tree() -> void:
