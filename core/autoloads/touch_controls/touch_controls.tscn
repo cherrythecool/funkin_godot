@@ -7,8 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://bjc80phtl0g5n" path="res://core/autoloads/touch_controls/buttons/arrow_press.png" id="3_8o8lk"]
 [ext_resource type="Texture2D" uid="uid://byerpgwxncrr4" path="res://core/autoloads/touch_controls/buttons/accept_base.png" id="4_uejki"]
 [ext_resource type="Texture2D" uid="uid://hmftqpu0e0vi" path="res://core/autoloads/touch_controls/buttons/accept_press.png" id="5_8dfaf"]
+[ext_resource type="Texture2D" uid="uid://bmblbstf43qb2" path="res://core/autoloads/touch_controls/buttons/button_base.png" id="6_8q5p8"]
 [ext_resource type="Texture2D" uid="uid://d4b76ad3txqoh" path="res://core/autoloads/touch_controls/buttons/shift_base.png" id="6_kk16y"]
 [ext_resource type="Texture2D" uid="uid://covxb2rqpqkc6" path="res://core/autoloads/touch_controls/buttons/shift_press.png" id="7_d347s"]
+[ext_resource type="Texture2D" uid="uid://bckbdjo1xwbjj" path="res://core/autoloads/touch_controls/buttons/button_press.png" id="7_ut5b4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uejki"]
 radius = 28.0
@@ -97,6 +99,16 @@ texture_pressed = ExtResource("5_8dfaf")
 shape = SubResource("CircleShape2D_uejki")
 passby_press = true
 action = "menu_accept"
+visibility_mode = 1
+
+[node name="module_select" type="TouchScreenButton" parent="menus" unique_id=1617492479]
+position = Vector2(1157, 25.000061)
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("6_8q5p8")
+texture_pressed = ExtResource("7_ut5b4")
+shape = SubResource("CircleShape2D_uejki")
+passby_press = true
+action = "module_select"
 visibility_mode = 1
 
 [node name="freeplay" type="Control" parent="menus" unique_id=763624923]

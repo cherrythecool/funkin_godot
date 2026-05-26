@@ -11,12 +11,17 @@ extends CanvasLayer
 @onready var scroll_container: ScrollContainer = %scroll_container
 @onready var module_container: VBoxContainer = %vbox
 
+var mods_path: String = "./mods"
+
 var current_module: String
 
 var current_modules: Array
 
 
 func _ready() -> void:
+	if OS.has_feature("mobile"):
+		mods_path = "user://mods"
+
 	hide()
 
 	Settings.set_default_settings(&"module", {
@@ -76,20 +81,25 @@ func load_mods_folder() -> void:
 	if disabled or OS.has_feature("editor"):
 		return
 
-	var dir := DirAccess.open("./")
+	var dir: DirAccess
+	if OS.has_feature("mobile"):
+		dir = DirAccess.open("user://")
+	else:
+		dir = DirAccess.open("./")
+
 	if not dir:
-		printerr("Failed to open ./ directory! Cannot load any modules!")
+		printerr("Failed to open mods parent directory! Cannot load any modules!")
 		return
 
 	dir.make_dir("mods")
 
-	var mods_dir := DirAccess.open("./mods")
+	var mods_dir := DirAccess.open(mods_path)
 	var mods := Array(mods_dir.get_files())
 	mods = mods.filter(module_pck_filter)
 
 	for mod: String in mods:
 		ProjectSettings.load_resource_pack(
-			"./mods/%s" % mod,
+			"%s/%s" % [mods_path, mod],
 			mods_replace_contents
 		)
 
@@ -157,7 +167,7 @@ func _on_open_folder_pressed() -> void:
 	if OS.has_feature("editor"):
 		return
 
-	var dir := DirAccess.open("./mods")
+	var dir := DirAccess.open(mods_path)
 	if not dir:
 		return
 

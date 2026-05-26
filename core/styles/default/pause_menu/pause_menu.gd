@@ -98,3 +98,7 @@ func close() -> void:
 		Game.instance.process_mode = Node.PROCESS_MODE_INHERIT
 		Conductor.active = true
 		Game.instance.unpaused.emit()
+
+
+func _exit_tree() -> void:
+	close()
