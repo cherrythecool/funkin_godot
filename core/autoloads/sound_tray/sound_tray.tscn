@@ -138,11 +138,13 @@ script = ExtResource("1_fobyb")
 [node name="volume_up" type="AudioStreamPlayer" parent="." unique_id=90379923]
 unique_name_in_owner = true
 stream = ExtResource("3_gtm6u")
+volume_db = 3.0
 max_polyphony = 4
 
 [node name="volume_down" type="AudioStreamPlayer" parent="." unique_id=1557540288]
 unique_name_in_owner = true
 stream = ExtResource("2_x1qxr")
+volume_db = 3.0
 max_polyphony = 4
 
 [node name="volume_max" type="AudioStreamPlayer" parent="." unique_id=409261063]

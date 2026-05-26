@@ -12,8 +12,6 @@ extends CanvasLayer
 @onready var volume_down: AudioStreamPlayer = %volume_down
 @onready var volume_max: AudioStreamPlayer = %volume_max
 
-var tween: Tween
-
 var muted: bool = false:
 	set(value):
 		AudioServer.set_bus_mute(0, value)
