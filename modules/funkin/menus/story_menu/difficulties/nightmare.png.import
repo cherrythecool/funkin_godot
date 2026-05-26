@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/nightmare.png-c3a2a26894b00878ff0dd55474b6f6c
 
 [params]
 
-compress/mode=3
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
