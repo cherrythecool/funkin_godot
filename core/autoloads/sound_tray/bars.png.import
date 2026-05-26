@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfl1iso62n4rn"
-path="res://.godot/imported/edit.svg-939e5bafe232c632c6f1d3126c0999e5.ctex"
+uid="uid://t0nh1fx577c7"
+path="res://.godot/imported/bars.png-ec729022aebb7ec3ade16e76fdaec0e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://core/autoloads/sound_tray/edit.svg"
-dest_files=["res://.godot/imported/edit.svg-939e5bafe232c632c6f1d3126c0999e5.ctex"]
+source_file="res://core/autoloads/sound_tray/bars.png"
+dest_files=["res://.godot/imported/bars.png-ec729022aebb7ec3ade16e76fdaec0e3.ctex"]
 
 [params]
 
 compress/mode=0
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

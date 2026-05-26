@@ -1,22 +1,24 @@
 extends CanvasLayer
 
 
-@export var icons: Array[Texture2D] = []
+@onready var bars: TextureRect = %bars
+@onready var root: Control = %root
+@onready var background: TextureRect = %background
+@onready var animation_player: AnimationPlayer = %animation_player
+@onready var bounce_player: AnimationPlayer = %bounce_player
+@onready var close_timer: Timer = %close_timer
 
-@onready var main_panel: Panel = %main_panel
-@onready var bar: ProgressBar = %bar
-@onready var volume_label: Label = %volume_label
-@onready var icon: TextureRect = %icon
-@onready var icon_label: Label = %icon_label
+@onready var volume_up: AudioStreamPlayer = %volume_up
+@onready var volume_down: AudioStreamPlayer = %volume_down
+@onready var volume_max: AudioStreamPlayer = %volume_max
 
 var tween: Tween
-var target_bus: StringName = &"Master"
 
 var muted: bool = false:
 	set(value):
-		AudioServer.set_bus_mute(AudioServer.get_bus_index(target_bus), value)
+		AudioServer.set_bus_mute(0, value)
 	get:
-		return AudioServer.is_bus_mute(AudioServer.get_bus_index(target_bus))
+		return AudioServer.is_bus_mute(0)
 
 var volume: float = -1.0:
 	set(value):
@@ -24,27 +26,37 @@ var volume: float = -1.0:
 			return
 
 		AudioServer.set_bus_volume_db(
-			AudioServer.get_bus_index(target_bus),
+			0,
 			linear_to_db(value),
 		)
 
 		var buses: Dictionary = Settings.get_setting(&"core", "volume", {})
-		buses[target_bus] = value
+		buses[&"Master"] = value
 		Settings.set_setting(&"core", "volume", buses)
 
 		if volume > 0.0:
 			muted = false
 	get:
-		return db_to_linear(
-			AudioServer.get_bus_volume_db(
-				AudioServer.get_bus_index(target_bus)
-			)
-		)
+		return db_to_linear(AudioServer.get_bus_volume_db(0))
+
+var shake_timer: float = 0.0
 
 
 func _ready() -> void:
 	hide()
 	Settings.settings_loaded.connect(_on_settings_loaded)
+
+
+func _physics_process(delta: float) -> void:
+	shake_timer -= delta
+
+	if shake_timer >= 0.0:
+		root.position = Vector2(
+			randf_range(-2.0, 2.0),
+			randf_range(-2.0, 2.0)
+		)
+	else:
+		root.position = Vector2.ZERO
 
 
 func _input(event: InputEvent) -> void:
@@ -60,36 +72,40 @@ func _input(event: InputEvent) -> void:
 	if direction == 0 and not event.is_action(&"volume_mute"):
 		return
 
-	if is_instance_valid(tween) and tween.is_running():
-		tween.kill()
+	if background.position.y <= -128.0:
+		animation_player.play(&"open")
+	close_timer.start()
 
-	tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	if not event.is_action(&"volume_mute"):
-		tween.tween_property(main_panel, ^"size:y", 92, 0.5)
+		bounce_player.play(&"bounce")
+		bounce_player.seek(0.0, true)
 	else:
-		main_panel.size.y = 92
 		muted = not muted
+		shake_timer = randf_range(0.1, 0.2)
 
-	tween.tween_property(main_panel, ^"size:y", 0, 0.5).set_delay(1.0)
-	tween.tween_property(self, ^"visible", false, 0.0)
 	visible = true
 
-	var modifier: int = roundi(Input.get_axis(&"alt", &"shift"))
-	var bus_index: int = AudioServer.get_bus_index(target_bus)
-	match modifier:
-		0:
-			volume = clampf(volume + 0.05 * direction, 0.0, 1.0)
-		-1:
-			bus_index = wrapi(bus_index + direction, 0, AudioServer.bus_count)
-			target_bus = AudioServer.get_bus_name(bus_index)
-		1:
-			volume = clampf(volume + 0.01 * direction, 0.0, 1.0)
+	if Input.is_action_pressed(&"shift"):
+		volume = clampf(volume + 0.01 * direction, 0.0, 1.0)
+	else:
+		volume = clampf(volume + 0.05 * direction, 0.0, 1.0)
 
-	bar.value = volume * 100.0
-	volume_label.text = "%d%% Volume" % [roundi(volume * 100.0)]
-	icon_label.text = target_bus
-	icon.texture = icons[bus_index] if bus_index < icons.size() else icons[0]
-	icon.modulate = Color.INDIAN_RED if muted else Color(0.502, 0.502, 0.502, 1.0)
+	if volume == 1.0 and direction != 0.0:
+		shake_timer = randf_range(0.1, 0.2)
+		volume_max.play()
+	else:
+		if direction > 0.0:
+			volume_up.play()
+			volume_up.pitch_scale = lerpf(0.85, 1.15, volume)
+		elif direction < 0.0:
+			volume_down.play()
+			volume_down.pitch_scale = lerpf(0.85, 1.15, volume)
+
+	bars.texture.region.size.x = bars.texture.atlas.get_width() * volume
+	if bars.texture.region.size.x < 1.0:
+		bars.texture.region.size.x = 1.0
+
+	bars.modulate = Color.INDIAN_RED if muted else Color.WHITE
 
 
 func _on_settings_loaded(file: StringName) -> void:
@@ -103,3 +119,12 @@ func _on_settings_loaded(file: StringName) -> void:
 			continue
 
 		AudioServer.set_bus_volume_db(bus_index, linear_to_db(buses.get(bus, 1.0)))
+
+
+func _on_tray_animation_finished(anim_name: StringName) -> void:
+	if anim_name == &"open":
+		close_timer.start()
+
+
+func _on_close_timer_timeout() -> void:
+	animation_player.play(&"close")
