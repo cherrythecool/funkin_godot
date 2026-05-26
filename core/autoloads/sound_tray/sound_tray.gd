@@ -72,8 +72,11 @@ func _input(event: InputEvent) -> void:
 	if direction == 0 and not event.is_action(&"volume_mute"):
 		return
 
-	if background.position.y <= -128.0:
+	if background.position.y <= -128.0 or animation_player.current_animation == &"close":
+		close_timer.stop()
 		animation_player.play(&"open")
+		animation_player.seek(0.0, true)
+
 	close_timer.start()
 
 	if not event.is_action(&"volume_mute"):
