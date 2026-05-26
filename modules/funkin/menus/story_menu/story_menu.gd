@@ -1,6 +1,13 @@
 extends Control
 
 
+@export_dir var songs_folder: String = "res://modules/funkin/songs":
+	set(v):
+		songs_folder = v
+
+		if songs_folder.ends_with("/"):
+			songs_folder = songs_folder.left(-1)
+
 @onready var songs: Control = %songs
 @onready var songs_label: Label = songs.get_node(^'songs_label')
 
@@ -52,7 +59,7 @@ func _process(delta: float) -> void:
 	week_gradient.modulate = week_color.color
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not active:
 		return
 	if event.is_echo():
@@ -117,17 +124,18 @@ func _load_first_song() -> bool:
 	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
 	var difficulty: String = difficulties.difficulties[difficulties.selected]
 	var song_name: String = selected_week.get_song_name(0, difficulty)
-	Game.chart = Chart.load_song(song_name, difficulty)
+	Game.chart = Chart.load_song("%s/%s" % [songs_folder, song_name], difficulty)
 
 	if not is_instance_valid(Game.chart):
 		var json_path: String = (
-			'res://modules/funkin/songs/%s/charts/%s.json'
-			% [song_name, difficulty.to_lower()]
+			'%s/%s/charts/%s.json'
+			% [songs_folder, song_name, difficulty.to_lower()]
 		)
 		printerr('Song at path %s doesn\'t exist!' % json_path)
 		GlobalAudio.get_player('MENU/CANCEL').play()
 		return false
 
+	Game.songs_folder = songs_folder
 	Game.song = song_name
 	Game.difficulty = difficulty.to_lower()
 	Game.mode = Game.PlayMode.STORY
@@ -156,8 +164,8 @@ func change_selection(amount: int = 0) -> void:
 	var song_names: PackedStringArray = []
 
 	for path: String in song_paths:
-		if ResourceLoader.exists('res://modules/funkin/songs/%s/meta.tres' % path):
-			var meta: SongMetadata = load('res://modules/funkin/songs/%s/meta.tres' % path)
+		if ResourceLoader.exists('%s/%s/meta.tres' % [songs_folder, path]):
+			var meta: SongMetadata = load('%s/%s/meta.tres' % [songs_folder, path])
 			song_names.push_back(meta.get_full_name())
 		else:
 			song_names.push_back(path)

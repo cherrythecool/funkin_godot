@@ -2,6 +2,7 @@ extends Node
 class_name Game
 
 
+static var songs_folder: String = "res://modules/funkin/songs"
 static var song: StringName = &"bopeebo"
 static var difficulty: StringName = &"hard"
 static var chart: Chart = null
@@ -11,23 +12,23 @@ static var exit_scene: String = ""
 static var instance: Game = null
 static var playlist: Array[GamePlaylistEntry] = []
 
-var events_index: int = 0
-var pause_menu: PackedScene
-
 @onready var rating_calculator: RatingCalculator = %rating_calculator
 @onready var tracks: Tracks = %tracks
 @onready var scripts: Scripts = %scripts
 
 @onready var hud_layer: CanvasLayer = %hud_layer
+@onready var stage_container: Node2D = $stage
+@onready var characters_container: Node2D = $characters
+
+var events_index: int = 0
+var pause_menu: PackedScene
+
 var hud: Node
 var player_field: NoteField = null
 var opponent_field: NoteField = null
 
 var song_started: bool = false
 var save_score: bool = true
-
-@onready var stage_container: Node2D = $stage
-@onready var characters_container: Node2D = $characters
 
 ## Each note type is stored here for use in any note field.
 var note_types: Dictionary[StringName, PackedScene] = {}
@@ -55,19 +56,24 @@ var score: int = 0:
 
 var misses: int = 0
 var combo: int = 0
+
 var accuracy: float = 0.0:
 	get:
 		if is_instance_valid(rating_calculator):
 			return rating_calculator.accuracy
 
 		return 0.0
+
 var rank: StringName:
 	get:
 		if is_instance_valid(rating_calculator):
 			return rating_calculator.rank
 
 		return &"N/A"
+
 var skin: HUDSkin
+
+var persist_camera_on_exit: bool = false
 
 signal hud_setup
 signal ready_post
@@ -84,10 +90,11 @@ signal score_changed(value: int)
 @warning_ignore("unused_signal") signal unpaused
 
 
-func _ready() -> void:
-	if not is_instance_valid(instance):
-		instance = self
+func _init() -> void:
+	instance = self
 
+
+func _ready() -> void:
 	# we set to inherit to bypass the automatic pausing
 	# from scene transitions (it makes the countdown &
 	# potentially other things a lil' wonky, mostly sounds)
@@ -97,7 +104,7 @@ func _ready() -> void:
 	Input.use_accumulated_input = false
 
 	GlobalAudio.music.stop()
-	tracks.load_tracks(song)
+	tracks.load_tracks(song, songs_folder)
 	tracks.finished.connect(finish_song.bind(false, false))
 
 	load_chart()
@@ -107,17 +114,23 @@ func _ready() -> void:
 	load_from_assets()
 	setup_hud()
 
-	scripts.load_scripts(song)
+	scripts.load_scripts(song, songs_folder)
 	load_events()
 	ready_post.emit()
 
 
 func _exit_tree() -> void:
-	if instance == self:
-		instance = null
+	if instance != self:
+		return
+
+	instance = null
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.use_accumulated_input = true
+
+	# Mostly for modules, might be helpful somewhere else too though
+	if not persist_camera_on_exit:
+		GameCamera2D.reset_persistent_values()
 
 
 func _process(delta: float) -> void:
@@ -130,6 +143,7 @@ func _process(delta: float) -> void:
 		died.emit()
 		Gameover.character_path = player.death_character
 		Gameover.character_position = player.global_position
+		persist_camera_on_exit = true
 		SceneManager.swap_to_packed(load("uid://c05dah5aarqg8"))
 		return
 
@@ -139,8 +153,7 @@ func _process(delta: float) -> void:
 
 	while events_index < chart.events.size() and \
 			Conductor.time >= chart.events[events_index].time:
-		var event: EventData = chart.events[events_index]
-		event_hit.emit(event)
+		event_hit.emit(chart.events[events_index])
 		events_index += 1
 
 
@@ -148,7 +161,7 @@ func _process_post(delta: float) -> void:
 	process_post.emit(delta)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_pressed():
 		return
 	if event.is_echo():
@@ -236,11 +249,11 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 	if not (playlist.is_empty() or force):
 		var new_song: StringName = playlist[0].name
 		var new_difficulty: StringName = playlist[0].difficulty
-		chart = Chart.load_song(new_song, new_difficulty)
+		chart = Chart.load_song("%s/%s" % [songs_folder, new_song], new_difficulty)
 		if not is_instance_valid(chart):
 			var json_path: String = (
-				"res://modules/funkin/songs/%s/charts/%s.json"
-				% [new_song, new_difficulty.to_lower()]
+				"%s/%s/charts/%s.json"
+				% [songs_folder, new_song, new_difficulty.to_lower()]
 			)
 			printerr("Song at path %s doesn\'t exist!" % json_path)
 			GlobalAudio.get_player("MENU/CANCEL").play()
@@ -276,7 +289,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 
 func load_chart() -> void:
 	if not is_instance_valid(chart):
-		chart = Chart.load_song(song, difficulty)
+		chart = Chart.load_song("%s/%s" % [songs_folder, song], difficulty)
 
 	var custom_speed: float = Settings.get_setting(&"core", "note_scroll_value")
 	match Settings.get_setting(&"core", "note_scroll_method"):
@@ -309,14 +322,14 @@ func load_chart() -> void:
 
 
 func load_assets() -> void:
-	if ResourceLoader.exists("res://modules/funkin/songs/%s/meta.tres" % song):
-		metadata = load("res://modules/funkin/songs/%s/meta.tres" % song)
+	if ResourceLoader.exists("%s/%s/meta.tres" % [songs_folder, song]):
+		metadata = load("%s/%s/meta.tres" % [songs_folder, song])
 	if not is_instance_valid(metadata):
 		metadata = SongMetadata.new()
 		metadata.display_name = song.to_pascal_case()
 
-	if ResourceLoader.exists("res://modules/funkin/songs/%s/assets.tres" % song):
-		assets = load("res://modules/funkin/songs/%s/assets.tres" % song)
+	if ResourceLoader.exists("%s/%s/assets.tres" % [songs_folder, song]):
+		assets = load("%s/%s/assets.tres" % [songs_folder, song])
 	if not is_instance_valid(assets):
 		assets = load("uid://dm8kpip52j8kf")
 
@@ -418,7 +431,7 @@ func reset_conductor() -> void:
 	Conductor.reset()
 	Conductor.get_bpm_changes(chart.events)
 	Conductor.calculate_beat()
-	Conductor.raw_time = -4.0 * Conductor.beat_delta
+	Conductor.raw_time = (-4.0 * Conductor.beat_delta) + Conductor.offset
 	Conductor.beat_hit.emit.call_deferred(-4)
 
 
@@ -435,7 +448,7 @@ func load_events() -> void:
 				continue
 			exceptions.push_back(event_name)
 
-			var path: String = "res://modules/funkin/events/%s.tscn" % [event_name]
+			var path: String = "res://modules/%s/events/%s.tscn" % [ModuleManager.current_module, event_name]
 			if not ResourceLoader.exists(path):
 				continue
 

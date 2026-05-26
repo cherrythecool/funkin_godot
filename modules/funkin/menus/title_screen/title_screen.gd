@@ -30,7 +30,7 @@ func _ready() -> void:
 		return
 
 	var music_player: AudioStreamPlayer = GlobalAudio.music
-	if not music_player.playing:
+	if in_intro or not music_player.playing:
 		Conductor.reset()
 		music_player.play()
 
@@ -57,7 +57,7 @@ func _process(delta: float) -> void:
 	hue_shift_material.set_shader_parameter(&"value", hue_shift)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if transitioning or event.is_echo() or not event.is_pressed():
 		return
 	if event.is_action(&"menu_cancel") and not Global.is_mobile:

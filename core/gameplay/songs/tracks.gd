@@ -80,11 +80,11 @@ static func find_tracks(song: StringName, path: String) -> AudioStream:
 	return tracks
 
 
-## Loads the audio tracks from the song [param song]
-## and places them into this Node as separate [AudioStreamPlayerEX]s.
-func load_tracks(song: StringName, song_path: String = '') -> void:
+## Loads the audio tracks from the song [param song].
+func load_tracks(song: StringName, song_path: String) -> void:
 	if song_path.is_empty():
 		song_path = 'res://modules/funkin/songs'
+
 	# Shouldn't be an issue but just to be sure.
 	if song_path.ends_with('/'):
 		song_path = song_path.left(song_path.length() - 1)

@@ -50,7 +50,7 @@ font_color = Color(0.501961, 0.501961, 0.501961, 1)
 
 [node name="sound_tray" type="CanvasLayer" unique_id=2135155222]
 process_mode = 3
-layer = 48
+layer = 16
 script = ExtResource("1_fobyb")
 icons = Array[Texture2D]([ExtResource("3_f6m6h"), ExtResource("3_d0bi8"), ExtResource("4_rgfc6")])
 

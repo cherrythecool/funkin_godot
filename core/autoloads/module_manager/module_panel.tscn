@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bqv4nkj1rm3om"]
+
+[ext_resource type="FontFile" uid="uid://br11pkir6c8as" path="res://core/fonts/jetbrains_mono.ttf" id="1_ite0c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfkcw"]
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghy35"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_ghy35"]
+font = ExtResource("1_ite0c")
+font_size = 12
+
+[node name="module_panel" type="Panel" unique_id=129263497]
+custom_minimum_size = Vector2(0, 32)
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfkcw")
+
+[node name="selected_panel" type="Panel" parent="." unique_id=1992337668]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ghy35")
+
+[node name="module_name" type="Label" parent="." unique_id=818339102]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.6)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_vertical = 2
+text = "funkin"
+label_settings = SubResource("LabelSettings_ghy35")
+vertical_alignment = 1
+text_overrun_behavior = 5

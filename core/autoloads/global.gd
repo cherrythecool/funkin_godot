@@ -57,7 +57,7 @@ func _on_focus_exit() -> void:
 	get_tree().paused = true
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_echo() or not event.is_pressed():
 		return
 

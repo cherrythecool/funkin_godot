@@ -24,7 +24,7 @@ func _ready() -> void:
 				continue
 
 			var b := n as Button
-			b.text = Alphabet.keycode_to_character(binds[node.name][i]).to_upper()
+			b.text = OS.get_keycode_string(binds[node.name][i]).to_upper()
 			b.pressed.connect(select_key.bind(b, node.name, i))
 			b.focus_mode = Control.FOCUS_ACCESSIBILITY
 

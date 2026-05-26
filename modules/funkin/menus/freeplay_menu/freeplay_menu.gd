@@ -1,10 +1,17 @@
-class_name FreeplayMenu extends Node2D
+class_name FreeplayMenu
+extends Node2D
 
 
 static var index: int = 0
 static var difficulty_index: int = 0
 
 @export var list: Array[String] = []
+@export_dir var songs_folder: String = "res://modules/funkin/songs":
+	set(v):
+		songs_folder = v
+
+		if songs_folder.ends_with("/"):
+			songs_folder = songs_folder.left(-1)
 
 @onready var background: Sprite2D = %background
 var target_background_color: Color = Color.WHITE
@@ -67,7 +74,7 @@ func _process(delta: float) -> void:
 	background.modulate = background.modulate.lerp(target_background_color, delta * 5.0)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not active:
 		return
 	if not event.is_pressed():
@@ -79,7 +86,7 @@ func _input(event: InputEvent) -> void:
 		SceneManager.transition_to_packed(load("uid://b7fwxsepnt38j"))
 	if event.is_action(&"menu_accept"):
 		active = false
-		call_deferred(&"select_song")
+		select_song.call_deferred()
 	if event.is_action(&"freeplay_open_characters"):
 		active = false
 		GlobalAudio.get_player(^"MENU/CANCEL").play()
@@ -92,10 +99,10 @@ func _input(event: InputEvent) -> void:
 
 
 func get_song_name(song: String, diff: String) -> String:
-	if not ResourceLoader.exists("res://modules/funkin/songs/%s/meta.tres" % [song]):
+	if not ResourceLoader.exists("%s/%s/meta.tres" % [songs_folder, song]):
 		return song.to_lower()
 
-	var meta: SongMetadata =  load("res://modules/funkin/songs/%s/meta.tres" % [song])
+	var meta: SongMetadata =  load("%s/%s/meta.tres" % [songs_folder, song])
 	if not is_instance_valid(meta):
 		return song.to_lower()
 
@@ -106,10 +113,10 @@ func get_song_name(song: String, diff: String) -> String:
 
 
 func get_song_difficulties(song: String) -> PackedStringArray:
-	if not ResourceLoader.exists("res://modules/funkin/songs/%s/meta.tres" % [song]):
+	if not ResourceLoader.exists("%s/%s/meta.tres" % [songs_folder, song]):
 		return ["easy", "normal", "hard"]
 
-	var meta: SongMetadata = load("res://modules/funkin/songs/%s/meta.tres" % [song])
+	var meta: SongMetadata = load("%s/%s/meta.tres" % [songs_folder, song])
 	if not is_instance_valid(meta):
 		return ["easy", "normal", "hard"]
 
@@ -156,13 +163,15 @@ func select_song() -> void:
 		active = true
 		return
 
-	Game.chart = Chart.load_song(current_song, difficulty)
+	var song_folder := "%s/%s" % [songs_folder, current_song]
+	Game.chart = Chart.load_song(song_folder, difficulty)
 	if not is_instance_valid(Game.chart):
-		var json_path: String = "res://modules/funkin/songs/%s/charts/%s.json" % [current_song, difficulty.to_lower()]
+		var json_path: String = "%s/charts/%s.json" % [song_folder, difficulty.to_lower()]
 		active = true
 		printerr("Song at path %s doesn\"t exist!" % json_path)
 		return
 
+	Game.songs_folder = songs_folder
 	Game.song = current_song
 	Game.difficulty = difficulty.to_lower()
 	Game.mode = Game.PlayMode.FREEPLAY
@@ -177,7 +186,7 @@ func load_song(i: int) -> void:
 		return
 
 	var song_name: String = get_song_name(song, "")
-	var meta_path: String = "res://modules/funkin/songs/%s/meta.tres" % song_name
+	var meta_path: String = "%s/%s/meta.tres" % [songs_folder, song_name]
 	var meta_exists: bool = ResourceLoader.exists(meta_path)
 	var meta: SongMetadata
 	if meta_exists:
@@ -205,11 +214,11 @@ func load_song(i: int) -> void:
 
 
 func _load_tracks() -> void:
-	if not Tracks.tracks_exist(current_song, "res://modules/funkin/songs"):
+	if not Tracks.tracks_exist(current_song, songs_folder):
 		return
 
 	GlobalAudio.music.stop()
-	tracks.load_tracks(current_song, "res://modules/funkin/songs")
+	tracks.load_tracks(current_song, songs_folder)
 	tracks.play()
 
 

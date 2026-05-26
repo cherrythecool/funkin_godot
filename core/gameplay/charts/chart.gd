@@ -7,13 +7,11 @@ var events: Array[EventData] = []
 var scroll_speed: float = 1.0
 
 
-static func load_song(name: StringName, difficulty: StringName) -> Chart:
+static func load_song(base_path: StringName, difficulty: StringName) -> Chart:
 	var start: int = Time.get_ticks_usec()
-	name = name.to_lower()
 	difficulty = difficulty.to_lower()
 
 	var chart: Chart = null
-	var base_path: String = 'res://modules/funkin/songs/%s' % name
 	chart = try_legacy(base_path, difficulty)
 	if is_instance_valid(chart):
 		_print_time_elapsed(start)
@@ -24,7 +22,7 @@ static func load_song(name: StringName, difficulty: StringName) -> Chart:
 		_print_time_elapsed(start)
 		return chart
 
-	printerr('Chart of song %s with difficulty %s not found.' % [name, difficulty])
+	printerr('Chart of song %s with difficulty %s not found.' % [base_path, difficulty])
 	return chart
 
 

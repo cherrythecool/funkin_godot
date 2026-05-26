@@ -27,7 +27,7 @@ func _ready() -> void:
 		game.hud.visible = false
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not allow_skipping:
 		return
 	if event.is_echo():

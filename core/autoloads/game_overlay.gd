@@ -69,7 +69,7 @@ func display() -> void:
 	)
 
 	if info_mode == "full":
-		text_output += "\n\n[Usage]\n%s / %s <GPU>\n%s / %s <TEX>\n%s / %s <CPU>\n\n[Engine]\nScene: %s\n%d Nodes (%d Orphaned)\nInput Accumulation: %s\n\n[Rendering]\n%d Draw Calls (%d Drawn Objects)\nAPI: %s (%s)\nGPU: %s" % [
+		text_output += "\n\n[Usage]\n%s / %s <GPU>\n%s / %s <TEX>\n%s / %s <CPU>\n\n[Engine]\nScene: %s\n%d Nodes (%d Orphaned)\nInput Accumulation: %s\n\n[Module]\nCurrent Module: %s\nSongs Folder: %s\n\n[Rendering]\n%d Draw Calls (%d Drawn Objects)\nAPI: %s (%s)\nGPU: %s" % [
 			String.humanize_size(floori(video_memory_current)),
 			String.humanize_size(floori(video_memory_peak)),
 			String.humanize_size(floori(texture_memory_current)),
@@ -80,6 +80,8 @@ func display() -> void:
 			Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
 			Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT),
 			"on" if Input.use_accumulated_input else "off",
+			ModuleManager.current_module,
+			Game.songs_folder,
 			Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
 			Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME),
 			RenderingServer.get_current_rendering_driver_name(),

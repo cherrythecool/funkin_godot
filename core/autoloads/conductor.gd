@@ -32,9 +32,10 @@ static var offset: float = audio_offset + manual_offset
 @export var tempo_changes: Array[BPMChange] = []
 
 var raw_time: float = 0.0
+
 var time: float:
 	get:
-		return raw_time + offset
+		return raw_time - offset
 
 # We need this internal variable to let you
 # properly modify rate in editor export at runtime
@@ -81,7 +82,7 @@ signal measure_hit(measure: int)
 signal rate_changed(rate: float)
 
 
-static func reset_offset() -> void:
+func reset_offset() -> void:
 	offset = audio_offset + manual_offset
 
 

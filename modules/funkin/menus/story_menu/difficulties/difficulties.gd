@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 	lerp_score = lerpf(lerp_score, float(target_score), delta * 6.0)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
 	if event.is_action('menu_left'):

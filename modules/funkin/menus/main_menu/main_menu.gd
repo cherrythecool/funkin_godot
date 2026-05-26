@@ -29,7 +29,7 @@ func _ready() -> void:
 	camera.force_update_scroll()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_pressed():
 		return
 	if not active:

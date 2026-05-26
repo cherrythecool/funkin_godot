@@ -107,7 +107,7 @@ func _process(delta: float) -> void:
 	scale = scale.lerp(Vector2.ONE, delta * 3.0)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
 	if not event.is_pressed():

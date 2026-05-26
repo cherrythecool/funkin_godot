@@ -105,7 +105,7 @@ func _process(delta: float) -> void:
 		camera_2d.smoothed_offset = get_camera_offset()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if transitioning:
 		return
 	if event.is_echo() or not event.is_pressed():

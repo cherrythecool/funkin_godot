@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 		the_list.position.y = lerpf(the_list.position.y, -184.0 - target, delta * 4.0)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not (active and alive):
 		return
 	if not event.is_pressed():

@@ -41,7 +41,7 @@ func _ready() -> void:
 			Vector2(16.0, 16.0)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
 	if not active:

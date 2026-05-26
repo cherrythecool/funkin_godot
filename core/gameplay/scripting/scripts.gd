@@ -1,8 +1,8 @@
-extends Node
 class_name Scripts
+extends Node
 
 
-func load_scripts(song: StringName, song_path: String = '') -> void:
+func load_scripts(song: StringName, song_path: String) -> void:
 	if song_path.is_empty():
 		song_path = 'res://modules/funkin/songs'
 

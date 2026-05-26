@@ -16,7 +16,7 @@ func _ready() -> void:
 	change_selection()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
 	if not event.is_pressed():

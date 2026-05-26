@@ -30,7 +30,7 @@ func change_selection(amount: int = 0) -> void:
 		GlobalAudio.get_player(^'MENU/SCROLL').play()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if options.is_empty():
 		return
 	if not (active and alive):

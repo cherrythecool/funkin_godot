@@ -33,7 +33,7 @@ func _ready() -> void:
 		child._ready()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not active:
 		return
 	if event.is_echo():

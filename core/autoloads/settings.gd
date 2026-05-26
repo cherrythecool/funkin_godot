@@ -38,6 +38,7 @@ func load_settings(file: StringName) -> void:
 	var path := get_settings_path(file)
 	if not FileAccess.file_exists(path):
 		settings_loaded.emit(file)
+		save_settings(file)
 		return
 
 	var raw_settings := FileAccess.get_file_as_string(path)
@@ -134,6 +135,7 @@ func _get_core_defaults() -> Dictionary:
 			"menu_accept": [KEY_ENTER, KEY_SPACE],
 
 			"menu_fullscreen": [KEY_F11],
+			"module_select": [KEY_F8],
 
 			"game_pause": [KEY_ENTER, KEY_ESCAPE],
 		},
