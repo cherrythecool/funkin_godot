@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://2441ftrjfyr7" path="res://modules/funkin/menus/options_menu/option_previews/notes.gd" id="1_508hw"]
 [ext_resource type="PackedScene" uid="uid://3diy2p3nknpi" path="res://core/notes/note_fields/4_lanes.tscn" id="2_5bgr3"]
-[ext_resource type="PackedScene" uid="uid://f75xq2p53bpl" path="res://core/notes/types/note.tscn" id="4_e1622"]
+[ext_resource type="PackedScene" uid="uid://f75xq2p53bpl" path="res://core/notes/types/default.tscn" id="4_e1622"]
 
 [node name="offset" type="Node2D" unique_id=2094019831]
 script = ExtResource("1_508hw")

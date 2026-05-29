@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dotr62vbo74yj" path="res://modules/funkin/menus/credits_menu/contributors/kittysleeper.png" id="10_svqsb"]
 [ext_resource type="Texture2D" uid="uid://dvl1c52hghiew" path="res://modules/funkin/menus/credits_menu/contributors/eir_team.png" id="11_71dcr"]
 [ext_resource type="Texture2D" uid="uid://ddbakd725242s" path="res://modules/funkin/menus/credits_menu/contributors/luscious77_github.jpeg" id="11_tnsff"]
+[ext_resource type="Texture2D" uid="uid://mbrycpsvucoa" path="res://modules/funkin/menus/credits_menu/contributors/fazzoc.png" id="12_tnsff"]
 [ext_resource type="Script" uid="uid://bk4kpu0r530gd" path="res://modules/funkin/menus/credits_menu/contributors/swordcube.gd" id="13_aave4"]
 [ext_resource type="AudioStream" uid="uid://cdx006xagoh7x" path="res://modules/funkin/styles/pico_mix/pause_menu.ogg" id="13_b34ng"]
 [ext_resource type="Texture2D" uid="uid://cdtbh4yrt24tn" path="res://modules/funkin/menus/credits_menu/contributors/sword.png" id="14_71dcr"]
@@ -142,20 +143,33 @@ skin = ExtResource("4_0ng60")
 text = "luscious77"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
-[node name="spacer" type="Node2D" parent="list" unique_id=593375683]
-position = Vector2(0, 1296)
-script = ExtResource("3_xtkoc")
+[node name="fazzoc" type="Node2D" parent="list" unique_id=1051160843]
+position = Vector2(-480, 1261.5001)
+script = ExtResource("4_wywfy")
+link = "https://linktr.ee/fazzoc"
+role = "Fixed receptor offsets"
+texture = ExtResource("12_tnsff")
 target_y = 6
+use_x = false
+offset = Vector2(-480, 0)
+skin = ExtResource("4_0ng60")
+text = "fazzoc"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="spacer" type="Node2D" parent="list" unique_id=593375683]
+position = Vector2(0, 1451.9999)
+script = ExtResource("3_xtkoc")
+target_y = 7
 use_x = false
 skin = ExtResource("4_0ng60")
 centered = true
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="special_thanks" type="Node2D" parent="list" unique_id=1627242772]
-position = Vector2(-480, 1385)
+position = Vector2(-480, 1540.9999)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_xtkoc")
-target_y = 7
+target_y = 8
 use_x = false
 offset = Vector2(-480, -32)
 skin = ExtResource("4_0ng60")
@@ -163,12 +177,12 @@ text = "special thanks"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="funkin_crew" type="Node2D" parent="list" unique_id=741503976]
-position = Vector2(-480, 1573.5)
+position = Vector2(-480, 1729.4996)
 script = ExtResource("4_wywfy")
 link = "https://github.com/FunkinCrew"
 role = "Made the Original Game"
 texture = ExtResource("6_fq4y8")
-target_y = 8
+target_y = 9
 use_x = false
 offset = Vector2(-480, 0)
 skin = ExtResource("4_0ng60")
@@ -176,12 +190,12 @@ text = "the funkin crew"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="godot_devs" type="Node2D" parent="list" unique_id=1111019336]
-position = Vector2(-480, 1729)
+position = Vector2(-480, 1884.9996)
 script = ExtResource("4_wywfy")
 link = "https://github.com/godotengine/godot/graphs/contributors"
 role = "Made the Game Engine"
 texture = ExtResource("5_komaw")
-target_y = 9
+target_y = 10
 use_x = false
 offset = Vector2(-480, 0)
 skin = ExtResource("4_0ng60")
@@ -189,12 +203,12 @@ text = "godot developers"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="eir_team" type="Node2D" parent="list" unique_id=259700794]
-position = Vector2(-480, 1886.5)
+position = Vector2(-480, 2042.4995)
 script = ExtResource("4_wywfy")
 link = "https://github.com/EIRTeam"
 role = "Made FFmpeg GDExtension"
 texture = ExtResource("11_71dcr")
-target_y = 10
+target_y = 11
 use_x = false
 offset = Vector2(-480, 0)
 skin = ExtResource("4_0ng60")
@@ -203,12 +217,12 @@ metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="swordcube" type="Node2D" parent="list" unique_id=1716439119]
 material = SubResource("ShaderMaterial_33ree")
-position = Vector2(-480, 2041)
+position = Vector2(-480, 2196.9902)
 script = ExtResource("13_aave4")
 link = "https://github.com/swordcube"
 role = "think fast think stupid"
 texture = ExtResource("14_71dcr")
-target_y = 11
+target_y = 12
 use_x = false
 offset = Vector2(-480, 0)
 skin = ExtResource("4_0ng60")

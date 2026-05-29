@@ -49,7 +49,7 @@ func _ready() -> void:
 	note_splash_alpha = Settings.get_setting(&"core", "note_splash_alpha")
 
 	if note_types.is_empty():
-		note_types[&"default"] = load(Note.DEFAULT_PATH)
+		note_types[&"default"] = Note.load_note_type(&"default")
 
 	# If you have another node in here that isn't a Node2D
 	# that is just currently not supported.

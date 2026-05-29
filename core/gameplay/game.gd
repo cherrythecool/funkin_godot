@@ -301,24 +301,23 @@ func load_chart() -> void:
 	Chart.sort_chart_notes(chart)
 	Chart.sort_chart_events(chart)
 
-	note_types[&"default"] = load(Note.DEFAULT_PATH)
+	var note_type_paths: PackedStringArray = [
+		"res://modules/%s/notes/types" % ModuleManager.current_module,
+		"res://core/notes/types",
+	]
 
 	# loading external types :3
 	for note: NoteData in chart.notes:
 		var type: StringName = note.type
-		if (note_types.has(type) or
-			note_types.has(type.to_snake_case())):
+		if (
+			note_types.has(type) or
+			note_types.has(type.to_snake_case())
+		):
 			continue
 
-		# check both full name and snake_case version
-		var path: String = "res://core/notes/types/%s.tscn" % [type]
-		if not ResourceLoader.exists(path):
-			type = type.to_snake_case()
-			path = "res://core/notes/types/%s.tscn" % [type]
-			if not ResourceLoader.exists(path):
-				continue
-
-		note_types[type] = load(path)
+		var scene := Note.load_note_type(type, note_type_paths)
+		if is_instance_valid(scene):
+			note_types[type] = scene
 
 
 func load_assets() -> void:

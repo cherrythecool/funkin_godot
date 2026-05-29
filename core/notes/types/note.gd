@@ -1,8 +1,8 @@
-class_name Note extends Node2D
+class_name Note
+extends Node2D
 
 
 const DEFAULT_HIT_WINDOW: float = 0.18
-const DEFAULT_PATH: String = "uid://f75xq2p53bpl"
 
 @export var sing_suffix: StringName = &""
 @export var use_skin: bool = true
@@ -43,6 +43,28 @@ var sustain_timer: float = 0.0:
 var sustain_length_offset: float = 0.0
 var sustain_tail_offset: float = 0.0
 var sustain_score_value: float = 0.0
+
+
+static func load_note_type(type_name: StringName, paths: PackedStringArray = []) -> PackedScene:
+	if paths.is_empty():
+		paths = [
+			"res://modules/%s/notes/types" % ModuleManager.current_module,
+			"res://core/notes/types",
+		]
+
+	for base_path: String in paths:
+		# check both full name and snake_case version
+		var path: String = "%s/%s.tscn" % [base_path, type_name]
+
+		if not ResourceLoader.exists(path):
+			path = "%s/%s.tscn" % [base_path, type_name.to_snake_case()]
+
+		if not ResourceLoader.exists(path):
+			continue
+
+		return load(path)
+
+	return null
 
 
 func _ready() -> void:
