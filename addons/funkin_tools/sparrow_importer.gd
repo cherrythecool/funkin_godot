@@ -475,8 +475,13 @@ func parse_animation_name(frame_name: String) -> PackedStringArray:
 
 	if starting_numbers:
 		return ["", frame_name]
+	elif not found_numbers:
+		return [
+			frame_name,
+			""
+		]
 
 	return [
 		frame_name.substr(0, stop_index),
-		frame_name.substr(stop_index, frame_name.length() - 1)
+		frame_name.substr(stop_index, -1)
 	]
