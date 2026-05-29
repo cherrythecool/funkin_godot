@@ -77,3 +77,9 @@ static func replace_tween(node: Node, tween: Tween) -> Tween:
 		tween.kill()
 
 	return node.create_tween()
+
+
+static func format_time(seconds: float) -> String:
+	var minutes := floori(seconds / 60.0)
+	var seconds_remaining := floori(seconds - (minutes * 60.0))
+	return "%d:%02d" % [minutes, seconds_remaining]

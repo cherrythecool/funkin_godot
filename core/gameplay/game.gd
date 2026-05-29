@@ -1,5 +1,5 @@
-extends Node
 class_name Game
+extends Node
 
 
 static var songs_folder: String = "res://modules/funkin/songs"

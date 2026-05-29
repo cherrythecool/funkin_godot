@@ -4,20 +4,20 @@ extends Node2D
 
 @onready var bar: ProgressBar = $bar
 @onready var icons: Node2D = $icons
-@onready var score_label: Label = $score_label
 
 var player_icon: Sprite2D = null
 var player_color: Color:
 	set(value):
 		player_color = value
-		bar.get('theme_override_styles/fill').bg_color = player_color
+		bar.get(&"theme_override_styles/fill").bg_color = player_color
 
 var opponent_icon: Sprite2D = null
 var opponent_color: Color:
 	set(value):
 		opponent_color = value
-		bar.get('theme_override_styles/background').bg_color = opponent_color
-var rank: StringName = &'N/A'
+		bar.get(&"theme_override_styles/background").bg_color = opponent_color
+
+var rank: StringName = &"N/A"
 var lerped_health: float = 0.0
 
 var game: Game
@@ -50,27 +50,6 @@ func _process(delta: float) -> void:
 	else:
 		player_icon.frame = 0
 		opponent_icon.frame = 0
-
-
-func update_score_label() -> void:
-	var accuracy_string: String = "N/A"
-	if game.rating_calculator.hit_count > 0:
-		var decimal_points: int = 2
-		if game.accuracy >= 100.0:
-			decimal_points = 2
-		elif game.accuracy >= 99.9:
-			decimal_points = 5
-		elif game.accuracy >= 99.0:
-			decimal_points = 3
-
-		accuracy_string = "%.*f%%" % [decimal_points, game.accuracy]
-
-	score_label.text = "Score:%d • Misses:%d • Accuracy:%s (%s)" % [
-		game.score,
-		game.misses,
-		accuracy_string,
-		game.rank,
-	]
 
 
 func reload_icons() -> void:
@@ -112,18 +91,5 @@ func _on_hud_downscroll_changed(downscroll: bool) -> void:
 	position.y = 80.0 if downscroll else 720.0 - 80.0
 
 
-func _on_hud_note_hit(_note: Note) -> void:
-	update_score_label()
-
-
-func _on_hud_note_miss(_note: Note) -> void:
-	update_score_label()
-
-
 func _on_hud_setup() -> void:
 	reload_icons()
-	game.score_changed.connect(_on_score_changed)
-
-
-func _on_score_changed(_value: int) -> void:
-	update_score_label()

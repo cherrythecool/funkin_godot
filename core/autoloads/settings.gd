@@ -151,7 +151,7 @@ func _get_core_defaults() -> Dictionary:
 		"holds_below_receptors": true,
 
 		"rating_alpha": 1.0,
-		"song_label_show": true,
+		"time_bar_show": true,
 		"skip_scene_transitions": false,
 
 		"performance_mode": false,

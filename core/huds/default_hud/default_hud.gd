@@ -23,7 +23,7 @@ var centered_receptors: bool = false:
 @onready var note_fields: Node2D = %note_fields
 @onready var health_bar: HealthBar = %health_bar
 @onready var countdown_container: CountdownContainer = %countdown_container
-@onready var song_label: Label = %song_label
+@onready var time_bar: ProgressBar = %time_bar
 
 @onready var rating_calculator: RatingCalculator:
 	get:
@@ -119,7 +119,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		rating_container.visible = health_bar.visible
 		countdown_container.visible = health_bar.visible
-		song_label.visible = health_bar.visible
+		time_bar.visible = health_bar.visible and Settings.get_setting(&"core", "time_bar_show")
 
 
 func _on_first_opponent_note(_note: Note) -> void:
