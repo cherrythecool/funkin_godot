@@ -94,14 +94,21 @@ func load_mods_folder() -> void:
 	dir.make_dir("mods")
 
 	var mods_dir := DirAccess.open(mods_path)
+
+	if not mods_dir:
+		printerr("Failed to open mods directory! Cannot load any modules!")
+		return
+
 	var mods := Array(mods_dir.get_files())
 	mods = mods.filter(module_pck_filter)
 
 	for mod: String in mods:
-		ProjectSettings.load_resource_pack(
-			"%s/%s" % [mods_path, mod],
-			mods_replace_contents
-		)
+		var path := "%s/%s" % [mods_path, mod]
+		var success := ProjectSettings.load_resource_pack(path, mods_replace_contents)
+		if not success:
+			printerr("Failed to load resource pack at path %s!" % path)
+		else:
+			print("Successfully loaded resource pack at path %s!" % path)
 
 
 func load_modules_list() -> void:
@@ -169,6 +176,7 @@ func _on_open_folder_pressed() -> void:
 
 	var dir := DirAccess.open(mods_path)
 	if not dir:
+		printerr("Error opening mods directory: %s" % DirAccess.get_open_error())
 		return
 
 	OS.shell_show_in_file_manager(dir.get_current_dir())

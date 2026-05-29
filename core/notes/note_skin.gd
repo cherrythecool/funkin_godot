@@ -1,5 +1,5 @@
-extends Resource
 class_name NoteSkin
+extends Resource
 
 
 @export_group("Receptors", "receptor_")
