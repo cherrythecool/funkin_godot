@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 
-@onready var label: Label = $label
+@onready var label: Label = %performance_info
 @onready var timer: Timer = %timer
 
 var video_memory_peak: float = 0.0

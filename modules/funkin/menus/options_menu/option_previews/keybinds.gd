@@ -42,7 +42,7 @@ func _input(event: InputEvent) -> void:
 	var input := event as InputEventKey
 	var binds: Dictionary = Settings.get_setting(&"core", "controls_keybinds")
 	binds[key][selected] = input.keycode
-	button.text = Alphabet.keycode_to_character(input.keycode).to_upper()
+	button.text = OS.get_keycode_string(input.keycode).to_upper()
 	Settings.set_setting(&"core", "controls_keybinds", binds)
 
 	selecting = false

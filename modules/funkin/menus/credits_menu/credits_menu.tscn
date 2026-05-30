@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://ck4pjp7k3k745" path="res://modules/funkin/menus/credits_menu/credits_menu.gd" id="1_536xp"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://modules/funkin/menus/background.png" id="1_due5w"]
 [ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://core/classes/alphabet/listed_alphabet.gd" id="3_xtkoc"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="4_0ng60"]
 [ext_resource type="Script" uid="uid://xex6ryb2bo7" path="res://modules/funkin/menus/credits_menu/contributors/contributor.gd" id="4_wywfy"]
 [ext_resource type="Texture2D" uid="uid://boevu3c5gntxa" path="res://modules/funkin/menus/credits_menu/contributors/cherry.jpg" id="5_0ng60"]
 [ext_resource type="Texture2D" uid="uid://b3ac3wi373b11" path="res://transgender_flag.svg" id="5_325oc"]
@@ -62,7 +61,6 @@ script = ExtResource("3_xtkoc")
 target_y = -1
 use_x = false
 offset = Vector2(-480, -32)
-skin = ExtResource("4_0ng60")
 text = "engine contributors"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
@@ -74,7 +72,6 @@ role = "Engine Creator"
 texture = ExtResource("5_0ng60")
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "cherry"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
@@ -87,7 +84,6 @@ texture = ExtResource("6_xc1f4")
 target_y = 1
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "gorkil"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
@@ -100,7 +96,6 @@ texture = ExtResource("7_jfhfx")
 target_y = 2
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "siwsi"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
@@ -113,7 +108,6 @@ texture = ExtResource("8_aave4")
 target_y = 3
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "nebula"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
@@ -126,7 +120,6 @@ texture = ExtResource("10_svqsb")
 target_y = 4
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "kittysleeper"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
@@ -139,12 +132,11 @@ texture = ExtResource("11_tnsff")
 target_y = 5
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "luscious77"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="fazzoc" type="Node2D" parent="list" unique_id=1051160843]
-position = Vector2(-480, 1261.5001)
+position = Vector2(-480, 1261.5)
 script = ExtResource("4_wywfy")
 link = "https://linktr.ee/fazzoc"
 role = "Fixed receptor offsets"
@@ -152,32 +144,29 @@ texture = ExtResource("12_tnsff")
 target_y = 6
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "fazzoc"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="spacer" type="Node2D" parent="list" unique_id=593375683]
-position = Vector2(0, 1451.9999)
+position = Vector2(0, 1452)
 script = ExtResource("3_xtkoc")
 target_y = 7
 use_x = false
-skin = ExtResource("4_0ng60")
 centered = true
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="special_thanks" type="Node2D" parent="list" unique_id=1627242772]
-position = Vector2(-480, 1540.9999)
+position = Vector2(-480, 1541)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_xtkoc")
 target_y = 8
 use_x = false
 offset = Vector2(-480, -32)
-skin = ExtResource("4_0ng60")
 text = "special thanks"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="funkin_crew" type="Node2D" parent="list" unique_id=741503976]
-position = Vector2(-480, 1729.4996)
+position = Vector2(-480, 1729.5)
 script = ExtResource("4_wywfy")
 link = "https://github.com/FunkinCrew"
 role = "Made the Original Game"
@@ -185,12 +174,11 @@ texture = ExtResource("6_fq4y8")
 target_y = 9
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "the funkin crew"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="godot_devs" type="Node2D" parent="list" unique_id=1111019336]
-position = Vector2(-480, 1884.9996)
+position = Vector2(-480, 1885)
 script = ExtResource("4_wywfy")
 link = "https://github.com/godotengine/godot/graphs/contributors"
 role = "Made the Game Engine"
@@ -198,12 +186,11 @@ texture = ExtResource("5_komaw")
 target_y = 10
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "godot developers"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="eir_team" type="Node2D" parent="list" unique_id=259700794]
-position = Vector2(-480, 2042.4995)
+position = Vector2(-480, 2042.5)
 script = ExtResource("4_wywfy")
 link = "https://github.com/EIRTeam"
 role = "Made FFmpeg GDExtension"
@@ -211,7 +198,6 @@ texture = ExtResource("11_71dcr")
 target_y = 11
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "eir team"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
@@ -225,7 +211,6 @@ texture = ExtResource("14_71dcr")
 target_y = 12
 use_x = false
 offset = Vector2(-480, 0)
-skin = ExtResource("4_0ng60")
 text = "swordcube"
 metadata/_custom_type_script = "uid://bable6fjbwgrq"
 

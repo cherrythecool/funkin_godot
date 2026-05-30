@@ -119,6 +119,7 @@ func update_note(note: Note, delta: float = 0.0) -> void:
 
 	if note.hit:
 		return
+
 	var difference: float = note.data.time - conductor.time
 	if difference < -note.hit_window:
 		miss_note(note)

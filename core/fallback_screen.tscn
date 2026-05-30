@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="1_50223"]
 [ext_resource type="Script" uid="uid://cocheymwvks4d" path="res://core/fallback_screen.gd" id="1_xvti2"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="2_xvti2"]
 
 [node name="fallback_screen" type="Control" unique_id=1046240421]
 layout_mode = 3
@@ -18,7 +17,6 @@ modulate = Color(1, 0, 0, 1)
 position = Vector2(24, 24)
 scale = Vector2(0.9, 0.9)
 script = ExtResource("1_50223")
-skin = ExtResource("2_xvti2")
 text = "the module you tried to
 load could not be found!"
 metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
@@ -27,7 +25,6 @@ metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
 position = Vector2(24, 196)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_50223")
-skin = ExtResource("2_xvti2")
 text = "open the module selector
 and try another module
 
@@ -43,7 +40,6 @@ unique_name_in_owner = true
 position = Vector2(24, 631)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_50223")
-skin = ExtResource("2_xvti2")
 text = "current module: {MODULE}
 current keybind: {KEYBIND}"
 metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"

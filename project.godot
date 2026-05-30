@@ -56,10 +56,10 @@ window/vsync/vsync_mode=0
 
 [editor]
 
-movie_writer/movie_file="E:/user/apps/godot/projects/FunkinGodot/bin/test.avi"
+movie_writer/video_quality=1.0
+movie_writer/ogv/encoding_speed=3
 naming/node_name_num_separator=2
 naming/node_name_casing=2
-movie_writer/mjpeg_quality=1.0
 
 [editor_plugins]
 

@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://jmkjkp1jvkpj" path="res://modules/funkin/menus/options_menu/categories/performance.tscn" id="8_26on6"]
 [ext_resource type="PackedScene" uid="uid://dd76grrhumccf" path="res://modules/funkin/menus/options_menu/categories/sound.tscn" id="9_23plx"]
 [ext_resource type="Script" uid="uid://plhr68emm461" path="res://modules/funkin/menus/options_menu/categories/icons/category_icon.gd" id="11_3cmdf"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="13_ygobi"]
 
 [node name="options_menu" type="Node2D" unique_id=1964132103]
 script = ExtResource("1_cbibk")
@@ -136,7 +135,6 @@ unique_name_in_owner = true
 position = Vector2(640, 32)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("5_qlnc3")
-skin = ExtResource("13_ygobi")
 text = "Gameplay"
 centered = true
 

@@ -28,6 +28,8 @@ func update_bar_and_label() -> void:
 		return
 
 	var length := custom_length if custom_length_enable else Conductor.target_length
-	value = maxf(Conductor.time, 0.0)
+	if Conductor.target_audio.playing:
+		value = maxf(Conductor.time, 0.0)
+
 	max_value = length
-	time_label.text = GameUtils.format_time(maxf(length - value, 0.0))
+	time_label.text = GameUtils.format_time(maxf(length - value, 0.0) / Conductor.rate)

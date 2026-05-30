@@ -64,5 +64,5 @@ func get_rank() -> StringName:
 			continue
 		else:
 			break
-	
+
 	return value

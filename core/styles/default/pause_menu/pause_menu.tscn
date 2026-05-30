@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bwmixxli8w6c0" path="res://core/styles/default/pause_menu/pause_menu.gd" id="1_vrvda"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="2_1gnl8"]
 [ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://core/classes/alphabet/listed_alphabet.gd" id="3_380tn"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="3_lalf1"]
 [ext_resource type="AudioStream" uid="uid://cvhdcl07i6lt1" path="res://core/styles/default/pause_menu/default_theme.ogg" id="4_6wbaw"]
 
 [node name="pause_menu" type="CanvasLayer" unique_id=1041939476]
@@ -36,7 +35,6 @@ z_index = 4
 position = Vector2(1068, 16)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("2_1gnl8")
-skin = ExtResource("3_lalf1")
 text = "Penis
 (HARD)"
 horizontal_alignment = "Right"
@@ -49,7 +47,6 @@ z_index = 4
 position = Vector2(982, 649)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("2_1gnl8")
-skin = ExtResource("3_lalf1")
 text = "Freeplay"
 metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
 
@@ -59,15 +56,14 @@ unique_name_in_owner = true
 [node name="resume" type="Node2D" parent="options" unique_id=29791263]
 position = Vector2(90, 327)
 script = ExtResource("3_380tn")
-skin = ExtResource("3_lalf1")
 text = "resume"
+vertical_alignment = "Bottom"
 
 [node name="restart" type="Node2D" parent="options" unique_id=422190198]
 modulate = Color(1, 1, 1, 0.7)
 position = Vector2(110, 482.5)
 script = ExtResource("3_380tn")
 target_y = 1
-skin = ExtResource("3_lalf1")
 text = "restart"
 
 [node name="options" type="Node2D" parent="options" unique_id=1594949867]
@@ -75,7 +71,6 @@ modulate = Color(1, 1, 1, 0.7)
 position = Vector2(130, 637)
 script = ExtResource("3_380tn")
 target_y = 2
-skin = ExtResource("3_lalf1")
 text = "options"
 
 [node name="quit" type="Node2D" parent="options" unique_id=1410297465]
@@ -83,7 +78,6 @@ modulate = Color(1, 1, 1, 0.7)
 position = Vector2(150, 794.5)
 script = ExtResource("3_380tn")
 target_y = 3
-skin = ExtResource("3_lalf1")
 text = "quit"
 
 [node name="music" type="AudioStreamPlayer" parent="." unique_id=980516486]

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="1_8fdwr"]
 [ext_resource type="Script" uid="uid://hukwrwmjwblw" path="res://modules/funkin/menus/setup_screen/setup_screen.gd" id="1_tlkk5"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="3_6gnh1"]
 
 [node name="setup_screen" type="Node2D" unique_id=1683777405 node_paths=PackedStringArray("options")]
 script = ExtResource("1_tlkk5")
@@ -14,7 +13,6 @@ position = Vector2(640, 360)
 [node name="welcome_label" type="Node2D" parent="parent" unique_id=212462775]
 position = Vector2(0, -64)
 script = ExtResource("1_8fdwr")
-skin = ExtResource("3_6gnh1")
 text = "Hello! It looks like you
 don't have a save yet,
 
@@ -28,7 +26,6 @@ horizontal_alignment = "Center"
 unique_name_in_owner = true
 position = Vector2(-180, 240)
 script = ExtResource("1_8fdwr")
-skin = ExtResource("3_6gnh1")
 text = "yes"
 centered = true
 horizontal_alignment = "Center"
@@ -38,7 +35,6 @@ unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.6)
 position = Vector2(180, 240)
 script = ExtResource("1_8fdwr")
-skin = ExtResource("3_6gnh1")
 text = "no"
 centered = true
 horizontal_alignment = "Center"

@@ -56,8 +56,6 @@ var value: float:
 
 
 func _ready() -> void:
-	super()
-
 	value = Settings.get_setting(file, key)
 	assert(is_instance_valid(root), "No root given to number option. This could cause issues, so here is your error.")
 

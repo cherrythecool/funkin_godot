@@ -211,6 +211,7 @@ func _on_note_hit(note: Note) -> void:
 	if is_instance_valid(player_field):
 		if not player_field.takes_input:
 			difference = 0.0
+
 	rating_calculator.add_hit(absf(difference), note.hit_window)
 
 	var rating: Rating = rating_calculator.get_rating(absf(difference))
@@ -220,8 +221,9 @@ func _on_note_hit(note: Note) -> void:
 
 func start_song(from_position: float = 0.0) -> void:
 	tracks.play(from_position)
+
 	Conductor.target_audio = tracks.player
-	Conductor.sync_to_target(0.0)
+	Conductor.raw_time = from_position
 	Conductor.rate = Conductor.internal_rate
 
 	song_start.emit()

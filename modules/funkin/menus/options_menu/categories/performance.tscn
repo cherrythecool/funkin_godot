@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://modules/funkin/menus/options_menu/options/checkbox/checkbox.gd" id="2_4cqv6"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="3_p1may"]
 [ext_resource type="SpriteFrames" uid="uid://oksqh74ocs1w" path="res://modules/funkin/menus/options_menu/options/checkbox/checkbox.res" id="4_j1leb"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="4_mctce"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_7omr5"]
 [ext_resource type="Script" uid="uid://cvona80crsbei" path="res://modules/funkin/menus/options_menu/options/list.gd" id="7_a8kn0"]
 
@@ -21,7 +20,6 @@ key = &"vsync_enabled"
 
 [node name="alphabet" type="Node2D" parent="vsync_enabled" unique_id=1171053634]
 script = ExtResource("3_p1may")
-skin = ExtResource("4_mctce")
 text = "vsync"
 centered = true
 
@@ -43,14 +41,12 @@ display_raw = false
 [node name="label" type="Node2D" parent="max_fps" unique_id=1836413960]
 position = Vector2(-140, 0)
 script = ExtResource("3_p1may")
-skin = ExtResource("4_mctce")
 text = "fps cap:"
 centered = true
 
 [node name="value" type="Node2D" parent="max_fps" unique_id=1521074740]
 position = Vector2(68, -34)
 script = ExtResource("3_p1may")
-skin = ExtResource("4_mctce")
 text = "< 0 >"
 
 [node name="intensive_visuals" type="Node2D" parent="." unique_id=677384584]
@@ -60,7 +56,6 @@ key = &"performance_mode"
 
 [node name="alphabet" type="Node2D" parent="intensive_visuals" unique_id=732150428]
 script = ExtResource("3_p1may")
-skin = ExtResource("4_mctce")
 text = "performance mode"
 centered = true
 
@@ -79,7 +74,6 @@ key = &"pause_when_unfocused"
 
 [node name="alphabet" type="Node2D" parent="pause_when_unfocused" unique_id=1168870364]
 script = ExtResource("3_p1may")
-skin = ExtResource("4_mctce")
 text = "pause on unfocus"
 centered = true
 
@@ -98,7 +92,6 @@ key = &"scale_with_dpi"
 
 [node name="alphabet" type="Node2D" parent="scale_with_dpi" unique_id=1469192814]
 script = ExtResource("3_p1may")
-skin = ExtResource("4_mctce")
 text = "scale with dpi"
 centered = true
 
@@ -115,7 +108,6 @@ modulate = Color(1, 0, 0, 0.6509804)
 position = Vector2(445, -34)
 scale = Vector2(0.3, 0.3)
 script = ExtResource("3_p1may")
-skin = ExtResource("4_mctce")
 text = "(needs restart to take effect)"
 metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
 
@@ -126,7 +118,6 @@ key = &"overlay_visible"
 
 [node name="alphabet" type="Node2D" parent="overlay_visible" unique_id=1251655064]
 script = ExtResource("3_p1may")
-skin = ExtResource("4_mctce")
 text = "overlay"
 centered = true
 
@@ -147,14 +138,12 @@ list = ["minimal", "full"]
 [node name="label" type="Node2D" parent="overlay_mode" unique_id=490640766]
 position = Vector2(-135, 0)
 script = ExtResource("3_p1may")
-skin = ExtResource("4_mctce")
 text = "overlay mode:"
 centered = true
 
 [node name="value" type="Node2D" parent="overlay_mode" unique_id=2031845935]
 position = Vector2(189, -34)
 script = ExtResource("3_p1may")
-skin = ExtResource("4_mctce")
 text = "default"
 
 [connection signal="animation_finished" from="vsync_enabled/checkbox" to="vsync_enabled" method="_on_checkbox_animation_finished"]

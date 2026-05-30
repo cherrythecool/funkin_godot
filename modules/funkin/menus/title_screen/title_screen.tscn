@@ -8,7 +8,6 @@
 [ext_resource type="SpriteFrames" uid="uid://diaqnypewr3ov" path="res://modules/funkin/menus/title_screen/enter.res" id="6_hraot"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="7_al1xt"]
 [ext_resource type="Texture2D" uid="uid://qqx4a0cwgl4s" path="res://icon.svg" id="8_xwi85"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="10_30q4t"]
 
 [sub_resource type="Animation" id="Animation_6rots"]
 length = 0.001
@@ -413,7 +412,6 @@ texture = ExtResource("8_xwi85")
 [node name="alphabet" type="Node2D" parent="intro_sequence" unique_id=828383561]
 unique_name_in_owner = true
 script = ExtResource("7_al1xt")
-skin = ExtResource("10_30q4t")
 centered = true
 horizontal_alignment = "Center"
 

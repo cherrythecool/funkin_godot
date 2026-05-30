@@ -25,15 +25,90 @@ process_mode = 3
 layer = 64
 script = ExtResource("1_itebg")
 
-[node name="label" type="Label" parent="." unique_id=1548224959]
+[node name="overlay_list" type="VBoxContainer" parent="." unique_id=1430764527]
 offset_left = 14.0
-offset_top = 11.0
+offset_top = 12.0
 offset_right = 208.0
-offset_bottom = 63.0
+offset_bottom = 64.0
+theme_override_constants/separation = 12
+
+[node name="performance_info" type="Label" parent="overlay_list" unique_id=1548224959]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
 text = "0FPS (0.00ms)
-0MiB / 0MiB (GPU + CPU)
-Funkin' Godot v3.0.0"
+MEM: 0MiB / 0MiB"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="usage_info" type="Label" parent="overlay_list" unique_id=823089376]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "CPU: 0B / 0B
+GPU: 0B / 0B
+TEX: 0B / 0B"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="engine_info" type="Label" parent="overlay_list" unique_id=1108379246]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "Scene: Game
+150 Nodes (0 Orphans)
+Input Accumulation off"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="module_info" type="Label" parent="overlay_list" unique_id=366615097]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "Current Module: funkin
+Songs Folder: res://modules/funkin/songs"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="rendering_info" type="Label" parent="overlay_list" unique_id=1838900809]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "0 Draw Calls (0 Drawn Objects)
+API: vulkan (forward_plus)
+GPU: Idfk bro"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="conductor_info" type="Label" parent="overlay_list" unique_id=2057034034]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "0.00ms AudioServer Offset
+0.00ms Offset (0.00ms manual)
+0.000s Time (1.00x Speed)
+100.00 BPM
+Beat: 0.00
+Step: 0.00
+Measure: 0.00"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="game_info" type="Label" parent="overlay_list" unique_id=1045670370]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "Scroll Speed: 2.10
+Is Playing: true
+Health: 50.00%
+Combo: 0"
 label_settings = SubResource("LabelSettings_rqscu")
 
 [node name="timer" type="Timer" parent="." unique_id=1466977838]

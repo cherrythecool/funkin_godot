@@ -83,3 +83,41 @@ static func format_time(seconds: float) -> String:
 	var minutes := floori(seconds / 60.0)
 	var seconds_remaining := floori(seconds - (minutes * 60.0))
 	return "%d:%02d" % [minutes, seconds_remaining]
+
+
+static func keycode_to_character(input: Key) -> String:
+	return keycode_string_to_character(OS.get_keycode_string(input))
+
+
+static func keycode_string_to_character(input: String) -> String:
+	match input.to_lower():
+		'apostrophe':
+			return '"'
+		'backslash':
+			return '\\'
+		'comma':
+			return ','
+		'period':
+			return '.'
+		'semicolon':
+			return ':'
+		'slash':
+			return '/'
+		'minus':
+			return '-'
+		'bracketright':
+			return ']'
+		'bracketleft':
+			return '['
+		'quoteleft':
+			return '~'
+		'left':
+			return '←'
+		'down':
+			return '↓'
+		'up':
+			return '↑'
+		'right':
+			return '→'
+		_:
+			return input

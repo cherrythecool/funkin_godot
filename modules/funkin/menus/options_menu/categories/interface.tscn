@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://modules/funkin/menus/options_menu/options/checkbox/checkbox.gd" id="2_422dy"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="3_ih51s"]
 [ext_resource type="SpriteFrames" uid="uid://oksqh74ocs1w" path="res://modules/funkin/menus/options_menu/options/checkbox/checkbox.res" id="4_abqtr"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="4_fkvco"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_fu6tn"]
 [ext_resource type="Script" uid="uid://dpnfmug35vwfs" path="res://modules/funkin/menus/options_menu/options/number_option.gd" id="6_1836p"]
 
@@ -31,14 +30,12 @@ display_as_percent = true
 
 [node name="label" type="Node2D" parent="underlay_alpha" unique_id=690664164]
 script = ExtResource("3_ih51s")
-skin = ExtResource("4_fkvco")
 text = "LANE ALPHA:"
 centered = true
 
 [node name="value" type="Node2D" parent="underlay_alpha" unique_id=1022669805]
 position = Vector2(272, -34)
 script = ExtResource("3_ih51s")
-skin = ExtResource("4_fkvco")
 text = "0%"
 
 [node name="rating_alpha" type="Node2D" parent="." unique_id=591998113 node_paths=PackedStringArray("root")]
@@ -58,14 +55,12 @@ display_as_percent = true
 
 [node name="label" type="Node2D" parent="rating_alpha" unique_id=427025558]
 script = ExtResource("3_ih51s")
-skin = ExtResource("4_fkvco")
 text = "RATING ALPHA:"
 centered = true
 
 [node name="value" type="Node2D" parent="rating_alpha" unique_id=1078053864]
 position = Vector2(321, -34)
 script = ExtResource("3_ih51s")
-skin = ExtResource("4_fkvco")
 text = "0%"
 
 [node name="splash_alpha" type="Node2D" parent="." unique_id=797866145 node_paths=PackedStringArray("root")]
@@ -86,14 +81,12 @@ display_as_percent = true
 [node name="label" type="Node2D" parent="splash_alpha" unique_id=1094598369]
 position = Vector2(47, 0)
 script = ExtResource("3_ih51s")
-skin = ExtResource("4_fkvco")
 text = "SPLASH ALPHA:"
 centered = true
 
 [node name="value" type="Node2D" parent="splash_alpha" unique_id=17153174]
 position = Vector2(366, -34)
 script = ExtResource("3_ih51s")
-skin = ExtResource("4_fkvco")
 text = "0%"
 
 [node name="holds_below_receptors" type="Node2D" parent="." unique_id=364311376]
@@ -104,7 +97,6 @@ key = &"holds_below_receptors"
 [node name="alphabet" type="Node2D" parent="holds_below_receptors" unique_id=1335330600]
 position = Vector2(243, 0)
 script = ExtResource("3_ih51s")
-skin = ExtResource("4_fkvco")
 text = "holds below receptors"
 centered = true
 
@@ -124,7 +116,6 @@ key = &"song_label_show"
 [node name="alphabet" type="Node2D" parent="song_label_show" unique_id=1607077160]
 position = Vector2(99, 0)
 script = ExtResource("3_ih51s")
-skin = ExtResource("4_fkvco")
 text = "Show Song Label"
 centered = true
 
@@ -144,7 +135,6 @@ key = &"skip_scene_transitions"
 [node name="alphabet" type="Node2D" parent="skip_scene_transitions" unique_id=1370226885]
 position = Vector2(140, 0)
 script = ExtResource("3_ih51s")
-skin = ExtResource("4_fkvco")
 text = "skip scene transitions"
 centered = true
 

@@ -4,6 +4,97 @@
 [ext_resource type="Script" uid="uid://iqrb44umgj2s" path="res://core/classes/alphabet/skin.gd" id="2_1t606"]
 [ext_resource type="SpriteFrames" uid="uid://d1b32ft1u6n8r" path="res://core/classes/alphabet/skins/bold.res" id="3_4btys"]
 
+[sub_resource type="Resource" id="Resource_0xbgq"]
+script = ExtResource("1_aln5g")
+animation = &"dash"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_nwm48"]
+script = ExtResource("1_aln5g")
+animation = &"greater_than"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_8gqfs"]
+script = ExtResource("1_aln5g")
+animation = &"less_than"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_rpojf"]
+script = ExtResource("1_aln5g")
+animation = &"hashtag"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_aeddx"]
+script = ExtResource("1_aln5g")
+animation = &"equals"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_2qwn1"]
+script = ExtResource("1_aln5g")
+animation = &"dollar_sign"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_x2lq3"]
+script = ExtResource("1_aln5g")
+animation = &"caret"
+offset = Vector2(0, -20)
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_l5mmr"]
+script = ExtResource("1_aln5g")
+animation = &"left_parenthesis"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_gvnys"]
+script = ExtResource("1_aln5g")
+animation = &"right_parenthesis"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_txvqk"]
+script = ExtResource("1_aln5g")
+animation = &"left_bracket"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_6e1tw"]
+script = ExtResource("1_aln5g")
+animation = &"right_bracket"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_cb04q"]
+script = ExtResource("1_aln5g")
+animation = &"plus"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_3bq4r"]
+script = ExtResource("1_aln5g")
+animation = &"tilde"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_d5ieu"]
+script = ExtResource("1_aln5g")
+animation = &"vertical_bar"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_0ikoc"]
+script = ExtResource("1_aln5g")
+animation = &"percent_sign"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_12fqp"]
+script = ExtResource("1_aln5g")
+animation = &"ampersand"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_4agno"]
+script = ExtResource("1_aln5g")
+animation = &"at_sign"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
+[sub_resource type="Resource" id="Resource_fatfn"]
+script = ExtResource("1_aln5g")
+animation = &"asterisk"
+metadata/_custom_type_script = "uid://6tbbvcxey6ba"
+
 [sub_resource type="Resource" id="Resource_7kt6j"]
 script = ExtResource("1_aln5g")
 animation = &"heart"
@@ -99,119 +190,11 @@ animation = &"underscore"
 offset = Vector2(0, 30)
 metadata/_custom_type_script = "uid://6tbbvcxey6ba"
 
-[sub_resource type="Resource" id="Resource_0xbgq"]
-script = ExtResource("1_aln5g")
-animation = &"dash"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_nwm48"]
-script = ExtResource("1_aln5g")
-animation = &"greater_than"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_8gqfs"]
-script = ExtResource("1_aln5g")
-animation = &"less_than"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_rpojf"]
-script = ExtResource("1_aln5g")
-animation = &"hashtag"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_aeddx"]
-script = ExtResource("1_aln5g")
-animation = &"equals"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_2qwn1"]
-script = ExtResource("1_aln5g")
-animation = &"dollar_sign"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_x2lq3"]
-script = ExtResource("1_aln5g")
-animation = &"caret"
-offset = Vector2(0, -20)
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_l5mmr"]
-script = ExtResource("1_aln5g")
-animation = &"left_parenthesis"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_gvnys"]
-script = ExtResource("1_aln5g")
-animation = &"right_parenthesis"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_txvqk"]
-script = ExtResource("1_aln5g")
-animation = &"left_bracket"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_6e1tw"]
-script = ExtResource("1_aln5g")
-animation = &"right_bracket"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_cb04q"]
-script = ExtResource("1_aln5g")
-animation = &"plus"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_3bq4r"]
-script = ExtResource("1_aln5g")
-animation = &"tilde"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_d5ieu"]
-script = ExtResource("1_aln5g")
-animation = &"vertical_bar"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_0ikoc"]
-script = ExtResource("1_aln5g")
-animation = &"percent_sign"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_12fqp"]
-script = ExtResource("1_aln5g")
-animation = &"ampersand"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_4agno"]
-script = ExtResource("1_aln5g")
-animation = &"at_sign"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
-[sub_resource type="Resource" id="Resource_fatfn"]
-script = ExtResource("1_aln5g")
-animation = &"asterisk"
-metadata/_custom_type_script = "uid://6tbbvcxey6ba"
-
 [resource]
 script = ExtResource("2_1t606")
 sprite_frames = ExtResource("3_4btys")
+suffix = " bold"
 character_map = Dictionary[PackedStringArray, ExtResource("1_aln5g")]({
-PackedStringArray("-"): SubResource("Resource_0xbgq"),
-PackedStringArray(">"): SubResource("Resource_nwm48"),
-PackedStringArray("<"): SubResource("Resource_8gqfs"),
-PackedStringArray("#"): SubResource("Resource_rpojf"),
-PackedStringArray("="): SubResource("Resource_aeddx"),
-PackedStringArray("$"): SubResource("Resource_2qwn1"),
-PackedStringArray("^"): SubResource("Resource_x2lq3"),
-PackedStringArray("("): SubResource("Resource_l5mmr"),
-PackedStringArray(")"): SubResource("Resource_gvnys"),
-PackedStringArray("["): SubResource("Resource_txvqk"),
-PackedStringArray("]"): SubResource("Resource_6e1tw"),
-PackedStringArray("+"): SubResource("Resource_cb04q"),
-PackedStringArray("~"): SubResource("Resource_3bq4r"),
-PackedStringArray("|"): SubResource("Resource_d5ieu"),
-PackedStringArray("%"): SubResource("Resource_0ikoc"),
-PackedStringArray("&"): SubResource("Resource_12fqp"),
-PackedStringArray("@"): SubResource("Resource_4agno"),
-PackedStringArray("*"): SubResource("Resource_fatfn"),
 PackedStringArray("♡", "♥", "❤"): SubResource("Resource_7kt6j"),
 PackedStringArray("\'", "ʼ", "ߴ", "՚"): SubResource("Resource_tykrd"),
 PackedStringArray("\\"): SubResource("Resource_na4oa"),
@@ -229,6 +212,24 @@ PackedStringArray("↑"): SubResource("Resource_t11ht"),
 PackedStringArray("→"): SubResource("Resource_t4qcd"),
 PackedStringArray(":"): SubResource("Resource_pg15c"),
 PackedStringArray(";"): SubResource("Resource_py1wh"),
-PackedStringArray("_"): SubResource("Resource_li1j2")
+PackedStringArray("_"): SubResource("Resource_li1j2"),
+PackedStringArray("-"): SubResource("Resource_0xbgq"),
+PackedStringArray(">"): SubResource("Resource_nwm48"),
+PackedStringArray("<"): SubResource("Resource_8gqfs"),
+PackedStringArray("#"): SubResource("Resource_rpojf"),
+PackedStringArray("="): SubResource("Resource_aeddx"),
+PackedStringArray("$"): SubResource("Resource_2qwn1"),
+PackedStringArray("^"): SubResource("Resource_x2lq3"),
+PackedStringArray("("): SubResource("Resource_l5mmr"),
+PackedStringArray(")"): SubResource("Resource_gvnys"),
+PackedStringArray("["): SubResource("Resource_txvqk"),
+PackedStringArray("]"): SubResource("Resource_6e1tw"),
+PackedStringArray("+"): SubResource("Resource_cb04q"),
+PackedStringArray("~"): SubResource("Resource_3bq4r"),
+PackedStringArray("|"): SubResource("Resource_d5ieu"),
+PackedStringArray("%"): SubResource("Resource_0ikoc"),
+PackedStringArray("&"): SubResource("Resource_12fqp"),
+PackedStringArray("@"): SubResource("Resource_4agno"),
+PackedStringArray("*"): SubResource("Resource_fatfn")
 })
 metadata/_custom_type_script = "uid://iqrb44umgj2s"

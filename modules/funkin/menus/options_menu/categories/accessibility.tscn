@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="2_1fbt3"]
 [ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://modules/funkin/menus/options_menu/options/checkbox/checkbox.gd" id="2_c2csa"]
 [ext_resource type="SpriteFrames" uid="uid://oksqh74ocs1w" path="res://modules/funkin/menus/options_menu/options/checkbox/checkbox.res" id="4_7yydl"]
-[ext_resource type="Resource" uid="uid://5kr5cxye6wyn" path="res://core/classes/alphabet/skins/bold_skin.tres" id="4_afy66"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_2odut"]
 
 [node name="accessibility" type="Node2D" unique_id=836521435]
@@ -18,7 +17,6 @@ key = &"flashing_lights"
 
 [node name="alphabet" type="Node2D" parent="flashing_lights" unique_id=1130308851]
 script = ExtResource("2_1fbt3")
-skin = ExtResource("4_afy66")
 text = "flashing lights"
 centered = true
 
