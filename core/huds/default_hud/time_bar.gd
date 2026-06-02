@@ -14,7 +14,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	update_bar_and_label()
+	if visible:
+		update_bar_and_label()
 
 
 func _on_hud_downscroll_changed(downscroll: bool) -> void:
@@ -27,7 +28,7 @@ func update_bar_and_label() -> void:
 		time_label.text = "?:??"
 		return
 
-	var length := custom_length if custom_length_enable else Conductor.target_length
+	var length: float = custom_length if custom_length_enable else Conductor.target_length
 	if Conductor.target_audio.playing:
 		value = maxf(Conductor.time, 0.0)
 

@@ -10,7 +10,7 @@
 [node name="interface" type="Node2D" unique_id=2111672686 node_paths=PackedStringArray("options")]
 position = Vector2(-320, 0)
 script = ExtResource("1_6p62e")
-options = [NodePath("underlay_alpha"), NodePath("rating_alpha"), NodePath("splash_alpha"), NodePath("holds_below_receptors"), NodePath("song_label_show"), NodePath("skip_scene_transitions")]
+options = [NodePath("underlay_alpha"), NodePath("rating_alpha"), NodePath("splash_alpha"), NodePath("holds_below_receptors"), NodePath("time_bar_show"), NodePath("skip_scene_transitions")]
 max_distance = 320.0
 
 [node name="underlay_alpha" type="Node2D" parent="." unique_id=925156825 node_paths=PackedStringArray("root")]
@@ -108,19 +108,19 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_fu6tn")
 
-[node name="song_label_show" type="Node2D" parent="." unique_id=1465903622]
-position = Vector2(6, 292)
+[node name="time_bar_show" type="Node2D" parent="." unique_id=1465903622]
+position = Vector2(-34, 292)
 script = ExtResource("2_422dy")
-key = &"song_label_show"
+key = &"time_bar_show"
 
-[node name="alphabet" type="Node2D" parent="song_label_show" unique_id=1607077160]
+[node name="alphabet" type="Node2D" parent="time_bar_show" unique_id=1607077160]
 position = Vector2(99, 0)
 script = ExtResource("3_ih51s")
-text = "Show Song Label"
+text = "Show Time Bar"
 centered = true
 
-[node name="checkbox" type="AnimatedSprite2D" parent="song_label_show" unique_id=1072530484]
-position = Vector2(520, 0)
+[node name="checkbox" type="AnimatedSprite2D" parent="time_bar_show" unique_id=1072530484]
+position = Vector2(468, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_abqtr")
 animation = &"selected"
@@ -147,5 +147,5 @@ offset = Vector2(-5, -35)
 script = ExtResource("5_fu6tn")
 
 [connection signal="animation_finished" from="holds_below_receptors/checkbox" to="holds_below_receptors" method="_on_checkbox_animation_finished"]
-[connection signal="animation_finished" from="song_label_show/checkbox" to="song_label_show" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="time_bar_show/checkbox" to="time_bar_show" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="skip_scene_transitions/checkbox" to="skip_scene_transitions" method="_on_checkbox_animation_finished"]

@@ -287,3 +287,16 @@ text = "Toggle Fullscreen"
 [node name="0" type="Button" parent="scroll/margin_container/vbox/menu_fullscreen" unique_id=179668767]
 layout_mode = 2
 text = "F11"
+
+[node name="module_select" type="HBoxContainer" parent="scroll/margin_container/vbox" unique_id=1858958916]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="label" type="Label" parent="scroll/margin_container/vbox/module_select" unique_id=1318491467]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Open Module Selector"
+
+[node name="0" type="Button" parent="scroll/margin_container/vbox/module_select" unique_id=1650021964]
+layout_mode = 2
+text = "F9"
