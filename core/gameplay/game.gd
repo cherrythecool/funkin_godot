@@ -11,6 +11,7 @@ static var exit_scene: String = ""
 
 static var instance: Game = null
 static var playlist: Array[GamePlaylistEntry] = []
+static var last_song_health: float = -1.0
 
 @onready var rating_calculator: RatingCalculator = %rating_calculator
 @onready var tracks: Tracks = %tracks
@@ -127,6 +128,8 @@ func _exit_tree() -> void:
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.use_accumulated_input = true
+
+	last_song_health = -1.0
 
 	# Mostly for modules, might be helpful somewhere else too though
 	if not persist_camera_on_exit:
@@ -268,6 +271,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 		difficulty = new_difficulty.to_lower()
 		playlist.pop_front()
 		get_tree().reload_current_scene()
+		last_song_health = health
 		return
 
 	chart = null

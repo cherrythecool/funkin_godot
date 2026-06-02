@@ -170,11 +170,11 @@ scale = Vector2(0.65, 0.65)
 scroll_scale = Vector2(0.1, 0.1)
 repeat_size = Vector2(2921.839, 0)
 autoscroll = Vector2(-22, 0)
-repeat_times = 3
+repeat_times = 2
 
 [node name="sprite" type="Sprite2D" parent="skybox" unique_id=1293425534]
 z_index = 10
-position = Vector2(-650, -375)
+position = Vector2(204.61542, -375)
 scale = Vector2(1.159, 1.001)
 texture = ExtResource("15_j2dnk")
 centered = false
@@ -185,13 +185,13 @@ scroll_scale = Vector2(1.2, 1.2)
 scroll_offset = Vector2(2048, 0)
 repeat_size = Vector2(2048, 0)
 autoscroll = Vector2(172, 0)
-repeat_times = 3
+repeat_times = 2
 
 [node name="sprite" type="Sprite2D" parent="mist_one" unique_id=358669624]
 modulate = Color(0.360784, 0.360784, 0.360784, 0.6)
 z_index = 1000
 material = ExtResource("15_hydkt")
-position = Vector2(-650, -100)
+position = Vector2(113, -100)
 texture = ExtResource("16_8xh06")
 centered = false
 
@@ -199,13 +199,13 @@ centered = false
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(2048, 0)
 autoscroll = Vector2(150, 0)
-repeat_times = 3
+repeat_times = 2
 
 [node name="sprite" type="Sprite2D" parent="mist_two" unique_id=91975970]
 modulate = Color(0.360784, 0.360784, 0.360784, 0.6)
 z_index = 1000
 material = ExtResource("15_hydkt")
-position = Vector2(-650, -100)
+position = Vector2(98, -100)
 texture = ExtResource("16_8xh06")
 centered = false
 
@@ -213,13 +213,13 @@ centered = false
 scroll_scale = Vector2(1.2, 1.2)
 repeat_size = Vector2(2048, 0)
 autoscroll = Vector2(-80, 0)
-repeat_times = 3
+repeat_times = 2
 
 [node name="sprite" type="Sprite2D" parent="mist_three" unique_id=208369538]
 modulate = Color(0.361, 0.361, 0.361, 0.8)
 z_index = 1001
 material = ExtResource("15_hydkt")
-position = Vector2(-650, -100)
+position = Vector2(83, -100)
 texture = ExtResource("17_gl3gy")
 centered = false
 
@@ -227,13 +227,13 @@ centered = false
 scroll_scale = Vector2(0.95, 0.95)
 repeat_size = Vector2(1638.4, 0)
 autoscroll = Vector2(-50, 0)
-repeat_times = 3
+repeat_times = 2
 
 [node name="sprite" type="Sprite2D" parent="mist_four" unique_id=2146361820]
 modulate = Color(0.361, 0.361, 0.361, 0.5)
 z_index = 99
 material = ExtResource("15_hydkt")
-position = Vector2(-650, -100)
+position = Vector2(117.99994, -100)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("16_8xh06")
 centered = false
@@ -242,13 +242,13 @@ centered = false
 scroll_scale = Vector2(0.8, 0.8)
 repeat_size = Vector2(1433.6, 0)
 autoscroll = Vector2(40, 0)
-repeat_times = 3
+repeat_times = 2
 
 [node name="sprite" type="Sprite2D" parent="mist_five" unique_id=1727289608]
 modulate = Color(0.361, 0.361, 0.361, 1)
 z_index = 88
 material = ExtResource("15_hydkt")
-position = Vector2(-650, -100)
+position = Vector2(117.99994, -100)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("17_gl3gy")
 centered = false
@@ -257,13 +257,13 @@ centered = false
 scroll_scale = Vector2(0.5, 0.5)
 repeat_size = Vector2(2252.8, 0)
 autoscroll = Vector2(20, 0)
-repeat_times = 3
+repeat_times = 2
 
 [node name="sprite" type="Sprite2D" parent="mist_six" unique_id=1000235504]
 modulate = Color(0.361, 0.361, 0.361, 1)
 z_index = 39
 material = ExtResource("15_hydkt")
-position = Vector2(-650, -100)
+position = Vector2(88, -100)
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("16_8xh06")
 centered = false

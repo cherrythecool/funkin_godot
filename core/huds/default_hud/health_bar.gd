@@ -31,6 +31,9 @@ func _ready() -> void:
 	game = Game.instance
 	lerped_health = game.health
 
+	if Game.last_song_health != -1.0:
+		lerped_health = Game.last_song_health
+
 
 func _process(delta: float) -> void:
 	lerped_health = lerpf(lerped_health, game.health, GameUtils.lerp_weight(delta, 5.0))
