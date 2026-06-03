@@ -28,6 +28,8 @@ static func load_chart(song_folder: String, difficulty: StringName) -> Chart:
 		return VSliceChart.load_vslice(song_folder, difficulty)
 	elif LegacyFunkinChart.is_legacy(song_folder, difficulty):
 		return LegacyFunkinChart.load_legacy(song_folder, difficulty)
+	elif CodenameChart.is_codename(song_folder, difficulty):
+		return CodenameChart.load_codename(song_folder, difficulty)
 	else:
 		return failed_load(song_folder, difficulty)
 

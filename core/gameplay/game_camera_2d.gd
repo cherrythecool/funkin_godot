@@ -143,6 +143,7 @@ func _on_game_event_hit(event: EventData) -> void:
 			var steps: int = data.get("duration", 32)
 			var ease_string: String = data.get("ease", "expoOut")
 			var data_zoom: float = data.get("zoom", 1.05)
+
 			if is_instance_valid(zoom_event_tween):
 				zoom_event_tween.kill()
 

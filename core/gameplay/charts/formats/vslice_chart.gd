@@ -22,9 +22,7 @@ static func is_vslice(song_folder: String, difficulty: StringName) -> bool:
 		return false
 
 	var chart_path := "%s/charts/chart.json" % song_folder
-	var chart_exists := ResourceLoader.exists(chart_path, "JSON")
-
-	if not chart_exists:
+	if not ResourceLoader.exists(chart_path, "JSON"):
 		return false
 
 	var data: Variant = load(chart_path).data
@@ -49,7 +47,7 @@ static func load_vslice(song_folder: String, difficulty: StringName) -> Chart:
 		change.bpm = float(change_data.get("bpm", 0.0))
 		chart.timing_changes.push_back(change)
 
-	var chart_path: String = "%s/charts/chart.json" % song_folder
+	var chart_path := "%s/charts/chart.json" % song_folder
 	var data: Variant = load(chart_path).data
 
 	var difficulty_string := String(difficulty).to_lower()
@@ -87,7 +85,7 @@ static func load_vslice(song_folder: String, difficulty: StringName) -> Chart:
 			note_data.length = note.get("l") / 1000.0
 
 		var direction: int = note.get("d")
-		var side: StringName = &"player" if direction < 4 else &"opponent"
+		var side := &"player" if direction < 4 else &"opponent"
 		note_data.direction = direction % 4
 
 		note_data.type = note.get("k", &"default")
