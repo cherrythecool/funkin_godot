@@ -83,10 +83,6 @@ signal measure_hit(measure: int)
 signal rate_changed(rate: float)
 
 
-func reset_offset() -> void:
-	offset = audio_offset + manual_offset
-
-
 func _exit_tree() -> void:
 	if instance == self:
 		rate = 1.0
@@ -113,6 +109,53 @@ func _process(delta: float) -> void:
 	calculate_beat()
 
 
+func _on_setting_changed(file: StringName, key: Variant) -> void:
+	if file == &"core" and key == "note_offset":
+		manual_offset = Settings.get_setting(file, key) / 1000.0
+
+
+func _on_scene_changed() -> void:
+	reset_offset()
+
+
+func get_tempo_at_time(time_: float, timing_changes_: Array[TimingChange]) -> float:
+	if timing_changes_.is_empty():
+		return 0.0
+
+	var bpm: float = timing_changes_[0].bpm
+	for change: TimingChange in timing_changes_:
+		if maxf(time_, 0.0) < change.time:
+			break
+		if not change.bpm_changed:
+			continue
+
+		bpm = change.bpm
+
+	return bpm
+
+
+func get_beat_at_time(time_: float, timing_changes_: Array[TimingChange]) -> float:
+	if timing_changes_.is_empty():
+		return 0.0
+
+	var beat_: float = 0.0
+	var bpm: float = timing_changes_[0].bpm
+
+	var last_time: float = 0.0
+	for change: TimingChange in timing_changes_:
+		if maxf(time_, 0.0) < change.time:
+			break
+		if not change.bpm_changed:
+			continue
+
+		beat_ += (change.time - last_time) / (60.0 / bpm)
+		last_time = change.time
+		bpm = change.bpm
+
+	beat_ += (time_ - last_time) / (60.0 / bpm)
+	return beat_
+
+
 func sync_to_target(delta: float) -> void:
 	var audio_time := GameUtils.get_accurate_time(target_audio)
 	var desync := absf(raw_time - audio_time)
@@ -130,21 +173,8 @@ func calculate_beat() -> void:
 	if timing_changes.is_empty():
 		beat = time / beat_delta
 	else:
-		beat = 0.0
-		tempo = timing_changes[0].bpm
-
-		var last_time: float = 0.0
-		for change: TimingChange in timing_changes:
-			if maxf(time, 0.0) < change.time:
-				break
-			if not change.bpm_changed:
-				continue
-
-			beat += (change.time - last_time) / beat_delta
-			last_time = change.time
-			tempo = change.bpm
-
-		beat += (time - last_time) / beat_delta
+		tempo = get_tempo_at_time(time, timing_changes)
+		beat = get_beat_at_time(time, timing_changes)
 
 	calculate_hits(last_step, last_beat, last_measure)
 
@@ -161,14 +191,6 @@ func calculate_hits(last_step: int, last_beat: int, last_measure: int) -> void:
 			measure_hit.emit(measure_value)
 
 
-func reset() -> void:
-	reset_offset()
-	target_audio = null
-	raw_time = 0.0
-	timing_changes.clear()
-	calculate_beat()
-
-
 func append_timing_changes(events: Array[TimingChange], clear: bool = true) -> void:
 	if clear:
 		timing_changes.clear()
@@ -177,10 +199,13 @@ func append_timing_changes(events: Array[TimingChange], clear: bool = true) -> v
 	timing_changes.sort_custom(Chart.sort_by_time)
 
 
-func _on_setting_changed(file: StringName, key: Variant) -> void:
-	if file == &"core" and key == "note_offset":
-		manual_offset = Settings.get_setting(file, key) / 1000.0
-
-
-func _on_scene_changed() -> void:
+func reset() -> void:
 	reset_offset()
+	target_audio = null
+	raw_time = 0.0
+	timing_changes.clear()
+	calculate_beat()
+
+
+func reset_offset() -> void:
+	offset = audio_offset + manual_offset

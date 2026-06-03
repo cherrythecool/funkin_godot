@@ -5,8 +5,8 @@ extends Character
 @onready var eye_whites: ColorRect = $eye_whites
 @onready var eyes: AnimateSymbol = $eyes
 @onready var background: ColorRect = $background
-var camera_side: int = 0
 
+var camera_side: StringName = &"player"
 
 
 func _ready() -> void:
@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if camera_side == 1 and eyes.frame >= 13:
+	if camera_side == &"opponent" and eyes.frame >= 13:
 		eyes.playing = false
 		eyes.frame = 13
 
@@ -26,14 +26,14 @@ func _on_event_hit(event: EventData) -> void:
 	if event.name.to_lower() != &'camera pan':
 		return
 
-	var side: int = event.data[0]
+	var side: StringName = event.data.get(&"side")
 	# prevent middle character from fucking with us :+1:
-	if side != 0 and side != 1:
+	if side != &"player" and side != &"opponent":
 		return
 
 	camera_side = side
 	if event.time <= 0.0:
-		if camera_side == 0:
+		if camera_side == &"player":
 			eyes.frame = 31
 			eyes.playing = false
 		else:
@@ -42,7 +42,7 @@ func _on_event_hit(event: EventData) -> void:
 
 		return
 
-	if camera_side == 0:
+	if camera_side == &"player":
 		eyes.frame = 13
 		eyes.playing = true
 	else:
@@ -52,6 +52,7 @@ func _on_event_hit(event: EventData) -> void:
 
 func set_character_material(new_material: Material) -> void:
 	super(new_material)
+
 	speakers.material = new_material
 	eye_whites.material = new_material
 	eyes.material = new_material

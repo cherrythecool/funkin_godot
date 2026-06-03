@@ -97,6 +97,7 @@ func _on_game_event_hit(event: EventData) -> void:
 					target = game.opponent
 				&"spectator":
 					target = game.spectator
+
 			if not is_instance_valid(target):
 				return
 
@@ -138,7 +139,7 @@ func _on_game_event_hit(event: EventData) -> void:
 				0.0
 			)
 		&"zoomcamera":
-			var data: Dictionary = event.data.get(&"values")[0]
+			var data: Dictionary = event.data.get(&"values")
 			var steps: int = data.get("duration", 32)
 			var ease_string: String = data.get("ease", "expoOut")
 			var data_zoom: float = data.get("zoom", 1.05)

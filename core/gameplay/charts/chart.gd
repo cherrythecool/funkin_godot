@@ -24,7 +24,9 @@ static func new_strumline() -> Dictionary:
 static func load_chart(song_folder: String, difficulty: StringName) -> Chart:
 	difficulty = difficulty.to_lower()
 
-	if LegacyFunkinChart.is_legacy(song_folder, difficulty):
+	if VSliceChart.is_vslice(song_folder, difficulty):
+		return VSliceChart.load_vslice(song_folder, difficulty)
+	elif LegacyFunkinChart.is_legacy(song_folder, difficulty):
 		return LegacyFunkinChart.load_legacy(song_folder, difficulty)
 	else:
 		return failed_load(song_folder, difficulty)
@@ -35,64 +37,10 @@ static func failed_load(song_folder: String, difficulty: StringName) -> Chart:
 	return null
 
 
-#static func try_legacy(base_path: String, difficulty: StringName) -> Chart:
-	#var legacy_exists: bool = ResourceLoader.exists('%s/charts/%s.json' % [base_path, difficulty])
-	#if not legacy_exists:
-		#return null
-#
-	#var path: String = '%s/charts/%s.json' % [base_path, difficulty]
-	#var funkin: FunkinLegacyChart = FunkinLegacyChart.new()
-	#funkin.json = load(path).data
-	#if 'codenameChart' in funkin.json and funkin.json.codenameChart == true:
-		#return CodenameChart.parse(base_path, funkin.json)
-#
-	#if funkin.json.song is Dictionary:
-		#funkin.scroll_speed = funkin.json.song.get('speed', 1.0)
-	#else:
-		#funkin.scroll_speed = funkin.json.get('speed', 1.0)
-#
-	#var extra_events: Array[EventData] = []
-	#var events_path: String = '%s/charts/events.json' % [base_path]
-	#if ResourceLoader.exists(events_path):
-		#var events_json: String = FileAccess.get_file_as_string(events_path)
-		#var data: Dictionary = JSON.parse_string(events_json)
-		#if data.song is Dictionary:
-			#extra_events.append_array(FunkinLegacyChart.parse_events(data.song))
-		#else:
-			#extra_events.append_array(FunkinLegacyChart.parse_events(data))
-#
-	#var chart: Chart = funkin.parse()
-	#chart.events.append_array(extra_events)
-	#chart.events.sort_custom(sort_time_based)
-	#return chart
-
-
-#static func try_fnfc(base_path: String, difficulty: StringName) -> Chart:
-	#var fnfc_exists: bool = ResourceLoader.exists('%s/charts/chart.json' % [base_path]) and \
-			#(ResourceLoader.exists('%s/charts/meta.json' % [base_path]) or ResourceLoader.exists('%s/charts/metadata.json' % [base_path]))
-	#if not fnfc_exists:
-		#return null
-#
-	#var fnfc: FNFCChart = FNFCChart.new()
-	#var chart_path: String = '%s/charts/chart.json' % [base_path]
-	#fnfc.json_chart = load(chart_path).data
-#
-	#var meta_path: String = '%s/charts/meta.json' % [base_path]
-	#if not ResourceLoader.exists(meta_path):
-		#meta_path = '%s/charts/metadata.json' % [base_path]
-	#var meta_data: String = FileAccess.get_file_as_string(meta_path)
-	#fnfc.json_meta = JSON.parse_string(meta_data)
-#
-	#if "scrollSpeed" in fnfc.json_chart:
-		#if fnfc.json_chart.scrollSpeed is float:
-			#fnfc.scroll_speed = fnfc.json_chart.scrollSpeed
-		#else:
-			#if fnfc.json_chart.scrollSpeed.has(difficulty.to_lower()):
-				#fnfc.scroll_speed = fnfc.json_chart.scrollSpeed.get(difficulty.to_lower(), 1.0)
-			#else:
-				#fnfc.scroll_speed = fnfc.json_chart.scrollSpeed.get('default', 1.0)
-#
-	#return fnfc.parse(difficulty)
+func _init() -> void:
+	strumlines[&"player"] = Chart.new_strumline()
+	strumlines[&"opponent"] = Chart.new_strumline()
+	strumlines[&"spectator"] = Chart.new_strumline()
 
 
 func sort() -> void:
@@ -129,3 +77,30 @@ func remove_stacked_notes(min_time: float = 0.005) -> int:
 			index += 1
 
 	return total_stacked
+
+
+func generate_default_events() -> void:
+	var found_camera_pan: bool = false
+	for event: EventData in events:
+		if event is CameraPan and event.time <= 0.001:
+			found_camera_pan = true
+			break
+
+	if not found_camera_pan:
+		events.push_front(CameraPan.new())
+
+
+func snap_starting_events() -> void:
+	for event: EventData in events:
+		if event.time <= 0.001 and event.trigger_before_countdown:
+			event.time = 0.0
+
+
+func update_note_types(strumline_key: StringName, type: StringName) -> bool:
+	var strumline: Dictionary = strumlines[strumline_key]
+
+	if type not in strumline[&"note_types"]:
+		strumline[&"note_types"].push_back(type)
+		return true
+	else:
+		return false

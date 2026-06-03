@@ -5,7 +5,7 @@ func _on_event_hit(event: EventData) -> void:
 	if event.name.to_lower() != &"playanimation":
 		return
 
-	var data: Dictionary = event.data[0]
+	var data: Dictionary = event.data.get(&"values")
 	var target: String = data.get("target", "bf")
 	var animation: String = data.get("anim", "hey")
 	var character: Character

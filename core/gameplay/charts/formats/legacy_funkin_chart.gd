@@ -2,10 +2,6 @@ class_name LegacyFunkinChart
 extends Object
 
 
-var json: Dictionary
-var scroll_speed: float = 1.0
-
-
 static func is_legacy(song_folder: String, difficulty: StringName) -> bool:
 	var path := "%s/charts/%s.json" % [song_folder, difficulty]
 	var chart_exists := ResourceLoader.exists(path, "JSON")
@@ -63,10 +59,6 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 	var must_hit: bool = sections[0].mustHitSection
 	chart.events.push_back(CameraPan.new(time, &"player" if must_hit else &"opponent"))
 
-	chart.strumlines[&"player"] = Chart.new_strumline()
-	chart.strumlines[&"opponent"] = Chart.new_strumline()
-	chart.strumlines[&"spectator"] = Chart.new_strumline()
-
 	for section: Dictionary in sections:
 		if section.get("changeBPM", false) and section.get("bpm", 0.0) != bpm:
 			bpm = section.get("bpm", 0.0)
@@ -108,14 +100,22 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 			else:
 				note_data.type = &"default"
 
-			var strumline: Dictionary = chart.strumlines[side]
-			if note_data.type not in strumline[&"note_types"]:
-				strumline[&"note_types"].push_back(note_data.type)
+			chart.update_note_types(side, note_data.type)
 
+			var strumline: Dictionary = chart.strumlines[side]
 			strumline[&"notes"].push_back(note_data)
 
 		beat += section_length
 		time += section_length * beat_delta
+
+	var events_path: String = "%s/charts/events.json" % song_folder
+	if ResourceLoader.exists(events_path):
+		var events_data: Variant = load(events_path).data
+		if events_data is Dictionary:
+			if "song" in events_data and events_data["song"] is Dictionary:
+				chart.events.append_array(load_psych_events(events_data["song"]))
+			else:
+				chart.events.append_array(load_psych_events(events_data))
 
 	chart.sort()
 
