@@ -31,9 +31,7 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 		return
 
 	var song_data: Dictionary
-
 	var chart := Chart.new()
-	chart.scroll_speed = song_data.get("speed", 1.0)
 
 	# Only format I know that does this is Psych 1.0, so that's why the check
 	# for this is how it is.
@@ -44,10 +42,17 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 		song_data = data
 		notes_use_must_hit = false
 
+	chart.scroll_speed = song_data.get("speed", 1.0)
+
 	var sections: Array = song_data["notes"]
 	var bpm: float = song_data["bpm"]
 	var beat: float = 0.0
 	var time: float = 0.0
+
+	var initial_bpm := TimingChange.new()
+	initial_bpm.bpm_changed = true
+	initial_bpm.bpm = bpm
+	chart.timing_changes.push_back(initial_bpm)
 
 	if song_data.has("events"):
 		chart.events.append_array(load_psych_events(song_data["events"]))

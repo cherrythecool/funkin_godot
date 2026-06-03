@@ -29,6 +29,7 @@ static var offset: float = audio_offset + manual_offset
 
 @export var active: bool = true
 @export var tempo: float = 0.0
+
 var timing_changes: Array[TimingChange] = []
 
 var raw_time: float = 0.0
@@ -136,10 +137,12 @@ func calculate_beat() -> void:
 		for change: TimingChange in timing_changes:
 			if maxf(time, 0.0) < change.time:
 				break
+			if not change.bpm_changed:
+				continue
 
 			beat += (change.time - last_time) / beat_delta
 			last_time = change.time
-			tempo = change.data[0]
+			tempo = change.bpm
 
 		beat += (time - last_time) / beat_delta
 
@@ -166,10 +169,11 @@ func reset() -> void:
 	calculate_beat()
 
 
-func get_bpm_changes(events: Array[EventData], clear: bool = true) -> void:
+func append_timing_changes(events: Array[TimingChange], clear: bool = true) -> void:
 	if clear:
 		timing_changes.clear()
 
+	timing_changes.append_array(events)
 	timing_changes.sort_custom(Chart.sort_by_time)
 
 

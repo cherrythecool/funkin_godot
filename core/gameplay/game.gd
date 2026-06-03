@@ -444,11 +444,10 @@ func setup_hud() -> void:
 
 func reset_conductor() -> void:
 	Conductor.reset()
-	Conductor.get_bpm_changes(chart.events)
+	Conductor.append_timing_changes(chart.timing_changes)
 	Conductor.calculate_beat()
 	Conductor.raw_time = (-4.0 * Conductor.beat_delta) + Conductor.offset
 	Conductor.beat_hit.emit.call_deferred(-4)
-	Conductor.target_audio = song_player
 
 
 func load_events() -> void:
