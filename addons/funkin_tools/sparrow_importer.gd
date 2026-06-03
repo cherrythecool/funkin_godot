@@ -190,6 +190,7 @@ func parse_all_sparrows() -> SpriteFrames:
 	if sprite_frames.has_animation(&"default"):
 		sprite_frames.remove_animation(&"default")
 
+	var animations: Dictionary[String, Dictionary] = {}
 	for import_path: String in imported_list.keys():
 		assert(import_path != null, "Imported Sparrow Atlas needs valid path")
 
@@ -203,16 +204,22 @@ func parse_all_sparrows() -> SpriteFrames:
 			import_frames.remove_animation(&"default")
 
 		for animation: String in import_frames.get_animation_names():
-			var prefix: String = ("%s " % [get_path_prefix(import_path)]
+			var prefix: String = (
+				"%s " % [get_path_prefix(import_path)]
 				if import_frames.get_meta(&"path_prefix", import_path_prefix)
-				else "")
+				else ""
+			)
 			var export_name: String = "%s%s" % [prefix, animation]
+
+			if not animations.has(export_name):
+				animations[export_name] = {}
 
 			if not sprite_frames.has_animation(export_name):
 				sprite_frames.add_animation(export_name)
 				sprite_frames.set_animation_loop(export_name,
 					import_frames.get_animation_loop(animation)
 				)
+
 				sprite_frames.set_animation_speed(export_name,
 					import_frames.get_animation_speed(animation)
 				)
@@ -225,28 +232,28 @@ func parse_all_sparrows() -> SpriteFrames:
 
 				if texture is AtlasTexture:
 					texture.filter_clip = export_filter_edges
-				if texture.has_meta(&"original_frame"):
-					var frame: int = texture.get_meta(&"original_frame")
-					if frame < sprite_frames.get_frame_count(export_name) - 1:
-						sprite_frames.add_frame(
-							export_name,
-							texture,
-							import_frames.get_frame_duration(
-								animation,
-								index,
-							),
-							frame,
-						)
-						continue
 
-				sprite_frames.add_frame(
-					export_name,
-					texture,
-					import_frames.get_frame_duration(
-						animation,
-						index,
-					),
+				texture.set_meta(&"duration", import_frames.get_frame_duration(
+					animation,
+					index,
+				))
+
+				animations[export_name].set(
+					texture.get_meta(&"original_frame", index),
+					texture
 				)
+
+	for animation: String in animations:
+		var frame_indexes: Array = animations[animation].keys()
+		frame_indexes.sort()
+
+		for index: int in frame_indexes:
+			var texture: AtlasTexture = animations[animation][index]
+			sprite_frames.add_frame(
+				animation,
+				texture,
+				texture.get_meta(&"duration", 1),
+			)
 
 	if export_clear_automatically:
 		imported_list.clear()
