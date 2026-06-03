@@ -1,5 +1,5 @@
 class_name NoteData
-extends Resource
+extends RefCounted
 
 
 @export var time: float

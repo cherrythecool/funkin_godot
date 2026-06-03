@@ -1,4 +1,5 @@
-class_name NoteField extends Node2D
+class_name NoteField
+extends Node2D
 
 
 @export_category('Gameplay')
@@ -274,10 +275,6 @@ func append_chart(chart: Chart, custom_strumline: StringName = &"") -> void:
 
 
 func spawn_note(data: NoteData) -> void:
-	data = data.duplicate()
-	if data.length > 0.0 and data.length < conductor.step_delta:
-		data.length = 0.0
-
 	var scene: PackedScene = note_types.get(
 		data.type.to_snake_case(), note_types.get(data.type)
 	)
@@ -291,9 +288,12 @@ func spawn_note(data: NoteData) -> void:
 	var note: Note = scene.instantiate()
 	note.field = self
 	note.data = data
-	note.lane = absi(data.direction) % lane_count
+	note.lane = data.direction
 	note.position.x = receptors[note.lane].position.x
+
+	# MAKE SURE NOTES ARE OFF SCREEN???????
 	note.position.y = -100000.0
+
 	if not is_instance_valid(note.splash):
 		note.splash = default_note_splash
 	if not use_note_splashes:
