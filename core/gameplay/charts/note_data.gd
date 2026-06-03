@@ -1,5 +1,5 @@
-extends Resource
 class_name NoteData
+extends Resource
 
 
 @export var time: float

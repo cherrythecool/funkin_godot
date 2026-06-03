@@ -203,13 +203,13 @@ z_index = 1
 
 [node name="opponent" parent="note_fields" unique_id=788558760 instance=ExtResource("2_0rw2j")]
 position = Vector2(320, 100)
+strumline = &"opponent"
 use_note_splashes = false
 default_note_splash = ExtResource("3_1ubyb")
 
 [node name="player" parent="note_fields" unique_id=827080627 instance=ExtResource("2_0rw2j")]
 position = Vector2(960, 100)
 takes_input = true
-side = 1
 default_note_splash = ExtResource("3_1ubyb")
 
 [connection signal="downscroll_changed" from="." to="health_bar" method="_on_hud_downscroll_changed"]

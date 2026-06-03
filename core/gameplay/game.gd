@@ -2,6 +2,12 @@ class_name Game
 extends Node
 
 
+enum PlayMode {
+	FREEPLAY = 0,
+	STORY = 1,
+	OTHER = 2,
+}
+
 static var songs_folder: String = "res://modules/funkin/songs"
 static var song: StringName = &"bopeebo"
 static var difficulty: StringName = &"hard"
@@ -13,8 +19,8 @@ static var instance: Game = null
 static var playlist: Array[GamePlaylistEntry] = []
 static var last_song_health: float = -1.0
 
+@onready var song_player: AudioStreamPlayer = %song_player
 @onready var rating_calculator: RatingCalculator = %rating_calculator
-@onready var tracks: Tracks = %tracks
 @onready var scripts: Scripts = %scripts
 
 @onready var hud_layer: CanvasLayer = %hud_layer
@@ -105,8 +111,12 @@ func _ready() -> void:
 	Input.use_accumulated_input = false
 
 	GlobalAudio.music.stop()
-	tracks.load_tracks(song, songs_folder)
-	tracks.finished.connect(finish_song.bind(false, false))
+
+	song_player.stream = Tracks.tracks_load(song, songs_folder)
+	if not is_instance_valid(song_player.stream):
+		printerr("Failed to load tracks for current song! Returning...")
+		finish_song(true, false)
+		return
 
 	load_chart()
 	reset_conductor()
@@ -117,6 +127,7 @@ func _ready() -> void:
 
 	scripts.load_scripts(song, songs_folder)
 	load_events()
+
 	ready_post.emit()
 
 
@@ -150,9 +161,13 @@ func _process(delta: float) -> void:
 		SceneManager.swap_to_packed(load("uid://c05dah5aarqg8"))
 		return
 
-	if is_instance_valid(tracks) and not song_started:
-		if Conductor.raw_time >= 0.0 and Conductor.active and not tracks.playing:
-			start_song()
+	if (
+		not song_started and
+		Conductor.raw_time >= 0.0 and
+		Conductor.active and
+		not song_player.playing
+	):
+		start_song()
 
 	while events_index < chart.events.size() and \
 			Conductor.time >= chart.events[events_index].time:
@@ -223,9 +238,9 @@ func _on_note_hit(note: Note) -> void:
 
 
 func start_song(from_position: float = 0.0) -> void:
-	tracks.play(from_position)
+	song_player.play(from_position)
 
-	Conductor.target_audio = tracks.player
+	Conductor.target_audio = song_player
 	Conductor.raw_time = from_position
 	Conductor.rate = Conductor.internal_rate
 
@@ -254,13 +269,9 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 	if not (playlist.is_empty() or force):
 		var new_song: StringName = playlist[0].name
 		var new_difficulty: StringName = playlist[0].difficulty
-		chart = Chart.load_song("%s/%s" % [songs_folder, new_song], new_difficulty)
+
+		chart = Chart.load_chart("%s/%s" % [songs_folder, new_song], new_difficulty)
 		if not is_instance_valid(chart):
-			var json_path: String = (
-				"%s/%s/charts/%s.json"
-				% [songs_folder, new_song, new_difficulty.to_lower()]
-			)
-			printerr("Song at path %s doesn\'t exist!" % json_path)
 			GlobalAudio.get_player("MENU/CANCEL").play()
 			back_to_menus.emit()
 			SceneManager.transition_to_packed(load("uid://b7fwxsepnt38j"))
@@ -295,7 +306,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 
 func load_chart() -> void:
 	if not is_instance_valid(chart):
-		chart = Chart.load_song("%s/%s" % [songs_folder, song], difficulty)
+		chart = Chart.load_chart("%s/%s" % [songs_folder, song], difficulty)
 
 	var custom_speed: float = Settings.get_setting(&"core", "note_scroll_value")
 	match Settings.get_setting(&"core", "note_scroll_method"):
@@ -304,26 +315,25 @@ func load_chart() -> void:
 		"constant":
 			scroll_speed = custom_speed
 
-	Chart.sort_chart_notes(chart)
-	Chart.sort_chart_events(chart)
+	chart.sort()
 
 	var note_type_paths: PackedStringArray = [
 		"res://modules/%s/notes/types" % ModuleManager.current_module,
 		"res://core/notes/types",
 	]
 
-	# loading external types :3
-	for note: NoteData in chart.notes:
-		var type: StringName = note.type
-		if (
-			note_types.has(type) or
-			note_types.has(type.to_snake_case())
-		):
-			continue
+	for strumline: Dictionary in chart.strumlines.values():
+		for raw_type: String in strumline[&"note_types"]:
+			var type := StringName(raw_type)
+			if (
+				note_types.has(type) or
+				note_types.has(type.to_snake_case())
+			):
+				continue
 
-		var scene := Note.load_note_type(type, note_type_paths)
-		if is_instance_valid(scene):
-			note_types[type] = scene
+			var scene := Note.load_note_type(type, note_type_paths)
+			if is_instance_valid(scene):
+				note_types[type] = scene
 
 
 func load_assets() -> void:
@@ -394,7 +404,7 @@ func load_from_assets() -> void:
 		player_field.reload_skin()
 
 		if metadata.player_audio_track_index > -1:
-			player_field.tracks_stream = tracks.player.stream
+			player_field.tracks_stream = song_player.stream
 			player_field.track_index = metadata.player_audio_track_index
 
 	if is_instance_valid(opponent_field):
@@ -404,7 +414,7 @@ func load_from_assets() -> void:
 		opponent_field.reload_skin()
 
 		if metadata.opponent_audio_track_index > -1:
-			opponent_field.tracks_stream = tracks.player.stream
+			opponent_field.tracks_stream = song_player.stream
 			opponent_field.track_index = metadata.opponent_audio_track_index
 
 	pause_menu = hud_skin.get_pause_menu()
@@ -438,6 +448,7 @@ func reset_conductor() -> void:
 	Conductor.calculate_beat()
 	Conductor.raw_time = (-4.0 * Conductor.beat_delta) + Conductor.offset
 	Conductor.beat_hit.emit.call_deferred(-4)
+	Conductor.target_audio = song_player
 
 
 func load_events() -> void:
@@ -445,7 +456,7 @@ func load_events() -> void:
 		# Note: this means all custom events just act as normal scripts
 		# which should be fine for 99.9% of use cases.
 		# it also means you have to manually check for event names
-		# but it"s fine :p
+		# but it's fine :p
 		var exceptions: Array[StringName] = []
 		for event: EventData in chart.events:
 			var event_name: StringName = event.name.to_lower()
@@ -503,10 +514,3 @@ func skip_to(seconds: float) -> void:
 	if is_instance_valid(player_field):
 		player_field.try_spawning(true)
 		player_field.clear_notes()
-
-
-enum PlayMode {
-	FREEPLAY = 0,
-	STORY = 1,
-	OTHER = 2,
-}

@@ -89,13 +89,13 @@ func _on_game_event_hit(event: EventData) -> void:
 	match event.name.to_lower():
 		&"camera pan":
 			var target: Character = null
-			var side: CameraPan.Side = event.data[0]
+			var side: StringName = event.data.get(&"side")
 			match side:
-				CameraPan.Side.PLAYER:
+				&"player":
 					target = game.player
-				CameraPan.Side.OPPONENT:
+				&"opponent":
 					target = game.opponent
-				CameraPan.Side.GIRLFRIEND:
+				&"spectator":
 					target = game.spectator
 			if not is_instance_valid(target):
 				return
@@ -103,9 +103,9 @@ func _on_game_event_hit(event: EventData) -> void:
 			if is_instance_valid(pan_event_tween) and pan_event_tween.is_running():
 				pan_event_tween.kill()
 
-			var ease_string: String = event.data[1]
+			var ease_string: String = event.data.get(&"ease_string")
 			position_lerps = true
-			position_target = target.get_camera_position() + event.data[3]
+			position_target = target.get_camera_position() + event.data.get(&"offset")
 			if event.time <= 0.0 or ease_string == "INSTANT":
 				position = position_target
 			if ease_string == "CLASSIC" or ease_string == "INSTANT":
@@ -113,7 +113,7 @@ func _on_game_event_hit(event: EventData) -> void:
 			if not is_instance_valid(conductor):
 				return
 
-			var steps: float = event.data[2]
+			var steps: float = event.data.get(&"duration")
 			pan_event_tween = create_tween()
 			pan_event_tween.set_ease(GameUtils.get_ease_from_str(ease_string))
 			pan_event_tween.set_trans(GameUtils.get_trans_from_str(ease_string))
@@ -138,7 +138,7 @@ func _on_game_event_hit(event: EventData) -> void:
 				0.0
 			)
 		&"zoomcamera":
-			var data: Dictionary = event.data[0]
+			var data: Dictionary = event.data.get(&"values")[0]
 			var steps: int = data.get("duration", 32)
 			var ease_string: String = data.get("ease", "expoOut")
 			var data_zoom: float = data.get("zoom", 1.05)

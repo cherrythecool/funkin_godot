@@ -29,7 +29,7 @@ static var offset: float = audio_offset + manual_offset
 
 @export var active: bool = true
 @export var tempo: float = 0.0
-@export var tempo_changes: Array[BPMChange] = []
+var timing_changes: Array[TimingChange] = []
 
 var raw_time: float = 0.0
 
@@ -126,14 +126,14 @@ func calculate_beat() -> void:
 	var last_beat: int = floori(beat)
 	var last_measure: int = floori(measure)
 
-	if tempo_changes.is_empty():
+	if timing_changes.is_empty():
 		beat = time / beat_delta
 	else:
 		beat = 0.0
-		tempo = tempo_changes[0].data[0]
+		tempo = timing_changes[0].bpm
 
 		var last_time: float = 0.0
-		for change: BPMChange in tempo_changes:
+		for change: TimingChange in timing_changes:
 			if maxf(time, 0.0) < change.time:
 				break
 
@@ -162,23 +162,15 @@ func reset() -> void:
 	reset_offset()
 	target_audio = null
 	raw_time = 0.0
-	tempo_changes.clear()
+	timing_changes.clear()
 	calculate_beat()
 
 
 func get_bpm_changes(events: Array[EventData], clear: bool = true) -> void:
 	if clear:
-		tempo_changes.clear()
+		timing_changes.clear()
 
-	for event: EventData in events:
-		if event is BPMChange:
-			tempo_changes.push_back(event as BPMChange)
-
-	tempo_changes.sort_custom(_sort_tempo_changes_by_time)
-
-
-func _sort_tempo_changes_by_time(a: BPMChange, b: BPMChange) -> bool:
-	return a.time < b.time
+	timing_changes.sort_custom(Chart.sort_by_time)
 
 
 func _on_setting_changed(file: StringName, key: Variant) -> void:

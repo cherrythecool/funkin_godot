@@ -124,14 +124,9 @@ func _load_first_song() -> bool:
 	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
 	var difficulty: String = difficulties.difficulties[difficulties.selected]
 	var song_name: String = selected_week.get_song_name(0, difficulty)
-	Game.chart = Chart.load_song("%s/%s" % [songs_folder, song_name], difficulty)
+	Game.chart = Chart.load_chart("%s/%s" % [songs_folder, song_name], difficulty)
 
 	if not is_instance_valid(Game.chart):
-		var json_path: String = (
-			'%s/%s/charts/%s.json'
-			% [songs_folder, song_name, difficulty.to_lower()]
-		)
-		printerr('Song at path %s doesn\'t exist!' % json_path)
 		GlobalAudio.get_player('MENU/CANCEL').play()
 		return false
 

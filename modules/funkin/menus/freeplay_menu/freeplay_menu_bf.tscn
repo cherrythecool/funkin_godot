@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://modules/funkin/menus/background.png" id="1_2q4rq"]
 [ext_resource type="Script" uid="uid://buarre8s3ld28" path="res://modules/funkin/menus/freeplay_menu/freeplay_menu.gd" id="1_p2lt6"]
-[ext_resource type="Script" uid="uid://bbfskuw2fyle3" path="res://core/gameplay/songs/tracks.gd" id="2_fq3va"]
 [ext_resource type="Script" uid="uid://4r8crqqwxnyk" path="res://modules/funkin/menus/freeplay_menu/info_panel.gd" id="4_5dymk"]
 [ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://core/fonts/vcr_osd_mono.ttf" id="5_q45ui"]
 [ext_resource type="Script" uid="uid://di5oncp1uonwm" path="res://modules/funkin/menus/freeplay_menu/score_panel.gd" id="6_mti1l"]
@@ -41,10 +40,8 @@ list = Array[String](["tutorial", "bopeebo", "fresh", "dad_battle", "spookeez", 
 unique_name_in_owner = true
 one_shot = true
 
-[node name="tracks" type="Node" parent="." unique_id=1402350992]
+[node name="song_player" type="AudioStreamPlayer" parent="." unique_id=1991467741]
 unique_name_in_owner = true
-script = ExtResource("2_fq3va")
-metadata/_custom_type_script = "uid://bbfskuw2fyle3"
 
 [node name="background" type="Sprite2D" parent="." unique_id=505659536]
 unique_name_in_owner = true
@@ -243,3 +240,4 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="timeout" from="track_timer" to="." method="_load_tracks"]
+[connection signal="finished" from="song_player" to="." method="_on_finished"]

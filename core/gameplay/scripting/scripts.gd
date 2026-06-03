@@ -13,8 +13,8 @@ func load_scripts(song: StringName, song_path: String) -> void:
 	# Load scripts from res://modules/funkin/songs/song_name/scripts
 	# by default, just like tracks, for convenience.
 	var loaded_from_dir: Array[PackedScene] = []
-	var script_path: String = '%s/%s/scripts' % [song_path, song]
-	var files: PackedStringArray = ResourceLoader.list_directory(script_path)
+	var script_path := '%s/%s/scripts' % [song_path, song]
+	var files := ResourceLoader.list_directory(script_path)
 	if not files.is_empty():
 		for file: String in files:
 			var resource: Resource = load('%s/%s' % [script_path, file])
@@ -24,14 +24,11 @@ func load_scripts(song: StringName, song_path: String) -> void:
 				add_child(script_instance)
 				loaded_from_dir.push_back(script)
 
-	if not ResourceLoader.exists('%s/%s/assets.tres' % [song_path, song]):
+	if not ResourceLoader.exists('%s/%s/assets.tres' % [song_path, song], "SongAssets"):
 		return
 
 	var assets: SongAssets = load('%s/%s/assets.tres' % [song_path, song])
 	if not is_instance_valid(assets):
-		return
-
-	if assets.scripts.is_empty():
 		return
 
 	for script: PackedScene in assets.scripts:

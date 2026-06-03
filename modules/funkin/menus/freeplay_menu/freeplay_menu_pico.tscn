@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://buarre8s3ld28" path="res://modules/funkin/menus/freeplay_menu/freeplay_menu.gd" id="1_qs7yu"]
 [ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://core/fonts/vcr_osd_mono.ttf" id="5_c8pqh"]
-[ext_resource type="Script" uid="uid://bbfskuw2fyle3" path="res://core/gameplay/songs/tracks.gd" id="12_8fnfx"]
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://modules/funkin/menus/background.png" id="13_cethf"]
 [ext_resource type="Script" uid="uid://4r8crqqwxnyk" path="res://modules/funkin/menus/freeplay_menu/info_panel.gd" id="14_e44qf"]
 [ext_resource type="Script" uid="uid://di5oncp1uonwm" path="res://modules/funkin/menus/freeplay_menu/score_panel.gd" id="16_8grxc"]
@@ -41,10 +40,8 @@ list = Array[String](["bopeebo_pico", "fresh_pico", "dad_battle_pico", "pico_pic
 unique_name_in_owner = true
 one_shot = true
 
-[node name="tracks" type="Node" parent="." unique_id=1426580030]
+[node name="song_player" type="AudioStreamPlayer" parent="." unique_id=1872093900]
 unique_name_in_owner = true
-script = ExtResource("12_8fnfx")
-metadata/_custom_type_script = "uid://bbfskuw2fyle3"
 
 [node name="background" type="Sprite2D" parent="." unique_id=1022391316]
 unique_name_in_owner = true

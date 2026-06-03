@@ -3,7 +3,7 @@ class_name NoteField extends Node2D
 
 @export_category('Gameplay')
 @export var takes_input: bool = false
-@export_enum('Opponent', 'Player') var side: int = 0
+@export var strumline: StringName = &"player"
 @export var note_types: Dictionary[StringName, PackedScene] = {}
 @export var conductor: Conductor = null
 @export var score_holds: bool = true
@@ -266,21 +266,14 @@ func clear_notes() -> void:
 		remove_note(note_container.get_child(0), true)
 
 
-func append_chart(chart: Chart) -> void:
-	note_data.append_array(chart.notes)
-	note_data.sort_custom(func(a: NoteData, b: NoteData) -> bool:
-		return a.time < b.time
-	)
+func append_chart(chart: Chart, custom_strumline: StringName = &"") -> void:
+	var key: StringName = strumline if custom_strumline.is_empty() else custom_strumline
+	if chart.strumlines.has(key):
+		note_data.append_array(chart.strumlines[key][&"notes"])
+		note_data.sort_custom(chart.sort_by_time)
 
 
 func spawn_note(data: NoteData) -> void:
-	var note_side: int = 1
-	if data.direction > 3:
-		note_side = 0
-
-	if note_side != side:
-		return
-
 	data = data.duplicate()
 	if data.length > 0.0 and data.length < conductor.step_delta:
 		data.length = 0.0

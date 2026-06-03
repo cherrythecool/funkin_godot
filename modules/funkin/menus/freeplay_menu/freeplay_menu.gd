@@ -18,7 +18,7 @@ var target_background_color: Color = Color.WHITE
 @onready var songs: Node = %songs
 var song_nodes: Array[FreeplaySongNode] = []
 
-@onready var tracks: Tracks = %tracks
+@onready var song_player: AudioStreamPlayer = %song_player
 @onready var track_timer: Timer = %track_timer
 @onready var info_panel: Panel = %info_panel
 
@@ -58,8 +58,6 @@ func _ready() -> void:
 		SceneManager.transition_to_packed(load("uid://b7fwxsepnt38j"))
 		printerr("Freeplay has no songs, returning.")
 		return
-
-	tracks.finished.connect(_on_finished)
 
 	change_selection()
 
@@ -164,11 +162,9 @@ func select_song() -> void:
 		return
 
 	var song_folder := "%s/%s" % [songs_folder, current_song]
-	Game.chart = Chart.load_song(song_folder, difficulty)
+	Game.chart = Chart.load_chart(song_folder, difficulty)
 	if not is_instance_valid(Game.chart):
-		var json_path: String = "%s/charts/%s.json" % [song_folder, difficulty.to_lower()]
 		active = true
-		printerr("Song at path %s doesn\"t exist!" % json_path)
 		return
 
 	Game.songs_folder = songs_folder
@@ -187,7 +183,7 @@ func load_song(i: int) -> void:
 
 	var song_name: String = get_song_name(song, "")
 	var meta_path: String = "%s/%s/meta.tres" % [songs_folder, song_name]
-	var meta_exists: bool = ResourceLoader.exists(meta_path)
+	var meta_exists: bool = ResourceLoader.exists(meta_path, "SongMetadata")
 	var meta: SongMetadata
 	if meta_exists:
 		meta = load(meta_path)
@@ -218,9 +214,9 @@ func _load_tracks() -> void:
 		return
 
 	GlobalAudio.music.stop()
-	tracks.load_tracks(current_song, songs_folder)
-	tracks.play()
+	song_player.stream = Tracks.tracks_load(current_song, songs_folder)
+	song_player.play()
 
 
 func _on_finished() -> void:
-	tracks.play()
+	song_player.play()
