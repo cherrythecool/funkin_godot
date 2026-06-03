@@ -19,16 +19,17 @@ static var instance: Game = null
 static var playlist: Array[GamePlaylistEntry] = []
 static var last_song_health: float = -1.0
 
+@export var asset_loader: AssetLoader
+@export var pause_menu: PackedScene
+
 @onready var song_player: AudioStreamPlayer = %song_player
 @onready var rating_calculator: RatingCalculator = %rating_calculator
-@onready var scripts: Scripts = %scripts
 
 @onready var hud_layer: CanvasLayer = %hud_layer
 @onready var stage_container: Node2D = $stage
 @onready var characters_container: Node2D = $characters
 
 var events_index: int = 0
-var pause_menu: PackedScene
 
 var hud: Node
 var player_field: NoteField = null
@@ -121,11 +122,15 @@ func _ready() -> void:
 	load_chart()
 	reset_conductor()
 
-	load_assets()
-	load_from_assets()
+	if is_instance_valid(asset_loader):
+		load_assets()
+		load_from_assets()
+
 	setup_hud()
 
-	scripts.load_scripts(song, songs_folder)
+	if is_instance_valid(asset_loader):
+		asset_loader.load_scripts(song, songs_folder)
+
 	load_events()
 
 	ready_post.emit()
@@ -350,83 +355,9 @@ func load_assets() -> void:
 
 
 func load_from_assets() -> void:
-	## Gameplay assets
-	player = assets.get_player().instantiate()
-	opponent = assets.get_opponent().instantiate()
-	spectator = assets.get_spectator().instantiate()
-	characters_container.add_child(spectator)
-	characters_container.add_child(player)
-	characters_container.add_child(opponent)
-
-	stage = assets.get_stage().instantiate()
-
-	# Setup the characters.
-	if stage.has_node(^"player"):
-		var player_point: CharacterPlacement = stage.get_node(^"player")
-		if is_instance_valid(player_point):
-			player_point.adjust_character(player, true)
-	if not player.starts_as_player:
-		player.scale *= Vector2(-1.0, 1.0)
-
-	if stage.has_node(^"opponent"):
-		var opponent_point: CharacterPlacement = stage.get_node(^"opponent")
-		if is_instance_valid(opponent_point):
-			opponent_point.adjust_character(opponent)
-	if opponent.starts_as_player:
-		opponent.scale *= Vector2(-1.0, 1.0)
-
-	if stage.has_node(^"spectator"):
-		var spectator_point: CharacterPlacement = stage.get_node(^"spectator")
-		if is_instance_valid(spectator_point):
-			spectator_point.adjust_character(spectator)
-
-	stage_container.add_child(stage)
-
-	## HUD Assets
-	hud = assets.get_hud().instantiate()
-
-	var hud_skin := assets.get_hud_skin()
-	if "hud_skin" in hud:
-		hud.hud_skin = hud_skin
-
-	hud_layer.add_child(hud)
-
-	if "player_field" in hud:
-		player_field = hud.player_field
-	if "opponent_field" in hud:
-		opponent_field = hud.opponent_field
-
-	# Set the NoteField characters.
-	if is_instance_valid(player_field):
-		player_field.target_character = player
-		player_field.skin = assets.get_player_note_skin()
-
-		player_field.reload_skin()
-
-		if metadata.player_audio_track_index > -1:
-			player_field.tracks_stream = song_player.stream
-			player_field.track_index = metadata.player_audio_track_index
-
-	if is_instance_valid(opponent_field):
-		opponent_field.target_character = opponent
-		opponent_field.skin = assets.get_opponent_note_skin()
-
-		opponent_field.reload_skin()
-
-		if metadata.opponent_audio_track_index > -1:
-			opponent_field.tracks_stream = song_player.stream
-			opponent_field.track_index = metadata.opponent_audio_track_index
-
-	pause_menu = hud_skin.get_pause_menu()
-
-	for key: StringName in assets.note_types.keys():
-		var scene: PackedScene = assets.note_types.get(key)
-		if is_instance_valid(scene):
-			note_types[key] = scene
-
-	# we"re done using assets so not point keeping
-	# the references around
-	assets = null
+	asset_loader.assets = assets
+	asset_loader.metadata = metadata
+	asset_loader.load_assets()
 
 
 func setup_hud() -> void:
@@ -452,24 +383,8 @@ func reset_conductor() -> void:
 
 func load_events() -> void:
 	if not chart.events.is_empty():
-		# Note: this means all custom events just act as normal scripts
-		# which should be fine for 99.9% of use cases.
-		# it also means you have to manually check for event names
-		# but it's fine :p
-		var exceptions: Array[StringName] = []
-		for event: EventData in chart.events:
-			var event_name: StringName = event.name.to_lower()
-			if exceptions.has(event_name):
-				continue
-			exceptions.push_back(event_name)
-
-			var path: String = "res://modules/%s/events/%s.tscn" % [ModuleManager.current_module, event_name]
-			if not ResourceLoader.exists(path):
-				continue
-
-			var scene: PackedScene = load(path)
-			var node: Node = scene.instantiate()
-			scripts.add_child(node)
+		if is_instance_valid(asset_loader):
+			asset_loader.load_events(chart.events)
 
 		for event: EventData in chart.events:
 			event_prepare.emit(event)

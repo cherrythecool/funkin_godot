@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dhv3phik4tia" path="res://core/gameplay/game.gd" id="1_tneyb"]
 [ext_resource type="Script" uid="uid://b1ln7ad72xey4" path="res://core/gameplay/game_camera_2d.gd" id="2_bdhmt"]
-[ext_resource type="Script" uid="uid://cm308tpfbi72q" path="res://core/gameplay/scripting/scripts.gd" id="2_oquto"]
+[ext_resource type="Script" uid="uid://cvc0oj8twimgt" path="res://core/gameplay/asset_loader.gd" id="2_vvk6n"]
 [ext_resource type="Script" uid="uid://dp70bbdhoqpo0" path="res://core/gameplay/ratings/rating.gd" id="5_lfrn8"]
 [ext_resource type="Script" uid="uid://1dwo0trw3je2" path="res://core/gameplay/ratings/rating_calculator.gd" id="6_ur1sh"]
 
@@ -46,25 +46,28 @@ bake_resolution = 180
 _data = [Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.5), -5.0, -1.6, 0, 1, Vector2(0.75, 0.1), -1.0, -0.4, 0, 1, Vector2(1, 0), -1.0, -0.4, 0, 1]
 point_count = 4
 
-[node name="game" type="Node" unique_id=1600443132]
+[node name="game" type="Node" unique_id=1600443132 node_paths=PackedStringArray("asset_loader")]
 script = ExtResource("1_tneyb")
+asset_loader = NodePath("asset_loader")
 
 [node name="song_player" type="AudioStreamPlayer" parent="." unique_id=523400484]
 unique_name_in_owner = true
 bus = &"Music"
+
+[node name="asset_loader" type="Node" parent="." unique_id=1406003250 node_paths=PackedStringArray("song_player", "characters_parent", "stage_parent", "hud_parent", "scripts_parent")]
+unique_name_in_owner = true
+script = ExtResource("2_vvk6n")
+song_player = NodePath("../song_player")
+characters_parent = NodePath("../characters")
+stage_parent = NodePath("../stage")
+hud_parent = NodePath("../hud_layer")
+scripts_parent = NodePath(".")
 
 [node name="rating_calculator" type="Node" parent="." unique_id=2044226761]
 unique_name_in_owner = true
 script = ExtResource("6_ur1sh")
 ratings = Array[ExtResource("5_lfrn8")]([SubResource("Resource_5i0tg"), SubResource("Resource_bdhmt"), SubResource("Resource_87uf6"), SubResource("Resource_2a8rs"), SubResource("Resource_4j704")])
 accuracy_curve = SubResource("Curve_5selw")
-
-[node name="asset_loader" type="Node" parent="." unique_id=1406003250]
-unique_name_in_owner = true
-
-[node name="scripts" type="Node" parent="." unique_id=1339041516]
-unique_name_in_owner = true
-script = ExtResource("2_oquto")
 
 [node name="stage" type="Node2D" parent="." unique_id=899799479]
 
