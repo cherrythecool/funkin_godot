@@ -11,12 +11,18 @@ func get_song_beat() -> float:
 
 func get_player_count() -> int:
 	return 2
+	
+func get_modchart_layer() -> Node:
+	return Game.instance.hud_layer
 
 func get_receptor_direction(receptor:Variant) -> int:
 	return receptor.lane
 
 func get_note_direction(note:Variant) -> int:
 	return note.lane
+	
+func get_note_time(note:Variant) -> float:
+	return note.data.time
 
 func get_receptor_player(receptor:Variant) -> int:
 	return 0 if Game.instance.player_field.receptors.has(receptor) else 1

@@ -61,7 +61,7 @@ func apply_bumpy(axis: String, player: int, time: float, visual_diff: float, dat
 		return adjust(axis, perc * 40.0 * math_func.call(angle), player)
 	return 0.0
 
-func get_position(position: Vector3, type: ModchartManager.ObjectType, direction: int, player: int) -> Vector3:
+func get_position(position: Vector3, object:Node, type: ModchartManager.ObjectType, direction: int, player: int) -> Vector3:
 	var time: float = manager.adapter.get_song_time() 
 	var visual_diff: float = position.y 
 	var data: float = float(direction)
@@ -83,7 +83,7 @@ func get_position(position: Vector3, type: ModchartManager.ObjectType, direction
 	pos.x += apply_drunk("Tan" + s_data, player, time, visual_diff, data, tan) + apply_tipsy("TanX" + s_data, player, time, visual_diff, data, tan) + apply_bumpy("TanX" + s_data, player, time, visual_diff, data, tan)
 	pos.y += apply_drunk("TanY" + s_data, player, time, visual_diff, data, tan) + apply_tipsy("Tan" + s_data, player, time, visual_diff, data, tan) + apply_bumpy("TanY" + s_data, player, time, visual_diff, data, tan)
 	pos.z += apply_drunk("TanZ" + s_data, player, time, visual_diff, data, tan) + apply_tipsy("TanZ" + s_data, player, time, visual_diff, data, tan) + apply_bumpy("Tan" + s_data, player, time, visual_diff, data, tan)
-
+	
 	return pos
 
 func get_sub_modifier_ids() -> Array[String]:
@@ -99,9 +99,9 @@ func get_sub_modifier_ids() -> Array[String]:
 	var shids: Array[String] = ["drunk", "tipsy", "bumpy", "drunkTan", "tipsyTan", "bumpyTan"]
 	var submods: Array[String] = []
 
-	for i in range(shids):
+	for i in range(shids.size()):
 		var mod: String = shids[i]
-		for a in range(axes):
+		for a in range(axes.size()):
 			var axe: String = axes[a]
 			if a == (i % axes.size()):
 				axe = ""

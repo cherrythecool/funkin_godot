@@ -12,7 +12,7 @@ func get_id() -> String:
 func get_sub_modifier_ids() -> Array[String]:
 	return []
 
-func get_position(position:Vector3, type:ModchartManager.ObjectType, direction:int, player:int) -> Vector3:
+func get_position(position:Vector3, object:Node, type:ModchartManager.ObjectType, direction:int, player:int) -> Vector3:
 	return position
 
 
