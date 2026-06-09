@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://dllx0o4nbnx1e"]
-
-[ext_resource type="Script" uid="uid://cidqesa7axyy2" path="res://assets/songs/test/scripts/modchart.gd" id="1_q8c8w"]
-
-[node name="modchart" type="Node" unique_id=842625655]
-script = ExtResource("1_q8c8w")
-metadata/_custom_type_script = "uid://ccygr6542u5ga"
