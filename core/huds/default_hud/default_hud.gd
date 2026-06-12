@@ -208,7 +208,7 @@ func set_downscroll(value: bool) -> void:
 
 func set_centered_receptors(value: bool) -> void:
 	if is_instance_valid(opponent_field):
-		opponent_field.visible = not value
+		#opponent_field.visible = not value
 		opponent_field.position.x = 320.0
 	if is_instance_valid(player_field):
 		player_field.position.x = 640.0 if value else 960.0

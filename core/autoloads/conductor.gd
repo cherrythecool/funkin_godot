@@ -158,12 +158,10 @@ func get_beat_at_time(time_: float, timing_changes_: Array[TimingChange]) -> flo
 
 func sync_to_target(delta: float) -> void:
 	var audio_time := GameUtils.get_accurate_time(target_audio)
-	var desync := absf(raw_time - audio_time)
-	if desync >= MAX_DESYNC:
-		raw_time = audio_time
+	if target_audio.playing and absf(raw_time - audio_time) < 1.0:
+		raw_time = maxf(audio_time, raw_time + (delta * 0.9 * target_audio.pitch_scale))
 	else:
-		raw_time += delta
-
+		raw_time = audio_time
 
 func calculate_beat() -> void:
 	var last_step: int = floori(step)

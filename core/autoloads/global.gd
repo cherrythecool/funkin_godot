@@ -34,7 +34,7 @@ func _ready() -> void:
 	main_window.focus_entered.connect(_on_focus_enter)
 	main_window.focus_exited.connect(_on_focus_exit)
 
-	version = ProjectSettings.get_setting("application/config/version", "0.0.0-unknown")
+	version = ProjectSettings.get_setting("application/config/version")
 
 	Settings.setting_changed.connect(_on_setting_changed)
 	Settings.settings_loaded.connect(_on_settings_loaded)
@@ -61,22 +61,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_echo() or not event.is_pressed():
 		return
 
+	get_viewport().set_input_as_handled()
+
 	if event.is_action(&"menu_fullscreen"):
-		get_viewport().set_input_as_handled()
 		fullscreened = not fullscreened
 		return
+
 	if event.is_action(&"menu_reload"):
 		SceneManager.reload_current_scene()
 		return
-
-
-func get_supported_vsync() -> DisplayServer.VSyncMode:
-	if RenderingServer.get_rendering_device() == null:
-		return DisplayServer.VSYNC_ENABLED
-
-	# Automatically will fallback if not supported
-	# (would default to MAILBOX but it's not very well supported atm)
-	return DisplayServer.VSYNC_ADAPTIVE
 
 
 func _on_setting_changed(file: StringName, key: Variant) -> void:
@@ -89,7 +82,7 @@ func _on_setting_changed(file: StringName, key: Variant) -> void:
 			Engine.max_fps = value
 		"vsync_enabled":
 			if value:
-				DisplayServer.window_set_vsync_mode(get_supported_vsync())
+				DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
 			else:
 				DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 

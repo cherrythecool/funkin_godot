@@ -19,6 +19,11 @@ static var instance: Game = null
 static var playlist: Array[GamePlaylistEntry] = []
 static var last_song_health: float = -1.0
 
+@export var strumlines: Dictionary[StringName, StrumlineManager] = {
+	&"player": null,
+	&"opponent": null,
+}
+
 @export var asset_loader: AssetLoader
 @export var pause_menu: PackedScene
 
@@ -114,6 +119,8 @@ func _ready() -> void:
 	GlobalAudio.music.stop()
 
 	song_player.stream = Tracks.tracks_load(song, songs_folder)
+	song_player.finished.connect(finish_song.bind(false, false))
+
 	if not is_instance_valid(song_player.stream):
 		printerr("Failed to load tracks for current song! Returning...")
 		finish_song(true, false)
@@ -256,7 +263,9 @@ func start_song(from_position: float = 0.0) -> void:
 func finish_song(force: bool = false, sound: bool = true) -> void:
 	if not playing:
 		return
+
 	song_finished.emit()
+
 	if force:
 		save_score = false
 
@@ -339,6 +348,16 @@ func load_chart() -> void:
 			var scene := Note.load_note_type(type, note_type_paths)
 			if is_instance_valid(scene):
 				note_types[type] = scene
+
+	for key: StringName in strumlines:
+		if not chart.strumlines.has(key):
+			continue
+
+		var manager: StrumlineManager = strumlines[key]
+		if not is_instance_valid(manager):
+			continue
+
+		manager.load_notes(chart.strumlines[key][&"notes"])
 
 
 func load_assets() -> void:

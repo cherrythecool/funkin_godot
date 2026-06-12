@@ -55,6 +55,7 @@ func swap_to_packed(scene: PackedScene) -> void:
 
 func swap_to_node(node: Node) -> void:
 	get_tree().change_scene_to_node.call_deferred(node)
+	node.process_mode = Node.PROCESS_MODE_INHERIT
 	current_scene = node
 	scene_changed.emit.call_deferred()
 
@@ -116,6 +117,3 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		&"out":
 			transitioned_out.emit()
 			reset_transition()
-
-			if is_instance_valid(current_scene):
-				current_scene.process_mode = Node.PROCESS_MODE_INHERIT

@@ -202,12 +202,16 @@ unique_name_in_owner = true
 z_index = 1
 
 [node name="opponent" parent="note_fields" unique_id=788558760 instance=ExtResource("2_0rw2j")]
+process_mode = 4
+visible = false
 position = Vector2(320, 100)
 strumline = &"opponent"
 use_note_splashes = false
 default_note_splash = ExtResource("3_1ubyb")
 
 [node name="player" parent="note_fields" unique_id=827080627 instance=ExtResource("2_0rw2j")]
+process_mode = 4
+visible = false
 position = Vector2(960, 100)
 takes_input = true
 default_note_splash = ExtResource("3_1ubyb")
