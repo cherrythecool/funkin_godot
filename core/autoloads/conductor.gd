@@ -163,6 +163,7 @@ func sync_to_target(delta: float) -> void:
 	else:
 		raw_time = audio_time
 
+
 func calculate_beat() -> void:
 	var last_step: int = floori(step)
 	var last_beat: int = floori(beat)

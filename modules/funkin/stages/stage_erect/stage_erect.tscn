@@ -9,15 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://dnradnxkw30ia" path="res://modules/funkin/stages/stage_erect/server.png" id="6_c6bns"]
 [ext_resource type="Texture2D" uid="uid://bl8lqtw6rwufb" path="res://modules/funkin/stages/stage_erect/lights.png" id="7_m7swh"]
 [ext_resource type="Texture2D" uid="uid://cp7t5wpilryw5" path="res://modules/funkin/stages/stage_erect/orangeLight.png" id="8_rpfqn"]
+[ext_resource type="Material" uid="uid://h6uy4lto3tyx" path="res://core/shaders/additive.tres" id="8_tpods"]
 [ext_resource type="Texture2D" uid="uid://bj8w8e6620cr" path="res://modules/funkin/stages/stage_erect/lightgreen.png" id="9_mw31y"]
 [ext_resource type="Texture2D" uid="uid://ehms2fgkxe3x" path="res://modules/funkin/stages/stage_erect/lightred.png" id="10_m8qgs"]
 [ext_resource type="Texture2D" uid="uid://bidx1tkuqgdgg" path="res://modules/funkin/stages/stage_erect/lightAbove.png" id="11_i0awy"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_62n7p"]
-blend_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1ebn4"]
-blend_mode = 1
 
 [node name="stage_erect" type="Node2D" unique_id=1588154130]
 script = ExtResource("1_iarc1")
@@ -35,7 +30,7 @@ scroll_scale = Vector2(1.2, 1.2)
 
 [node name="small_light" type="Sprite2D" parent="lights" unique_id=1561564028]
 z_index = 10
-material = SubResource("CanvasItemMaterial_62n7p")
+material = ExtResource("8_tpods")
 position = Vector2(940, -103)
 texture = ExtResource("2_l58ct")
 centered = false
@@ -54,10 +49,9 @@ z_index = 5
 position = Vector2(560, 290)
 sprite_frames = ExtResource("3_iarc1")
 animation = &"bop"
-frame_progress = 0.055782475
+autoplay = "bop"
 centered = false
 script = ExtResource("4_dtqj5")
-playing = true
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
 [node name="bg" type="Sprite2D" parent="." unique_id=1740866234]
@@ -74,28 +68,28 @@ centered = false
 
 [node name="orange_light" type="Sprite2D" parent="." unique_id=52082893]
 z_index = 80
-material = SubResource("CanvasItemMaterial_1ebn4")
+material = ExtResource("8_tpods")
 position = Vector2(189, -195)
 texture = ExtResource("8_rpfqn")
 centered = false
 
 [node name="light_green" type="Sprite2D" parent="." unique_id=327335924]
 z_index = 40
-material = SubResource("CanvasItemMaterial_1ebn4")
+material = ExtResource("8_tpods")
 position = Vector2(-171, 242)
 texture = ExtResource("9_mw31y")
 centered = false
 
 [node name="light_red" type="Sprite2D" parent="." unique_id=1854463240]
 z_index = 40
-material = SubResource("CanvasItemMaterial_1ebn4")
+material = ExtResource("8_tpods")
 position = Vector2(-101, 560)
 texture = ExtResource("10_m8qgs")
 centered = false
 
 [node name="light_above" type="Sprite2D" parent="." unique_id=1240653636]
 z_index = 4096
-material = SubResource("CanvasItemMaterial_1ebn4")
+material = ExtResource("8_tpods")
 position = Vector2(773, -117)
 texture = ExtResource("11_i0awy")
 centered = false

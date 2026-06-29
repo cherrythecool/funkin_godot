@@ -4,8 +4,9 @@ extends RefCounted
 
 enum NoteState {
 	ALIVE = 0,
+	HELD,
 	HIT,
-	MISSED
+	MISSED,
 }
 
 

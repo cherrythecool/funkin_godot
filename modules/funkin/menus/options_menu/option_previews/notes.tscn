@@ -9,7 +9,6 @@ script = ExtResource("1_508hw")
 
 [node name="notes" parent="." unique_id=182197152 instance=ExtResource("2_5bgr3")]
 position = Vector2(0, -240)
-side = 1
 note_types = Dictionary[StringName, PackedScene]({
 &"default": ExtResource("4_e1622")
 })

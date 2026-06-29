@@ -13,7 +13,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oe5j7"]
 shader = ExtResource("4_6ah8b")
-shader_parameter/fade = 0.0
+shader_parameter/fade = 0.999999977648
 
 [node name="philly_train" type="Node2D" unique_id=1603892609]
 script = ExtResource("1_r13m0")

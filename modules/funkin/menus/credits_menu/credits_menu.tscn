@@ -203,7 +203,7 @@ metadata/_custom_type_script = "uid://bable6fjbwgrq"
 
 [node name="swordcube" type="Node2D" parent="list" unique_id=1716439119]
 material = SubResource("ShaderMaterial_33ree")
-position = Vector2(-480, 2196.9902)
+position = Vector2(-480, 2196.9998)
 script = ExtResource("13_aave4")
 link = "https://github.com/swordcube"
 role = "think fast think stupid"

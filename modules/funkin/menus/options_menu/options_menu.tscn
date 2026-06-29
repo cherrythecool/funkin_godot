@@ -70,7 +70,7 @@ category = ExtResource("7_u8bnw")
 position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"interface"
-frame_progress = 0.57236814
+frame_progress = 0.55520815
 script = ExtResource("4_k5v7g")
 playing = true
 
@@ -141,11 +141,11 @@ centered = true
 [node name="options_label" type="AnimatedSprite2D" parent="." unique_id=1836989782]
 unique_name_in_owner = true
 position = Vector2(163, 48)
-rotation = -0.0006921438
+rotation = 0.022795325
 scale = Vector2(0.6, 0.6)
 sprite_frames = ExtResource("3_yv0yv")
 animation = &"options idle"
-frame_progress = 0.8419702
-offset = Vector2(0, 3.9998033)
+frame_progress = 0.8248102
+offset = Vector2(0, 3.7807627)
 script = ExtResource("4_6ck0r")
 playing = true

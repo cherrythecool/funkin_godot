@@ -31,49 +31,34 @@ func _process(_delta: float) -> void:
 		receptor_states.fill(ReceptorState.RELEASED)
 
 	var time := Conductor.time
-	var counter := 0
+	var note_idx := 0
 
-	while notes_index + counter < notes.size():
-		var note := notes[notes_index + counter]
-		if time < note.time - hit_window:
+	while notes_index + note_idx < notes.size():
+		var note := notes[notes_index + note_idx]
+		if not is_note_in_range(note, time):
 			break
 
-		if note.state != NoteData.NoteState.ALIVE:
-			if counter == 0:
-				notes_index += 1
-
-			counter += 1
-			continue
-
-		if time >= note.time and cpu:
-			hit_note(note)
-
-			if counter == 0 and note.length <= 0.0:
-				notes_index += 1
+		var shift_notes_index := false
+		var finished := note.state == NoteData.NoteState.HIT or note.state == NoteData.NoteState.MISSED
+		if finished:
+			shift_notes_index = note_idx == 0
+		else:
+			if cpu:
+				if time >= note.time:
+					hit_note(note)
+					shift_notes_index = note_idx == 0 and note.state == NoteData.NoteState.HIT
 			else:
-				counter += 1
+				if time > note.time + hit_window and note.state == NoteData.NoteState.ALIVE:
+					miss_note(note)
+					shift_notes_index = note_idx == 0
 
-			continue
+		if shift_notes_index:
+			notes_index += 1
+		else:
+			note_idx += 1
 
-		if time > note.time + hit_window and not cpu:
-			note.state = NoteData.NoteState.MISSED
-			note_missed.emit(note)
-
-			if counter == 0:
-				notes_index += 1
-
-			continue
-
-		counter += 1
-
-
-func _input(event: InputEvent) -> void:
-	if cpu or event.is_echo():
-		return
-	for action: String in INPUT_ACTIONS:
-		if event.is_action(StringName(action)):
-			_handle_player_input()
-			break
+	if not cpu:
+		_handle_player_input()
 
 
 func _handle_player_input() -> void:
@@ -99,7 +84,7 @@ func _handle_player_input() -> void:
 	var time := Conductor.time
 	for index: int in range(notes_index, notes.size()):
 		var note := notes[index]
-		if time < note.time - hit_window:
+		if not is_note_in_range(note, time):
 			break
 
 		match note.state:
@@ -109,14 +94,30 @@ func _handle_player_input() -> void:
 
 				pressed[note.direction] = false
 				hit_note(note)
-			_:
-				continue
+			NoteData.NoteState.HELD:
+				if held[note.direction]:
+					hit_note(note)
 
 
 func hit_note(note: NoteData) -> void:
-	note.state = NoteData.NoteState.HIT
+	var time := Conductor.time
+
+	if time < note.time + note.length and note.length > 0.0:
+		note.state = NoteData.NoteState.HELD
+	else:
+		note.state = NoteData.NoteState.HIT
+
 	receptor_states[note.direction] = ReceptorState.HIT
 	note_hit.emit(note)
+
+
+func miss_note(note: NoteData) -> void:
+	note.state = NoteData.NoteState.MISSED
+	note_missed.emit(note)
+
+
+func is_note_in_range(note: NoteData, time: float) -> bool:
+	return time >= note.time - hit_window
 
 
 func load_notes(notes_array: Array) -> void:
