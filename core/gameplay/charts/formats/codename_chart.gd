@@ -103,7 +103,8 @@ static func parse_events(chart: Chart, events: Array, sides: Array[StringName]) 
 		match name:
 			"Camera Movement":
 				var ease_string: String = "CLASSIC"
-				if not params[1]:
+
+				if params.size() >= 2 and not params[1]:
 					ease_string = "INSTANT"
 				elif params.size() >= 5 and params[3] != "CLASSIC":
 					ease_string = str(params[3]) + str(params[4])
