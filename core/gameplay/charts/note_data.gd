@@ -9,7 +9,6 @@ enum NoteState {
 	MISSED,
 }
 
-
 @export var time: float
 @export var beat: float
 @export var direction: int
@@ -18,3 +17,4 @@ enum NoteState {
 @export var type: StringName
 
 var state: NoteState = NoteState.ALIVE
+var grace_timer: float = 1.0

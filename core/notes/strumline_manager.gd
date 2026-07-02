@@ -26,7 +26,7 @@ func _ready() -> void:
 	receptor_states.fill(ReceptorState.RELEASED)
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if cpu:
 		receptor_states.fill(ReceptorState.RELEASED)
 
@@ -48,8 +48,21 @@ func _process(_delta: float) -> void:
 					hit_note(note)
 					shift_notes_index = note_idx == 0 and note.state == NoteData.NoteState.HIT
 			else:
-				if time > note.time + hit_window and note.state == NoteData.NoteState.ALIVE:
+				var past_hit_window := (
+					time > note.time + hit_window and
+					note.state == NoteData.NoteState.ALIVE
+				)
+				var sustain_missed := (
+					(note.grace_timer <= 0.0 and note.length > 0.0) and
+					note.state == NoteData.NoteState.HELD
+				)
+				var should_miss := past_hit_window or sustain_missed
+
+				if should_miss:
 					miss_note(note)
+					shift_notes_index = note_idx == 0
+				elif time >= note.time + note.length and note.state == NoteData.NoteState.HELD:
+					hit_note(note)
 					shift_notes_index = note_idx == 0
 
 		if shift_notes_index:
@@ -58,10 +71,10 @@ func _process(_delta: float) -> void:
 			note_idx += 1
 
 	if not cpu:
-		_handle_player_input()
+		_handle_player_input(delta)
 
 
-func _handle_player_input() -> void:
+func _handle_player_input(delta: float) -> void:
 	var pressed: Array[bool]
 	pressed.resize(INPUT_ACTIONS.size())
 
@@ -77,9 +90,6 @@ func _handle_player_input() -> void:
 			receptor_states[i] = ReceptorState.RELEASED
 		elif pressed[i] and receptor_states[i] == ReceptorState.RELEASED:
 			receptor_states[i] = ReceptorState.PRESSED
-
-	if true not in held:
-		return
 
 	var time := Conductor.time
 	for index: int in range(notes_index, notes.size()):
@@ -97,6 +107,13 @@ func _handle_player_input() -> void:
 			NoteData.NoteState.HELD:
 				if held[note.direction]:
 					hit_note(note)
+				else:
+					note.grace_timer -= delta
+
+				held[note.direction] = false
+				if note.grace_timer <= 0.0:
+					miss_note(note)
+
 
 
 func hit_note(note: NoteData) -> void:
@@ -107,6 +124,7 @@ func hit_note(note: NoteData) -> void:
 	else:
 		note.state = NoteData.NoteState.HIT
 
+	note.grace_timer = Conductor.sustain_release_delta
 	receptor_states[note.direction] = ReceptorState.HIT
 	note_hit.emit(note)
 

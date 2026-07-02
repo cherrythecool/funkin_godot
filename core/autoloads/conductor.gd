@@ -158,7 +158,7 @@ func get_beat_at_time(time_: float, timing_changes_: Array[TimingChange]) -> flo
 
 func sync_to_target(delta: float) -> void:
 	var audio_time := GameUtils.get_accurate_time(target_audio)
-	if target_audio.playing and absf(raw_time - audio_time) < 1.0:
+	if target_audio.playing and absf(raw_time - audio_time) < 0.5:
 		raw_time = maxf(audio_time, raw_time + (delta * 0.9 * target_audio.pitch_scale))
 	else:
 		raw_time = audio_time
