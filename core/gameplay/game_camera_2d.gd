@@ -78,7 +78,7 @@ func _on_beat_hit(beat: int) -> void:
 		zoom += bump_amount
 
 
-func _on_first_opponent_note(_note: Note) -> void:
+func _on_first_opponent_note(_note: NoteData) -> void:
 	bumps = true
 
 
@@ -107,6 +107,7 @@ func _on_game_event_hit(event: EventData) -> void:
 			var ease_string: String = event.data.get(&"ease_string")
 			position_lerps = true
 			position_target = target.get_camera_position() + event.data.get(&"offset")
+
 			if event.time <= 0.0 or ease_string == "INSTANT":
 				position = position_target
 			if ease_string == "CLASSIC" or ease_string == "INSTANT":
@@ -149,7 +150,8 @@ func _on_game_event_hit(event: EventData) -> void:
 
 			match data.get("mode", "direct"):
 				"stage":
-					data_zoom *= game.stage.default_zoom
+					if game.stage:
+						data_zoom *= game.stage.default_zoom
 				"direct":
 					pass
 

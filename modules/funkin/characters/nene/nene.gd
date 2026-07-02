@@ -53,6 +53,9 @@ func _on_event_hit(event: EventData) -> void:
 func set_character_material(new_material: Material) -> void:
 	super(new_material)
 
+	if not speakers:
+		await ready
+
 	speakers.material = new_material
 	eye_whites.material = new_material
 	eyes.material = new_material

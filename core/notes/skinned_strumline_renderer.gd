@@ -28,6 +28,8 @@ func _process(delta: float) -> void:
 	for i: int in receptors.size():
 		var state := parent.receptor_states[i]
 		var receptor := receptors[i]
+		receptor.hold_timer += delta
+
 		var receptor_anim := &"%s %s" % [
 			receptor.direction,
 			receptor.animation,
@@ -52,7 +54,8 @@ func _draw() -> void:
 		return
 
 	var time := Conductor.time
-	var spawn_time: float = 800.0 / (450.0 * absf(scroll_speed))
+	var scaled_scroll_speed := scroll_speed / Conductor.rate
+	var spawn_time: float = 800.0 / (450.0 * absf(scaled_scroll_speed))
 
 	var receptor_frames := skin.get_receptor_frames()
 	var receptor_scale := skin.receptor_scale
@@ -93,7 +96,7 @@ func _draw() -> void:
 
 	var note_frames := skin.get_note_frames()
 	var note_scale := skin.note_scale
-	var time_to_pixels := 450.0 * scroll_speed
+	var time_to_pixels := 450.0 * scaled_scroll_speed
 	var sustain_width := skin.sustain_size
 	var tail_width := skin.sustain_tail_size
 
@@ -120,7 +123,7 @@ func _draw() -> void:
 		var sus_tex := get_sustain_texture(&"%s sustain" % receptor.direction, 0, false)
 		var tail_tex := get_sustain_texture(&"%s sustain end" % receptor.direction, 0, false)
 		var tail_size := tail_tex.get_size() * note_scale
-		var sus_modulate := Color(Color.WHITE, note.grace_timer / Conductor.sustain_release_delta)
+		var sus_modulate := Color(Color.WHITE, skin.sustain_alpha)
 
 		if note.state == NoteData.NoteState.ALIVE:
 			sus_height = note.length * time_to_pixels
@@ -133,7 +136,8 @@ func _draw() -> void:
 						note_position - Vector2(sustain_width / 2.0, sus_height),
 						Vector2(sustain_width, sus_height),
 					),
-					false,
+					true,
+					sus_modulate,
 				)
 			else:
 				tail_size.y += sus_height
@@ -146,6 +150,7 @@ func _draw() -> void:
 						Vector2(tail_width, tail_size.y * (-1.0)),
 					),
 					false,
+					sus_modulate,
 				)
 
 			draw_texture_rect(
@@ -154,9 +159,10 @@ func _draw() -> void:
 					note_position - (texture.get_size() * note_scale / 2.0),
 					texture.get_size() * note_scale
 				),
-				false
+				false,
 			)
 		elif note.state == NoteData.NoteState.HELD:
+			sus_modulate.a = note.grace_timer / Conductor.sustain_release_delta
 			sus_height = (note.length + time_difference) * time_to_pixels
 			sus_height -= tail_size.y
 
@@ -214,4 +220,13 @@ func get_sustain_texture(anim_name: StringName, frame: int, is_tail: bool) -> Te
 func _on_note_hit(note: NoteData) -> void:
 	var receptor := receptors[note.direction]
 	receptor.animation_state = StrumlineManager.ReceptorState.HIT
-	receptor.animation_progress = 0.0
+
+	if (
+		(note.state == NoteData.NoteState.ALIVE) or
+		(
+			note.state == NoteData.NoteState.HELD and
+			receptor.hold_timer >= Conductor.beat_delta / 4.0
+		)
+	):
+		receptor.hold_timer = 0.0
+		receptor.animation_progress = 0.0

@@ -62,19 +62,22 @@ func reload_icons() -> void:
 
 	reload_icon_colors()
 
-	player_icon = Icon.create_sprite(Game.instance.player.icon)
+	player_icon = Icon.create_sprite(Game.instance.player.icon) if Game.instance.player else Icon.create_sprite(Icon.new())
 	player_icon.position.x = 50.0
 	icons.add_child(player_icon)
 	player_icon.flip_h = true
 
-	opponent_icon = Icon.create_sprite(Game.instance.opponent.icon)
+	opponent_icon = Icon.create_sprite(Game.instance.opponent.icon) if Game.instance.opponent else Icon.create_sprite(Icon.new())
 	opponent_icon.position.x = -50.0
 	icons.add_child(opponent_icon)
 
 
 func reload_icon_colors() -> void:
-	player_color = Game.instance.player.icon.color
-	opponent_color = Game.instance.opponent.icon.color
+	if Game.instance.player:
+		player_color = Game.instance.player.icon.color
+
+	if Game.instance.opponent:
+		opponent_color = Game.instance.opponent.icon.color
 
 
 # ease out cubic, taken from easings.net

@@ -13,6 +13,7 @@ enum ReceptorState {
 
 const INPUT_ACTIONS: PackedStringArray = ["note_left", "note_down", "note_up", "note_right"]
 
+@export var strumline: StringName = &"player"
 @export var hit_window: float = 0.18
 @export var cpu: bool = true
 
@@ -117,6 +118,8 @@ func _handle_player_input(delta: float) -> void:
 
 
 func hit_note(note: NoteData) -> void:
+	note_hit.emit(note)
+
 	var time := Conductor.time
 
 	if time < note.time + note.length and note.length > 0.0:
@@ -126,12 +129,11 @@ func hit_note(note: NoteData) -> void:
 
 	note.grace_timer = Conductor.sustain_release_delta
 	receptor_states[note.direction] = ReceptorState.HIT
-	note_hit.emit(note)
 
 
 func miss_note(note: NoteData) -> void:
-	note.state = NoteData.NoteState.MISSED
 	note_missed.emit(note)
+	note.state = NoteData.NoteState.MISSED
 
 
 func is_note_in_range(note: NoteData, time: float) -> bool:
@@ -143,3 +145,4 @@ func load_notes(notes_array: Array) -> void:
 
 	for note: NoteData in notes_array:
 		note.state = NoteData.NoteState.ALIVE
+		note.strumline = strumline

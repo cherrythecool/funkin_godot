@@ -2,6 +2,8 @@ extends Node2D
 class_name Character
 
 
+@export var strumline: StrumlineManager
+
 @export_category("Visuals")
 @export var icon: Icon = Icon.new()
 @export var starts_as_player: bool = false
@@ -52,9 +54,16 @@ func _process(delta: float) -> void:
 	if not is_instance_valid(Conductor.instance):
 		return
 
-	sing_timer += delta / Conductor.instance.beat_delta
-	if sing_timer * 4.0 >= sing_steps or sing_steps <= 0.0:
-		dance(true)
+	if is_instance_valid(strumline) and singing and (
+		StrumlineManager.ReceptorState.HIT in strumline.receptor_states or
+		StrumlineManager.ReceptorState.PRESSED in strumline.receptor_states
+	):
+		sing_timer += delta / Conductor.instance.beat_delta
+	else:
+		sing_timer += delta / Conductor.instance.beat_delta
+
+		if sing_timer * 4.0 >= sing_steps or sing_steps <= 0.0:
+			dance(true)
 
 
 func play_anim(anim: StringName, force: bool = false, special: bool = false) -> void:
@@ -138,8 +147,8 @@ func set_character_material(new_material: Material) -> void:
 func get_camera_position() -> Vector2:
 	if not is_instance_valid(camera_offset):
 		return Vector2.ZERO
-
-	return camera_offset.global_position
+	else:
+		return camera_offset.global_position
 
 
 func offset_camera_position(added: Vector2) -> void:
@@ -151,3 +160,26 @@ func offset_camera_position(added: Vector2) -> void:
 
 func _on_beat_hit(_beat: int) -> void:
 	dance()
+
+
+func _on_note_hit(note: NoteData) -> void:
+	if note.state != NoteData.NoteState.ALIVE and sing_timer * 4.0 < 1.0:
+		return
+
+	sing_timer = 0.0
+
+	var direction: StringName = Note.directions[note.direction]
+	if swap_sing_animations and swapped_directions.has(direction):
+		direction = swapped_directions.get(direction)
+
+	play_anim(&"sing_%s" % direction.to_lower(), true)
+
+
+func _on_note_missed(note: NoteData) -> void:
+	sing_timer = 0.0
+
+	var direction: StringName = Note.directions[note.direction]
+	if swap_sing_animations and swapped_directions.has(direction):
+		direction = swapped_directions.get(direction)
+
+	play_anim(&"sing_%s_miss" % direction.to_lower(), true)

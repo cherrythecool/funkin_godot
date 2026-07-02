@@ -16,4 +16,5 @@ display_name = &"Darnell"
 mix = &"Erect"
 icon = SubResource("Resource_i20ry")
 difficulties = ["erect", "nightmare"]
+scene_path = "uid://bcj1wq4g56fgg"
 metadata/_custom_type_script = "uid://3bi6wwv6us1w"

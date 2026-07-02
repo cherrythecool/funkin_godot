@@ -55,10 +55,10 @@ var scroll_speed: float:
 var assets: SongAssets
 var metadata: SongMetadata
 
-var player: Character
-var opponent: Character
-var spectator: Character
-var stage: Stage
+@export var player: Character
+@export var opponent: Character
+@export var spectator: Character
+@export var stage: Stage
 
 var health: float = 50.0
 var score: int = 0:
@@ -223,26 +223,34 @@ func _unhandled_input(event: InputEvent) -> void:
 		skip_to(Conductor.raw_time + 10.0)
 
 
-func _on_note_miss(note: Note) -> void:
+func _on_note_miss(note: NoteData) -> void:
 	misses += 1
 	score -= 10
 	combo = 0
-	rating_calculator.add_hit(note.hit_window, note.hit_window)
+
+	if strumlines.has(note.strumline):
+		var hit_window := strumlines[note.strumline].hit_window
+		rating_calculator.add_hit(hit_window, hit_window)
+
 	health = clampf(health - 2.0, 0.0, 100.0)
 
 
-func _on_note_hit(note: Note) -> void:
+func _on_note_hit(note: NoteData) -> void:
+	if note.state != NoteData.NoteState.ALIVE:
+		return
+
 	combo += 1
 
 	if not is_instance_valid(rating_calculator):
 		return
 
-	var difference: float = Conductor.time - note.data.time
+	var difference: float = Conductor.time - note.time
 	if is_instance_valid(player_field):
 		if not player_field.takes_input:
 			difference = 0.0
 
-	rating_calculator.add_hit(absf(difference), note.hit_window)
+	if strumlines.has(note.strumline):
+		rating_calculator.add_hit(absf(difference), strumlines[note.strumline].hit_window)
 
 	var rating: Rating = rating_calculator.get_rating(absf(difference))
 	health = clampf(health + rating.health, 0.0, 100.0)

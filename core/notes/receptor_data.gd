@@ -21,3 +21,5 @@ var animation_progress: float = 0.0
 var animation_frame: int:
 	get:
 		return floori(animation_progress * framerate)
+
+var hold_timer: float = 0.0

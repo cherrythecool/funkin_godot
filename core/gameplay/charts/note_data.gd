@@ -18,3 +18,4 @@ enum NoteState {
 
 var state: NoteState = NoteState.ALIVE
 var grace_timer: float = 1.0
+var strumline: StringName

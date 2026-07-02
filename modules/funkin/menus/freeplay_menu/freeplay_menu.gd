@@ -172,7 +172,12 @@ func select_song() -> void:
 	Game.difficulty = difficulty.to_lower()
 	Game.mode = Game.PlayMode.FREEPLAY
 	Game.playlist.clear()
-	SceneManager.transition_to_packed(load("uid://da8mu3oqto3qq"))
+
+	var meta := SongMetadata.load_from_song(current_song, songs_folder)
+	if is_instance_valid(meta) and ResourceLoader.exists(meta.scene_path):
+		SceneManager.transition_to_file(meta.scene_path)
+	else:
+		SceneManager.transition_to_file("uid://da8mu3oqto3qq")
 
 
 func load_song(i: int) -> void:

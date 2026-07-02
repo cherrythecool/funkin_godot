@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://bcj1wq4g56fgg"]
+
+[ext_resource type="Script" uid="uid://dhv3phik4tia" path="res://core/gameplay/game.gd" id="1_wdans"]
+[ext_resource type="Script" uid="uid://cvc0oj8twimgt" path="res://core/gameplay/asset_loader.gd" id="2_seo1d"]
+[ext_resource type="Script" uid="uid://1dwo0trw3je2" path="res://core/gameplay/ratings/rating_calculator.gd" id="3_j7he7"]
+[ext_resource type="Script" uid="uid://dp70bbdhoqpo0" path="res://core/gameplay/ratings/rating.gd" id="4_4vlo1"]
+[ext_resource type="Script" uid="uid://3n2aou2bthat" path="res://core/notes/strumline_manager.gd" id="5_gof74"]
+[ext_resource type="Script" uid="uid://b1ln7ad72xey4" path="res://core/gameplay/game_camera_2d.gd" id="6_ocj6e"]
+[ext_resource type="PackedScene" uid="uid://s7la6mup6cwb" path="res://modules/funkin/characters/nene/nene.tscn" id="6_p878t"]
+[ext_resource type="PackedScene" uid="uid://dhtct6lrdao7r" path="res://modules/funkin/stages/philly_streets_erect/philly_streets_erect.tscn" id="6_snf6e"]
+[ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://core/notes/skinned_strumline_renderer.gd" id="7_n2edi"]
+[ext_resource type="PackedScene" uid="uid://bh5vnsmdwoatu" path="res://modules/funkin/characters/pico/pico_player.tscn" id="7_snf6e"]
+[ext_resource type="PackedScene" uid="uid://dx13k6w54if1l" path="res://modules/funkin/characters/darnell/darnell.tscn" id="8_qp3l0"]
+[ext_resource type="Script" uid="uid://chj1hnw2lhjy4" path="res://core/notes/receptor_data.gd" id="8_r5x4a"]
+[ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://core/styles/default/note_skin.tres" id="9_7fxix"]
+[ext_resource type="PackedScene" uid="uid://cr0c14kq4sye1" path="res://core/huds/default_hud/default_hud.tscn" id="11_qp3l0"]
+[ext_resource type="Resource" uid="uid://oxo327xfxemo" path="res://core/styles/default/hud_skin.tres" id="12_lkmjy"]
+
+[sub_resource type="Resource" id="Resource_5i0tg"]
+script = ExtResource("4_4vlo1")
+name = &"shit"
+timing = 166.66
+score = -10
+health = -2.0
+metadata/_custom_type_script = "uid://dp70bbdhoqpo0"
+
+[sub_resource type="Resource" id="Resource_bdhmt"]
+script = ExtResource("4_4vlo1")
+name = &"bad"
+timing = 135.0
+score = 10
+health = 0.0
+metadata/_custom_type_script = "uid://dp70bbdhoqpo0"
+
+[sub_resource type="Resource" id="Resource_87uf6"]
+script = ExtResource("4_4vlo1")
+name = &"good"
+timing = 90.0
+score = 200
+health = 0.75
+metadata/_custom_type_script = "uid://dp70bbdhoqpo0"
+
+[sub_resource type="Resource" id="Resource_2a8rs"]
+script = ExtResource("4_4vlo1")
+name = &"sick"
+timing = 45.0
+health = 1.0
+metadata/_custom_type_script = "uid://dp70bbdhoqpo0"
+
+[sub_resource type="Resource" id="Resource_4j704"]
+script = ExtResource("4_4vlo1")
+metadata/_custom_type_script = "uid://dp70bbdhoqpo0"
+
+[sub_resource type="Curve" id="Curve_5selw"]
+bake_resolution = 180
+_data = [Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.5), -5.0, -1.6, 0, 1, Vector2(0.75, 0.1), -1.0, -0.4, 0, 1, Vector2(1, 0), -1.0, -0.4, 0, 1]
+point_count = 4
+
+[sub_resource type="Resource" id="Resource_v2t1s"]
+script = ExtResource("8_r5x4a")
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_cr7sq"]
+script = ExtResource("8_r5x4a")
+direction = &"down"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_qjd2v"]
+script = ExtResource("8_r5x4a")
+direction = &"up"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_wwci2"]
+script = ExtResource("8_r5x4a")
+direction = &"right"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_ere7q"]
+script = ExtResource("8_r5x4a")
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_u83tf"]
+script = ExtResource("8_r5x4a")
+direction = &"down"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_5x38g"]
+script = ExtResource("8_r5x4a")
+direction = &"up"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_icvbc"]
+script = ExtResource("8_r5x4a")
+direction = &"right"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[node name="darnell_erect" type="Node" unique_id=1600443132 node_paths=PackedStringArray("strumlines", "asset_loader", "player", "opponent", "spectator", "stage")]
+script = ExtResource("1_wdans")
+strumlines = {
+&"opponent": NodePath("opponent_strumline"),
+&"player": NodePath("player_strumline")
+}
+asset_loader = NodePath("asset_loader")
+player = NodePath("characters/pico_player")
+opponent = NodePath("characters/darnell")
+spectator = NodePath("characters/nene")
+stage = NodePath("stage/philly_streets_erect")
+
+[node name="song_player" type="AudioStreamPlayer" parent="." unique_id=523400484]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="asset_loader" type="Node" parent="." unique_id=1406003250 node_paths=PackedStringArray("song_player", "scripts_parent")]
+unique_name_in_owner = true
+script = ExtResource("2_seo1d")
+song_player = NodePath("../song_player")
+scripts_parent = NodePath(".")
+
+[node name="rating_calculator" type="Node" parent="." unique_id=2044226761]
+unique_name_in_owner = true
+script = ExtResource("3_j7he7")
+ratings = Array[ExtResource("4_4vlo1")]([SubResource("Resource_5i0tg"), SubResource("Resource_bdhmt"), SubResource("Resource_87uf6"), SubResource("Resource_2a8rs"), SubResource("Resource_4j704")])
+accuracy_curve = SubResource("Curve_5selw")
+
+[node name="player_strumline" type="Node" parent="." unique_id=1994861156]
+script = ExtResource("5_gof74")
+cpu = false
+metadata/_custom_type_script = "uid://3n2aou2bthat"
+
+[node name="opponent_strumline" type="Node" parent="." unique_id=1318353459]
+script = ExtResource("5_gof74")
+strumline = &"opponent"
+metadata/_custom_type_script = "uid://3n2aou2bthat"
+
+[node name="stage" type="Node2D" parent="." unique_id=899799479]
+
+[node name="philly_streets_erect" parent="stage" unique_id=1496845117 instance=ExtResource("6_snf6e")]
+
+[node name="characters" type="Node2D" parent="." unique_id=15584752]
+
+[node name="nene" parent="characters" unique_id=1793526993 instance=ExtResource("6_p878t")]
+z_index = 300
+position = Vector2(1531, 1089)
+
+[node name="pico_player" parent="characters" unique_id=1984217448 node_paths=PackedStringArray("strumline") instance=ExtResource("7_snf6e")]
+z_index = 300
+position = Vector2(2138, 1216)
+strumline = NodePath("../../player_strumline")
+
+[node name="camera_offset" parent="characters/pico_player" index="2" unique_id=205512890]
+position = Vector2(-302, -262)
+
+[node name="darnell" parent="characters" unique_id=1554177453 node_paths=PackedStringArray("strumline") instance=ExtResource("8_qp3l0")]
+z_index = 300
+position = Vector2(826, 1175)
+strumline = NodePath("../../opponent_strumline")
+
+[node name="camera_offset" parent="characters/darnell" index="2" unique_id=996067345]
+position = Vector2(548, -261)
+
+[node name="camera_2d" type="Camera2D" parent="." unique_id=918652241]
+position = Vector2(640, 360)
+limit_enabled = false
+script = ExtResource("6_ocj6e")
+bumps = false
+
+[node name="hud_layer" type="CanvasLayer" parent="." unique_id=444258132]
+unique_name_in_owner = true
+
+[node name="hud" parent="hud_layer" unique_id=1372711265 instance=ExtResource("11_qp3l0")]
+hud_skin = ExtResource("12_lkmjy")
+
+[node name="player_renderer" type="Node2D" parent="hud_layer/hud" unique_id=766572025 node_paths=PackedStringArray("parent")]
+position = Vector2(960, 620)
+script = ExtResource("7_n2edi")
+parent = NodePath("../../../player_strumline")
+receptors = Array[ExtResource("8_r5x4a")]([SubResource("Resource_v2t1s"), SubResource("Resource_cr7sq"), SubResource("Resource_qjd2v"), SubResource("Resource_wwci2")])
+skin = ExtResource("9_7fxix")
+spacing = 112.0
+scroll_speed = 3.0
+metadata/_custom_type_script = "uid://rh4jeluc5vy5"
+
+[node name="opponent_renderer" type="Node2D" parent="hud_layer/hud" unique_id=966116256 node_paths=PackedStringArray("parent")]
+position = Vector2(320, 620)
+script = ExtResource("7_n2edi")
+parent = NodePath("../../../opponent_strumline")
+receptors = Array[ExtResource("8_r5x4a")]([SubResource("Resource_ere7q"), SubResource("Resource_u83tf"), SubResource("Resource_5x38g"), SubResource("Resource_icvbc")])
+skin = ExtResource("9_7fxix")
+spacing = 112.0
+scroll_speed = 3.0
+metadata/_custom_type_script = "uid://rh4jeluc5vy5"
+
+[connection signal="back_to_menus" from="." to="camera_2d" method="_on_game_back_to_menus"]
+[connection signal="event_hit" from="." to="camera_2d" method="_on_game_event_hit"]
+[connection signal="ready_post" from="." to="camera_2d" method="_on_game_ready_post"]
+[connection signal="note_hit" from="player_strumline" to="." method="_on_note_hit"]
+[connection signal="note_hit" from="player_strumline" to="characters/pico_player" method="_on_note_hit"]
+[connection signal="note_hit" from="player_strumline" to="hud_layer/hud" method="_on_note_hit"]
+[connection signal="note_missed" from="player_strumline" to="." method="_on_note_miss"]
+[connection signal="note_missed" from="player_strumline" to="characters/pico_player" method="_on_note_missed"]
+[connection signal="note_missed" from="player_strumline" to="hud_layer/hud" method="_on_note_miss"]
+[connection signal="note_hit" from="opponent_strumline" to="camera_2d" method="_on_first_opponent_note" flags=6]
+[connection signal="note_hit" from="opponent_strumline" to="characters/darnell" method="_on_note_hit"]
+[connection signal="note_hit" from="opponent_strumline" to="hud_layer/hud" method="_on_first_opponent_note" flags=6]
+[connection signal="note_hit" from="opponent_strumline" to="hud_layer/hud" method="_on_opponent_note_hit"]
+
+[editable path="characters/pico_player"]
+[editable path="characters/darnell"]

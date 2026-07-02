@@ -35,12 +35,14 @@ func _ready() -> void:
 			mist.free()
 		mists.clear()
 
-	if not game.player.name.contains("pico"):
-		game.player.offset_camera_position(Vector2(-250.0, -20.0))
-	else:
-		game.player.offset_camera_position(Vector2(-250.0, 35.0))
+	if game.player:
+		if not game.player.name.contains("pico"):
+			game.player.offset_camera_position(Vector2(-250.0, -20.0))
+		else:
+			game.player.offset_camera_position(Vector2(-250.0, 35.0))
 
-	game.opponent.offset_camera_position(Vector2(230.0, 75.0))
+	if game.opponent:
+		game.opponent.offset_camera_position(Vector2(230.0, 75.0))
 
 	var color_material: ShaderMaterial = ShaderMaterial.new()
 	color_material.shader = load('uid://bgwusoh6kicj3')
@@ -49,9 +51,14 @@ func _ready() -> void:
 	color_material.set_shader_parameter('contrast', -25.0)
 	color_material.set_shader_parameter('brightness', -20.0)
 
-	game.player.set_character_material(color_material)
-	game.spectator.set_character_material(color_material)
-	game.opponent.set_character_material(color_material)
+	if game.player:
+		game.player.set_character_material(color_material)
+
+	if game.spectator:
+		game.spectator.set_character_material(color_material)
+
+	if game.opponent:
+		game.opponent.set_character_material(color_material)
 	reset_cars(true, true)
 	_process(0.0)
 

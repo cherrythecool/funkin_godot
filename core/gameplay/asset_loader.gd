@@ -18,11 +18,15 @@ func load_assets() -> void:
 		printerr("Tried to load assets without any assets!")
 		return
 
-	var player: Character = assets.get_player().instantiate()
-	var opponent: Character = assets.get_opponent().instantiate()
-	var spectator: Character = assets.get_spectator().instantiate()
+	var player: Character = Game.instance.player
+	var opponent: Character = Game.instance.opponent
+	var spectator: Character = Game.instance.spectator
 
 	if is_instance_valid(characters_parent):
+		player = assets.get_player().instantiate()
+		opponent = assets.get_opponent().instantiate()
+		spectator = assets.get_spectator().instantiate()
+
 		Game.instance.player = player
 		Game.instance.opponent = opponent
 		Game.instance.spectator = spectator
@@ -30,38 +34,35 @@ func load_assets() -> void:
 		characters_parent.add_child(spectator)
 		characters_parent.add_child(player)
 		characters_parent.add_child(opponent)
-	else:
-		player.queue_free()
-		opponent.queue_free()
-		spectator.queue_free()
-
-	var stage: Stage = assets.get_stage().instantiate()
-	Game.instance.stage = stage
-
-	# Setup the characters.
-	if stage.has_node(^"player"):
-		var player_point: CharacterPlacement = stage.get_node(^"player")
-		if is_instance_valid(player_point):
-			player_point.adjust_character(player, true)
-	if not player.starts_as_player:
-		player.scale *= Vector2(-1.0, 1.0)
-
-	if stage.has_node(^"opponent"):
-		var opponent_point: CharacterPlacement = stage.get_node(^"opponent")
-		if is_instance_valid(opponent_point):
-			opponent_point.adjust_character(opponent)
-	if opponent.starts_as_player:
-		opponent.scale *= Vector2(-1.0, 1.0)
-
-	if stage.has_node(^"spectator"):
-		var spectator_point: CharacterPlacement = stage.get_node(^"spectator")
-		if is_instance_valid(spectator_point):
-			spectator_point.adjust_character(spectator)
 
 	if is_instance_valid(stage_parent):
-		stage_parent.add_child(stage)
-	else:
-		stage.queue_free()
+		var stage: Stage = assets.get_stage().instantiate()
+		Game.instance.stage = stage
+
+		if player:
+			if stage.has_node(^"player"):
+				var player_point: CharacterPlacement = stage.get_node(^"player")
+				if is_instance_valid(player_point):
+					player_point.adjust_character(player, true)
+			if not player.starts_as_player:
+				player.scale *= Vector2(-1.0, 1.0)
+
+		if opponent:
+			if stage.has_node(^"opponent"):
+				var opponent_point: CharacterPlacement = stage.get_node(^"opponent")
+				if is_instance_valid(opponent_point):
+					opponent_point.adjust_character(opponent)
+			if opponent.starts_as_player:
+				opponent.scale *= Vector2(-1.0, 1.0)
+
+		if spectator:
+			if stage.has_node(^"spectator"):
+				var spectator_point: CharacterPlacement = stage.get_node(^"spectator")
+				if is_instance_valid(spectator_point):
+					spectator_point.adjust_character(spectator)
+
+		if is_instance_valid(stage_parent):
+			stage_parent.add_child(stage)
 
 	var hud: Node = assets.get_hud().instantiate()
 	var hud_skin := assets.get_hud_skin()

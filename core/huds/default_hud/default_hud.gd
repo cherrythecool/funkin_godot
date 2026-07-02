@@ -37,7 +37,7 @@ var centered_receptors: bool = false:
 @onready var combo_node: Node2D = rating_container.get_node('combo')
 var rating_tween: Tween
 
-var hud_skin: HUDSkin:
+@export var hud_skin: HUDSkin:
 	set(v):
 		hud_skin = v
 		rating_textures = hud_skin.get_rating_textures()
@@ -122,21 +122,24 @@ func _unhandled_input(event: InputEvent) -> void:
 		time_bar.visible = health_bar.visible and Settings.get_setting(&"core", "time_bar_show")
 
 
-func _on_first_opponent_note(_note: Note) -> void:
+func _on_first_opponent_note(_note: NoteData) -> void:
 	bumps = true
 
 
-func _on_note_hit(note: Note) -> void:
-	var difference: float = Conductor.time - note.data.time
+func _on_note_hit(note: NoteData) -> void:
+	if note.state != NoteData.NoteState.ALIVE:
+		return
+
+	var difference: float = Conductor.time - note.time
 	if not player_field.takes_input:
 		difference = 0.0
 
 	if player_field.takes_input:
-		difference_label.text = '%.2fms' % [difference * 1000.0]
+		difference_label.text = "%.2fms" % [difference * 1000.0]
 		difference_label.modulate = Color(0.4, 0.5, 0.8) \
 				if difference < 0.0 else Color(0.8, 0.4, 0.5)
 	else:
-		difference_label.text = 'Botplay'
+		difference_label.text = "Botplay"
 		difference_label.modulate = Color(0.6, 0.62, 0.7)
 
 	if is_instance_valid(rating_tween) and rating_tween.is_running():
@@ -148,8 +151,8 @@ func _on_note_hit(note: Note) -> void:
 	if rating_textures.has(rating.name):
 		rating_sprite.texture = rating_textures[rating.name]
 
-	if rating.name == &'marvelous' or rating.name == &'sick':
-		spawn_splash(note, player_field.skin, note.field.receptors[note.lane])
+	#if rating.name == &'marvelous' or rating.name == &'sick':
+	#	spawn_splash(note, player_field.skin, note.field.receptors[note.lane])
 
 	rating_container.modulate.a = Settings.get_setting(&"core", "rating_alpha")
 	rating_container.scale = Vector2.ONE * 1.1
@@ -183,7 +186,7 @@ func _on_note_hit(note: Note) -> void:
 	note_hit.emit(note)
 
 
-func _on_note_miss(note: Note) -> void:
+func _on_note_miss(note: NoteData) -> void:
 	if is_instance_valid(rating_tween) and rating_tween.is_running():
 		rating_tween.kill()
 
@@ -191,8 +194,9 @@ func _on_note_miss(note: Note) -> void:
 	note_miss.emit(note)
 
 
-func _on_opponent_note_hit(note: Note) -> void:
-	spawn_splash(note, opponent_field.skin, note.field.receptors[note.lane])
+func _on_opponent_note_hit(_note: NoteData) -> void:
+	#spawn_splash(note, opponent_field.skin, note.field.receptors[note.direction])
+	pass
 
 
 func set_downscroll(value: bool) -> void:
