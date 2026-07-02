@@ -5,24 +5,16 @@
 [ext_resource type="Script" uid="uid://1dwo0trw3je2" path="res://core/gameplay/ratings/rating_calculator.gd" id="3_j7he7"]
 [ext_resource type="Script" uid="uid://dp70bbdhoqpo0" path="res://core/gameplay/ratings/rating.gd" id="4_4vlo1"]
 [ext_resource type="Script" uid="uid://3n2aou2bthat" path="res://core/notes/strumline_manager.gd" id="5_gof74"]
-[ext_resource type="Script" uid="uid://djsxumpddydxq" path="res://core/autoloads/conductor.gd" id="6_68iqh"]
 [ext_resource type="Script" uid="uid://b1ln7ad72xey4" path="res://core/gameplay/game_camera_2d.gd" id="6_ocj6e"]
 [ext_resource type="PackedScene" uid="uid://s7la6mup6cwb" path="res://modules/funkin/characters/nene/nene.tscn" id="6_p878t"]
 [ext_resource type="PackedScene" uid="uid://dhtct6lrdao7r" path="res://modules/funkin/stages/philly_streets_erect/philly_streets_erect.tscn" id="6_snf6e"]
-[ext_resource type="AudioStream" uid="uid://ui2sjk2g21ew" path="res://modules/funkin/songs/bopeebo/tracks/Inst.ogg" id="6_u3xw7"]
-[ext_resource type="AudioStream" uid="uid://dy2sn0rlka5f2" path="res://modules/funkin/songs/bopeebo/tracks/Voices-bf.ogg" id="7_68iqh"]
 [ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://core/notes/skinned_strumline_renderer.gd" id="7_n2edi"]
 [ext_resource type="PackedScene" uid="uid://bh5vnsmdwoatu" path="res://modules/funkin/characters/pico/pico_player.tscn" id="7_snf6e"]
-[ext_resource type="AudioStream" uid="uid://cu6o37h510kun" path="res://modules/funkin/songs/bopeebo/tracks/Voices-dad.ogg" id="8_1dgy2"]
 [ext_resource type="PackedScene" uid="uid://dx13k6w54if1l" path="res://modules/funkin/characters/darnell/darnell.tscn" id="8_qp3l0"]
 [ext_resource type="Script" uid="uid://chj1hnw2lhjy4" path="res://core/notes/receptor_data.gd" id="8_r5x4a"]
 [ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://core/styles/default/note_skin.tres" id="9_7fxix"]
-[ext_resource type="PackedScene" uid="uid://cdxxht68lxv1a" path="res://modules/funkin/characters/mom/mom.tscn" id="11_lcotg"]
 [ext_resource type="PackedScene" uid="uid://cr0c14kq4sye1" path="res://core/huds/default_hud/default_hud.tscn" id="11_qp3l0"]
-[ext_resource type="Shader" uid="uid://b1cg727toe7oh" path="res://modules/funkin/menus/title_screen/hue_shift.gdshader" id="12_68iqh"]
 [ext_resource type="Resource" uid="uid://oxo327xfxemo" path="res://core/styles/default/hud_skin.tres" id="12_lkmjy"]
-[ext_resource type="Material" uid="uid://h6uy4lto3tyx" path="res://core/shaders/additive.tres" id="12_yorhy"]
-[ext_resource type="PackedScene" uid="uid://bu44d2he2dxm3" path="res://core/characters/bf/bf.tscn" id="13_yorhy"]
 
 [sub_resource type="Resource" id="Resource_5i0tg"]
 script = ExtResource("4_4vlo1")
@@ -63,42 +55,6 @@ metadata/_custom_type_script = "uid://dp70bbdhoqpo0"
 bake_resolution = 180
 _data = [Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.5), -5.0, -1.6, 0, 1, Vector2(0.75, 0.1), -1.0, -0.4, 0, 1, Vector2(1, 0), -1.0, -0.4, 0, 1]
 point_count = 4
-
-[sub_resource type="GDScript" id="GDScript_g4v7s"]
-script/source = "extends Node
-
-
-@onready var bf_1: StrumlineManager = $bf_1
-@onready var bf_2: StrumlineManager = $bf_2
-@onready var bopeebo: AudioStreamPlayer2D = $bopeebo
-@onready var evil_conductor: Conductor = $evil_conductor
-
-
-func _ready() -> void:
-	var evil_chart := Chart.load_chart(\"res://modules/funkin/songs/bopeebo\", &\"hard\")
-	bf_1.load_notes(evil_chart.strumlines[&\"player\"].get(\"notes\"))
-	bf_2.load_notes(evil_chart.strumlines[&\"opponent\"].get(\"notes\"))
-
-	Game.instance.song_start.connect(_on_song_started)
-
-
-func _on_song_started() -> void:
-	bopeebo.play()
-	evil_conductor.active = true
-"
-
-[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_g4v7s"]
-stream_count = 3
-stream_0/stream = ExtResource("6_u3xw7")
-stream_0/volume = 0.0
-stream_1/stream = ExtResource("7_68iqh")
-stream_1/volume = 0.0
-stream_2/stream = ExtResource("8_1dgy2")
-stream_2/volume = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dgy2"]
-shader = ExtResource("12_68iqh")
-shader_parameter/value = 0.29999976977440035
 
 [sub_resource type="Resource" id="Resource_v2t1s"]
 script = ExtResource("8_r5x4a")
@@ -168,6 +124,7 @@ accuracy_curve = SubResource("Curve_5selw")
 
 [node name="player_strumline" type="Node" parent="." unique_id=1994861156]
 script = ExtResource("5_gof74")
+cpu = false
 metadata/_custom_type_script = "uid://3n2aou2bthat"
 
 [node name="opponent_strumline" type="Node" parent="." unique_id=1318353459]
@@ -175,52 +132,11 @@ script = ExtResource("5_gof74")
 strumline = &"opponent"
 metadata/_custom_type_script = "uid://3n2aou2bthat"
 
-[node name="evil_chart_thing" type="Node" parent="." unique_id=297269129]
-script = SubResource("GDScript_g4v7s")
-
-[node name="evil_conductor" type="Node" parent="evil_chart_thing" unique_id=970812122]
-script = ExtResource("6_68iqh")
-active = false
-
-[node name="bopeebo" type="AudioStreamPlayer2D" parent="evil_chart_thing" unique_id=1977268880]
-position = Vector2(1559, 1335)
-stream = SubResource("AudioStreamSynchronized_g4v7s")
-volume_db = -8.0
-bus = &"Music"
-
-[node name="bf_1" type="Node" parent="evil_chart_thing" unique_id=1384371707 node_paths=PackedStringArray("conductor")]
-script = ExtResource("5_gof74")
-strumline = &"bf_1"
-conductor = NodePath("../evil_conductor")
-metadata/_custom_type_script = "uid://3n2aou2bthat"
-
-[node name="bf_2" type="Node" parent="evil_chart_thing" unique_id=638702431 node_paths=PackedStringArray("conductor")]
-script = ExtResource("5_gof74")
-strumline = &"bf_2"
-conductor = NodePath("../evil_conductor")
-metadata/_custom_type_script = "uid://3n2aou2bthat"
-
 [node name="stage" type="Node2D" parent="." unique_id=899799479]
 
 [node name="philly_streets_erect" parent="stage" unique_id=1496845117 instance=ExtResource("6_snf6e")]
 
 [node name="characters" type="Node2D" parent="." unique_id=15584752]
-
-[node name="darnell_2" parent="characters" unique_id=1798166835 node_paths=PackedStringArray("strumline") instance=ExtResource("8_qp3l0")]
-z_index = 298
-material = SubResource("ShaderMaterial_1dgy2")
-position = Vector2(1708, 1011)
-rotation = -3.1415925
-scale = Vector2(0.9599987, -1)
-skew = 0.12915437
-strumline = NodePath("../../opponent_strumline")
-swap_sing_animations = true
-
-[node name="sprite" parent="characters/darnell_2" index="0" unique_id=806311329]
-use_parent_material = true
-
-[node name="camera_offset" parent="characters/darnell_2" index="2" unique_id=996067345]
-position = Vector2(548, -261)
 
 [node name="nene" parent="characters" unique_id=1793526993 instance=ExtResource("6_p878t")]
 z_index = 299
@@ -230,45 +146,6 @@ position = Vector2(1531, 1089)
 z_index = 300
 position = Vector2(2138, 1216)
 strumline = NodePath("../../player_strumline")
-
-[node name="pico_player_3" parent="characters/pico_player/sprite" parent_id_path=PackedInt32Array(1402692875, 498550991) index="0" unique_id=1984217448 node_paths=PackedStringArray("strumline") instance=ExtResource("7_snf6e")]
-z_index = -1
-use_parent_material = true
-position = Vector2(59, 416)
-scale = Vector2(0.5, 0.5)
-strumline = NodePath("../../../../player_strumline")
-
-[node name="sprite" parent="characters/pico_player/sprite/pico_player_3" index="0" unique_id=498550991]
-use_parent_material = true
-
-[node name="camera_offset" parent="characters/pico_player/sprite/pico_player_3" index="2" unique_id=205512890]
-position = Vector2(-302, -262)
-
-[node name="pico_player_2" parent="characters/pico_player/sprite" parent_id_path=PackedInt32Array(1402692875, 498550991) index="1" unique_id=1732651847 node_paths=PackedStringArray("strumline") instance=ExtResource("7_snf6e")]
-use_parent_material = true
-position = Vector2(336, 517)
-scale = Vector2(0.5, 0.5)
-strumline = NodePath("../../../../player_strumline")
-
-[node name="sprite" parent="characters/pico_player/sprite/pico_player_2" index="0" unique_id=498550991]
-use_parent_material = true
-
-[node name="camera_offset" parent="characters/pico_player/sprite/pico_player_2" index="2" unique_id=205512890]
-position = Vector2(-302, -262)
-
-[node name="pico_player_4" parent="characters/pico_player/sprite" parent_id_path=PackedInt32Array(1402692875, 498550991) index="2" unique_id=1567754027 node_paths=PackedStringArray("strumline") instance=ExtResource("7_snf6e")]
-z_index = 300
-use_parent_material = true
-position = Vector2(92.00012, 542)
-scale = Vector2(0.595, 0.595)
-skew = 0.12915432
-strumline = NodePath("../../../../player_strumline")
-
-[node name="sprite" parent="characters/pico_player/sprite/pico_player_4" index="0" unique_id=498550991]
-use_parent_material = true
-
-[node name="camera_offset" parent="characters/pico_player/sprite/pico_player_4" index="2" unique_id=205512890]
-position = Vector2(-302, -262)
 
 [node name="camera_offset" parent="characters/pico_player" index="2" unique_id=205512890]
 position = Vector2(-302, -262)
@@ -280,94 +157,6 @@ strumline = NodePath("../../opponent_strumline")
 
 [node name="camera_offset" parent="characters/darnell" index="2" unique_id=996067345]
 position = Vector2(548, -261)
-
-[node name="mom" parent="characters" unique_id=1914771471 node_paths=PackedStringArray("strumline") instance=ExtResource("11_lcotg")]
-modulate = Color(0.6117647, 0.6117647, 0.6117647, 0.6627451)
-z_index = 4096
-material = ExtResource("12_yorhy")
-position = Vector2(1477.9999, 1221)
-scale = Vector2(0.275, 0.275)
-skew = -0.12915437
-strumline = NodePath("../../opponent_strumline")
-
-[node name="sprite" parent="characters/mom" index="0" unique_id=176042494]
-use_parent_material = true
-
-[node name="mom_2" parent="characters" unique_id=1653621988 node_paths=PackedStringArray("strumline") instance=ExtResource("11_lcotg")]
-modulate = Color(0.6117647, 0.6117647, 0.6117647, 0.6627451)
-z_index = 4096
-material = ExtResource("12_yorhy")
-position = Vector2(1219, 1279.0001)
-scale = Vector2(0.275, 0.275)
-skew = -0.12915437
-strumline = NodePath("../../opponent_strumline")
-
-[node name="sprite" parent="characters/mom_2" index="0" unique_id=176042494]
-use_parent_material = true
-
-[node name="mom_6" parent="characters" unique_id=1546470172 node_paths=PackedStringArray("strumline") instance=ExtResource("11_lcotg")]
-modulate = Color(0.6117647, 0.6117647, 0.6117647, 0.6627451)
-z_index = 4096
-material = ExtResource("12_yorhy")
-position = Vector2(1082, 1308.0001)
-scale = Vector2(0.275, 0.275)
-skew = -0.12915437
-strumline = NodePath("../../opponent_strumline")
-
-[node name="sprite" parent="characters/mom_6" index="0" unique_id=176042494]
-use_parent_material = true
-
-[node name="mom_3" parent="characters" unique_id=1975481224 node_paths=PackedStringArray("strumline") instance=ExtResource("11_lcotg")]
-modulate = Color(0.6117647, 0.6117647, 0.6117647, 0.6627451)
-z_index = 4096
-material = ExtResource("12_yorhy")
-position = Vector2(1620, 1236.0001)
-scale = Vector2(0.275, 0.275)
-skew = -0.12915437
-strumline = NodePath("../../opponent_strumline")
-
-[node name="sprite" parent="characters/mom_3" index="0" unique_id=176042494]
-use_parent_material = true
-
-[node name="mom_4" parent="characters" unique_id=1003011961 node_paths=PackedStringArray("strumline") instance=ExtResource("11_lcotg")]
-modulate = Color(0.6117647, 0.6117647, 0.6117647, 0.6627451)
-z_index = 4096
-material = ExtResource("12_yorhy")
-position = Vector2(1351.9998, 1261.0001)
-scale = Vector2(0.275, 0.275)
-skew = -0.12915437
-strumline = NodePath("../../opponent_strumline")
-
-[node name="sprite" parent="characters/mom_4" index="0" unique_id=176042494]
-use_parent_material = true
-
-[node name="mom_5" parent="characters" unique_id=772748280 node_paths=PackedStringArray("strumline") instance=ExtResource("11_lcotg")]
-modulate = Color(0.6117647, 0.6117647, 0.6117647, 0.6627451)
-z_index = 4096
-material = ExtResource("12_yorhy")
-position = Vector2(1739, 1226)
-scale = Vector2(0.275, 0.275)
-skew = -0.12915437
-strumline = NodePath("../../opponent_strumline")
-
-[node name="sprite" parent="characters/mom_5" index="0" unique_id=176042494]
-use_parent_material = true
-
-[node name="bf" parent="characters" unique_id=1298651439 node_paths=PackedStringArray("strumline") instance=ExtResource("13_yorhy")]
-modulate = Color(18.399155, 0, 0, 0.39215687)
-z_index = 300
-position = Vector2(1764.9999, 1350)
-scale = Vector2(0.355, 0.355)
-strumline = NodePath("../../evil_chart_thing/bf_1")
-
-[node name="bf_2" parent="characters" unique_id=1089011066 node_paths=PackedStringArray("strumline") instance=ExtResource("13_yorhy")]
-modulate = Color(4.7334204, 18.399004, 0, 0.392)
-z_index = 300
-position = Vector2(1367.9999, 1359)
-scale = Vector2(-0.355, 0.355)
-strumline = NodePath("../../evil_chart_thing/bf_2")
-starts_as_player = false
-swap_sing_animations = true
 
 [node name="camera_2d" type="Camera2D" parent="." unique_id=918652241]
 position = Vector2(640, 360)
@@ -412,15 +201,5 @@ metadata/_custom_type_script = "uid://rh4jeluc5vy5"
 [connection signal="note_hit" from="opponent_strumline" to="hud_layer/hud" method="_on_first_opponent_note" flags=6]
 [connection signal="note_hit" from="opponent_strumline" to="hud_layer/hud" method="_on_opponent_note_hit"]
 
-[editable path="characters/darnell_2"]
 [editable path="characters/pico_player"]
-[editable path="characters/pico_player/sprite/pico_player_3"]
-[editable path="characters/pico_player/sprite/pico_player_2"]
-[editable path="characters/pico_player/sprite/pico_player_4"]
 [editable path="characters/darnell"]
-[editable path="characters/mom"]
-[editable path="characters/mom_2"]
-[editable path="characters/mom_6"]
-[editable path="characters/mom_3"]
-[editable path="characters/mom_4"]
-[editable path="characters/mom_5"]
