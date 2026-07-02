@@ -131,10 +131,10 @@ func _on_note_hit(note: NoteData) -> void:
 		return
 
 	var difference: float = Conductor.time - note.time
-	if not player_field.takes_input:
+	if game.strumlines[&"player"].cpu:
 		difference = 0.0
 
-	if player_field.takes_input:
+	if not game.strumlines[&"player"].cpu:
 		difference_label.text = "%.2fms" % [difference * 1000.0]
 		difference_label.modulate = Color(0.4, 0.5, 0.8) \
 				if difference < 0.0 else Color(0.8, 0.4, 0.5)

@@ -245,9 +245,8 @@ func _on_note_hit(note: NoteData) -> void:
 		return
 
 	var difference: float = Conductor.time - note.time
-	if is_instance_valid(player_field):
-		if not player_field.takes_input:
-			difference = 0.0
+	if strumlines.has(&"player") and strumlines[&"player"].cpu:
+		difference = 0.0
 
 	if strumlines.has(note.strumline):
 		rating_calculator.add_hit(absf(difference), strumlines[note.strumline].hit_window)

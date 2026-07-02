@@ -16,6 +16,7 @@ const INPUT_ACTIONS: PackedStringArray = ["note_left", "note_down", "note_up", "
 @export var strumline: StringName = &"player"
 @export var hit_window: float = 0.18
 @export var cpu: bool = true
+@export var conductor: Conductor
 
 var receptor_states: Array[ReceptorState]
 var notes: Array[NoteData]
@@ -31,7 +32,7 @@ func _process(delta: float) -> void:
 	if cpu:
 		receptor_states.fill(ReceptorState.RELEASED)
 
-	var time := Conductor.time
+	var time := get_time()
 	var note_idx := 0
 
 	while notes_index + note_idx < notes.size():
@@ -92,7 +93,7 @@ func _handle_player_input(delta: float) -> void:
 		elif pressed[i] and receptor_states[i] == ReceptorState.RELEASED:
 			receptor_states[i] = ReceptorState.PRESSED
 
-	var time := Conductor.time
+	var time := get_time()
 	for index: int in range(notes_index, notes.size()):
 		var note := notes[index]
 		if not is_note_in_range(note, time):
@@ -120,7 +121,7 @@ func _handle_player_input(delta: float) -> void:
 func hit_note(note: NoteData) -> void:
 	note_hit.emit(note)
 
-	var time := Conductor.time
+	var time := get_time()
 
 	if time < note.time + note.length and note.length > 0.0:
 		note.state = NoteData.NoteState.HELD
@@ -138,6 +139,13 @@ func miss_note(note: NoteData) -> void:
 
 func is_note_in_range(note: NoteData, time: float) -> bool:
 	return time >= note.time - hit_window
+
+
+func get_time() -> float:
+	if conductor:
+		return conductor.time
+	else:
+		return Conductor.time
 
 
 func load_notes(notes_array: Array) -> void:

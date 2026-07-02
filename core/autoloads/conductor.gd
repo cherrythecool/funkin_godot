@@ -69,7 +69,7 @@ var measure_delta: float:
 	get:
 		return beat_delta * 4.0
 
-var target_audio: AudioStreamPlayer = null
+@export var target_audio: AudioStreamPlayer = null
 var target_length: float:
 	get:
 		if is_instance_valid(target_audio) and is_instance_valid(target_audio.stream):

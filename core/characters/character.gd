@@ -40,12 +40,18 @@ signal animation_finished(animation: StringName)
 func _enter_tree() -> void:
 	sprite = get_node_or_null(^"sprite")
 	animation_player = get_node_or_null(^"animation_player")
+
 	if animation_player != null:
 		animation_player.animation_finished.connect(animation_finished.emit)
 
 	dance(true)
+
 	if is_instance_valid(Conductor.instance):
 		Conductor.instance.beat_hit.connect(_on_beat_hit)
+
+	if is_instance_valid(strumline):
+		strumline.note_hit.connect(_on_note_hit)
+		strumline.note_missed.connect(_on_note_missed)
 
 
 func _process(delta: float) -> void:
