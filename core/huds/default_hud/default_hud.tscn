@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://cr0c14kq4sye1"]
 
 [ext_resource type="Script" uid="uid://cuh3v6jw2ti70" path="res://core/huds/default_hud/default_hud.gd" id="1_hv0yb"]
-[ext_resource type="PackedScene" uid="uid://3diy2p3nknpi" path="res://core/notes/note_fields/4_lanes.tscn" id="2_0rw2j"]
-[ext_resource type="PackedScene" uid="uid://bx6f5ldidoswy" path="res://core/notes/splashes/note_splash.tscn" id="3_1ubyb"]
 [ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://core/fonts/vcr_osd_mono.ttf" id="3_ecfub"]
 [ext_resource type="Script" uid="uid://d1luakfpc6be5" path="res://core/huds/default_hud/score_label.gd" id="4_hg5eq"]
 [ext_resource type="Script" uid="uid://nb701n0rtr0l" path="res://core/huds/default_hud/health_bar.gd" id="4_spp67"]
@@ -11,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://ds3g63uwcq4jw" path="res://core/styles/default/combo.png" id="7_7svf3"]
 [ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://modules/funkin/funkin.ttf" id="8_in2av"]
 [ext_resource type="Script" uid="uid://pc372g2dpnb3" path="res://core/huds/default_hud/countdown_container.gd" id="9_6w54d"]
+[ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://core/notes/skinned_strumline_renderer.gd" id="10_nwv25"]
+[ext_resource type="Script" uid="uid://chj1hnw2lhjy4" path="res://core/notes/receptor_data.gd" id="11_vvq14"]
+[ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://core/styles/default/note_skin.tres" id="12_iy7o8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vjxi"]
 bg_color = Color(0.529412, 0.545098, 0.545098, 1)
@@ -60,7 +61,55 @@ font_size = 64
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
-[node name="hud" type="Control" unique_id=1372711265]
+[sub_resource type="Resource" id="Resource_v2t1s"]
+script = ExtResource("11_vvq14")
+direction = null
+framerate = null
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_cr7sq"]
+script = ExtResource("11_vvq14")
+direction = &"down"
+framerate = null
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_qjd2v"]
+script = ExtResource("11_vvq14")
+direction = &"up"
+framerate = null
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_wwci2"]
+script = ExtResource("11_vvq14")
+direction = &"right"
+framerate = null
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_ere7q"]
+script = ExtResource("11_vvq14")
+direction = null
+framerate = null
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_u83tf"]
+script = ExtResource("11_vvq14")
+direction = &"down"
+framerate = null
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_5x38g"]
+script = ExtResource("11_vvq14")
+direction = &"up"
+framerate = null
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_icvbc"]
+script = ExtResource("11_vvq14")
+direction = &"right"
+framerate = null
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[node name="hud" type="Control" unique_id=1372711265 node_paths=PackedStringArray("player_renderer", "opponent_renderer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,6 +119,8 @@ grow_vertical = 2
 pivot_offset = Vector2(640, 360)
 mouse_filter = 2
 script = ExtResource("1_hv0yb")
+player_renderer = NodePath("player_renderer")
+opponent_renderer = NodePath("opponent_renderer")
 metadata/_edit_lock_ = true
 
 [node name="health_bar" type="Node2D" parent="." unique_id=1819531785]
@@ -197,24 +248,27 @@ position = Vector2(640, 360)
 script = ExtResource("9_6w54d")
 hud = NodePath("..")
 
-[node name="note_fields" type="Node2D" parent="." unique_id=2028384754]
+[node name="player_renderer" type="Node2D" parent="." unique_id=1392333694 node_paths=PackedStringArray("parent")]
 unique_name_in_owner = true
-z_index = 1
+position = Vector2(960, 620)
+script = ExtResource("10_nwv25")
+parent = NodePath("")
+receptors = Array[ExtResource("11_vvq14")]([SubResource("Resource_v2t1s"), SubResource("Resource_cr7sq"), SubResource("Resource_qjd2v"), SubResource("Resource_wwci2")])
+skin = ExtResource("12_iy7o8")
+spacing = 112.0
+scroll_speed = 3.0
+metadata/_custom_type_script = "uid://rh4jeluc5vy5"
 
-[node name="opponent" parent="note_fields" unique_id=788558760 instance=ExtResource("2_0rw2j")]
-process_mode = 4
-visible = false
-position = Vector2(320, 100)
-strumline = &"opponent"
-use_note_splashes = false
-default_note_splash = ExtResource("3_1ubyb")
-
-[node name="player" parent="note_fields" unique_id=827080627 instance=ExtResource("2_0rw2j")]
-process_mode = 4
-visible = false
-position = Vector2(960, 100)
-takes_input = true
-default_note_splash = ExtResource("3_1ubyb")
+[node name="opponent_renderer" type="Node2D" parent="." unique_id=290028316 node_paths=PackedStringArray("parent")]
+unique_name_in_owner = true
+position = Vector2(320, 620)
+script = ExtResource("10_nwv25")
+parent = NodePath("")
+receptors = Array[ExtResource("11_vvq14")]([SubResource("Resource_ere7q"), SubResource("Resource_u83tf"), SubResource("Resource_5x38g"), SubResource("Resource_icvbc")])
+skin = ExtResource("12_iy7o8")
+spacing = 112.0
+scroll_speed = 3.0
+metadata/_custom_type_script = "uid://rh4jeluc5vy5"
 
 [connection signal="downscroll_changed" from="." to="health_bar" method="_on_hud_downscroll_changed"]
 [connection signal="downscroll_changed" from="." to="time_bar" method="_on_hud_downscroll_changed"]

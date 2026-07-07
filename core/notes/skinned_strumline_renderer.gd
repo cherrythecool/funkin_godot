@@ -2,22 +2,24 @@ class_name SkinnedStrumlineRenderer
 extends Node2D
 
 
-@export var parent: StrumlineManager
+@export var parent: StrumlineManager:
+	set(v):
+		if parent != v:
+			if parent and parent.note_hit.is_connected(_on_note_hit):
+				parent.note_hit.disconnect(_on_note_hit)
+
+			parent = v
+			parent.note_hit.connect(_on_note_hit)
 
 @export var receptors: Array[ReceptorData] = []
 @export var skin: NoteSkin
+@export var use_skin_texture_filter := true
 
-@export var spacing: float = 90.0
-@export var scroll_speed: float = 1.0
+@export var spacing := 90.0
+@export var scroll_speed := 1.0
+@export var downscroll := false
 
 var cached_sustain_textures: Dictionary[StringName, Texture2D]
-
-
-func _ready() -> void:
-	if not is_instance_valid(parent):
-		return
-
-	parent.note_hit.connect(_on_note_hit)
 
 
 func _process(delta: float) -> void:
@@ -52,6 +54,9 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	if not is_instance_valid(parent):
 		return
+
+	if use_skin_texture_filter:
+		texture_filter = skin.note_filter
 
 	var time := Conductor.time
 	var scaled_scroll_speed := scroll_speed / Conductor.rate
@@ -116,8 +121,13 @@ func _draw() -> void:
 		var time_difference := note.time - time
 		var note_position := Vector2(
 			receptor_position.x,
-			receptor_position.y - (time_difference * time_to_pixels)
+			receptor_position.y,
 		)
+
+		if downscroll:
+			note_position.y -= (time_difference * time_to_pixels)
+		else:
+			note_position.y += (time_difference * time_to_pixels)
 
 		var sus_height: float
 		var sus_tex := get_sustain_texture(&"%s sustain" % receptor.direction, 0, false)
@@ -130,10 +140,16 @@ func _draw() -> void:
 			sus_height -= tail_size.y
 
 			if sus_height > 0.0:
+				var sus_offset: Vector2
+				if downscroll:
+					sus_offset = -Vector2(sustain_width / 2.0, sus_height)
+				else:
+					sus_offset = Vector2(-sustain_width / 2.0, 0)
+
 				draw_texture_rect(
 					sus_tex,
 					Rect2(
-						note_position - Vector2(sustain_width / 2.0, sus_height),
+						note_position + sus_offset,
 						Vector2(sustain_width, sus_height),
 					),
 					true,
@@ -143,11 +159,17 @@ func _draw() -> void:
 				tail_size.y += sus_height
 
 			if note.length > 0.0:
+				var tail_offset: Vector2
+				if downscroll:
+					tail_offset = -Vector2(0.0, sus_height) - Vector2(tail_width / 2.0, tail_size.y)
+				else:
+					tail_offset = Vector2(-tail_width / 2.0, sus_height)
+
 				draw_texture_rect(
 					tail_tex,
 					Rect2(
-						note_position - Vector2(0.0, sus_height) - Vector2(tail_width / 2.0, tail_size.y),
-						Vector2(tail_width, tail_size.y * (-1.0)),
+						note_position + tail_offset,
+						Vector2(tail_width, tail_size.y * (-1.0 if downscroll else 1.0)),
 					),
 					false,
 					sus_modulate,
@@ -167,10 +189,16 @@ func _draw() -> void:
 			sus_height -= tail_size.y
 
 			if sus_height > 0.0:
+				var sus_offset: Vector2
+				if downscroll:
+					sus_offset = -Vector2(sustain_width / 2.0, sus_height)
+				else:
+					sus_offset = Vector2(-sustain_width / 2.0, 0)
+
 				draw_texture_rect(
 					sus_tex,
 					Rect2(
-						receptor_position - Vector2(sustain_width / 2.0, sus_height),
+						receptor_position + sus_offset,
 						Vector2(sustain_width, sus_height),
 					),
 					false,
@@ -180,11 +208,17 @@ func _draw() -> void:
 				tail_size.y += sus_height
 
 			if note.length > 0.0:
+				var tail_offset: Vector2
+				if downscroll:
+					tail_offset = -Vector2(tail_width / 2.0, maxf(sus_height, 0.0)) - Vector2(0.0, tail_size.y)
+				else:
+					tail_offset = Vector2(-tail_width / 2.0, maxf(sus_height, 0.0))
+
 				draw_texture_rect(
 					tail_tex,
 					Rect2(
-						receptor_position - Vector2(0.0, maxf(sus_height, 0.0)) - Vector2(tail_width / 2.0, tail_size.y),
-						Vector2(tail_width, tail_size.y * (-1.0)),
+						receptor_position + tail_offset,
+						Vector2(tail_width, tail_size.y * (-1.0 if downscroll else 1.0)),
 					),
 					false,
 					sus_modulate,

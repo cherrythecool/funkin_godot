@@ -51,6 +51,8 @@ func _ready() -> void:
 	if camera_zoom != Vector2.INF and persistent_zoom:
 		zoom = camera_zoom
 
+	Conductor.beat_hit.connect(_on_beat_hit)
+
 
 func _exit_tree() -> void:
 	if instance == self:

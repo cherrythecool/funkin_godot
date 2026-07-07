@@ -6,9 +6,6 @@
 [ext_resource type="Script" uid="uid://dp70bbdhoqpo0" path="res://core/gameplay/ratings/rating.gd" id="5_lfrn8"]
 [ext_resource type="Script" uid="uid://1dwo0trw3je2" path="res://core/gameplay/ratings/rating_calculator.gd" id="6_ur1sh"]
 [ext_resource type="Script" uid="uid://3n2aou2bthat" path="res://core/notes/strumline_manager.gd" id="6_vvk6n"]
-[ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://core/notes/skinned_strumline_renderer.gd" id="7_ovqck"]
-[ext_resource type="Script" uid="uid://chj1hnw2lhjy4" path="res://core/notes/receptor_data.gd" id="8_ere7q"]
-[ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://core/styles/default/note_skin.tres" id="9_ere7q"]
 
 [sub_resource type="Resource" id="Resource_5i0tg"]
 script = ExtResource("5_lfrn8")
@@ -49,54 +46,6 @@ metadata/_custom_type_script = "uid://dp70bbdhoqpo0"
 bake_resolution = 180
 _data = [Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.5), -5.0, -1.6, 0, 1, Vector2(0.75, 0.1), -1.0, -0.4, 0, 1, Vector2(1, 0), -1.0, -0.4, 0, 1]
 point_count = 4
-
-[sub_resource type="Resource" id="Resource_v2t1s"]
-script = ExtResource("8_ere7q")
-direction = null
-framerate = null
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_cr7sq"]
-script = ExtResource("8_ere7q")
-direction = &"down"
-framerate = null
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_qjd2v"]
-script = ExtResource("8_ere7q")
-direction = &"up"
-framerate = null
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_wwci2"]
-script = ExtResource("8_ere7q")
-direction = &"right"
-framerate = null
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_ere7q"]
-script = ExtResource("8_ere7q")
-direction = null
-framerate = null
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_u83tf"]
-script = ExtResource("8_ere7q")
-direction = &"down"
-framerate = null
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_5x38g"]
-script = ExtResource("8_ere7q")
-direction = &"up"
-framerate = null
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_icvbc"]
-script = ExtResource("8_ere7q")
-direction = &"right"
-framerate = null
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [node name="game" type="Node" unique_id=1600443132 node_paths=PackedStringArray("strumlines", "asset_loader")]
 script = ExtResource("1_tneyb")
@@ -146,26 +95,6 @@ bumps = false
 
 [node name="hud_layer" type="CanvasLayer" parent="." unique_id=444258132]
 unique_name_in_owner = true
-
-[node name="player_renderer" type="Node2D" parent="hud_layer" unique_id=766572025 node_paths=PackedStringArray("parent")]
-position = Vector2(960, 620)
-script = ExtResource("7_ovqck")
-parent = NodePath("../../player_strumline")
-receptors = Array[ExtResource("8_ere7q")]([SubResource("Resource_v2t1s"), SubResource("Resource_cr7sq"), SubResource("Resource_qjd2v"), SubResource("Resource_wwci2")])
-skin = ExtResource("9_ere7q")
-spacing = 112.0
-scroll_speed = 3.0
-metadata/_custom_type_script = "uid://rh4jeluc5vy5"
-
-[node name="opponent_renderer" type="Node2D" parent="hud_layer" unique_id=966116256 node_paths=PackedStringArray("parent")]
-position = Vector2(320, 620)
-script = ExtResource("7_ovqck")
-parent = NodePath("../../opponent_strumline")
-receptors = Array[ExtResource("8_ere7q")]([SubResource("Resource_ere7q"), SubResource("Resource_u83tf"), SubResource("Resource_5x38g"), SubResource("Resource_icvbc")])
-skin = ExtResource("9_ere7q")
-spacing = 112.0
-scroll_speed = 3.0
-metadata/_custom_type_script = "uid://rh4jeluc5vy5"
 
 [connection signal="back_to_menus" from="." to="camera_2d" method="_on_game_back_to_menus"]
 [connection signal="event_hit" from="." to="camera_2d" method="_on_game_event_hit"]

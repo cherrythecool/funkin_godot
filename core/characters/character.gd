@@ -46,8 +46,7 @@ func _enter_tree() -> void:
 
 	dance(true)
 
-	if is_instance_valid(Conductor.instance):
-		Conductor.instance.beat_hit.connect(_on_beat_hit)
+	Conductor.beat_hit.connect(_on_beat_hit)
 
 	if is_instance_valid(strumline):
 		strumline.note_hit.connect(_on_note_hit)

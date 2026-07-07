@@ -60,13 +60,14 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if not event.is_pressed():
 		return
-	if not (event.is_action(&"volume_down") or
+	if not (
+		event.is_action(&"volume_down") or
 		event.is_action(&"volume_up") or
 		event.is_action(&"volume_mute")
 	):
 		return
 
-	var direction: int = roundi(Input.get_axis(&"volume_down", &"volume_up"))
+	var direction := roundi(Input.get_axis(&"volume_down", &"volume_up"))
 	if direction == 0 and not event.is_action(&"volume_mute"):
 		return
 

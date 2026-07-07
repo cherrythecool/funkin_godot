@@ -135,6 +135,15 @@ func _ready() -> void:
 
 	setup_hud()
 
+	if strumlines.has(&"player"):
+		var plr_strums := strumlines[&"player"]
+		plr_strums.note_hit.connect(_on_note_hit)
+		plr_strums.note_missed.connect(_on_note_miss)
+
+	if strumlines.has(&"opponent") and GameCamera2D.instance:
+		var opp_strums := strumlines[&"opponent"]
+		opp_strums.note_hit.connect(GameCamera2D.instance._on_first_opponent_note, CONNECT_ONE_SHOT)
+
 	if is_instance_valid(asset_loader):
 		asset_loader.load_scripts(song, songs_folder)
 
@@ -207,14 +216,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action(&"menu_cancel"):
 		finish_song(true)
 
-	if event.is_action(&"toggle_botplay") and is_instance_valid(player_field):
+	if event.is_action(&"toggle_botplay") and strumlines.has(&"player"):
 		save_score = false
-		player_field.takes_input = not player_field.takes_input
 
-		for receptor: Receptor in player_field.receptors:
-			receptor.takes_input = player_field.takes_input
-			receptor.automatically_play_static = not player_field.takes_input
-		botplay_changed.emit(not player_field.takes_input)
+		var plr_strums := strumlines[&"player"]
+		plr_strums.cpu = not plr_strums.cpu
+		botplay_changed.emit(not plr_strums.cpu)
 
 	if not OS.is_debug_build():
 		return

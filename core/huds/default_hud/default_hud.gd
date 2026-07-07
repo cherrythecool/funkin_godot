@@ -1,8 +1,6 @@
 extends Control
 
 
-var player_field: NoteField
-var opponent_field: NoteField
 var game: Game
 
 var downscroll: bool = false:
@@ -20,7 +18,9 @@ var centered_receptors: bool = false:
 @export var bump_interval: int = 4
 @export var zoom_lerping: bool = true
 
-@onready var note_fields: Node2D = %note_fields
+@export var player_renderer: SkinnedStrumlineRenderer
+@export var opponent_renderer: SkinnedStrumlineRenderer
+
 @onready var health_bar: HealthBar = %health_bar
 @onready var countdown_container: CountdownContainer = %countdown_container
 @onready var time_bar: ProgressBar = %time_bar
@@ -60,11 +60,6 @@ func _ready() -> void:
 
 	Conductor.beat_hit.connect(_on_beat_hit)
 
-	if note_fields.has_node(^'player'):
-		player_field = note_fields.get_node(^'player')
-	if note_fields.has_node(^'opponent'):
-		opponent_field = note_fields.get_node(^'opponent')
-
 	rating_container.visible = true
 	rating_container.modulate.a = 0.0
 	downscroll = Settings.get_setting(&"core", "downscroll")
@@ -77,16 +72,25 @@ func _on_setup() -> void:
 		combo_node.texture_filter = hud_skin.combo_filter
 		rating_sprite.scale = hud_skin.rating_scale
 		rating_sprite.texture_filter = hud_skin.rating_filter
-	if is_instance_valid(opponent_field):
-		opponent_field.note_hit.connect(
-			_on_first_opponent_note,
-			CONNECT_ONE_SHOT
-		)
-		opponent_field.note_hit.connect(_on_opponent_note_hit)
-	if is_instance_valid(player_field):
-		player_field.note_hit.connect(_on_note_hit)
-		player_field.note_miss.connect(_on_note_miss)
 
+	var strumlines := game.strumlines
+	if strumlines.has(&"player"):
+		var plr_strums := strumlines[&"player"]
+		plr_strums.note_hit.connect(_on_note_hit)
+		plr_strums.note_missed.connect(_on_note_miss)
+		player_renderer.parent = plr_strums
+	else:
+		player_renderer.hide()
+
+	if strumlines.has(&"opponent"):
+		var opp_strums := strumlines[&"opponent"]
+		opp_strums.note_hit.connect(_on_opponent_note_hit)
+		opp_strums.note_hit.connect(_on_first_opponent_note, CONNECT_ONE_SHOT)
+		opponent_renderer.parent = opp_strums
+	else:
+		opponent_renderer.hide()
+
+	set_downscroll(downscroll)
 	setup.emit()
 
 
@@ -200,22 +204,22 @@ func _on_opponent_note_hit(_note: NoteData) -> void:
 
 
 func set_downscroll(value: bool) -> void:
-	if is_instance_valid(player_field):
-		player_field.scroll_speed_modifier = -1.0 if value else 1.0
-		player_field.position.y = 720.0 - 100.0 if value else 100.0
-	if is_instance_valid(opponent_field):
-		opponent_field.scroll_speed_modifier = -1.0 if value else 1.0
-		opponent_field.position.y = 720.0 - 100.0 if value else 100.0
+	if is_instance_valid(player_renderer):
+		player_renderer.downscroll = value
+		player_renderer.position.y = 720.0 - 100.0 if value else 100.0
+	if is_instance_valid(opponent_renderer):
+		opponent_renderer.downscroll = value
+		opponent_renderer.position.y = 720.0 - 100.0 if value else 100.0
 
 	downscroll_changed.emit(value)
 
 
 func set_centered_receptors(value: bool) -> void:
-	if is_instance_valid(opponent_field):
-		#opponent_field.visible = not value
-		opponent_field.position.x = 320.0
-	if is_instance_valid(player_field):
-		player_field.position.x = 640.0 if value else 960.0
+	if is_instance_valid(opponent_renderer):
+		opponent_renderer.visible = not value
+		opponent_renderer.position.x = 320.0
+	if is_instance_valid(player_renderer):
+		player_renderer.position.x = 640.0 if value else 960.0
 
 
 func spawn_splash(note: Note, skin: NoteSkin, target: Node2D) -> void:
@@ -232,5 +236,5 @@ func spawn_splash(note: Note, skin: NoteSkin, target: Node2D) -> void:
 		splash.colors = skin.splash_shader_colors
 		splash.material = skin.get_splash_material()
 
-	note_fields.add_child(splash)
+	#note_fields.add_child(splash)
 	splash.global_position = target.global_position

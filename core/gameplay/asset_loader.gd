@@ -24,7 +24,13 @@ func load_assets() -> void:
 
 	if is_instance_valid(characters_parent):
 		player = assets.get_player().instantiate()
+		if Game.instance.strumlines.has(&"player"):
+			player.strumline = Game.instance.strumlines[&"player"]
+
 		opponent = assets.get_opponent().instantiate()
+		if Game.instance.strumlines.has(&"opponent"):
+			opponent.strumline = Game.instance.strumlines[&"opponent"]
+
 		spectator = assets.get_spectator().instantiate()
 
 		Game.instance.player = player
@@ -76,45 +82,20 @@ func load_assets() -> void:
 	else:
 		hud.queue_free()
 
-	var player_field: NoteField
-	var opponent_field: NoteField
+	var player_renderer: SkinnedStrumlineRenderer
+	var opponent_renderer: SkinnedStrumlineRenderer
 
-	if "player_field" in hud:
-		player_field = hud.player_field
-	if "opponent_field" in hud:
-		opponent_field = hud.opponent_field
+	if "player_renderer" in hud:
+		player_renderer = hud.player_renderer
+	if "opponent_renderer" in hud:
+		opponent_renderer = hud.opponent_renderer
 
 	# Set the NoteField characters.
-	if is_instance_valid(player_field):
-		player_field.target_character = player
-		player_field.skin = assets.get_player_note_skin()
+	if is_instance_valid(player_renderer):
+		player_renderer.skin = assets.get_player_note_skin()
 
-		player_field.reload_skin()
-
-		if (
-			is_instance_valid(metadata) and
-			metadata.player_audio_track_index > -1 and
-			is_instance_valid(song_player)
-		):
-			player_field.tracks_stream = song_player.stream
-			player_field.track_index = metadata.player_audio_track_index
-
-	if is_instance_valid(opponent_field):
-		opponent_field.target_character = opponent
-		opponent_field.skin = assets.get_opponent_note_skin()
-
-		opponent_field.reload_skin()
-
-		if (
-			is_instance_valid(metadata) and
-			metadata.opponent_audio_track_index > -1 and
-			is_instance_valid(song_player)
-		):
-			opponent_field.tracks_stream = song_player.stream
-			opponent_field.track_index = metadata.opponent_audio_track_index
-
-	Game.instance.player_field = player_field
-	Game.instance.opponent_field = opponent_field
+	if is_instance_valid(opponent_renderer):
+		opponent_renderer.skin = assets.get_opponent_note_skin()
 
 	Game.instance.pause_menu = hud_skin.get_pause_menu()
 

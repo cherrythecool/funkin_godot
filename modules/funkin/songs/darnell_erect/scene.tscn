@@ -8,11 +8,8 @@
 [ext_resource type="Script" uid="uid://b1ln7ad72xey4" path="res://core/gameplay/game_camera_2d.gd" id="6_ocj6e"]
 [ext_resource type="PackedScene" uid="uid://s7la6mup6cwb" path="res://modules/funkin/characters/nene/nene.tscn" id="6_p878t"]
 [ext_resource type="PackedScene" uid="uid://dhtct6lrdao7r" path="res://modules/funkin/stages/philly_streets_erect/philly_streets_erect.tscn" id="6_snf6e"]
-[ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://core/notes/skinned_strumline_renderer.gd" id="7_n2edi"]
 [ext_resource type="PackedScene" uid="uid://bh5vnsmdwoatu" path="res://modules/funkin/characters/pico/pico_player.tscn" id="7_snf6e"]
 [ext_resource type="PackedScene" uid="uid://dx13k6w54if1l" path="res://modules/funkin/characters/darnell/darnell.tscn" id="8_qp3l0"]
-[ext_resource type="Script" uid="uid://chj1hnw2lhjy4" path="res://core/notes/receptor_data.gd" id="8_r5x4a"]
-[ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://core/styles/default/note_skin.tres" id="9_7fxix"]
 [ext_resource type="PackedScene" uid="uid://cr0c14kq4sye1" path="res://core/huds/default_hud/default_hud.tscn" id="11_qp3l0"]
 [ext_resource type="Resource" uid="uid://oxo327xfxemo" path="res://core/styles/default/hud_skin.tres" id="12_lkmjy"]
 
@@ -55,44 +52,6 @@ metadata/_custom_type_script = "uid://dp70bbdhoqpo0"
 bake_resolution = 180
 _data = [Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.5), -5.0, -1.6, 0, 1, Vector2(0.75, 0.1), -1.0, -0.4, 0, 1, Vector2(1, 0), -1.0, -0.4, 0, 1]
 point_count = 4
-
-[sub_resource type="Resource" id="Resource_v2t1s"]
-script = ExtResource("8_r5x4a")
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_cr7sq"]
-script = ExtResource("8_r5x4a")
-direction = &"down"
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_qjd2v"]
-script = ExtResource("8_r5x4a")
-direction = &"up"
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_wwci2"]
-script = ExtResource("8_r5x4a")
-direction = &"right"
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_ere7q"]
-script = ExtResource("8_r5x4a")
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_u83tf"]
-script = ExtResource("8_r5x4a")
-direction = &"down"
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_5x38g"]
-script = ExtResource("8_r5x4a")
-direction = &"up"
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
-
-[sub_resource type="Resource" id="Resource_icvbc"]
-script = ExtResource("8_r5x4a")
-direction = &"right"
-metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [node name="darnell_erect" type="Node" unique_id=1600443132 node_paths=PackedStringArray("strumlines", "asset_loader", "player", "opponent", "spectator", "stage")]
 script = ExtResource("1_wdans")
@@ -170,36 +129,9 @@ unique_name_in_owner = true
 [node name="hud" parent="hud_layer" unique_id=1372711265 instance=ExtResource("11_qp3l0")]
 hud_skin = ExtResource("12_lkmjy")
 
-[node name="player_renderer" type="Node2D" parent="hud_layer/hud" unique_id=766572025 node_paths=PackedStringArray("parent")]
-position = Vector2(960, 620)
-script = ExtResource("7_n2edi")
-parent = NodePath("../../../player_strumline")
-receptors = Array[ExtResource("8_r5x4a")]([SubResource("Resource_v2t1s"), SubResource("Resource_cr7sq"), SubResource("Resource_qjd2v"), SubResource("Resource_wwci2")])
-skin = ExtResource("9_7fxix")
-spacing = 112.0
-scroll_speed = 3.0
-metadata/_custom_type_script = "uid://rh4jeluc5vy5"
-
-[node name="opponent_renderer" type="Node2D" parent="hud_layer/hud" unique_id=966116256 node_paths=PackedStringArray("parent")]
-position = Vector2(320, 620)
-script = ExtResource("7_n2edi")
-parent = NodePath("../../../opponent_strumline")
-receptors = Array[ExtResource("8_r5x4a")]([SubResource("Resource_ere7q"), SubResource("Resource_u83tf"), SubResource("Resource_5x38g"), SubResource("Resource_icvbc")])
-skin = ExtResource("9_7fxix")
-spacing = 112.0
-scroll_speed = 3.0
-metadata/_custom_type_script = "uid://rh4jeluc5vy5"
-
 [connection signal="back_to_menus" from="." to="camera_2d" method="_on_game_back_to_menus"]
 [connection signal="event_hit" from="." to="camera_2d" method="_on_game_event_hit"]
 [connection signal="ready_post" from="." to="camera_2d" method="_on_game_ready_post"]
-[connection signal="note_hit" from="player_strumline" to="." method="_on_note_hit"]
-[connection signal="note_hit" from="player_strumline" to="hud_layer/hud" method="_on_note_hit"]
-[connection signal="note_missed" from="player_strumline" to="." method="_on_note_miss"]
-[connection signal="note_missed" from="player_strumline" to="hud_layer/hud" method="_on_note_miss"]
-[connection signal="note_hit" from="opponent_strumline" to="camera_2d" method="_on_first_opponent_note" flags=6]
-[connection signal="note_hit" from="opponent_strumline" to="hud_layer/hud" method="_on_first_opponent_note" flags=6]
-[connection signal="note_hit" from="opponent_strumline" to="hud_layer/hud" method="_on_opponent_note_hit"]
 
 [editable path="characters/pico_player"]
 [editable path="characters/darnell"]
