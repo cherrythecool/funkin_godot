@@ -47,20 +47,5 @@ stream = ExtResource("3_x0mbf")
 bus = &"SFX"
 parameters/looping = false
 
-[node name="secret" type="CanvasLayer" parent="." unique_id=1353677681]
-unique_name_in_owner = true
-layer = 128
-
-[node name="player" type="VideoStreamPlayer" parent="secret" unique_id=956208271]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-volume_db = 23.999992
-expand = true
-bus = &"Music"
-
 [connection signal="timeout" from="initial_focus_timer" to="." method="_on_initial_focus_timer_timeout"]
 [connection signal="timeout" from="fade_out_delay" to="." method="_on_fade_out_timer_timeout"]
-[connection signal="finished" from="secret/player" to="." method="_ready"]

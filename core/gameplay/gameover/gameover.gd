@@ -13,8 +13,6 @@ static var character_path: String = "uid://w4v0gymuehdt"
 @onready var on_death: AudioStreamPlayer = %on_death
 @onready var retry: AudioStreamPlayer = %retry
 
-@onready var secret: CanvasLayer = %secret
-
 var character: Character
 var active: bool = true
 
@@ -22,22 +20,6 @@ var active: bool = true
 func _ready() -> void:
 	randomize()
 	active = true
-
-	var player: VideoStreamPlayer = secret.get_node(^"player")
-	var value: int = randi_range(1, 1000)
-	if value == 127:
-		active = false
-		player.stream = load("uid://6jxbt142o25i")
-		player.play()
-		return
-	elif value == 67:
-		active = false
-		player.stream = load("uid://db4cvq6qsh27")
-		player.play()
-		player.volume = 1.0
-		return
-	else:
-		secret.queue_free()
 
 	Conductor.reset()
 	Conductor.target_audio = music_player
