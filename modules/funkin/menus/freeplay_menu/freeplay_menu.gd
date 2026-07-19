@@ -188,7 +188,7 @@ func load_song(i: int) -> void:
 
 	var song_name: String = get_song_name(song, "")
 	var meta_path: String = "%s/%s/meta.tres" % [songs_folder, song_name]
-	var meta_exists: bool = ResourceLoader.exists(meta_path, "SongMetadata")
+	var meta_exists: bool = ResourceLoader.exists(meta_path)
 	var meta: SongMetadata
 	if meta_exists:
 		meta = load(meta_path)

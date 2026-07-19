@@ -31,8 +31,6 @@ static var last_song_health: float = -1.0
 @onready var rating_calculator: RatingCalculator = %rating_calculator
 
 @onready var hud_layer: CanvasLayer = %hud_layer
-@onready var stage_container: Node2D = $stage
-@onready var characters_container: Node2D = $characters
 
 var events_index: int = 0
 
@@ -133,8 +131,6 @@ func _ready() -> void:
 		load_assets()
 		load_from_assets()
 
-	setup_hud()
-
 	if strumlines.has(&"player"):
 		var plr_strums := strumlines[&"player"]
 		plr_strums.note_hit.connect(_on_note_hit)
@@ -143,6 +139,8 @@ func _ready() -> void:
 	if strumlines.has(&"opponent") and GameCamera2D.instance:
 		var opp_strums := strumlines[&"opponent"]
 		opp_strums.note_hit.connect(GameCamera2D.instance._on_first_opponent_note, CONNECT_ONE_SHOT)
+
+	setup_hud()
 
 	if is_instance_valid(asset_loader):
 		asset_loader.load_scripts(song, songs_folder)
@@ -394,15 +392,6 @@ func load_from_assets() -> void:
 
 
 func setup_hud() -> void:
-	if is_instance_valid(player_field):
-		player_field.note_types = note_types
-		player_field.append_chart(chart)
-		player_field.note_miss.connect(_on_note_miss)
-		player_field.note_hit.connect(_on_note_hit)
-	if is_instance_valid(opponent_field):
-		opponent_field.note_types = note_types
-		opponent_field.append_chart(chart)
-
 	hud_setup.emit()
 
 

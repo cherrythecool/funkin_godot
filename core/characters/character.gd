@@ -2,7 +2,18 @@ extends Node2D
 class_name Character
 
 
-@export var strumline: StrumlineManager
+@export var strumline: StrumlineManager:
+	set(v):
+		if strumline != v:
+			if is_instance_valid(strumline):
+				strumline.note_hit.disconnect(_on_note_hit)
+				strumline.note_missed.disconnect(_on_note_missed)
+
+			strumline = v
+
+			if is_instance_valid(strumline):
+				strumline.note_hit.connect(_on_note_hit)
+				strumline.note_missed.connect(_on_note_missed)
 
 @export_category("Visuals")
 @export var icon: Icon = Icon.new()
@@ -47,10 +58,6 @@ func _enter_tree() -> void:
 	dance(true)
 
 	Conductor.beat_hit.connect(_on_beat_hit)
-
-	if is_instance_valid(strumline):
-		strumline.note_hit.connect(_on_note_hit)
-		strumline.note_missed.connect(_on_note_missed)
 
 
 func _process(delta: float) -> void:

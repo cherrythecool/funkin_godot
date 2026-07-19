@@ -16,4 +16,4 @@ func _ready() -> void:
 		camera.position = camera.position_target
 
 		game.hud.health_bar.reload_icons()
-		opponent_field.target_character = opponent
+		opponent.strumline = game.strumlines[&"opponent"]

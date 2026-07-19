@@ -88,6 +88,9 @@ func reload_current_scene() -> void:
 	reset_transition()
 
 	if is_instance_valid(target_scene):
+		var path := target_scene.resource_path
+		target_scene = null
+		target_scene = load(path)
 		swap_to_packed(target_scene)
 	else:
 		get_tree().reload_current_scene()
