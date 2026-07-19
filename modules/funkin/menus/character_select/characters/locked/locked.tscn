@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://bydgpm6a02kid"]
 
-[ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="1_x5qlb"]
+[ext_resource type="Script" uid="uid://c5ju3u657fyae" path="res://addons/gdanimate/animate_symbol_2d.gd" id="1_x5qlb"]
+[ext_resource type="Script" uid="uid://dy4vnmv4435ty" path="res://addons/gdanimate/formats/animate_symbol_library.gd" id="2_kcqql"]
+[ext_resource type="Script" uid="uid://dkyyuwqo0dy7q" path="res://addons/gdanimate/formats/texture_atlas/atlas.gd" id="3_s1oyp"]
+
+[sub_resource type="Resource" id="Resource_1ar2k"]
+script = ExtResource("3_s1oyp")
+folder = "res://modules/funkin/menus/character_select/characters/locked/sprites"
+override_enable = false
+metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
 
 [sub_resource type="Animation" id="Animation_pbpkc"]
 length = 0.001
@@ -31,7 +39,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_vu2qn"]
 resource_name = "cancel"
-length = 0.375004
+length = 0.16667097241431475
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -43,7 +51,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [109]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -55,12 +63,12 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_hfb6a"]
 resource_name = "confirm"
-length = 0.125004
+length = 2.958339968629182
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -69,10 +77,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.9166667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [38, 108]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -81,15 +89,15 @@ tracks/1/path = NodePath(".:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.9166667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_yl5pe"]
 resource_name = "enter"
-length = 0.708338
+length = 0.37500447959452865
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -98,10 +106,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [29, 37]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -110,15 +118,15 @@ tracks/1/path = NodePath(".:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_8m8j6"]
 resource_name = "exit"
-length = 0.0416708
+length = 0.08333756954222918
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -127,10 +135,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.041666668),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [27, 28]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -139,15 +147,16 @@ tracks/1/path = NodePath(".:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.041666668),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_q61be"]
 resource_name = "idle"
-length = 0.541671
+length = 1.083338404007256
+loop_mode = 1
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -156,10 +165,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.0833334),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 26]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -168,10 +177,10 @@ tracks/1/path = NodePath(".:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.0833334),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s4ft7"]
@@ -186,8 +195,9 @@ _data = {
 
 [node name="player" type="Node2D" unique_id=748485921]
 script = ExtResource("1_x5qlb")
-loop_mode = "Play Once"
-metadata/_custom_type_script = "uid://diqmdngjb60u2"
+symbol_libraries = Array[ExtResource("2_kcqql")]([SubResource("Resource_1ar2k")])
+offset = Vector2(15, -25)
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1785883520]
 libraries/ = SubResource("AnimationLibrary_s4ft7")
+next/enter = &"idle"

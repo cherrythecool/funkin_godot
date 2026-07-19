@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dxds0xfgeuu0y"]
+
+[ext_resource type="Shader" uid="uid://c5u6kews6u3e" path="res://addons/gdanimate/formats/texture_atlas/shaders/additive_shader.gdshader" id="1_7fkty"]
+
+[resource]
+shader = ExtResource("1_7fkty")

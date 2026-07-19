@@ -3,12 +3,20 @@
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_bx4po"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_y74xc"]
 [ext_resource type="Texture2D" uid="uid://bfd6qv0m2yna6" path="res://modules/funkin/characters/parents_christmas/icon.png" id="3_bx4po"]
-[ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="4_tcbtr"]
+[ext_resource type="Script" uid="uid://c5ju3u657fyae" path="res://addons/gdanimate/animate_symbol_2d.gd" id="4_tcbtr"]
+[ext_resource type="Script" uid="uid://dy4vnmv4435ty" path="res://addons/gdanimate/formats/animate_symbol_library.gd" id="5_w8jy5"]
+[ext_resource type="Script" uid="uid://dkyyuwqo0dy7q" path="res://addons/gdanimate/formats/texture_atlas/atlas.gd" id="6_uyewc"]
 
 [sub_resource type="Resource" id="Resource_4ohel"]
 script = ExtResource("2_y74xc")
 texture = ExtResource("3_bx4po")
 color = Color(0.658824, 0.262745, 0.6, 1)
+
+[sub_resource type="Resource" id="Resource_4my6j"]
+script = ExtResource("6_uyewc")
+folder = "res://modules/funkin/characters/parents_christmas/sprites"
+render_mode = "Performance"
+metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
 
 [sub_resource type="Animation" id="Animation_bgpi6"]
 length = 0.001
@@ -560,10 +568,8 @@ icon = SubResource("Resource_4ohel")
 [node name="sprite" type="Node2D" parent="." unique_id=694403987]
 position = Vector2(-474, -727)
 script = ExtResource("4_tcbtr")
-atlas = "res://modules/funkin/characters/parents_christmas/sprites"
-symbol = "Parent Christmas Idle"
-loop_mode = "Play Once"
-metadata/_custom_type_script = "uid://diqmdngjb60u2"
+symbol_libraries = Array[ExtResource("5_w8jy5")]([SubResource("Resource_4my6j")])
+symbol = &"Parent Christmas Idle"
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1164363871]
 libraries/ = SubResource("AnimationLibrary_mki60")

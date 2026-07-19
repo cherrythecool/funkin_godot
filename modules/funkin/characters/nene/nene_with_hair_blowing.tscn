@@ -1,14 +1,28 @@
 [gd_scene format=3 uid="uid://chcrerdnievt5"]
 
 [ext_resource type="Script" uid="uid://cbvhb58xsq20k" path="res://modules/funkin/characters/nene/nene.gd" id="1_3rmg0"]
-[ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="2_00dwk"]
+[ext_resource type="Script" uid="uid://c5ju3u657fyae" path="res://addons/gdanimate/animate_symbol_2d.gd" id="2_00dwk"]
+[ext_resource type="Script" uid="uid://dy4vnmv4435ty" path="res://addons/gdanimate/formats/animate_symbol_library.gd" id="3_4my6j"]
 [ext_resource type="Script" uid="uid://cn4vvfu6y4fwp" path="res://modules/funkin/characters/nene/nene_visualizer.gd" id="3_naqiu"]
+[ext_resource type="Script" uid="uid://dkyyuwqo0dy7q" path="res://addons/gdanimate/formats/texture_atlas/atlas.gd" id="4_3u6g5"]
 [ext_resource type="SpriteFrames" uid="uid://t7blpt6jvqhd" path="res://modules/funkin/characters/nene/abot/visualizer.res" id="4_oieip"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_18xhm"]
 [ext_resource type="SpriteFrames" uid="uid://2gjv3q82uoin" path="res://modules/funkin/characters/nene/character_with_hair_blowing.res" id="6_3rmg0"]
 
+[sub_resource type="Resource" id="Resource_fkdv5"]
+script = ExtResource("4_3u6g5")
+folder = "res://modules/funkin/characters/nene/abot/eyes"
+render_mode = "Performance"
+metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wgx2l"]
 blend_mode = 1
+
+[sub_resource type="Resource" id="Resource_gilnr"]
+script = ExtResource("4_3u6g5")
+folder = "res://modules/funkin/characters/nene/abot/speaker"
+render_mode = "Performance"
+metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
 
 [sub_resource type="Animation" id="Animation_bgpi6"]
 length = 0.001
@@ -416,9 +430,8 @@ offset_bottom = -45.0
 [node name="eyes" type="Node2D" parent="." unique_id=1197549919]
 position = Vector2(-356, -98)
 script = ExtResource("2_00dwk")
-atlas = "res://modules/funkin/characters/nene/abot/eyes"
-loop_mode = "Play Once"
-metadata/_custom_type_script = "uid://diqmdngjb60u2"
+symbol_libraries = Array[ExtResource("3_4my6j")]([SubResource("Resource_fkdv5")])
+symbol = &"a bot eyes lookin"
 
 [node name="background" type="ColorRect" parent="." unique_id=257885714]
 offset_left = -230.0
@@ -503,9 +516,7 @@ metadata/_custom_type_script = "uid://xcwf8fppek0h"
 [node name="speakers" type="Node2D" parent="." unique_id=1765787271]
 position = Vector2(-413, -337)
 script = ExtResource("2_00dwk")
-atlas = "res://modules/funkin/characters/nene/abot/speaker"
-loop_mode = "Play Once"
-metadata/_custom_type_script = "uid://diqmdngjb60u2"
+symbol_libraries = Array[ExtResource("3_4my6j")]([SubResource("Resource_gilnr")])
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=850550979]
 position = Vector2(-284, -649)

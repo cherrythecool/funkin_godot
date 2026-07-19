@@ -2,6 +2,24 @@ class_name GameUtils
 extends Object
 
 
+const KNOWN_TWEEN_TYPES: Dictionary[StringName, Tween.TransitionType] = {
+	&"sine": Tween.TRANS_SINE,
+	&"circ": Tween.TRANS_CIRC,
+	&"cube": Tween.TRANS_CUBIC,
+	&"quad": Tween.TRANS_QUAD,
+	&"quart": Tween.TRANS_QUART,
+	&"quint": Tween.TRANS_QUINT,
+	&"expo": Tween.TRANS_EXPO,
+	&"elastic": Tween.TRANS_ELASTIC,
+
+	# NOTE: This *may* be supported by HaxeFlixel, but is not
+	# natively by Godot. It could technically be added with
+	# custom tween functions, but that is not currently top
+	# priority, so this is the "solution" for now.
+	&"smoothStep": Tween.TRANS_CUBIC,
+}
+
+
 static func free_children_from(node: Node, immediate: bool = false) -> void:
 	while node.get_child_count() > 0:
 		var child: Node = node.get_child(0)
@@ -36,26 +54,9 @@ static func get_ease_from_str(string: String) -> Tween.EaseType:
 
 
 static func get_trans_from_str(string: String) -> Tween.TransitionType:
-	const KNOWN_TYPES: Dictionary[StringName, Tween.TransitionType] = {
-		&"sine": Tween.TRANS_SINE,
-		&"circ": Tween.TRANS_CIRC,
-		&"cube": Tween.TRANS_CUBIC,
-		&"quad": Tween.TRANS_QUAD,
-		&"quart": Tween.TRANS_QUART,
-		&"quint": Tween.TRANS_QUINT,
-		&"expo": Tween.TRANS_EXPO,
-		&"elastic": Tween.TRANS_ELASTIC,
-
-		# NOTE: This *may* be supported by HaxeFlixel, but is not
-		# natively by Godot. It could technically be added with
-		# custom tween functions, but that is not currently top
-		# priority, so this is the solution for now.
-		&"smoothStep": Tween.TRANS_CUBIC,
-	}
-
-	for transition_name: StringName in KNOWN_TYPES.keys():
+	for transition_name: StringName in KNOWN_TWEEN_TYPES.keys():
 		if string.begins_with(transition_name):
-			return KNOWN_TYPES[transition_name]
+			return KNOWN_TWEEN_TYPES[transition_name]
 
 	return Tween.TRANS_LINEAR
 
@@ -67,7 +68,8 @@ static func get_accurate_time(player: AudioStreamPlayer) -> float:
 	)
 
 
-# From Godot docs
+# https://docs.godotengine.org/en/4.7/tutorials/math/interpolation.html#smoothing-motion
+# https://www.gamedeveloper.com/programming/improved-lerp-smoothing-
 static func lerp_weight(delta: float, constant: float) -> float:
 	return minf(1.0 - exp(delta * -constant), 1.0)
 
@@ -91,33 +93,33 @@ static func keycode_to_character(input: Key) -> String:
 
 static func keycode_string_to_character(input: String) -> String:
 	match input.to_lower():
-		'apostrophe':
+		"apostrophe":
 			return '"'
-		'backslash':
-			return '\\'
-		'comma':
-			return ','
-		'period':
-			return '.'
-		'semicolon':
-			return ':'
-		'slash':
-			return '/'
-		'minus':
-			return '-'
-		'bracketright':
-			return ']'
-		'bracketleft':
-			return '['
-		'quoteleft':
-			return '~'
-		'left':
-			return '←'
-		'down':
-			return '↓'
-		'up':
-			return '↑'
-		'right':
-			return '→'
+		"backslash":
+			return "\\"
+		"comma":
+			return ","
+		"period":
+			return "."
+		"semicolon":
+			return ":"
+		"slash":
+			return "/"
+		"minus":
+			return "-"
+		"bracketright":
+			return "]"
+		"bracketleft":
+			return "["
+		"quoteleft":
+			return "~"
+		"left":
+			return "←"
+		"down":
+			return "↓"
+		"up":
+			return "↑"
+		"right":
+			return "→"
 		_:
 			return input

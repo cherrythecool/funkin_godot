@@ -197,11 +197,10 @@ func _on_game_ready_post() -> void:
 		zoom_target = Vector2.ONE * game.stage.default_zoom
 		zoom = zoom_target
 		position_lerp_speed = game.stage.camera_speed
-	if is_instance_valid(game.opponent_field):
-		game.opponent_field.note_hit.connect(
-			_on_first_opponent_note,
-			CONNECT_ONE_SHOT
-		)
+
+	if game.strumlines.has(&"opponent"):
+		var opp_strums := game.strumlines[&"opponent"]
+		opp_strums.note_hit.connect(_on_first_opponent_note, CONNECT_ONE_SHOT)
 
 	if camera_position != Vector2.INF and persistent_position:
 		position = camera_position

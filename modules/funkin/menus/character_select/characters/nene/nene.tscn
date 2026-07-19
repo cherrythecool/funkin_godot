@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://b6oapcexvu5n"]
 
-[ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="1_w2ps7"]
+[ext_resource type="Script" uid="uid://c5ju3u657fyae" path="res://addons/gdanimate/animate_symbol_2d.gd" id="1_w2ps7"]
+[ext_resource type="Script" uid="uid://dy4vnmv4435ty" path="res://addons/gdanimate/formats/animate_symbol_library.gd" id="2_jaaiq"]
+[ext_resource type="Script" uid="uid://dkyyuwqo0dy7q" path="res://addons/gdanimate/formats/texture_atlas/atlas.gd" id="3_u8xif"]
+
+[sub_resource type="Resource" id="Resource_rb631"]
+script = ExtResource("3_u8xif")
+folder = "res://modules/funkin/menus/character_select/characters/nene/spritemap"
+render_mode = "Performance"
+metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
 
 [sub_resource type="Animation" id="Animation_datai"]
 length = 0.001
@@ -132,9 +140,7 @@ _data = {
 
 [node name="spectator" type="Node2D" unique_id=1496297057]
 script = ExtResource("1_w2ps7")
-atlas = "res://modules/funkin/menus/character_select/characters/nene/spritemap"
-loop_mode = "Play Once"
-metadata/_custom_type_script = "uid://diqmdngjb60u2"
+symbol_libraries = Array[ExtResource("2_jaaiq")]([SubResource("Resource_rb631")])
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=729249337]
 libraries/ = SubResource("AnimationLibrary_eqng3")

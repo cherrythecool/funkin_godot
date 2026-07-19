@@ -25,6 +25,7 @@ var current_scene: Node = null:
 		return current_scene
 
 var target_scene: PackedScene = null
+var target_scene_path: String = ""
 
 
 func _ready() -> void:
@@ -61,7 +62,23 @@ func swap_to_node(node: Node) -> void:
 
 
 func transition_to_file(scene_path: String) -> void:
-	transition_to_packed(load(scene_path))
+	reset_transition()
+
+	if (
+		Settings.get_setting(&"core", "skip_scene_transitions") or
+		(not is_instance_valid(transition_player))
+	):
+		swap_to_packed(load(scene_path))
+		return
+
+	if is_instance_valid(current_scene):
+		current_scene.process_mode = Node.PROCESS_MODE_DISABLED
+
+	visible = true
+	target_scene_path = scene_path
+
+	transition_player.speed_scale = transition_speed_scale
+	transition_player.play(&"in")
 
 
 func transition_to_packed(scene: PackedScene) -> void:
@@ -112,6 +129,10 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		&"in":
 			transitioned_in.emit()
 			transition_player.play(&"out")
+
+			if not target_scene_path.is_empty():
+				target_scene = load(target_scene_path)
+				target_scene_path = ""
 
 			if is_instance_valid(target_scene):
 				var node: Node = target_scene.instantiate()

@@ -1,5 +1,6 @@
 @tool
-class_name AnimatedSprite extends AnimatedSprite2D
+class_name AnimatedSprite
+extends AnimatedSprite2D
 
 
 @export var playing: bool = false:

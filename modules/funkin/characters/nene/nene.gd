@@ -1,9 +1,9 @@
 extends Character
 
 
-@onready var speakers: AnimateSymbol = $speakers
+@onready var speakers: AnimateSymbol2D = $speakers
 @onready var eye_whites: ColorRect = $eye_whites
-@onready var eyes: AnimateSymbol = $eyes
+@onready var eyes: AnimateSymbol2D = $eyes
 @onready var background: ColorRect = $background
 
 var camera_side: StringName = &"player"

@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://core/gameplay/songs/assets.gd" id="1_xp11c"]
 [ext_resource type="PackedScene" uid="uid://cr0c14kq4sye1" path="res://core/huds/default_hud/default_hud.tscn" id="1_xt3r0"]
 [ext_resource type="Resource" uid="uid://oxo327xfxemo" path="res://core/styles/default/hud_skin.tres" id="2_jy5h7"]
-[ext_resource type="PackedScene" uid="uid://f75xq2p53bpl" path="res://core/notes/types/default.tscn" id="3_jy5h7"]
 [ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://core/styles/default/note_skin.tres" id="4_aa21j"]
 [ext_resource type="PackedScene" uid="uid://m26q2fyumltr" path="res://core/stages/template.tscn" id="6_0y7vn"]
 
@@ -18,7 +17,4 @@ hud = ExtResource("1_xt3r0")
 hud_skin = ExtResource("2_jy5h7")
 player_note_skin = ExtResource("4_aa21j")
 opponent_note_skin = ExtResource("4_aa21j")
-note_types = Dictionary[StringName, PackedScene]({
-&"default": ExtResource("3_jy5h7")
-})
 metadata/_custom_type_script = "uid://dk2lxfhv5lvf4"

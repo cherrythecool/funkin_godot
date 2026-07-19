@@ -12,13 +12,13 @@ static var selected_y: int = 1
 @onready var dipshit_backing: AnimatedSprite = %dipshit_backing
 @onready var choose_dipshit: Sprite2D = %choose_dipshit
 
-@onready var spectator: AnimateSymbol = %spectator
+@onready var spectator: AnimateSymbol2D = %spectator
 var spectator_anim: AnimationPlayer
 
-@onready var player: AnimateSymbol = %player
+@onready var player: AnimateSymbol2D = %player
 var player_anim: AnimationPlayer
 
-@onready var speakers: AnimateSymbol = $speakers/sprite
+@onready var speakers: AnimateSymbol2D = $speakers/sprite
 
 @onready var music: AudioStreamPlayer = %music
 @onready var select: AudioStreamPlayer = %select
@@ -181,6 +181,9 @@ func _update_selection(sound: bool = true) -> void:
 		_:
 			_load_characters('uid://bydgpm6a02kid', 'uid://bydgpm6a02kid', load('uid://ncq3u01qhoh8'))
 
+			spectator.process_mode = Node.PROCESS_MODE_DISABLED
+			spectator.hide()
+
 
 func get_camera_offset() -> Vector2:
 	return Vector2(
@@ -260,13 +263,15 @@ func _on_beat_hit(beat: int) -> void:
 	speakers.playing = true
 
 	if not locked:
-		if (
-			player_anim.current_animation == &'cancel'
-			or spectator_anim.current_animation == &'cancel'
-		):
-			return
+		if player_anim.current_animation == &"":
+			if player_anim.has_animation(&'idle'):
+				player_anim.play(&'idle')
 
-		if player_anim.has_animation(&'idle'):
-			player_anim.play(&'idle')
-		if spectator_anim.has_animation(&'dance_left'):
+		if spectator_anim.has_animation(&'dance_left') and (
+			spectator_anim.current_animation == &"" or
+			spectator_anim.current_animation.begins_with(&"dance_")
+		):
 			spectator_anim.play(&'dance_left' if beat % 2 == 0 else &'dance_right')
+		elif spectator_anim.current_animation == &"":
+			if spectator_anim.has_animation(&"idle"):
+				spectator_anim.play(&"idle")

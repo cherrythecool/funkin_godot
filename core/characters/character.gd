@@ -1,6 +1,8 @@
-extends Node2D
 class_name Character
+extends Node2D
 
+
+const SING_DIRECTIONS: PackedStringArray = ["left", "down", "up", "right"]
 
 @export var strumline: StrumlineManager:
 	set(v):
@@ -109,29 +111,6 @@ func has_anim(anim: StringName) -> bool:
 	return animation_player.has_animation(anim)
 
 
-func sing(note: Note, force: bool = false) -> void:
-	sing_timer = 0.0
-
-	var direction: StringName = Note.directions[note.lane]
-	if swap_sing_animations and swapped_directions.has(direction):
-		direction = swapped_directions.get(direction)
-
-	var suffixed_name: StringName = &"sing_%s%s" % [direction.to_lower(), note.sing_suffix]
-	if (not note.sing_suffix.is_empty()) and has_anim(suffixed_name):
-		play_anim(&"sing_%s%s" % [direction.to_lower(), note.sing_suffix], force)
-	else:
-		play_anim(&"sing_%s" % direction.to_lower(), force)
-
-
-func sing_miss(note: Note, force: bool = false) -> void:
-	sing_timer = 0.0
-
-	var direction: StringName = Note.directions[note.lane]
-	if swap_sing_animations and swapped_directions.has(direction):
-		direction = swapped_directions.get(direction)
-	play_anim(&"sing_%s_miss" % direction.to_lower(), force)
-
-
 func dance(force: bool = false) -> void:
 	if not dances:
 		return
@@ -180,7 +159,7 @@ func _on_note_hit(note: NoteData) -> void:
 
 	sing_timer = 0.0
 
-	var direction: StringName = Note.directions[note.direction]
+	var direction: StringName = SING_DIRECTIONS[note.direction]
 	if swap_sing_animations and swapped_directions.has(direction):
 		direction = swapped_directions.get(direction)
 
@@ -190,7 +169,7 @@ func _on_note_hit(note: NoteData) -> void:
 func _on_note_missed(note: NoteData) -> void:
 	sing_timer = 0.0
 
-	var direction: StringName = Note.directions[note.direction]
+	var direction: StringName = SING_DIRECTIONS[note.direction]
 	if swap_sing_animations and swapped_directions.has(direction):
 		direction = swapped_directions.get(direction)
 

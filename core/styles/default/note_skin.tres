@@ -3,8 +3,7 @@
 [ext_resource type="SpriteFrames" uid="uid://y8en4nx7mbuw" path="res://core/styles/default/receptors.res" id="1_0nxoh"]
 [ext_resource type="SpriteFrames" uid="uid://b3r2xop0whqyf" path="res://core/styles/default/notes.res" id="1_1yw7k"]
 [ext_resource type="Script" uid="uid://dfdr435gif8gk" path="res://core/notes/note_skin.gd" id="1_yox26"]
-[ext_resource type="SpriteFrames" uid="uid://bw4etux81oui3" path="res://core/styles/default/splashes.res" id="4_kcys0"]
-[ext_resource type="Shader" uid="uid://cqme286ehx6n7" path="res://core/shaders/note_splash.gdshader" id="5_2oa2n"]
+[ext_resource type="SpriteFrames" uid="uid://c6o1lsakoino4" path="res://core/styles/default/splashes.res" id="4_kcys0"]
 
 [resource]
 script = ExtResource("1_yox26")
@@ -13,6 +12,4 @@ note_frames = ExtResource("1_1yw7k")
 sustain_texture_offset = Rect2(0, 2, 0, -4)
 sustain_tail_texture_offset = Rect2(0, 1, 0, -1)
 splash_frames = ExtResource("4_kcys0")
-splash_shader_enabled = true
-splash_shader_shader = ExtResource("5_2oa2n")
 metadata/_custom_type_script = "uid://dfdr435gif8gk"

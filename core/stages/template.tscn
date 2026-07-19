@@ -9,9 +9,9 @@ default_zoom = 0.9
 
 [node name="background_color_rect" type="ColorRect" parent="." unique_id=2021814570]
 offset_left = -320.0
-offset_top = -180.0
+offset_top = -62.0
 offset_right = 1600.0
-offset_bottom = 900.0
+offset_bottom = 1018.0
 color = Color(0.5078125, 0.5078125, 0.5078125, 1)
 
 [node name="spectator" type="Marker2D" parent="." unique_id=1964904064]

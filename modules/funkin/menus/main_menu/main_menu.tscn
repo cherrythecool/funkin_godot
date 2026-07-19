@@ -159,7 +159,7 @@ animation_name = &"storymode"
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"storymode idle"
-frame_progress = 0.46888876
+frame_progress = 0.34003273
 script = ExtResource("4_emyfo")
 playing = true
 
@@ -190,7 +190,7 @@ animation_name = &"credits"
 position = Vector2(0, 62)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"credits idle"
-frame_progress = 0.9982581
+frame_progress = 0.86940217
 script = ExtResource("4_emyfo")
 playing = true
 

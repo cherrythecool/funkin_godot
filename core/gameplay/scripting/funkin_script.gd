@@ -56,26 +56,6 @@ var stage: Stage:
 		else:
 			return null
 
-var player_field: NoteField:
-	set(value):
-		if is_instance_valid(game):
-			game.player_field = value
-	get:
-		if is_instance_valid(game):
-			return game.player_field
-		else:
-			return null
-
-var opponent_field: NoteField:
-	set(value):
-		if is_instance_valid(game):
-			game.opponent_field = value
-	get:
-		if is_instance_valid(game):
-			return game.opponent_field
-		else:
-			return null
-
 var camera: GameCamera2D:
 	get:
 		if is_instance_valid(GameCamera2D.instance):

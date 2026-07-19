@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bxdjijj35wput"]
+
+[ext_resource type="Shader" uid="uid://dxd51xxtukgkl" path="res://addons/gdanimate/formats/texture_atlas/shaders/sprite_shader.gdshader" id="1_1enpm"]
+
+[resource]
+shader = ExtResource("1_1enpm")

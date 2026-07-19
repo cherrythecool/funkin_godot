@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://cd4erocsrgekg" path="res://core/styles/default/countdown/ready.png" id="7_smc0y"]
 [ext_resource type="Texture2D" uid="uid://c70k6xe0qbuac" path="res://core/styles/default/countdown/set.png" id="8_gs3vn"]
 [ext_resource type="Texture2D" uid="uid://cgkt2ctlovm34" path="res://core/styles/default/countdown/go.png" id="9_hvo5u"]
+[ext_resource type="PackedScene" uid="uid://d3n853hu8o3ik" path="res://core/styles/default/pause_menu/pause_menu.tscn" id="12_0sup7"]
+[ext_resource type="AudioStream" uid="uid://cvhdcl07i6lt1" path="res://core/styles/default/pause_menu/default_theme.ogg" id="13_ysmi4"]
 
 [resource]
 script = ExtResource("4_vkktj")
@@ -25,3 +27,5 @@ shit = ExtResource("5_slrmr")
 combo_atlas = ExtResource("2_nfcec")
 countdown_textures = Array[Texture2D]([null, ExtResource("7_smc0y"), ExtResource("8_gs3vn"), ExtResource("9_hvo5u")])
 countdown_sounds = Array[AudioStream]([ExtResource("3_0jb8h"), ExtResource("4_y1cy4"), ExtResource("5_siv11"), ExtResource("6_1ctyo")])
+pause_menu = ExtResource("12_0sup7")
+pause_music = ExtResource("13_ysmi4")

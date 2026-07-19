@@ -680,7 +680,6 @@ starts_as_player = true
 death_character = "uid://lxm28lqknvjd"
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=498550991]
-use_parent_material = true
 position = Vector2(-215, -441)
 sprite_frames = ExtResource("4_attca")
 animation = &"Pico Idle Dance"

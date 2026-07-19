@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_bbqcr"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_jrmk7"]
 [ext_resource type="Texture2D" uid="uid://d2c1hlp80sm2q" path="res://modules/funkin/characters/gf/icon.png" id="3_2glvu"]
-[ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="4_nbymw"]
+[ext_resource type="Script" uid="uid://c5ju3u657fyae" path="res://addons/gdanimate/animate_symbol_2d.gd" id="4_nbymw"]
+[ext_resource type="Script" uid="uid://dy4vnmv4435ty" path="res://addons/gdanimate/formats/animate_symbol_library.gd" id="5_0lwe2"]
+[ext_resource type="Script" uid="uid://dkyyuwqo0dy7q" path="res://addons/gdanimate/formats/texture_atlas/atlas.gd" id="6_oec3b"]
 
 [sub_resource type="Resource" id="Resource_1qgms"]
 script = ExtResource("2_jrmk7")
@@ -11,8 +13,15 @@ texture = ExtResource("3_2glvu")
 color = Color(0.647288, 0, 0.3019, 1)
 frames = Vector2i(1, 1)
 
+[sub_resource type="Resource" id="Resource_42asd"]
+script = ExtResource("6_oec3b")
+folder = "res://modules/funkin/characters/gf/default_spritemap"
+render_mode = "Performance"
+metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
+
 [sub_resource type="Animation" id="Animation_bgpi6"]
-length = 0.001
+length = 0.041670834575220944
+step = 0.041666668
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -64,14 +73,14 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite:loop_mode")
-tracks/4/interp = 1
+tracks/4/path = NodePath("sprite:loop")
+tracks/4/interp = 0
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["Play Once"]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_4o0t4"]
@@ -235,7 +244,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_sljxr"]
 resource_name = "hair_blow"
-length = 0.125004
+length = 0.16667097241431475
 loop_mode = 1
 step = 0.0416667
 tracks/0/type = "value"
@@ -254,13 +263,13 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.125),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.041666668, 0.083333336, 0.125),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0, 3]
+"values": [0, 1, 2, 3]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -295,13 +304,13 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.45833334),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 11]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -360,7 +369,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("sprite:playing")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.541667),
@@ -383,14 +392,14 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite:loop_mode")
-tracks/4/interp = 1
+tracks/4/path = NodePath("sprite:loop")
+tracks/4/interp = 0
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.541667),
+"times": PackedFloat32Array(0, 0.5416667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": ["Loop", "Play Once"]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_4j6uk"]
@@ -628,10 +637,8 @@ dance_steps = Array[StringName]([&"dance_left", &"dance_right"])
 [node name="sprite" type="Node2D" parent="." unique_id=1185828068]
 position = Vector2(-218, -341)
 script = ExtResource("4_nbymw")
-atlas = "res://modules/funkin/characters/gf/default_spritemap"
-symbol = "GF Dancing Beat"
-loop_mode = "Play Once"
-metadata/_custom_type_script = "uid://diqmdngjb60u2"
+symbol_libraries = Array[ExtResource("5_0lwe2")]([SubResource("Resource_42asd")])
+symbol = &"GF Dancing Beat"
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1081631293]
 libraries/ = SubResource("AnimationLibrary_mki60")

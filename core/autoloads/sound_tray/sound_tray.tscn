@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bhbryleu1jjq0"]
 
 [ext_resource type="Script" uid="uid://d3gp8t7bd34mv" path="res://core/autoloads/sound_tray/sound_tray.gd" id="1_fobyb"]
-[ext_resource type="Theme" uid="uid://o8lle0eu7wkh" path="res://core/themes/general_theme.tres" id="2_baism"]
 [ext_resource type="AudioStream" uid="uid://ct153w6rmrntc" path="res://core/autoloads/sound_tray/volume_down.ogg" id="2_x1qxr"]
 [ext_resource type="AudioStream" uid="uid://osbi54io0ek4" path="res://core/autoloads/sound_tray/volume_up.ogg" id="3_gtm6u"]
 [ext_resource type="AudioStream" uid="uid://blh40k0yr71kp" path="res://core/autoloads/sound_tray/volume_max.ogg" id="4_hul2l"]
@@ -165,7 +164,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("2_baism")
 
 [node name="background" type="TextureRect" parent="root" unique_id=1444651431]
 unique_name_in_owner = true

@@ -35,8 +35,8 @@ static var last_song_health: float = -1.0
 var events_index: int = 0
 
 var hud: Node
-var player_field: NoteField = null
-var opponent_field: NoteField = null
+#var player_field: NoteField = null
+#var opponent_field: NoteField = null
 
 var song_started: bool = false
 var save_score: bool = true
@@ -135,10 +135,6 @@ func _ready() -> void:
 		var plr_strums := strumlines[&"player"]
 		plr_strums.note_hit.connect(_on_note_hit)
 		plr_strums.note_missed.connect(_on_note_miss)
-
-	if strumlines.has(&"opponent") and GameCamera2D.instance:
-		var opp_strums := strumlines[&"opponent"]
-		opp_strums.note_hit.connect(GameCamera2D.instance._on_first_opponent_note, CONNECT_ONE_SHOT)
 
 	setup_hud()
 
@@ -357,9 +353,9 @@ func load_chart() -> void:
 			):
 				continue
 
-			var scene := Note.load_note_type(type, note_type_paths)
-			if is_instance_valid(scene):
-				note_types[type] = scene
+			#var scene := Note.load_note_type(type, note_type_paths)
+			#if is_instance_valid(scene):
+				#note_types[type] = scene
 
 	for key: StringName in strumlines:
 		if not chart.strumlines.has(key):
@@ -444,9 +440,9 @@ func skip_to(seconds: float) -> void:
 
 	Conductor.calculate_beat()
 
-	if is_instance_valid(opponent_field):
-		opponent_field.try_spawning(true)
-		opponent_field.clear_notes()
-	if is_instance_valid(player_field):
-		player_field.try_spawning(true)
-		player_field.clear_notes()
+	#if is_instance_valid(opponent_field):
+		#opponent_field.try_spawning(true)
+		#opponent_field.clear_notes()
+	#if is_instance_valid(player_field):
+		#player_field.try_spawning(true)
+		#player_field.clear_notes()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://uy8oihb6pd4m" path="res://modules/funkin/menus/character_select/background/bg.png" id="1_oablf"]
 [ext_resource type="Script" uid="uid://p52omju8wqak" path="res://modules/funkin/menus/character_select/character_select.gd" id="1_tjis5"]
-[ext_resource type="Script" uid="uid://diqmdngjb60u2" path="res://addons/gdanimate/animate_symbol.gd" id="2_rptr7"]
+[ext_resource type="Script" uid="uid://c5ju3u657fyae" path="res://addons/gdanimate/animate_symbol_2d.gd" id="2_rptr7"]
 [ext_resource type="AudioStream" uid="uid://dagd7ek6gmogr" path="res://modules/funkin/menus/character_select/scroll.ogg" id="2_twrlh"]
 [ext_resource type="AudioStream" uid="uid://b41lp4n5nd3dk" path="res://modules/funkin/menus/character_select/confirm.ogg" id="3_0awtx"]
 [ext_resource type="AudioStream" uid="uid://b234a5vj6k6" path="res://modules/funkin/menus/character_select/theme.ogg" id="3_4fbts"]
@@ -12,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://dkhehc56csbb2" path="res://modules/funkin/menus/character_select/background/character_light.png" id="6_u125y"]
 [ext_resource type="SpriteFrames" uid="uid://chgxlx7kxse4l" path="res://modules/funkin/menus/character_select/background/stage.res" id="7_5ydai"]
 [ext_resource type="PackedScene" uid="uid://dh0j85o8ohuon" path="res://modules/funkin/menus/character_select/characters/gf/gf.tscn" id="7_jblrn"]
+[ext_resource type="Script" uid="uid://dy4vnmv4435ty" path="res://addons/gdanimate/formats/animate_symbol_library.gd" id="8_37ee5"]
 [ext_resource type="PackedScene" uid="uid://d3uuros7qs2p" path="res://modules/funkin/menus/character_select/characters/bf/bf.tscn" id="8_okqu4"]
+[ext_resource type="Script" uid="uid://dkyyuwqo0dy7q" path="res://addons/gdanimate/formats/texture_atlas/atlas.gd" id="9_lycc1"]
 [ext_resource type="Texture2D" uid="uid://4gefr8chrmni" path="res://modules/funkin/menus/character_select/background/fg_blur.png" id="9_okqu4"]
 [ext_resource type="Texture2D" uid="uid://dshobl0rx8nhg" path="res://modules/funkin/menus/character_select/background/choose_dark.png" id="12_rgimu"]
 [ext_resource type="Texture2D" uid="uid://c7u4qpyu0eogq" path="res://modules/funkin/menus/character_select/background/choose_dipshit.png" id="13_3wfvo"]
@@ -31,8 +33,26 @@
 [ext_resource type="SpriteFrames" uid="uid://cxstgenxhhdxm" path="res://modules/funkin/menus/character_select/selection_box/selector.tres" id="26_twrlh"]
 [ext_resource type="Script" uid="uid://dn2m283whavha" path="res://modules/funkin/menus/character_select/camera.gd" id="31_4fbts"]
 
+[sub_resource type="Resource" id="Resource_8nvxi"]
+script = ExtResource("9_lycc1")
+folder = "res://modules/funkin/menus/character_select/background/crowd"
+render_mode = "Performance"
+metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xae3q"]
 blend_mode = 3
+
+[sub_resource type="Resource" id="Resource_tyvfc"]
+script = ExtResource("9_lycc1")
+folder = "res://modules/funkin/menus/character_select/background/bar"
+render_mode = "Performance"
+metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
+
+[sub_resource type="Resource" id="Resource_37ee5"]
+script = ExtResource("9_lycc1")
+folder = "res://modules/funkin/menus/character_select/background/speakers"
+render_mode = "Performance"
+metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wrayq"]
 shader = ExtResource("15_8pm5i")
@@ -139,16 +159,16 @@ scroll_scale = Vector2(0.3, 0.3)
 [node name="sprite" type="Node2D" parent="crowd" unique_id=192690567]
 position = Vector2(-75, 209)
 script = ExtResource("2_rptr7")
-atlas = "res://modules/funkin/menus/character_select/background/crowd"
-frame = 8
-playing = true
-metadata/_custom_type_script = "uid://diqmdngjb60u2"
+symbol_libraries = Array[ExtResource("8_37ee5")]([SubResource("Resource_8nvxi")])
+symbol = &"crowd"
+autoplay = true
+loop = true
 
 [node name="select_stage" type="AnimatedSprite2D" parent="." unique_id=488027129]
 position = Vector2(-40, 391)
 sprite_frames = ExtResource("7_5ydai")
 animation = &"stage full instance 1"
-frame_progress = 0.51415354
+frame_progress = 0.5203069
 centered = false
 script = ExtResource("4_xae3q")
 playing = true
@@ -169,9 +189,8 @@ scroll_scale = Vector2(0, 0.7)
 material = SubResource("CanvasItemMaterial_xae3q")
 position = Vector2(0, 55)
 script = ExtResource("2_rptr7")
-atlas = "res://modules/funkin/menus/character_select/background/bar"
-playing = true
-metadata/_custom_type_script = "uid://diqmdngjb60u2"
+symbol_libraries = Array[ExtResource("8_37ee5")]([SubResource("Resource_tyvfc")])
+symbol = &"name bar animated"
 
 [node name="player_light" type="Sprite2D" parent="." unique_id=394656920]
 position = Vector2(800, 250)
@@ -198,9 +217,8 @@ scroll_scale = Vector2(1.8, 1.8)
 [node name="sprite" type="Node2D" parent="speakers" unique_id=969833391]
 position = Vector2(-73, 421)
 script = ExtResource("2_rptr7")
-atlas = "res://modules/funkin/menus/character_select/background/speakers"
-loop_mode = "Play Once"
-metadata/_custom_type_script = "uid://diqmdngjb60u2"
+symbol_libraries = Array[ExtResource("8_37ee5")]([SubResource("Resource_37ee5")])
+symbol = &"Speakers ALL"
 
 [node name="foreground_blur" type="Sprite2D" parent="." unique_id=1998309422]
 material = SubResource("ShaderMaterial_wrayq")
