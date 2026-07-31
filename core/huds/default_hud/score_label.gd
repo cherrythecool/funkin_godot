@@ -36,7 +36,7 @@ func update_score_label() -> void:
 		elif game.accuracy >= 99.0:
 			decimal_points = 3
 
-		accuracy_string = "%.*f%%" % [decimal_points, game.accuracy]
+		accuracy_string = "%.*f%%" % [decimal_points, floorf(game.accuracy * 100000.0) / 100000.0]
 
 	text = "Score:%d %s Misses:%d %s Accuracy:%s (%s)" % [
 		game.score,
