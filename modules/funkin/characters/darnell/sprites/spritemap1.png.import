@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2nowrr6dsdk7"
-path="res://.godot/imported/sprites.png-f130e47a8547b4d458a6586369330372.ctex"
+uid="uid://fsrkj76b4iln"
+path="res://.godot/imported/spritemap1.png-3756691e37fab0a761f09353e8110e8a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://modules/funkin/characters/darnell/sprites.png"
-dest_files=["res://.godot/imported/sprites.png-f130e47a8547b4d458a6586369330372.ctex"]
+source_file="res://modules/funkin/characters/darnell/sprites/spritemap1.png"
+dest_files=["res://.godot/imported/spritemap1.png-3756691e37fab0a761f09353e8110e8a.ctex"]
 
 [params]
 
 compress/mode=0
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

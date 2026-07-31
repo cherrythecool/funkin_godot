@@ -135,6 +135,9 @@ func _notification(what: int) -> void:
 			if autoplay and not Engine.is_editor_hint():
 				playing = true
 
+		NOTIFICATION_READY:
+			_process_animation(0.0)
+
 		NOTIFICATION_EXIT_TREE:
 			_clear_canvas_item(true)
 

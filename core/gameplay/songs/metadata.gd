@@ -30,6 +30,6 @@ static func load_from_song(song: String, songs_folder: String) -> SongMetadata:
 
 func get_full_name() -> StringName:
 	if mix != &"Default":
-		return &"%s [%s Mix]" % [display_name, mix]
+		return &"%s (%s Mix)" % [display_name, mix]
 	else:
 		return display_name

@@ -17,6 +17,7 @@ const KNOWN_TWEEN_TYPES: Dictionary[StringName, Tween.TransitionType] = {
 	# custom tween functions, but that is not currently top
 	# priority, so this is the "solution" for now.
 	&"smoothStep": Tween.TRANS_CUBIC,
+	&"smootherStep": Tween.TRANS_CIRC,
 }
 
 

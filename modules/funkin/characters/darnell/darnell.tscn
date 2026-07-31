@@ -3,27 +3,34 @@
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_tc5gy"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_cf3ry"]
 [ext_resource type="Texture2D" uid="uid://dnw888uux6bmj" path="res://modules/funkin/characters/darnell/icon.png" id="3_tc5gy"]
-[ext_resource type="SpriteFrames" uid="uid://bjtkeb7hna0ox" path="res://modules/funkin/characters/darnell/sprites.res" id="4_tc5gy"]
-[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_8k5q6"]
+[ext_resource type="Script" uid="uid://c5ju3u657fyae" path="res://addons/gdanimate/animate_symbol_2d.gd" id="6_jdsdp"]
+[ext_resource type="Script" uid="uid://dy4vnmv4435ty" path="res://addons/gdanimate/formats/animate_symbol_library.gd" id="7_u4ki3"]
+[ext_resource type="Script" uid="uid://dkyyuwqo0dy7q" path="res://addons/gdanimate/formats/texture_atlas/atlas.gd" id="8_hgxij"]
 
 [sub_resource type="Resource" id="Resource_cf3ry"]
 script = ExtResource("2_cf3ry")
 texture = ExtResource("3_tc5gy")
 color = Color(0.447059, 0.368627, 0.690196, 1)
 
+[sub_resource type="Resource" id="Resource_xw0vb"]
+script = ExtResource("8_hgxij")
+folder = "res://modules/funkin/characters/darnell/sprites"
+override_enable = false
+metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
+
 [sub_resource type="Animation" id="Animation_bgpi6"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:animation")
+tracks/0/path = NodePath("sprite:symbol")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"Idle"]
+"values": [&"Darnell Idle"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -61,40 +68,28 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("sprite:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_ud1jc"]
 resource_name = "idle"
-length = 1.12501
+length = 0.5833379867747426
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:animation")
-tracks/0/interp = 1
+tracks/0/path = NodePath("sprite:symbol")
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"Idle"]
+"values": [&"Darnell Idle"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
@@ -106,7 +101,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("sprite:offset")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
@@ -118,7 +113,7 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("sprite:playing")
-tracks/3/interp = 1
+tracks/3/interp = 0
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
@@ -126,40 +121,28 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("sprite:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
-[sub_resource type="Animation" id="Animation_wgt05"]
+[sub_resource type="Animation" id="Animation_jdsdp"]
 resource_name = "sing_down"
-length = 0.125004
+length = 0.5833379867747426
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:animation")
-tracks/0/interp = 1
+tracks/0/path = NodePath("sprite:symbol")
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"Pose Down"]
+"values": [&"Darnell Pose Down"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
@@ -171,19 +154,19 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("sprite:offset")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(4, 18)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("sprite:playing")
-tracks/3/interp = 1
+tracks/3/interp = 0
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
@@ -191,40 +174,28 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("sprite:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
-[sub_resource type="Animation" id="Animation_0v5yh"]
+[sub_resource type="Animation" id="Animation_lnqxk"]
 resource_name = "sing_left"
-length = 0.125004
+length = 0.33333777815848586
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:animation")
-tracks/0/interp = 1
+tracks/0/path = NodePath("sprite:symbol")
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"Pose Left"]
+"values": [&"Darnell pose right"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
@@ -236,19 +207,19 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("sprite:offset")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(-27, -3)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("sprite:playing")
-tracks/3/interp = 1
+tracks/3/interp = 0
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
@@ -256,40 +227,28 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("sprite:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
-[sub_resource type="Animation" id="Animation_2i71f"]
+[sub_resource type="Animation" id="Animation_hgxij"]
 resource_name = "sing_right"
-length = 0.125004
+length = 0.5833379867747426
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:animation")
-tracks/0/interp = 1
+tracks/0/path = NodePath("sprite:symbol")
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"Pose Right"]
+"values": [&"darnell pose left"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
@@ -301,60 +260,48 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("sprite:offset")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(-4, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("sprite:playing")
-tracks/3/interp = 1
+tracks/3/interp = 0
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("sprite:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_m87l6"]
+[sub_resource type="Animation" id="Animation_u4ki3"]
 resource_name = "sing_up"
-length = 0.125004
+length = 0.5833379867747426
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:animation")
-tracks/0/interp = 1
+tracks/0/path = NodePath("sprite:symbol")
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"Pose Up"]
+"values": [&"Darnell pose up"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
@@ -366,59 +313,47 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("sprite:offset")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(3.325, -48.4)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("sprite:playing")
-tracks/3/interp = 1
+tracks/3/interp = 0
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("sprite:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mki60"]
 _data = {
 &"RESET": SubResource("Animation_bgpi6"),
 &"idle": SubResource("Animation_ud1jc"),
-&"sing_down": SubResource("Animation_wgt05"),
-&"sing_left": SubResource("Animation_0v5yh"),
-&"sing_right": SubResource("Animation_2i71f"),
-&"sing_up": SubResource("Animation_m87l6")
+&"sing_down": SubResource("Animation_jdsdp"),
+&"sing_left": SubResource("Animation_lnqxk"),
+&"sing_right": SubResource("Animation_hgxij"),
+&"sing_up": SubResource("Animation_u4ki3")
 }
 
 [node name="darnell" type="Node2D" unique_id=1554177453]
 script = ExtResource("1_tc5gy")
 icon = SubResource("Resource_cf3ry")
 
-[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=806311329]
-position = Vector2(-230, -525)
-sprite_frames = ExtResource("4_tc5gy")
-animation = &"Idle"
-centered = false
-script = ExtResource("5_8k5q6")
+[node name="sprite" type="Node2D" parent="." unique_id=170538034]
+position = Vector2(-184, -463)
+script = ExtResource("6_jdsdp")
+symbol_libraries = Array[ExtResource("7_u4ki3")]([SubResource("Resource_xw0vb")])
+symbol = &"Darnell Idle"
+metadata/_custom_type_script = "uid://c5ju3u657fyae"
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1793266690]
 libraries/ = SubResource("AnimationLibrary_mki60")
