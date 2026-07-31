@@ -9,12 +9,12 @@ extends Node
 
 func _ready() -> void:
 	if hardcoded_enabled:
-		SceneManager.swap_to_path(hardcoded_scene_path)
+		SceneManager.swap_to_file(hardcoded_scene_path)
 	else:
 		var current_module: String = Settings.get_setting(&"module", "current_module")
 		var target_path := "res://modules/%s/module.tscn" % current_module
 
 		if ResourceLoader.exists(target_path):
-			SceneManager.swap_to_path(target_path)
+			SceneManager.swap_to_file(target_path)
 		else:
-			SceneManager.swap_to_path("res://core/fallback_screen.tscn")
+			SceneManager.swap_to_file("res://core/fallback_screen.tscn")

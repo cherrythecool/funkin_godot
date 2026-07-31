@@ -26,7 +26,7 @@ var hue_shift: float = 0.0
 func _ready() -> void:
 	if not Settings.user_had_core_settings:
 		Settings.user_had_core_settings = true
-		SceneManager.swap_to_path("uid://dasf7d5k8p30f")
+		SceneManager.swap_to_file("uid://dasf7d5k8p30f")
 		return
 
 	var music_player: AudioStreamPlayer = GlobalAudio.music

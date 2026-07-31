@@ -173,7 +173,7 @@ func _process(delta: float) -> void:
 		Gameover.character_path = player.death_character
 		Gameover.character_position = player.global_position
 		persist_camera_on_exit = true
-		SceneManager.swap_to_packed(load("uid://c05dah5aarqg8"))
+		SceneManager.swap_to_file("uid://c05dah5aarqg8")
 		return
 
 	if (
@@ -339,19 +339,19 @@ func load_chart() -> void:
 
 	chart.sort()
 
-	var note_type_paths: PackedStringArray = [
-		"res://modules/%s/notes/types" % ModuleManager.current_module,
-		"res://core/notes/types",
-	]
-
-	for strumline: Dictionary in chart.strumlines.values():
-		for raw_type: String in strumline[&"note_types"]:
-			var type := StringName(raw_type)
-			if (
-				note_types.has(type) or
-				note_types.has(type.to_snake_case())
-			):
-				continue
+	#var note_type_paths: PackedStringArray = [
+		#"res://modules/%s/notes/types" % ModuleManager.current_module,
+		#"res://core/notes/types",
+	#]
+#
+	#for strumline: Dictionary in chart.strumlines.values():
+		#for raw_type: String in strumline[&"note_types"]:
+			#var type := StringName(raw_type)
+			#if (
+				#note_types.has(type) or
+				#note_types.has(type.to_snake_case())
+			#):
+				#continue
 
 			#var scene := Note.load_note_type(type, note_type_paths)
 			#if is_instance_valid(scene):

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cmy8a7dh1kvs4"]
 
 [ext_resource type="Script" uid="uid://dhvmq8a4h56fu" path="res://core/autoloads/scene_manager/scene_manager.gd" id="1_qc8cf"]
-[ext_resource type="PackedScene" uid="uid://d0bf4x8ft3rjl" path="res://core/autoloads/scene_manager/default_transition.tscn" id="2_wxtw4"]
+[ext_resource type="PackedScene" uid="uid://6c6svnfsdils" path="res://core/autoloads/scene_manager/funkin_transition.tscn" id="2_wxtw4"]
 
 [node name="scene_manager" type="CanvasLayer" unique_id=1107837109 node_paths=PackedStringArray("transition_player")]
 process_mode = 3

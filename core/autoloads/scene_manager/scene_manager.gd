@@ -15,129 +15,88 @@ signal transitioned_out
 
 		if is_instance_valid(transition_player):
 			transition_player.animation_finished.connect(_on_animation_finished)
+
 @export_range(0.0, 5.0, 0.01, "or_greater") var transition_speed_scale: float = 1.0
 
 var current_scene: Node = null:
 	get:
-		if current_scene == null and is_inside_tree():
+		if is_inside_tree() and not is_instance_valid(current_scene):
 			current_scene = get_tree().current_scene
 
 		return current_scene
 
-var target_scene: PackedScene = null
-var target_scene_path: String = ""
+var _target_scene_path := ""
 
 
 func _ready() -> void:
-	reset_transition()
-
-
-func replace_transitions_with(scene: PackedScene) -> void:
-	var animation: StringName = transition_player.current_animation
-	remove_child(transition_player)
-	transition_player.queue_free()
-
-	var new_transitions: AnimationPlayer = scene.instantiate()
-	add_child(new_transitions)
-	transition_player = new_transitions
-	reset_transition()
-
-	if not animation.is_empty():
-		transition_player.play(animation)
-
-
-func swap_to_path(scene_path: String) -> void:
-	swap_to_packed(load(scene_path))
-
-
-func swap_to_packed(scene: PackedScene) -> void:
-	swap_to_node(scene.instantiate())
-
-
-func swap_to_node(node: Node) -> void:
-	get_tree().change_scene_to_node.call_deferred(node)
-	node.process_mode = Node.PROCESS_MODE_INHERIT
-	current_scene = node
-	scene_changed.emit.call_deferred()
+	_reset_transition()
 
 
 func transition_to_file(scene_path: String) -> void:
-	reset_transition()
+	_reset_transition()
 
-	if (
-		Settings.get_setting(&"core", "skip_scene_transitions") or
-		(not is_instance_valid(transition_player))
-	):
-		swap_to_packed(load(scene_path))
+	if Settings.get_setting(&"core", "skip_scene_transitions") or not is_instance_valid(transition_player):
+		swap_to_file(scene_path)
 		return
+
+	_target_scene_path = scene_path
 
 	if is_instance_valid(current_scene):
 		current_scene.process_mode = Node.PROCESS_MODE_DISABLED
 
 	visible = true
-	target_scene_path = scene_path
-
-	transition_player.speed_scale = transition_speed_scale
-	transition_player.play(&"in")
+	_play_animation(&"in")
 
 
-func transition_to_packed(scene: PackedScene) -> void:
-	reset_transition()
-
-	if (
-		Settings.get_setting(&"core", "skip_scene_transitions") or
-		(not is_instance_valid(transition_player))
-	):
-		swap_to_packed(scene)
-		return
-
-	if is_instance_valid(current_scene):
-		current_scene.process_mode = Node.PROCESS_MODE_DISABLED
-
-	visible = true
-	target_scene = scene
-
-	transition_player.speed_scale = transition_speed_scale
-	transition_player.play(&"in")
+func swap_to_file(scene_path: String) -> void:
+	_target_scene_path = scene_path
+	get_tree().change_scene_to_file.call_deferred(scene_path)
+	scene_changed.emit.call_deferred()
 
 
 func reload_current_scene() -> void:
-	reset_transition()
+	_reset_transition()
 
-	if is_instance_valid(target_scene):
-		var path := target_scene.resource_path
-		target_scene = null
-		target_scene = load(path)
-		swap_to_packed(target_scene)
+	if ResourceLoader.exists(_target_scene_path, "PackedScene") and not _target_scene_path.is_empty():
+		swap_to_file(_target_scene_path)
 	else:
 		get_tree().reload_current_scene()
 		current_scene = get_tree().current_scene
 
 
-func reset_transition() -> void:
-	if (
-		is_instance_valid(transition_player) and
-		transition_player.has_animation(&"RESET")
-	):
-		transition_player.play(&"RESET")
+func replace_transitions_with(scene: PackedScene) -> void:
+	var animation: StringName = transition_player.current_animation if transition_player else &""
 
+	if transition_player:
+		remove_child(transition_player)
+		transition_player.queue_free()
+
+	var new_transitions := scene.instantiate() as AnimationPlayer
+	transition_player = new_transitions
+	add_child(new_transitions)
+	_reset_transition()
+
+	if not animation.is_empty():
+		transition_player.play(animation)
+
+
+func _play_animation(anim: StringName) -> void:
+	if is_instance_valid(transition_player) and transition_player.has_animation(anim):
+		transition_player.speed_scale = transition_speed_scale
+		transition_player.play(anim)
+
+
+func _reset_transition() -> void:
 	visible = false
+	_play_animation(&"RESET")
 
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
 		&"in":
 			transitioned_in.emit()
-			transition_player.play(&"out")
-
-			if not target_scene_path.is_empty():
-				target_scene = load(target_scene_path)
-				target_scene_path = ""
-
-			if is_instance_valid(target_scene):
-				var node: Node = target_scene.instantiate()
-				node.process_mode = Node.PROCESS_MODE_DISABLED
-				swap_to_node(node)
+			_play_animation(&"out")
+			swap_to_file(_target_scene_path)
 		&"out":
 			transitioned_out.emit()
-			reset_transition()
+			_reset_transition()

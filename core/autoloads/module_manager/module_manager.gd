@@ -66,7 +66,7 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		hide()
 		Settings.set_setting(&"module", "current_module", current_modules[selected])
-		SceneManager.swap_to_path("res://core/main.tscn")
+		SceneManager.swap_to_file("res://core/main.tscn")
 	elif event.is_action(&"menu_cancel"):
 		get_viewport().set_input_as_handled()
 		hide()
