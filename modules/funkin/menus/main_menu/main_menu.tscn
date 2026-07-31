@@ -91,26 +91,30 @@ one_shot = true
 
 [node name="background" type="Parallax2D" parent="." unique_id=1543059190]
 unique_name_in_owner = true
-scale = Vector2(1.1, 1.1)
 scroll_scale = Vector2(0, 0.1)
-scroll_offset = Vector2(640, 360)
 
 [node name="sprite" type="Sprite2D" parent="background" unique_id=685855177]
+position = Vector2(640, 360)
+scale = Vector2(1.1, 1.1)
 texture = ExtResource("1_wymee")
 
 [node name="sprite_pink" type="Sprite2D" parent="background" unique_id=1905381358]
 visible = false
+position = Vector2(640, 360)
+scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_dbg3w")
 
 [node name="transgender_flag" type="Sprite2D" parent="background" unique_id=1189888633]
 visible = false
 modulate = Color(1, 1, 1, 0.36078432)
 texture_filter = 1
-scale = Vector2(1.6090909, 1.5227273)
+position = Vector2(640, 360)
+scale = Vector2(1.77, 1.77)
 texture = ExtResource("9_hjvrp")
 script = ExtResource("5_jicku")
 
 [node name="animation_player" type="AnimationPlayer" parent="background" unique_id=1339924607]
+unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_08ydn")
 
 [node name="camera" type="Camera2D" parent="." unique_id=1616268641]
@@ -119,9 +123,9 @@ position = Vector2(640, 360)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
-[node name="ui_layer" type="CanvasLayer" parent="." unique_id=1707456745]
+[node name="hud" type="CanvasLayer" parent="." unique_id=1707456745]
 
-[node name="version_label" type="Label" parent="ui_layer" unique_id=1878566145]
+[node name="version_label" type="Label" parent="hud" unique_id=1878566145]
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -136,22 +140,24 @@ label_settings = SubResource("LabelSettings_lig6g")
 vertical_alignment = 2
 script = ExtResource("7_bsukk")
 
-[node name="scroll_container" type="ScrollContainer" parent="ui_layer" unique_id=650336102]
+[node name="scroll_container" type="ScrollContainer" parent="hud" unique_id=650336102]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+vertical_scroll_mode = 5
 metadata/_edit_lock_ = true
 
-[node name="container" type="VBoxContainer" parent="ui_layer/scroll_container" unique_id=788825582]
+[node name="container" type="VBoxContainer" parent="hud/scroll_container" unique_id=788825582]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="story_mode" type="Control" parent="ui_layer/scroll_container/container" unique_id=1889209392]
+[node name="story_mode" type="Control" parent="hud/scroll_container/container" unique_id=1889209392]
 custom_minimum_size = Vector2(0, 122)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -159,30 +165,30 @@ script = ExtResource("4_4uv5u")
 scene_path = "uid://dcf86iwg6mn3d"
 animation_name = &"storymode"
 
-[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/story_mode" unique_id=803161499]
+[node name="sprite" type="AnimatedSprite2D" parent="hud/scroll_container/container/story_mode" unique_id=803161499]
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"storymode idle"
-frame_progress = 0.029925266
+frame_progress = 0.6590735
 script = ExtResource("4_emyfo")
 playing = true
 
-[node name="freeplay" type="Control" parent="ui_layer/scroll_container/container" unique_id=1818888720]
+[node name="freeplay" type="Control" parent="hud/scroll_container/container" unique_id=1818888720]
 custom_minimum_size = Vector2(0, 122)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("7_1hnlc")
 animation_name = &"freeplay"
 
-[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/freeplay" unique_id=1752211736]
+[node name="sprite" type="AnimatedSprite2D" parent="hud/scroll_container/container/freeplay" unique_id=1752211736]
 position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
-frame_progress = 0.5094497
+frame_progress = 0.13859493
 script = ExtResource("4_emyfo")
 playing = true
 
-[node name="credits" type="Control" parent="ui_layer/scroll_container/container" unique_id=461284960]
+[node name="credits" type="Control" parent="hud/scroll_container/container" unique_id=461284960]
 custom_minimum_size = Vector2(0, 124)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -190,15 +196,15 @@ script = ExtResource("4_4uv5u")
 scene_path = "uid://b6gvgi7qjy176"
 animation_name = &"credits"
 
-[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/credits" unique_id=1926702981]
+[node name="sprite" type="AnimatedSprite2D" parent="hud/scroll_container/container/credits" unique_id=1926702981]
 position = Vector2(0, 62)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"credits idle"
-frame_progress = 0.55929863
+frame_progress = 0.1884535
 script = ExtResource("4_emyfo")
 playing = true
 
-[node name="options" type="Control" parent="ui_layer/scroll_container/container" unique_id=161792120]
+[node name="options" type="Control" parent="hud/scroll_container/container" unique_id=161792120]
 custom_minimum_size = Vector2(0, 111)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -206,10 +212,10 @@ script = ExtResource("4_4uv5u")
 scene_path = "uid://3daku38i1a50"
 animation_name = &"options"
 
-[node name="sprite" type="AnimatedSprite2D" parent="ui_layer/scroll_container/container/options" unique_id=1641720325]
+[node name="sprite" type="AnimatedSprite2D" parent="hud/scroll_container/container/options" unique_id=1641720325]
 position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"
-frame_progress = 0.6524727
+frame_progress = 0.28161457
 script = ExtResource("4_emyfo")
 playing = true

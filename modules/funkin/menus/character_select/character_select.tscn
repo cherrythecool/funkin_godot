@@ -21,6 +21,7 @@
 [ext_resource type="Shader" uid="uid://m135j34o0ros" path="res://core/shaders/blend_modes.gdshader" id="15_8pm5i"]
 [ext_resource type="Shader" uid="uid://ctlwv54e12i3j" path="res://modules/funkin/menus/character_select/mosaic_shader.gdshader" id="15_cggar"]
 [ext_resource type="Texture2D" uid="uid://86qag6byq5lj" path="res://modules/funkin/menus/character_select/characters/bf/title.png" id="16_3ax17"]
+[ext_resource type="Script" uid="uid://u0ic25erbfqp" path="res://core/classes/backbuffer_copy_control.gd" id="16_lycc1"]
 [ext_resource type="Shader" uid="uid://bgwusoh6kicj3" path="res://core/shaders/adjust_hscb.gdshader" id="16_tshbu"]
 [ext_resource type="SpriteFrames" uid="uid://cdi8k0pr0dogl" path="res://modules/funkin/menus/character_select/background/choose_blur.res" id="16_twrlh"]
 [ext_resource type="SpriteFrames" uid="uid://d0o5ptiv2s303" path="res://modules/funkin/menus/character_select/background/choose_backing.res" id="17_0awtx"]
@@ -168,7 +169,7 @@ loop = true
 position = Vector2(-40, 391)
 sprite_frames = ExtResource("7_5ydai")
 animation = &"stage full instance 1"
-frame_progress = 0.5203069
+frame_progress = 0.99829644
 centered = false
 script = ExtResource("4_xae3q")
 playing = true
@@ -219,6 +220,16 @@ position = Vector2(-73, 421)
 script = ExtResource("2_rptr7")
 symbol_libraries = Array[ExtResource("8_37ee5")]([SubResource("Resource_37ee5")])
 symbol = &"Speakers ALL"
+
+[node name="back_buffer_copy" type="Control" parent="." unique_id=261698799]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -125.0
+offset_top = 170.0
+offset_right = 1442.0
+offset_bottom = 728.0
+script = ExtResource("16_lycc1")
+metadata/_custom_type_script = "uid://u0ic25erbfqp"
 
 [node name="foreground_blur" type="Sprite2D" parent="." unique_id=1998309422]
 material = SubResource("ShaderMaterial_wrayq")
