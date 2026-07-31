@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ds3g63uwcq4jw" path="res://core/styles/default/combo.png" id="7_7svf3"]
 [ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://modules/funkin/funkin.ttf" id="8_in2av"]
 [ext_resource type="Script" uid="uid://pc372g2dpnb3" path="res://core/huds/default_hud/countdown_container.gd" id="9_6w54d"]
-[ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://core/notes/skinned_strumline_renderer.gd" id="10_nwv25"]
+[ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://core/notes/strumline_renderer_2d.gd" id="10_nwv25"]
 [ext_resource type="Script" uid="uid://chj1hnw2lhjy4" path="res://core/notes/receptor_data.gd" id="11_vvq14"]
 [ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://core/styles/default/note_skin.tres" id="12_iy7o8"]
 

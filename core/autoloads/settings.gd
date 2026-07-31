@@ -63,7 +63,6 @@ func load_settings(file: StringName) -> void:
 	save_settings(file)
 
 	settings_loaded.emit(file)
-	print("Successfully loaded settings from path '%s'!" % [path])
 
 
 func set_setting(file: StringName, key: Variant, value: Variant, save: bool = true) -> void:

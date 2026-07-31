@@ -130,7 +130,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 			selector.play(&'idle')
 		else:
-			SceneManager.transition_to_packed(load('uid://b7fwxsepnt38j'))
+			SceneManager.transition_to_file('uid://b7fwxsepnt38j')
 	if event.is_action(&'menu_accept') and not locked:
 		locked = true
 
@@ -222,7 +222,7 @@ func _on_confirm_finished() -> void:
 	FreeplayMenu.index = 0
 	FreeplayMenu.difficulty_index = 0
 
-	SceneManager.transition_to_packed(load(MainMenu.freeplay_scene))
+	SceneManager.transition_to_file(MainMenu.freeplay_scene)
 
 
 func _load_characters(player_path: String, spectator_path: String, logo: Texture2D) -> void:

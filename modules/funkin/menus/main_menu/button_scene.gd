@@ -8,5 +8,5 @@ func accept() -> bool:
 	if not ResourceLoader.exists(scene_path):
 		return super()
 
-	SceneManager.transition_to_packed(load(scene_path))
+	SceneManager.transition_to_file(scene_path)
 	return true

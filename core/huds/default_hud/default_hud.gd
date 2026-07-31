@@ -18,8 +18,8 @@ var centered_receptors: bool = false:
 @export var bump_interval: int = 4
 @export var zoom_lerping: bool = true
 
-@export var player_renderer: SkinnedStrumlineRenderer
-@export var opponent_renderer: SkinnedStrumlineRenderer
+@export var player_renderer: StrumlineRenderer2D
+@export var opponent_renderer: StrumlineRenderer2D
 
 @onready var health_bar: HealthBar = %health_bar
 @onready var countdown_container: CountdownContainer = %countdown_container

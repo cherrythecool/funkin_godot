@@ -66,11 +66,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		match Game.mode:
 			Game.PlayMode.FREEPLAY:
-				SceneManager.transition_to_packed(load(MainMenu.freeplay_scene))
+				SceneManager.transition_to_file(MainMenu.freeplay_scene)
 			Game.PlayMode.STORY:
-				SceneManager.transition_to_packed(load("uid://dcf86iwg6mn3d"))
+				SceneManager.transition_to_file("uid://dcf86iwg6mn3d")
 			_:
-				SceneManager.transition_to_packed(load("uid://cxk008iuw4n7u"))
+				SceneManager.transition_to_file("uid://cxk008iuw4n7u")
 
 	if event.is_action(&"menu_accept"):
 		active = false
@@ -96,5 +96,5 @@ func _on_fade_out_timer_timeout() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(character, ^"modulate:a", 0.0, 2.0)
 	tween.tween_callback(func() -> void:
-		SceneManager.transition_to_packed(load("uid://da8mu3oqto3qq"))
+		SceneManager.transition_to_file("uid://da8mu3oqto3qq")
 	)

@@ -26,14 +26,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		match options[selected].name:
 			&"yes":
 				OptionsMenu.target_scene = "uid://cxk008iuw4n7u"
-				SceneManager.transition_to_packed(load("uid://3daku38i1a50"))
+				SceneManager.transition_to_file("uid://3daku38i1a50")
 			&"no":
-				SceneManager.transition_to_packed(load("uid://cxk008iuw4n7u"))
+				SceneManager.transition_to_file("uid://cxk008iuw4n7u")
 
 	if event.is_action(&"menu_cancel"):
 		active = false
 		GlobalAudio.get_player(^"MENU/CANCEL").play()
-		SceneManager.transition_to_packed(load("uid://cxk008iuw4n7u"))
+		SceneManager.transition_to_file("uid://cxk008iuw4n7u")
 
 
 func change_selection(amount: int = 0) -> void:

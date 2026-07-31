@@ -55,7 +55,7 @@ func _ready() -> void:
 	if song_nodes.is_empty():
 		active = false
 		GlobalAudio.get_player("MENU/CANCEL").play()
-		SceneManager.transition_to_packed(load("uid://b7fwxsepnt38j"))
+		SceneManager.transition_to_file("uid://b7fwxsepnt38j")
 		printerr("Freeplay has no songs, returning.")
 		return
 
@@ -81,14 +81,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action(&"menu_cancel"):
 		active = false
 		GlobalAudio.get_player("MENU/CANCEL").play()
-		SceneManager.transition_to_packed(load("uid://b7fwxsepnt38j"))
+		SceneManager.transition_to_file("uid://b7fwxsepnt38j")
 	if event.is_action(&"menu_accept"):
 		active = false
 		select_song.call_deferred()
 	if event.is_action(&"freeplay_open_characters"):
 		active = false
 		GlobalAudio.get_player(^"MENU/CANCEL").play()
-		SceneManager.transition_to_packed(load("uid://62vvv8x8t7nm"))
+		SceneManager.transition_to_file("uid://62vvv8x8t7nm")
 
 	if event.is_action(&"menu_up") or event.is_action(&"menu_down"):
 		change_selection(roundi(Input.get_axis(&"menu_up", &"menu_down")))

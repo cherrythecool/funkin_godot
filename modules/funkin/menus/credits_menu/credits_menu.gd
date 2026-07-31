@@ -25,7 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action(&'menu_cancel'):
 		music.stop()
 		GlobalAudio.music.play()
-		SceneManager.transition_to_packed(load('uid://b7fwxsepnt38j'))
+		SceneManager.transition_to_file('uid://b7fwxsepnt38j')
 	if event.is_action(&'menu_accept'):
 		var item: ListedAlphabet = list.get_child(selected)
 		if item is CreditsContributor:

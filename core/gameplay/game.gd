@@ -296,7 +296,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 		if not is_instance_valid(chart):
 			GlobalAudio.get_player("MENU/CANCEL").play()
 			back_to_menus.emit()
-			SceneManager.transition_to_packed(load("uid://b7fwxsepnt38j"))
+			SceneManager.transition_to_file("uid://b7fwxsepnt38j")
 			playlist.clear()
 			return
 
@@ -314,16 +314,16 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 
 	back_to_menus.emit()
 	if not exit_scene.is_empty():
-		SceneManager.transition_to_packed(load(exit_scene))
+		SceneManager.transition_to_file(exit_scene)
 		exit_scene = ""
 		return
 	match mode:
 		PlayMode.STORY:
-			SceneManager.transition_to_packed(load("uid://dcf86iwg6mn3d"))
+			SceneManager.transition_to_file("uid://dcf86iwg6mn3d")
 		PlayMode.FREEPLAY:
-			SceneManager.transition_to_packed(load(MainMenu.freeplay_scene))
+			SceneManager.transition_to_file(MainMenu.freeplay_scene)
 		_:
-			SceneManager.transition_to_packed(load("uid://cxk008iuw4n7u"))
+			SceneManager.transition_to_file("uid://cxk008iuw4n7u")
 
 
 func load_chart() -> void:

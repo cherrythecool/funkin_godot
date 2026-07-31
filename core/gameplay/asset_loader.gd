@@ -82,8 +82,8 @@ func load_assets() -> void:
 	else:
 		hud.queue_free()
 
-	var player_renderer: SkinnedStrumlineRenderer
-	var opponent_renderer: SkinnedStrumlineRenderer
+	var player_renderer: StrumlineRenderer2D
+	var opponent_renderer: StrumlineRenderer2D
 
 	if "player_renderer" in hud:
 		player_renderer = hud.player_renderer

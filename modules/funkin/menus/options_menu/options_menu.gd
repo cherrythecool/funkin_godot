@@ -49,7 +49,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action(&'menu_cancel'):
 		active = false
 		GlobalAudio.get_player('MENU/CANCEL').play()
-		SceneManager.transition_to_packed(load(target_scene))
+		SceneManager.transition_to_file(target_scene)
 		target_scene = DEFAULT_TARGET_SCENE
 
 

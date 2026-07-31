@@ -131,7 +131,7 @@ _data = {
 
 [node name="sound_tray" type="CanvasLayer" unique_id=2135155222]
 process_mode = 3
-layer = 16
+layer = 48
 script = ExtResource("1_fobyb")
 
 [node name="volume_up" type="AudioStreamPlayer" parent="." unique_id=90379923]

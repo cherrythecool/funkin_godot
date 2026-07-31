@@ -1,4 +1,4 @@
-class_name SkinnedStrumlineRenderer
+class_name StrumlineRenderer2D
 extends Node2D
 
 

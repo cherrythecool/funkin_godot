@@ -67,7 +67,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				&"options":
 					OptionsMenu.target_scene = "uid://da8mu3oqto3qq"
 					close()
-					SceneManager.transition_to_packed(load("uid://3daku38i1a50"))
+					SceneManager.transition_to_file("uid://3daku38i1a50")
 				&"quit":
 					close()
 					Game.instance.finish_song(true)

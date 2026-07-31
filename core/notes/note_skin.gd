@@ -41,21 +41,21 @@ extends Resource
 
 
 func get_receptor_frames() -> SpriteFrames:
-	if is_instance_valid(receptor_frames):
-		return receptor_frames
-	return load("uid://y8en4nx7mbuw")
+	if not is_instance_valid(receptor_frames):
+		receptor_frames = load("uid://y8en4nx7mbuw")
+	return receptor_frames
 
 
 func get_note_frames() -> SpriteFrames:
-	if is_instance_valid(note_frames):
-		return note_frames
-	return load("uid://b3r2xop0whqyf")
+	if not is_instance_valid(note_frames):
+		note_frames = load("uid://b3r2xop0whqyf")
+	return note_frames
 
 
 func get_splash_frames() -> SpriteFrames:
-	if is_instance_valid(splash_frames):
-		return splash_frames
-	return load("uid://bw4etux81oui3")
+	if not is_instance_valid(splash_frames):
+		splash_frames = load("uid://bw4etux81oui3")
+	return splash_frames
 
 
 func get_splash_material() -> ShaderMaterial:
