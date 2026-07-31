@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://br11pkir6c8as"
-path="res://.godot/imported/jetbrains_mono.ttf-5c8919ccc408073c5c5bd4bb33c9094a.fontdata"
+uid="uid://cuh8h453towpc"
+path="res://.godot/imported/red_hat_mono.ttf-13ff6db0026ddcbfbbf7be1d55e3ca9f.fontdata"
 
 [deps]
 
-source_file="res://core/fonts/jetbrains_mono.ttf"
-dest_files=["res://.godot/imported/jetbrains_mono.ttf-5c8919ccc408073c5c5bd4bb33c9094a.fontdata"]
+source_file="res://core/fonts/red_hat_mono.ttf"
+dest_files=["res://.godot/imported/red_hat_mono.ttf-13ff6db0026ddcbfbbf7be1d55e3ca9f.fontdata"]
 
 [params]
 
@@ -22,8 +22,8 @@ msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
 modulate_color_glyphs=false
-hinting=1
-subpixel_positioning=1
+hinting=3
+subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null

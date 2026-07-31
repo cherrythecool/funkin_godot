@@ -1,28 +1,34 @@
 [gd_scene format=3 uid="uid://bqv4nkj1rm3om"]
 
-[ext_resource type="FontFile" uid="uid://br11pkir6c8as" path="res://core/fonts/jetbrains_mono.ttf" id="1_ite0c"]
+[ext_resource type="FontFile" uid="uid://cuh8h453towpc" path="res://core/fonts/red_hat_mono.ttf" id="1_24gn8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfkcw"]
 bg_color = Color(0, 0, 0, 0.6)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghy35"]
 draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(1, 1, 1, 0.6)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="FontVariation" id="FontVariation_kc7kk"]
+base_font = ExtResource("1_24gn8")
+variation_opentype = {
+2003265652: 500
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_ghy35"]
-font = ExtResource("1_ite0c")
+font = SubResource("FontVariation_kc7kk")
 font_size = 12
 
 [node name="module_panel" type="Panel" unique_id=129263497]

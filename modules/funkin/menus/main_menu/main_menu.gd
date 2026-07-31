@@ -5,7 +5,6 @@ static var selected: int = 0
 static var freeplay_scene: String = 'uid://3rua2gpac5p8'
 
 @onready var items: VBoxContainer = $ui_layer/scroll_container/container
-@onready var version_label: Label = $ui_layer/version_label
 @onready var background_animations: AnimationPlayer = $background/animation_player
 @onready var camera: Camera2D = %camera
 @onready var timer: Timer = %timer
@@ -16,8 +15,6 @@ var active: bool = true
 func _ready() -> void:
 	if not GlobalAudio.music.playing:
 		GlobalAudio.music.play()
-
-	version_label.text = version_label.text.replace('$VERSION', Global.version)
 
 	# thank you https://github.com/godotengine/godot-proposals/issues/12058#issuecomment-2748489241
 	# needed to recompute the layout manually to make sure that

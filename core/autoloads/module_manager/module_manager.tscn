@@ -2,24 +2,29 @@
 
 [ext_resource type="Script" uid="uid://d0a7jysvvuotb" path="res://core/autoloads/module_manager/module_manager.gd" id="1_p5b5k"]
 [ext_resource type="PackedScene" uid="uid://bqv4nkj1rm3om" path="res://core/autoloads/module_manager/module_panel.tscn" id="2_kc7kk"]
-[ext_resource type="FontFile" uid="uid://br11pkir6c8as" path="res://core/fonts/jetbrains_mono.ttf" id="3_nvfl7"]
+[ext_resource type="FontFile" uid="uid://cuh8h453towpc" path="res://core/fonts/red_hat_mono.ttf" id="3_kc7kk"]
 [ext_resource type="Texture2D" uid="uid://mwxbaajkt3nh" path="res://core/autoloads/module_manager/folder_icon.svg" id="4_kc7kk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgwie"]
-bg_color = Color(0, 0, 0, 0.6)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+bg_color = Color(0.0703125, 0.069488525, 0.069488525, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19921875, 0.19921875, 0.19921875, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_24gn8"]
+base_font = ExtResource("3_kc7kk")
+variation_opentype = {
+2003265652: 600
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_t6euu"]
-font = ExtResource("3_nvfl7")
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_myt0c"]
-color = Color(1, 1, 1, 0.25)
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 2
+font = SubResource("FontVariation_24gn8")
 
 [node name="module_manager" type="CanvasLayer" unique_id=1939416663]
 layer = 64
@@ -36,7 +41,7 @@ anchor_bottom = 0.5
 offset_left = -160.0
 offset_top = -64.0
 offset_right = 160.0
-offset_bottom = 64.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -47,7 +52,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 offset_left = 8.0
-offset_top = 8.0
+offset_top = 3.0
 offset_right = -8.0
 offset_bottom = 32.0
 grow_horizontal = 2
@@ -57,26 +62,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="open_folder" type="Button" parent="selection_panel" unique_id=1131345913]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 offset_left = 24.0
+offset_top = 4.0
 offset_right = 56.0
-offset_bottom = 32.0
+offset_bottom = 33.0
+theme_override_colors/icon_normal_color = Color(0.67578125, 0.67578125, 0.67578125, 1)
+theme_override_colors/icon_hover_color = Color(0.90625, 0.90625, 0.90625, 1)
 icon = ExtResource("4_kc7kk")
 flat = true
 icon_alignment = 1
-vertical_icon_alignment = 2
-
-[node name="h_separator" type="HSeparator" parent="selection_panel" unique_id=1240957103]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_left = 24.0
-offset_top = 32.0
-offset_right = -24.0
-offset_bottom = 4.0
-grow_horizontal = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_myt0c")
 
 [node name="scroll_container" type="ScrollContainer" parent="selection_panel" unique_id=935166583]
 unique_name_in_owner = true
@@ -84,9 +81,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 40.0
-offset_right = -24.0
+offset_left = 8.0
+offset_top = 34.0
+offset_right = -8.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/scrollbar_h_separation = 4

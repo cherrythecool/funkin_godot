@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d4lyul6n3wfmw"]
 
 [ext_resource type="Script" uid="uid://baq1jchoadbo1" path="res://core/autoloads/game_overlay.gd" id="1_itebg"]
-[ext_resource type="FontFile" uid="uid://br11pkir6c8as" path="res://core/fonts/jetbrains_mono.ttf" id="2_uhwfu"]
+[ext_resource type="FontFile" uid="uid://cuh8h453towpc" path="res://core/fonts/red_hat_mono.ttf" id="2_7j305"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j305"]
 bg_color = Color(0, 0, 0, 0.5)
@@ -14,9 +14,15 @@ expand_margin_top = 3.0
 expand_margin_right = 6.0
 expand_margin_bottom = 3.0
 
+[sub_resource type="FontVariation" id="FontVariation_7j305"]
+base_font = ExtResource("2_7j305")
+variation_opentype = {
+2003265652: 500
+}
+
 [sub_resource type="LabelSettings" id="LabelSettings_rqscu"]
 line_spacing = -4.0
-font = ExtResource("2_uhwfu")
+font = SubResource("FontVariation_7j305")
 font_size = 14
 outline_color = Color(0, 0, 0, 1)
 

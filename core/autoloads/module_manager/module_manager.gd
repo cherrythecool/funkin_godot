@@ -1,26 +1,28 @@
 extends CanvasLayer
 
 
-@export var mods_replace_contents: bool = false
+@export var mods_replace_contents := false
 
 @export var selected := 0
 @export var disabled := false
 @export var module_panel: PackedScene
 
+var mods_path: String = "./mods"
+var current_module: String
+var current_modules: Array
+
 @onready var main_panel: Panel = %selection_panel
 @onready var scroll_container: ScrollContainer = %scroll_container
 @onready var module_container: VBoxContainer = %vbox
-
-var mods_path: String = "./mods"
-
-var current_module: String
-
-var current_modules: Array
+@onready var open_folder: Button = %open_folder
 
 
 func _ready() -> void:
 	if OS.has_feature("mobile"):
 		mods_path = "user://mods"
+
+	if OS.has_feature("editor"):
+		open_folder.hide()
 
 	hide()
 
@@ -40,10 +42,10 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if disabled or not event.is_pressed():
+	if disabled:
 		return
 
-	if event.is_action(&"module_select"):
+	if event.is_action_pressed(&"module_select"):
 		visible = not visible
 
 		if visible:
@@ -56,25 +58,20 @@ func _input(event: InputEvent) -> void:
 	if not visible:
 		return
 
-	if event.is_action(&"menu_up"):
+	if event.is_action_pressed(&"menu_up"):
 		get_viewport().set_input_as_handled()
 		change_selection(-1)
-	elif event.is_action(&"menu_down"):
+	elif event.is_action_pressed(&"menu_down"):
 		get_viewport().set_input_as_handled()
 		change_selection(1)
-	elif event.is_action(&"menu_accept"):
+	elif event.is_action_pressed(&"menu_accept"):
 		get_viewport().set_input_as_handled()
 		hide()
 		Settings.set_setting(&"module", "current_module", current_modules[selected])
 		SceneManager.swap_to_file("res://core/main.tscn")
-	elif event.is_action(&"menu_cancel"):
+	elif event.is_action_pressed(&"menu_cancel"):
 		get_viewport().set_input_as_handled()
 		hide()
-
-
-func _on_setting_changed(file: StringName, key: Variant) -> void:
-	if file == &"module" and key == "current_module":
-		current_module = Settings.get_setting(&"module", "current_module")
 
 
 func load_mods_folder() -> void:
@@ -141,10 +138,10 @@ func recreate_panels() -> void:
 		panel.get_node(^"%module_name").text = module
 		module_container.add_child(panel)
 
-	if Global.game_size.y >= 128.0:
-		main_panel.size.y = 48.0 + clampf(module_container.get_minimum_size().y, 40.0, Global.game_size.y - 48.0)
+	if Global.game_size.y >= 76.0:
+		main_panel.size.y = 44.0 + clampf(module_container.get_minimum_size().y, 40.0, Global.game_size.y - 44.0)
 	else:
-		main_panel.size.y = 128.0
+		main_panel.size.y = 76.0
 
 	main_panel.position.y = (Global.game_size.y - main_panel.size.y) / 2.0
 
@@ -180,3 +177,8 @@ func _on_open_folder_pressed() -> void:
 		return
 
 	OS.shell_show_in_file_manager(dir.get_current_dir())
+
+
+func _on_setting_changed(file: StringName, key: Variant) -> void:
+	if file == &"module" and key == "current_module":
+		current_module = Settings.get_setting(&"module", "current_module")
