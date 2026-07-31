@@ -17,9 +17,19 @@ extends Node2D
 
 @export var spacing := 90.0
 @export var scroll_speed := 1.0
+@export var splash_alpha := 0.8
 @export var downscroll := false
 
-var cached_sustain_textures: Dictionary[StringName, Texture2D]
+@export_group("Animations", "animations_")
+@export var animations_note: Array[StringName] = [&"left note", &"down note", &"up note", &"right note"]
+@export var animations_sustain: Array[StringName] = [&"left sustain", &"down sustain", &"up sustain", &"right sustain"]
+@export var animations_tail: Array[StringName] = [&"left sustain end", &"down sustain end", &"up sustain end", &"right sustain end"]
+
+var _note_textures: Array[Texture2D]
+var _sustain_textures: Array[Texture2D]
+var _tail_textures: Array[Texture2D]
+
+var _receptor_positions: PackedVector2Array
 
 
 func _process(delta: float) -> void:
@@ -27,17 +37,16 @@ func _process(delta: float) -> void:
 		return
 
 	var receptor_frames := skin.get_receptor_frames()
+
 	for i: int in receptors.size():
 		var state := parent.receptor_states[i]
 		var receptor := receptors[i]
 		receptor.hold_timer += delta
 
-		var receptor_anim := &"%s %s" % [
-			receptor.direction,
-			receptor.animation,
-		]
-
-		var animation_length := receptor_frames.get_frame_count(receptor_anim) / receptor.framerate
+		var animation_length := (
+			receptor_frames.get_frame_count(receptor.animation_name) /
+			receptor_frames.get_animation_speed(receptor.animation_name)
+		)
 
 		if receptor.animation_state != state:
 			if (not parent.cpu) or receptor.animation_progress >= animation_length:
@@ -47,6 +56,8 @@ func _process(delta: float) -> void:
 				receptor.animation_progress += delta
 		else:
 			receptor.animation_progress += delta
+
+		receptor.splash_progress += delta
 
 	queue_redraw()
 
@@ -60,35 +71,31 @@ func _draw() -> void:
 
 	var time := Conductor.time
 	var scaled_scroll_speed := scroll_speed / Conductor.rate
-	var spawn_time: float = 800.0 / (450.0 * absf(scaled_scroll_speed))
+	var spawn_time: float = 0.8 / (0.45 * absf(scaled_scroll_speed))
 
 	var receptor_frames := skin.get_receptor_frames()
 	var receptor_scale := skin.receptor_scale
-	var receptor_positions: PackedVector2Array
-	receptor_positions.resize(receptors.size())
-	receptor_positions.fill(Vector2.ZERO)
+	_receptor_positions.resize(receptors.size())
 
 	for i: int in receptors.size():
 		var receptor := receptors[i]
-		var receptor_anim := &"%s %s" % [
-			receptor.direction,
-			receptor.animation,
-		]
+		var receptor_anim := receptor.animation_name
 
 		var anim_length := receptor_frames.get_frame_count(receptor_anim)
 		if anim_length == 0:
 			continue
 
+		var frame := floori(receptor.animation_progress * receptor_frames.get_animation_speed(receptor_anim))
 		var texture := receptor_frames.get_frame_texture(
 			receptor_anim,
-			mini(receptor.animation_frame, anim_length - 1)
+			mini(frame, anim_length - 1)
 		)
 
 		var receptor_position := Vector2(
 			(i * spacing) - (spacing * 1.5),
 			0.0
 		)
-		receptor_positions[i] = receptor_position
+		_receptor_positions[i] = receptor_position
 
 		draw_texture_rect(
 			texture,
@@ -100,137 +107,175 @@ func _draw() -> void:
 		)
 
 	var note_frames := skin.get_note_frames()
-	var note_scale := skin.note_scale
-	var time_to_pixels := 450.0 * scaled_scroll_speed
-	var sustain_width := skin.sustain_size
-	var tail_width := skin.sustain_tail_size
+
+	_note_textures.resize(animations_note.size())
+	_sustain_textures.resize(animations_sustain.size())
+	_tail_textures.resize(animations_tail.size())
 
 	for index: int in range(parent.notes_index, parent.notes.size()):
 		var note := parent.notes[index]
 		if time < note.time - spawn_time:
 			break
 
-		var receptor := receptors[note.direction]
-		var receptor_position := receptor_positions[note.direction]
+		var receptor_position := _receptor_positions[note.direction]
 
 		# TODO: looping note anims ig
-		var texture := note_frames.get_frame_texture(&"%s note" % receptor.direction, 0)
+		var texture := _note_textures[note.direction]
+		if not texture:
+			texture = note_frames.get_frame_texture(animations_note[note.direction], 0)
+			_note_textures[note.direction] = texture
+
+		var sustain_texture := _sustain_textures[note.direction]
+		if not sustain_texture:
+			sustain_texture = get_sustain_texture(note.direction, 0, false)
+			_sustain_textures[note.direction] = sustain_texture
+
+		var tail_texture := _tail_textures[note.direction]
+		if not tail_texture:
+			tail_texture = get_sustain_texture(note.direction, 0, true)
+			_tail_textures[note.direction] = tail_texture
+
+		draw_sustain(note, sustain_texture, tail_texture, receptor_position)
+
+		if note.state == NoteData.NoteState.ALIVE:
+			draw_note(note, texture, receptor_position)
+
+	var splash_frames := skin.get_splash_frames()
+	var splash_scale := skin.splash_scale
+
+	for i: int in receptors.size():
+		var receptor := receptors[i]
+		var splash_anim := receptor.splash_animation
+
+		if not splash_frames.has_animation(splash_anim):
+			continue
+
+		var anim_length := splash_frames.get_frame_count(splash_anim)
+		if anim_length == 0:
+			continue
+
+		var frame := floori(receptor.splash_progress * splash_frames.get_animation_speed(splash_anim))
+		if frame > anim_length - 1:
+			continue
+
+		var texture := splash_frames.get_frame_texture(
+			splash_anim,
+			frame
+		)
+
 		if not texture:
 			continue
 
-		var time_difference := note.time - time
-		var note_position := Vector2(
-			receptor_position.x,
-			receptor_position.y,
+		var receptor_position := _receptor_positions[i]
+		draw_texture_rect(
+			texture,
+			Rect2(
+				receptor_position - (texture.get_size() * splash_scale / 2.0),
+				texture.get_size() * splash_scale,
+			),
+			false,
+			Color(Color.WHITE, splash_alpha)
 		)
 
-		if downscroll:
-			note_position.y -= (time_difference * time_to_pixels)
-		else:
-			note_position.y += (time_difference * time_to_pixels)
 
-		var sus_height: float
-		var sus_tex := get_sustain_texture(&"%s sustain" % receptor.direction, 0, false)
-		var tail_tex := get_sustain_texture(&"%s sustain end" % receptor.direction, 0, false)
-		var tail_size := tail_tex.get_size() * note_scale
-		var sus_modulate := Color(Color.WHITE, skin.sustain_alpha)
+func get_note_offset(note: NoteData) -> float:
+	var time_difference := note.time - Conductor.time
+	var time_to_pixels := 450.0 * (scroll_speed / Conductor.rate)
 
-		if note.state == NoteData.NoteState.ALIVE:
-			sus_height = note.length * time_to_pixels
-			sus_height -= tail_size.y
-
-			if sus_height > 0.0:
-				var sus_offset: Vector2
-				if downscroll:
-					sus_offset = -Vector2(sustain_width / 2.0, sus_height)
-				else:
-					sus_offset = Vector2(-sustain_width / 2.0, 0)
-
-				draw_texture_rect(
-					sus_tex,
-					Rect2(
-						note_position + sus_offset,
-						Vector2(sustain_width, sus_height),
-					),
-					true,
-					sus_modulate,
-				)
-			else:
-				tail_size.y += sus_height
-
-			if note.length > 0.0:
-				var tail_offset: Vector2
-				if downscroll:
-					tail_offset = -Vector2(0.0, sus_height) - Vector2(tail_width / 2.0, tail_size.y)
-				else:
-					tail_offset = Vector2(-tail_width / 2.0, sus_height)
-
-				draw_texture_rect(
-					tail_tex,
-					Rect2(
-						note_position + tail_offset,
-						Vector2(tail_width, tail_size.y * (-1.0 if downscroll else 1.0)),
-					),
-					false,
-					sus_modulate,
-				)
-
-			draw_texture_rect(
-				texture,
-				Rect2(
-					note_position - (texture.get_size() * note_scale / 2.0),
-					texture.get_size() * note_scale
-				),
-				false,
-			)
-		elif note.state == NoteData.NoteState.HELD:
-			sus_modulate.a = note.grace_timer / Conductor.sustain_release_delta
-			sus_height = (note.length + time_difference) * time_to_pixels
-			sus_height -= tail_size.y
-
-			if sus_height > 0.0:
-				var sus_offset: Vector2
-				if downscroll:
-					sus_offset = -Vector2(sustain_width / 2.0, sus_height)
-				else:
-					sus_offset = Vector2(-sustain_width / 2.0, 0)
-
-				draw_texture_rect(
-					sus_tex,
-					Rect2(
-						receptor_position + sus_offset,
-						Vector2(sustain_width, sus_height),
-					),
-					false,
-					sus_modulate,
-				)
-			else:
-				tail_size.y += sus_height
-
-			if note.length > 0.0:
-				var tail_offset: Vector2
-				if downscroll:
-					tail_offset = -Vector2(tail_width / 2.0, maxf(sus_height, 0.0)) - Vector2(0.0, tail_size.y)
-				else:
-					tail_offset = Vector2(-tail_width / 2.0, maxf(sus_height, 0.0))
-
-				draw_texture_rect(
-					tail_tex,
-					Rect2(
-						receptor_position + tail_offset,
-						Vector2(tail_width, tail_size.y * (-1.0 if downscroll else 1.0)),
-					),
-					false,
-					sus_modulate,
-				)
+	if downscroll:
+		return -time_difference * time_to_pixels
+	else:
+		return time_difference * time_to_pixels
 
 
-func get_sustain_texture(anim_name: StringName, frame: int, is_tail: bool) -> Texture2D:
-	if cached_sustain_textures.has(anim_name):
-		var cached_tex := cached_sustain_textures[anim_name]
-		if cached_tex.get_meta(&"frame") == frame:
+func draw_sustain(
+	note: NoteData,
+	sustain_texture: Texture2D,
+	tail_texture: Texture2D,
+	receptor_position: Vector2
+) -> void:
+	if note.length <= 0.0:
+		return
+
+	var note_scale := skin.note_scale
+	var sustain_width := skin.sustain_size
+	var tail_width := skin.sustain_tail_size
+
+	var time_to_pixels := 450.0 * (scroll_speed / Conductor.rate)
+	var time_difference := note.time - Conductor.time
+
+	var sus_height: float
+	var tail_size := tail_texture.get_size() * note_scale
+	var sus_modulate := Color(Color.WHITE, skin.sustain_alpha)
+
+	if note.state == NoteData.NoteState.HELD:
+		sus_modulate.a = note.grace_timer / Conductor.sustain_release_delta
+		sus_height = (note.length + time_difference) * time_to_pixels
+		sus_height -= tail_size.y
+	else:
+		sus_height = note.length * time_to_pixels
+		sus_height -= tail_size.y
+		receptor_position.y += get_note_offset(note)
+
+	if sus_height > 0.0:
+		var sus_offset := (
+			-Vector2(sustain_width / 2.0, sus_height) if downscroll
+			else Vector2(-sustain_width / 2.0, 0)
+		)
+
+		draw_texture_rect(
+			sustain_texture,
+			Rect2(
+				receptor_position + sus_offset,
+				Vector2(sustain_width, sus_height),
+			),
+			false,
+			sus_modulate,
+		)
+	else:
+		tail_size.y += sus_height
+
+	var tail_offset := (
+		-Vector2(tail_width / 2.0, maxf(sus_height, 0.0)) - Vector2(0.0, tail_size.y) if downscroll
+		else Vector2(-tail_width / 2.0, maxf(sus_height, 0.0))
+	)
+
+	draw_texture_rect(
+		tail_texture,
+		Rect2(
+			receptor_position + tail_offset,
+			Vector2(tail_width, tail_size.y * (-1.0 if downscroll else 1.0)),
+		),
+		false,
+		sus_modulate,
+	)
+
+
+func draw_note(note: NoteData, texture: Texture2D, receptor_position: Vector2) -> void:
+	if not texture:
+		return
+
+	var note_scale := skin.note_scale
+	var note_position := receptor_position + Vector2(0.0, get_note_offset(note))
+
+	draw_texture_rect(
+		texture,
+		Rect2(
+			note_position - (texture.get_size() * note_scale / 2.0),
+			texture.get_size() * note_scale
+		),
+		false,
+	)
+
+
+func get_sustain_texture(direction: int, frame: int, is_tail: bool) -> Texture2D:
+	var cache := _tail_textures if is_tail else _sustain_textures
+	if direction < cache.size():
+		var cached_tex := cache[direction]
+		if cached_tex and cached_tex.get_meta(&"frame") == frame:
 			return cached_tex
 
+	var anim_name := (animations_tail if is_tail else animations_sustain)[direction]
 	var note_frames := skin.get_note_frames()
 	if not note_frames.has_animation(anim_name):
 		return null
@@ -246,7 +291,7 @@ func get_sustain_texture(anim_name: StringName, frame: int, is_tail: bool) -> Te
 		)
 
 	texture.set_meta(&"frame", frame)
-	cached_sustain_textures[anim_name] = texture
+	cache[direction] = texture
 
 	return texture
 
@@ -264,3 +309,11 @@ func _on_note_hit(note: NoteData) -> void:
 	):
 		receptor.hold_timer = 0.0
 		receptor.animation_progress = 0.0
+
+	if (
+		(not parent.cpu) and
+		absf(Conductor.time - note.time) < 0.045 and
+		note.state == NoteData.NoteState.ALIVE
+	):
+		receptor.splash_progress = 0.0
+		receptor.splash_animation = &"%s_%d" % [receptor.direction, randi_range(1, 2)]

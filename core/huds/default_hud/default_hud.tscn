@@ -63,50 +63,40 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_v2t1s"]
 script = ExtResource("11_vvq14")
-direction = null
-framerate = null
 metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [sub_resource type="Resource" id="Resource_cr7sq"]
 script = ExtResource("11_vvq14")
 direction = &"down"
-framerate = null
 metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [sub_resource type="Resource" id="Resource_qjd2v"]
 script = ExtResource("11_vvq14")
 direction = &"up"
-framerate = null
 metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [sub_resource type="Resource" id="Resource_wwci2"]
 script = ExtResource("11_vvq14")
 direction = &"right"
-framerate = null
 metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [sub_resource type="Resource" id="Resource_ere7q"]
 script = ExtResource("11_vvq14")
-direction = null
-framerate = null
 metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [sub_resource type="Resource" id="Resource_u83tf"]
 script = ExtResource("11_vvq14")
 direction = &"down"
-framerate = null
 metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [sub_resource type="Resource" id="Resource_5x38g"]
 script = ExtResource("11_vvq14")
 direction = &"up"
-framerate = null
 metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [sub_resource type="Resource" id="Resource_icvbc"]
 script = ExtResource("11_vvq14")
 direction = &"right"
-framerate = null
 metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [node name="hud" type="Control" unique_id=1372711265 node_paths=PackedStringArray("player_renderer", "opponent_renderer")]

@@ -207,9 +207,11 @@ func set_downscroll(value: bool) -> void:
 	if is_instance_valid(player_renderer):
 		player_renderer.downscroll = value
 		player_renderer.position.y = 720.0 - 100.0 if value else 100.0
+		player_renderer.splash_alpha = Settings.get_setting(&"core", "note_splash_alpha")
 	if is_instance_valid(opponent_renderer):
 		opponent_renderer.downscroll = value
 		opponent_renderer.position.y = 720.0 - 100.0 if value else 100.0
+		opponent_renderer.splash_alpha = Settings.get_setting(&"core", "note_splash_alpha")
 
 	downscroll_changed.emit(value)
 
