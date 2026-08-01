@@ -269,6 +269,7 @@ func start_song(from_position: float = 0.0) -> void:
 
 
 func finish_song(force: bool = false, sound: bool = true) -> void:
+	# TODO: make parts of this replacable or more separated so u can customize in ur modules :3
 	if not playing:
 		return
 
@@ -278,6 +279,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 		save_score = false
 
 	playing = false
+
 	if save_score:
 		var current_score: Dictionary = Scores.get_score(song, difficulty)
 		if str(current_score.get("score", "N/A")) == "N/A" or score > current_score.get("score"):
@@ -296,7 +298,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 		song = new_song
 		difficulty = new_difficulty.to_lower()
 		playlist.pop_front()
-		get_tree().reload_current_scene()
+		SceneManager.swap_to_file(SongLoader.get_scene_path(song, songs_folder))
 		last_song_health = health
 		return
 

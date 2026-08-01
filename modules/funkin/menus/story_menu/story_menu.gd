@@ -94,7 +94,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				props.props[2].play_anim(&"confirm", true)
 				await props.props[2].animation_finished
 
-			SceneManager.transition_to_file("uid://da8mu3oqto3qq")
+			SceneManager.transition_to_file(SongLoader.get_scene_path(Game.song, Game.songs_folder))
 		else:
 			active = true
 

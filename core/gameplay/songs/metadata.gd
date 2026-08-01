@@ -17,7 +17,7 @@ extends Resource
 @export var skip_countdown: bool = false
 @export var player_audio_track_index: int = -1
 @export var opponent_audio_track_index: int = -1
-@export_file(".tscn") var scene_path: String
+@export_file("*.tscn") var scene_path: String
 
 
 static func load_from_song(song: String, songs_folder: String) -> SongMetadata:

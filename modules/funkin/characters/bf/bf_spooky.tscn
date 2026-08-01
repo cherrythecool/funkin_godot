@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_78jqg"]
 [ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_x7gjw"]
 [ext_resource type="Texture2D" uid="uid://dp4wr3woulw3y" path="res://core/characters/bf/icon.png" id="3_xe2oy"]
-[ext_resource type="SpriteFrames" uid="uid://728e4i2su3c6" path="res://modules/funkin/characters/bf/spooky_sprites.res" id="4_78jqg"]
+[ext_resource type="SpriteFrames" uid="uid://b6rmcjga76pk3" path="res://modules/funkin/characters/bf/spooky_sprites.res" id="4_fdmx8"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_yfyl8"]
 
 [sub_resource type="Resource" id="Resource_04pdi"]
@@ -871,14 +871,14 @@ _data = {
 &"sing_up_miss": SubResource("Animation_4o0ab")
 }
 
-[node name="bf-spooky" type="Node2D" unique_id=113605881]
+[node name="bf_spooky" type="Node2D" unique_id=113605881]
 script = ExtResource("1_78jqg")
 icon = SubResource("Resource_04pdi")
 starts_as_player = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=832432133]
 position = Vector2(-208, -392)
-sprite_frames = ExtResource("4_78jqg")
+sprite_frames = ExtResource("4_fdmx8")
 animation = &"BF idle dance"
 centered = false
 script = ExtResource("5_yfyl8")

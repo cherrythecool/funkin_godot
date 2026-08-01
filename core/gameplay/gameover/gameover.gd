@@ -96,5 +96,5 @@ func _on_fade_out_timer_timeout() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(character, ^"modulate:a", 0.0, 2.0)
 	tween.tween_callback(func() -> void:
-		SceneManager.transition_to_file("uid://da8mu3oqto3qq")
+		SceneManager.transition_to_file(SongLoader.get_scene_path(Game.song, Game.songs_folder))
 	)
