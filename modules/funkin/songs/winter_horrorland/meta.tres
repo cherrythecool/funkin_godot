@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://dqtvi285ki0du"]
+
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://core/gameplay/songs/metadata.gd" id="1_a5lta"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="1_yf5fh"]
+[ext_resource type="Texture2D" uid="uid://cyns8uj2h4erl" path="res://modules/funkin/characters/monster/icon.png" id="2_cu53k"]
+
+[sub_resource type="Resource" id="Resource_1rtw1"]
+script = ExtResource("1_yf5fh")
+texture = ExtResource("2_cu53k")
+color = Color(0.9529412, 1, 0.43137255, 1)
+metadata/_custom_type_script = "uid://b7lu04jsahckp"
+
+[resource]
+script = ExtResource("1_a5lta")
+display_name = &"Winter Horrorland"
+icon = SubResource("Resource_1rtw1")
+metadata/_custom_type_script = "uid://3bi6wwv6us1w"

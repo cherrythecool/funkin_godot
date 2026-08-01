@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://1tgi8h3dewq1"]
+
+[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://core/gameplay/songs/assets.gd" id="1_j7qfp"]
+[ext_resource type="PackedScene" uid="uid://md8gwoxxlk00" path="res://modules/funkin/characters/monster/monster.tscn" id="1_yoy8c"]
+[ext_resource type="PackedScene" uid="uid://bragoy3tisav2" path="res://modules/funkin/characters/gf/gf.tscn" id="3_i6jf6"]
+[ext_resource type="PackedScene" uid="uid://8gvi1td3sh2t" path="res://modules/funkin/stages/stage_erect/stage_erect.tscn" id="4_yoy8c"]
+
+[resource]
+script = ExtResource("1_j7qfp")
+spectator = ExtResource("3_i6jf6")
+opponent = ExtResource("1_yoy8c")
+stage = ExtResource("4_yoy8c")
+metadata/_custom_type_script = "uid://dk2lxfhv5lvf4"
