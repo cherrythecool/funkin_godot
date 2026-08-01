@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ccyvbidbyp8hj"]
+
+[ext_resource type="Script" uid="uid://8uvlppobed3f" path="res://assets/songs/darnell_bf/scripts/modchart.gd" id="1_eta4j"]
+
+[node name="modchart" type="Node" unique_id=842625655]
+script = ExtResource("1_eta4j")
+metadata/_custom_type_script = "uid://ccygr6542u5ga"

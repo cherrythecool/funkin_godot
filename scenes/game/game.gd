@@ -393,7 +393,6 @@ func setup_hud() -> void:
 
 	hud_setup.emit()
 
-
 func reset_conductor() -> void:
 	conductor.reset()
 	conductor.get_bpm_changes(chart.events)

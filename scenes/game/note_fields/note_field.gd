@@ -23,6 +23,7 @@ var lane_count: int = 0
 var notes: Array[Note] = []
 var note_data: Array[NoteData] = []
 var note_data_index: int = 0
+var update_note_positions: bool = true
 
 var scroll_speed_modifier: float = 1.0
 
@@ -84,8 +85,10 @@ func _process(delta: float) -> void:
 
 func update_note(note: Note, delta: float = 0.0) -> void:
 	var receptor: Receptor = get_receptor_from_lane(note.lane)
-	note.position.y = receptor.position.y
-	note.position.y -= (conductor.time - note.data.time) * 1000.0 * 0.45 * get_scroll_speed()
+	
+	if update_note_positions:
+		note.position.y = receptor.position.y
+		note.position.y -= (conductor.time - note.data.time) * 1000.0 * 0.45 * get_scroll_speed()
 
 	if note.is_sustain and note.hit:
 		if not is_receptor_held(note.lane):

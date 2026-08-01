@@ -19,7 +19,7 @@ script = ExtResource("1_dvmij")
 position = Vector2(0, -184)
 
 [node name="scroll_speed" type="Node2D" parent="the_list" unique_id=1325525582]
-position = Vector2(-4, 429)
+position = Vector2(-8, 480)
 script = ExtResource("2_getyr")
 skin = ExtResource("3_r0pnr")
 text = "scroll speed"
@@ -76,7 +76,7 @@ animation = &"unselected"
 script = ExtResource("6_ubeli")
 
 [node name="offset" type="Node2D" parent="the_list/options" unique_id=1554961303 node_paths=PackedStringArray("root", "current_preview")]
-position = Vector2(0, 288)
+position = Vector2(8, 288)
 script = ExtResource("7_wvbcq")
 value_suffix = &"ms"
 root = NodePath("../../..")
@@ -96,8 +96,27 @@ script = ExtResource("2_getyr")
 skin = ExtResource("3_r0pnr")
 text = "< 0 >"
 
+[node name="modcharts" type="Node2D" parent="the_list/options" unique_id=428954743]
+position = Vector2(-55, 381)
+script = ExtResource("4_2w5sj")
+key = &"modcharts"
+
+[node name="alphabet" type="Node2D" parent="the_list/options/modcharts" unique_id=1032087482]
+script = ExtResource("2_getyr")
+skin = ExtResource("3_r0pnr")
+text = "modcharts"
+centered = true
+
+[node name="checkbox" type="AnimatedSprite2D" parent="the_list/options/modcharts" unique_id=97967825]
+position = Vector2(319, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("5_pu18o")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("6_ubeli")
+
 [node name="method" type="Node2D" parent="the_list/options" unique_id=476497392]
-position = Vector2(0, 533)
+position = Vector2(12, 576)
 script = ExtResource("8_8o1re")
 list = Array[String](["chart", "constant"])
 display_raw = false
@@ -116,7 +135,7 @@ skin = ExtResource("3_r0pnr")
 text = "chart"
 
 [node name="value" type="Node2D" parent="the_list/options" unique_id=610762522 node_paths=PackedStringArray("root", "current_preview")]
-position = Vector2(-22, 629)
+position = Vector2(-10, 672)
 script = ExtResource("7_gp12a")
 key = &"custom_scroll_speed"
 integers = false
@@ -153,3 +172,4 @@ position = Vector2(240, 312)
 
 [connection signal="animation_finished" from="the_list/options/downscroll/checkbox" to="the_list/options/downscroll" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="the_list/options/middlescroll/checkbox" to="the_list/options/middlescroll" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="the_list/options/modcharts/checkbox" to="the_list/options/modcharts" method="_on_checkbox_animation_finished"]
