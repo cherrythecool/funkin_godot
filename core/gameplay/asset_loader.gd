@@ -2,6 +2,12 @@ class_name AssetLoader
 extends Node
 
 
+@export_group("Change Song", "song_")
+@export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var song_change := false
+@export var song_name: StringName = &""
+@export var song_difficulty: StringName = &""
+@export_dir var song_folder: String = ""
+
 @export var assets: SongAssets
 @export var metadata: SongMetadata
 
@@ -11,6 +17,18 @@ extends Node
 @export var hud_parent: Node
 
 @export var scripts_parent: Node
+
+
+func _ready() -> void:
+	if song_change:
+		if not song_name.is_empty():
+			Game.song = song_name
+
+		if not song_difficulty.is_empty():
+			Game.difficulty = song_difficulty
+
+		if not song_folder.is_empty():
+			Game.songs_folder = song_folder
 
 
 func load_assets() -> void:

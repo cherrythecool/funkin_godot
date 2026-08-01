@@ -117,7 +117,6 @@ func _handle_player_input(delta: float) -> void:
 					miss_note(note)
 
 
-
 func hit_note(note: NoteData) -> void:
 	note_hit.emit(note)
 
@@ -154,3 +153,20 @@ func load_notes(notes_array: Array) -> void:
 	for note: NoteData in notes_array:
 		note.state = NoteData.NoteState.ALIVE
 		note.strumline = strumline
+
+
+func push_note(note: NoteData) -> void:
+	if notes.is_empty():
+		notes.push_back(note)
+	else:
+		var sort := notes[notes.size() - 1].time > note.time
+		notes.push_back(note)
+
+		if sort:
+			notes_index = 0
+			notes.sort_custom(Chart.sort_by_time)
+
+
+func clear_notes() -> void:
+	notes.clear()
+	notes_index = 0

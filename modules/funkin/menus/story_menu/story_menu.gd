@@ -97,6 +97,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			SceneManager.transition_to_file("uid://da8mu3oqto3qq")
 		else:
 			active = true
+
 	if event.is_action('menu_up') or event.is_action('menu_down'):
 		var movement: int = int(Input.get_axis('menu_up', 'menu_down'))
 		change_selection(movement)
@@ -124,12 +125,8 @@ func _load_first_song() -> bool:
 	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
 	var difficulty: String = difficulties.difficulties[difficulties.selected]
 	var song_name: String = selected_week.get_song_name(0, difficulty)
-	Game.chart = Chart.load_chart("%s/%s" % [songs_folder, song_name], difficulty)
 
-	if not is_instance_valid(Game.chart):
-		GlobalAudio.get_player('MENU/CANCEL').play()
-		return false
-
+	Game.chart = null
 	Game.songs_folder = songs_folder
 	Game.song = song_name
 	Game.difficulty = difficulty.to_lower()

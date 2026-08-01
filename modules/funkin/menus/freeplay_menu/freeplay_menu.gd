@@ -161,12 +161,7 @@ func select_song() -> void:
 		active = true
 		return
 
-	var song_folder := "%s/%s" % [songs_folder, current_song]
-	Game.chart = Chart.load_chart(song_folder, difficulty)
-	if not is_instance_valid(Game.chart):
-		active = true
-		return
-
+	Game.chart = null
 	Game.songs_folder = songs_folder
 	Game.song = current_song
 	Game.difficulty = difficulty.to_lower()

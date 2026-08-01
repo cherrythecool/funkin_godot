@@ -84,7 +84,6 @@ func _on_setup() -> void:
 
 	if strumlines.has(&"opponent"):
 		var opp_strums := strumlines[&"opponent"]
-		opp_strums.note_hit.connect(_on_opponent_note_hit)
 		opp_strums.note_hit.connect(_on_first_opponent_note, CONNECT_ONE_SHOT)
 		opponent_renderer.parent = opp_strums
 	else:
@@ -155,9 +154,6 @@ func _on_note_hit(note: NoteData) -> void:
 	if rating_textures.has(rating.name):
 		rating_sprite.texture = rating_textures[rating.name]
 
-	#if rating.name == &'marvelous' or rating.name == &'sick':
-	#	spawn_splash(note, player_field.skin, note.field.receptors[note.lane])
-
 	rating_container.modulate.a = Settings.get_setting(&"core", "rating_alpha")
 	rating_container.scale = Vector2.ONE * 1.1
 	rating_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -198,16 +194,13 @@ func _on_note_miss(note: NoteData) -> void:
 	note_miss.emit(note)
 
 
-func _on_opponent_note_hit(_note: NoteData) -> void:
-	#spawn_splash(note, opponent_field.skin, note.field.receptors[note.direction])
-	pass
-
-
 func set_downscroll(value: bool) -> void:
 	if is_instance_valid(player_renderer):
 		player_renderer.downscroll = value
 		player_renderer.position.y = 720.0 - 100.0 if value else 100.0
 		player_renderer.splash_alpha = Settings.get_setting(&"core", "note_splash_alpha")
+		player_renderer.underlay_alpha = Settings.get_setting(&"core", "note_underlay_alpha")
+
 	if is_instance_valid(opponent_renderer):
 		opponent_renderer.downscroll = value
 		opponent_renderer.position.y = 720.0 - 100.0 if value else 100.0
@@ -222,21 +215,3 @@ func set_centered_receptors(value: bool) -> void:
 		opponent_renderer.position.x = 320.0
 	if is_instance_valid(player_renderer):
 		player_renderer.position.x = 640.0 if value else 960.0
-
-
-#func spawn_splash(note: Note, skin: NoteSkin, target: Node2D) -> void:
-	#if not is_instance_valid(note.splash):
-		#return
-#
-	#var splash: NoteSplash = note.splash.instantiate()
-	#splash.note = note
-#
-	#if splash.use_skin and is_instance_valid(skin):
-		#splash.sprite_frames = skin.get_splash_frames()
-		#splash.scale = skin.splash_scale
-		#splash.texture_filter = skin.splash_filter
-		#splash.colors = skin.splash_shader_colors
-		#splash.material = skin.get_splash_material()
-#
-	##note_fields.add_child(splash)
-	#splash.global_position = target.global_position

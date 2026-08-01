@@ -65,7 +65,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					close()
 					SceneManager.reload_current_scene()
 				&"options":
-					OptionsMenu.target_scene = "uid://da8mu3oqto3qq"
+					OptionsMenu.target_scene = get_tree().current_scene.scene_file_path
 					close()
 					SceneManager.transition_to_file("uid://3daku38i1a50")
 				&"quit":

@@ -15,9 +15,10 @@ extends Node2D
 @export var skin: NoteSkin
 @export var use_skin_texture_filter := true
 
-@export var spacing := 90.0
+@export var spacing := 112.0
 @export var scroll_speed := 1.0
 @export var splash_alpha := 0.8
+@export var underlay_alpha := 0.0
 @export var downscroll := false
 
 @export_group("Animations", "animations_")
@@ -77,6 +78,21 @@ func _draw() -> void:
 	var receptor_scale := skin.receptor_scale
 	_receptor_positions.resize(receptors.size())
 
+	if underlay_alpha > 0.0:
+		draw_rect(
+			Rect2(
+				Vector2(
+					-spacing * 2.0,
+					-position.y,
+				),
+				Vector2(
+					spacing * receptors.size(),
+					720.0,
+				)
+			),
+			Color(Color.BLACK, underlay_alpha)
+		)
+
 	for i: int in receptors.size():
 		var receptor := receptors[i]
 		var receptor_anim := receptor.animation_name
@@ -91,16 +107,15 @@ func _draw() -> void:
 			mini(frame, anim_length - 1)
 		)
 
-		var receptor_position := Vector2(
+		_receptor_positions[i] = Vector2(
 			(i * spacing) - (spacing * 1.5),
 			0.0
 		)
-		_receptor_positions[i] = receptor_position
 
 		draw_texture_rect(
 			texture,
 			Rect2(
-				receptor_position - (texture.get_size() * receptor_scale / 2.0),
+				_receptor_positions[i] - (texture.get_size() * receptor_scale / 2.0),
 				texture.get_size() * receptor_scale,
 			),
 			false

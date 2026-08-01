@@ -292,14 +292,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 		var new_song: StringName = playlist[0].name
 		var new_difficulty: StringName = playlist[0].difficulty
 
-		chart = Chart.load_chart("%s/%s" % [songs_folder, new_song], new_difficulty)
-		if not is_instance_valid(chart):
-			GlobalAudio.get_player("MENU/CANCEL").play()
-			back_to_menus.emit()
-			SceneManager.transition_to_file("uid://b7fwxsepnt38j")
-			playlist.clear()
-			return
-
+		chart = null
 		song = new_song
 		difficulty = new_difficulty.to_lower()
 		playlist.pop_front()
@@ -313,10 +306,12 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 		GlobalAudio.get_player("MENU/CANCEL").play()
 
 	back_to_menus.emit()
+
 	if not exit_scene.is_empty():
 		SceneManager.transition_to_file(exit_scene)
 		exit_scene = ""
 		return
+
 	match mode:
 		PlayMode.STORY:
 			SceneManager.transition_to_file("uid://dcf86iwg6mn3d")

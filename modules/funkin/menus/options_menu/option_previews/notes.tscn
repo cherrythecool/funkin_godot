@@ -1,6 +1,41 @@
 [gd_scene format=3 uid="uid://ctp6qq4w60hkd"]
 
 [ext_resource type="Script" uid="uid://2441ftrjfyr7" path="res://modules/funkin/menus/options_menu/option_previews/notes.gd" id="1_508hw"]
+[ext_resource type="Script" uid="uid://3n2aou2bthat" path="res://core/notes/strumline_manager.gd" id="2_vt4am"]
+[ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://core/notes/strumline_renderer_2d.gd" id="3_litst"]
+[ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://core/styles/default/note_skin.tres" id="4_litst"]
+[ext_resource type="Script" uid="uid://chj1hnw2lhjy4" path="res://core/notes/receptor_data.gd" id="4_oelvf"]
+
+[sub_resource type="Resource" id="Resource_oelvf"]
+script = ExtResource("4_oelvf")
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_vjjcy"]
+script = ExtResource("4_oelvf")
+direction = &"down"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_hxbik"]
+script = ExtResource("4_oelvf")
+direction = &"up"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_oaket"]
+script = ExtResource("4_oelvf")
+direction = &"right"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
 [node name="offset" type="Node2D" unique_id=2094019831]
 script = ExtResource("1_508hw")
+
+[node name="manager" type="Node" parent="." unique_id=777743180]
+script = ExtResource("2_vt4am")
+metadata/_custom_type_script = "uid://3n2aou2bthat"
+
+[node name="renderer" type="Node2D" parent="." unique_id=1544883246 node_paths=PackedStringArray("parent")]
+position = Vector2(0, -240)
+script = ExtResource("3_litst")
+parent = NodePath("../manager")
+receptors = Array[ExtResource("4_oelvf")]([SubResource("Resource_oelvf"), SubResource("Resource_vjjcy"), SubResource("Resource_hxbik"), SubResource("Resource_oaket")])
+skin = ExtResource("4_litst")
+metadata/_custom_type_script = "uid://rh4jeluc5vy5"

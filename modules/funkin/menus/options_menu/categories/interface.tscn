@@ -10,7 +10,7 @@
 [node name="interface" type="Node2D" unique_id=2111672686 node_paths=PackedStringArray("options")]
 position = Vector2(-320, 0)
 script = ExtResource("1_6p62e")
-options = [NodePath("underlay_alpha"), NodePath("rating_alpha"), NodePath("splash_alpha"), NodePath("holds_below_receptors"), NodePath("time_bar_show"), NodePath("skip_scene_transitions")]
+options = [NodePath("underlay_alpha"), NodePath("rating_alpha"), NodePath("splash_alpha"), NodePath("time_bar_show"), NodePath("skip_scene_transitions")]
 max_distance = 320.0
 
 [node name="underlay_alpha" type="Node2D" parent="." unique_id=925156825 node_paths=PackedStringArray("root")]
@@ -89,27 +89,8 @@ position = Vector2(366, -34)
 script = ExtResource("3_ih51s")
 text = "0%"
 
-[node name="holds_below_receptors" type="Node2D" parent="." unique_id=364311376]
-position = Vector2(3, 108)
-script = ExtResource("2_422dy")
-key = &"holds_below_receptors"
-
-[node name="alphabet" type="Node2D" parent="holds_below_receptors" unique_id=1335330600]
-position = Vector2(243, 0)
-script = ExtResource("3_ih51s")
-text = "holds below receptors"
-centered = true
-
-[node name="checkbox" type="AnimatedSprite2D" parent="holds_below_receptors" unique_id=1145184616]
-position = Vector2(801, 0)
-scale = Vector2(0.8, 0.8)
-sprite_frames = ExtResource("4_abqtr")
-animation = &"selected"
-offset = Vector2(-5, -35)
-script = ExtResource("5_fu6tn")
-
 [node name="time_bar_show" type="Node2D" parent="." unique_id=1465903622]
-position = Vector2(-34, 292)
+position = Vector2(-34, 188)
 script = ExtResource("2_422dy")
 key = &"time_bar_show"
 
@@ -128,7 +109,7 @@ offset = Vector2(-5, -35)
 script = ExtResource("5_fu6tn")
 
 [node name="skip_scene_transitions" type="Node2D" parent="." unique_id=2138152291]
-position = Vector2(117, 390)
+position = Vector2(117, 286)
 script = ExtResource("2_422dy")
 key = &"skip_scene_transitions"
 
@@ -146,6 +127,5 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 script = ExtResource("5_fu6tn")
 
-[connection signal="animation_finished" from="holds_below_receptors/checkbox" to="holds_below_receptors" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="time_bar_show/checkbox" to="time_bar_show" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="skip_scene_transitions/checkbox" to="skip_scene_transitions" method="_on_checkbox_animation_finished"]

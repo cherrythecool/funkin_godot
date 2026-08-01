@@ -147,7 +147,6 @@ func _get_core_defaults() -> Dictionary:
 		"note_scroll_value": 1.0,
 		"note_underlay_alpha": 0.0,
 		"note_splash_alpha": 0.8,
-		"holds_below_receptors": true,
 
 		"rating_alpha": 1.0,
 		"time_bar_show": true,
