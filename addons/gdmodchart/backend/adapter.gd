@@ -23,3 +23,7 @@ func get_notes() -> Array[Variant]: return []
 
 func get_receptor_sprite(receptor:Variant) -> Node2D: return null
 func get_note_sprite(note:Variant) -> Node2D: return null
+
+func get_hold_length(note:Variant) -> float: return 0
+func get_hold_sprite(note:Variant) -> Node2D: return null
+func get_tail_sprite(note:Variant) -> Node2D: return null

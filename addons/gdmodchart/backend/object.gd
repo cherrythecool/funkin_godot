@@ -5,11 +5,8 @@ var origin:Node2D
 
 func _init(origin:Node2D) -> void:
 	self.origin = origin
-
-func _process(delta: float) -> void:
-	if !is_instance_valid(origin):
-		self.queue_free()
-		return
+	
+func update_properties() -> void:
 	self.texture = _get_origin_texture(origin)
 	if self.modulate != origin.modulate + origin.self_modulate: self.modulate = origin.modulate + origin.self_modulate
 	if self.scale.x != origin.global_scale.x or self.scale.y != origin.global_scale.y: self.scale = Vector3(origin.global_scale.x, origin.global_scale.y, 1)

@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://dtq3vdo73pkrg"]
-
-[ext_resource type="PackedScene" uid="uid://uoclkwldbxy3" path="res://modchart_test_2.tscn" id="1_mj838"]
-
-[node name="modchart_test" type="Node3D" unique_id=332603837]
-
-[node name="sprite_3d" parent="." unique_id=124838758 instance=ExtResource("1_mj838")]
-transform = Transform3D(1, 0, 0, 0, 0.995832, -0.09120615, 0, 0.09120615, 0.995832, -7.7136154, 0, -25.61905)

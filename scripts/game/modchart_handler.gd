@@ -41,3 +41,25 @@ func get_receptor_sprite(receptor:Variant) -> Node2D:
 
 func get_note_sprite(note:Variant) -> Node2D:
 	return note.sprite
+
+func get_hold_length(note:Variant) -> float:
+	return note.data.length
+	
+var fake_cache: Dictionary[TextureRect, Sprite2D] = {}
+
+func get_hold_sprite(note:Variant) -> Node2D:
+	var fake = fake_cache.get(note.sustain)
+	if !is_instance_valid(fake):
+		fake = Sprite2D.new()
+		fake_cache.set(note.sustain, fake)
+	fake.global_position = note.sustain.global_position
+	fake.texture = note.sustain.texture
+	return fake
+func get_tail_sprite(note:Variant) -> Node2D:
+	var fake = fake_cache.get(note.tail)
+	if !is_instance_valid(fake):
+		fake = Sprite2D.new()
+		fake_cache.set(note.tail, fake)
+	fake.global_position = note.tail.global_position
+	fake.texture = note.tail.texture
+	return fake

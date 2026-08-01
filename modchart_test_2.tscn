@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://uoclkwldbxy3"]
-
-[ext_resource type="Texture2D" uid="uid://bbc06fsifnyro" path="res://assets/game/skins/default/notes.png" id="1_g8gfc"]
-
-[node name="sprite_3d" type="Sprite3D" unique_id=124838758]
-texture = ExtResource("1_g8gfc")
