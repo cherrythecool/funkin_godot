@@ -132,6 +132,9 @@ func _draw() -> void:
 		if time < note.time - spawn_time:
 			break
 
+		if note.state == NoteData.NoteState.HIT or note.state == NoteData.NoteState.MISSED:
+			continue
+
 		var receptor_position := _receptor_positions[note.direction]
 
 		# TODO: looping note anims ig
@@ -156,6 +159,9 @@ func _draw() -> void:
 			draw_note(note, texture, receptor_position)
 
 	var splash_frames := skin.get_splash_frames()
+	if not splash_frames:
+		return
+
 	var splash_scale := skin.splash_scale
 
 	for i: int in receptors.size():

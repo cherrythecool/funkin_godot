@@ -76,6 +76,7 @@ static func load_codename(song_folder: String, difficulty: StringName) -> Chart:
 			else:
 				note_data.type = &"default"
 
+			note_data.strumline = side
 			chart.strumlines[side][&"notes"].push_back(note_data)
 
 	chart.sort()

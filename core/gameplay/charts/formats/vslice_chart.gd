@@ -91,6 +91,7 @@ static func load_vslice(song_folder: String, difficulty: StringName) -> Chart:
 		note_data.type = note.get("k", &"default")
 		chart.update_note_types(side, note_data.type)
 
+		note_data.strumline = side
 		chart.strumlines[side][&"notes"].push_back(note_data)
 
 	chart.sort()

@@ -435,9 +435,5 @@ func skip_to(seconds: float) -> void:
 
 	Conductor.calculate_beat()
 
-	#if is_instance_valid(opponent_field):
-		#opponent_field.try_spawning(true)
-		#opponent_field.clear_notes()
-	#if is_instance_valid(player_field):
-		#player_field.try_spawning(true)
-		#player_field.clear_notes()
+	for key: StringName in strumlines:
+		strumlines[key].skip_missed_notes(1.0)

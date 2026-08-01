@@ -54,7 +54,7 @@ func get_note_frames() -> SpriteFrames:
 
 func get_splash_frames() -> SpriteFrames:
 	if not is_instance_valid(splash_frames):
-		splash_frames = load("uid://bw4etux81oui3")
+		splash_frames = load("uid://c6o1lsakoino4")
 	return splash_frames
 
 

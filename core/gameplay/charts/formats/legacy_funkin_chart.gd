@@ -95,6 +95,8 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 			else:
 				side = &"opponent" if direction < 4 else &"player"
 
+			note_data.strumline = side
+
 			if note.size() > 3 and note[3] is String:
 				note_data.type = StringName(note[3])
 			else:

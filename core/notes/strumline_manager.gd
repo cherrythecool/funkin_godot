@@ -121,7 +121,6 @@ func hit_note(note: NoteData) -> void:
 	note_hit.emit(note)
 
 	var time := get_time()
-
 	if time < note.time + note.length and note.length > 0.0:
 		note.state = NoteData.NoteState.HELD
 	else:
@@ -170,3 +169,13 @@ func push_note(note: NoteData) -> void:
 func clear_notes() -> void:
 	notes.clear()
 	notes_index = 0
+
+
+func skip_missed_notes(time_range: float) -> void:
+	var time := get_time()
+	while notes_index < notes.size():
+		var note := notes[notes_index]
+		if time + time_range > note.time:
+			notes_index += 1
+		else:
+			return
