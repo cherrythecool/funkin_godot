@@ -125,7 +125,6 @@ func change_selection(amount: int = 0) -> void:
 	index = wrapi(index + amount, 0, song_nodes.size())
 	song_changed.emit(index)
 	change_difficulty()
-	previous_song = current_song
 
 	track_timer.start(0.0)
 
@@ -153,7 +152,6 @@ func change_difficulty(amount: int = 0) -> void:
 	# there has been a change and the song should switch
 	if current_song != previous_song:
 		track_timer.start(0.0)
-		previous_song = current_song
 
 
 func select_song() -> void:
@@ -207,6 +205,11 @@ func load_song(i: int) -> void:
 func _load_tracks() -> void:
 	if not Tracks.tracks_exist(current_song, songs_folder):
 		return
+
+	if current_song == previous_song:
+		return
+
+	previous_song = current_song
 
 	GlobalAudio.music.stop()
 	song_player.stream = Tracks.tracks_load(current_song, songs_folder)
