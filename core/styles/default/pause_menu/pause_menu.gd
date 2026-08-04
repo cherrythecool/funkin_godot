@@ -22,11 +22,13 @@ func _ready() -> void:
 	tween.tween_property(root, ^"modulate:a", 1.0, 0.5)
 
 	create_tween().tween_property(music, ^"volume_linear", 0.9, 2.0).set_delay(0.5)
+
 	if not is_instance_valid(Game.instance):
 		return
-	if is_instance_valid(Game.instance.skin) and \
-			is_instance_valid(Game.instance.skin.pause_music):
-		music.stream = Game.instance.skin.pause_music
+
+	if is_instance_valid(Game.instance.hud) and \
+			is_instance_valid(Game.instance.hud.get(&"hud_skin")):
+		music.stream = Game.instance.hud.hud_skin.pause_music
 		music.play()
 
 	var keys: Array = Game.PlayMode.keys()
