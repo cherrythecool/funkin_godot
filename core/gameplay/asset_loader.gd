@@ -88,34 +88,31 @@ func load_assets() -> void:
 		if is_instance_valid(stage_parent):
 			stage_parent.add_child(stage)
 
-	var hud: Node = assets.get_hud().instantiate()
-	var hud_skin := assets.get_hud_skin()
-	if "hud_skin" in hud:
-		hud.hud_skin = hud_skin
-
-	Game.instance.hud = hud
-
 	if is_instance_valid(hud_parent):
+		var hud: Node = assets.get_hud().instantiate()
+		var hud_skin := assets.get_hud_skin()
+		if "hud_skin" in hud:
+			hud.hud_skin = hud_skin
+
+		Game.instance.hud = hud
 		hud_parent.add_child(hud)
-	else:
-		hud.queue_free()
 
-	var player_renderer: StrumlineRenderer2D
-	var opponent_renderer: StrumlineRenderer2D
+		var player_renderer: StrumlineRenderer2D
+		var opponent_renderer: StrumlineRenderer2D
 
-	if "player_renderer" in hud:
-		player_renderer = hud.player_renderer
-	if "opponent_renderer" in hud:
-		opponent_renderer = hud.opponent_renderer
+		if "player_renderer" in hud:
+			player_renderer = hud.player_renderer
+		if "opponent_renderer" in hud:
+			opponent_renderer = hud.opponent_renderer
 
-	# Set the NoteField characters.
-	if is_instance_valid(player_renderer):
-		player_renderer.skin = assets.get_player_note_skin()
+		# Set the NoteField characters.
+		if is_instance_valid(player_renderer):
+			player_renderer.skin = assets.get_player_note_skin()
 
-	if is_instance_valid(opponent_renderer):
-		opponent_renderer.skin = assets.get_opponent_note_skin()
+		if is_instance_valid(opponent_renderer):
+			opponent_renderer.skin = assets.get_opponent_note_skin()
 
-	Game.instance.pause_menu = hud_skin.get_pause_menu()
+		Game.instance.pause_menu = hud_skin.get_pause_menu()
 
 	for key: StringName in assets.note_types.keys():
 		var scene: PackedScene = assets.note_types.get(key)

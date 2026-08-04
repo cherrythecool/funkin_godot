@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dhv3phik4tia" path="res://core/gameplay/game.gd" id="1_wdans"]
 [ext_resource type="Script" uid="uid://cvc0oj8twimgt" path="res://core/gameplay/asset_loader.gd" id="2_seo1d"]
+[ext_resource type="PackedScene" uid="uid://d3n853hu8o3ik" path="res://core/styles/default/pause_menu/pause_menu.tscn" id="2_snf6e"]
 [ext_resource type="Script" uid="uid://1dwo0trw3je2" path="res://core/gameplay/ratings/rating_calculator.gd" id="3_j7he7"]
 [ext_resource type="Script" uid="uid://dp70bbdhoqpo0" path="res://core/gameplay/ratings/rating.gd" id="4_4vlo1"]
 [ext_resource type="Script" uid="uid://3n2aou2bthat" path="res://core/notes/strumline_manager.gd" id="5_gof74"]
@@ -11,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bh5vnsmdwoatu" path="res://modules/funkin/characters/pico/pico_player.tscn" id="7_snf6e"]
 [ext_resource type="PackedScene" uid="uid://dx13k6w54if1l" path="res://modules/funkin/characters/darnell/darnell.tscn" id="8_qp3l0"]
 [ext_resource type="PackedScene" uid="uid://cr0c14kq4sye1" path="res://core/huds/default_hud/default_hud.tscn" id="11_qp3l0"]
-[ext_resource type="Resource" uid="uid://oxo327xfxemo" path="res://core/styles/default/hud_skin.tres" id="12_lkmjy"]
+[ext_resource type="Resource" uid="uid://b50qb5a7wlrmn" path="res://modules/funkin/styles/pico_mix/hud_skin.tres" id="12_p878t"]
 
 [sub_resource type="Resource" id="Resource_5i0tg"]
 script = ExtResource("4_4vlo1")
@@ -53,13 +54,15 @@ bake_resolution = 180
 _data = [Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.5), -5.0, -1.6, 0, 1, Vector2(0.75, 0.1), -1.0, -0.4, 0, 1, Vector2(1, 0), -1.0, -0.4, 0, 1]
 point_count = 4
 
-[node name="darnell_erect" type="Node" unique_id=1600443132 node_paths=PackedStringArray("strumlines", "asset_loader", "player", "opponent", "spectator", "stage")]
+[node name="darnell_erect" type="Node" unique_id=1600443132 node_paths=PackedStringArray("strumlines", "asset_loader", "hud", "player", "opponent", "spectator", "stage")]
 script = ExtResource("1_wdans")
 strumlines = {
 &"opponent": NodePath("opponent_strumline"),
 &"player": NodePath("player_strumline")
 }
 asset_loader = NodePath("asset_loader")
+pause_menu = ExtResource("2_snf6e")
+hud = NodePath("hud_layer/hud")
 player = NodePath("characters/pico_player")
 opponent = NodePath("characters/darnell")
 spectator = NodePath("characters/nene")
@@ -127,7 +130,7 @@ bumps = false
 unique_name_in_owner = true
 
 [node name="hud" parent="hud_layer" unique_id=1372711265 instance=ExtResource("11_qp3l0")]
-hud_skin = ExtResource("12_lkmjy")
+hud_skin = ExtResource("12_p878t")
 
 [connection signal="back_to_menus" from="." to="camera_2d" method="_on_game_back_to_menus"]
 [connection signal="event_hit" from="." to="camera_2d" method="_on_game_event_hit"]

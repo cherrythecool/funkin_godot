@@ -16,6 +16,7 @@ extends Node2D
 @export var use_skin_texture_filter := true
 
 @export var spacing := 112.0
+@export var use_game_scroll_speed := true
 @export var scroll_speed := 1.0
 @export var splash_alpha := 0.8
 @export var underlay_alpha := 0.0
@@ -31,6 +32,14 @@ var _sustain_textures: Array[Texture2D]
 var _tail_textures: Array[Texture2D]
 
 var _receptor_positions: PackedVector2Array
+
+
+func _ready() -> void:
+	if use_game_scroll_speed and is_instance_valid(Game.instance):
+		scroll_speed = Game.instance.scroll_speed
+		Game.instance.scroll_speed_changed.connect(func(value: float) -> void:
+			scroll_speed = value
+		)
 
 
 func _process(delta: float) -> void:

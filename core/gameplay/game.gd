@@ -34,7 +34,7 @@ static var last_song_health: float = -1.0
 
 var events_index: int = 0
 
-var hud: Node
+@export var hud: Node
 #var player_field: NoteField = null
 #var opponent_field: NoteField = null
 

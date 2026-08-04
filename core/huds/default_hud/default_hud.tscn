@@ -244,7 +244,6 @@ position = Vector2(960, 620)
 script = ExtResource("10_nwv25")
 receptors = Array[ExtResource("11_vvq14")]([SubResource("Resource_v2t1s"), SubResource("Resource_cr7sq"), SubResource("Resource_qjd2v"), SubResource("Resource_wwci2")])
 skin = ExtResource("12_iy7o8")
-spacing = 112.0
 scroll_speed = 3.0
 metadata/_custom_type_script = "uid://rh4jeluc5vy5"
 
@@ -254,7 +253,6 @@ position = Vector2(320, 620)
 script = ExtResource("10_nwv25")
 receptors = Array[ExtResource("11_vvq14")]([SubResource("Resource_ere7q"), SubResource("Resource_u83tf"), SubResource("Resource_5x38g"), SubResource("Resource_icvbc")])
 skin = ExtResource("12_iy7o8")
-spacing = 112.0
 scroll_speed = 3.0
 metadata/_custom_type_script = "uid://rh4jeluc5vy5"
 
