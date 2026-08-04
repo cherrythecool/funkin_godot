@@ -4,6 +4,8 @@ extends Node2D
 static var selected_x: int = 1
 static var selected_y: int = 1
 
+@export var entries: Dictionary[StringName, CharacterSelectEntry] = {}
+
 @onready var camera_2d: Camera2D = %camera_2d
 @onready var fade_rect: ColorRect = %fade_rect
 
@@ -38,6 +40,9 @@ var locked: bool = false
 var transitioning: bool = false
 
 var dipshit_tween: Tween
+var music_tween: Tween
+
+var start_freeplay: String
 
 
 func _enter_tree() -> void:
@@ -50,6 +55,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	GlobalAudio.music.stop()
+	start_freeplay = MainMenu.freeplay_scene
 
 	confirm.finished.connect(_on_confirm_finished)
 
@@ -57,7 +63,12 @@ func _ready() -> void:
 	Conductor.target_audio = music
 	Conductor.tempo = 90.0
 	Conductor.beat_hit.connect(_on_beat_hit)
+
+	music.volume_linear = 0.0
 	music.play()
+
+	music_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	music_tween.tween_property(music, ^"volume_linear", 1.0, 1.0)
 
 	dipshit_tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)\
 			.set_ease(Tween.EASE_OUT).set_parallel()
@@ -113,6 +124,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action(&'menu_cancel'):
 		if locked:
+			if music_tween and music_tween.is_running():
+				music_tween.kill()
+
+			music_tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+			music_tween.tween_property(music, ^"volume_linear", 1.0, 2.0)
+
 			locked = false
 			deny.play()
 			selector.play(&'denied')
@@ -130,22 +147,26 @@ func _unhandled_input(event: InputEvent) -> void:
 
 			selector.play(&'idle')
 		else:
-			SceneManager.transition_to_file('uid://b7fwxsepnt38j')
+			if ResourceLoader.exists(start_freeplay):
+				SceneManager.transition_to_file(start_freeplay)
+			else:
+				SceneManager.transition_to_file('uid://b7fwxsepnt38j')
 	if event.is_action(&'menu_accept') and not locked:
 		locked = true
 
 		var index: int = selected_x + (selected_y * 3)
-		# TODO: make this a script or smth so better customization
+
 		var icon: AnimatedSprite = characters.get_child(index)
-		match icon.editor_description:
-			'bf':
-				finish_selection(icon, "uid://3rua2gpac5p8")
-			'pico':
-				finish_selection(icon, "uid://cbp5qie32cehq")
-			_:
-				locked = false
-				selector.play(&'denied')
-				deny.play()
+		var key: StringName = icon.get_meta(&"key", &"locked")
+		if key not in entries:
+			key = &"locked"
+
+		if key == &"locked":
+			locked = false
+			selector.play(&'denied')
+			deny.play()
+		else:
+			finish_selection(icon, entries[key].freeplay_path)
 
 	# TODO: make this cleaner
 	if locked:
@@ -167,22 +188,22 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _update_selection(sound: bool = true) -> void:
 	selector.play(&'idle')
+
 	if sound:
 		select.play()
 
 	var index: int = selected_x + (selected_y * 3)
-	# TODO: make this a script or smth so better customization
-	var icon: AnimatedSprite = characters.get_child(index)
-	match icon.editor_description:
-		'bf':
-			_load_characters('uid://d3uuros7qs2p', 'uid://dh0j85o8ohuon', load('uid://86qag6byq5lj'))
-		'pico':
-			_load_characters('uid://c6to8sv86340c', 'uid://b6oapcexvu5n', load('uid://dwv1twuy3tllg'))
-		_:
-			_load_characters('uid://bydgpm6a02kid', 'uid://bydgpm6a02kid', load('uid://ncq3u01qhoh8'))
 
-			spectator.process_mode = Node.PROCESS_MODE_DISABLED
-			spectator.hide()
+	var icon: AnimatedSprite = characters.get_child(index)
+	var key: StringName = icon.get_meta(&"key", &"locked")
+	if key not in entries:
+		key = &"locked"
+
+	_load_characters(entries[key].player, entries[key].spectator, entries[key].name_texture)
+
+	if entries[key].player == entries[key].spectator:
+		spectator.process_mode = Node.PROCESS_MODE_DISABLED
+		spectator.hide()
 
 
 func get_camera_offset() -> Vector2:
@@ -194,6 +215,13 @@ func get_camera_offset() -> Vector2:
 
 func finish_selection(icon: AnimatedSprite, scene_path: String) -> void:
 	MainMenu.freeplay_scene = scene_path
+
+	if music_tween and music_tween.is_running():
+		music_tween.kill()
+
+	music_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	music_tween.tween_property(music, ^"volume_linear", 0.0, 1.0)
+
 	confirm.play()
 	player_anim.play(&'confirm')
 	spectator_anim.play(&'confirm')
@@ -225,7 +253,7 @@ func _on_confirm_finished() -> void:
 	SceneManager.transition_to_file(MainMenu.freeplay_scene)
 
 
-func _load_characters(player_path: String, spectator_path: String, logo: Texture2D) -> void:
+func _load_characters(player_scene: PackedScene, spectator_scene: PackedScene, logo: Texture2D) -> void:
 	title.texture = logo
 	if is_instance_valid(title_tween) and title_tween.is_running():
 		title_tween.kill()
@@ -242,12 +270,10 @@ func _load_characters(player_path: String, spectator_path: String, logo: Texture
 	spectator.queue_free()
 	player.queue_free()
 
-	var spectator_scene: PackedScene = load(spectator_path)
 	var spectator_node: Node = spectator_scene.instantiate()
 	atlas_characters.add_child(spectator_node)
 	spectator = spectator_node
 
-	var player_scene: PackedScene = load(player_path)
 	var player_node: Node = player_scene.instantiate()
 	atlas_characters.add_child(player_node)
 	player = player_node

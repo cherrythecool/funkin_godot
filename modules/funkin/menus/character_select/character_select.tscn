@@ -2,16 +2,22 @@
 
 [ext_resource type="Texture2D" uid="uid://uy8oihb6pd4m" path="res://modules/funkin/menus/character_select/background/bg.png" id="1_oablf"]
 [ext_resource type="Script" uid="uid://p52omju8wqak" path="res://modules/funkin/menus/character_select/character_select.gd" id="1_tjis5"]
+[ext_resource type="Script" uid="uid://d33ys4d802pc6" path="res://modules/funkin/menus/character_select/characters/character_scenes.gd" id="2_qa0wy"]
 [ext_resource type="Script" uid="uid://c5ju3u657fyae" path="res://addons/gdanimate/animate_symbol_2d.gd" id="2_rptr7"]
 [ext_resource type="AudioStream" uid="uid://dagd7ek6gmogr" path="res://modules/funkin/menus/character_select/scroll.ogg" id="2_twrlh"]
 [ext_resource type="AudioStream" uid="uid://b41lp4n5nd3dk" path="res://modules/funkin/menus/character_select/confirm.ogg" id="3_0awtx"]
 [ext_resource type="AudioStream" uid="uid://b234a5vj6k6" path="res://modules/funkin/menus/character_select/theme.ogg" id="3_4fbts"]
+[ext_resource type="Texture2D" uid="uid://dwv1twuy3tllg" path="res://modules/funkin/menus/character_select/characters/pico/title.png" id="3_tmmlt"]
 [ext_resource type="AudioStream" uid="uid://6wvkbito7xw2" path="res://modules/funkin/menus/character_select/cancel.ogg" id="4_1u4p0"]
+[ext_resource type="PackedScene" uid="uid://c6to8sv86340c" path="res://modules/funkin/menus/character_select/characters/pico/pico.tscn" id="4_rmxm4"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="4_xae3q"]
+[ext_resource type="PackedScene" uid="uid://b6oapcexvu5n" path="res://modules/funkin/menus/character_select/characters/nene/nene.tscn" id="5_2th8n"]
 [ext_resource type="Texture2D" uid="uid://cavibbv2delc2" path="res://modules/funkin/menus/character_select/background/curtains.png" id="5_xae3q"]
 [ext_resource type="Texture2D" uid="uid://dkhehc56csbb2" path="res://modules/funkin/menus/character_select/background/character_light.png" id="6_u125y"]
+[ext_resource type="Texture2D" uid="uid://ncq3u01qhoh8" path="res://modules/funkin/menus/character_select/characters/locked/title.png" id="6_x4fj0"]
 [ext_resource type="SpriteFrames" uid="uid://chgxlx7kxse4l" path="res://modules/funkin/menus/character_select/background/stage.res" id="7_5ydai"]
 [ext_resource type="PackedScene" uid="uid://dh0j85o8ohuon" path="res://modules/funkin/menus/character_select/characters/gf/gf.tscn" id="7_jblrn"]
+[ext_resource type="PackedScene" uid="uid://bydgpm6a02kid" path="res://modules/funkin/menus/character_select/characters/locked/locked.tscn" id="7_vk1q6"]
 [ext_resource type="Script" uid="uid://dy4vnmv4435ty" path="res://addons/gdanimate/formats/animate_symbol_library.gd" id="8_37ee5"]
 [ext_resource type="PackedScene" uid="uid://d3uuros7qs2p" path="res://modules/funkin/menus/character_select/characters/bf/bf.tscn" id="8_okqu4"]
 [ext_resource type="Script" uid="uid://dkyyuwqo0dy7q" path="res://addons/gdanimate/formats/texture_atlas/atlas.gd" id="9_lycc1"]
@@ -33,6 +39,29 @@
 [ext_resource type="SpriteFrames" uid="uid://bhrbjrxy56cpw" path="res://modules/funkin/menus/character_select/characters/bf/icon.res" id="22_twrlh"]
 [ext_resource type="SpriteFrames" uid="uid://cxstgenxhhdxm" path="res://modules/funkin/menus/character_select/selection_box/selector.tres" id="26_twrlh"]
 [ext_resource type="Script" uid="uid://dn2m283whavha" path="res://modules/funkin/menus/character_select/camera.gd" id="31_4fbts"]
+
+[sub_resource type="Resource" id="Resource_lycc1"]
+script = ExtResource("2_qa0wy")
+player = ExtResource("8_okqu4")
+spectator = ExtResource("7_jblrn")
+name_texture = ExtResource("16_3ax17")
+freeplay_path = "uid://3rua2gpac5p8"
+metadata/_custom_type_script = "uid://d33ys4d802pc6"
+
+[sub_resource type="Resource" id="Resource_bw8wk"]
+script = ExtResource("2_qa0wy")
+player = ExtResource("4_rmxm4")
+spectator = ExtResource("5_2th8n")
+name_texture = ExtResource("3_tmmlt")
+freeplay_path = "uid://cbp5qie32cehq"
+metadata/_custom_type_script = "uid://d33ys4d802pc6"
+
+[sub_resource type="Resource" id="Resource_cnglj"]
+script = ExtResource("2_qa0wy")
+player = ExtResource("7_vk1q6")
+spectator = ExtResource("7_vk1q6")
+name_texture = ExtResource("6_x4fj0")
+metadata/_custom_type_script = "uid://d33ys4d802pc6"
 
 [sub_resource type="Resource" id="Resource_8nvxi"]
 script = ExtResource("9_lycc1")
@@ -128,6 +157,11 @@ shader_parameter/block_size = Vector2(1, 1)
 
 [node name="character_select" type="Node2D" unique_id=1836175676]
 script = ExtResource("1_tjis5")
+entries = Dictionary[StringName, ExtResource("2_qa0wy")]({
+&"bf": SubResource("Resource_lycc1"),
+&"locked": SubResource("Resource_cnglj"),
+&"pico": SubResource("Resource_bw8wk")
+})
 
 [node name="music" type="AudioStreamPlayer" parent="." unique_id=1334339865]
 unique_name_in_owner = true
@@ -169,7 +203,7 @@ loop = true
 position = Vector2(-40, 391)
 sprite_frames = ExtResource("7_5ydai")
 animation = &"stage full instance 1"
-frame_progress = 0.99829644
+frame_progress = 0.7939309
 centered = false
 script = ExtResource("4_xae3q")
 playing = true
@@ -302,20 +336,20 @@ script = ExtResource("4_xae3q")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
 [node name="4" type="AnimatedSprite2D" parent="character_selector/characters" unique_id=742736969]
-editor_description = "pico"
 position = Vector2(-108.5, 322)
 sprite_frames = ExtResource("18_q65u0")
 animation = &"PICO ICON"
 script = ExtResource("4_xae3q")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
+metadata/key = &"pico"
 
 [node name="5" type="AnimatedSprite2D" parent="character_selector/characters" unique_id=1643131191]
-editor_description = "bf"
 position = Vector2(0, 322)
 sprite_frames = ExtResource("22_twrlh")
 animation = &"BF ICON"
 script = ExtResource("4_xae3q")
 metadata/_custom_type_script = "uid://xcwf8fppek0h"
+metadata/key = &"bf"
 
 [node name="6" type="AnimatedSprite2D" parent="character_selector/characters" unique_id=1787080575]
 material = SubResource("ShaderMaterial_pwyd4")
@@ -385,10 +419,11 @@ texture = ExtResource("16_3ax17")
 [node name="camera_2d" type="Camera2D" parent="." unique_id=472909301]
 unique_name_in_owner = true
 position = Vector2(640, 360)
-limit_left = -100
-limit_top = -100
-limit_right = 1380
+limit_left = -25
+limit_top = -26
+limit_right = 1296
 limit_bottom = 720
+limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("31_4fbts")
 
