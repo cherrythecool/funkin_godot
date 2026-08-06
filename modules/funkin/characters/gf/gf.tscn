@@ -20,7 +20,7 @@ render_mode = "Performance"
 metadata/_custom_type_script = "uid://dkyyuwqo0dy7q"
 
 [sub_resource type="Animation" id="Animation_bgpi6"]
-length = 0.041670834575220944
+length = 0.04167083457522094
 step = 0.041666668
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -639,6 +639,7 @@ position = Vector2(-218, -341)
 script = ExtResource("4_nbymw")
 symbol_libraries = Array[ExtResource("5_0lwe2")]([SubResource("Resource_42asd")])
 symbol = &"GF Dancing Beat"
+centered = false
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1081631293]
 libraries/ = SubResource("AnimationLibrary_mki60")

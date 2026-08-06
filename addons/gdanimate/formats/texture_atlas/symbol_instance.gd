@@ -1,6 +1,6 @@
 @tool
 class_name TextureAtlasSymbolInstance
-extends TextureAtlasDrawable
+extends TextureAtlasFrameElement
 
 
 @export var key: StringName
@@ -11,7 +11,6 @@ extends TextureAtlasDrawable
 @export var filters: Array[TextureAtlasFilter] = []
 @export var blend_mode: TextureAtlas.BlendMode = TextureAtlas.BlendMode.NORMAL
 @export var color_matrix: TextureAtlasColorMatrix = null
-@export var symbol: TextureAtlasSymbol = null
 
 
 static func parse(element: Dictionary, optimized: bool) -> TextureAtlasSymbolInstance:
@@ -92,8 +91,39 @@ static func parse(element: Dictionary, optimized: bool) -> TextureAtlasSymbolIns
 	return parsed
 
 
-func draw(target: RID, options: Dictionary = {}) -> void:
-	pass
+func calculate_rect(data: Dictionary[StringName, Variant]) -> void:
+	var symbols: Dictionary[StringName, TextureAtlasSymbol] = data[&"symbols"]
+	var spritemap: Dictionary[StringName, AtlasTexture] = data[&"spritemap"]
+	var parent_transform: Transform2D = data[&"transform"]
+	var symbol := symbols[key]
+
+	rect = Rect2()
+
+	for i: int in symbol.layers_draw_order:
+		var layer := symbol.layers[i]
+
+		if layer.clipping:
+			continue
+		if not first_frame in layer.frame_range:
+			continue
+		if not layer.frame_indexes.has(first_frame):
+			continue
+
+		var layer_frame := layer.frames[layer.frame_indexes[first_frame]]
+		for element: TextureAtlasFrameElement in layer_frame.elements:
+			if element is TextureAtlasSprite:
+				element.calculate_rect({
+					&"texture": spritemap[element.key],
+					&"transform": parent_transform * transform,
+				})
+			elif element is TextureAtlasSymbolInstance:
+				element.calculate_rect({
+					&"spritemap": spritemap,
+					&"symbols": symbols,
+					&"transform": parent_transform * transform,
+				})
+
+			rect = rect.merge(element.rect)
 
 
 func get_frame_after(amount: int, length: int, movie_clips_play: bool) -> int:

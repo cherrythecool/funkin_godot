@@ -1,5 +1,4 @@
 class_name TextureAtlasSpritemap
-extends Object
 
 
 static func load_spritemaps(

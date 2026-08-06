@@ -6,6 +6,7 @@ extends Resource
 @export var layers: Array[TextureAtlasLayer] = []
 @export var layers_draw_order: Array = []
 @export var length: int = 0
+@export var rect := Rect2()
 
 
 static func parse(symbol: Dictionary, optimized: bool) -> TextureAtlasSymbol:
@@ -27,3 +28,30 @@ static func parse(symbol: Dictionary, optimized: bool) -> TextureAtlasSymbol:
 
 	parsed_symbol.layers_draw_order = range(parsed_symbol.layers.size() - 1, -1, -1)
 	return parsed_symbol
+
+
+func calculate_rect(
+	symbols: Dictionary[StringName, TextureAtlasSymbol],
+	spritemap: Dictionary[StringName, AtlasTexture],
+) -> void:
+	rect = Rect2()
+
+	for layer: TextureAtlasLayer in layers:
+		if layer.clipping:
+			continue
+
+		for frame: TextureAtlasFrame in layer.frames:
+			for element: TextureAtlasFrameElement in frame.elements:
+				if element is TextureAtlasSprite:
+					element.calculate_rect({
+						&"texture": spritemap[element.key],
+						&"transform": Transform2D.IDENTITY,
+					})
+				elif element is TextureAtlasSymbolInstance:
+					element.calculate_rect({
+						&"spritemap": spritemap,
+						&"symbols": symbols,
+						&"transform": Transform2D.IDENTITY,
+					})
+
+				rect = rect.merge(element.rect)

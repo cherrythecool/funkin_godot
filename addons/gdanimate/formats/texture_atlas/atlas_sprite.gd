@@ -1,13 +1,13 @@
 @tool
 class_name TextureAtlasSprite
-extends TextureAtlasDrawable
+extends TextureAtlasFrameElement
 
 
 const ROTATED_SPRITE_RADIANS: float = deg_to_rad(-90.0)
 
-
 @export var key: StringName
 @export var transform: Transform2D
+@export var backbuffer_rect := Rect2()
 
 
 static func parse(element: Dictionary, optimized: bool) -> TextureAtlasSprite:
@@ -26,6 +26,22 @@ static func parse(element: Dictionary, optimized: bool) -> TextureAtlasSprite:
 		)
 
 	return parsed
+
+
+func calculate_rect(data: Dictionary[StringName, Variant]) -> void:
+	var texture: Texture2D = data[&"texture"]
+	var sprite_transform := Transform2D.IDENTITY
+	if texture.get_meta(&"rotated", false) == true:
+		sprite_transform = Transform2D(
+			ROTATED_SPRITE_RADIANS,
+			Vector2(
+				0.0,
+				texture.get_width(),
+			),
+		)
+
+	rect = data[&"transform"] * transform * sprite_transform * Rect2(Vector2.ZERO, texture.get_size())
+	backbuffer_rect = sprite_transform * Rect2(Vector2.ZERO, texture.get_size())
 
 
 func draw(target: RID, options: Dictionary = {}) -> void:

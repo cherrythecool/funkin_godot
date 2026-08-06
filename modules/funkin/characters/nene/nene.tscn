@@ -275,6 +275,7 @@ position = Vector2(-356, -98)
 script = ExtResource("2_7sfqk")
 symbol_libraries = Array[ExtResource("3_ifybg")]([SubResource("Resource_0lwe2")])
 symbol = &"a bot eyes lookin"
+centered = false
 
 [node name="background" type="ColorRect" parent="." unique_id=857189350]
 offset_left = -230.0
@@ -360,6 +361,7 @@ metadata/_custom_type_script = "uid://xcwf8fppek0h"
 position = Vector2(-413, -337)
 script = ExtResource("2_7sfqk")
 symbol_libraries = Array[ExtResource("3_ifybg")]([SubResource("Resource_oec3b")])
+centered = false
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=2051816380]
 position = Vector2(-284, -649)

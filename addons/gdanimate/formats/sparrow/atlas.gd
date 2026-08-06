@@ -9,17 +9,19 @@ extends AnimateSymbolLibrary
 		parse()
 		path_changed.emit()
 
+@export_range(0.0, 100.0, 0.01, "or_greater") var framerate: float = 24.0
+
+@export_group("Override Texture")
+@export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var override_texture := false
 @export var texture: Texture2D:
 	set(v):
 		texture = v
 		redraw_requested.emit()
 
-@export var override_texture := false
+@export_group("")
+@export_tool_button("Export", "SpriteFrames") var _export_spriteframes := export
 
-@export_range(0.0, 100.0, 0.01, "or_greater") var framerate: float = 24.0
-@export_tool_button("Export", "SpriteFrames") var export_spriteframes := export
-
-@export_storage var frames: Array[SparrowFrame]
+@export_storage var frames: Array[SparrowAtlasFrame]
 @export_storage var symbols: PackedStringArray
 
 # Caches the relationship between symbols -> frames
@@ -81,14 +83,15 @@ func parse() -> void:
 					path = "%s.png" % [basename]
 				if ResourceLoader.exists(path):
 					texture = load(ResourceUID.path_to_uid(path))
+
 			"subtexture":
-				var frame: SparrowFrame = SparrowFrame.new()
+				var frame: SparrowAtlasFrame = SparrowAtlasFrame.new()
 				frame.parse(xml)
 				frames.push_back(frame)
 
-	frames.sort_custom(SparrowFrame.sort_by_name)
+	frames.sort_custom(SparrowAtlasFrame.sort_by_name)
 
-	for frame: SparrowFrame in frames:
+	for frame: SparrowAtlasFrame in frames:
 		var array: Array[Variant] = frame.get_name_array()
 		if array.size() < 2:
 			continue
@@ -100,7 +103,7 @@ func parse() -> void:
 
 
 func cache() -> void:
-	var resource_path: String = "%s.res" % [source_path.get_basename()]
+	var resource_path := "%s.res" % [source_path.get_basename()]
 	take_over_path(resource_path)
 	ResourceSaver.save(
 		self,
@@ -115,7 +118,7 @@ func cache() -> void:
 func draw_2d(target: AnimateSymbol2D) -> void:
 	target._clear_canvas_item(true)
 
-	var sparrow_frame: SparrowFrame = SparrowFrame.get_filtered_frame(
+	var sparrow_frame := SparrowAtlasFrame.get_filtered_frame(
 		target.symbol,
 		target.frame,
 		self,
@@ -124,12 +127,16 @@ func draw_2d(target: AnimateSymbol2D) -> void:
 	if not is_instance_valid(sparrow_frame):
 		return
 
-	var canvas_item: RID = target.get_canvas_item()
-	var offset: Vector2 = target.offset
+	var canvas_item := target.get_canvas_item()
+	var offset := target.offset
 	if target.centered:
 		offset -= get_symbol_rect(target.symbol).size / 2.0
 
 	sparrow_frame.draw_2d(canvas_item, texture, offset)
+
+
+func update_2d(_target: AnimateSymbol2D) -> void:
+	pass
 
 
 func get_framerate() -> float:
@@ -146,7 +153,7 @@ func get_symbol_list() -> PackedStringArray:
 
 func get_symbol_length(key: StringName) -> int:
 	if not _internal_frames_cache.has(key):
-		_internal_frames_cache[key] = SparrowFrame.get_filtered_frames(key, self)
+		_internal_frames_cache[key] = SparrowAtlasFrame.get_filtered_frames(key, self)
 
 	return maxi(_internal_frames_cache[key].size() - 1, 0)
 
@@ -157,13 +164,13 @@ func has_symbol(symbol: StringName) -> bool:
 
 func get_symbol_rect(symbol: StringName) -> Rect2:
 	if not _internal_bounding_cache.has(symbol):
-		var filtered: Array[SparrowFrame] = SparrowFrame.get_filtered_frames(
+		var filtered: Array[SparrowAtlasFrame] = SparrowAtlasFrame.get_filtered_frames(
 			symbol,
 			self,
 		)
 
 		var bounding := Rect2()
-		for frame: SparrowFrame in filtered:
+		for frame: SparrowAtlasFrame in filtered:
 			bounding = bounding.merge(frame.get_bounding_box())
 
 		_internal_bounding_cache[symbol] = bounding

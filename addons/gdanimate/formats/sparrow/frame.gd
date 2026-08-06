@@ -1,5 +1,5 @@
 @tool
-class_name SparrowFrame
+class_name SparrowAtlasFrame
 extends Resource
 
 
@@ -9,7 +9,7 @@ extends Resource
 @export var rotated := false
 
 
-static func sort_by_name(a: SparrowFrame, b: SparrowFrame) -> bool:
+static func sort_by_name(a: SparrowAtlasFrame, b: SparrowAtlasFrame) -> bool:
 	return String(a.name) < String(b.name)
 
 
@@ -17,7 +17,7 @@ static func get_filtered_frame(
 	prefix: String,
 	frame: int,
 	atlas: SparrowAtlas,
-) -> SparrowFrame:
+) -> SparrowAtlasFrame:
 	var frame_cache: Dictionary[String, Array] = atlas._internal_frames_cache
 
 	if atlas.frames.is_empty():
@@ -25,7 +25,7 @@ static func get_filtered_frame(
 	if not frame_cache.has(prefix):
 		frame_cache[prefix] = get_filtered_frames(prefix, atlas)
 
-	var filtered := frame_cache[prefix] as Array[SparrowFrame]
+	var filtered := frame_cache[prefix] as Array[SparrowAtlasFrame]
 	if filtered.is_empty():
 		return null
 	else:
@@ -35,19 +35,19 @@ static func get_filtered_frame(
 static func get_filtered_frames(
 	filter: String,
 	atlas: SparrowAtlas,
-) -> Array[SparrowFrame]:
+) -> Array[SparrowAtlasFrame]:
 	if filter.strip_edges().is_empty():
 		return atlas.frames.duplicate()
+	else:
+		return atlas.frames.filter(func(frame: SparrowAtlasFrame) -> bool:
+			if not atlas.symbols.has(filter):
+				return frame.name.begins_with(filter)
 
-	return atlas.frames.filter(func(frame: SparrowFrame) -> bool:
-		if not atlas.symbols.has(filter):
-			return frame.name.begins_with(filter)
-
-		return (
-			frame.name.left(frame.name.length() - 4) == filter and
-			frame.name.right(4).is_valid_int()
+			return (
+				frame.name.left(frame.name.length() - 4) == filter and
+				frame.name.right(4).is_valid_int()
+			)
 		)
-	)
 
 
 func draw_2d(canvas_item: RID, texture: Texture2D, draw_offset: Vector2) -> void:
@@ -60,7 +60,7 @@ func draw_2d(canvas_item: RID, texture: Texture2D, draw_offset: Vector2) -> void
 				-PI / 2.0,
 				Vector2(
 					draw_offset.x,
-					region.size.x + draw_offset.y
+					region.size.x + draw_offset.y,
 				),
 			),
 		)

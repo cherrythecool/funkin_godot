@@ -11,8 +11,9 @@ static func export(atlas: SparrowAtlas) -> void:
 		printerr("Cannot export blank or invalid Sparrow atlas!")
 		return
 
-	var sprite_frames: SpriteFrames = SpriteFrames.new()
+	var sprite_frames := SpriteFrames.new()
 	sprite_frames.remove_animation(&"default")
+
 	if not atlas.symbols.is_empty():
 		for symbol: String in atlas.symbols:
 			sprite_frames.add_animation(symbol)
@@ -25,10 +26,10 @@ static func export(atlas: SparrowAtlas) -> void:
 	sprite_frames.set_animation_speed(&" ", atlas.framerate)
 	sprite_frames.set_animation_loop(&" ", false)
 
-	for frame: SparrowFrame in atlas.frames:
+	for frame: SparrowAtlasFrame in atlas.frames:
 		add_frame_to_frames(frame, sprite_frames, " ", state)
 
-	var basename: String = atlas.source_path.get_basename()
+	var basename := atlas.source_path.get_basename()
 	sprite_frames.take_over_path("%s_frames.res" % [basename])
 	ResourceSaver.save(
 		sprite_frames,
@@ -45,15 +46,16 @@ static func add_symbol_to_frames(
 	sprite_frames: SpriteFrames,
 	state: ExporterState,
 ) -> void:
-	var filtered: Array[SparrowFrame] = SparrowFrame.get_filtered_frames(symbol, state.atlas)
+	var filtered: Array[SparrowAtlasFrame] = SparrowAtlasFrame.get_filtered_frames(symbol, state.atlas)
 	var max_frame_size: Vector2
-	for frame: SparrowFrame in filtered:
+
+	for frame: SparrowAtlasFrame in filtered:
 		if frame.offset.size.x > max_frame_size.x:
 			max_frame_size.x = frame.offset.size.x
 		if frame.offset.size.y > max_frame_size.y:
 			max_frame_size.y = frame.offset.size.y
 
-	for frame: SparrowFrame in filtered:
+	for frame: SparrowAtlasFrame in filtered:
 		# hopefully, this should fix some really weird edge cases
 		# with improper frame width and frame heights!!! :3
 		if frame.offset.size.x < max_frame_size.x:
@@ -65,12 +67,12 @@ static func add_symbol_to_frames(
 
 
 static func add_frame_to_frames(
-	frame: SparrowFrame,
+	frame: SparrowAtlasFrame,
 	sprite_frames: SpriteFrames,
 	symbol: String,
 	state: ExporterState,
 ) -> void:
-	var atlas_texture: AtlasTexture = AtlasTexture.new()
+	var atlas_texture := AtlasTexture.new()
 	atlas_texture.atlas = state.atlas.texture
 	atlas_texture.filter_clip = true
 	atlas_texture.region = frame.region

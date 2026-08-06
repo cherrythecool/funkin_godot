@@ -196,6 +196,7 @@ _data = {
 [node name="player" type="Node2D" unique_id=748485921]
 script = ExtResource("1_x5qlb")
 symbol_libraries = Array[ExtResource("2_kcqql")]([SubResource("Resource_1ar2k")])
+centered = false
 offset = Vector2(15, -25)
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1785883520]

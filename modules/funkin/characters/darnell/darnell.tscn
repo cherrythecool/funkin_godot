@@ -353,6 +353,7 @@ position = Vector2(-184, -463)
 script = ExtResource("6_jdsdp")
 symbol_libraries = Array[ExtResource("7_u4ki3")]([SubResource("Resource_xw0vb")])
 symbol = &"Darnell Idle"
+centered = false
 metadata/_custom_type_script = "uid://c5ju3u657fyae"
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1793266690]

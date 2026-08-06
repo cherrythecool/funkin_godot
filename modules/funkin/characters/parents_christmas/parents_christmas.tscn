@@ -570,6 +570,7 @@ position = Vector2(-474, -727)
 script = ExtResource("4_tcbtr")
 symbol_libraries = Array[ExtResource("5_w8jy5")]([SubResource("Resource_4my6j")])
 symbol = &"Parent Christmas Idle"
+centered = false
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1164363871]
 libraries/ = SubResource("AnimationLibrary_mki60")

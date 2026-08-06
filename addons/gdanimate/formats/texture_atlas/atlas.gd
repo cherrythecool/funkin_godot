@@ -131,20 +131,20 @@ static func parse_matrix(matrix: Variant) -> Transform2D:
 			Vector2(matrix["m30"], matrix["m31"]),
 		)
 	elif matrix is Array:
-		if matrix.size() == 6:
+		if matrix.size() >= 6 and matrix.size() < 14:
 			return Transform2D(
 				Vector2(matrix[0], matrix[1]),
 				Vector2(matrix[2], matrix[3]),
 				Vector2(matrix[4], matrix[5]),
 			)
-		else:
+		elif matrix.size() >= 14:
 			return Transform2D(
 				Vector2(matrix[0], matrix[1]),
 				Vector2(matrix[4], matrix[5]),
 				Vector2(matrix[12], matrix[13]),
 			)
-	else:
-		return Transform2D.IDENTITY
+
+	return Transform2D.IDENTITY
 
 
 func _get_property_list() -> Array[Dictionary]:
@@ -199,7 +199,8 @@ func parse() -> void:
 		return
 
 	TextureAtlasSpritemap.load_spritemaps(folder, spritemap)
-	load_animation()
+	_load_animation()
+	_calculate_rects()
 
 
 func cache() -> void:
@@ -207,47 +208,48 @@ func cache() -> void:
 
 
 func draw_2d(target: AnimateSymbol2D) -> void:
+	target._cached_rects.clear()
+
 	var symbol: StringName = target.symbol
 	var use_stage: bool = not symbols.has(target.symbol)
 	if use_stage and not stage_symbol.is_empty():
 		symbol = stage_symbol
 
 	if not symbols.has(symbol):
+		target._clear_canvas_item(true)
 		return
 
-	var transform := Transform2D(0.0, target.offset)
-	if target.centered:
-		var rect: Rect2 = get_symbol_rect(symbol)
-		transform = transform.translated(
-			-rect.position - (rect.size / 2.0),
-		)
-
-	if use_stage:
-		transform *= stage_transform
-
+	var transform := _get_transform_2d(target)
 	var target_item := target.get_canvas_item()
 	match render_mode:
 		"Performance":
 			target._clear_canvas_item(true)
 			_internal_materials.clear()
-			draw_2d_simple(
+			_draw_2d_performance(
 				symbols[symbol],
 				target.frame,
 				transform,
+				target.self_modulate,
 				target_item,
 			)
 		"Full":
 			if _internal_materials.is_empty():
 				_internal_materials = {
-					&"default": load("res://addons/gdanimate/formats/texture_atlas/shaders/sprite_material.tres"),
+					&"default": load("res://addons/gdanimate/formats/texture_atlas/shaders/default_material.tres"),
 					&"blend_add": load("res://addons/gdanimate/formats/texture_atlas/shaders/additive_material.tres"),
 					&"blend_subtract": load("res://addons/gdanimate/formats/texture_atlas/shaders/subtract_material.tres"),
+					&"other_blends": load("res://addons/gdanimate/formats/texture_atlas/shaders/other_blends.tres"),
 				}
 
 			var state := TextureAtlasDrawState.new()
 			state.item_pool = target._canvas_item_pool
 			state.materials = _internal_materials.duplicate()
 			state.texture_filter = target.texture_filter as RenderingServer.CanvasItemTextureFilter
+			state.texture_repeat = target.texture_repeat as RenderingServer.CanvasItemTextureRepeat
+			state.light_mask = target.light_mask
+			state.backbuffer_transform = target._get_backbuffer_transform() * transform
+			state.bounding_box_cache = target._cached_rects
+			state.color_matrix.color_multipliers = target.self_modulate
 
 			if is_instance_valid(target.material):
 				state.materials[&"default"] = target.material
@@ -261,26 +263,12 @@ func draw_2d(target: AnimateSymbol2D) -> void:
 			target._clear_canvas_item(false)
 			target._reset_canvas_item_pool()
 
-			var root_item: RID = state.get_next_item()
-			RenderingServer.canvas_item_set_parent(
-				root_item,
-				target_item,
-			)
-
+			var root_item := state.get_next_item()
+			RenderingServer.canvas_item_set_draw_behind_parent(root_item, true)
+			RenderingServer.canvas_item_set_parent(root_item, target_item)
 			RenderingServer.canvas_item_set_transform(root_item, transform)
-			RenderingServer.canvas_item_set_default_texture_filter(
-				root_item,
-				state.texture_filter,
-			)
 
-			RenderingServer.canvas_item_set_default_texture_repeat(
-				root_item,
-				RenderingServer.CANVAS_ITEM_TEXTURE_REPEAT_DISABLED,
-			)
-
-			state.apply_material_to_current()
-
-			draw_2d_full(
+			_draw_2d_full(
 				symbols[symbol],
 				target.frame,
 				state,
@@ -288,10 +276,57 @@ func draw_2d(target: AnimateSymbol2D) -> void:
 			)
 
 
-func draw_2d_simple(
+func update_2d(target: AnimateSymbol2D) -> void:
+	if Engine.is_editor_hint():
+		return
+
+	var backbuffer_transform := target._get_backbuffer_transform() * _get_transform_2d(target)
+	for rid: RID in target._cached_rects:
+		RenderingServer.canvas_item_set_copy_to_backbuffer(
+			rid,
+			true,
+			backbuffer_transform * target._cached_rects[rid],
+		)
+
+
+func get_framerate() -> float:
+	return framerate
+
+
+func get_filename() -> StringName:
+	return StringName(folder.get_file())
+
+
+func get_symbol_list() -> PackedStringArray:
+	return symbols.keys()
+
+
+func get_symbol_length(key: StringName) -> int:
+	if key == &" " or key.is_empty():
+		key = stage_symbol
+
+	if symbols.has(key):
+		return symbols[key].length
+	else:
+		return 0
+
+
+func get_symbol_rect(key: StringName) -> Rect2:
+	if not symbols.has(key):
+		return Rect2()
+	else:
+		return symbols[key].rect
+
+
+func has_symbol(symbol: StringName) -> bool:
+	return symbols.has(symbol)
+
+
+func _draw_2d_performance(
 	symbol: TextureAtlasSymbol,
 	frame: int,
 	transform: Transform2D,
+	modulate: Color,
 	target: RID,
 ) -> void:
 	for i: int in symbol.layers_draw_order:
@@ -302,34 +337,39 @@ func draw_2d_simple(
 			continue
 
 		var layer_frame := layer.frames[layer.frame_indexes[frame]]
-		for element: TextureAtlasDrawable in layer_frame.elements:
+		for element: TextureAtlasFrameElement in layer_frame.elements:
 			if element is TextureAtlasSprite:
 				var texture := spritemap[element.key]
 				texture.filter_clip = clip_texture_uvs
 				element.draw(target, {
 					&"texture": texture,
 					&"transform": transform,
-					&"modulate": Color.WHITE,
+					&"modulate": modulate,
 				})
 			elif element is TextureAtlasSymbolInstance:
-				draw_2d_simple(symbols[element.key],
+				_draw_2d_performance(symbols[element.key],
 					element.get_frame_after(
 						frame - layer_frame.starting_index,
 						symbols[element.key].length,
 						movie_clips_play,
 					),
 					transform * element.transform,
+					modulate * (
+						Color.WHITE if not element.color_matrix
+						else element.color_matrix.color_multipliers
+					),
 					target,
 				)
 
 
-func draw_2d_full(
+func _draw_2d_full(
 	symbol: TextureAtlasSymbol,
 	frame: int,
 	state: TextureAtlasDrawState,
 	target: RID,
 ) -> void:
 	var start_transform := state.local_transform
+	var start_bounds := state.bounding_box
 	var start_blend := state.blend_mode
 	var start_color_matrix := state.color_matrix
 
@@ -348,14 +388,24 @@ func draw_2d_full(
 
 		var layer_frame := layer.frames[layer.frame_indexes[frame]]
 		var current_item: RID
-		for element: TextureAtlasDrawable in layer_frame.elements:
+		for element: TextureAtlasFrameElement in layer_frame.elements:
 			current_item = state.get_current_item()
 
 			state.blend_mode = start_blend
 			state.color_matrix = start_color_matrix
 			state.local_transform = start_transform
+			state.bounding_box = start_bounds
 
 			if element is TextureAtlasSprite:
+				var texture := spritemap[element.key]
+				texture.filter_clip = clip_texture_uvs
+
+				var needs_backbuffer := state.blend_needs_backbuffer(state.blend_mode)
+				if needs_backbuffer:
+					state.bounding_box = state.bounding_box.merge(
+						state.local_transform * element.backbuffer_rect,
+					)
+
 				if (
 					state.item_masker != state.masker or
 					state.item_masked != state.masked or
@@ -364,48 +414,23 @@ func draw_2d_full(
 				):
 					current_item = state.get_next_item()
 					RenderingServer.canvas_item_set_parent(current_item, target)
+					RenderingServer.canvas_item_set_draw_index(current_item, state.item_pool_index)
+					state.bounding_box_cache[current_item] = state.bounding_box
 
-					state.item_masker = state.masker
-					state.item_masked = state.masked
-					state.item_blend_mode = state.blend_mode
-					state.item_color_matrix = state.color_matrix
-					state.apply_material_to_current()
-					state.color_matrix.apply_to_item(current_item)
+				if needs_backbuffer and state.bounding_box != state.item_bounding_box:
+					state.item_bounding_box = state.bounding_box
+					state.bounding_box_cache[current_item] = state.bounding_box
 
-					if state.masker:
-						for rid: RID in state.masked_items:
-							RenderingServer.canvas_item_set_parent(rid, current_item)
+					RenderingServer.canvas_item_set_copy_to_backbuffer(
+						current_item,
+						true,
+						state.get_backbuffer_rect(),
+					)
 
-						RenderingServer.canvas_item_set_material(current_item, RID())
-						RenderingServer.canvas_item_set_canvas_group_mode(
-							current_item,
-							RenderingServer.CANVAS_GROUP_MODE_CLIP_ONLY,
-						)
-					else:
-						RenderingServer.canvas_item_set_canvas_group_mode(
-							current_item,
-							RenderingServer.CANVAS_GROUP_MODE_DISABLED,
-						)
-
-					if state.blend_needs_backbuffer(state.blend_mode):
-						# TODO: calculate bounding boxes for optimized copying
-						RenderingServer.canvas_item_set_copy_to_backbuffer(
-							current_item,
-							true,
-							Rect2(),
-						)
-
-				var texture := spritemap[element.key]
-				texture.filter_clip = clip_texture_uvs
 				element.draw(current_item, {
 					&"texture": texture,
 					&"transform": state.local_transform,
-					&"modulate": Color(
-						state.color_matrix.color_multipliers.x,
-						state.color_matrix.color_multipliers.y,
-						state.color_matrix.color_multipliers.z,
-						state.color_matrix.color_multipliers.w,
-					),
+					&"modulate": state.color_matrix.color_multipliers,
 				})
 			elif element is TextureAtlasSymbolInstance:
 				state.local_transform *= element.transform
@@ -413,7 +438,7 @@ func draw_2d_full(
 				if element.color_matrix:
 					state.color_matrix = TextureAtlasColorMatrix.apply_to_other(
 						state.color_matrix,
-						element.color_matrix
+						element.color_matrix,
 					)
 
 				if (
@@ -422,7 +447,7 @@ func draw_2d_full(
 				):
 					state.blend_mode = element.blend_mode
 
-				draw_2d_full(symbols[element.key],
+				_draw_2d_full(symbols[element.key],
 					element.get_frame_after(
 						frame - layer_frame.starting_index,
 						symbols[element.key].length,
@@ -440,40 +465,46 @@ func draw_2d_full(
 			state.masker = false
 
 
-func get_framerate() -> float:
-	return framerate
+func _calculate_rects() -> void:
+	for key: StringName in symbols:
+		symbols[key].calculate_rect(symbols, spritemap)
 
 
-func get_filename() -> StringName:
-	return StringName(folder.get_file())
+func _get_transform_2d(target: AnimateSymbol2D) -> Transform2D:
+	var symbol: StringName = target.symbol
+	var use_stage: bool = not symbols.has(target.symbol)
+	if use_stage and not stage_symbol.is_empty():
+		symbol = stage_symbol
+
+	if not symbols.has(symbol):
+		return Transform2D.IDENTITY
+
+	var transform := Transform2D.IDENTITY
+	var rect := get_symbol_rect(symbol)
+	transform = transform.translated(
+		-rect.position - (rect.size / 2.0),
+	)
+
+	transform = transform.scaled(
+		Vector2(
+			-1.0 if target.flip_h else 1.0,
+			-1.0 if target.flip_v else 1.0,
+		)
+	)
+
+	if not target.centered:
+		transform = transform.translated(
+			rect.position + (rect.size / 2.0),
+		)
+
+	if use_stage and not target.centered:
+		transform *= stage_transform
+
+	transform = transform.translated(target.offset)
+	return transform
 
 
-func get_symbol_list() -> PackedStringArray:
-	return symbols.keys()
-
-
-func get_symbol_length(key: StringName) -> int:
-	if not symbols.has(key):
-		key = stage_symbol
-	if symbols.has(key):
-		return symbols[key].length
-
-	return 0
-
-
-func get_symbol_rect(key: StringName) -> Rect2:
-	if not symbols.has(key):
-		return Rect2()
-
-	#return symbols[key].bounding_box
-	return Rect2()
-
-
-func has_symbol(symbol: StringName) -> bool:
-	return symbols.has(symbol)
-
-
-func load_animation() -> void:
+func _load_animation() -> void:
 	var raw_json: String = FileAccess.get_file_as_string("%s/Animation.json" % [folder])
 	var json: Variant = JSON.parse_string(raw_json)
 	if json == null:
@@ -507,7 +538,7 @@ func load_animation() -> void:
 	if json.has("SD" if optimized else "SYMBOL_DICTIONARY"):
 		var symbol_dict: Dictionary = json.get("SD" if optimized else "SYMBOL_DICTIONARY", {})
 		var symbol_array: Array = symbol_dict.get("S" if optimized else "Symbols", [])
-		SymbolDictionary.parse_array(symbol_array, optimized, symbols)
+		TextureAtlasSymbolDictionary.parse_array(symbol_array, optimized, symbols)
 	elif DirAccess.dir_exists_absolute("%s/LIBRARY" % folder):
 		var dir: DirAccess = DirAccess.open("%s/LIBRARY" % folder)
 		if dir == null:
@@ -518,7 +549,7 @@ func load_animation() -> void:
 
 			return
 
-		SymbolDictionary.load_symbols_directory(
+		TextureAtlasSymbolDictionary.load_symbols_directory(
 			optimized,
 			dir,
 			"",
@@ -526,7 +557,7 @@ func load_animation() -> void:
 		)
 
 	var main_animation: Dictionary = json.get("AN" if optimized else "ANIMATION", {})
-	SymbolDictionary.parse_symbol(main_animation, optimized, symbols)
+	TextureAtlasSymbolDictionary.parse_symbol(main_animation, optimized, symbols)
 
 	stage_symbol = main_animation.get("SN" if optimized else "SYMBOL_name")
 	stage_transform = Transform2D.IDENTITY

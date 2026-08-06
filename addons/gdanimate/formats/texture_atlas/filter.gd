@@ -52,6 +52,6 @@ static func parse(
 				&"quality": json.get("Q" if optimized else "quality", 1),
 			}
 		_:
-			print("Filter type %s not supported." % filter_type)
+			push_warning("Filter type %s not supported." % filter_type)
 
 	return filter

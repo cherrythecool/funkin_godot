@@ -48,19 +48,19 @@ name_texture = ExtResource("16_3ax17")
 freeplay_path = "uid://3rua2gpac5p8"
 metadata/_custom_type_script = "uid://d33ys4d802pc6"
 
+[sub_resource type="Resource" id="Resource_cnglj"]
+script = ExtResource("2_qa0wy")
+player = ExtResource("7_vk1q6")
+spectator = ExtResource("7_vk1q6")
+name_texture = ExtResource("6_x4fj0")
+metadata/_custom_type_script = "uid://d33ys4d802pc6"
+
 [sub_resource type="Resource" id="Resource_bw8wk"]
 script = ExtResource("2_qa0wy")
 player = ExtResource("4_rmxm4")
 spectator = ExtResource("5_2th8n")
 name_texture = ExtResource("3_tmmlt")
 freeplay_path = "uid://cbp5qie32cehq"
-metadata/_custom_type_script = "uid://d33ys4d802pc6"
-
-[sub_resource type="Resource" id="Resource_cnglj"]
-script = ExtResource("2_qa0wy")
-player = ExtResource("7_vk1q6")
-spectator = ExtResource("7_vk1q6")
-name_texture = ExtResource("6_x4fj0")
 metadata/_custom_type_script = "uid://d33ys4d802pc6"
 
 [sub_resource type="Resource" id="Resource_8nvxi"]
@@ -196,14 +196,15 @@ position = Vector2(-75, 209)
 script = ExtResource("2_rptr7")
 symbol_libraries = Array[ExtResource("8_37ee5")]([SubResource("Resource_8nvxi")])
 symbol = &"crowd"
-autoplay = true
 loop = true
+autoplay = &"crowd"
+centered = false
 
 [node name="select_stage" type="AnimatedSprite2D" parent="." unique_id=488027129]
 position = Vector2(-40, 391)
 sprite_frames = ExtResource("7_5ydai")
 animation = &"stage full instance 1"
-frame_progress = 0.7939309
+frame_progress = 0.4827093
 centered = false
 script = ExtResource("4_xae3q")
 playing = true
@@ -226,6 +227,9 @@ position = Vector2(0, 55)
 script = ExtResource("2_rptr7")
 symbol_libraries = Array[ExtResource("8_37ee5")]([SubResource("Resource_tyvfc")])
 symbol = &"name bar animated"
+loop = true
+autoplay = &"name bar animated"
+centered = false
 
 [node name="player_light" type="Sprite2D" parent="." unique_id=394656920]
 position = Vector2(800, 250)
@@ -254,6 +258,7 @@ position = Vector2(-73, 421)
 script = ExtResource("2_rptr7")
 symbol_libraries = Array[ExtResource("8_37ee5")]([SubResource("Resource_37ee5")])
 symbol = &"Speakers ALL"
+centered = false
 
 [node name="back_buffer_copy" type="Control" parent="." unique_id=261698799]
 layout_mode = 3

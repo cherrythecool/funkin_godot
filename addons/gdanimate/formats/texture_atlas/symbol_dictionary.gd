@@ -1,5 +1,4 @@
-class_name SymbolDictionary
-extends Object
+class_name TextureAtlasSymbolDictionary
 
 
 static func parse_symbol(

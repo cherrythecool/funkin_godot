@@ -5,7 +5,7 @@ extends Resource
 
 @export var starting_index: int = 0
 @export var duration: int = 0
-@export var elements: Array[TextureAtlasDrawable] = []
+@export var elements: Array[TextureAtlasFrameElement] = []
 
 
 static func parse(frame: Dictionary, optimized: bool) -> TextureAtlasFrame:

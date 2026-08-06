@@ -123,6 +123,7 @@ _data = {
 [node name="player" type="Node2D" unique_id=1096064306]
 script = ExtResource("1_bdv53")
 symbol_libraries = Array[ExtResource("2_8arfh")]([SubResource("Resource_37ee5")])
+centered = false
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=1914100702]
 libraries/ = SubResource("AnimationLibrary_s4ft7")
