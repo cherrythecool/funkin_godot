@@ -37,17 +37,16 @@ static func load_codename(song_folder: String, difficulty: StringName) -> Chart:
 	var strumlines: Array = data.strumLines
 	for strumline: Dictionary in strumlines:
 		var type: int = strumline.get("type", 2)
-		var character_position: String = strumline.position
 		var is_first: bool
 
-		match character_position:
-			"boyfriend":
+		match type:
+			1:
 				is_first = not &"player" in sides
 				sides.append(&"player")
-			"girlfriend":
+			2:
 				is_first = not &"spectator" in sides
 				sides.append(&"spectator")
-			_:
+			0, _:
 				is_first = not &"opponent" in sides
 				sides.append(&"opponent")
 

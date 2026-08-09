@@ -46,6 +46,9 @@ signal difficulty_changed(difficulty: StringName)
 
 
 func _ready() -> void:
+	if get_tree().current_scene == self:
+		MainMenu.freeplay_scene = scene_file_path
+
 	randomize()
 	assert(not list.is_empty(), "You need a list to have freeplay work correctly.")
 
