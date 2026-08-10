@@ -136,6 +136,13 @@ func _ready() -> void:
 		plr_strums.note_hit.connect(_on_note_hit)
 		plr_strums.note_missed.connect(_on_note_miss)
 
+		if player and not player.strumline:
+			player.strumline = plr_strums
+
+	if strumlines.has(&"opponent"):
+		if opponent and not opponent.strumline:
+			opponent.strumline = strumlines[&"opponent"]
+
 	setup_hud()
 
 	if is_instance_valid(asset_loader):

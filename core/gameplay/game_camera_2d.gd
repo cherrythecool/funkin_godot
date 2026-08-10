@@ -25,6 +25,7 @@ static var camera_zoom: Vector2 = Vector2.INF
 @export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var zoom_lerps: bool = true
 @export_custom(PROPERTY_HINT_LINK, "") var zoom_target: Vector2 = Vector2(1.05, 1.05)
 @export_range(0.0, 2.0, 0.1, "or_greater") var zoom_lerp_speed: float = 1.0
+@export_range(0.0, 2.0, 0.001, "or_greater") var zoom_stage_target: float = 1.05
 
 @export_group("Camera Bumping")
 @export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var bumps: bool = true
@@ -153,7 +154,9 @@ func _on_game_event_hit(event: EventData) -> void:
 			match data.get("mode", "direct"):
 				"stage":
 					if game.stage:
-						data_zoom *= game.stage.default_zoom
+						zoom_stage_target = game.stage.default_zoom
+
+					data_zoom *= zoom_stage_target
 				"direct":
 					pass
 
