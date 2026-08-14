@@ -10,8 +10,8 @@
 [node name="performance" type="Node2D" unique_id=344179767 node_paths=PackedStringArray("options")]
 position = Vector2(-320, 0)
 script = ExtResource("1_lsu8b")
-options = [NodePath("vsync_enabled"), NodePath("max_fps"), NodePath("intensive_visuals"), NodePath("scale_with_dpi"), NodePath("pause_when_unfocused"), NodePath("overlay_visible"), NodePath("overlay_mode")]
-max_distance = 260.0
+options = [NodePath("vsync_enabled"), NodePath("max_fps"), NodePath("intensive_visuals"), NodePath("scale_with_dpi"), NodePath("pause_when_unfocused")]
+max_distance = 0.0
 
 [node name="vsync_enabled" type="Node2D" parent="." unique_id=780994590]
 position = Vector2(-126, -170)
@@ -111,43 +111,7 @@ script = ExtResource("3_p1may")
 text = "(needs restart to take effect)"
 metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
 
-[node name="overlay_visible" type="Node2D" parent="." unique_id=788984032]
-position = Vector2(-83, 448)
-script = ExtResource("2_4cqv6")
-key = &"overlay_visible"
-
-[node name="alphabet" type="Node2D" parent="overlay_visible" unique_id=1251655064]
-script = ExtResource("3_p1may")
-text = "overlay"
-centered = true
-
-[node name="checkbox" type="AnimatedSprite2D" parent="overlay_visible" unique_id=1252067311]
-position = Vector2(239, 0)
-scale = Vector2(0.8, 0.8)
-sprite_frames = ExtResource("4_j1leb")
-animation = &"selected"
-offset = Vector2(-5, -35)
-script = ExtResource("5_7omr5")
-
-[node name="overlay_mode" type="Node2D" parent="." unique_id=1633305983]
-position = Vector2(177, 545)
-script = ExtResource("7_a8kn0")
-key = &"overlay_mode"
-list = ["minimal", "full"]
-
-[node name="label" type="Node2D" parent="overlay_mode" unique_id=490640766]
-position = Vector2(-135, 0)
-script = ExtResource("3_p1may")
-text = "overlay mode:"
-centered = true
-
-[node name="value" type="Node2D" parent="overlay_mode" unique_id=2031845935]
-position = Vector2(189, -34)
-script = ExtResource("3_p1may")
-text = "default"
-
 [connection signal="animation_finished" from="vsync_enabled/checkbox" to="vsync_enabled" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="intensive_visuals/checkbox" to="intensive_visuals" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="pause_when_unfocused/checkbox" to="pause_when_unfocused" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="scale_with_dpi/checkbox" to="scale_with_dpi" method="_on_checkbox_animation_finished"]
-[connection signal="animation_finished" from="overlay_visible/checkbox" to="overlay_visible" method="_on_checkbox_animation_finished"]

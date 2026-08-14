@@ -37,7 +37,7 @@ Controls="*res://core/autoloads/controls.gd"
 ModuleManager="*uid://dubyatkw6h7m2"
 SoundTray="*uid://bhbryleu1jjq0"
 SceneManager="*uid://cmy8a7dh1kvs4"
-GameOverlay="*res://core/autoloads/game_overlay.tscn"
+GameOverlay="*res://core/autoloads/debug_overlay.tscn"
 TouchControls="*res://core/autoloads/touch_controls/touch_controls.tscn"
 Settings="*res://core/autoloads/settings.gd"
 

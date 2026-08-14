@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d4lyul6n3wfmw"]
 
-[ext_resource type="Script" uid="uid://baq1jchoadbo1" path="res://core/autoloads/game_overlay.gd" id="1_itebg"]
-[ext_resource type="FontFile" uid="uid://cuh8h453towpc" path="res://core/fonts/red_hat_mono.ttf" id="2_7j305"]
+[ext_resource type="Script" uid="uid://baq1jchoadbo1" path="res://core/autoloads/debug_overlay.gd" id="1_ctmdh"]
+[ext_resource type="FontFile" uid="uid://cuh8h453towpc" path="res://core/fonts/red_hat_mono.ttf" id="2_qk36k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j305"]
 bg_color = Color(0, 0, 0, 0.5)
@@ -15,7 +15,7 @@ expand_margin_right = 6.0
 expand_margin_bottom = 3.0
 
 [sub_resource type="FontVariation" id="FontVariation_7j305"]
-base_font = ExtResource("2_7j305")
+base_font = ExtResource("2_qk36k")
 variation_opentype = {
 2003265652: 500
 }
@@ -26,50 +26,53 @@ font = SubResource("FontVariation_7j305")
 font_size = 14
 outline_color = Color(0, 0, 0, 1)
 
-[node name="game_overlay" type="CanvasLayer" unique_id=61125803]
+[node name="debug_overlay" type="CanvasLayer" unique_id=61125803]
 process_mode = 3
 layer = 64
-script = ExtResource("1_itebg")
+script = ExtResource("1_ctmdh")
 
-[node name="overlay_list" type="VBoxContainer" parent="." unique_id=1430764527]
+[node name="timer" type="Timer" parent="." unique_id=1466977838]
+unique_name_in_owner = true
+
+[node name="info_container" type="VBoxContainer" parent="." unique_id=1430764527]
 offset_left = 14.0
 offset_top = 12.0
-offset_right = 208.0
-offset_bottom = 64.0
+offset_right = 115.0
+offset_bottom = 48.0
 theme_override_constants/separation = 12
 
-[node name="performance_info" type="Label" parent="overlay_list" unique_id=1548224959]
+[node name="performance_info" type="Label" parent="info_container" unique_id=1548224959]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
-text = "0FPS (0.00ms)
-MEM: 0MiB / 0MiB"
+text = "0 FPS
+MEM: 0B / 0B"
 label_settings = SubResource("LabelSettings_rqscu")
 
-[node name="usage_info" type="Label" parent="overlay_list" unique_id=823089376]
+[node name="memory_info" type="Label" parent="info_container" unique_id=823089376]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
-text = "CPU: 0B / 0B
+text = "OBJ: 0B / 0B
 GPU: 0B / 0B
 TEX: 0B / 0B"
 label_settings = SubResource("LabelSettings_rqscu")
 
-[node name="engine_info" type="Label" parent="overlay_list" unique_id=1108379246]
+[node name="engine_info" type="Label" parent="info_container" unique_id=1108379246]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
-text = "Scene: Game
-150 Nodes (0 Orphans)
-Input Accumulation off"
+text = "Scene: game
+57 Nodes (0 Orphan Nodes)
+Input Accumulation: false"
 label_settings = SubResource("LabelSettings_rqscu")
 
-[node name="module_info" type="Label" parent="overlay_list" unique_id=366615097]
+[node name="module_info" type="Label" parent="info_container" unique_id=366615097]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -79,33 +82,32 @@ text = "Current Module: funkin
 Songs Folder: res://modules/funkin/songs"
 label_settings = SubResource("LabelSettings_rqscu")
 
-[node name="rendering_info" type="Label" parent="overlay_list" unique_id=1838900809]
+[node name="rendering_info" type="Label" parent="info_container" unique_id=1838900809]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
-text = "0 Draw Calls (0 Drawn Objects)
-API: vulkan (forward_plus)
+text = "0 Draw Calls & 0 Drawn Objects
+API: vulkan/forward_plus
 GPU: Idfk bro"
 label_settings = SubResource("LabelSettings_rqscu")
 
-[node name="conductor_info" type="Label" parent="overlay_list" unique_id=2057034034]
+[node name="conductor_info" type="Label" parent="info_container" unique_id=2057034034]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
-text = "0.00ms AudioServer Offset
-0.00ms Offset (0.00ms manual)
-0.000s Time (1.00x Speed)
-100.00 BPM
+text = "Time: 0.000s (1.00x Speed)
+BPM: 100.00
 Beat: 0.00
 Step: 0.00
-Measure: 0.00"
+Measure: 0.00
+Offset: 0.00ms (0.00ms manual)"
 label_settings = SubResource("LabelSettings_rqscu")
 
-[node name="game_info" type="Label" parent="overlay_list" unique_id=1045670370]
+[node name="game_info" type="Label" parent="info_container" unique_id=1045670370]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -117,9 +119,4 @@ Health: 50.00%
 Combo: 0"
 label_settings = SubResource("LabelSettings_rqscu")
 
-[node name="timer" type="Timer" parent="." unique_id=1466977838]
-unique_name_in_owner = true
-autostart = true
-
 [connection signal="ready" from="." to="." method="display"]
-[connection signal="timeout" from="timer" to="." method="display"]
