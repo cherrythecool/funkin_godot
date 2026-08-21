@@ -12,6 +12,17 @@ static func sort_by_time(a: Variant, b: Variant) -> bool:
 	return a.time < b.time
 
 
+static func sort_events(a: EventData, b: EventData) -> bool:
+	if (
+		is_equal_approx(a.time, 0.0) and
+		is_equal_approx(a.time, b.time) and
+		a.trigger_before_countdown != b.trigger_before_countdown
+	):
+		return a.trigger_before_countdown
+	else:
+		return sort_by_time(a, b)
+
+
 static func new_strumline() -> Dictionary:
 	return {
 		&"notes": [],
@@ -51,7 +62,7 @@ func sort() -> void:
 		strumline[&"notes"].sort_custom(sort_by_time)
 
 	timing_changes.sort_custom(sort_by_time)
-	events.sort_custom(sort_by_time)
+	events.sort_custom(sort_events)
 
 
 func remove_stacked_notes(min_time: float = 0.005) -> int:
