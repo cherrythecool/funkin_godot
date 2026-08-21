@@ -311,6 +311,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 
 	chart = null
 	playlist.clear()
+
 	if sound:
 		GlobalAudio.get_player("MENU/CANCEL").play()
 

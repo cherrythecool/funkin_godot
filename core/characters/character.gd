@@ -68,16 +68,16 @@ func _process(delta: float) -> void:
 	if not is_instance_valid(Conductor.instance):
 		return
 
+	sing_timer += delta / Conductor.instance.beat_delta
+
 	if is_instance_valid(strumline) and singing and (
 		StrumlineManager.ReceptorState.HIT in strumline.receptor_states or
 		StrumlineManager.ReceptorState.PRESSED in strumline.receptor_states
 	):
-		sing_timer += delta / Conductor.instance.beat_delta
-	else:
-		sing_timer += delta / Conductor.instance.beat_delta
+		return
 
-		if sing_timer * 4.0 >= sing_steps or sing_steps <= 0.0:
-			dance(true)
+	if sing_timer * 4.0 >= sing_steps or sing_steps <= 0.0:
+		dance(true)
 
 
 func play_anim(anim: StringName, force: bool = false, special: bool = false) -> void:
