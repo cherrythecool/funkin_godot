@@ -8,10 +8,10 @@ var downscroll: bool = false:
 		downscroll = value
 		set_downscroll(value)
 
-var centered_receptors: bool = false:
+var middlescroll: bool = false:
 	set(value):
-		centered_receptors = value
-		set_centered_receptors(value)
+		middlescroll = value
+		set_middlescroll(value)
 
 @export var bumps: bool = false
 @export var bump_amount: Vector2 = Vector2(0.03, 0.03)
@@ -21,9 +21,10 @@ var centered_receptors: bool = false:
 @export var player_renderer: StrumlineRenderer2D
 @export var opponent_renderer: StrumlineRenderer2D
 
-@onready var health_bar: HealthBar = %health_bar
-@onready var countdown_container: CountdownContainer = %countdown_container
-@onready var time_bar: ProgressBar = %time_bar
+@export var health_bar: HealthBar
+@export var countdown_container: CountdownContainer
+@export var time_bar: ProgressBar
+@export var rating_container: Node2D
 
 @onready var rating_calculator: RatingCalculator:
 	get:
@@ -31,10 +32,6 @@ var centered_receptors: bool = false:
 			return game.rating_calculator
 		else:
 			return null
-@onready var rating_container: Node2D = %rating_container
-@onready var difference_label: Label = rating_container.get_node('difference_label')
-@onready var rating_sprite: Sprite2D = rating_container.get_node('rating')
-@onready var combo_node: Node2D = rating_container.get_node('combo')
 var rating_tween: Tween
 
 @export var hud_skin: HUDSkin:
@@ -43,10 +40,9 @@ var rating_tween: Tween
 		rating_textures = hud_skin.get_rating_textures()
 
 var rating_textures: Dictionary[StringName, Texture2D] = {}
+var toggle_visible := true
 
 signal setup
-signal note_hit(note: NoteData)
-signal note_miss(note: NoteData)
 signal downscroll_changed(downscroll: bool)
 
 
@@ -60,24 +56,17 @@ func _ready() -> void:
 
 	Conductor.beat_hit.connect(_on_beat_hit)
 
-	rating_container.visible = true
-	rating_container.modulate.a = 0.0
 	downscroll = Settings.get_setting(&"core", "downscroll")
-	centered_receptors = Settings.get_setting(&"core", "middlescroll")
+	middlescroll = Settings.get_setting(&"core", "middlescroll")
 
 
 func _on_setup() -> void:
-	if is_instance_valid(hud_skin):
-		combo_node.scale = hud_skin.combo_scale
-		combo_node.texture_filter = hud_skin.combo_filter
-		rating_sprite.scale = hud_skin.rating_scale
-		rating_sprite.texture_filter = hud_skin.rating_filter
+	if rating_container and not rating_container.hud_skin:
+		rating_container.hud_skin = hud_skin
 
 	var strumlines := game.strumlines
 	if strumlines.has(&"player"):
 		var plr_strums := strumlines[&"player"]
-		plr_strums.note_hit.connect(_on_note_hit)
-		plr_strums.note_missed.connect(_on_note_miss)
 		player_renderer.parent = plr_strums
 	else:
 		player_renderer.hide()
@@ -94,9 +83,7 @@ func _on_setup() -> void:
 
 
 func _on_beat_hit(beat: int) -> void:
-	if not (game.playing and bumps):
-		return
-	if beat <= 0:
+	if beat <= 0 or not (game.playing and bumps):
 		return
 
 	if beat % bump_interval == 0:
@@ -111,97 +98,37 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_echo():
-		return
-	if not event.is_pressed():
-		return
-	if event.is_action(&"toggle_game_hud"):
-		health_bar.visible = not health_bar.visible
-		if not rating_container.visible:
-			rating_container.modulate.a = 0.0
+	if event.is_action_pressed(&"toggle_game_hud"):
+		toggle_visible = not toggle_visible
 
-		rating_container.visible = health_bar.visible
-		countdown_container.visible = health_bar.visible
-		time_bar.visible = health_bar.visible and Settings.get_setting(&"core", "time_bar_show")
+		if health_bar:
+			health_bar.visible = toggle_visible
+
+		if rating_container:
+			if not rating_container.visible:
+				rating_container.modulate.a = 0.0
+
+			rating_container.visible = toggle_visible
+
+		if countdown_container:
+			countdown_container.visible = toggle_visible
+
+		if time_bar:
+			time_bar.visible = toggle_visible and Settings.get_setting(&"core", "time_bar_show")
 
 
 func _on_first_opponent_note(_note: NoteData) -> void:
 	bumps = true
 
 
-func _on_note_hit(note: NoteData) -> void:
-	if note.state != NoteData.NoteState.ALIVE:
-		return
-
-	var difference: float = Conductor.time - note.time
-	if game.strumlines[&"player"].cpu:
-		difference = 0.0
-
-	if not game.strumlines[&"player"].cpu:
-		difference_label.text = "%.2fms" % [difference * 1000.0]
-		difference_label.modulate = Color(0.4, 0.5, 0.8) \
-				if difference < 0.0 else Color(0.8, 0.4, 0.5)
-	else:
-		difference_label.text = "Botplay"
-		difference_label.modulate = Color(0.6, 0.62, 0.7)
-
-	if is_instance_valid(rating_tween) and rating_tween.is_running():
-		rating_tween.kill()
-
-	var rating: Rating = Rating.new()
-	if is_instance_valid(rating_calculator):
-		rating = rating_calculator.get_rating(absf(difference))
-	if rating_textures.has(rating.name):
-		rating_sprite.texture = rating_textures[rating.name]
-
-	rating_container.modulate.a = Settings.get_setting(&"core", "rating_alpha")
-	rating_container.scale = Vector2.ONE * 1.1
-	rating_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	rating_tween.tween_property(rating_container, 'scale', Vector2.ONE, 0.15)
-	rating_tween.tween_property(rating_container, 'modulate:a', 0.0, 0.25).set_delay(0.25)
-
-	var combo_str: String = str(game.combo).pad_zeros(3)
-	var num_count: int = combo_str.length()
-	var combo_spacing: float = 90.0
-	if is_instance_valid(hud_skin):
-		combo_spacing = hud_skin.combo_spacing
-
-	combo_node.position.x = (-combo_spacing / 4.0) * (num_count - 1)
-	while combo_node.get_child_count() < num_count:
-		var node: Node = combo_node.get_child(0).duplicate()
-		node.name = str(combo_node.get_child_count()+1)
-		combo_node.add_child(node)
-
-	for i: int in combo_node.get_child_count():
-		var number: Sprite2D = combo_node.get_child(i)
-		if i < num_count and is_instance_valid(hud_skin):
-			number.texture = hud_skin.get_combo_atlas()
-			number.texture_filter = hud_skin.combo_filter
-			number.frame = int(combo_str[i])
-			number.position.x = combo_spacing * i
-			number.visible = true
-		else:
-			number.visible = false
-
-	note_hit.emit(note)
-
-
-func _on_note_miss(note: NoteData) -> void:
-	if is_instance_valid(rating_tween) and rating_tween.is_running():
-		rating_tween.kill()
-
-	rating_container.modulate.a = 0.0
-	note_miss.emit(note)
-
-
 func set_downscroll(value: bool) -> void:
-	if is_instance_valid(player_renderer):
+	if player_renderer:
 		player_renderer.downscroll = value
 		player_renderer.position.y = 720.0 - 100.0 if value else 100.0
 		player_renderer.splash_alpha = Settings.get_setting(&"core", "note_splash_alpha")
 		player_renderer.underlay_alpha = Settings.get_setting(&"core", "note_underlay_alpha")
 
-	if is_instance_valid(opponent_renderer):
+	if opponent_renderer:
 		opponent_renderer.downscroll = value
 		opponent_renderer.position.y = 720.0 - 100.0 if value else 100.0
 		opponent_renderer.splash_alpha = Settings.get_setting(&"core", "note_splash_alpha")
@@ -209,9 +136,10 @@ func set_downscroll(value: bool) -> void:
 	downscroll_changed.emit(value)
 
 
-func set_centered_receptors(value: bool) -> void:
-	if is_instance_valid(opponent_renderer):
+func set_middlescroll(value: bool) -> void:
+	if player_renderer:
+		player_renderer.position.x = 640.0 if value else 960.0
+
+	if opponent_renderer:
 		opponent_renderer.visible = not value
 		opponent_renderer.position.x = 320.0
-	if is_instance_valid(player_renderer):
-		player_renderer.position.x = 640.0 if value else 960.0

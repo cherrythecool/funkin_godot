@@ -1,5 +1,5 @@
-extends Marker2D
 class_name CountdownContainer
+extends Marker2D
 
 
 @export var do_countdown: bool = true
@@ -56,11 +56,12 @@ func _on_beat_hit(beat: int) -> void:
 		Conductor.raw_time = -5.0 * Conductor.beat_delta
 		return
 
-	# countdown lol
 	beat += countdown_offset
+
 	if beat >= 0 and force_countdown:
 		force_countdown = false
 		return
+
 	var index: int = clampi(4 - absi(beat), 0, 3)
 	display_countdown_sprite(index)
 	play_countdown_sound(index)
@@ -74,13 +75,13 @@ func display_countdown_sprite(index: int) -> void:
 	if not is_instance_valid(countdown_textures[index]):
 		return
 
-	var sprite: Sprite2D = Sprite2D.new()
-	sprite.scale = Vector2(1.05, 1.05)
+	var sprite := Sprite2D.new()
+	sprite.scale = Vector2.ONE * 1.05
 	sprite.texture = countdown_textures[index]
 	sprite.texture_filter = hud_skin.rating_filter
 	add_child(sprite)
 
-	var tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)\
+	var tween := create_tween().set_trans(Tween.TRANS_SINE)\
 			.set_ease(Tween.EASE_OUT).set_parallel()
 	tween.tween_property(sprite, ^'modulate:a', 0.0, Conductor.beat_delta)
 	tween.tween_property(sprite, ^'scale', Vector2.ONE, Conductor.beat_delta)
@@ -93,9 +94,9 @@ func play_countdown_sound(index: int) -> void:
 	if not is_instance_valid(countdown_sounds[index]):
 		return
 
-	var player: AudioStreamPlayer = AudioStreamPlayer.new()
+	var player := AudioStreamPlayer.new()
 	player.stream = countdown_sounds[index]
-	player.bus = &'SFX'
+	player.bus = &"SFX"
 	player.finished.connect(player.queue_free)
 	add_child(player)
 

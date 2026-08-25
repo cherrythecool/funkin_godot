@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://nb701n0rtr0l" path="res://core/huds/default_hud/health_bar.gd" id="4_spp67"]
 [ext_resource type="Script" uid="uid://c6e8gdo34p37h" path="res://core/huds/default_hud/time_bar.gd" id="5_nwv25"]
 [ext_resource type="Texture2D" uid="uid://cn6fmp8et8ktw" path="res://core/styles/default/ratings/marvelous.png" id="6_mktee"]
+[ext_resource type="Script" uid="uid://bw11x7hqfgd8j" path="res://core/huds/default_hud/rating_container.gd" id="6_vvq14"]
 [ext_resource type="Texture2D" uid="uid://ds3g63uwcq4jw" path="res://core/styles/default/combo.png" id="7_7svf3"]
 [ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://modules/funkin/funkin.ttf" id="8_in2av"]
 [ext_resource type="Script" uid="uid://pc372g2dpnb3" path="res://core/huds/default_hud/countdown_container.gd" id="9_6w54d"]
@@ -99,7 +100,7 @@ script = ExtResource("11_vvq14")
 direction = &"right"
 metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
 
-[node name="hud" type="Control" unique_id=1372711265 node_paths=PackedStringArray("player_renderer", "opponent_renderer")]
+[node name="hud" type="Control" unique_id=1372711265 node_paths=PackedStringArray("player_renderer", "opponent_renderer", "health_bar", "countdown_container", "time_bar", "rating_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,6 +112,10 @@ mouse_filter = 2
 script = ExtResource("1_hv0yb")
 player_renderer = NodePath("player_renderer")
 opponent_renderer = NodePath("opponent_renderer")
+health_bar = NodePath("health_bar")
+countdown_container = NodePath("countdown_container")
+time_bar = NodePath("time_bar")
+rating_container = NodePath("rating_container")
 metadata/_edit_lock_ = true
 
 [node name="health_bar" type="Node2D" parent="." unique_id=1819531785]
@@ -208,6 +213,7 @@ vertical_alignment = 1
 [node name="rating_container" type="Node2D" parent="." unique_id=969389249]
 unique_name_in_owner = true
 position = Vector2(640, 328)
+script = ExtResource("6_vvq14")
 
 [node name="rating" type="Sprite2D" parent="rating_container" unique_id=1424953406]
 scale = Vector2(0.7, 0.7)
@@ -260,4 +266,5 @@ metadata/_custom_type_script = "uid://rh4jeluc5vy5"
 [connection signal="downscroll_changed" from="." to="time_bar" method="_on_hud_downscroll_changed"]
 [connection signal="setup" from="." to="health_bar" method="_on_hud_setup"]
 [connection signal="setup" from="." to="health_bar/score_label" method="_on_hud_setup"]
+[connection signal="setup" from="." to="rating_container" method="_on_hud_setup"]
 [connection signal="setup" from="." to="countdown_container" method="_on_hud_setup"]

@@ -1,5 +1,5 @@
-extends Resource
 class_name HUDSkin
+extends Resource
 
 
 @export_group('Ratings')
@@ -45,10 +45,10 @@ class_name HUDSkin
 
 
 func get_combo_atlas() -> Texture2D:
-	if is_instance_valid(combo_atlas):
+	if combo_atlas:
 		return combo_atlas
-
-	return load("uid://ds3g63uwcq4jw")
+	else:
+		return load("uid://ds3g63uwcq4jw")
 
 
 func get_countdown_textures(length: int = 4) -> Array[Texture2D]:
@@ -102,7 +102,7 @@ func get_rating_textures() -> Dictionary[StringName, Texture2D]:
 	}
 
 	var textures: Dictionary[StringName, Texture2D] = {}
-	for key: StringName in DEFAULT_PATHS.keys():
+	for key: StringName in DEFAULT_PATHS:
 		if key in self and is_instance_valid(get(key)):
 			textures[key] = get(key)
 		else:

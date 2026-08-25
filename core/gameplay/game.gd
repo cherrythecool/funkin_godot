@@ -12,7 +12,7 @@ static var songs_folder: String = "res://modules/funkin/songs"
 static var song: StringName = &"bopeebo"
 static var difficulty: StringName = &"hard"
 static var chart: Chart = null
-static var mode: PlayMode = PlayMode.FREEPLAY
+static var mode := PlayMode.FREEPLAY
 static var exit_scene: String = ""
 
 static var instance: Game = null
@@ -35,8 +35,6 @@ static var last_song_health: float = -1.0
 var events_index: int = 0
 
 @export var hud: Node
-#var player_field: NoteField = null
-#var opponent_field: NoteField = null
 
 var song_started: bool = false
 var save_score: bool = true

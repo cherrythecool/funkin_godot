@@ -165,7 +165,7 @@ func _update_label(info_key: StringName) -> void:
 				return
 
 			label.show()
-			label.text = "Scroll Speed: %.2f\nPlaying: %s\nHealth: %.2f%\nCombo: %d" % [
+			label.text = "Scroll Speed: %.2f\nPlaying: %s\nHealth: %.2f%%\nCombo: %d" % [
 				Game.instance.scroll_speed,
 				Game.instance.playing,
 				Game.instance.health,
