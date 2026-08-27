@@ -12,7 +12,6 @@ script = ExtResource("1_drfcy")
 [node name="camera_2d" type="Camera2D" parent="." unique_id=1264412517]
 unique_name_in_owner = true
 position = Vector2(640, 360)
-limit_enabled = false
 script = ExtResource("2_wio1r")
 position_lerps = false
 zoom_lerps = false

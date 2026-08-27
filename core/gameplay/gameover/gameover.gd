@@ -1,5 +1,4 @@
 extends Node2D
-class_name Gameover
 
 
 static var character_position: Vector2 = Vector2.ZERO
@@ -18,7 +17,6 @@ var active: bool = true
 
 
 func _ready() -> void:
-	randomize()
 	active = true
 
 	Conductor.reset()
@@ -32,7 +30,7 @@ func _ready() -> void:
 	character = load(character_path).instantiate()
 
 	if is_instance_valid(character.gameover_assets):
-		var assets: GameoverAssets = character.gameover_assets
+		var assets := character.gameover_assets
 		if is_instance_valid(assets.on_death):
 			on_death.stream = assets.on_death
 		if is_instance_valid(assets.looping_music):
@@ -52,27 +50,16 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_echo():
-		return
-	if not event.is_pressed():
-		return
 	if not active:
 		return
 
-	if event.is_action(&"menu_cancel"):
+	if event.is_action_pressed(&"menu_cancel"):
 		active = false
 		GlobalAudio.get_player(^"MENU/CANCEL").play()
 		GameCamera2D.reset_persistent_values()
+		SceneManager.transition_to_file(Game.load_settings[&"exit_scene_path"])
 
-		match Game.mode:
-			Game.PlayMode.FREEPLAY:
-				SceneManager.transition_to_file(MainMenu.freeplay_scene)
-			Game.PlayMode.STORY:
-				SceneManager.transition_to_file("uid://dcf86iwg6mn3d")
-			_:
-				SceneManager.transition_to_file("uid://cxk008iuw4n7u")
-
-	if event.is_action(&"menu_accept"):
+	if event.is_action_pressed(&"menu_accept"):
 		active = false
 		character.play_anim(&"retry")
 		music_player.stop()
@@ -93,8 +80,13 @@ func _on_initial_focus_timer_timeout() -> void:
 
 
 func _on_fade_out_timer_timeout() -> void:
-	var tween: Tween = create_tween()
+	var tween := create_tween()
 	tween.tween_property(character, ^"modulate:a", 0.0, 2.0)
 	tween.tween_callback(func() -> void:
-		SceneManager.transition_to_file(SongLoader.get_scene_path(Game.song, Game.songs_folder))
+		SceneManager.transition_to_file(
+			SongLoader.get_scene_path(
+				Game.load_settings[&"song_name"],
+				Game.load_settings[&"songs_folder"],
+			),
+		)
 	)
