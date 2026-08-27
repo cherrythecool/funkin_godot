@@ -77,6 +77,10 @@ folder_colors={
 "res://script_templates/": "orange"
 }
 
+[global_group]
+
+RatingManager=""
+
 [gui]
 
 common/snap_controls_to_pixels=false

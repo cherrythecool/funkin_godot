@@ -70,7 +70,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			GlobalAudio.get_player(^"MENU/CONFIRM").play()
 
 			if Settings.get_setting(&"core", "flashing_lights"):
-				flash.color = Color.WHITE
+				flash.color = Color(Color.WHITE, 0.5)
 			else:
 				flash.color = Color.TRANSPARENT
 				enter_animation.speed_scale = 0.0
@@ -134,6 +134,7 @@ func skip_intro() -> void:
 
 	post_intro.visible = true
 
-	flash.color = Color.WHITE
-	flash_tween = GameUtils.replace_tween(self, flash_tween)
-	flash_tween.tween_property(flash, ^"color:a", 0.0, 1.0)
+	if Settings.get_setting(&"core", "flashing_lights"):
+		flash.color = Color(Color.WHITE, 0.5)
+		flash_tween = GameUtils.replace_tween(self, flash_tween)
+		flash_tween.tween_property(flash, ^"color:a", 0.0, 1.0)

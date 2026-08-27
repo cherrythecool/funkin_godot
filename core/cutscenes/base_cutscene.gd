@@ -17,7 +17,7 @@ class_name BaseCutscene extends FunkinScript
 @export var auto_free: bool = true
 
 func _ready() -> void:
-	if Game.mode == Game.PlayMode.FREEPLAY and not play_in_freeplay:
+	if Game.load_settings[&"mode_name"] == "Freeplay" and not play_in_freeplay:
 		queue_free()
 		return
 	game.hud.pause_countdown = true

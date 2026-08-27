@@ -9,7 +9,6 @@ extends Node
 @export_dir var song_folder: String = ""
 
 @export var assets: SongAssets
-@export var metadata: SongMetadata
 
 @export var song_player: AudioStreamPlayer
 @export var characters_parent: Node
@@ -22,16 +21,25 @@ extends Node
 func _ready() -> void:
 	if song_change:
 		if not song_name.is_empty():
-			Game.song = song_name
+			Game.load_settings[&"song_name"] = song_name
 
 		if not song_difficulty.is_empty():
-			Game.difficulty = song_difficulty
+			Game.load_settings[&"song_difficulty"] = song_difficulty
 
 		if not song_folder.is_empty():
-			Game.songs_folder = song_folder
+			Game.load_settings[&"songs_folder"] = song_folder
+	else:
+		song_name = Game.load_settings[&"song_name"]
+		song_difficulty = Game.load_settings[&"song_difficulty"]
+		song_folder = Game.load_settings[&"songs_folder"]
 
 
 func load_assets() -> void:
+	if ResourceLoader.exists("%s/%s/assets.tres" % [song_folder, song_name]):
+		assets = load("%s/%s/assets.tres" % [song_folder, song_name])
+	if not is_instance_valid(assets):
+		assets = load("uid://dm8kpip52j8kf")
+
 	if not is_instance_valid(assets):
 		printerr("Tried to load assets without any assets!")
 		return

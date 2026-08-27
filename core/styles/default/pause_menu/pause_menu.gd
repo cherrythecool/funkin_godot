@@ -31,14 +31,13 @@ func _ready() -> void:
 		music.stream = Game.instance.hud.hud_skin.pause_music
 		music.play()
 
-	var keys: Array = Game.PlayMode.keys()
 	song_name.text = "%s\n(%s)" % [Game.instance.metadata.get_full_name(),
-			Game.difficulty.to_upper(),]
+			Game.load_settings[&"song_difficulty"].to_upper(),]
 	if song_name.size.x > Global.game_size.x:
 		song_name.scale = Vector2.ONE * (Global.game_size.x / song_name.size.x * 0.9)
 	song_name.position.x = Global.game_size.x - \
 			(float(song_name.size.x) * song_name.scale.x) - 16.0
-	play_type.text = keys[Game.mode].to_upper()
+	play_type.text = Game.load_settings[&"mode_name"].to_upper()
 	play_type.position = Global.game_size - (Vector2(play_type.size) * 0.75) - \
 			Vector2(16.0, 16.0)
 
@@ -69,6 +68,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				&"options":
 					OptionsMenu.target_scene = get_tree().current_scene.scene_file_path
 					close()
+					Game.instance.back_to_menus.emit()
 					SceneManager.transition_to_file("uid://3daku38i1a50")
 				&"quit":
 					close()

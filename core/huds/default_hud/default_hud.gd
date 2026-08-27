@@ -26,12 +26,6 @@ var middlescroll: bool = false:
 @export var time_bar: ProgressBar
 @export var rating_container: Node2D
 
-@onready var rating_calculator: RatingCalculator:
-	get:
-		if is_instance_valid(game) and is_instance_valid(game.rating_calculator):
-			return game.rating_calculator
-		else:
-			return null
 var rating_tween: Tween
 
 @export var hud_skin: HUDSkin:

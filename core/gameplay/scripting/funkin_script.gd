@@ -122,4 +122,4 @@ func _initialize_variables() -> void:
 		game.event_prepare.connect(_on_event_prepare)
 		game.event_hit.connect(_on_event_hit)
 		game.ready_post.connect(_ready_post)
-		game.process_post.connect(_process_post)
+		#game.process_post.connect(_process_post)

@@ -94,7 +94,13 @@ func _unhandled_input(event: InputEvent) -> void:
 				props.props[2].play_anim(&"confirm", true)
 				await props.props[2].animation_finished
 
-			SceneManager.transition_to_file(SongLoader.get_scene_path(Game.song, Game.songs_folder))
+			Game.load_settings[&"exit_scene_path"] = get_tree().current_scene.scene_file_path
+			SceneManager.transition_to_file(
+				SongLoader.get_scene_path(
+					Game.load_settings[&"song_name"],
+					Game.load_settings[&"songs_folder"],
+				),
+			)
 		else:
 			active = true
 
@@ -109,7 +115,8 @@ func _get_weeks_target_y() -> float:
 
 func _load_active_playlist() -> void:
 	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
-	Game.playlist = []
+	Game.load_settings[&"playlist"].clear()
+
 	if selected_week.songs.size() == 1:
 		return
 
@@ -118,7 +125,7 @@ func _load_active_playlist() -> void:
 		var entry: GamePlaylistEntry = GamePlaylistEntry.new()
 		entry.name = selected_week.get_song_name(i, difficulty)
 		entry.difficulty = difficulty
-		Game.playlist.push_back(entry)
+		Game.load_settings[&"playlist"].push_back(entry)
 
 
 func _load_first_song() -> bool:
@@ -126,11 +133,10 @@ func _load_first_song() -> bool:
 	var difficulty: String = difficulties.difficulties[difficulties.selected]
 	var song_name: String = selected_week.get_song_name(0, difficulty)
 
-	Game.chart = null
-	Game.songs_folder = songs_folder
-	Game.song = song_name
-	Game.difficulty = difficulty.to_lower()
-	Game.mode = Game.PlayMode.STORY
+	Game.load_settings[&"songs_folder"] = songs_folder
+	Game.load_settings[&"song_name"] = song_name
+	Game.load_settings[&"song_difficulty"] = difficulty.to_lower()
+	Game.load_settings[&"mode_name"] = "Story Mode"
 	return true
 
 

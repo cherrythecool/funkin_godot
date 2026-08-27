@@ -2,6 +2,8 @@ class_name HealthBar
 extends Node2D
 
 
+static var last_song_health: float = -1.0
+
 @onready var bar: ProgressBar = $bar
 @onready var icons: Node2D = $icons
 
@@ -20,7 +22,8 @@ var opponent_color: Color:
 var rank: StringName = &"N/A"
 var lerped_health: float = 0.0
 
-var game: Game
+var rating_manager: RatingManager
+var tracking_song_health := true
 
 
 func _ready() -> void:
@@ -28,15 +31,26 @@ func _ready() -> void:
 		process_mode = Node.PROCESS_MODE_DISABLED
 		return
 
-	game = Game.instance
-	lerped_health = game.health
+	rating_manager = get_tree().get_first_node_in_group(&"RatingManager")
 
-	if Game.last_song_health != -1.0:
-		lerped_health = Game.last_song_health
+	if rating_manager:
+		lerped_health = rating_manager.get_health_percent()
+	if last_song_health != -1.0:
+		lerped_health = last_song_health
+
+	Game.instance.back_to_menus.connect(func() -> void:
+		tracking_song_health = false
+		last_song_health = -1.0
+	)
 
 
 func _process(delta: float) -> void:
-	lerped_health = lerpf(lerped_health, game.health, GameUtils.lerp_weight(delta, 5.0))
+	if rating_manager:
+		lerped_health = lerpf(lerped_health, rating_manager.get_health_percent(), GameUtils.lerp_weight(delta, 5.0))
+
+	if tracking_song_health:
+		last_song_health = lerped_health
+
 	bar.value = lerped_health
 	icons.scale = Vector2(1.2, 1.2).lerp(Vector2.ONE, icon_lerp())
 	position_icons(bar.value)

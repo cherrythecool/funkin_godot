@@ -14,12 +14,7 @@ var game: Game:
 
 		return game
 
-var rating_calculator: RatingCalculator:
-	get:
-		if is_instance_valid(game) and game.rating_calculator:
-			return game.rating_calculator
-		else:
-			return null
+var rating_manager: RatingManager
 
 var rating_textures: Dictionary[StringName, Texture2D] = {}
 var tween: Tween
@@ -32,6 +27,10 @@ var tween: Tween
 func _enter_tree() -> void:
 	modulate.a = 0.0
 	show()
+
+
+func _ready() -> void:
+	rating_manager = get_tree().get_first_node_in_group(&"RatingManager")
 
 
 func _on_hud_setup() -> void:
@@ -66,9 +65,9 @@ func _on_note_hit(note: NoteData) -> void:
 	if tween and tween.is_running():
 		tween.kill()
 
-	var rating := Rating.new()
-	if is_instance_valid(rating_calculator):
-		rating = rating_calculator.get_rating(absf(difference))
+	var rating := FunkinRating.new()
+	if rating_manager and rating_manager is FunkinRatingManager:
+		rating = rating_manager.get_rating(absf(difference))
 	if rating_textures.has(rating.name):
 		rating_sprite.texture = rating_textures[rating.name]
 
@@ -78,7 +77,10 @@ func _on_note_hit(note: NoteData) -> void:
 	tween.tween_property(self, 'scale', Vector2.ONE, 0.15)
 	tween.tween_property(self, 'modulate:a', 0.0, 0.25).set_delay(0.25)
 
-	var combo_str: String = str(game.combo).pad_zeros(3)
+	var combo_str: String = "000"
+	if rating_manager:
+		combo_str = str(rating_manager.combo).pad_zeros(3)
+
 	var num_count: int = combo_str.length()
 	var combo_spacing: float = 90.0
 	if is_instance_valid(hud_skin):

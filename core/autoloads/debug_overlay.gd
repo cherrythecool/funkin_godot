@@ -139,7 +139,7 @@ func _update_label(info_key: StringName) -> void:
 		&"module":
 			label.text = "Module: %s\nSongs Folder: %s" % [
 				ModuleManager.current_module,
-				Game.songs_folder,
+				Game.load_settings[&"songs_folder"],
 			]
 		&"rendering":
 			label.text = "API: %s/%s\nGPU: %s\nDraw Calls: %d\nDrawn Objects: %d" % [
@@ -165,9 +165,7 @@ func _update_label(info_key: StringName) -> void:
 				return
 
 			label.show()
-			label.text = "Scroll Speed: %.2f\nPlaying: %s\nHealth: %.2f%%\nCombo: %d" % [
+			label.text = "Scroll Speed: %.2f\nPlaying: %s" % [
 				Game.instance.scroll_speed,
 				Game.instance.playing,
-				Game.instance.health,
-				Game.instance.combo,
 			]

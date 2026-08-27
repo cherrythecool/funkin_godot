@@ -4,45 +4,44 @@ extends Label
 
 @export var separator: String = "-"
 
-var game: Game = null
+var rating_manager: RatingManager
 
 
 func _ready() -> void:
-	game = Game.instance
+	rating_manager = get_tree().get_first_node_in_group(&"RatingManager")
+
+	if rating_manager:
+		rating_manager.changed.connect(update_score_label)
 
 
 func _on_hud_setup() -> void:
-	if is_instance_valid(game):
-		game.score_changed.connect(_on_score_changed)
-
-	update_score_label()
-
-
-func _on_score_changed(_value: int) -> void:
 	update_score_label()
 
 
 func update_score_label() -> void:
-	if not is_instance_valid(game):
+	if (not rating_manager) or (rating_manager is not FunkinRatingManager):
 		return
 
 	var accuracy_string: String = "N/A"
-	if game.rating_calculator.hit_count > 0:
-		var decimal_points: int = 2
-		if game.accuracy >= 100.0:
+	if rating_manager._total_notes_hit > 0:
+		var decimal_points := 2
+		if rating_manager.get_accuracy() >= 100.0:
 			decimal_points = 2
-		elif game.accuracy >= 99.9:
+		elif rating_manager.get_accuracy() >= 99.9:
 			decimal_points = 5
-		elif game.accuracy >= 99.0:
+		elif rating_manager.get_accuracy() >= 99.0:
 			decimal_points = 3
 
-		accuracy_string = "%.*f%%" % [decimal_points, floorf(game.accuracy * 100000.0) / 100000.0]
+		accuracy_string = "%.*f%%" % [
+			decimal_points,
+			floorf(rating_manager.get_accuracy() * 100000.0) / 100000.0,
+		]
 
 	text = "Score:%d %s Misses:%d %s Accuracy:%s (%s)" % [
-		game.score,
+		rating_manager.score,
 		separator,
-		game.misses,
+		rating_manager.misses,
 		separator,
 		accuracy_string,
-		&"N/A" if accuracy_string == "N/A" else game.rank,
+		&"N/A" if accuracy_string == "N/A" else rating_manager.get_rank(),
 	]

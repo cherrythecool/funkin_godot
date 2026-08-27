@@ -162,12 +162,12 @@ func select_song() -> void:
 		active = true
 		return
 
-	Game.chart = null
-	Game.songs_folder = songs_folder
-	Game.song = current_song
-	Game.difficulty = difficulty.to_lower()
-	Game.mode = Game.PlayMode.FREEPLAY
-	Game.playlist.clear()
+	Game.load_settings[&"songs_folder"] = songs_folder
+	Game.load_settings[&"song_name"] = current_song
+	Game.load_settings[&"song_difficulty"] = difficulty.to_lower()
+	Game.load_settings[&"mode_name"] = "Freeplay"
+	Game.load_settings[&"exit_scene_path"] = get_tree().current_scene.scene_file_path
+	Game.load_settings[&"playlist"].clear()
 	SceneManager.transition_to_file(SongLoader.get_scene_path(current_song, songs_folder))
 
 
@@ -215,7 +215,7 @@ func _load_tracks() -> void:
 	previous_song = current_song
 
 	GlobalAudio.music.stop()
-	song_player.stream = Tracks.tracks_load(current_song, songs_folder)
+	song_player.stream = Tracks.load_tracks(current_song, songs_folder)
 	song_player.play()
 
 

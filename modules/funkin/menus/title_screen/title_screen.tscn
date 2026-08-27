@@ -8,6 +8,7 @@
 [ext_resource type="SpriteFrames" uid="uid://diaqnypewr3ov" path="res://modules/funkin/menus/title_screen/enter.res" id="6_hraot"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://core/classes/alphabet/alphabet.gd" id="7_al1xt"]
 [ext_resource type="Texture2D" uid="uid://qqx4a0cwgl4s" path="res://icon.svg" id="8_xwi85"]
+[ext_resource type="Material" uid="uid://h6uy4lto3tyx" path="res://core/shaders/additive.tres" id="9_uoi2b"]
 
 [sub_resource type="Animation" id="Animation_6rots"]
 length = 0.001
@@ -420,6 +421,7 @@ callback_mode_process = 2
 libraries/ = SubResource("AnimationLibrary_v06vg")
 
 [node name="flash" type="ColorRect" parent="." unique_id=450789777]
+material = ExtResource("9_uoi2b")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

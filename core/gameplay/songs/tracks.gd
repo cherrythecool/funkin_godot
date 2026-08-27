@@ -16,7 +16,7 @@ static func tracks_exist(song: StringName, path: String) -> bool:
 ##
 ## Will try to generate an AudioStreamSynchronized if a tracks folder
 ## can be found. (Loading all resources in the folder)
-static func tracks_load(song: StringName, path: String) -> AudioStream:
+static func load_tracks(song: StringName, path: String) -> AudioStream:
 	var song_folder := "%s/%s" % [path, song]
 	var files := ResourceLoader.list_directory("%s/tracks" % [song_folder])
 	if files.is_empty():

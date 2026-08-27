@@ -31,11 +31,11 @@ func _get_score_key(song: StringName, difficulty: StringName) -> String:
 
 func get_score(song: StringName, difficulty: StringName) -> Dictionary:
 	return data.get(_get_score_key(song, difficulty), {
-			'score': 'N/A',
-			'misses': 'N/A',
-			'accuracy': 'N/A',
-			'rank': 'N/A',
-		})
+		'score': 'N/A',
+		'misses': 'N/A',
+		'accuracy': 'N/A',
+		'rank': 'N/A',
+	})
 
 
 func has_score(song: StringName, difficulty: StringName) -> bool:
