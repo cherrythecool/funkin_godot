@@ -18,7 +18,7 @@ const SING_DIRECTIONS: PackedStringArray = ["left", "down", "up", "right"]
 				strumline.note_missed.connect(_on_note_missed)
 
 @export_category("Visuals")
-@export var icon: Icon = Icon.new()
+@export var icon: HealthIcon = HealthIcon.new()
 @export var starts_as_player: bool = false
 @export var swap_sing_animations: bool = false
 

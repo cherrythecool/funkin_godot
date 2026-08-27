@@ -1,15 +1,9 @@
 [gd_scene format=3 uid="uid://bu44d2he2dxm3"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_qpuwd"]
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_nvsa7"]
-[ext_resource type="Texture2D" uid="uid://dp4wr3woulw3y" path="res://core/characters/bf/icon.png" id="3_a8h5q"]
+[ext_resource type="Resource" uid="uid://lbe7ubbkwdln" path="res://core/characters/bf/icon.tres" id="2_qibnw"]
 [ext_resource type="SpriteFrames" uid="uid://vwb0175wp7cl" path="res://core/characters/bf/sprites.res" id="4_n76qh"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_cqlbl"]
-
-[sub_resource type="Resource" id="Resource_04pdi"]
-script = ExtResource("2_nvsa7")
-texture = ExtResource("3_a8h5q")
-color = Color(0.191974, 0.690272, 0.81973, 1)
 
 [sub_resource type="Animation" id="Animation_bgpi6"]
 length = 0.001
@@ -821,7 +815,7 @@ _data = {
 
 [node name="bf" type="Node2D" unique_id=1298651439]
 script = ExtResource("1_qpuwd")
-icon = SubResource("Resource_04pdi")
+icon = ExtResource("2_qibnw")
 starts_as_player = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1630777912]

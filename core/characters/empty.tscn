@@ -40,7 +40,7 @@ _data = {
 &"sing_up": SubResource("Animation_m87l6")
 }
 
-[node name="null" type="Node2D" unique_id=32175279]
+[node name="empty" type="Node2D" unique_id=32175279]
 script = ExtResource("1_ym6ae")
 
 [node name="animation_player" type="AnimationPlayer" parent="." unique_id=255405431]

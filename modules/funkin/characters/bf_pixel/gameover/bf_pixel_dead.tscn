@@ -1,21 +1,12 @@
 [gd_scene format=3 uid="uid://5rxh788gk1wf"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_rjicp"]
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_314fo"]
-[ext_resource type="Texture2D" uid="uid://827umg3700yo" path="res://modules/funkin/characters/bf_pixel/icon.png" id="3_rjicp"]
 [ext_resource type="SpriteFrames" uid="uid://b2wgxn7lqcp6q" path="res://modules/funkin/characters/bf_pixel/gameover/sprites.res" id="4_rjicp"]
 [ext_resource type="AudioStream" uid="uid://bix35f5l13smb" path="res://modules/funkin/characters/bf_pixel/gameover/theme.ogg" id="4_yw7xa"]
 [ext_resource type="AudioStream" uid="uid://nc8jlc5o3cbq" path="res://modules/funkin/characters/bf_pixel/gameover/on_death.ogg" id="5_u3tih"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_yw7xa"]
 [ext_resource type="AudioStream" uid="uid://c5bs6b76dbkw8" path="res://modules/funkin/characters/bf_pixel/gameover/retry.ogg" id="6_0h8j6"]
 [ext_resource type="Script" uid="uid://be3817vx78fju" path="res://core/characters/gameover_assets.gd" id="7_krrd3"]
-
-[sub_resource type="Resource" id="Resource_314fo"]
-script = ExtResource("2_314fo")
-texture = ExtResource("3_rjicp")
-color = Color(0.48235294, 0.8392157, 0.9647059, 1)
-filter = 1
-internal_scale = Vector2(4.688, 4.688)
 
 [sub_resource type="Resource" id="Resource_le6dn"]
 script = ExtResource("7_krrd3")
@@ -293,7 +284,6 @@ _data = {
 
 [node name="bf_pixel_dead" type="Node2D" unique_id=1980548900]
 script = ExtResource("1_rjicp")
-icon = SubResource("Resource_314fo")
 starts_as_player = true
 dance_steps = Array[StringName]([])
 gameover_assets = SubResource("Resource_le6dn")

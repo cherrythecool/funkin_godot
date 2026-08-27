@@ -189,7 +189,7 @@ func load_song(i: int) -> void:
 		meta.display_name = song_name.to_pascal_case()
 
 	if not is_instance_valid(meta.icon):
-		meta.icon = Icon.new()
+		meta.icon = HealthIcon.new()
 
 	var node: FreeplaySongNode = FreeplaySongNode.new()
 	node.position = Vector2.ZERO
@@ -199,7 +199,7 @@ func load_song(i: int) -> void:
 	song_nodes.push_back(node)
 	songs.add_child(node)
 
-	var icon: Sprite2D = Icon.create_sprite(meta.icon)
+	var icon: Sprite2D = HealthIcon.create_sprite(meta.icon)
 	# 37.5 = 150.0 * 0.25
 	icon.position = Vector2(node.size.x + 75.0, 37.5)
 	node.add_child(icon)

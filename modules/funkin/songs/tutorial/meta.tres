@@ -8,7 +8,7 @@
 script = ExtResource("1_hiav4")
 texture = ExtResource("2_3hcmq")
 color = Color(0.647059, 0, 0.301961, 1)
-frames = Vector2i(1, 1)
+texture_frames = Vector2i(1, 1)
 metadata/_custom_type_script = "uid://b7lu04jsahckp"
 
 [resource]

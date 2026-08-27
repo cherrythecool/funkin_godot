@@ -10,8 +10,8 @@
 [sub_resource type="Resource" id="Resource_1qgms"]
 script = ExtResource("2_jrmk7")
 texture = ExtResource("3_2glvu")
+texture_frames = Vector2i(1, 1)
 color = Color(0.647288, 0, 0.3019, 1)
-frames = Vector2i(1, 1)
 
 [sub_resource type="Resource" id="Resource_42asd"]
 script = ExtResource("6_oec3b")

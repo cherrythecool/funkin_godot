@@ -1,15 +1,8 @@
 [gd_scene format=3 uid="uid://w4v0gymuehdt"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_rkxpw"]
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_jqq76"]
-[ext_resource type="Texture2D" uid="uid://dp4wr3woulw3y" path="res://core/characters/bf/icon.png" id="3_suw35"]
 [ext_resource type="SpriteFrames" uid="uid://w0puyhy3ntlg" path="res://core/characters/bf/gameover/sprites.res" id="4_o3v6h"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_xir7k"]
-
-[sub_resource type="Resource" id="Resource_e6vli"]
-script = ExtResource("2_jqq76")
-texture = ExtResource("3_suw35")
-color = Color(0.191974, 0.690272, 0.81973, 1)
 
 [sub_resource type="Animation" id="Animation_bgpi6"]
 length = 0.001
@@ -280,7 +273,6 @@ _data = {
 
 [node name="bf_dead" type="Node2D" unique_id=115123107]
 script = ExtResource("1_rkxpw")
-icon = SubResource("Resource_e6vli")
 starts_as_player = true
 dance_steps = Array[StringName]([])
 

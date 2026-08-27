@@ -5,7 +5,7 @@ extends Resource
 @export_group("Display Info")
 @export var display_name: StringName = &"Song Name"
 @export var mix: StringName = &"Default"
-@export var icon: Icon = null
+@export var icon: HealthIcon = null
 
 @export_group("Difficulties")
 @export var difficulties: PackedStringArray = [

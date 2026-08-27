@@ -7,13 +7,13 @@ static var last_song_health: float = -1.0
 @onready var bar: ProgressBar = $bar
 @onready var icons: Node2D = $icons
 
-var player_icon: Sprite2D = null
+var player_icon: CanvasItem = null
 var player_color: Color:
 	set(value):
 		player_color = value
 		bar.get(&"theme_override_styles/fill").bg_color = player_color
 
-var opponent_icon: Sprite2D = null
+var opponent_icon: CanvasItem = null
 var opponent_color: Color:
 	set(value):
 		opponent_color = value
@@ -55,32 +55,24 @@ func _process(delta: float) -> void:
 	icons.scale = Vector2(1.2, 1.2).lerp(Vector2.ONE, icon_lerp())
 	position_icons(bar.value)
 
-	var player_frames: int = player_icon.hframes * player_icon.vframes
-	var opponent_frames: int = opponent_icon.hframes * opponent_icon.vframes
-
-	if bar.value >= 80.0:
-		player_icon.frame = 2 if player_frames >= 3 else 0
-		opponent_icon.frame = 1 if opponent_frames >= 2 else 0
-	elif bar.value <= 20.0:
-		player_icon.frame = 1 if player_frames >= 2 else 0
-		opponent_icon.frame = 2 if opponent_frames >= 3 else 0
-	else:
-		player_icon.frame = 0
-		opponent_icon.frame = 0
+	_update_icon_animation(player_icon, true)
+	_update_icon_animation(opponent_icon, false)
 
 
 func reload_icons() -> void:
-	if is_instance_valid(player_icon) and is_instance_valid(opponent_icon):
+	if player_icon:
 		player_icon.queue_free()
+
+	if opponent_icon:
 		opponent_icon.queue_free()
 
 	reload_icon_colors()
 
-	opponent_icon = Icon.create_sprite(Game.instance.opponent.icon) if Game.instance.opponent else Icon.create_sprite(Icon.new())
+	opponent_icon = HealthIcon.create_sprite(Game.instance.opponent.icon) if Game.instance.opponent else HealthIcon.create_sprite(HealthIcon.new())
 	opponent_icon.position.x = -50.0
 	icons.add_child(opponent_icon)
 
-	player_icon = Icon.create_sprite(Game.instance.player.icon) if Game.instance.player else Icon.create_sprite(Icon.new())
+	player_icon = HealthIcon.create_sprite(Game.instance.player.icon) if Game.instance.player else HealthIcon.create_sprite(HealthIcon.new())
 	player_icon.position.x = 50.0
 	icons.add_child(player_icon)
 	player_icon.flip_h = true
@@ -105,6 +97,32 @@ func icon_lerp() -> float:
 
 func position_icons(health: float) -> void:
 	icons.position.x = 320.0 - (health * 6.4)
+
+
+func _update_icon_animation(icon: CanvasItem, is_player: bool) -> void:
+	if icon is Sprite2D:
+		var frames: int = icon.hframes * icon.vframes
+		if lerped_health >= 80.0:
+			var target: int = 2 if is_player else 1
+			icon.frame = target if frames >= target + 1 else 0
+		elif lerped_health <= 20.0:
+			var target: int = 1 if is_player else 2
+			icon.frame = target if frames >= target + 1 else 0
+		else:
+			icon.frame = 0
+	elif icon is AnimatedSprite2D:
+		var target: StringName
+		if lerped_health >= 80.0:
+			target = &"winning" if is_player else &"losing"
+		elif lerped_health <= 20.0:
+			target = &"losing" if is_player else &"winning"
+		else:
+			target = &"default"
+
+		if not icon.sprite_frames.has_animation(target):
+			target = &"default"
+		if icon.animation != target and icon.sprite_frames.has_animation(target):
+			icon.play(target)
 
 
 func _on_hud_downscroll_changed(downscroll: bool) -> void:

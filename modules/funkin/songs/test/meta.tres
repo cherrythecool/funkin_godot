@@ -9,7 +9,7 @@ script = ExtResource("1_33gq3")
 texture = ExtResource("2_d4kt2")
 color = Color(0.48235294, 0.8392157, 0.9647059, 1)
 filter = 1
-internal_scale = Vector2(4.688, 4.688)
+scale = Vector2(4.688, 4.688)
 metadata/_custom_type_script = "uid://b7lu04jsahckp"
 
 [resource]

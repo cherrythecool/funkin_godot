@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="HealthIcon" format=3 uid="uid://lbe7ubbkwdln"]
+
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="1_g1j48"]
+[ext_resource type="Texture2D" uid="uid://dp4wr3woulw3y" path="res://core/characters/bf/icon.png" id="2_y2mo8"]
+
+[resource]
+script = ExtResource("1_g1j48")
+texture = ExtResource("2_y2mo8")
+color = Color(0.191974, 0.690272, 0.81973, 1)

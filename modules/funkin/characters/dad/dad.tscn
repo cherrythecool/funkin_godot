@@ -9,8 +9,8 @@
 [sub_resource type="Resource" id="Resource_4ohel"]
 script = ExtResource("2_2fkqd")
 texture = ExtResource("3_sy3hy")
+texture_frames = Vector2i(1, 1)
 color = Color(0.686366, 0.400092, 0.808011, 1)
-frames = Vector2i(1, 1)
 
 [sub_resource type="Animation" id="Animation_bgpi6"]
 length = 0.001
