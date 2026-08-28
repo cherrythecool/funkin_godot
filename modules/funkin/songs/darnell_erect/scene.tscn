@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://1dwo0trw3je2" path="res://core/gameplay/ratings/funkin_rating_manager.gd" id="3_j7he7"]
 [ext_resource type="Script" uid="uid://dp70bbdhoqpo0" path="res://core/gameplay/ratings/funkin_rating.gd" id="4_4vlo1"]
 [ext_resource type="Script" uid="uid://3n2aou2bthat" path="res://core/notes/strumline_manager.gd" id="5_gof74"]
-[ext_resource type="Script" uid="uid://b1ln7ad72xey4" path="res://core/gameplay/game_camera_2d.gd" id="6_ocj6e"]
+[ext_resource type="Script" uid="uid://b1ln7ad72xey4" path="res://core/gameplay/funkin_camera_2d.gd" id="6_ocj6e"]
 [ext_resource type="PackedScene" uid="uid://s7la6mup6cwb" path="res://modules/funkin/characters/nene/nene.tscn" id="6_p878t"]
 [ext_resource type="PackedScene" uid="uid://dhtct6lrdao7r" path="res://modules/funkin/stages/philly_streets_erect/philly_streets_erect.tscn" id="6_snf6e"]
 [ext_resource type="PackedScene" uid="uid://bh5vnsmdwoatu" path="res://modules/funkin/characters/pico/pico_player.tscn" id="7_snf6e"]

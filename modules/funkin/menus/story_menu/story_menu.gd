@@ -122,9 +122,11 @@ func _load_active_playlist() -> void:
 
 	var difficulty: String = difficulties.difficulties[difficulties.selected]
 	for i: int in range(1, selected_week.songs.size()):
-		var entry: GamePlaylistEntry = GamePlaylistEntry.new()
-		entry.name = selected_week.get_song_name(i, difficulty)
-		entry.difficulty = difficulty
+		var entry := {
+			&"name": selected_week.get_song_name(i, difficulty),
+			&"difficulty": difficulty,
+		}
+
 		Game.load_settings[&"playlist"].push_back(entry)
 
 

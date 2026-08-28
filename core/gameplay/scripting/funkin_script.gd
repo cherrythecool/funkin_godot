@@ -56,10 +56,10 @@ var stage: Stage:
 		else:
 			return null
 
-var camera: GameCamera2D:
+var camera: FunkinCamera2D:
 	get:
-		if is_instance_valid(GameCamera2D.instance):
-			return GameCamera2D.instance
+		if is_instance_valid(FunkinCamera2D.instance):
+			return FunkinCamera2D.instance
 		else:
 			return null
 

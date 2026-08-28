@@ -12,6 +12,14 @@ script = ExtResource("1_ouhng")
 sounds = Array[AudioStream]([ExtResource("2_di0st"), ExtResource("3_tyw1g")])
 default_zoom = 1.0
 
+[node name="color_rect" type="ColorRect" parent="." unique_id=768524423]
+z_index = -200
+offset_left = -2033.0
+offset_top = -1473.0
+offset_right = 3673.0
+offset_bottom = 2495.0
+color = Color(0.14117648, 0.13725491, 0.21176471, 1)
+
 [node name="background" type="AnimatedSprite2D" parent="." unique_id=1665463365]
 unique_name_in_owner = true
 z_index = -100

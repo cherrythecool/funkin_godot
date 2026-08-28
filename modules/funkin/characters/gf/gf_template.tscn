@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dwnlgm41kqjlx"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_yyy4f"]
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_t4ttt"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/health_icon.gd" id="2_t4ttt"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="3_is4pj"]
 [ext_resource type="Texture2D" uid="uid://d2c1hlp80sm2q" path="res://modules/funkin/characters/gf/icon.png" id="3_v608q"]
 [ext_resource type="SpriteFrames" uid="uid://flg6mlptxgc5" path="res://modules/funkin/characters/gf/car_sprites.res" id="4_v608q"]

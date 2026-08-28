@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://b4v1y25c1t1uo"]
 
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="1_0r1ye"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/health_icon.gd" id="1_0r1ye"]
 [ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://core/gameplay/songs/metadata.gd" id="1_83goj"]
 [ext_resource type="Texture2D" uid="uid://dnw888uux6bmj" path="res://modules/funkin/characters/darnell/icon.png" id="2_x788m"]
 

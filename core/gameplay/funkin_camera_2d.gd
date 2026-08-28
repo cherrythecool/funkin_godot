@@ -1,8 +1,8 @@
-class_name GameCamera2D
+class_name FunkinCamera2D
 extends Camera2D
 
 
-static var instance: GameCamera2D = null
+static var instance: FunkinCamera2D = null
 static var camera_position: Vector2 = Vector2.INF
 static var camera_zoom: Vector2 = Vector2.INF
 
@@ -52,9 +52,11 @@ func _ready() -> void:
 	if camera_zoom != Vector2.INF and persistent_zoom:
 		zoom = camera_zoom
 
-	game.ready_post.connect(_on_game_ready_post)
-	game.back_to_menus.connect(_on_game_back_to_menus)
-	game.event_hit.connect(_on_game_event_hit)
+	if game:
+		game.ready_post.connect(_on_game_ready_post)
+		game.back_to_menus.connect(_on_game_back_to_menus)
+		game.event_hit.connect(_on_game_event_hit)
+
 	Conductor.beat_hit.connect(_on_beat_hit)
 
 

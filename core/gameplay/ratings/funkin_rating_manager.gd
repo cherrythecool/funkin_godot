@@ -2,6 +2,15 @@ class_name FunkinRatingManager
 extends RatingManager
 
 
+@export_group("Game Over", "gameover_")
+@export_file("*.tscn") var gameover_file_path: String = "uid://c05dah5aarqg8"
+
+@export_subgroup("Is FunkinGameOver", "gameover_")
+@export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var gameover_set_default_values := true
+@export var gameover_set_character_position := true
+@export var gameover_set_character_path := true
+@export var gameover_keep_camera_transform := true
+
 @export var ranks: Dictionary[float, StringName] = {
 	0.0: &"F",
 	60.0: &"D",
@@ -52,6 +61,20 @@ func add_note_miss() -> void:
 		_apply_rating(miss_rating)
 
 	changed.emit()
+
+
+func _died() -> void:
+	var game := Game.instance
+	if gameover_set_default_values and game:
+		if gameover_set_character_position and game.player:
+			FunkinGameOver.character_position = game.player.global_position
+
+		if gameover_set_character_path and game.player:
+			FunkinGameOver.character_path = game.player.death_character
+
+		game.persist_camera_on_exit = gameover_keep_camera_transform
+
+	SceneManager.swap_to_file(gameover_file_path)
 
 
 func get_accuracy() -> float:

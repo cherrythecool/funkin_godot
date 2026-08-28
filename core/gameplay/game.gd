@@ -8,7 +8,7 @@ static var load_settings: Dictionary[StringName, Variant] = {
 	&"song_difficulty": &"hard",
 	&"songs_folder": "res://modules/funkin/songs",
 	&"exit_scene_path": "",
-	&"playlist": [],
+	&"playlist": [] as Array[Dictionary],
 }
 
 static var instance: Game = null
@@ -50,7 +50,7 @@ var scroll_speed: float:
 
 var skin: HUDSkin
 
-var persist_camera_on_exit: bool = false
+var persist_camera_on_exit := false
 
 signal hud_setup
 signal ready_post
@@ -60,7 +60,6 @@ signal event_hit(event: EventData)
 signal song_finished
 signal back_to_menus
 signal scroll_speed_changed(value: float)
-signal died
 signal botplay_changed(botplay: bool)
 @warning_ignore("unused_signal") signal unpaused
 
@@ -138,20 +137,12 @@ func _exit_tree() -> void:
 
 	# Mostly for modules, might be helpful somewhere else too though
 	if not persist_camera_on_exit:
-		GameCamera2D.reset_persistent_values()
+		FunkinCamera2D.reset_persistent_values()
 
 
 func _process(_delta: float) -> void:
 	if not playing:
 		return
-
-	#if health <= 0.0:
-		#died.emit()
-		#Gameover.character_path = player.death_character
-		#Gameover.character_position = player.global_position
-		#persist_camera_on_exit = true
-		#SceneManager.swap_to_file("uid://c05dah5aarqg8")
-		#return
 
 	if (
 		not song_started and
@@ -202,7 +193,6 @@ func start_song(from_position: float = 0.0) -> void:
 
 
 func finish_song(force: bool = false, sound: bool = true) -> void:
-	# TODO: make parts of this replacable or more separated so u can customize in ur modules :3
 	if not playing:
 		return
 
@@ -211,33 +201,25 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 
 	var playlist: Array = load_settings[&"playlist"]
 	if not (playlist.is_empty() or force):
-		var new_song: StringName = playlist[0].name
-		var new_difficulty: StringName = playlist[0].difficulty
+		var next_song: Dictionary = playlist.pop_front()
+		load_settings[&"song_name"] = next_song[&"name"]
+		load_settings[&"song_difficulty"] = next_song[&"difficulty"].to_lower()
 
-		chart = null
-
-		load_settings[&"song_name"] = new_song
-		load_settings[&"song_difficulty"] = new_difficulty.to_lower()
-		playlist.pop_front()
 		SceneManager.swap_to_file(SongLoader.get_scene_path(
 			load_settings[&"song_name"],
 			load_settings[&"songs_folder"],
 		))
-		return
-
-	chart = null
-	playlist.clear()
-
-	if sound:
-		GlobalAudio.get_player(^"MENU/CANCEL").play()
-
-	back_to_menus.emit()
-
-	var exit_scene: String = load_settings[&"exit_scene_path"]
-	if exit_scene.is_empty():
-		SceneManager.transition_to_file("uid://bwcdjku7iww5m")
 	else:
-		SceneManager.transition_to_file(exit_scene)
+		if sound:
+			GlobalAudio.get_player(^"MENU/CANCEL").play()
+
+		back_to_menus.emit()
+
+		var exit_scene: String = load_settings[&"exit_scene_path"]
+		if exit_scene.is_empty():
+			SceneManager.transition_to_file("uid://bwcdjku7iww5m")
+		else:
+			SceneManager.transition_to_file(exit_scene)
 
 
 func load_chart() -> void:
@@ -258,24 +240,6 @@ func load_chart() -> void:
 			scroll_speed = custom_speed
 
 	chart.sort()
-
-	#var note_type_paths: PackedStringArray = [
-		#"res://modules/%s/notes/types" % ModuleManager.current_module,
-		#"res://core/notes/types",
-	#]
-#
-	#for strumline: Dictionary in chart.strumlines.values():
-		#for raw_type: String in strumline[&"note_types"]:
-			#var type := StringName(raw_type)
-			#if (
-				#note_types.has(type) or
-				#note_types.has(type.to_snake_case())
-			#):
-				#continue
-
-			#var scene := Note.load_note_type(type, note_type_paths)
-			#if is_instance_valid(scene):
-				#note_types[type] = scene
 
 	for key: StringName in strumlines:
 		if not chart.strumlines.has(key):

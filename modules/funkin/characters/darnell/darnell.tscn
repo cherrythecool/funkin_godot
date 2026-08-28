@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dx13k6w54if1l"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_tc5gy"]
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_cf3ry"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/health_icon.gd" id="2_cf3ry"]
 [ext_resource type="Texture2D" uid="uid://dnw888uux6bmj" path="res://modules/funkin/characters/darnell/icon.png" id="3_tc5gy"]
 [ext_resource type="Script" uid="uid://c5ju3u657fyae" path="res://addons/gdanimate/animate_symbol_2d.gd" id="6_jdsdp"]
 [ext_resource type="Script" uid="uid://dy4vnmv4435ty" path="res://addons/gdanimate/formats/animate_symbol_library.gd" id="7_u4ki3"]

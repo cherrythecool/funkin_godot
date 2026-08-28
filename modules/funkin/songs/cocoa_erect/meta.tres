@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://b4nktln3gyhl8"]
 
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="1_6n60n"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/health_icon.gd" id="1_6n60n"]
 [ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://core/gameplay/songs/metadata.gd" id="1_lyyv7"]
 [ext_resource type="Texture2D" uid="uid://bfd6qv0m2yna6" path="res://modules/funkin/characters/parents_christmas/icon.png" id="2_suciw"]
 

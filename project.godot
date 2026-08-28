@@ -80,6 +80,7 @@ folder_colors={
 [global_group]
 
 RatingManager=""
+EventManager=""
 
 [gui]
 

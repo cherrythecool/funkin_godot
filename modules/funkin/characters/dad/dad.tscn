@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cdlt4jc7j8122"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_6r3o0"]
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_2fkqd"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/health_icon.gd" id="2_2fkqd"]
 [ext_resource type="Texture2D" uid="uid://c8gwllfuq3f1a" path="res://modules/funkin/characters/dad/icon.png" id="3_sy3hy"]
 [ext_resource type="SpriteFrames" uid="uid://cg0jqphtja7sl" path="res://modules/funkin/characters/dad/sprites.res" id="4_24ktn"]
 [ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://core/classes/animated_sprite.gd" id="5_r6lww"]

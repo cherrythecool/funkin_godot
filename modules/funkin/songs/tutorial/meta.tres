@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://b0j0apsq72qxq"]
 
 [ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://core/gameplay/songs/metadata.gd" id="1_gy5f6"]
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="1_hiav4"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/health_icon.gd" id="1_hiav4"]
 [ext_resource type="Texture2D" uid="uid://d2c1hlp80sm2q" path="res://modules/funkin/characters/gf/icon.png" id="2_3hcmq"]
 
 [sub_resource type="Resource" id="Resource_2lilv"]

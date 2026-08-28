@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bm0fb28jg0uki"]
 
 [ext_resource type="Script" uid="uid://dmoepm00llloi" path="res://core/characters/character.gd" id="1_bx4po"]
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="2_y74xc"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/health_icon.gd" id="2_y74xc"]
 [ext_resource type="Texture2D" uid="uid://bfd6qv0m2yna6" path="res://modules/funkin/characters/parents_christmas/icon.png" id="3_bx4po"]
 [ext_resource type="Script" uid="uid://c5ju3u657fyae" path="res://addons/gdanimate/animate_symbol_2d.gd" id="4_tcbtr"]
 [ext_resource type="Script" uid="uid://dy4vnmv4435ty" path="res://addons/gdanimate/formats/animate_symbol_library.gd" id="5_w8jy5"]

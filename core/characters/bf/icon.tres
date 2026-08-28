@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HealthIcon" format=3 uid="uid://lbe7ubbkwdln"]
 
-[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/icon.gd" id="1_g1j48"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://core/characters/health_icon.gd" id="1_g1j48"]
 [ext_resource type="Texture2D" uid="uid://dp4wr3woulw3y" path="res://core/characters/bf/icon.png" id="2_y2mo8"]
 
 [resource]
