@@ -25,7 +25,7 @@ const SING_DIRECTIONS: PackedStringArray = ["left", "down", "up", "right"]
 @export_category("Animations")
 @export var dances: bool = true
 @export var dance_steps: Array[StringName] = [&"idle"]
-@export_range(0.0, 1024.0, 0.01) var sing_steps: float = 4.0
+@export_range(0.0, 1024.0, 0.01) var sing_steps: float = 8.0
 var dance_step: int = 0
 
 @export_category("Death")
