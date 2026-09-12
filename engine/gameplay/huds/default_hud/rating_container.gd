@@ -49,18 +49,15 @@ func _on_hud_setup() -> void:
 func _on_note_hit(note: NoteData) -> void:
 	if note.state != NoteData.NoteState.ALIVE:
 		return
+	if game.strumlines[&"player"].cpu:
+		return
 
 	var difference: float = Conductor.time - note.time
-	if game.strumlines[&"player"].cpu:
-		difference = 0.0
-
-	if not game.strumlines[&"player"].cpu:
-		difference_label.text = "%.2fms" % [difference * 1000.0]
-		difference_label.modulate = Color(0.4, 0.5, 0.8) \
-				if difference < 0.0 else Color(0.8, 0.4, 0.5)
-	else:
-		difference_label.text = "Botplay"
-		difference_label.modulate = Color(0.6, 0.62, 0.7)
+	difference_label.text = "%.2fms" % [difference * 1000.0]
+	difference_label.modulate = (
+		Color(0.4, 0.5, 0.8) if difference < 0.0
+		else Color(0.8, 0.4, 0.5)
+	)
 
 	if tween and tween.is_running():
 		tween.kill()
