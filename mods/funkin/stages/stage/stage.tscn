@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://0ih6j18ov417"]
+
+[ext_resource type="Script" uid="uid://bn5n82vuwrrl8" path="res://engine/gameplay/stages/stage.gd" id="1_j6jli"]
+[ext_resource type="Texture2D" uid="uid://c57ymqk8sdl5u" path="res://mods/funkin/stages/stage/backdrop.png" id="3_xw3u5"]
+[ext_resource type="Texture2D" uid="uid://86bapobu21kd" path="res://mods/funkin/stages/stage/front.png" id="4_l4wy2"]
+[ext_resource type="Texture2D" uid="uid://d3kftbmmrheuw" path="res://mods/funkin/stages/stage/curtains.png" id="5_lk1og"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://engine/gameplay/stages/character_preview.gd" id="5_wl1cv"]
+
+[node name="Stage" type="Node2D" unique_id=238825755 node_paths=PackedStringArray("spawn_spectator", "spawn_player", "spawn_opponent")]
+script = ExtResource("1_j6jli")
+default_zoom = 0.9
+spawn_spectator = NodePath("SpectatorSpawn")
+spawn_player = NodePath("PlayerSpawn")
+spawn_opponent = NodePath("OpponentSpawn")
+
+[node name="Wall" type="Parallax2D" parent="." unique_id=357440226]
+scroll_scale = Vector2(0.9, 0.9)
+
+[node name="Sprite" type="Sprite2D" parent="Wall" unique_id=557488275]
+position = Vector2(-600, -200)
+texture = ExtResource("3_xw3u5")
+centered = false
+
+[node name="Floor" type="Sprite2D" parent="." unique_id=871656608]
+position = Vector2(-650, 600)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("4_l4wy2")
+centered = false
+
+[node name="Curtains" type="Parallax2D" parent="." unique_id=1029917959]
+z_index = 1
+scroll_scale = Vector2(1.3, 1.3)
+
+[node name="Sprite" type="Sprite2D" parent="Curtains" unique_id=1468759171]
+position = Vector2(-500, -300)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("5_lk1og")
+centered = false
+
+[node name="SpectatorSpawn" type="Marker2D" parent="." unique_id=1646962631]
+position = Vector2(625, 750)
+script = ExtResource("5_wl1cv")
+character_path = "uid://bragoy3tisav2"
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=568846318]
+position = Vector2(1000, 800)
+script = ExtResource("5_wl1cv")
+
+[node name="OpponentSpawn" type="Marker2D" parent="." unique_id=1313589310]
+position = Vector2(256, 800)
+script = ExtResource("5_wl1cv")
+character_path = "uid://cdlt4jc7j8122"

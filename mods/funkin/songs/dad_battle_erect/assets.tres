@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://b4lhkfjftxiix"]
+
+[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://engine/gameplay/songs/assets.gd" id="1_di7lv"]
+[ext_resource type="PackedScene" uid="uid://8gvi1td3sh2t" path="res://mods/funkin/stages/stage_erect/stage_erect.tscn" id="2_orjto"]
+
+[resource]
+script = ExtResource("1_di7lv")
+stage = ExtResource("2_orjto")

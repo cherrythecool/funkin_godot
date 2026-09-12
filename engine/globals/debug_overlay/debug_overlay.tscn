@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://d4lyul6n3wfmw"]
+
+[ext_resource type="Script" uid="uid://baq1jchoadbo1" path="res://engine/globals/debug_overlay/debug_overlay.gd" id="1_ctmdh"]
+[ext_resource type="FontFile" uid="uid://cuh8h453towpc" path="res://engine/common/fonts/red_hat_mono.ttf" id="2_qk36k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j305"]
+bg_color = Color(0, 0, 0, 0.5)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 6.0
+expand_margin_top = 3.0
+expand_margin_right = 6.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="FontVariation" id="FontVariation_7j305"]
+base_font = ExtResource("2_qk36k")
+variation_opentype = {
+2003265652: 500
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_rqscu"]
+line_spacing = -4.0
+font = SubResource("FontVariation_7j305")
+font_size = 14
+outline_color = Color(0, 0, 0, 1)
+
+[node name="DebugOverlay" type="CanvasLayer" unique_id=61125803 node_paths=PackedStringArray("timer", "info_labels")]
+process_mode = 3
+layer = 64
+script = ExtResource("1_ctmdh")
+timer = NodePath("Timer")
+info_labels = {
+&"conductor": NodePath("InfoContainer/Conductor"),
+&"engine": NodePath("InfoContainer/Engine"),
+&"game": NodePath("InfoContainer/Game"),
+&"memory": NodePath("InfoContainer/Memory"),
+&"module": NodePath("InfoContainer/Mod"),
+&"performance": NodePath("InfoContainer/Performance"),
+&"rendering": NodePath("InfoContainer/Rendering")
+}
+
+[node name="Timer" type="Timer" parent="." unique_id=1466977838]
+
+[node name="InfoContainer" type="VBoxContainer" parent="." unique_id=1430764527]
+offset_left = 14.0
+offset_top = 12.0
+offset_right = 115.0
+offset_bottom = 48.0
+theme_override_constants/separation = 12
+
+[node name="Performance" type="Label" parent="InfoContainer" unique_id=1548224959]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "0 FPS
+MEM: 0B / 0B"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="Memory" type="Label" parent="InfoContainer" unique_id=823089376]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "OBJ: 0B / 0B
+GPU: 0B / 0B
+TEX: 0B / 0B"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="Engine" type="Label" parent="InfoContainer" unique_id=1108379246]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "Scene: game
+57 Nodes (0 Orphan Nodes)
+Input Accumulation: false"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="Mod" type="Label" parent="InfoContainer" unique_id=366615097]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "Current Module: funkin
+Songs Folder: res://mods/funkin/songs"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="Rendering" type="Label" parent="InfoContainer" unique_id=1838900809]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "0 Draw Calls & 0 Drawn Objects
+API: vulkan/forward_plus
+GPU: Idfk bro"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="Conductor" type="Label" parent="InfoContainer" unique_id=2057034034]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "Time: 0.000s (1.00x Speed)
+BPM: 100.00
+Beat: 0.00
+Step: 0.00
+Measure: 0.00
+Offset: 0.00ms (0.00ms manual)"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[node name="Game" type="Label" parent="InfoContainer" unique_id=1045670370]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j305")
+text = "Scroll Speed: 2.10
+Is Playing: true
+Health: 50.00%
+Combo: 0"
+label_settings = SubResource("LabelSettings_rqscu")
+
+[connection signal="ready" from="." to="." method="display"]

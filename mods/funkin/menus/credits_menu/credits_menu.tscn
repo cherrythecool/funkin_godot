@@ -1,0 +1,274 @@
+[gd_scene format=3 uid="uid://b6gvgi7qjy176"]
+
+[ext_resource type="Script" uid="uid://ck4pjp7k3k745" path="res://mods/funkin/menus/credits_menu/credits_menu.gd" id="1_536xp"]
+[ext_resource type="Texture2D" uid="uid://c3x06i25jm34a" path="res://mods/funkin/menus/background_inverted.png" id="2_0h12u"]
+[ext_resource type="Script" uid="uid://bable6fjbwgrq" path="res://engine/common/alphabet/listed_alphabet.gd" id="3_xtkoc"]
+[ext_resource type="Script" uid="uid://xex6ryb2bo7" path="res://mods/funkin/menus/credits_menu/contributors/contributor.gd" id="4_wywfy"]
+[ext_resource type="Texture2D" uid="uid://boevu3c5gntxa" path="res://mods/funkin/menus/credits_menu/contributors/cherry.jpg" id="5_0ng60"]
+[ext_resource type="Texture2D" uid="uid://bluenau7pkveo" path="res://mods/funkin/menus/credits_menu/contributors/godot.svg" id="5_komaw"]
+[ext_resource type="Texture2D" uid="uid://6hlha56pn1t4" path="res://engine/default_icon.png" id="6_fq4y8"]
+[ext_resource type="Texture2D" uid="uid://dpcti4426mwej" path="res://mods/funkin/menus/credits_menu/contributors/vortex.png" id="6_xc1f4"]
+[ext_resource type="Texture2D" uid="uid://sbaset6yggsb" path="res://mods/funkin/menus/credits_menu/contributors/siwsi.png" id="7_jfhfx"]
+[ext_resource type="Texture2D" uid="uid://b4dt6w5nafr6p" path="res://mods/funkin/menus/credits_menu/contributors/nebula.png" id="8_aave4"]
+[ext_resource type="Texture2D" uid="uid://dotr62vbo74yj" path="res://mods/funkin/menus/credits_menu/contributors/kittysleeper.png" id="10_svqsb"]
+[ext_resource type="Texture2D" uid="uid://ddbakd725242s" path="res://mods/funkin/menus/credits_menu/contributors/luscious77_github.jpeg" id="11_tnsff"]
+[ext_resource type="Texture2D" uid="uid://mbrycpsvucoa" path="res://mods/funkin/menus/credits_menu/contributors/fazzoc.png" id="12_tnsff"]
+[ext_resource type="Script" uid="uid://bk4kpu0r530gd" path="res://mods/funkin/menus/credits_menu/contributors/swordcube.gd" id="13_aave4"]
+[ext_resource type="AudioStream" uid="uid://cdx006xagoh7x" path="res://mods/funkin/styles/pico_mix/pause_menu.ogg" id="13_b34ng"]
+[ext_resource type="Texture2D" uid="uid://cdtbh4yrt24tn" path="res://mods/funkin/menus/credits_menu/contributors/sword.png" id="14_71dcr"]
+[ext_resource type="Texture2D" uid="uid://dmmxcp5gk515a" path="res://mods/funkin/menus/credits_menu/contributors/kobewi.png" id="14_svqsb"]
+[ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://engine/common/fonts/vcr_osd_mono.ttf" id="17_svqsb"]
+
+[sub_resource type="Shader" id="Shader_33ree"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	VERTEX.y += sin((TIME + VERTEX.y - VERTEX.x) * 16.0) * 4.0;
+}
+
+void fragment() {
+	COLOR.r -= fract(UV.x - UV.y + TIME * 4.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_33ree"]
+shader = SubResource("Shader_33ree")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtkoc"]
+bg_color = Color(0, 0, 0, 0.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tnsff"]
+font = ExtResource("17_svqsb")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_0h12u"]
+font = ExtResource("17_svqsb")
+font_size = 18
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CreditsMenu" type="Node2D" unique_id=816495922 node_paths=PackedStringArray("music", "list", "info_label", "info_texture")]
+script = ExtResource("1_536xp")
+music = NodePath("Music")
+list = NodePath("List")
+info_label = NodePath("InfoPanel/ContributorLabel")
+info_texture = NodePath("InfoPanel/ContributorImage")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1866985725]
+stream = ExtResource("13_b34ng")
+volume_db = -6.0
+bus = &"Music"
+parameters/looping = true
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1581091074]
+modulate = Color(0.524323, 0.552343, 0.972656, 1)
+position = Vector2(640, 360)
+texture = ExtResource("2_0h12u")
+
+[node name="List" type="Node2D" parent="." unique_id=328085113]
+position = Vector2(520, -90)
+
+[node name="EngineContributors" type="Node2D" parent="List" unique_id=1372672573]
+position = Vector2(-480, 137)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("3_xtkoc")
+target_y = -1
+use_x = false
+offset = Vector2(-480, -32)
+text = "engine contributors"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="cherrythecool" type="Node2D" parent="List" unique_id=977500252]
+position = Vector2(-480, 325.5)
+script = ExtResource("4_wywfy")
+link = "https://goddess.nekoweb.org"
+role = "Engine Creator"
+texture = ExtResource("5_0ng60")
+use_x = false
+offset = Vector2(-480, 0)
+text = "cherry"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="Gorkil" type="Node2D" parent="List" unique_id=1965816180]
+position = Vector2(-480, 481)
+script = ExtResource("4_wywfy")
+link = "https://github.com/Vortex2Oblivion"
+role = "Fixes & Optimizations"
+texture = ExtResource("6_xc1f4")
+target_y = 1
+use_x = false
+offset = Vector2(-480, 0)
+text = "gorkil"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="Siwsi" type="Node2D" parent="List" unique_id=707442528]
+position = Vector2(-480, 639)
+script = ExtResource("4_wywfy")
+link = "https://github.com/pisayesiwsi"
+role = "Cutscene & README help"
+texture = ExtResource("7_jfhfx")
+target_y = 2
+use_x = false
+offset = Vector2(-480, 0)
+text = "siwsi"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="Nebula" type="Node2D" parent="List" unique_id=1515844015]
+position = Vector2(-480, 793)
+script = ExtResource("4_wywfy")
+link = "https://github.com/nebulazorua"
+role = "Fixed Legacy Chart Bugs"
+texture = ExtResource("8_aave4")
+target_y = 3
+use_x = false
+offset = Vector2(-480, 0)
+text = "nebula"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="KittySleeper" type="Node2D" parent="List" unique_id=1896161115]
+position = Vector2(-480, 949)
+script = ExtResource("4_wywfy")
+link = "https://github.com/KittySleeper"
+role = "Fixes & Additions"
+texture = ExtResource("10_svqsb")
+target_y = 4
+use_x = false
+offset = Vector2(-480, 0)
+text = "kittysleeper"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="Luscious77" type="Node2D" parent="List" unique_id=1421911482]
+position = Vector2(-480, 1105.5)
+script = ExtResource("4_wywfy")
+link = "https://github.com/Luscious77"
+role = "Added Volume Muting"
+texture = ExtResource("11_tnsff")
+target_y = 5
+use_x = false
+offset = Vector2(-480, 0)
+text = "luscious77"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="Fazzoc" type="Node2D" parent="List" unique_id=1051160843]
+position = Vector2(-480, 1261.5)
+script = ExtResource("4_wywfy")
+link = "https://linktr.ee/fazzoc"
+role = "Fixed receptor offsets"
+texture = ExtResource("12_tnsff")
+target_y = 6
+use_x = false
+offset = Vector2(-480, 0)
+text = "fazzoc"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="Spacer" type="Node2D" parent="List" unique_id=593375683]
+position = Vector2(0, 1452)
+script = ExtResource("3_xtkoc")
+target_y = 7
+use_x = false
+centered = true
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="SpecialThanks" type="Node2D" parent="List" unique_id=1627242772]
+position = Vector2(-480, 1541)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("3_xtkoc")
+target_y = 8
+use_x = false
+offset = Vector2(-480, -32)
+text = "special thanks"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="FunkinCrew" type="Node2D" parent="List" unique_id=741503976]
+position = Vector2(-480, 1729.5)
+script = ExtResource("4_wywfy")
+link = "https://github.com/FunkinCrew"
+role = "Made the Original Game"
+texture = ExtResource("6_fq4y8")
+target_y = 9
+use_x = false
+offset = Vector2(-480, 0)
+text = "the funkin crew"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="Godot" type="Node2D" parent="List" unique_id=1111019336]
+position = Vector2(-480, 1885)
+script = ExtResource("4_wywfy")
+link = "https://github.com/godotengine/godot/graphs/contributors"
+role = "Made the Game Engine"
+texture = ExtResource("5_komaw")
+target_y = 10
+use_x = false
+offset = Vector2(-480, 0)
+text = "godot developers"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="KoBewi" type="Node2D" parent="List" unique_id=1557720121]
+position = Vector2(-480, 2041)
+script = ExtResource("4_wywfy")
+link = "https://github.com/KoBeWi"
+role = "Parallax2D Preview plugin"
+texture = ExtResource("14_svqsb")
+target_y = 11
+use_x = false
+offset = Vector2(-480, 0)
+text = "KoBeWi"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="swordcube" type="Node2D" parent="List" unique_id=1716439119 node_paths=PackedStringArray("texture_rect", "label")]
+material = SubResource("ShaderMaterial_33ree")
+position = Vector2(-480, 2197)
+script = ExtResource("13_aave4")
+texture_rect = NodePath("../../InfoPanel/ContributorImage")
+label = NodePath("../../InfoPanel/ContributorLabel")
+link = "https://github.com/swordcube"
+role = "think fast think stupid"
+texture = ExtResource("14_71dcr")
+target_y = 12
+use_x = false
+offset = Vector2(-480, 0)
+text = "swordcube"
+metadata/_custom_type_script = "uid://bable6fjbwgrq"
+
+[node name="InfoPanel" type="Panel" parent="." unique_id=1677369682]
+offset_left = 800.0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xtkoc")
+
+[node name="ContributorLabel" type="Label" parent="InfoPanel" unique_id=472444648]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "Main Developer"
+label_settings = SubResource("LabelSettings_tnsff")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContributorImage" type="TextureRect" parent="InfoPanel" unique_id=1233850997]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = -16.0
+offset_bottom = -16.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContributorLabel2" type="Label" parent="." unique_id=1662462625]
+modulate = Color(1, 1, 1, 0.8)
+anchors_preset = -1
+offset_left = 808.0
+offset_top = 672.0
+offset_right = 1272.0
+offset_bottom = 712.0
+grow_horizontal = 2
+text = "Press ACCEPT to open this contributor's link"
+label_settings = SubResource("LabelSettings_0h12u")
+horizontal_alignment = 1
+vertical_alignment = 2

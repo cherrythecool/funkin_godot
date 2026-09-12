@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://t1fpdj8vxahn"]
+
+[ext_resource type="Script" uid="uid://c6e8gdo34p37h" path="res://engine/gameplay/huds/default_hud/time_bar.gd" id="1_jrilb"]
+[ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://engine/common/fonts/vcr_osd_mono.ttf" id="2_y4vwl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ecfub"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hg5eq"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wblnk"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ecfub"]
+font = ExtResource("2_y4vwl")
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TimeBar" type="ProgressBar" unique_id=1087964716 node_paths=PackedStringArray("time_label")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -346.0
+offset_right = 150.0
+offset_bottom = -330.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ecfub")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hg5eq")
+value = 50.0
+show_percentage = false
+script = ExtResource("1_jrilb")
+time_label = NodePath("Label")
+
+[node name="Outline" type="Panel" parent="." unique_id=624246819]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wblnk")
+
+[node name="Label" type="Label" parent="." unique_id=602013618]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0:00"
+label_settings = SubResource("LabelSettings_ecfub")
+horizontal_alignment = 1
+vertical_alignment = 1

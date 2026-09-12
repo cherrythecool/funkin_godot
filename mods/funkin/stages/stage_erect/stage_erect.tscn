@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://8gvi1td3sh2t"]
+
+[ext_resource type="Script" uid="uid://cbh44rgsi115p" path="res://mods/funkin/stages/stage_erect/stage_erect.gd" id="1_iarc1"]
+[ext_resource type="Texture2D" uid="uid://bkq11tqsokn86" path="res://mods/funkin/stages/stage_erect/brightLightSmall.png" id="2_l58ct"]
+[ext_resource type="SpriteFrames" uid="uid://b4fq5b13ipykf" path="res://mods/funkin/stages/stage_erect/crowd.res" id="3_iarc1"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="4_dtqj5"]
+[ext_resource type="Texture2D" uid="uid://k0ecbkhwv0p8" path="res://mods/funkin/stages/stage_erect/bg.png" id="5_drghb"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://engine/gameplay/stages/character_preview.gd" id="5_gyln2"]
+[ext_resource type="Texture2D" uid="uid://dnradnxkw30ia" path="res://mods/funkin/stages/stage_erect/server.png" id="6_c6bns"]
+[ext_resource type="Texture2D" uid="uid://bl8lqtw6rwufb" path="res://mods/funkin/stages/stage_erect/lights.png" id="7_m7swh"]
+[ext_resource type="Texture2D" uid="uid://cp7t5wpilryw5" path="res://mods/funkin/stages/stage_erect/orangeLight.png" id="8_rpfqn"]
+[ext_resource type="Material" uid="uid://h6uy4lto3tyx" path="res://engine/common/shaders/blend_additive.tres" id="8_tpods"]
+[ext_resource type="Texture2D" uid="uid://bj8w8e6620cr" path="res://mods/funkin/stages/stage_erect/lightgreen.png" id="9_mw31y"]
+[ext_resource type="Texture2D" uid="uid://ehms2fgkxe3x" path="res://mods/funkin/stages/stage_erect/lightred.png" id="10_m8qgs"]
+[ext_resource type="Texture2D" uid="uid://bidx1tkuqgdgg" path="res://mods/funkin/stages/stage_erect/lightAbove.png" id="11_i0awy"]
+
+[node name="StageErect" type="Node2D" unique_id=1588154130 node_paths=PackedStringArray("spawn_spectator", "spawn_player", "spawn_opponent")]
+script = ExtResource("1_iarc1")
+default_zoom = 0.85
+spawn_spectator = NodePath("SpectatorSpawn")
+spawn_player = NodePath("PlayerSpawn")
+spawn_opponent = NodePath("OpponentSpawn")
+
+[node name="Background" type="ColorRect" parent="." unique_id=539382344]
+offset_left = 730.0
+offset_top = -170.0
+offset_right = 1738.0
+offset_bottom = 699.0
+color = Color(0.133333, 0.12549, 0.14902, 1)
+
+[node name="LightsLayer" type="Parallax2D" parent="." unique_id=491299852]
+scroll_scale = Vector2(1.2, 1.2)
+
+[node name="SmallLight" type="Sprite2D" parent="LightsLayer" unique_id=1561564028]
+z_index = 10
+material = ExtResource("8_tpods")
+position = Vector2(940, -103)
+texture = ExtResource("2_l58ct")
+centered = false
+
+[node name="Overhang" type="Sprite2D" parent="LightsLayer" unique_id=422951966]
+z_index = 4000
+position = Vector2(-622, -147)
+texture = ExtResource("7_m7swh")
+centered = false
+
+[node name="Crowd" type="Parallax2D" parent="." unique_id=217517363]
+scroll_scale = Vector2(0.8, 0.8)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Crowd" unique_id=1523785748]
+z_index = 5
+position = Vector2(560, 290)
+sprite_frames = ExtResource("3_iarc1")
+animation = &"bop"
+autoplay = "bop"
+centered = false
+script = ExtResource("4_dtqj5")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="Stage" type="Sprite2D" parent="." unique_id=1740866234]
+z_index = 20
+position = Vector2(-603, -187)
+texture = ExtResource("5_drghb")
+centered = false
+
+[node name="Server" type="Sprite2D" parent="." unique_id=438399569]
+z_index = 30
+position = Vector2(-361, 205)
+texture = ExtResource("6_c6bns")
+centered = false
+
+[node name="OrangeGlow" type="Sprite2D" parent="." unique_id=52082893]
+z_index = 80
+material = ExtResource("8_tpods")
+position = Vector2(189, -195)
+texture = ExtResource("8_rpfqn")
+centered = false
+
+[node name="GreenLight" type="Sprite2D" parent="." unique_id=327335924]
+z_index = 40
+material = ExtResource("8_tpods")
+position = Vector2(-171, 242)
+texture = ExtResource("9_mw31y")
+centered = false
+
+[node name="RedLight" type="Sprite2D" parent="." unique_id=1854463240]
+z_index = 40
+material = ExtResource("8_tpods")
+position = Vector2(-101, 560)
+texture = ExtResource("10_m8qgs")
+centered = false
+
+[node name="AboveLight" type="Sprite2D" parent="." unique_id=1240653636]
+z_index = 4096
+material = ExtResource("8_tpods")
+position = Vector2(773, -117)
+texture = ExtResource("11_i0awy")
+centered = false
+
+[node name="SpectatorSpawn" type="Marker2D" parent="." unique_id=686765778 node_paths=PackedStringArray("custom_camera_offset")]
+z_index = 100
+position = Vector2(541, 827)
+script = ExtResource("5_gyln2")
+character_path = "uid://bragoy3tisav2"
+custom_camera_offset = NodePath("CameraOffset")
+
+[node name="CameraOffset" type="Marker2D" parent="SpectatorSpawn" unique_id=1651971613]
+position = Vector2(47, -248)
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=41666887]
+z_index = 300
+position = Vector2(960, 861)
+script = ExtResource("5_gyln2")
+
+[node name="OpponentSpawn" type="Marker2D" parent="." unique_id=847478879]
+z_index = 200
+position = Vector2(51, 852)
+script = ExtResource("5_gyln2")
+character_path = "uid://cdlt4jc7j8122"

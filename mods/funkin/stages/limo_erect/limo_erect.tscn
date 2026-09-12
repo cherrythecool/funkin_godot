@@ -1,0 +1,287 @@
+[gd_scene format=3 uid="uid://dvw6bjqx07lwq"]
+
+[ext_resource type="Script" uid="uid://cfcm0avtkih5m" path="res://mods/funkin/stages/limo_erect/limo_erect.gd" id="1_kku1o"]
+[ext_resource type="AudioStream" uid="uid://d3dsst4t3xlnc" path="res://mods/funkin/stages/limo/sounds/car_0.ogg" id="2_bfmtg"]
+[ext_resource type="AudioStream" uid="uid://c4uwi5d31prdc" path="res://mods/funkin/stages/limo/sounds/car_1.ogg" id="3_cr4ss"]
+[ext_resource type="Material" uid="uid://h6uy4lto3tyx" path="res://engine/common/shaders/blend_additive.tres" id="4_6tkr4"]
+[ext_resource type="Texture2D" uid="uid://l6g6nongsi4t" path="res://mods/funkin/stages/limo_erect/limoSunset.png" id="4_rgi3v"]
+[ext_resource type="SpriteFrames" uid="uid://cijtdecl0qdl8" path="res://mods/funkin/stages/limo_erect/shooting star.res" id="5_dqopq"]
+[ext_resource type="SpriteFrames" uid="uid://2gs8bc76h0m4" path="res://mods/funkin/stages/limo_erect/bg_limo.res" id="7_dqopq"]
+[ext_resource type="SpriteFrames" uid="uid://cw4n68f8svcko" path="res://mods/funkin/stages/limo_erect/limo_drive.res" id="8_dqopq"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="8_gyo08"]
+[ext_resource type="Shader" uid="uid://bgwusoh6kicj3" path="res://engine/common/shaders/adjust_hscb.gdshader" id="10_cr4ss"]
+[ext_resource type="Texture2D" uid="uid://2vt2m2655uu" path="res://mods/funkin/stages/limo/fastCarLol.png" id="10_gwn6i"]
+[ext_resource type="SpriteFrames" uid="uid://co1ft38yoprcq" path="res://mods/funkin/stages/limo/henchmen.res" id="11_g8tp8"]
+[ext_resource type="Texture2D" uid="uid://bdvbvk2gtlsac" path="res://mods/funkin/stages/limo_erect/mistMid.png" id="12_bfmtg"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://engine/gameplay/stages/character_preview.gd" id="12_re7xl"]
+[ext_resource type="Texture2D" uid="uid://bf0yvjn8cji58" path="res://mods/funkin/stages/limo_erect/mistBack.png" id="13_bfmtg"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uwh00"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("2_bfmtg")
+stream_1/stream = ExtResource("3_cr4ss")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l4vvd"]
+shader = ExtResource("10_cr4ss")
+shader_parameter/hue = -30.0
+shader_parameter/saturation = -20.0
+shader_parameter/contrast = 0.0
+shader_parameter/brightness = -30.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_17t55"]
+shader = ExtResource("10_cr4ss")
+shader_parameter/hue = -30.0
+shader_parameter/saturation = -20.0
+shader_parameter/contrast = 0.0
+shader_parameter/brightness = -30.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bf0j"]
+shader = ExtResource("10_cr4ss")
+shader_parameter/hue = -30.0
+shader_parameter/saturation = -20.0
+shader_parameter/contrast = 0.0
+shader_parameter/brightness = -30.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afjqi"]
+shader = ExtResource("10_cr4ss")
+shader_parameter/hue = -30.0
+shader_parameter/saturation = -20.0
+shader_parameter/contrast = 0.0
+shader_parameter/brightness = -30.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyo08"]
+shader = ExtResource("10_cr4ss")
+shader_parameter/hue = -30.0
+shader_parameter/saturation = -20.0
+shader_parameter/contrast = 0.0
+shader_parameter/brightness = -30.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if4vr"]
+shader = ExtResource("10_cr4ss")
+shader_parameter/hue = -30.0
+shader_parameter/saturation = -20.0
+shader_parameter/contrast = 0.0
+shader_parameter/brightness = -30.0
+
+[node name="LimoErect" type="Node2D" unique_id=2010360086 node_paths=PackedStringArray("fast_car", "car_timer", "car_pass", "dancers", "star_sprite", "mists", "spawn_spectator", "spawn_player", "spawn_opponent")]
+script = ExtResource("1_kku1o")
+fast_car = NodePath("FastCar")
+car_timer = NodePath("CarTimer")
+car_pass = NodePath("CarPass")
+dancers = NodePath("Dancers")
+star_sprite = NodePath("Stars/Sprite")
+mists = [NodePath("Mist1"), NodePath("Mist2"), NodePath("Mist3"), NodePath("Mist4"), NodePath("Mist5")]
+default_zoom = 0.9
+spawn_spectator = NodePath("SpectatorSpawn")
+spawn_player = NodePath("PlayerSpawn")
+spawn_opponent = NodePath("OpponentSpawn")
+
+[node name="CarTimer" type="Timer" parent="." unique_id=334600176]
+wait_time = 2.0
+one_shot = true
+
+[node name="CarPass" type="AudioStreamPlayer" parent="." unique_id=933610334]
+stream = SubResource("AudioStreamRandomizer_uwh00")
+
+[node name="Sunset" type="Parallax2D" parent="." unique_id=680463113]
+scroll_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite" type="Sprite2D" parent="Sunset" unique_id=2080070856]
+z_index = 10
+position = Vector2(-120, -50)
+texture = ExtResource("4_rgi3v")
+centered = false
+
+[node name="Mist5" type="Parallax2D" parent="." unique_id=179264399]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(3072, 0)
+autoscroll = Vector2(100, 0)
+repeat_times = 2
+
+[node name="Sprite" type="Sprite2D" parent="Mist5" unique_id=188380314]
+modulate = Color(0.905882, 0.643137, 0.501961, 1)
+z_index = 98
+material = ExtResource("4_6tkr4")
+position = Vector2(-650, -400)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("12_bfmtg")
+centered = false
+
+[node name="Stars" type="Parallax2D" parent="." unique_id=133057238]
+scroll_scale = Vector2(0.12, 0.12)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Stars" unique_id=145724043]
+z_index = 20
+material = ExtResource("4_6tkr4")
+position = Vector2(200, 0)
+sprite_frames = ExtResource("5_dqopq")
+animation = &"shooting star"
+centered = false
+script = ExtResource("8_gyo08")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="BGLimo" type="Parallax2D" parent="." unique_id=1886658867]
+scroll_scale = Vector2(0.4, 0.4)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="BGLimo" unique_id=1911522606]
+z_index = 20
+position = Vector2(-200, 480)
+sprite_frames = ExtResource("7_dqopq")
+animation = &"background limo blue"
+frame_progress = 0.5232518
+centered = false
+script = ExtResource("8_gyo08")
+playing = true
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="FGLimo" type="AnimatedSprite2D" parent="." unique_id=8213595]
+z_index = 150
+position = Vector2(-120, 550)
+sprite_frames = ExtResource("8_dqopq")
+animation = &"Limo stage"
+frame_progress = 0.25377718
+centered = false
+script = ExtResource("8_gyo08")
+playing = true
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="FastCar" type="Sprite2D" parent="." unique_id=61614143]
+z_index = 500
+material = SubResource("ShaderMaterial_l4vvd")
+position = Vector2(-26000, 160)
+texture = ExtResource("10_gwn6i")
+centered = false
+
+[node name="Dancers" type="Parallax2D" parent="." unique_id=1005069651]
+scroll_scale = Vector2(0.4, 0.4)
+
+[node name="0" type="AnimatedSprite2D" parent="Dancers" unique_id=457136541]
+z_index = 30
+material = SubResource("ShaderMaterial_17t55")
+position = Vector2(100, 100)
+sprite_frames = ExtResource("11_g8tp8")
+animation = &"left"
+centered = false
+script = ExtResource("8_gyo08")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="1" type="AnimatedSprite2D" parent="Dancers" unique_id=609912037]
+z_index = 30
+material = SubResource("ShaderMaterial_6bf0j")
+position = Vector2(400, 100)
+sprite_frames = ExtResource("11_g8tp8")
+animation = &"left"
+centered = false
+script = ExtResource("8_gyo08")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="2" type="AnimatedSprite2D" parent="Dancers" unique_id=2092425506]
+z_index = 30
+material = SubResource("ShaderMaterial_afjqi")
+position = Vector2(700, 100)
+sprite_frames = ExtResource("11_g8tp8")
+animation = &"left"
+centered = false
+script = ExtResource("8_gyo08")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="3" type="AnimatedSprite2D" parent="Dancers" unique_id=39650477]
+z_index = 30
+material = SubResource("ShaderMaterial_gyo08")
+position = Vector2(1000, 100)
+sprite_frames = ExtResource("11_g8tp8")
+animation = &"left"
+centered = false
+script = ExtResource("8_gyo08")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="4" type="AnimatedSprite2D" parent="Dancers" unique_id=1752723175]
+z_index = 30
+material = SubResource("ShaderMaterial_if4vr")
+position = Vector2(1300, 100)
+sprite_frames = ExtResource("11_g8tp8")
+animation = &"left"
+centered = false
+script = ExtResource("8_gyo08")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="Mist4" type="Parallax2D" parent="." unique_id=1721128465]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(3072, 0)
+autoscroll = Vector2(700, 0)
+repeat_times = 2
+
+[node name="Sprite" type="Sprite2D" parent="Mist4" unique_id=1790739982]
+modulate = Color(0.611765, 0.466667, 0.780392, 1)
+z_index = 98
+material = ExtResource("4_6tkr4")
+position = Vector2(-650, -380)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("13_bfmtg")
+centered = false
+
+[node name="Mist3" type="Parallax2D" parent="." unique_id=1255486752]
+scroll_scale = Vector2(0.8, 0.8)
+repeat_size = Vector2(3072, 0)
+autoscroll = Vector2(900, 0)
+repeat_times = 2
+
+[node name="Sprite" type="Sprite2D" parent="Mist3" unique_id=1091664270]
+modulate = Color(0.655, 0.851, 0.745, 0.5)
+z_index = 99
+material = ExtResource("4_6tkr4")
+position = Vector2(-650, -100)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("12_bfmtg")
+centered = false
+
+[node name="SpectatorSpawn" type="Marker2D" parent="." unique_id=680684617 node_paths=PackedStringArray("custom_camera_offset")]
+z_index = 100
+position = Vector2(755, 790)
+script = ExtResource("12_re7xl")
+character_path = "uid://cfd0vee7ua8k7"
+custom_camera_offset = NodePath("CameraOffset")
+
+[node name="CameraOffset" type="Marker2D" parent="SpectatorSpawn" unique_id=906098998]
+position = Vector2(107, -536)
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=472062035]
+z_index = 300
+position = Vector2(1274, 595)
+script = ExtResource("12_re7xl")
+
+[node name="OpponentSpawn" type="Marker2D" parent="." unique_id=690791128]
+z_index = 200
+position = Vector2(263, 831)
+script = ExtResource("12_re7xl")
+character_path = "uid://cdxxht68lxv1a"
+
+[node name="Mist1" type="Parallax2D" parent="." unique_id=212071724]
+scroll_scale = Vector2(1.1, 1.1)
+repeat_size = Vector2(2048, 0)
+autoscroll = Vector2(1700, 0)
+repeat_times = 3
+
+[node name="Sprite" type="Sprite2D" parent="Mist1" unique_id=2128740000]
+modulate = Color(0.776471, 0.74902, 0.870588, 0.4)
+z_index = 400
+material = ExtResource("4_6tkr4")
+position = Vector2(-650, -100)
+texture = ExtResource("12_bfmtg")
+centered = false
+
+[node name="Mist2" type="Parallax2D" parent="." unique_id=13746106]
+scroll_scale = Vector2(1.2, 1.2)
+repeat_size = Vector2(2662.4, 0)
+autoscroll = Vector2(2100, 0)
+repeat_times = 2
+
+[node name="Sprite" type="Sprite2D" parent="Mist2" unique_id=527814661]
+modulate = Color(0.415686, 0.301961, 0.631373, 1)
+z_index = 400
+material = ExtResource("4_6tkr4")
+position = Vector2(-650, -100)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("13_bfmtg")
+centered = false

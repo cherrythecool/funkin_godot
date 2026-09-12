@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://dxf7ko1cpaa7e"]
+
+[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://engine/gameplay/songs/assets.gd" id="1_cr5ah"]
+[ext_resource type="PackedScene" uid="uid://d4dbyolh86dgm" path="res://mods/funkin/characters/spooky/spooky.tscn" id="1_ls5qq"]
+[ext_resource type="PackedScene" uid="uid://be43de6mqy3ia" path="res://mods/funkin/stages/spooky/spooky.tscn" id="3_v1o34"]
+
+[resource]
+script = ExtResource("1_cr5ah")
+opponent = ExtResource("1_ls5qq")
+stage = ExtResource("3_v1o34")
+metadata/_custom_type_script = "uid://dk2lxfhv5lvf4"

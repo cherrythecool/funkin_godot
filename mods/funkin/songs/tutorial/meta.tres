@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://b0j0apsq72qxq"]
+
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://engine/gameplay/songs/metadata.gd" id="1_gy5f6"]
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://engine/gameplay/characters/health_icon.gd" id="1_hiav4"]
+[ext_resource type="Texture2D" uid="uid://d2c1hlp80sm2q" path="res://mods/funkin/characters/gf/icon.png" id="2_3hcmq"]
+
+[sub_resource type="Resource" id="Resource_2lilv"]
+script = ExtResource("1_hiav4")
+texture = ExtResource("2_3hcmq")
+texture_frames = Vector2i(1, 1)
+color = Color(0.647059, 0, 0.301961, 1)
+metadata/_custom_type_script = "uid://b7lu04jsahckp"
+
+[resource]
+script = ExtResource("1_gy5f6")
+display_name = &"Tutorial"
+icon = SubResource("Resource_2lilv")

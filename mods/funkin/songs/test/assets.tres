@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://cht6iq8f10ycv"]
+
+[ext_resource type="PackedScene" uid="uid://bv6yjr8gjtef4" path="res://mods/funkin/characters/bf_pixel/bf_pixel.tscn" id="1_qw5sw"]
+[ext_resource type="Resource" uid="uid://pv1ounxci6y8" path="res://mods/funkin/styles/pixel/note_skin.tres" id="2_qw5sw"]
+[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://engine/gameplay/songs/assets.gd" id="3_x8t8d"]
+[ext_resource type="PackedScene" uid="uid://l1dqw6ovt7lg" path="res://engine/gameplay/characters/empty.tscn" id="4_lvgbr"]
+
+[resource]
+script = ExtResource("3_x8t8d")
+spectator = ExtResource("4_lvgbr")
+opponent = ExtResource("1_qw5sw")
+opponent_note_skin = ExtResource("2_qw5sw")

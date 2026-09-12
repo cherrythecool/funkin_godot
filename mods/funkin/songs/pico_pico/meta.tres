@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://cgkmsq0g37m7y"]
+
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://engine/gameplay/characters/health_icon.gd" id="1_43tby"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://engine/gameplay/songs/metadata.gd" id="2_43tby"]
+[ext_resource type="Texture2D" uid="uid://cbpmx024rn06u" path="res://mods/funkin/characters/pico/icon.png" id="2_qlpsj"]
+
+[sub_resource type="Resource" id="Resource_pecwl"]
+script = ExtResource("1_43tby")
+texture = ExtResource("2_qlpsj")
+color = Color(0.717647, 0.847059, 0.333333, 1)
+metadata/_custom_type_script = "uid://b7lu04jsahckp"
+
+[resource]
+script = ExtResource("2_43tby")
+display_name = &"Pico"
+mix = &"Pico"
+icon = SubResource("Resource_pecwl")
+metadata/_custom_type_script = "uid://3bi6wwv6us1w"

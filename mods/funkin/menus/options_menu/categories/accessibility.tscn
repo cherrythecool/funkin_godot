@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://drcqw4es4j7q4"]
+
+[ext_resource type="Script" uid="uid://8peekichuo8h" path="res://mods/funkin/menus/options_menu/categories/accessibility.gd" id="1_1hocu"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://engine/common/alphabet/alphabet.gd" id="2_1fbt3"]
+[ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://mods/funkin/menus/options_menu/options/checkbox/checkbox.gd" id="2_c2csa"]
+[ext_resource type="SpriteFrames" uid="uid://oksqh74ocs1w" path="res://mods/funkin/menus/options_menu/options/checkbox/checkbox.res" id="4_7yydl"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="5_2odut"]
+
+[node name="Accessibility" type="Node2D" unique_id=836521435 node_paths=PackedStringArray("selected_option")]
+position = Vector2(-320, 0)
+script = ExtResource("1_1hocu")
+selected_option = NodePath("FlashingLights")
+
+[node name="FlashingLights" type="Node2D" parent="." unique_id=1168581670 node_paths=PackedStringArray("alphabet", "checkbox")]
+position = Vector2(73, 0)
+script = ExtResource("2_c2csa")
+alphabet = NodePath("Label")
+checkbox = NodePath("Checkbox")
+key = &"flashing_lights"
+
+[node name="Label" type="Node2D" parent="FlashingLights" unique_id=1130308851]
+script = ExtResource("2_1fbt3")
+text = "flashing lights"
+centered = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="FlashingLights" unique_id=259587310]
+position = Vector2(421, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_7yydl")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_2odut")
+
+[connection signal="animation_finished" from="FlashingLights/Checkbox" to="FlashingLights" method="_on_checkbox_animation_finished"]

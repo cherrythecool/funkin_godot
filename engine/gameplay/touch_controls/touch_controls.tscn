@@ -1,0 +1,223 @@
+[gd_scene format=3 uid="uid://dln7pilk4eccf"]
+
+[ext_resource type="Script" uid="uid://chr6gh7537dwm" path="res://engine/gameplay/touch_controls/touch_controls.gd" id="1_wcbf3"]
+[ext_resource type="Texture2D" uid="uid://ciiyghjt8ttyu" path="res://engine/gameplay/touch_controls/buttons/arrow_base.png" id="2_dn4ts"]
+[ext_resource type="Texture2D" uid="uid://byw58vkvv3dw4" path="res://engine/gameplay/touch_controls/buttons/pause_base.png" id="2_mq6jc"]
+[ext_resource type="Texture2D" uid="uid://c5li7ue0ore5r" path="res://engine/gameplay/touch_controls/buttons/pause_press.png" id="3_4ikyy"]
+[ext_resource type="Texture2D" uid="uid://bjc80phtl0g5n" path="res://engine/gameplay/touch_controls/buttons/arrow_press.png" id="3_8o8lk"]
+[ext_resource type="Texture2D" uid="uid://byerpgwxncrr4" path="res://engine/gameplay/touch_controls/buttons/accept_base.png" id="4_uejki"]
+[ext_resource type="Texture2D" uid="uid://hmftqpu0e0vi" path="res://engine/gameplay/touch_controls/buttons/accept_press.png" id="5_8dfaf"]
+[ext_resource type="Texture2D" uid="uid://bmblbstf43qb2" path="res://engine/gameplay/touch_controls/buttons/button_base.png" id="6_8q5p8"]
+[ext_resource type="Texture2D" uid="uid://d4b76ad3txqoh" path="res://engine/gameplay/touch_controls/buttons/shift_base.png" id="6_kk16y"]
+[ext_resource type="Texture2D" uid="uid://covxb2rqpqkc6" path="res://engine/gameplay/touch_controls/buttons/shift_press.png" id="7_d347s"]
+[ext_resource type="Texture2D" uid="uid://bckbdjo1xwbjj" path="res://engine/gameplay/touch_controls/buttons/button_press.png" id="7_ut5b4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uejki"]
+radius = 28.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wcbf3"]
+size = Vector2(320, 720)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wcbf3"]
+radius = 28.0
+
+[node name="TouchControls" type="CanvasLayer" unique_id=461542984 node_paths=PackedStringArray("menus", "freeplay", "game", "left", "down", "up", "right")]
+process_mode = 3
+layer = 128
+script = ExtResource("1_wcbf3")
+menus = NodePath("Menus")
+freeplay = NodePath("Menus/Freeplay")
+game = NodePath("Game")
+left = NodePath("Game/Left")
+down = NodePath("Game/Down")
+up = NodePath("Game/Up")
+right = NodePath("Game/Right")
+
+[node name="Menus" type="Control" parent="." unique_id=71277730]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+metadata/_edit_lock_ = true
+
+[node name="Left" type="TouchScreenButton" parent="Menus" unique_id=1481230585]
+position = Vector2(66, 590)
+rotation = -1.5708
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("2_dn4ts")
+texture_pressed = ExtResource("3_8o8lk")
+shape = SubResource("CircleShape2D_uejki")
+passby_press = true
+action = "menu_left"
+visibility_mode = 1
+
+[node name="Down" type="TouchScreenButton" parent="Menus" unique_id=757714994]
+position = Vector2(253, 686)
+rotation = 3.14159
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("2_dn4ts")
+texture_pressed = ExtResource("3_8o8lk")
+shape = SubResource("CircleShape2D_uejki")
+passby_press = true
+action = "menu_down"
+visibility_mode = 1
+
+[node name="Up" type="TouchScreenButton" parent="Menus" unique_id=287631027]
+position = Vector2(162, 403)
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("2_dn4ts")
+texture_pressed = ExtResource("3_8o8lk")
+shape = SubResource("CircleShape2D_uejki")
+passby_press = true
+action = "menu_up"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="Menus" unique_id=271482993]
+position = Vector2(349, 499)
+rotation = 1.5708
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("2_dn4ts")
+texture_pressed = ExtResource("3_8o8lk")
+shape = SubResource("CircleShape2D_uejki")
+passby_press = true
+action = "menu_right"
+visibility_mode = 1
+
+[node name="Cancel" type="TouchScreenButton" parent="Menus" unique_id=615485729]
+position = Vector2(1034, 688)
+rotation = -1.5708
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("2_dn4ts")
+texture_pressed = ExtResource("3_8o8lk")
+shape = SubResource("CircleShape2D_uejki")
+passby_press = true
+action = "menu_cancel"
+visibility_mode = 1
+
+[node name="Accept" type="TouchScreenButton" parent="Menus" unique_id=589905947]
+position = Vector2(1157, 597)
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("4_uejki")
+texture_pressed = ExtResource("5_8dfaf")
+shape = SubResource("CircleShape2D_uejki")
+passby_press = true
+action = "menu_accept"
+visibility_mode = 1
+
+[node name="ModSwitcher" type="TouchScreenButton" parent="Menus" unique_id=1617492479]
+position = Vector2(1157, 25.000061)
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("6_8q5p8")
+texture_pressed = ExtResource("7_ut5b4")
+shape = SubResource("CircleShape2D_uejki")
+passby_press = true
+action = "module_select"
+visibility_mode = 1
+
+[node name="Freeplay" type="Control" parent="Menus" unique_id=763624923]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="SelectCHaracter" type="TouchScreenButton" parent="Menus/Freeplay" unique_id=343961192]
+position = Vector2(594, 597)
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("6_kk16y")
+texture_pressed = ExtResource("7_d347s")
+shape = SubResource("CircleShape2D_uejki")
+passby_press = true
+action = "freeplay_open_characters"
+visibility_mode = 1
+
+[node name="Game" type="Control" parent="." unique_id=679655625]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+metadata/_edit_lock_ = true
+
+[node name="Left" type="ColorRect" parent="Game" unique_id=1280801000]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.757, 0.294, 0.6, 0)
+
+[node name="Button" type="TouchScreenButton" parent="Game/Left" unique_id=319656990]
+position = Vector2(160, 360)
+shape = SubResource("RectangleShape2D_wcbf3")
+passby_press = true
+action = "note_left"
+visibility_mode = 1
+
+[node name="Down" type="ColorRect" parent="Game" unique_id=1797184710]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 640.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0, 1, 1, 0)
+
+[node name="Button" type="TouchScreenButton" parent="Game/Down" unique_id=1921398230]
+position = Vector2(160, 360)
+shape = SubResource("RectangleShape2D_wcbf3")
+passby_press = true
+action = "note_down"
+visibility_mode = 1
+
+[node name="Up" type="ColorRect" parent="Game" unique_id=383368020]
+layout_mode = 0
+offset_left = 640.0
+offset_right = 960.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.071, 0.98, 0.016, 0)
+
+[node name="Button" type="TouchScreenButton" parent="Game/Up" unique_id=119080982]
+position = Vector2(160, 360)
+shape = SubResource("RectangleShape2D_wcbf3")
+passby_press = true
+action = "note_up"
+visibility_mode = 1
+
+[node name="Right" type="ColorRect" parent="Game" unique_id=322390288]
+layout_mode = 0
+offset_left = 960.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.976, 0.224, 0.247, 0)
+
+[node name="Button" type="TouchScreenButton" parent="Game/Right" unique_id=134444641]
+position = Vector2(160, 360)
+shape = SubResource("RectangleShape2D_wcbf3")
+passby_press = true
+action = "note_right"
+visibility_mode = 1
+
+[node name="Pause" type="TouchScreenButton" parent="Game" unique_id=634855048]
+position = Vector2(32, 32)
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("2_mq6jc")
+texture_pressed = ExtResource("3_4ikyy")
+shape = SubResource("CircleShape2D_wcbf3")
+action = "game_pause"
+visibility_mode = 1
+
+[connection signal="gui_input" from="Game/Left" to="." method="_on_left_gui_input"]
+[connection signal="gui_input" from="Game/Down" to="." method="_on_down_gui_input"]
+[connection signal="gui_input" from="Game/Up" to="." method="_on_up_gui_input"]
+[connection signal="gui_input" from="Game/Right" to="." method="_on_right_gui_input"]

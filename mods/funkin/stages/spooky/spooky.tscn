@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://be43de6mqy3ia"]
+
+[ext_resource type="Script" uid="uid://c45gdx8wrc4ga" path="res://mods/funkin/stages/spooky/spooky.gd" id="1_ouhng"]
+[ext_resource type="AudioStream" uid="uid://kxlvlo6t0jou" path="res://mods/funkin/stages/spooky/sounds/thunder_1.ogg" id="2_di0st"]
+[ext_resource type="SpriteFrames" uid="uid://bmnb7p8am7vg0" path="res://mods/funkin/stages/spooky/bg.res" id="2_wmj7i"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="3_jds1s"]
+[ext_resource type="AudioStream" uid="uid://dmak0jirhk2pj" path="res://mods/funkin/stages/spooky/sounds/thunder_2.ogg" id="3_tyw1g"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://engine/gameplay/stages/character_preview.gd" id="5_m434m"]
+
+[node name="Spooky" type="Node2D" unique_id=1632799468 node_paths=PackedStringArray("background", "spawn_spectator", "spawn_player", "spawn_opponent")]
+script = ExtResource("1_ouhng")
+background = NodePath("Background")
+sounds = Array[AudioStream]([ExtResource("2_di0st"), ExtResource("3_tyw1g")])
+default_zoom = 1.0
+spawn_spectator = NodePath("SpectatorSpawn")
+spawn_player = NodePath("PlayerSpawn")
+spawn_opponent = NodePath("OpponentSpawn")
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=768524423]
+z_index = -200
+offset_left = -2033.0
+offset_top = -1473.0
+offset_right = 3673.0
+offset_bottom = 2495.0
+color = Color(0.14117648, 0.13725491, 0.21176471, 1)
+
+[node name="Background" type="AnimatedSprite2D" parent="." unique_id=1665463365]
+z_index = -100
+position = Vector2(-200, -100)
+sprite_frames = ExtResource("2_wmj7i")
+animation = &"halloweem bg"
+centered = false
+script = ExtResource("3_jds1s")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="SpectatorSpawn" type="Marker2D" parent="." unique_id=1201410258 node_paths=PackedStringArray("custom_camera_offset")]
+position = Vector2(625, 750)
+script = ExtResource("5_m434m")
+character_path = "uid://bragoy3tisav2"
+custom_camera_offset = NodePath("CameraOffset")
+
+[node name="CameraOffset" type="Marker2D" parent="SpectatorSpawn" unique_id=266724940]
+position = Vector2(47, -445)
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=351881070]
+position = Vector2(1000, 800)
+script = ExtResource("5_m434m")
+
+[node name="OpponentSpawn" type="Marker2D" parent="." unique_id=985891925]
+position = Vector2(256, 800)
+script = ExtResource("5_m434m")
+character_path = "uid://d4dbyolh86dgm"

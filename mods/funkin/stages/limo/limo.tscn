@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://k1d367s1as6d"]
+
+[ext_resource type="Script" uid="uid://b6pvuwsnfdwtj" path="res://mods/funkin/stages/limo/limo.gd" id="1_11vc5"]
+[ext_resource type="AudioStream" uid="uid://d3dsst4t3xlnc" path="res://mods/funkin/stages/limo/sounds/car_0.ogg" id="2_8o2p2"]
+[ext_resource type="Texture2D" uid="uid://dgyy58asxhwwl" path="res://mods/funkin/stages/limo/limoSunset.png" id="2_potqh"]
+[ext_resource type="SpriteFrames" uid="uid://bcxsxnwrkpfpt" path="res://mods/funkin/stages/limo/bgLimo.res" id="3_8o2p2"]
+[ext_resource type="AudioStream" uid="uid://c4uwi5d31prdc" path="res://mods/funkin/stages/limo/sounds/car_1.ogg" id="3_xtsds"]
+[ext_resource type="Shader" uid="uid://5wjcw14c4ehl" path="res://mods/funkin/stages/limo/sunset_shader.gdshader" id="4_2gosj"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="4_xtsds"]
+[ext_resource type="Texture2D" uid="uid://beyfiss15cjmj" path="res://mods/funkin/stages/limo/limoOverlay.png" id="5_1nyvw"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://engine/gameplay/stages/character_preview.gd" id="5_8o2p2"]
+[ext_resource type="SpriteFrames" uid="uid://d1vhwrlofvmka" path="res://mods/funkin/stages/limo/limoDrive.res" id="5_axglq"]
+[ext_resource type="Texture2D" uid="uid://2vt2m2655uu" path="res://mods/funkin/stages/limo/fastCarLol.png" id="7_2gosj"]
+[ext_resource type="SpriteFrames" uid="uid://co1ft38yoprcq" path="res://mods/funkin/stages/limo/henchmen.res" id="9_xtsds"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qjhqe"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("2_8o2p2")
+stream_1/stream = ExtResource("3_xtsds")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylkxk"]
+shader = ExtResource("4_2gosj")
+shader_parameter/funnyShit = ExtResource("5_1nyvw")
+
+[node name="Limo" type="Node2D" unique_id=2141360635 node_paths=PackedStringArray("fast_car", "car_timer", "car_pass", "dancers", "spawn_spectator", "spawn_player", "spawn_opponent")]
+script = ExtResource("1_11vc5")
+fast_car = NodePath("FastCar")
+car_timer = NodePath("CarTimer")
+car_pass = NodePath("CarPass")
+dancers = NodePath("Dancers")
+default_zoom = 0.9
+spawn_spectator = NodePath("SpectatorSpawn")
+spawn_player = NodePath("PlayerSpawn")
+spawn_opponent = NodePath("OpponentSpawn")
+
+[node name="CarTimer" type="Timer" parent="." unique_id=934252569]
+wait_time = 2.0
+one_shot = true
+
+[node name="CarPass" type="AudioStreamPlayer" parent="." unique_id=1716118330]
+stream = SubResource("AudioStreamRandomizer_qjhqe")
+
+[node name="Sunset" type="Parallax2D" parent="." unique_id=1610912083]
+scroll_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite" type="Sprite2D" parent="Sunset" unique_id=2117964312]
+z_index = 10
+material = SubResource("ShaderMaterial_ylkxk")
+position = Vector2(-120, -50)
+texture = ExtResource("2_potqh")
+centered = false
+
+[node name="BGLimo" type="Parallax2D" parent="." unique_id=1004692345]
+scroll_scale = Vector2(0.4, 0.4)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="BGLimo" unique_id=2128826861]
+z_index = 20
+position = Vector2(-200, 480)
+sprite_frames = ExtResource("3_8o2p2")
+animation = &"background limo pink"
+autoplay = "background limo pink"
+centered = false
+script = ExtResource("4_xtsds")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="FGLimo" type="AnimatedSprite2D" parent="." unique_id=1000834276]
+z_index = 150
+position = Vector2(-120, 550)
+sprite_frames = ExtResource("5_axglq")
+animation = &"Limo stage"
+autoplay = "Limo stage"
+centered = false
+script = ExtResource("4_xtsds")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="FastCar" type="Sprite2D" parent="." unique_id=1457524160]
+z_index = 500
+position = Vector2(-26000, 160)
+texture = ExtResource("7_2gosj")
+centered = false
+
+[node name="Dancers" type="Parallax2D" parent="." unique_id=249883978]
+scroll_scale = Vector2(0.4, 0.4)
+
+[node name="0" type="AnimatedSprite2D" parent="Dancers" unique_id=479708961]
+z_index = 30
+position = Vector2(100, 100)
+sprite_frames = ExtResource("9_xtsds")
+animation = &"left"
+centered = false
+script = ExtResource("4_xtsds")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="1" type="AnimatedSprite2D" parent="Dancers" unique_id=1688809252]
+z_index = 30
+position = Vector2(400, 100)
+sprite_frames = ExtResource("9_xtsds")
+animation = &"left"
+centered = false
+script = ExtResource("4_xtsds")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="2" type="AnimatedSprite2D" parent="Dancers" unique_id=1826526929]
+z_index = 30
+position = Vector2(700, 100)
+sprite_frames = ExtResource("9_xtsds")
+animation = &"left"
+centered = false
+script = ExtResource("4_xtsds")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="3" type="AnimatedSprite2D" parent="Dancers" unique_id=16875184]
+z_index = 30
+position = Vector2(1000, 100)
+sprite_frames = ExtResource("9_xtsds")
+animation = &"left"
+centered = false
+script = ExtResource("4_xtsds")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="4" type="AnimatedSprite2D" parent="Dancers" unique_id=772945008]
+z_index = 30
+position = Vector2(1300, 100)
+sprite_frames = ExtResource("9_xtsds")
+animation = &"left"
+centered = false
+script = ExtResource("4_xtsds")
+metadata/_custom_type_script = "uid://xcwf8fppek0h"
+
+[node name="SpectatorSpawn" type="Marker2D" parent="." unique_id=1771025256]
+z_index = 100
+position = Vector2(755, 790)
+script = ExtResource("5_8o2p2")
+character_path = "uid://cfd0vee7ua8k7"
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1328564153]
+z_index = 300
+position = Vector2(1274, 595)
+script = ExtResource("5_8o2p2")
+
+[node name="OpponentSpawn" type="Marker2D" parent="." unique_id=1464205059]
+z_index = 200
+position = Vector2(263, 831)
+script = ExtResource("5_8o2p2")
+character_path = "uid://cdxxht68lxv1a"
+
+[connection signal="timeout" from="CarTimer" to="." method="reset_fast_car"]

@@ -1,0 +1,191 @@
+extends Control
+
+
+@export_dir var songs_folder: String = "res://mods/funkin/songs":
+	set(v):
+		songs_folder = v
+
+		if songs_folder.ends_with("/"):
+			songs_folder = songs_folder.left(-1)
+
+@export var songs: Control
+@export var songs_label: Label
+
+@export var difficulties: Control
+@export var weeks: Control
+@export var props: StoryModePropsContainer
+
+@export var high_score: Label
+@export var week_name: Label
+
+@export var week_color: ColorRect
+@export var week_gradient: TextureRect
+@export var week_flash_timer: Timer
+
+var week_name_tween: Tween
+var active: bool = true
+
+
+func _ready() -> void:
+	var music_player: AudioStreamPlayer = MenuAudio.music
+	if not music_player.playing:
+		Conductor.reset()
+		music_player.play()
+
+	Conductor.tempo = 102.0
+	Conductor.target_audio = music_player
+	Conductor.beat_hit.connect(_on_beat_hit)
+
+	change_selection()
+	weeks.position.y = _get_weeks_target_y()
+
+
+func _on_beat_hit(_beat: int) -> void:
+	if not active:
+		return
+
+	props.beat_hit()
+
+
+func _process(delta: float) -> void:
+	weeks.position.y = lerpf(
+		weeks.position.y,
+		_get_weeks_target_y(),
+		minf(delta * 6.0, 1.0)
+	)
+
+	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
+	week_color.color = week_color.color.lerp(selected_week.background_color, minf(delta * 6.0, 1.0))
+	week_gradient.modulate = week_color.color
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not active:
+		return
+	if event.is_echo():
+		return
+	if not event.is_pressed():
+		return
+	if event.is_action('menu_cancel'):
+		active = false
+		MenuAudio.cancel.play()
+		SceneManager.transition_to_file("uid://b7fwxsepnt38j")
+	if event.is_action(&"menu_accept"):
+		active = false
+		_load_active_playlist()
+
+		if _load_first_song():
+			MenuAudio.confirm.play()
+
+			if Settings.get_setting(&"core", "flashing_lights"):
+				week_flash_timer.start()
+				week_flash_timer.timeout.emit()
+
+			if is_instance_valid(props.props[2]):
+				props.tween_prop_out(1)
+				props.tween_prop_out(3)
+
+				var og_scale: Vector2 = props.props[2].scale
+				props.props[2].scale *= 1.1
+
+				var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+				tween.tween_property(props.props[2], ^"scale", og_scale, 0.5)
+
+				props.props[2].play_anim(&"confirm", true)
+				await props.props[2].animation_finished
+
+			Game.load_settings[&"exit_scene_path"] = get_tree().current_scene.scene_file_path
+			SceneManager.transition_to_file(
+				SongLoader.get_scene_path(
+					Game.load_settings[&"song_name"],
+					Game.load_settings[&"songs_folder"],
+				),
+			)
+		else:
+			active = true
+
+	if event.is_action('menu_up') or event.is_action('menu_down'):
+		var movement: int = int(Input.get_axis('menu_up', 'menu_down'))
+		change_selection(movement)
+
+
+func _get_weeks_target_y() -> float:
+	return 48.0 - weeks.get_child(weeks.selected).position.y
+
+
+func _load_active_playlist() -> void:
+	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
+	Game.load_settings[&"playlist"].clear()
+
+	if selected_week.songs.size() == 1:
+		return
+
+	var difficulty: String = difficulties.difficulties[difficulties.selected]
+	for i: int in range(1, selected_week.songs.size()):
+		var entry := {
+			&"name": selected_week.get_song_name(i, difficulty),
+			&"difficulty": difficulty,
+		}
+
+		Game.load_settings[&"playlist"].push_back(entry)
+
+
+func _load_first_song() -> bool:
+	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
+	var difficulty: String = difficulties.difficulties[difficulties.selected]
+	var song_name: String = selected_week.get_song_name(0, difficulty)
+
+	Game.load_settings[&"songs_folder"] = songs_folder
+	Game.load_settings[&"song_name"] = song_name
+	Game.load_settings[&"song_difficulty"] = difficulty.to_lower()
+	Game.load_settings[&"mode_name"] = "Story Mode"
+	return true
+
+
+func change_selection(amount: int = 0) -> void:
+	var previous_week: StoryWeekNode = weeks.get_child(weeks.selected)
+	weeks.selected = wrapi(weeks.selected + amount, 0, weeks.get_child_count())
+
+	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
+	props.update_props(selected_week.props)
+
+	if previous_week.props.left != selected_week.props.left:
+		props.tween_prop_in(1, 280.0, Vector2(-400.0, 200.0))
+	if previous_week.props.center != selected_week.props.center:
+		props.tween_prop_in(2, 640.0, Vector2(640.0, 720.0))
+	if previous_week.props.right != selected_week.props.right:
+		props.tween_prop_in(3, 1000.0, Vector2(1280.0+400.0, 200.0))
+
+	week_name.text = selected_week.display_name
+	difficulties.difficulties = selected_week.difficulties
+	difficulties.change_selection()
+
+	var song_paths: PackedStringArray = selected_week.songs
+	var song_names: PackedStringArray = []
+
+	for path: String in song_paths:
+		if ResourceLoader.exists('%s/%s/meta.tres' % [songs_folder, path]):
+			var meta: SongMetadata = load('%s/%s/meta.tres' % [songs_folder, path])
+			song_names.push_back(meta.get_full_name())
+		else:
+			song_names.push_back(path)
+
+	songs_label.text = '\n'.join(song_names)
+
+	if is_instance_valid(week_name_tween) and week_name_tween.is_running():
+		week_name_tween.kill()
+
+	week_name.visible_ratio = 0.0
+	week_name_tween = create_tween()
+	week_name_tween.tween_property(week_name, ^"visible_ratio", 1.0, 0.067 * week_name.text.length())
+
+	if amount != 0:
+		MenuAudio.scroll.play()
+
+
+func _on_week_flash_timer_timeout() -> void:
+	var selected_week: StoryWeekNode = weeks.get_child(weeks.selected)
+	if selected_week.modulate == Color.WHITE:
+		selected_week.modulate = Color.CYAN
+	else:
+		selected_week.modulate = Color.WHITE

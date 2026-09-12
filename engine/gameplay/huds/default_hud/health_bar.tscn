@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://mjkelik6v8qb"]
+
+[ext_resource type="Script" uid="uid://nb701n0rtr0l" path="res://engine/gameplay/huds/default_hud/health_bar.gd" id="1_3namt"]
+[ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://engine/common/fonts/vcr_osd_mono.ttf" id="2_1ct6h"]
+[ext_resource type="Script" uid="uid://d1luakfpc6be5" path="res://engine/gameplay/huds/default_hud/score_label.gd" id="3_ead6m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vjxi"]
+bg_color = Color(0.529412, 0.545098, 0.545098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sakno"]
+bg_color = Color(0.905882, 0.92549, 0.933333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wblnk"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ku58i"]
+font = ExtResource("2_1ct6h")
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="HealthBar" type="Node2D" unique_id=1421310572 node_paths=PackedStringArray("bar", "icons")]
+script = ExtResource("1_3namt")
+bar = NodePath("Bar")
+icons = NodePath("IconsParent")
+
+[node name="Bar" type="ProgressBar" parent="." unique_id=445073324]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -8.0
+offset_right = 320.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_7vjxi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sakno")
+value = 50.0
+fill_mode = 1
+show_percentage = false
+
+[node name="Outline" type="Panel" parent="Bar" unique_id=1553430088]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wblnk")
+
+[node name="IconsParent" type="Node2D" parent="." unique_id=1626695899]
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=20712958]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -640.0
+offset_top = 32.0
+offset_right = 640.0
+offset_bottom = 67.0
+grow_horizontal = 2
+pivot_offset = Vector2(640, 17.5)
+text = "Score:0 - Misses:0 - Accuracy:N/A (N/A)
+"
+label_settings = SubResource("LabelSettings_ku58i")
+horizontal_alignment = 1
+script = ExtResource("3_ead6m")

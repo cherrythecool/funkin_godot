@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://ckoe40a7fh618"]
+
+[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://engine/gameplay/songs/assets.gd" id="1_djkrh"]
+[ext_resource type="PackedScene" uid="uid://dr24tjg5bcvow" path="res://mods/funkin/characters/pico/pico.tscn" id="1_jcvhn"]
+[ext_resource type="PackedScene" uid="uid://b1g35ux81f5hh" path="res://mods/funkin/stages/philly_train_erect/philly_train_erect.tscn" id="3_4bt30"]
+
+[resource]
+script = ExtResource("1_djkrh")
+opponent = ExtResource("1_jcvhn")
+stage = ExtResource("3_4bt30")
+metadata/_custom_type_script = "uid://dk2lxfhv5lvf4"

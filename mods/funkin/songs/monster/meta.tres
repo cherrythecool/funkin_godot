@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://bj3i5srwdh6f2"]
+
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://engine/gameplay/characters/health_icon.gd" id="1_dils7"]
+[ext_resource type="Texture2D" uid="uid://cyns8uj2h4erl" path="res://mods/funkin/characters/monster/icon.png" id="2_1gkxv"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://engine/gameplay/songs/metadata.gd" id="2_tm0ls"]
+
+[sub_resource type="Resource" id="Resource_mnl25"]
+script = ExtResource("1_dils7")
+texture = ExtResource("2_1gkxv")
+color = Color(0.996078, 1, 0.466667, 1)
+metadata/_custom_type_script = "uid://b7lu04jsahckp"
+
+[resource]
+script = ExtResource("2_tm0ls")
+display_name = &"Monster"
+icon = SubResource("Resource_mnl25")
+metadata/_custom_type_script = "uid://3bi6wwv6us1w"

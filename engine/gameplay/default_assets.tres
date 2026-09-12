@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://dm8kpip52j8kf"]
+
+[ext_resource type="PackedScene" uid="uid://bu44d2he2dxm3" path="res://engine/gameplay/characters/bf/bf.tscn" id="1_1r7wn"]
+[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://engine/gameplay/songs/assets.gd" id="1_xp11c"]
+[ext_resource type="PackedScene" uid="uid://cr0c14kq4sye1" path="res://engine/gameplay/huds/default_hud/default_hud.tscn" id="1_xt3r0"]
+[ext_resource type="Resource" uid="uid://oxo327xfxemo" path="res://engine/gameplay/styles/default/hud_skin.tres" id="2_jy5h7"]
+[ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://engine/gameplay/styles/default/note_skin.tres" id="4_aa21j"]
+[ext_resource type="PackedScene" uid="uid://m26q2fyumltr" path="res://engine/gameplay/stages/template.tscn" id="6_0y7vn"]
+
+[resource]
+script = ExtResource("1_xp11c")
+player = ExtResource("1_1r7wn")
+spectator = ExtResource("1_1r7wn")
+opponent = ExtResource("1_1r7wn")
+stage = ExtResource("6_0y7vn")
+hud = ExtResource("1_xt3r0")
+hud_skin = ExtResource("2_jy5h7")
+player_note_skin = ExtResource("4_aa21j")
+opponent_note_skin = ExtResource("4_aa21j")
+metadata/_custom_type_script = "uid://dk2lxfhv5lvf4"

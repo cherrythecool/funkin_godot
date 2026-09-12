@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://cr0c14kq4sye1"]
+
+[ext_resource type="Script" uid="uid://cuh3v6jw2ti70" path="res://engine/gameplay/huds/default_hud/default_hud.gd" id="1_hv0yb"]
+[ext_resource type="PackedScene" uid="uid://mjkelik6v8qb" path="res://engine/gameplay/huds/default_hud/health_bar.tscn" id="2_l5g1e"]
+[ext_resource type="PackedScene" uid="uid://cv4xvjycy32bv" path="res://engine/gameplay/huds/default_hud/rating_container.tscn" id="4_h3rog"]
+[ext_resource type="PackedScene" uid="uid://t1fpdj8vxahn" path="res://engine/gameplay/huds/default_hud/time_bar.tscn" id="5_p6n50"]
+[ext_resource type="Script" uid="uid://pc372g2dpnb3" path="res://engine/gameplay/huds/default_hud/countdown_container.gd" id="9_6w54d"]
+[ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://engine/gameplay/notes/2d_renderer/strumline_renderer_2d.gd" id="10_nwv25"]
+[ext_resource type="Script" uid="uid://chj1hnw2lhjy4" path="res://engine/gameplay/notes/2d_renderer/receptor_data.gd" id="11_vvq14"]
+[ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://engine/gameplay/styles/default/note_skin.tres" id="12_iy7o8"]
+
+[sub_resource type="Resource" id="Resource_v2t1s"]
+script = ExtResource("11_vvq14")
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_cr7sq"]
+script = ExtResource("11_vvq14")
+direction = &"down"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_qjd2v"]
+script = ExtResource("11_vvq14")
+direction = &"up"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_wwci2"]
+script = ExtResource("11_vvq14")
+direction = &"right"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_ere7q"]
+script = ExtResource("11_vvq14")
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_u83tf"]
+script = ExtResource("11_vvq14")
+direction = &"down"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_5x38g"]
+script = ExtResource("11_vvq14")
+direction = &"up"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[sub_resource type="Resource" id="Resource_icvbc"]
+script = ExtResource("11_vvq14")
+direction = &"right"
+metadata/_custom_type_script = "uid://chj1hnw2lhjy4"
+
+[node name="DefaultHUD" type="Control" unique_id=1372711265 node_paths=PackedStringArray("player_renderer", "opponent_renderer", "health_bar", "countdown_container", "time_bar", "rating_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 360)
+mouse_filter = 2
+script = ExtResource("1_hv0yb")
+player_renderer = NodePath("PlayerRenderer")
+opponent_renderer = NodePath("OpponentRenderer")
+health_bar = NodePath("HealthBar")
+countdown_container = NodePath("CountdownContainer")
+time_bar = NodePath("TimeBar")
+rating_container = NodePath("RatingContainer")
+metadata/_edit_lock_ = true
+
+[node name="HealthBar" parent="." unique_id=1421310572 instance=ExtResource("2_l5g1e")]
+position = Vector2(640, 640)
+
+[node name="TimeBar" parent="." unique_id=1087964716 instance=ExtResource("5_p6n50")]
+layout_mode = 1
+anchors_preset = -1
+
+[node name="RatingContainer" parent="." unique_id=1940396623 instance=ExtResource("4_h3rog")]
+position = Vector2(640, 328)
+
+[node name="CountdownContainer" type="Marker2D" parent="." unique_id=1614052304]
+position = Vector2(640, 360)
+script = ExtResource("9_6w54d")
+
+[node name="PlayerRenderer" type="Node2D" parent="." unique_id=1392333694]
+position = Vector2(960, 620)
+script = ExtResource("10_nwv25")
+receptors = Array[ExtResource("11_vvq14")]([SubResource("Resource_v2t1s"), SubResource("Resource_cr7sq"), SubResource("Resource_qjd2v"), SubResource("Resource_wwci2")])
+skin = ExtResource("12_iy7o8")
+scroll_speed = 3.0
+metadata/_custom_type_script = "uid://rh4jeluc5vy5"
+
+[node name="OpponentRenderer" type="Node2D" parent="." unique_id=290028316]
+position = Vector2(320, 620)
+script = ExtResource("10_nwv25")
+receptors = Array[ExtResource("11_vvq14")]([SubResource("Resource_ere7q"), SubResource("Resource_u83tf"), SubResource("Resource_5x38g"), SubResource("Resource_icvbc")])
+skin = ExtResource("12_iy7o8")
+scroll_speed = 3.0
+metadata/_custom_type_script = "uid://rh4jeluc5vy5"
+
+[connection signal="downscroll_changed" from="." to="HealthBar" method="_on_hud_downscroll_changed"]
+[connection signal="downscroll_changed" from="." to="TimeBar" method="_on_hud_downscroll_changed"]
+[connection signal="setup" from="." to="HealthBar" method="_on_hud_setup"]
+[connection signal="setup" from="." to="RatingContainer" method="_on_hud_setup"]
+[connection signal="setup" from="." to="CountdownContainer" method="_on_hud_setup"]

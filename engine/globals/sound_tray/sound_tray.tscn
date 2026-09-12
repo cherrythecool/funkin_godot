@@ -1,0 +1,214 @@
+[gd_scene format=3 uid="uid://bhbryleu1jjq0"]
+
+[ext_resource type="Script" uid="uid://d3gp8t7bd34mv" path="res://engine/globals/sound_tray/sound_tray.gd" id="1_fobyb"]
+[ext_resource type="AudioStream" uid="uid://ct153w6rmrntc" path="res://engine/globals/sound_tray/volume_down.ogg" id="2_x1qxr"]
+[ext_resource type="AudioStream" uid="uid://osbi54io0ek4" path="res://engine/globals/sound_tray/volume_up.ogg" id="3_gtm6u"]
+[ext_resource type="AudioStream" uid="uid://blh40k0yr71kp" path="res://engine/globals/sound_tray/volume_max.ogg" id="4_hul2l"]
+[ext_resource type="Texture2D" uid="uid://ghfxfuexa0q1" path="res://engine/globals/sound_tray/box.png" id="6_ne0eb"]
+[ext_resource type="Texture2D" uid="uid://t0nh1fx577c7" path="res://engine/globals/sound_tray/bars.png" id="7_x1qxr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1qxr"]
+atlas = ExtResource("7_x1qxr")
+region = Rect2(0, 0, 101.5, 0)
+
+[sub_resource type="Animation" id="Animation_x1qxr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.75, 0.75)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(510, -128)]
+}
+
+[sub_resource type="Animation" id="Animation_y6u6t"]
+resource_name = "close"
+length = 0.33333752
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0.75, 0.75)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(510, 16), Vector2(510, -128)]
+}
+
+[sub_resource type="Animation" id="Animation_hul2l"]
+resource_name = "open"
+length = 0.33333752
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0.75, 0.75)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(510, -128), Vector2(510, 16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hul2l"]
+_data = {
+&"RESET": SubResource("Animation_x1qxr"),
+&"close": SubResource("Animation_y6u6t"),
+&"open": SubResource("Animation_hul2l")
+}
+
+[sub_resource type="Animation" id="Animation_3k1ds"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_1jwnr"]
+resource_name = "bounce"
+length = 0.33333752
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333337),
+"transitions": PackedFloat32Array(0.3789291, 1),
+"update": 0,
+"values": [Vector2(0.7, 0.8), Vector2(0.75, 0.75)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3k1ds"]
+_data = {
+&"RESET": SubResource("Animation_3k1ds"),
+&"bounce": SubResource("Animation_1jwnr")
+}
+
+[node name="SoundTray" type="CanvasLayer" unique_id=2135155222 node_paths=PackedStringArray("close_timer", "root", "background", "bars", "opening_animation", "bounce_animation", "volume_up", "volume_down", "volume_max")]
+process_mode = 3
+layer = 48
+script = ExtResource("1_fobyb")
+close_timer = NodePath("CloseTimer")
+root = NodePath("Root")
+background = NodePath("Root/Background")
+bars = NodePath("Root/Background/Bars")
+opening_animation = NodePath("Root/Background/OpeningAnimation")
+bounce_animation = NodePath("Root/Background/BounceAnimation")
+volume_up = NodePath("Sounds/VolumeUp")
+volume_down = NodePath("Sounds/VolumeDown")
+volume_max = NodePath("Sounds/VolumeMax")
+
+[node name="Sounds" type="Node" parent="." unique_id=1791173904]
+
+[node name="VolumeUp" type="AudioStreamPlayer" parent="Sounds" unique_id=90379923]
+stream = ExtResource("3_gtm6u")
+volume_db = 3.0
+max_polyphony = 4
+
+[node name="VolumeDown" type="AudioStreamPlayer" parent="Sounds" unique_id=1557540288]
+stream = ExtResource("2_x1qxr")
+volume_db = 3.0
+max_polyphony = 4
+
+[node name="VolumeMax" type="AudioStreamPlayer" parent="Sounds" unique_id=409261063]
+stream = ExtResource("4_hul2l")
+max_polyphony = 4
+
+[node name="CloseTimer" type="Timer" parent="." unique_id=1404560406]
+one_shot = true
+
+[node name="Root" type="Control" parent="." unique_id=1216102772]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="Root" unique_id=1444651431]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_top = -128.0
+offset_right = 130.0
+offset_bottom = 18.0
+grow_horizontal = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset_ratio = Vector2(0.5, 0)
+texture = ExtResource("6_ne0eb")
+expand_mode = 1
+
+[node name="Bars" type="TextureRect" parent="Root/Background" unique_id=1510969806]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = -55.0
+offset_right = 101.5
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_x1qxr")
+stretch_mode = 2
+
+[node name="OpeningAnimation" type="AnimationPlayer" parent="Root/Background" unique_id=1108377773]
+libraries/ = SubResource("AnimationLibrary_hul2l")
+
+[node name="BounceAnimation" type="AnimationPlayer" parent="Root/Background" unique_id=623868530]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_3k1ds")
+
+[connection signal="timeout" from="CloseTimer" to="." method="_on_close_timer_timeout"]
+[connection signal="animation_finished" from="Root/Background/OpeningAnimation" to="." method="_on_tray_animation_finished"]

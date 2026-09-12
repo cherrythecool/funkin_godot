@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://dd76grrhumccf"]
+
+[ext_resource type="Script" uid="uid://c7iq5ek2ivhku" path="res://mods/funkin/menus/options_menu/categories/interface.gd" id="1_fujo8"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://engine/common/alphabet/alphabet.gd" id="2_rqn5q"]
+[ext_resource type="Script" uid="uid://bfvypstga7ch8" path="res://mods/funkin/menus/options_menu/options/volume_option.gd" id="6_efc3u"]
+
+[node name="Sound" type="Node2D" unique_id=29367316 node_paths=PackedStringArray("options")]
+script = ExtResource("1_fujo8")
+options = [NodePath("Master"), NodePath("Music"), NodePath("SFX")]
+max_distance = 0.0
+
+[node name="Master" type="Node2D" parent="." unique_id=238260379 node_paths=PackedStringArray("root", "value_label")]
+position = Vector2(-264, -60)
+script = ExtResource("6_efc3u")
+key = &"volume"
+ranged = true
+minimum = 0.0
+maximum = 100.0
+step = 5.0
+step_shift = 1.0
+step_alt = 1.0
+value_suffix = &"%"
+root = NodePath("..")
+value_label = NodePath("Value")
+
+[node name="Label" type="Node2D" parent="Master" unique_id=1169113267]
+position = Vector2(-140, 0)
+script = ExtResource("2_rqn5q")
+text = "master:"
+centered = true
+
+[node name="Value" type="Node2D" parent="Master" unique_id=1189295515]
+position = Vector2(38, -32)
+script = ExtResource("2_rqn5q")
+text = "< 0% >"
+
+[node name="Music" type="Node2D" parent="." unique_id=371396805 node_paths=PackedStringArray("root", "value_label")]
+position = Vector2(-287, 36)
+script = ExtResource("6_efc3u")
+bus = &"Music"
+key = &"volume"
+ranged = true
+minimum = 0.0
+maximum = 100.0
+step = 5.0
+step_shift = 1.0
+step_alt = 1.0
+value_suffix = &"%"
+root = NodePath("..")
+value_label = NodePath("Value")
+
+[node name="Label" type="Node2D" parent="Music" unique_id=937756468]
+position = Vector2(-140, 0)
+script = ExtResource("2_rqn5q")
+text = "music:"
+centered = true
+
+[node name="Value" type="Node2D" parent="Music" unique_id=2120686870]
+position = Vector2(60, -33)
+script = ExtResource("2_rqn5q")
+text = "< 0% >"
+
+[node name="SFX" type="Node2D" parent="." unique_id=1953408017 node_paths=PackedStringArray("root", "value_label")]
+position = Vector2(-336, 134)
+script = ExtResource("6_efc3u")
+bus = &"SFX"
+key = &"volume"
+ranged = true
+minimum = 0.0
+maximum = 100.0
+step = 5.0
+step_shift = 1.0
+step_alt = 1.0
+value_suffix = &"%"
+root = NodePath("..")
+value_label = NodePath("Value")
+
+[node name="Label" type="Node2D" parent="SFX" unique_id=854779378]
+position = Vector2(-140, 0)
+script = ExtResource("2_rqn5q")
+text = "sfx:"
+centered = true
+
+[node name="Value" type="Node2D" parent="SFX" unique_id=1929155117]
+position = Vector2(109, -33)
+script = ExtResource("2_rqn5q")
+text = "< 0% >"

@@ -1,0 +1,97 @@
+class_name CountdownContainer
+extends Marker2D
+
+
+@export var do_countdown: bool = true
+@export var pause_countdown: bool = false
+@export var force_countdown: bool = false
+
+var countdown_offset: int = 0
+var hud_skin: HUDSkin:
+	set(v):
+		hud_skin = v
+		countdown_textures = hud_skin.get_countdown_textures()
+		countdown_sounds = hud_skin.get_countdown_sounds()
+
+var countdown_textures: Array[Texture2D] = []
+var countdown_sounds: Array[AudioStream] = []
+
+var game: Game
+
+
+func _on_hud_setup() -> void:
+	game = Game.instance
+	if game.metadata.skip_countdown:
+		do_countdown = false
+
+	game.ready_post.connect(_ready_post)
+	Conductor.beat_hit.connect(_on_beat_hit)
+
+	if not hud_skin:
+		hud_skin = load('uid://oxo327xfxemo')
+
+	scale = hud_skin.countdown_scale
+
+
+func _ready_post() -> void:
+	if not do_countdown:
+		Conductor.raw_time = 0.0
+
+
+func _on_beat_hit(beat: int) -> void:
+	if not is_instance_valid(Game.instance):
+		return
+	if (not do_countdown) and not force_countdown:
+		return
+	if (beat >= 0 or Game.instance.song_started) and not force_countdown:
+		return
+
+	if pause_countdown:
+		Conductor.raw_time = -5.0 * Conductor.beat_delta
+		return
+
+	beat += countdown_offset
+
+	if beat >= 0 and force_countdown:
+		force_countdown = false
+		return
+
+	var index: int = clampi(4 - absi(beat), 0, 3)
+	display_countdown_sprite(index)
+	play_countdown_sound(index)
+
+
+func display_countdown_sprite(index: int) -> void:
+	if not is_instance_valid(hud_skin):
+		return
+	if index > countdown_textures.size() - 1:
+		return
+	if not is_instance_valid(countdown_textures[index]):
+		return
+
+	var sprite := Sprite2D.new()
+	sprite.scale = Vector2.ONE * 1.05
+	sprite.texture = countdown_textures[index]
+	sprite.texture_filter = hud_skin.rating_filter
+	add_child(sprite)
+
+	var tween := create_tween().set_trans(Tween.TRANS_SINE)\
+			.set_ease(Tween.EASE_OUT).set_parallel()
+	tween.tween_property(sprite, ^'modulate:a', 0.0, Conductor.beat_delta)
+	tween.tween_property(sprite, ^'scale', Vector2.ONE, Conductor.beat_delta)
+	tween.tween_callback(sprite.queue_free).set_delay(Conductor.beat_delta)
+
+
+func play_countdown_sound(index: int) -> void:
+	if index > countdown_sounds.size() - 1:
+		return
+	if not is_instance_valid(countdown_sounds[index]):
+		return
+
+	var player := AudioStreamPlayer.new()
+	player.stream = countdown_sounds[index]
+	player.bus = &"SFX"
+	player.finished.connect(player.queue_free)
+	add_child(player)
+
+	player.play()

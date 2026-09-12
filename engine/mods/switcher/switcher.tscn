@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://dubyatkw6h7m2"]
+
+[ext_resource type="Script" uid="uid://d0a7jysvvuotb" path="res://engine/mods/switcher/switcher.gd" id="1_p5b5k"]
+[ext_resource type="PackedScene" uid="uid://bqv4nkj1rm3om" path="res://engine/mods/switcher/listed_mod.tscn" id="2_kc7kk"]
+[ext_resource type="FontFile" uid="uid://cuh8h453towpc" path="res://engine/common/fonts/red_hat_mono.ttf" id="3_kc7kk"]
+[ext_resource type="Texture2D" uid="uid://mwxbaajkt3nh" path="res://engine/mods/switcher/folder_icon.svg" id="4_kc7kk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgwie"]
+bg_color = Color(0.0703125, 0.069488525, 0.069488525, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19921875, 0.19921875, 0.19921875, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_24gn8"]
+base_font = ExtResource("3_kc7kk")
+variation_opentype = {
+2003265652: 600
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_t6euu"]
+font = SubResource("FontVariation_24gn8")
+
+[node name="ModSwitcher" type="CanvasLayer" unique_id=1939416663 node_paths=PackedStringArray("root", "open_folder", "scroll_container", "mod_container")]
+layer = 64
+script = ExtResource("1_p5b5k")
+module_panel = ExtResource("2_kc7kk")
+root = NodePath("Root")
+open_folder = NodePath("Root/OpenFolder")
+scroll_container = NodePath("Root/ScrollContainer")
+mod_container = NodePath("Root/ScrollContainer/ModContainer")
+
+[node name="Root" type="Panel" parent="." unique_id=1164833986]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -64.0
+offset_right = 160.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_hgwie")
+
+[node name="Title" type="Label" parent="Root" unique_id=992405183]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 3.0
+offset_right = -8.0
+offset_bottom = 32.0
+grow_horizontal = 2
+text = "Mods Switcher"
+label_settings = SubResource("LabelSettings_t6euu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OpenFolder" type="Button" parent="Root" unique_id=1131345913]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 24.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 33.0
+theme_override_colors/icon_normal_color = Color(0.67578125, 0.67578125, 0.67578125, 1)
+theme_override_colors/icon_hover_color = Color(0.90625, 0.90625, 0.90625, 1)
+icon = ExtResource("4_kc7kk")
+flat = true
+icon_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Root" unique_id=935166583]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 34.0
+offset_right = -8.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/scrollbar_h_separation = 4
+
+[node name="ModContainer" type="VBoxContainer" parent="Root/ScrollContainer" unique_id=1006290012]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[connection signal="pressed" from="Root/OpenFolder" to="." method="_on_open_folder_pressed"]

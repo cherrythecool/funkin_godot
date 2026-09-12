@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://di58m2bnkbajd"]
+
+[ext_resource type="Script" uid="uid://0p2ytefjgc4v" path="res://mods/funkin/menus/options_menu/categories/category_base.gd" id="1_48ko1"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://engine/common/alphabet/alphabet.gd" id="2_it2mv"]
+
+[node name="None" type="Node2D" unique_id=258251732]
+script = ExtResource("1_48ko1")
+
+[node name="Label" type="Node2D" parent="." unique_id=757009502]
+script = ExtResource("2_it2mv")
+text = "sorry!
+this section is unfinished!"
+centered = true
+horizontal_alignment = "Center"

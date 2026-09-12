@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dt7vny7nmtw41"]
+
+[ext_resource type="Script" uid="uid://bgoj5fedfmju5" path="res://engine/globals/menu_sounds/menu_sounds.gd" id="1_m7o54"]
+[ext_resource type="AudioStream" uid="uid://dergcpn8f5cju" path="res://engine/globals/menu_sounds/funkin_theme.ogg" id="2_m7o54"]
+[ext_resource type="AudioStream" uid="uid://bmt2cyc46u6om" path="res://engine/globals/menu_sounds/scroll.ogg" id="3_ddpa1"]
+[ext_resource type="AudioStream" uid="uid://cw4cxfwsg33fg" path="res://engine/globals/menu_sounds/confirm.ogg" id="4_get07"]
+[ext_resource type="AudioStream" uid="uid://ks4syot2ec3p" path="res://engine/globals/menu_sounds/cancel.ogg" id="5_ded61"]
+
+[node name="MenuSounds" type="Node" unique_id=1820826613 node_paths=PackedStringArray("music", "scroll", "confirm", "cancel")]
+script = ExtResource("1_m7o54")
+music = NodePath("Music")
+scroll = NodePath("Scroll")
+confirm = NodePath("Confirm")
+cancel = NodePath("Cancel")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1505970123]
+stream = ExtResource("2_m7o54")
+bus = &"Music"
+parameters/looping = true
+
+[node name="Scroll" type="AudioStreamPlayer" parent="." unique_id=1299172272]
+stream = ExtResource("3_ddpa1")
+volume_db = -10.0
+max_polyphony = 16
+bus = &"SFX"
+
+[node name="Confirm" type="AudioStreamPlayer" parent="." unique_id=1130258454]
+stream = ExtResource("4_get07")
+volume_db = -10.0
+max_polyphony = 4
+bus = &"SFX"
+
+[node name="Cancel" type="AudioStreamPlayer" parent="." unique_id=1578359029]
+stream = ExtResource("5_ded61")
+volume_db = -10.0
+max_polyphony = 2
+bus = &"SFX"

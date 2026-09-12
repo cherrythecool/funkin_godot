@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dhgxccn0eo4sy"]
+
+[ext_resource type="Script" uid="uid://bn5n82vuwrrl8" path="res://engine/gameplay/stages/stage.gd" id="1_6qkqj"]
+[ext_resource type="Script" uid="uid://dvnwbtnvi747m" path="res://engine/gameplay/stages/character_preview.gd" id="2_f70a8"]
+
+[node name="Empty" type="Node2D" unique_id=367971697 node_paths=PackedStringArray("spawn_spectator", "spawn_player", "spawn_opponent")]
+script = ExtResource("1_6qkqj")
+spawn_spectator = NodePath("SpectatorSpawn")
+spawn_player = NodePath("PlayerSpawn")
+spawn_opponent = NodePath("OpponentSpawn")
+
+[node name="SpectatorSpawn" type="Marker2D" parent="." unique_id=1618861398]
+script = ExtResource("2_f70a8")
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=866792563]
+position = Vector2(453, 0)
+script = ExtResource("2_f70a8")
+
+[node name="OpponentSpawn" type="Marker2D" parent="." unique_id=1943065639]
+position = Vector2(-488, 0)
+script = ExtResource("2_f70a8")

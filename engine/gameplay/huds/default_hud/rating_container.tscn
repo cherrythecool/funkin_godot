@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cv4xvjycy32bv"]
+
+[ext_resource type="Script" uid="uid://bw11x7hqfgd8j" path="res://engine/gameplay/huds/default_hud/rating_container.gd" id="1_pyogd"]
+[ext_resource type="Texture2D" uid="uid://cn6fmp8et8ktw" path="res://engine/gameplay/styles/default/ratings/marvelous.png" id="2_fejtq"]
+[ext_resource type="Texture2D" uid="uid://ds3g63uwcq4jw" path="res://engine/gameplay/styles/default/combo.png" id="3_uonfa"]
+[ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://mods/funkin/funkin.ttf" id="4_lmwkn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6egcm"]
+font = ExtResource("4_lmwkn")
+font_size = 64
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[node name="RatingContainer" type="Node2D" unique_id=1940396623 node_paths=PackedStringArray("rating_sprite", "combo_node", "difference_label")]
+script = ExtResource("1_pyogd")
+rating_sprite = NodePath("Rating")
+combo_node = NodePath("Combo")
+difference_label = NodePath("DifferenceLabel")
+
+[node name="Rating" type="Sprite2D" parent="." unique_id=403727332]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_fejtq")
+
+[node name="Combo" type="Node2D" parent="." unique_id=72799944]
+position = Vector2(0, 75)
+scale = Vector2(0.5, 0.5)
+
+[node name="1" type="Sprite2D" parent="Combo" unique_id=852011492]
+texture = ExtResource("3_uonfa")
+hframes = 10
+
+[node name="DifferenceLabel" type="Label" parent="." unique_id=419103817]
+offset_left = -640.0
+offset_top = 106.0
+offset_right = 640.0
+offset_bottom = 143.0
+pivot_offset = Vector2(640, 24.5)
+text = "0ms"
+label_settings = SubResource("LabelSettings_6egcm")
+horizontal_alignment = 1
+vertical_alignment = 1

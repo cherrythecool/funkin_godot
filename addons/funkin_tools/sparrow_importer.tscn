@@ -3,16 +3,20 @@
 [ext_resource type="Script" uid="uid://dbridha1ib24a" path="res://addons/funkin_tools/sparrow_importer.gd" id="1_wy6ij"]
 [ext_resource type="Script" uid="uid://stecdjsveru4" path="res://addons/funkin_tools/sparrow_importer/import_spritesheets.gd" id="2_g586u"]
 
-[node name="Sparrow Importer" type="ScrollContainer" unique_id=522038997]
+[node name="Sparrow Importer" type="ScrollContainer" unique_id=522038997 node_paths=PackedStringArray("open_dialog", "save_dialog", "save_pngs_dialog", "spritesheet_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wy6ij")
+open_dialog = NodePath("OpenDialog")
+save_dialog = NodePath("SaveDialog")
+save_pngs_dialog = NodePath("SavePNGsDialog")
+spritesheet_container = NodePath("HSplitContainer/ImportContainer/ImportList")
 metadata/_tab_index = 0
 
-[node name="h_split_container" type="HSplitContainer" parent="." unique_id=1317473324]
+[node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=1317473324]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -20,7 +24,7 @@ theme_override_constants/separation = 8
 theme_override_constants/minimum_grab_thickness = 8
 theme_override_constants/autohide = 0
 
-[node name="margin_container" type="MarginContainer" parent="h_split_container" unique_id=202462875]
+[node name="SettingContainer" type="MarginContainer" parent="HSplitContainer" unique_id=202462875]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 8
@@ -28,27 +32,28 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="v_box" type="VBoxContainer" parent="h_split_container/margin_container" unique_id=1235361769]
+[node name="VBox" type="VBoxContainer" parent="HSplitContainer/SettingContainer" unique_id=1235361769]
 layout_mode = 2
 
-[node name="label" type="Label" parent="h_split_container/margin_container/v_box" unique_id=384297583]
+[node name="MainLabel" type="Label" parent="HSplitContainer/SettingContainer/VBox" unique_id=384297583]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "Use this tool to convert Sparrow Atlases to Godot's native SpriteFrames resources!"
 autowrap_mode = 3
 
-[node name="h_separator" type="HSeparator" parent="h_split_container/margin_container/v_box" unique_id=1142561575]
+[node name="Separator" type="HSeparator" parent="HSplitContainer/SettingContainer/VBox" unique_id=1142561575]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="import_label" type="Label" parent="h_split_container/margin_container/v_box" unique_id=1148032193]
+[node name="ImportTitle" type="Label" parent="HSplitContainer/SettingContainer/VBox" unique_id=1148032193]
 layout_mode = 2
 text = "Animation Import Settings"
 
-[node name="import_options" type="VBoxContainer" parent="h_split_container/margin_container/v_box" unique_id=882601088]
+[node name="ImportOptions" type="VBoxContainer" parent="HSplitContainer/SettingContainer/VBox" unique_id=882601088]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="fps_box" type="SpinBox" parent="h_split_container/margin_container/v_box/import_options" unique_id=1931057880]
+[node name="FPSBox" type="SpinBox" parent="HSplitContainer/SettingContainer/VBox/ImportOptions" unique_id=1931057880]
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "Default framerate of all animations imported"
@@ -56,7 +61,7 @@ max_value = 1000.0
 value = 24.0
 rounded = true
 
-[node name="label" type="Label" parent="h_split_container/margin_container/v_box/import_options/fps_box" unique_id=1529303080]
+[node name="Label" type="Label" parent="HSplitContainer/SettingContainer/VBox/ImportOptions/FPSBox" unique_id=1529303080]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -66,59 +71,59 @@ offset_left = 4.0
 text = "FPS"
 vertical_alignment = 1
 
-[node name="looping" type="CheckBox" parent="h_split_container/margin_container/v_box/import_options" unique_id=616923307]
+[node name="Looping" type="CheckBox" parent="HSplitContainer/SettingContainer/VBox/ImportOptions" unique_id=616923307]
 layout_mode = 2
 tooltip_text = "Default looping value of all animations imported"
 text = "Looping"
 
-[node name="path_prefix" type="CheckBox" parent="h_split_container/margin_container/v_box/import_options" unique_id=1994565422]
+[node name="UsePathPrefix" type="CheckBox" parent="HSplitContainer/SettingContainer/VBox/ImportOptions" unique_id=1994565422]
 layout_mode = 2
 tooltip_text = "Adds the name of the spritesheet (without file extension) to the start of each animation name
 
 Useful for multiple files with colliding names"
 text = "Use File Name as Prefix"
 
-[node name="import_spritesheets" type="Button" parent="h_split_container/margin_container/v_box" unique_id=354221627]
+[node name="ImportSpritesheet" type="Button" parent="HSplitContainer/SettingContainer/VBox" unique_id=354221627]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Import Spritesheets"
 script = ExtResource("2_g586u")
 
-[node name="h_separator_2" type="HSeparator" parent="h_split_container/margin_container/v_box" unique_id=703281737]
+[node name="Separator2" type="HSeparator" parent="HSplitContainer/SettingContainer/VBox" unique_id=703281737]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="clear_on_export" type="CheckBox" parent="h_split_container/margin_container/v_box" unique_id=1881482230]
+[node name="ClearAfterExport" type="CheckBox" parent="HSplitContainer/SettingContainer/VBox" unique_id=1881482230]
 layout_mode = 2
 tooltip_text = "Removes all imported spritesheeets automatically after exporting your sprites
 
 Useful if you're exporting a lot of individual sprites in a row"
 text = "Clear Imports After Export"
 
-[node name="filter_clips" type="CheckBox" parent="h_split_container/margin_container/v_box" unique_id=748300720]
+[node name="FilterEdges" type="CheckBox" parent="HSplitContainer/SettingContainer/VBox" unique_id=748300720]
 layout_mode = 2
 tooltip_text = "Exports all frames with the region around them being clipped to avoid bleeding from pixels around them (disable if it somehow causes issues with your sprites)"
 button_pressed = true
 text = "Filter Edges of Frames"
 
-[node name="merge_spritesheets" type="CheckBox" parent="h_split_container/margin_container/v_box" unique_id=936388840]
+[node name="MergeSpritesheets" type="CheckBox" parent="HSplitContainer/SettingContainer/VBox" unique_id=936388840]
 layout_mode = 2
 tooltip_text = "Merges all imported spritesheets into one single file or folder (depending on the way you export)
 
 Useful for easily combining animations into one resource"
 text = "Merge All Spritesheets"
 
-[node name="export_to_spriteframes" type="Button" parent="h_split_container/margin_container/v_box" unique_id=886929936]
+[node name="ExportSpriteFrames" type="Button" parent="HSplitContainer/SettingContainer/VBox" unique_id=886929936]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Export All to SpriteFrames"
 
-[node name="export_to_pngs" type="Button" parent="h_split_container/margin_container/v_box" unique_id=373774286]
+[node name="ExportPNGs" type="Button" parent="HSplitContainer/SettingContainer/VBox" unique_id=373774286]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Export All to PNGs"
 
-[node name="margin_container_2" type="MarginContainer" parent="h_split_container" unique_id=943521314]
+[node name="ImportContainer" type="MarginContainer" parent="HSplitContainer" unique_id=943521314]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 8
@@ -126,17 +131,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="h_box_container" type="HBoxContainer" parent="h_split_container/margin_container_2" unique_id=1236300492]
-layout_mode = 2
-
-[node name="spritesheet_container" type="BoxContainer" parent="h_split_container/margin_container_2/h_box_container" unique_id=18772460]
-unique_name_in_owner = true
+[node name="ImportList" type="BoxContainer" parent="HSplitContainer/ImportContainer" unique_id=18772460]
 layout_mode = 2
 size_flags_horizontal = 3
 vertical = true
 
-[node name="open_dialog" type="FileDialog" parent="." unique_id=542802301]
-unique_name_in_owner = true
+[node name="OpenDialog" type="FileDialog" parent="." unique_id=542802301]
 disable_3d = true
 oversampling_override = 1.0
 title = "Open File(s)"
@@ -149,8 +149,7 @@ folder_creation_enabled = false
 favorites_enabled = false
 recent_list_enabled = false
 
-[node name="save_dialog" type="FileDialog" parent="." unique_id=24363397]
-unique_name_in_owner = true
+[node name="SaveDialog" type="FileDialog" parent="." unique_id=24363397]
 disable_3d = true
 oversampling_override = 1.0
 initial_position = 4
@@ -163,8 +162,7 @@ recent_list_enabled = false
 option_0/name = "Compressed"
 option_0/default = 1
 
-[node name="save_pngs_dialog" type="FileDialog" parent="." unique_id=1325887618]
-unique_name_in_owner = true
+[node name="SavePNGsDialog" type="FileDialog" parent="." unique_id=1325887618]
 disable_3d = true
 oversampling_override = 1.0
 title = "Open a Directory"
@@ -176,16 +174,16 @@ use_native_dialog = true
 favorites_enabled = false
 recent_list_enabled = false
 
-[connection signal="value_changed" from="h_split_container/margin_container/v_box/import_options/fps_box" to="." method="_on_fps_box_value_changed"]
-[connection signal="toggled" from="h_split_container/margin_container/v_box/import_options/looping" to="." method="_on_looping_toggled"]
-[connection signal="toggled" from="h_split_container/margin_container/v_box/import_options/path_prefix" to="." method="_on_path_prefix_toggled"]
-[connection signal="dropped_spritesheet" from="h_split_container/margin_container/v_box/import_spritesheets" to="." method="import_spritesheet"]
-[connection signal="pressed" from="h_split_container/margin_container/v_box/import_spritesheets" to="." method="_on_import_spritesheets_pressed"]
-[connection signal="toggled" from="h_split_container/margin_container/v_box/clear_on_export" to="." method="_on_clear_on_export_toggled"]
-[connection signal="toggled" from="h_split_container/margin_container/v_box/filter_clips" to="." method="_on_filter_clips_toggled"]
-[connection signal="toggled" from="h_split_container/margin_container/v_box/merge_spritesheets" to="." method="_on_merge_spritesheets_toggled"]
-[connection signal="pressed" from="h_split_container/margin_container/v_box/export_to_spriteframes" to="." method="_on_export_to_spriteframes_pressed"]
-[connection signal="pressed" from="h_split_container/margin_container/v_box/export_to_pngs" to="." method="_on_export_to_pngs_pressed"]
-[connection signal="files_selected" from="open_dialog" to="." method="_on_open_dialog_files_selected"]
-[connection signal="file_selected" from="save_dialog" to="." method="_on_save_dialog_file_selected"]
-[connection signal="dir_selected" from="save_pngs_dialog" to="." method="_on_save_pngs_dialog_dir_selected"]
+[connection signal="value_changed" from="HSplitContainer/SettingContainer/VBox/ImportOptions/FPSBox" to="." method="_on_fps_box_value_changed"]
+[connection signal="toggled" from="HSplitContainer/SettingContainer/VBox/ImportOptions/Looping" to="." method="_on_looping_toggled"]
+[connection signal="toggled" from="HSplitContainer/SettingContainer/VBox/ImportOptions/UsePathPrefix" to="." method="_on_path_prefix_toggled"]
+[connection signal="dropped_spritesheet" from="HSplitContainer/SettingContainer/VBox/ImportSpritesheet" to="." method="import_spritesheet"]
+[connection signal="pressed" from="HSplitContainer/SettingContainer/VBox/ImportSpritesheet" to="." method="_on_import_spritesheets_pressed"]
+[connection signal="toggled" from="HSplitContainer/SettingContainer/VBox/ClearAfterExport" to="." method="_on_clear_on_export_toggled"]
+[connection signal="toggled" from="HSplitContainer/SettingContainer/VBox/FilterEdges" to="." method="_on_filter_clips_toggled"]
+[connection signal="toggled" from="HSplitContainer/SettingContainer/VBox/MergeSpritesheets" to="." method="_on_merge_spritesheets_toggled"]
+[connection signal="pressed" from="HSplitContainer/SettingContainer/VBox/ExportSpriteFrames" to="." method="_on_export_to_spriteframes_pressed"]
+[connection signal="pressed" from="HSplitContainer/SettingContainer/VBox/ExportPNGs" to="." method="_on_export_to_pngs_pressed"]
+[connection signal="files_selected" from="OpenDialog" to="." method="_on_open_dialog_files_selected"]
+[connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]
+[connection signal="dir_selected" from="SavePNGsDialog" to="." method="_on_save_pngs_dialog_dir_selected"]

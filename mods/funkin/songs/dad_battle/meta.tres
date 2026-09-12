@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://comnwrlg3bck2"]
+
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://engine/gameplay/characters/health_icon.gd" id="1_51ii3"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://engine/gameplay/songs/metadata.gd" id="1_bsbrc"]
+[ext_resource type="Texture2D" uid="uid://c8gwllfuq3f1a" path="res://mods/funkin/characters/dad/icon.png" id="2_nnwev"]
+
+[sub_resource type="Resource" id="Resource_myabr"]
+script = ExtResource("1_51ii3")
+texture = ExtResource("2_nnwev")
+texture_frames = Vector2i(1, 1)
+color = Color(0.686275, 0.4, 0.807843, 1)
+metadata/_custom_type_script = "uid://b7lu04jsahckp"
+
+[resource]
+script = ExtResource("1_bsbrc")
+display_name = &"Dad Battle"
+icon = SubResource("Resource_myabr")
+difficulties = ["easy", "normal", "hard", "erect", "nightmare"]
+difficulty_song_overrides = Dictionary[String, StringName]({
+"erect": &"dad_battle_erect",
+"nightmare": &"dad_battle_erect"
+})

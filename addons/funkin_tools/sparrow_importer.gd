@@ -4,10 +4,10 @@ extends Node
 
 const SPARROW_IMPORTER_SPRITESHEET: PackedScene = preload("uid://eiv8nrtiovmp")
 
-@onready var open_dialog: FileDialog = %open_dialog
-@onready var save_dialog: FileDialog = %save_dialog
-@onready var save_pngs_dialog: FileDialog = %save_pngs_dialog
-@onready var spritesheet_container: BoxContainer = %spritesheet_container
+@export var open_dialog: FileDialog
+@export var save_dialog: FileDialog
+@export var save_pngs_dialog: FileDialog
+@export var spritesheet_container: BoxContainer
 
 var import_framerate: float = 24.0
 var import_looping: bool = false
@@ -130,30 +130,30 @@ func import_spritesheet(path: String) -> void:
 	imported_list.set(path, imported_frames)
 
 	var panel: PanelContainer = SPARROW_IMPORTER_SPRITESHEET.instantiate()
-	var spritesheet_label: Label = panel.get_node(^"%spritesheet_label")
+	var spritesheet_label: Label = panel.get_node(^"%NameLabel")
 	spritesheet_label.text = path.replace("res://", "")
 
-	var fps_box: SpinBox = panel.get_node(^"%fps_box")
+	var fps_box: SpinBox = panel.get_node(^"%FPSBox")
 	fps_box.value = import_framerate
 	fps_box.value_changed.connect(func(value: float) -> void:
 		for animation: String in imported_frames.get_animation_names():
 			imported_frames.set_animation_speed(animation, value)
 	)
 
-	var looping_checkbox: CheckBox = panel.get_node(^"%looping_checkbox")
+	var looping_checkbox: CheckBox = panel.get_node(^"%Looping")
 	looping_checkbox.button_pressed = import_looping
 	looping_checkbox.toggled.connect(func(value: bool) -> void:
 		for animation: String in imported_frames.get_animation_names():
 			imported_frames.set_animation_loop(animation, value)
 	)
 
-	var path_prefix: CheckBox = panel.get_node(^"%path_prefix")
+	var path_prefix: CheckBox = panel.get_node(^"%UsePathPrefix")
 	path_prefix.button_pressed = import_path_prefix
 	path_prefix.toggled.connect(func(value: bool) -> void:
 		imported_frames.set_meta(&"path_prefix", value)
 	)
 
-	var remove_button: Button = panel.get_node(^"%remove_button")
+	var remove_button: Button = panel.get_node(^"%RemoveButton")
 	remove_button.pressed.connect(func() -> void:
 		panel.queue_free()
 		imported_list.erase(path)

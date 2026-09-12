@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b6ejs2wvgt8fc" path="res://addons/funkin_tools/sparrow_importer.tscn" id="1_6xjsh"]
 
-[node name="main_screen" type="TabContainer" unique_id=1267126330]
+[node name="MainScreen" type="TabContainer" unique_id=1267126330]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

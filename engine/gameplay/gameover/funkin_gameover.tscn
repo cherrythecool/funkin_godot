@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://c05dah5aarqg8"]
+
+[ext_resource type="Script" uid="uid://dxe2rk2ymwaek" path="res://engine/gameplay/gameover/funkin_gameover.gd" id="1_drfcy"]
+[ext_resource type="AudioStream" uid="uid://dj3krjnstguwg" path="res://engine/gameplay/characters/bf/gameover/theme.ogg" id="2_rrri4"]
+[ext_resource type="Script" uid="uid://b1ln7ad72xey4" path="res://engine/gameplay/funkin_camera_2d.gd" id="2_wio1r"]
+[ext_resource type="AudioStream" uid="uid://m36stqbwyc5k" path="res://engine/gameplay/characters/bf/gameover/on_death.ogg" id="3_3j1mk"]
+[ext_resource type="AudioStream" uid="uid://cglpk5tuq0rha" path="res://engine/gameplay/characters/bf/gameover/retry.ogg" id="3_x0mbf"]
+
+[node name="FunkinGameOver" type="Node2D" unique_id=548554929 node_paths=PackedStringArray("camera", "music", "on_death", "retry", "timer_initial_focus", "timer_fade_out_delay")]
+script = ExtResource("1_drfcy")
+camera = NodePath("Camera2D")
+music = NodePath("Sounds/Music")
+on_death = NodePath("Sounds/OnDeath")
+retry = NodePath("Sounds/Retry")
+timer_initial_focus = NodePath("Timers/InitialFocus")
+timer_fade_out_delay = NodePath("Timers/FadeOutDelay")
+
+[node name="Sounds" type="Node" parent="." unique_id=209263440]
+
+[node name="Music" type="AudioStreamPlayer" parent="Sounds" unique_id=1055192286]
+stream = ExtResource("2_rrri4")
+bus = &"Music"
+parameters/looping = true
+
+[node name="OnDeath" type="AudioStreamPlayer" parent="Sounds" unique_id=692021416]
+stream = ExtResource("3_3j1mk")
+bus = &"SFX"
+parameters/looping = false
+
+[node name="Retry" type="AudioStreamPlayer" parent="Sounds" unique_id=1216352305]
+stream = ExtResource("3_x0mbf")
+bus = &"SFX"
+parameters/looping = false
+
+[node name="Timers" type="Node" parent="." unique_id=1464369602]
+
+[node name="InitialFocus" type="Timer" parent="Timers" unique_id=924066918]
+wait_time = 0.5
+one_shot = true
+
+[node name="FadeOutDelay" type="Timer" parent="Timers" unique_id=893372256]
+wait_time = 0.7
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1264412517]
+position = Vector2(640, 360)
+script = ExtResource("2_wio1r")
+position_lerps = false
+zoom_lerps = false
+bumps = false
+metadata/_custom_type_script = "uid://b1ln7ad72xey4"

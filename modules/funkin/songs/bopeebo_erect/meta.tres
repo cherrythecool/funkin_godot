@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://djsvc13ty8i26"]
-
-[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://core/gameplay/songs/metadata.gd" id="2_bcala"]
-
-[resource]
-script = ExtResource("2_bcala")
-display_name = &"Bopeebo"
-mix = &"Erect"

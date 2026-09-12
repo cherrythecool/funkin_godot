@@ -1,0 +1,440 @@
+[gd_scene format=3 uid="uid://cxk008iuw4n7u"]
+
+[ext_resource type="Script" uid="uid://dno3ea8v3s7gx" path="res://mods/funkin/menus/title_screen/title_screen.gd" id="1_0m8ln"]
+[ext_resource type="SpriteFrames" uid="uid://dkgusfub7fbij" path="res://mods/funkin/menus/title_screen/gf.res" id="1_ii0wr"]
+[ext_resource type="Material" uid="uid://bo61teq831cd6" path="res://mods/funkin/menus/title_screen/hue_shift.tres" id="2_grdy1"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="3_s2rvo"]
+[ext_resource type="SpriteFrames" uid="uid://srbxpow67jf1" path="res://mods/funkin/menus/title_screen/logo.res" id="5_nv456"]
+[ext_resource type="SpriteFrames" uid="uid://diaqnypewr3ov" path="res://mods/funkin/menus/title_screen/enter.res" id="6_hraot"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://engine/common/alphabet/alphabet.gd" id="7_al1xt"]
+[ext_resource type="Texture2D" uid="uid://qqx4a0cwgl4s" path="res://icon.svg" id="8_xwi85"]
+[ext_resource type="Material" uid="uid://h6uy4lto3tyx" path="res://engine/common/shaders/blend_additive.tres" id="9_uoi2b"]
+
+[sub_resource type="Animation" id="Animation_gpcxv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainText:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainText:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GodotLogo:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_0iyna"]
+resource_name = "intro"
+length = 16.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainText:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["", "cherrythecool", "cherrythecool
+presents", "", "made with", "made with
+godot", "", "!random", "!keep", "!randomall", "", "Funkin'", "Funkin'
+Godot", "Funkin'
+Godot
+Framework", ""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainText:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 5, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -72), Vector2(0, -35.5), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GodotLogo:visible")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v06vg"]
+_data = {
+&"RESET": SubResource("Animation_gpcxv"),
+&"intro": SubResource("Animation_0iyna")
+}
+
+[sub_resource type="Animation" id="Animation_6rots"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"gfDance"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_j1s0s"]
+resource_name = "dance_left"
+length = 0.583338
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"gfDance"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.583333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.583333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_mh840"]
+resource_name = "dance_right"
+length = 0.583338
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"gfDance"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.583333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [15, 29]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.583333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j25c3"]
+_data = {
+&"RESET": SubResource("Animation_6rots"),
+&"dance_left": SubResource("Animation_j1s0s"),
+&"dance_right": SubResource("Animation_mh840")
+}
+
+[sub_resource type="Animation" id="Animation_vg1w0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Press Enter to Begin"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_lm570"]
+resource_name = "loop"
+length = 0.250004
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Press Enter to Begin"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qdiad"]
+resource_name = "press"
+length = 0.33333778
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"ENTER PRESSED"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3333336),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4274r"]
+_data = {
+&"RESET": SubResource("Animation_vg1w0"),
+&"loop": SubResource("Animation_lm570"),
+&"press": SubResource("Animation_qdiad")
+}
+
+[node name="TitleScreen" type="Node2D" unique_id=610167585 node_paths=PackedStringArray("post_intro", "girlfriend_animation", "logo_sprite", "enter_animation", "flash", "intro_sequence", "intro_animation", "intro_alphabet")]
+script = ExtResource("1_0m8ln")
+randomized_lines = Array[String](["rate five--pls no blam", "women are real--this is official", "better than geometry dash--fight me robtop", "this is a god damn prototype--we workin on it okay", "newgrounds--forever", "refined taste in music--if i say so myself", "good bye--my penis", "fashionably late--but here it is", "yooooooooooo--yooooooooo", "pico funny--pico funny", "updates each friday--on time every time", "cussing--we have it", "pico says--trans rights", "parental advisory--explicit content", "to enable pen pressure--disable windows ink", "godot--or something", "gabriel--ultrakill", "a release?--what's that?", "listen to--femtanyl", "sub to--technoblade", "i'm so--vslicey", "#include <stdio.h>----int main(void) {--    puts(\"Hello world!\")--} // c program in fnf text", "cd--44.1khz--everyday", "opinionated--funkin' distro", "how to--exit vim?-- -- --:q! ?", "gdscript is--my life", "welcome to--the rewrite", "funkin module--more like--fuckin' uhm", "what the--fuck godot???"])
+hue_shift_material = ExtResource("2_grdy1")
+post_intro = NodePath("AfterIntro")
+girlfriend_animation = NodePath("AfterIntro/GF/AnimationPlayer")
+logo_sprite = NodePath("AfterIntro/Logo/Sprite")
+enter_animation = NodePath("AfterIntro/Enter/AnimationPlayer")
+flash = NodePath("Flash")
+intro_sequence = NodePath("Intro")
+intro_animation = NodePath("Intro/AnimationPlayer")
+intro_alphabet = NodePath("Intro/MainText")
+
+[node name="Intro" type="Node2D" parent="." unique_id=1181948435]
+position = Vector2(640, 360)
+
+[node name="GodotLogo" type="Sprite2D" parent="Intro" unique_id=2102314791]
+visible = false
+position = Vector2(0, 200)
+scale = Vector2(2, 2)
+texture = ExtResource("8_xwi85")
+
+[node name="MainText" type="Node2D" parent="Intro" unique_id=828383561]
+script = ExtResource("7_al1xt")
+centered = true
+horizontal_alignment = "Center"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Intro" unique_id=233742057]
+callback_mode_process = 2
+libraries/ = SubResource("AnimationLibrary_v06vg")
+
+[node name="AfterIntro" type="Node2D" parent="." unique_id=1918716990]
+visible = false
+
+[node name="GF" type="Node2D" parent="AfterIntro" unique_id=841461104]
+position = Vector2(891, 373)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="AfterIntro/GF" unique_id=1022928287]
+material = ExtResource("2_grdy1")
+sprite_frames = ExtResource("1_ii0wr")
+animation = &"gfDance"
+script = ExtResource("3_s2rvo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AfterIntro/GF" unique_id=201242509]
+libraries/ = SubResource("AnimationLibrary_j25c3")
+
+[node name="Logo" type="Node2D" parent="AfterIntro" unique_id=741380354]
+position = Vector2(354, 246)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="AfterIntro/Logo" unique_id=681811415]
+material = ExtResource("2_grdy1")
+sprite_frames = ExtResource("5_nv456")
+animation = &"bump"
+script = ExtResource("3_s2rvo")
+
+[node name="Enter" type="Node2D" parent="AfterIntro" unique_id=497100013]
+position = Vector2(805, 636)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="AfterIntro/Enter" unique_id=1680006475]
+material = ExtResource("2_grdy1")
+sprite_frames = ExtResource("6_hraot")
+animation = &"Press Enter to Begin"
+frame = 8
+script = ExtResource("3_s2rvo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AfterIntro/Enter" unique_id=1284167027]
+libraries/ = SubResource("AnimationLibrary_4274r")
+autoplay = &"loop"
+
+[node name="Flash" type="ColorRect" parent="." unique_id=450789777]
+material = ExtResource("9_uoi2b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true

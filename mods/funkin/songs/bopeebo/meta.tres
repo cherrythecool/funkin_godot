@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="SongMetadata" format=3 uid="uid://c5d47mbdc14ja"]
+
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://engine/gameplay/characters/health_icon.gd" id="1_i8til"]
+[ext_resource type="Script" uid="uid://3bi6wwv6us1w" path="res://engine/gameplay/songs/metadata.gd" id="1_ubbcs"]
+[ext_resource type="Texture2D" uid="uid://c8gwllfuq3f1a" path="res://mods/funkin/characters/dad/icon.png" id="2_tnkgv"]
+
+[sub_resource type="Resource" id="Resource_78bgo"]
+script = ExtResource("1_i8til")
+texture = ExtResource("2_tnkgv")
+texture_frames = Vector2i(1, 1)
+color = Color(0.686275, 0.4, 0.807843, 1)
+metadata/_custom_type_script = "uid://b7lu04jsahckp"
+
+[resource]
+script = ExtResource("1_ubbcs")
+display_name = &"Bopeebo"
+icon = SubResource("Resource_78bgo")
+difficulties = ["easy", "normal", "hard", "erect", "nightmare"]
+difficulty_song_overrides = Dictionary[String, StringName]({
+"erect": &"bopeebo_erect",
+"nightmare": &"bopeebo_erect"
+})

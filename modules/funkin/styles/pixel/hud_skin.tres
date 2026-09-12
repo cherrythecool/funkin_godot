@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="HUDSkin" format=3 uid="uid://bx66ixfj76oix"]
-
-[ext_resource type="Script" uid="uid://bwjjpqxupvxcc" path="res://core/huds/hud_skin.gd" id="1_nl67s"]
-
-[resource]
-script = ExtResource("1_nl67s")
-countdown_textures = null
-countdown_sounds = null
-metadata/_custom_type_script = "uid://bwjjpqxupvxcc"

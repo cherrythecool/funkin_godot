@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://8ynd81bqjpe8"]
+
+[ext_resource type="Script" uid="uid://cfoo44n1adnya" path="res://engine/gameplay/cutscenes/video_cutscene.gd" id="1_q08p3"]
+
+[node name="VideoExample" type="CanvasLayer" unique_id=1576883825 node_paths=PackedStringArray("video_player")]
+layer = 32
+script = ExtResource("1_q08p3")
+video_player = NodePath("VideoPlayer")
+
+[node name="VideoPlayer" type="VideoStreamPlayer" parent="." unique_id=1172277455]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand = true
+
+[connection signal="finished" from="VideoPlayer" to="." method="finish"]

@@ -1,0 +1,426 @@
+[gd_scene format=3 uid="uid://dcf86iwg6mn3d"]
+
+[ext_resource type="Script" uid="uid://df3do7nvg4as7" path="res://mods/funkin/menus/story_menu/story_menu.gd" id="1_el8f4"]
+[ext_resource type="Script" uid="uid://bfydji5l6juhk" path="res://mods/funkin/menus/story_menu/props_container.gd" id="3_64j2x"]
+[ext_resource type="Script" uid="uid://ceghwb3yjt8wp" path="res://mods/funkin/menus/story_menu/songs_label.gd" id="3_552ey"]
+[ext_resource type="Texture2D" uid="uid://vbft4ijb0s4b" path="res://mods/funkin/menus/story_menu/weeks/tutorial.png" id="4_3r44s"]
+[ext_resource type="Texture2D" uid="uid://bsjowh7qqed78" path="res://mods/funkin/menus/story_menu/difficulties/normal.png" id="4_j0vh7"]
+[ext_resource type="Script" uid="uid://bp07frgyvgscl" path="res://mods/funkin/menus/story_menu/weeks.gd" id="4_owtj4"]
+[ext_resource type="Texture2D" uid="uid://g4kew3bfwjeq" path="res://mods/funkin/menus/story_menu/weeks/week1.png" id="5_1dfdl"]
+[ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://engine/common/fonts/vcr_osd_mono.ttf" id="5_4wpxw"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="5_61vqd"]
+[ext_resource type="SpriteFrames" uid="uid://dgm7jwe1ek04e" path="res://mods/funkin/menus/story_menu/difficulties/arrows.res" id="6_kynlf"]
+[ext_resource type="Script" uid="uid://btmma2a3qu1e6" path="res://mods/funkin/menus/story_menu/week_node.gd" id="6_qh5s5"]
+[ext_resource type="PackedScene" uid="uid://cl6aifhbol57q" path="res://mods/funkin/menus/story_menu/props/bf/bf.tscn" id="8_2yyv5"]
+[ext_resource type="Script" uid="uid://cy73q76dmhvie" path="res://mods/funkin/menus/story_menu/story_week_props.gd" id="9_fjedh"]
+[ext_resource type="PackedScene" uid="uid://bmjlw8331xjs2" path="res://mods/funkin/menus/story_menu/props/dad/dad.tscn" id="12_ydl1e"]
+[ext_resource type="PackedScene" uid="uid://dltbn2kviddy8" path="res://mods/funkin/menus/story_menu/props/gf/gf.tscn" id="13_h6fec"]
+[ext_resource type="Script" uid="uid://y50dwtv7v34j" path="res://mods/funkin/menus/story_menu/difficulties/difficulties.gd" id="13_w5bhr"]
+[ext_resource type="Texture2D" uid="uid://ci8xeupe8nkh6" path="res://mods/funkin/menus/story_menu/weeks/week4.png" id="14_4twhc"]
+[ext_resource type="Texture2D" uid="uid://butmkemg2qi0g" path="res://mods/funkin/menus/story_menu/weeks/week2.png" id="14_6iroa"]
+[ext_resource type="PackedScene" uid="uid://bl4osqppv4p3j" path="res://mods/funkin/menus/story_menu/props/mom/mom.tscn" id="15_h4pin"]
+[ext_resource type="PackedScene" uid="uid://eeh8q36snnag" path="res://mods/funkin/menus/story_menu/props/spooky/spooky.tscn" id="15_nakdl"]
+[ext_resource type="Texture2D" uid="uid://cebpbhg2jc6ic" path="res://mods/funkin/menus/story_menu/weeks/week3.png" id="16_rx72u"]
+[ext_resource type="PackedScene" uid="uid://hs0eb1ifd534" path="res://mods/funkin/menus/story_menu/props/pico/pico.tscn" id="17_5noim"]
+[ext_resource type="Texture2D" uid="uid://dxbb2esycsfwo" path="res://mods/funkin/menus/story_menu/difficulties/easy.png" id="22_8au17"]
+[ext_resource type="Texture2D" uid="uid://b4sb7d2chuirx" path="res://mods/funkin/menus/story_menu/difficulties/hard.png" id="24_f5xgx"]
+[ext_resource type="Texture2D" uid="uid://bp5mka3gbwa88" path="res://mods/funkin/menus/story_menu/difficulties/erect.png" id="25_hkev1"]
+[ext_resource type="SpriteFrames" uid="uid://hi7e85v5yo4a" path="res://mods/funkin/menus/story_menu/difficulties/nightmare.res" id="27_hkev1"]
+
+[sub_resource type="Gradient" id="Gradient_f5xgx"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hkev1"]
+gradient = SubResource("Gradient_f5xgx")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kq7xu"]
+font = ExtResource("5_4wpxw")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_uaspw"]
+font = ExtResource("5_4wpxw")
+font_size = 32
+font_color = Color(0.929688, 0.403107, 0.625258, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c4fjc"]
+font = ExtResource("5_4wpxw")
+font_size = 32
+font_color = Color(0.929688, 0.403107, 0.625258, 1)
+
+[sub_resource type="Resource" id="Resource_imiqu"]
+script = ExtResource("9_fjedh")
+center = ExtResource("8_2yyv5")
+right = ExtResource("13_h6fec")
+
+[sub_resource type="Resource" id="Resource_ru6mx"]
+script = ExtResource("9_fjedh")
+left = ExtResource("12_ydl1e")
+center = ExtResource("8_2yyv5")
+right = ExtResource("13_h6fec")
+
+[sub_resource type="Resource" id="Resource_5noim"]
+script = ExtResource("9_fjedh")
+left = ExtResource("15_nakdl")
+center = ExtResource("8_2yyv5")
+right = ExtResource("13_h6fec")
+
+[sub_resource type="Resource" id="Resource_nlhku"]
+script = ExtResource("9_fjedh")
+left = ExtResource("17_5noim")
+center = ExtResource("8_2yyv5")
+right = ExtResource("13_h6fec")
+
+[sub_resource type="Resource" id="Resource_4twhc"]
+script = ExtResource("9_fjedh")
+left = ExtResource("15_h4pin")
+center = ExtResource("8_2yyv5")
+right = ExtResource("13_h6fec")
+
+[sub_resource type="Gradient" id="Gradient_nlhku"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5oacg"]
+gradient = SubResource("Gradient_nlhku")
+fill_to = Vector2(0, 1)
+
+[node name="StoryMenu" type="Control" unique_id=1700712844 node_paths=PackedStringArray("songs", "songs_label", "difficulties", "weeks", "props", "high_score", "week_name", "week_color", "week_gradient", "week_flash_timer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_el8f4")
+songs = NodePath("BottomArea/Tracks")
+songs_label = NodePath("BottomArea/Tracks/Songs")
+difficulties = NodePath("BottomArea/Difficulties")
+weeks = NodePath("BottomArea/WeeksContainer")
+props = NodePath("Props")
+high_score = NodePath("Header/HighScore")
+week_name = NodePath("Header/WeekName")
+week_color = NodePath("WeekBackground")
+week_gradient = NodePath("WeekGradient")
+week_flash_timer = NodePath("WeekFlashTimer")
+metadata/_edit_lock_ = true
+
+[node name="WeekFlashTimer" type="Timer" parent="." unique_id=1680428688]
+wait_time = 0.055
+
+[node name="BlackBackground" type="ColorRect" parent="." unique_id=2052416452]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="WeekBackground" type="ColorRect" parent="." unique_id=1790402908]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 56.0
+offset_bottom = -264.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.9764706, 0.8117647, 0.31764707, 1)
+
+[node name="Props" type="Control" parent="." unique_id=787446284 node_paths=PackedStringArray("backdrop", "left", "center", "right")]
+clip_contents = true
+anchors_preset = 0
+offset_top = 56.0
+offset_right = 1280.0
+offset_bottom = 456.0
+script = ExtResource("3_64j2x")
+backdrop = NodePath("Background")
+left = NodePath("Left")
+center = NodePath("Center")
+right = NodePath("Right")
+
+[node name="Background" type="Node2D" parent="Props" unique_id=1582750622]
+position = Vector2(640, 200)
+
+[node name="Left" type="Node2D" parent="Props" unique_id=1091075869]
+position = Vector2(280, 200)
+
+[node name="Center" type="Node2D" parent="Props" unique_id=1118708715]
+position = Vector2(640, 200)
+
+[node name="Right" type="Node2D" parent="Props" unique_id=1855682713]
+position = Vector2(1000, 200)
+
+[node name="WeekGradient" type="TextureRect" parent="." unique_id=406475865]
+modulate = Color(0.9764706, 0.8117647, 0.31764707, 1)
+layout_mode = 0
+offset_top = 440.0
+offset_right = 1280.0
+offset_bottom = 456.0
+texture = SubResource("GradientTexture2D_hkev1")
+expand_mode = 1
+
+[node name="Left" type="TextureRect" parent="WeekGradient" unique_id=2002696452]
+layout_mode = 0
+offset_top = -400.0
+offset_right = 400.0
+offset_bottom = -384.0
+rotation = 1.5707964
+pivot_offset = Vector2(0, 16)
+texture = SubResource("GradientTexture2D_hkev1")
+expand_mode = 1
+
+[node name="Right" type="TextureRect" parent="WeekGradient" unique_id=1029494885]
+layout_mode = 0
+offset_left = 1280.0
+offset_right = 1680.0
+offset_bottom = 16.0
+rotation = -1.5707964
+pivot_offset = Vector2(0, 16)
+texture = SubResource("GradientTexture2D_hkev1")
+expand_mode = 1
+
+[node name="Header" type="Control" parent="." unique_id=102546961]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+
+[node name="Background" type="ColorRect" parent="Header" unique_id=1348824300]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 56.0
+color = Color(0, 0, 0, 1)
+
+[node name="HighScore" type="Label" parent="Header" unique_id=1403253543]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = 631.0
+grow_vertical = 2
+text = "High Score: N/A"
+label_settings = SubResource("LabelSettings_kq7xu")
+vertical_alignment = 1
+
+[node name="WeekName" type="Label" parent="Header" unique_id=236678733]
+modulate = Color(1, 1, 1, 0.75)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -649.0
+offset_right = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_kq7xu")
+horizontal_alignment = 2
+vertical_alignment = 1
+visible_characters_behavior = 1
+
+[node name="BottomArea" type="Control" parent="." unique_id=1165625928]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -264.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Tracks" type="Control" parent="BottomArea" unique_id=264472232]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 376.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BottomArea/Tracks" unique_id=1604576896]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 24.0
+offset_right = -4.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "TRACKS"
+label_settings = SubResource("LabelSettings_uaspw")
+horizontal_alignment = 1
+
+[node name="Songs" type="Label" parent="BottomArea/Tracks" unique_id=1991165176]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -198.0
+offset_right = -4.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_c4fjc")
+horizontal_alignment = 1
+max_lines_visible = 8
+script = ExtResource("3_552ey")
+
+[node name="timer" type="Timer" parent="BottomArea/Tracks/Songs" unique_id=1927057657]
+wait_time = 0.5
+autostart = true
+
+[node name="WeeksContainer" type="Control" parent="BottomArea" unique_id=288261092]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = 47.0
+offset_right = 200.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_owtj4")
+
+[node name="Tutorial" type="TextureRect" parent="BottomArea/WeeksContainer" unique_id=575870488]
+layout_mode = 0
+offset_right = 456.0
+offset_bottom = 82.0
+grow_horizontal = 2
+texture = ExtResource("4_3r44s")
+stretch_mode = 5
+script = ExtResource("6_qh5s5")
+songs = PackedStringArray("tutorial")
+difficulties = PackedStringArray("easy", "normal", "hard")
+display_name = &"Teaching Time"
+props = SubResource("Resource_imiqu")
+
+[node name="Week1" type="TextureRect" parent="BottomArea/WeeksContainer" unique_id=126895427]
+layout_mode = 0
+offset_top = 90.0
+offset_right = 456.0
+offset_bottom = 179.0
+grow_horizontal = 2
+texture = ExtResource("5_1dfdl")
+stretch_mode = 5
+script = ExtResource("6_qh5s5")
+songs = PackedStringArray("bopeebo", "fresh", "dad_battle")
+difficulties = PackedStringArray("easy", "normal", "hard", "erect", "nightmare")
+display_name = &"Daddy Dearest"
+props = SubResource("Resource_ru6mx")
+difficulty_suffixes = Dictionary[StringName, StringName]({
+&"erect": &"_erect",
+&"nightmare": &"_erect"
+})
+
+[node name="Week2" type="TextureRect" parent="BottomArea/WeeksContainer" unique_id=1760566944]
+layout_mode = 0
+offset_top = 191.0
+offset_right = 456.0
+offset_bottom = 280.0
+grow_horizontal = 2
+texture = ExtResource("14_6iroa")
+stretch_mode = 5
+script = ExtResource("6_qh5s5")
+songs = PackedStringArray("spookeez", "south", "monster")
+difficulties = PackedStringArray("easy", "normal", "hard")
+display_name = &"Spooky Month"
+props = SubResource("Resource_5noim")
+
+[node name="Week3" type="TextureRect" parent="BottomArea/WeeksContainer" unique_id=404453370]
+layout_mode = 0
+offset_top = 255.0
+offset_right = 456.0
+offset_bottom = 344.0
+grow_horizontal = 2
+texture = ExtResource("16_rx72u")
+stretch_mode = 5
+script = ExtResource("6_qh5s5")
+songs = PackedStringArray("pico", "philly_nice", "blammed")
+difficulties = PackedStringArray("easy", "normal", "hard", "erect", "nightmare")
+display_name = &"Pico"
+props = SubResource("Resource_nlhku")
+difficulty_suffixes = Dictionary[StringName, StringName]({
+&"erect": &"_erect",
+&"nightmare": &"_erect"
+})
+
+[node name="Week4" type="TextureRect" parent="BottomArea/WeeksContainer" unique_id=365844322]
+layout_mode = 0
+offset_top = 374.0
+offset_right = 456.0
+offset_bottom = 463.0
+texture = ExtResource("14_4twhc")
+stretch_mode = 5
+script = ExtResource("6_qh5s5")
+songs = PackedStringArray("satin_panties", "high", "milf")
+difficulties = PackedStringArray("easy", "normal", "hard")
+display_name = &"Mommy Must Murder"
+props = SubResource("Resource_4twhc")
+
+[node name="Difficulties" type="Control" parent="BottomArea" unique_id=1872210390 node_paths=PackedStringArray("weeks", "high_score", "left_arrow", "right_arrow", "difficulty_sprite", "animated_difficulty")]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -440.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("13_w5bhr")
+textures = Dictionary[StringName, Texture2D]({
+&"easy": ExtResource("22_8au17"),
+&"erect": ExtResource("25_hkev1"),
+&"hard": ExtResource("24_f5xgx"),
+&"normal": ExtResource("4_j0vh7")
+})
+sprite_frames = Dictionary[StringName, SpriteFrames]({
+&"nightmare": ExtResource("27_hkev1")
+})
+weeks = NodePath("../WeeksContainer")
+high_score = NodePath("../../Header/HighScore")
+left_arrow = NodePath("LeftArrow")
+right_arrow = NodePath("RightArrow")
+difficulty_sprite = NodePath("Difficulty")
+animated_difficulty = NodePath("Difficulty/AnimatedDifficulty")
+metadata/_edit_lock_ = true
+
+[node name="Difficulty" type="Sprite2D" parent="BottomArea/Difficulties" unique_id=418640635]
+position = Vector2(220, 96)
+texture = ExtResource("4_j0vh7")
+
+[node name="AnimatedDifficulty" type="AnimatedSprite2D" parent="BottomArea/Difficulties/Difficulty" unique_id=929830569]
+visible = false
+sprite_frames = ExtResource("27_hkev1")
+animation = &"idle"
+script = ExtResource("5_61vqd")
+
+[node name="LeftArrow" type="AnimatedSprite2D" parent="BottomArea/Difficulties" unique_id=1559551709]
+position = Vector2(32, 96)
+sprite_frames = ExtResource("6_kynlf")
+animation = &"leftIdle"
+script = ExtResource("5_61vqd")
+
+[node name="RightArrow" type="AnimatedSprite2D" parent="BottomArea/Difficulties" unique_id=1207021250]
+position = Vector2(408, 96)
+sprite_frames = ExtResource("6_kynlf")
+animation = &"rightIdle"
+script = ExtResource("5_61vqd")
+
+[node name="BlackGradient" type="TextureRect" parent="BottomArea" unique_id=247310096]
+layout_mode = 1
+offset_left = 376.0
+offset_right = 840.0
+offset_bottom = 29.0
+texture = SubResource("GradientTexture2D_5oacg")
+expand_mode = 1
+
+[connection signal="timeout" from="WeekFlashTimer" to="." method="_on_week_flash_timer_timeout"]
+[connection signal="timeout" from="BottomArea/Tracks/Songs/timer" to="BottomArea/Tracks/Songs" method="_tick"]

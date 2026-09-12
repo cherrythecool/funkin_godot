@@ -19,7 +19,7 @@ config/quit_on_go_back=false
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
-config/icon="res://icons/default/original.png"
+config/icon="res://engine/default_icon.png"
 
 [audio]
 
@@ -29,17 +29,17 @@ general/ios/mix_with_others=true
 
 [autoload]
 
-Global="*res://core/autoloads/global.gd"
-GlobalAudio="*res://core/autoloads/global_audio.tscn"
+Global="*res://engine/globals/global.gd"
+MenuAudio="*res://engine/globals/menu_sounds/menu_sounds.tscn"
 Conductor="*uid://djsxumpddydxq"
-Scores="*res://core/autoloads/scores.gd"
-Controls="*res://core/autoloads/controls.gd"
-ModuleManager="*uid://dubyatkw6h7m2"
+Scores="*res://engine/save/scores.gd"
+Controls="*res://engine/save/controls.gd"
+ModSwitcher="*uid://dubyatkw6h7m2"
 SoundTray="*uid://bhbryleu1jjq0"
 SceneManager="*uid://cmy8a7dh1kvs4"
-GameOverlay="*res://core/autoloads/debug_overlay.tscn"
-TouchControls="*res://core/autoloads/touch_controls/touch_controls.tscn"
-Settings="*res://core/autoloads/settings.gd"
+DebugOverlay="*res://engine/globals/debug_overlay/debug_overlay.tscn"
+TouchControls="*res://engine/gameplay/touch_controls/touch_controls.tscn"
+Settings="*res://engine/save/settings.gd"
 
 [debug]
 
@@ -58,8 +58,6 @@ window/vsync/vsync_mode=0
 
 movie_writer/video_quality=1.0
 movie_writer/ogv/encoding_speed=3
-naming/node_name_num_separator=2
-naming/node_name_casing=2
 
 [editor_plugins]
 
@@ -69,12 +67,12 @@ enabled=PackedStringArray("res://addons/funkin_tools/plugin.cfg", "res://addons/
 
 folder_colors={
 "res://addons/": "gray",
-"res://core/": "blue",
-"res://icons/": "teal",
-"res://modules/": "purple",
-"res://modules/funkin/": "red",
+"res://engine/": "blue",
+"res://mods/": "purple",
+"res://mods/funkin/": "red",
 "res://plans/": "yellow",
-"res://script_templates/": "orange"
+"res://script_templates/": "orange",
+"res://tools/": "green"
 }
 
 [global_group]

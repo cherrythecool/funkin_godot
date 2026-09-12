@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b1avobaxkcjon"]
+
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://engine/common/alphabet/alphabet.gd" id="1_50223"]
+[ext_resource type="Script" uid="uid://cocheymwvks4d" path="res://engine/fallback_screen.gd" id="1_xvti2"]
+
+[node name="FallbackScreen" type="Control" unique_id=1046240421 node_paths=PackedStringArray("keybind_display")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xvti2")
+keybind_display = NodePath("KeybindDisplay")
+
+[node name="Title" type="Node2D" parent="." unique_id=1084625390]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(24, 24)
+scale = Vector2(0.9, 0.9)
+script = ExtResource("1_50223")
+text = "the mod you tried to
+load could not be found!"
+metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
+
+[node name="Instructions" type="Node2D" parent="." unique_id=1151227495]
+position = Vector2(24, 196)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_50223")
+text = "open the mod switcher
+and try another mod
+
+or
+
+if you have no mods then get
+some and put them in the mods
+folder and restart the game!"
+metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
+
+[node name="KeybindDisplay" type="Node2D" parent="." unique_id=374559099]
+position = Vector2(24, 631)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_50223")
+text = "current mod: {MODULE}
+current keybind: {KEYBIND}"
+metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"

@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://jmkjkp1jvkpj"]
+
+[ext_resource type="Script" uid="uid://c7iq5ek2ivhku" path="res://mods/funkin/menus/options_menu/categories/interface.gd" id="1_lsu8b"]
+[ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://mods/funkin/menus/options_menu/options/checkbox/checkbox.gd" id="2_4cqv6"]
+[ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://engine/common/alphabet/alphabet.gd" id="3_p1may"]
+[ext_resource type="SpriteFrames" uid="uid://oksqh74ocs1w" path="res://mods/funkin/menus/options_menu/options/checkbox/checkbox.res" id="4_j1leb"]
+[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="5_7omr5"]
+[ext_resource type="Script" uid="uid://cvona80crsbei" path="res://mods/funkin/menus/options_menu/options/list.gd" id="7_a8kn0"]
+
+[node name="Performance" type="Node2D" unique_id=344179767 node_paths=PackedStringArray("options")]
+position = Vector2(-320, 0)
+script = ExtResource("1_lsu8b")
+options = [NodePath("VSync"), NodePath("FPSCap"), NodePath("PerformanceMode"), NodePath("ScaleWithDPI"), NodePath("PauseOnUnfocus")]
+max_distance = 0.0
+
+[node name="VSync" type="Node2D" parent="." unique_id=780994590 node_paths=PackedStringArray("alphabet", "checkbox")]
+position = Vector2(-126, -170)
+script = ExtResource("2_4cqv6")
+alphabet = NodePath("Label")
+checkbox = NodePath("Checkbox")
+key = &"vsync_enabled"
+
+[node name="Label" type="Node2D" parent="VSync" unique_id=1171053634]
+script = ExtResource("3_p1may")
+text = "vsync"
+centered = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="VSync" unique_id=182956059]
+position = Vector2(206, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_j1leb")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_7omr5")
+
+[node name="FPSCap" type="Node2D" parent="." unique_id=2011964035 node_paths=PackedStringArray("value_label")]
+position = Vector2(66, -79)
+script = ExtResource("7_a8kn0")
+key = &"max_fps"
+list = [0.0, 30.0, 60.0, 120.0, 144.0, 165.0, 240.0, 360.0, 1000.0]
+display_raw = false
+value_label = NodePath("Value")
+
+[node name="Label" type="Node2D" parent="FPSCap" unique_id=1836413960]
+position = Vector2(-140, 0)
+script = ExtResource("3_p1may")
+text = "fps cap:"
+centered = true
+
+[node name="Value" type="Node2D" parent="FPSCap" unique_id=1521074740]
+position = Vector2(68, -34)
+script = ExtResource("3_p1may")
+text = "< 0 >"
+
+[node name="PerformanceMode" type="Node2D" parent="." unique_id=677384584 node_paths=PackedStringArray("alphabet", "checkbox")]
+position = Vector2(133, 10)
+script = ExtResource("2_4cqv6")
+alphabet = NodePath("Label")
+checkbox = NodePath("Checkbox")
+key = &"performance_mode"
+
+[node name="Label" type="Node2D" parent="PerformanceMode" unique_id=732150428]
+script = ExtResource("3_p1may")
+text = "performance mode"
+centered = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="PerformanceMode" unique_id=2067246571]
+position = Vector2(462, 0.99999994)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_j1leb")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_7omr5")
+
+[node name="ScaleWithDPI" type="Node2D" parent="." unique_id=2031384203 node_paths=PackedStringArray("alphabet", "checkbox")]
+position = Vector2(66, 174)
+script = ExtResource("2_4cqv6")
+alphabet = NodePath("Label")
+checkbox = NodePath("Checkbox")
+key = &"scale_with_dpi"
+
+[node name="Label" type="Node2D" parent="ScaleWithDPI" unique_id=1469192814]
+script = ExtResource("3_p1may")
+text = "scale with dpi"
+centered = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="ScaleWithDPI" unique_id=665540961]
+position = Vector2(395, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_j1leb")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_7omr5")
+
+[node name="Note" type="Node2D" parent="ScaleWithDPI" unique_id=700873868]
+modulate = Color(1, 0, 0, 0.6509804)
+position = Vector2(445, -34)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("3_p1may")
+text = "(needs restart to take effect)"
+metadata/_custom_type_script = "uid://b6ydf4mbyjiwc"
+
+[node name="PauseOnUnfocus" type="Node2D" parent="." unique_id=1218604123 node_paths=PackedStringArray("alphabet", "checkbox")]
+position = Vector2(113, 268)
+script = ExtResource("2_4cqv6")
+alphabet = NodePath("Label")
+checkbox = NodePath("Checkbox")
+key = &"pause_when_unfocused"
+
+[node name="Label" type="Node2D" parent="PauseOnUnfocus" unique_id=1168870364]
+script = ExtResource("3_p1may")
+text = "pause on unfocus"
+centered = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="PauseOnUnfocus" unique_id=584308001]
+position = Vector2(439, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_j1leb")
+animation = &"selected"
+offset = Vector2(-5, -35)
+script = ExtResource("5_7omr5")
+
+[connection signal="animation_finished" from="VSync/Checkbox" to="VSync" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="PerformanceMode/Checkbox" to="PerformanceMode" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="ScaleWithDPI/Checkbox" to="ScaleWithDPI" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="PauseOnUnfocus/Checkbox" to="PauseOnUnfocus" method="_on_checkbox_animation_finished"]

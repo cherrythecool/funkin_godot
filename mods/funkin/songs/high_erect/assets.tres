@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://rfx7kkpm8dgo"]
+
+[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://engine/gameplay/songs/assets.gd" id="1_s1ghw"]
+[ext_resource type="PackedScene" uid="uid://cdxxht68lxv1a" path="res://mods/funkin/characters/mom/mom.tscn" id="2_s7w8c"]
+[ext_resource type="PackedScene" uid="uid://ctwq5qb8rpv66" path="res://mods/funkin/characters/bf/bf_car.tscn" id="3_p8syg"]
+[ext_resource type="PackedScene" uid="uid://cfd0vee7ua8k7" path="res://mods/funkin/characters/gf/gf_car.tscn" id="4_irxmp"]
+[ext_resource type="PackedScene" uid="uid://dvw6bjqx07lwq" path="res://mods/funkin/stages/limo_erect/limo_erect.tscn" id="5_s7w8c"]
+
+[resource]
+script = ExtResource("1_s1ghw")
+player = ExtResource("3_p8syg")
+spectator = ExtResource("4_irxmp")
+opponent = ExtResource("2_s7w8c")
+stage = ExtResource("5_s7w8c")
+metadata/_custom_type_script = ExtResource("1_s1ghw")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://bkpmothden5ls"]
+
+[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://engine/gameplay/songs/assets.gd" id="1_ruvv4"]
+[ext_resource type="PackedScene" uid="uid://dx13k6w54if1l" path="res://mods/funkin/characters/darnell/darnell.tscn" id="2_g4hj6"]
+[ext_resource type="PackedScene" uid="uid://dhtct6lrdao7r" path="res://mods/funkin/stages/philly_streets_erect/philly_streets_erect.tscn" id="3_2eaya"]
+
+[resource]
+script = ExtResource("1_ruvv4")
+opponent = ExtResource("2_g4hj6")
+stage = ExtResource("3_2eaya")
+metadata/_custom_type_script = "uid://dk2lxfhv5lvf4"
