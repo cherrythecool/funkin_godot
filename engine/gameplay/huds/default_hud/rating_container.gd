@@ -1,6 +1,7 @@
 extends Node2D
 
 
+@export var target: StringName = &"player"
 @export var rating_sprite: Sprite2D
 @export var combo_node: Node2D
 @export var difference_label: Label
@@ -40,16 +41,16 @@ func _on_hud_setup() -> void:
 		combo_node.texture_filter = hud_skin.combo_filter
 		combo_node.scale = hud_skin.combo_scale
 
-	if &"player" in game.strumlines:
-		var plr_strums := game.strumlines[&"player"]
-		plr_strums.note_hit.connect(_on_note_hit)
-		plr_strums.note_missed.connect(_on_note_missed)
+	if target in game.strumlines:
+		var strums := game.strumlines[target]
+		strums.note_hit.connect(_on_note_hit)
+		strums.note_missed.connect(_on_note_missed)
 
 
 func _on_note_hit(note: NoteData) -> void:
 	if note.state != NoteData.NoteState.ALIVE:
 		return
-	if game.strumlines[&"player"].cpu:
+	if game.strumlines[target].cpu:
 		return
 
 	var difference: float = Conductor.time - note.time
@@ -62,8 +63,8 @@ func _on_note_hit(note: NoteData) -> void:
 	if tween and tween.is_running():
 		tween.kill()
 
-	var rating := FunkinRating.new()
-	if rating_manager and rating_manager is FunkinRatingManager:
+	var rating := Rating.new()
+	if rating_manager:
 		rating = rating_manager.get_rating(absf(difference))
 	if rating_textures.has(rating.name):
 		rating_sprite.texture = rating_textures[rating.name]

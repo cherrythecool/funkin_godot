@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://b1ln7ad72xey4" path="res://engine/gameplay/funkin_camera_2d.gd" id="2_bdhmt"]
 [ext_resource type="Script" uid="uid://cvc0oj8twimgt" path="res://engine/gameplay/asset_loader.gd" id="2_vvk6n"]
 [ext_resource type="Script" uid="uid://co5jfkyqkhdq7" path="res://engine/gameplay/event_manager.gd" id="3_ovqck"]
-[ext_resource type="Script" uid="uid://dp70bbdhoqpo0" path="res://engine/gameplay/ratings/funkin_rating.gd" id="5_lfrn8"]
-[ext_resource type="Script" uid="uid://1dwo0trw3je2" path="res://engine/gameplay/ratings/funkin_rating_manager.gd" id="6_ur1sh"]
+[ext_resource type="Script" uid="uid://dp70bbdhoqpo0" path="res://engine/gameplay/ratings/rating.gd" id="5_lfrn8"]
+[ext_resource type="Script" uid="uid://1dwo0trw3je2" path="res://engine/gameplay/ratings/rating_manager.gd" id="6_ur1sh"]
 [ext_resource type="Script" uid="uid://3n2aou2bthat" path="res://engine/gameplay/notes/strumline_manager.gd" id="6_vvk6n"]
 
 [sub_resource type="Resource" id="Resource_5i0tg"]

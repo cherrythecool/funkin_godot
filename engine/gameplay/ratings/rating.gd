@@ -1,4 +1,4 @@
-class_name FunkinRating
+class_name Rating
 extends Resource
 
 
