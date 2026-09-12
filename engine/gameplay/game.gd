@@ -69,10 +69,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	# we set to inherit to bypass the automatic pausing
-	# from scene transitions (it makes the countdown &
-	# potentially other things a lil' wonky, mostly sounds)
-	process_mode = Node.PROCESS_MODE_INHERIT
+	randomize()
 
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	Input.use_accumulated_input = false

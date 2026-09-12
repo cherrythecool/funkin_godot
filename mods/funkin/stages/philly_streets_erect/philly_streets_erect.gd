@@ -36,10 +36,10 @@ func _ready() -> void:
 		mists.clear()
 
 	if game.player:
-		if not game.player.name.contains("pico"):
-			game.player.offset_camera_position(Vector2(-200.0, 50.0))
+		if game.player.name.contains("Pico"):
+			game.player.offset_camera_position(Vector2(-250.0, 50.0))
 		else:
-			game.player.offset_camera_position(Vector2(-250.0, 35.0))
+			game.player.offset_camera_position(Vector2(-250.0, 0.0))
 
 	if game.opponent:
 		game.opponent.offset_camera_position(Vector2(230.0, 75.0))

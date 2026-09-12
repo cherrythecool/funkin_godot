@@ -91,6 +91,7 @@ metadata/_custom_type_script = "uid://3n2aou2bthat"
 
 [node name="OpponentStrumline" type="Node" parent="." unique_id=1318353459]
 script = ExtResource("6_vvk6n")
+strumline = &"opponent"
 metadata/_custom_type_script = "uid://3n2aou2bthat"
 
 [node name="StageParent" type="Node2D" parent="." unique_id=899799479]

@@ -23,12 +23,15 @@ shader_parameter/saturation = -16.0
 shader_parameter/contrast = 0.0
 shader_parameter/brightness = -5.0
 
-[node name="PhillyTrainErect" type="Node2D" unique_id=617471028 node_paths=PackedStringArray("train_passes", "window", "train")]
+[node name="PhillyTrainErect" type="Node2D" unique_id=617471028 node_paths=PackedStringArray("train_passes", "window", "train", "spawn_spectator", "spawn_player", "spawn_opponent")]
 script = ExtResource("1_devln")
 train_passes = NodePath("TrainPasses")
 window = NodePath("Window/Sprite")
 train = NodePath("Train")
 light_colors = Array[Color]([Color(0.713726, 0.435294, 0.262745, 1), Color(0.196078, 0.603922, 0.427451, 1), Color(0.576471, 0.172549, 0.156863, 1), Color(0.14902, 0.388235, 0.67451, 1), Color(0.313726, 0.176471, 0.392157, 1)])
+spawn_spectator = NodePath("SpectatorSpawn")
+spawn_player = NodePath("PlayerSpawn")
+spawn_opponent = NodePath("OpponentSpawn")
 
 [node name="TrainPasses" type="AudioStreamPlayer" parent="." unique_id=696695998]
 stream = ExtResource("10_wnwyq")
