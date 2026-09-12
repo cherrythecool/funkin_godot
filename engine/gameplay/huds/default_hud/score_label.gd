@@ -19,7 +19,7 @@ func _on_hud_setup() -> void:
 
 
 func update_score_label() -> void:
-	if (not rating_manager) or (rating_manager is not FunkinRatingManager):
+	if not rating_manager:
 		return
 
 	var accuracy_string: String = "N/A"
