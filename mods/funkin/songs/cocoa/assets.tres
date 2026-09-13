@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://b62s07hsmb0cm"]
-
-[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://engine/gameplay/songs/assets.gd" id="1_0hytj"]
-[ext_resource type="PackedScene" uid="uid://bm0fb28jg0uki" path="res://mods/funkin/characters/parents_christmas/parents_christmas.tscn" id="1_db1q6"]
-
-[resource]
-script = ExtResource("1_0hytj")
-opponent = ExtResource("1_db1q6")
-metadata/_custom_type_script = "uid://dk2lxfhv5lvf4"

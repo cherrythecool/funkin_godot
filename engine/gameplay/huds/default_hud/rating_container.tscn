@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bw11x7hqfgd8j" path="res://engine/gameplay/huds/default_hud/rating_container.gd" id="1_pyogd"]
 [ext_resource type="Texture2D" uid="uid://cn6fmp8et8ktw" path="res://engine/gameplay/styles/default/ratings/marvelous.png" id="2_fejtq"]
 [ext_resource type="Texture2D" uid="uid://ds3g63uwcq4jw" path="res://engine/gameplay/styles/default/combo.png" id="3_uonfa"]
-[ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://mods/funkin/funkin.ttf" id="4_lmwkn"]
+[ext_resource type="FontFile" uid="uid://b5sq5n4iqxrih" path="res://engine/common/fonts/funkin.ttf" id="4_lmwkn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6egcm"]
 font = ExtResource("4_lmwkn")

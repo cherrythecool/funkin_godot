@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://b5sq5n4iqxrih"
-path="res://.godot/imported/funkin.ttf-8b8f610e827ded4127c0d58aaa9cf9a0.fontdata"
+path="res://.godot/imported/funkin.ttf-df404525be42f297ad444b527dc0039a.fontdata"
 
 [deps]
 
-source_file="res://mods/funkin/funkin.ttf"
-dest_files=["res://.godot/imported/funkin.ttf-8b8f610e827ded4127c0d58aaa9cf9a0.fontdata"]
+source_file="res://engine/common/fonts/funkin.ttf"
+dest_files=["res://.godot/imported/funkin.ttf-df404525be42f297ad444b527dc0039a.fontdata"]
 
 [params]
 

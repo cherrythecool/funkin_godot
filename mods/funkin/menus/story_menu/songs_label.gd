@@ -1,7 +1,7 @@
 extends Label
 
 
-@onready var timer: Timer = $timer
+@onready var timer: Timer = $Timer
 
 var state: SongLabelState = SongLabelState.WAITING_DOWN
 

@@ -3,4 +3,4 @@
 [ext_resource type="PackedScene" uid="uid://3rua2gpac5p8" path="res://mods/funkin/menus/freeplay_menu/freeplay_menu_bf.tscn" id="1_c4a4n"]
 
 [node name="FreeplayMenuPico" unique_id=1191603205 instance=ExtResource("1_c4a4n")]
-list = Array[String](["bopeebo_pico", "fresh_pico", "dad_battle_pico", "pico_pico", "philly_nice_pico", "blammed_pico", "darnell_erect"])
+list = Array[String](["bopeebo_pico", "fresh_pico", "dad_battle_pico"])
