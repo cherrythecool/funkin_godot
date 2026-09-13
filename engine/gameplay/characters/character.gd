@@ -2,8 +2,6 @@ class_name Character
 extends Node2D
 
 
-const SING_DIRECTIONS: PackedStringArray = ["left", "down", "up", "right"]
-
 @export_group("References")
 @export var strumline: StrumlineManager:
 	set(v):
@@ -28,6 +26,7 @@ const SING_DIRECTIONS: PackedStringArray = ["left", "down", "up", "right"]
 @export var swap_sing_animations: bool = false
 
 @export_group("Animations")
+@export var sing_directions: Array[String] = ["left", "down", "up", "right"]
 @export var dances: bool = true
 @export var dance_steps: Array[StringName] = [&"idle"]
 @export_range(0.0, 1024.0, 0.01) var sing_steps: float = 8.0
@@ -156,7 +155,7 @@ func _on_note_hit(note: NoteData) -> void:
 
 	sing_timer = 0.0
 
-	var direction: StringName = SING_DIRECTIONS[note.direction]
+	var direction := StringName(sing_directions[note.direction % sing_directions.size()])
 	if swap_sing_animations and swapped_directions.has(direction):
 		direction = swapped_directions.get(direction)
 
@@ -166,7 +165,7 @@ func _on_note_hit(note: NoteData) -> void:
 func _on_note_missed(note: NoteData) -> void:
 	sing_timer = 0.0
 
-	var direction: StringName = SING_DIRECTIONS[note.direction]
+	var direction := StringName(sing_directions[note.direction % sing_directions.size()])
 	if swap_sing_animations and swapped_directions.has(direction):
 		direction = swapped_directions.get(direction)
 

@@ -60,7 +60,9 @@ static func load_codename(song_folder: String, difficulty: StringName) -> Chart:
 				character = characters[0]
 
 			side = &"%d_%s" % [sides.size() - 1, character]
-			chart.strumlines[side] = Chart.new_strumline()
+			chart.strumlines[side] = Strumline.new()
+
+		chart.strumlines[side].key_count = strumline.get("keyCount", 4)
 
 		var notes: Array = strumline.notes
 		for note: Dictionary in notes:
@@ -76,7 +78,7 @@ static func load_codename(song_folder: String, difficulty: StringName) -> Chart:
 				note_data.type = &"default"
 
 			note_data.strumline = side
-			chart.strumlines[side][&"notes"].push_back(note_data)
+			chart.strumlines[side].add_note(note_data)
 
 	chart.sort()
 

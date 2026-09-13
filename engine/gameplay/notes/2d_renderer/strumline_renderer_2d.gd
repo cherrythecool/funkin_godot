@@ -91,7 +91,7 @@ func _draw() -> void:
 		draw_rect(
 			Rect2(
 				Vector2(
-					-spacing * 2.0,
+					-spacing * (receptors.size() / 2.0),
 					-position.y,
 				),
 				Vector2(
@@ -117,21 +117,20 @@ func _draw() -> void:
 		)
 
 		_receptor_positions[i] = Vector2(
-			(i * spacing) - (spacing * 1.5),
+			(i * spacing) - (spacing * float(receptors.size() - 1) / 2.0),
 			0.0
 		)
 
 		draw_texture_rect(
 			texture,
 			Rect2(
-				_receptor_positions[i] - (texture.get_size() * receptor_scale / 2.0),
+				_receptor_positions[i] - ((texture.get_size() * receptor_scale) / 2.0),
 				texture.get_size() * receptor_scale,
 			),
 			false
 		)
 
 	var note_frames := skin.get_note_frames()
-
 	_note_textures.resize(animations_note.size())
 	_sustain_textures.resize(animations_sustain.size())
 	_tail_textures.resize(animations_tail.size())

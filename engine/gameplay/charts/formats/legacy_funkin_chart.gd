@@ -59,6 +59,22 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 	var must_hit: bool = sections[0].mustHitSection
 	chart.events.push_back(CameraPan.new(time, &"player" if must_hit else &"opponent"))
 
+	# shaggy ultimate update chart format
+	var mania: int = song_data.get("mania", -1)
+	var key_count: int = 4
+	match mania:
+		1:
+			key_count = 6
+		2:
+			key_count = 7
+		3:
+			key_count = 9
+		_:
+			key_count = 4
+
+	for strumline: Strumline in chart.strumlines.values():
+		strumline.key_count = key_count
+
 	for section: Dictionary in sections:
 		if section.get("changeBPM", false) and section.get("bpm", 0.0) != bpm:
 			bpm = section.get("bpm", 0.0)
@@ -87,16 +103,16 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 			note_data.length = maxf(float(note[2]) / 1000.0, 0.0)
 
 			var direction := int(note[1])
-			note_data.direction = absi(direction) % 4
+			note_data.direction = direction % key_count
 
 			var side: StringName
 			if notes_use_must_hit:
 				if must_hit:
-					side = &"player" if direction < 4 else &"opponent"
+					side = &"player" if direction < key_count else &"opponent"
 				else:
-					side = &"opponent" if direction < 4 else &"player"
+					side = &"opponent" if direction < key_count else &"player"
 			else:
-				side = &"opponent" if direction < 4 else &"player"
+				side = &"opponent" if direction < key_count else &"player"
 
 			note_data.strumline = side
 
@@ -105,10 +121,7 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 			else:
 				note_data.type = &"default"
 
-			chart.update_note_types(side, note_data.type)
-
-			var strumline: Dictionary = chart.strumlines[side]
-			strumline[&"notes"].push_back(note_data)
+			chart.strumlines[side].add_note(note_data)
 
 		beat += section_length
 		time += section_length * beat_delta
@@ -117,10 +130,14 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 	if ResourceLoader.exists(events_path):
 		var events_data: Variant = load(events_path).data
 		if events_data is Dictionary:
+			var target_data: Dictionary
 			if "song" in events_data and events_data["song"] is Dictionary:
-				chart.events.append_array(load_psych_events(events_data["song"]))
+				target_data = events_data["song"]
 			else:
-				chart.events.append_array(load_psych_events(events_data))
+				target_data = events_data
+
+			if "events" in target_data and target_data["events"] is Array:
+				chart.events.append_array(load_psych_events(target_data["events"]))
 
 	chart.sort()
 

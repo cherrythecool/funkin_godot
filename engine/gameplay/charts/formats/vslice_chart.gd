@@ -87,12 +87,10 @@ static func load_vslice(song_folder: String, difficulty: StringName) -> Chart:
 		var direction: int = note.get("d")
 		var side := &"player" if direction < 4 else &"opponent"
 		note_data.direction = direction % 4
-
 		note_data.type = note.get("k", &"default")
-		chart.update_note_types(side, note_data.type)
-
 		note_data.strumline = side
-		chart.strumlines[side][&"notes"].push_back(note_data)
+
+		chart.strumlines[side].add_note(note_data)
 
 	chart.sort()
 

@@ -11,12 +11,12 @@ enum ReceptorState {
 	PRESSED,
 }
 
-const INPUT_ACTIONS: PackedStringArray = ["note_left", "note_down", "note_up", "note_right"]
-
+@export var conductor: Conductor
 @export var strumline: StringName = &"player"
 @export var hit_window: float = 0.18
 @export var cpu: bool = true
-@export var conductor: Conductor
+@export var key_count: int = 4
+@export var input_actions: Array[StringName] = [&"note_left", &"note_down", &"note_up", &"note_right"]
 
 var rating_manager: RatingManager
 var receptor_states: Array[ReceptorState]
@@ -26,7 +26,7 @@ var notes_index: int = 0
 
 func _ready() -> void:
 	rating_manager = get_tree().get_first_node_in_group(&"RatingManager")
-	receptor_states.resize(4)
+	receptor_states.resize(key_count)
 	receptor_states.fill(ReceptorState.RELEASED)
 
 
@@ -90,7 +90,11 @@ func hit_note(note: NoteData) -> void:
 	else:
 		note.state = NoteData.NoteState.HIT
 
-	note.grace_timer = Conductor.sustain_release_delta
+	if conductor:
+		note.grace_timer = conductor.sustain_release_delta
+	else:
+		note.grace_timer = Conductor.sustain_release_delta
+
 	receptor_states[note.direction] = ReceptorState.HIT
 
 
@@ -150,13 +154,13 @@ func skip_missed_notes(time_range: float) -> void:
 
 func _handle_player_input(delta: float) -> void:
 	var pressed: Array[bool]
-	pressed.resize(INPUT_ACTIONS.size())
+	pressed.resize(key_count)
 
 	var held: Array[bool]
-	held.resize(INPUT_ACTIONS.size())
+	held.resize(key_count)
 
-	for i: int in INPUT_ACTIONS.size():
-		var action := StringName(INPUT_ACTIONS[i])
+	for i: int in key_count:
+		var action := input_actions[i]
 		pressed[i] = Input.is_action_just_pressed(action)
 		held[i] = Input.is_action_pressed(action)
 
@@ -185,5 +189,6 @@ func _handle_player_input(delta: float) -> void:
 					note.grace_timer -= delta
 
 				held[note.direction] = false
+
 				if note.grace_timer <= 0.0:
 					miss_note(note)

@@ -247,7 +247,8 @@ func load_chart() -> void:
 		if not is_instance_valid(manager):
 			continue
 
-		manager.load_notes(chart.strumlines[key][&"notes"])
+		manager.key_count = chart.strumlines[key].key_count
+		manager.load_notes(chart.strumlines[key].notes)
 
 
 func init_conductor() -> void:
