@@ -13,6 +13,7 @@ static var camera_zoom: Vector2 = Vector2.INF
 
 		return conductor
 
+@export var persist_camera_on_exit := true
 @export var persistent_position: bool = true
 @export var persistent_zoom: bool = true
 
@@ -38,7 +39,6 @@ var game: Game:
 
 var zoom_event_tween: Tween
 var pan_event_tween: Tween
-var persist_camera_on_exit := false
 
 
 static func reset_persistent_values() -> void:

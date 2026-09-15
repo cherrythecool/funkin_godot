@@ -68,7 +68,7 @@ hud_layer = NodePath("HUDLayer")
 [node name="SongPlayer" type="AudioStreamPlayer" parent="." unique_id=523400484]
 bus = &"Music"
 
-[node name="AssetLoader" type="Node" parent="." unique_id=1406003250 node_paths=PackedStringArray("song_player", "characters_parent", "stage_parent", "hud_parent", "scripts_parent")]
+[node name="AssetLoader" type="Node" parent="." unique_id=1406003250 node_paths=PackedStringArray("song_player", "characters_parent", "stage_parent", "hud_parent", "scripts_parent") groups=["AssetLoader"]]
 script = ExtResource("2_vvk6n")
 song_player = NodePath("../SongPlayer")
 characters_parent = NodePath("../CharactersParent")

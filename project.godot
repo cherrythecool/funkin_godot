@@ -79,6 +79,7 @@ folder_colors={
 
 RatingManager=""
 EventManager=""
+AssetLoader=""
 
 [gui]
 
