@@ -50,13 +50,10 @@ var scroll_speed: float:
 
 var skin: HUDSkin
 
-var persist_camera_on_exit := false
-
+signal chart_loaded(chart_: Chart)
 signal hud_setup
 signal ready_post
 signal song_start
-signal event_prepare(event: EventData)
-signal event_hit(event: EventData)
 signal song_finished
 signal back_to_menus
 signal scroll_speed_changed(value: float)
@@ -118,8 +115,6 @@ func _ready() -> void:
 			load_settings[&"songs_folder"],
 		)
 
-	load_events()
-
 	ready_post.emit()
 
 
@@ -131,10 +126,6 @@ func _exit_tree() -> void:
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.use_accumulated_input = true
-
-	# Mostly for modules, might be helpful somewhere else too though
-	if not persist_camera_on_exit:
-		FunkinCamera2D.reset_persistent_values()
 
 
 func _process(_delta: float) -> void:
@@ -148,11 +139,6 @@ func _process(_delta: float) -> void:
 		not song_player.playing
 	):
 		start_song()
-
-	while events_index < chart.events.size() and \
-			Conductor.time >= chart.events[events_index].time:
-		event_hit.emit(chart.events[events_index])
-		events_index += 1
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -250,6 +236,8 @@ func load_chart() -> void:
 		manager.key_count = chart.strumlines[key].key_count
 		manager.load_notes(chart.strumlines[key].notes)
 
+	chart_loaded.emit(chart)
+
 
 func init_conductor() -> void:
 	Conductor.reset()
@@ -257,26 +245,6 @@ func init_conductor() -> void:
 	Conductor.calculate_beat()
 	Conductor.raw_time = (-4.0 * Conductor.beat_delta) + Conductor.offset
 	Conductor.beat_hit.emit.call_deferred(-4)
-
-
-func load_events() -> void:
-	if not chart.events.is_empty():
-		if asset_loader:
-			asset_loader.load_events(chart.events)
-
-		for event: EventData in chart.events:
-			event_prepare.emit(event)
-
-		# we do int(time * 1000.0) because if it's less than 1 ms
-		# after the start of a song (i've seen this in base game charts before)
-		# then we should still call it early lol
-		while (not chart.events.is_empty()) and events_index < chart.events.size() \
-				and int(chart.events[events_index].time * 1000.0) <= 0.0:
-			if not chart.events[events_index].trigger_before_countdown:
-				break
-
-			event_hit.emit(chart.events[events_index])
-			events_index += 1
 
 
 func skip_to(seconds: float) -> void:

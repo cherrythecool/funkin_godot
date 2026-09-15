@@ -2,7 +2,7 @@ extends FunkinScript
 
 
 func _on_event_hit(event: EventData) -> void:
-	if event.name.to_lower() != &"playanimation":
+	if event.name != &"PlayAnimation":
 		return
 
 	var data: Dictionary = event.data.get(&"values")
@@ -16,6 +16,7 @@ func _on_event_hit(event: EventData) -> void:
 			character = spectator
 		"dad":
 			character = opponent
+
 	if not is_instance_valid(character):
 		push_warning("Couldn't find character name \"%s\" in PlayAnimation event." % [target,])
 		return

@@ -35,8 +35,10 @@ static var camera_zoom: Vector2 = Vector2.INF
 var game: Game:
 	get:
 		return Game.instance
+
 var zoom_event_tween: Tween
 var pan_event_tween: Tween
+var persist_camera_on_exit := false
 
 
 static func reset_persistent_values() -> void:
@@ -45,8 +47,9 @@ static func reset_persistent_values() -> void:
 
 
 func _ready() -> void:
-	if not is_instance_valid(instance):
+	if not instance:
 		instance = self
+
 	if camera_position != Vector2.INF and persistent_position:
 		position = camera_position
 	if camera_zoom != Vector2.INF and persistent_zoom:
@@ -55,13 +58,19 @@ func _ready() -> void:
 	if game:
 		game.ready_post.connect(_on_game_ready_post)
 		game.back_to_menus.connect(_on_game_back_to_menus)
-		game.event_hit.connect(_on_game_event_hit)
+
+	var event_manager: EventManager = get_tree().get_first_node_in_group(&"EventManager")
+	if event_manager:
+		event_manager.event_hit.connect(_on_event_hit)
 
 	Conductor.beat_hit.connect(_on_beat_hit)
 
 
 func _exit_tree() -> void:
 	if instance == self:
+		if not persist_camera_on_exit:
+			reset_persistent_values()
+
 		instance = null
 
 
@@ -90,7 +99,7 @@ func _on_first_opponent_note(_note: NoteData) -> void:
 	bumps = true
 
 
-func _on_game_event_hit(event: EventData) -> void:
+func _on_event_hit(event: EventData) -> void:
 	if not is_instance_valid(conductor):
 		conductor = Conductor.instance
 

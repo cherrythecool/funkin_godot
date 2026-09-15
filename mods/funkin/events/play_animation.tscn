@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dy7f1knbir4ub"]
 
-[ext_resource type="Script" uid="uid://cqhwgvh2e5u26" path="res://mods/funkin/events/playanimation.gd" id="1_6kpoa"]
+[ext_resource type="Script" uid="uid://cqhwgvh2e5u26" path="res://mods/funkin/events/play_animation.gd" id="1_6kpoa"]
 
 [node name="PlayAnimation" type="Node" unique_id=1428824881]
 script = ExtResource("1_6kpoa")

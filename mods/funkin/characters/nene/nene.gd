@@ -11,10 +11,9 @@ var camera_side: StringName = &"player"
 
 
 func _ready() -> void:
-	if not is_instance_valid(Game.instance):
-		return
-
-	Game.instance.event_hit.connect(_on_event_hit)
+	var event_manager: EventManager = get_tree().get_first_node_in_group(&"EventManager")
+	if event_manager:
+		event_manager.event_hit.connect(_on_event_hit)
 
 
 func _process(_delta: float) -> void:

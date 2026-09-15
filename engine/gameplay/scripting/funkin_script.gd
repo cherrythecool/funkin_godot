@@ -64,6 +64,9 @@ var camera: FunkinCamera2D:
 			return null
 
 
+var event_manager: EventManager
+
+
 func _init() -> void:
 	await tree_entered
 	_initialize_variables()
@@ -112,9 +115,12 @@ func _initialize_variables() -> void:
 		conductor.measure_hit.connect(_on_measure_hit)
 
 	if is_instance_valid(game):
+		game.ready_post.connect(_ready_post)
 		game.song_start.connect(_on_song_start)
 		game.song_finished.connect(_on_song_finished)
 		game.back_to_menus.connect(_on_back_to_menus)
-		game.event_prepare.connect(_on_event_prepare)
-		game.event_hit.connect(_on_event_hit)
-		game.ready_post.connect(_ready_post)
+
+	event_manager = get_tree().get_first_node_in_group(&"EventManager")
+	if event_manager:
+		event_manager.event_hit.connect(_on_event_hit)
+		event_manager.event_prepare.connect(_on_event_prepare)

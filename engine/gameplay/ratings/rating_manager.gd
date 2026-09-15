@@ -82,7 +82,8 @@ func _died() -> void:
 		if gameover_set_character_path and game.player:
 			FunkinGameOver.character_path = game.player.death_character
 
-		game.persist_camera_on_exit = gameover_keep_camera_transform
+		if FunkinCamera2D.instance:
+			FunkinCamera2D.instance.persist_camera_on_exit = gameover_keep_camera_transform
 
 	SceneManager.swap_to_file(gameover_file_path)
 

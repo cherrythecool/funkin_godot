@@ -146,28 +146,3 @@ func load_scripts(song: String, songs_folder: String) -> void:
 
 		var script_instance: Node = script.instantiate()
 		add_child(script_instance)
-
-
-func load_events(events: Array[EventData]) -> void:
-	if not is_instance_valid(scripts_parent):
-		printerr("Tried to load events without parent node!")
-		return
-
-	var loaded_events: Array[StringName] = []
-	var base_path := "res://mods/%s/events" %  ModSwitcher.current_module
-	for event: EventData in events:
-		var event_name: StringName = event.name.to_lower()
-		if loaded_events.has(event_name):
-			continue
-
-		loaded_events.push_back(event_name)
-
-		var path: String = "%s/%s.tscn" % [base_path, event_name]
-		if not ResourceLoader.exists(path, "PackedScene"):
-			path = "%s/%s.tscn" % [base_path, event_name.to_snake_case()]
-
-		if not ResourceLoader.exists(path, "PackedScene"):
-			continue
-
-		var scene: PackedScene = load(path)
-		scripts_parent.add_child(scene.instantiate())
