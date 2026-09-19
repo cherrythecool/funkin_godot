@@ -84,9 +84,6 @@ func _ready() -> void:
 		finish_song(true, false)
 		return
 
-	load_chart()
-	init_conductor()
-
 	if not metadata:
 		var song_folder: String = load_settings[&"songs_folder"]
 		var song_name: StringName = load_settings[&"song_name"]
@@ -114,6 +111,9 @@ func _ready() -> void:
 			load_settings[&"song_name"],
 			load_settings[&"songs_folder"],
 		)
+
+	load_chart()
+	init_conductor()
 
 	ready_post.emit()
 

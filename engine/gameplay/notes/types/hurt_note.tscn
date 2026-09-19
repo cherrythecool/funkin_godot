@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c5onbalnc4rjj"]
+
+[ext_resource type="Script" uid="uid://c64m488wuqf36" path="res://engine/gameplay/notes/types/hurt_note.gd" id="1_vhad3"]
+
+[node name="HurtNote" type="Node" unique_id=624207546]
+script = ExtResource("1_vhad3")
+metadata/_custom_type_script = "uid://ccygr6542u5ga"

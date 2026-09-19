@@ -51,41 +51,30 @@ func get_health_percent() -> float:
 	return health
 
 
-func add_note_hit(time_diff: float) -> void:
+func add_note_hit(time_diff: float, note: NoteData) -> void:
+	if not note.should_hit:
+		add_note_miss(note)
+		return
+
 	_total_notes_hit += 1
 	combo += 1
 
 	var rating := get_rating(time_diff)
 	if rating:
-		_apply_rating(rating)
+		_apply_rating(rating, note, note.hit_health_multiplier)
 
 	changed.emit()
 
 
-func add_note_miss() -> void:
+func add_note_miss(note: NoteData) -> void:
 	_total_notes_hit += 1
 	misses += 1
 	combo = 0
 
 	if miss_rating:
-		_apply_rating(miss_rating)
+		_apply_rating(miss_rating, note, note.miss_health_multiplier)
 
 	changed.emit()
-
-
-func _died() -> void:
-	var game := Game.instance
-	if gameover_set_default_values and game:
-		if gameover_set_character_position and game.player:
-			FunkinGameOver.character_position = game.player.global_position
-
-		if gameover_set_character_path and game.player:
-			FunkinGameOver.character_path = game.player.death_character
-
-		if FunkinCamera2D.instance:
-			FunkinCamera2D.instance.persist_camera_on_exit = gameover_keep_camera_transform
-
-	SceneManager.swap_to_file(gameover_file_path)
 
 
 func get_accuracy() -> float:
@@ -121,10 +110,29 @@ func get_rating(time_diff: float) -> Rating:
 	return returned_rating
 
 
-func _apply_rating(rating: Rating) -> void:
-	score += rating.score
-	health = clampf(health + rating.health_percent, 0.0, 100.0)
+func _apply_rating(rating: Rating, note: NoteData, health_mult: float) -> void:
+	if note.use_custom_score:
+		score += note.custom_score
+	else:
+		score += rating.score
+
+	health = clampf(health + (rating.health_percent * health_mult), 0.0, 100.0)
 	_accumulated_accuracy += rating.accuracy_percent / 100.0
+
+
+func _died() -> void:
+	var game := Game.instance
+	if gameover_set_default_values and game:
+		if gameover_set_character_position and game.player:
+			FunkinGameOver.character_position = game.player.global_position
+
+		if gameover_set_character_path and game.player:
+			FunkinGameOver.character_path = game.player.death_character
+
+		if FunkinCamera2D.instance:
+			FunkinCamera2D.instance.persist_camera_on_exit = gameover_keep_camera_transform
+
+	SceneManager.swap_to_file(gameover_file_path)
 
 
 func _on_song_finished() -> void:

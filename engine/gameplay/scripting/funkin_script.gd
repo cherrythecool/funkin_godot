@@ -108,6 +108,10 @@ func _on_event_hit(_event: EventData) -> void:
 	pass
 
 
+func _on_note_prepare(_note: NoteData) -> void:
+	pass
+
+
 func _initialize_variables() -> void:
 	if is_instance_valid(conductor):
 		conductor.beat_hit.connect(_on_beat_hit)
@@ -119,6 +123,9 @@ func _initialize_variables() -> void:
 		game.song_start.connect(_on_song_start)
 		game.song_finished.connect(_on_song_finished)
 		game.back_to_menus.connect(_on_back_to_menus)
+
+		for strumline: StrumlineManager in game.strumlines.values():
+			strumline.note_prepare.connect(_on_note_prepare)
 
 	event_manager = get_tree().get_first_node_in_group(&"EventManager")
 	if event_manager:

@@ -15,6 +15,15 @@ enum NoteState {
 @export var length: float
 
 @export var type: StringName
+@export var type_data: Dictionary[StringName, Variant]
+
+@export_group("Basic Type Info")
+@export var should_hit: bool = true
+@export var hit_health_multiplier: float = 1.0
+@export var miss_health_multiplier: float = 1.0
+
+@export var use_custom_score: bool = false
+@export var custom_score: int = 0
 
 var state: NoteState = NoteState.ALIVE
 var grace_timer: float = 1.0

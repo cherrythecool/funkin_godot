@@ -2,6 +2,7 @@ class_name StrumlineManager
 extends Node
 
 
+signal note_prepare(note: NoteData)
 signal note_hit(note: NoteData)
 signal note_missed(note: NoteData)
 
@@ -81,7 +82,7 @@ func _process(delta: float) -> void:
 func hit_note(note: NoteData) -> void:
 	var time := get_time()
 	if rating_manager and note.state == NoteData.NoteState.ALIVE and not cpu:
-		rating_manager.add_note_hit(0.0 if cpu else absf(time - note.time))
+		rating_manager.add_note_hit(absf(time - note.time), note)
 
 	note_hit.emit(note)
 
@@ -99,8 +100,12 @@ func hit_note(note: NoteData) -> void:
 
 
 func miss_note(note: NoteData) -> void:
+	if not note.should_hit:
+		note.state = NoteData.NoteState.HIT
+		return
+
 	if rating_manager and not cpu:
-		rating_manager.add_note_miss()
+		rating_manager.add_note_miss(note)
 
 	note_missed.emit(note)
 	note.state = NoteData.NoteState.MISSED
@@ -118,11 +123,17 @@ func get_time() -> float:
 
 
 func load_notes(notes_array: Array) -> void:
+	var is_adding_on := not notes.is_empty()
+	notes_array.sort_custom(Chart.sort_by_time)
 	notes.append_array(notes_array)
 
 	for note: NoteData in notes_array:
 		note.state = NoteData.NoteState.ALIVE
 		note.strumline = strumline
+		note_prepare.emit(note)
+
+	if is_adding_on:
+		notes.sort_custom(Chart.sort_by_time)
 
 
 func push_note(note: NoteData) -> void:
