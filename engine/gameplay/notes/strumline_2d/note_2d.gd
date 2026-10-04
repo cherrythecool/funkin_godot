@@ -34,6 +34,9 @@ func _process(_delta: float) -> void:
 
 
 func apply_skin(skin: NoteSkin) -> void:
+	if not is_instance_valid(skin):
+		return
+
 	texture_filter = skin.note_filter
 
 	if animated_node is AnimatedSprite2D:
