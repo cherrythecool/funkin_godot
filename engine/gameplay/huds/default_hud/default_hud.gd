@@ -18,8 +18,8 @@ var middlescroll: bool = false:
 @export var bump_interval: int = 4
 @export var zoom_lerping: bool = true
 
-@export var player_renderer: StrumlineRenderer2D
-@export var opponent_renderer: StrumlineRenderer2D
+@export var player_renderer: Strumline2D
+@export var opponent_renderer: Strumline2D
 
 @export var health_bar: HealthBar
 @export var countdown_container: CountdownContainer
@@ -122,13 +122,10 @@ func set_downscroll(value: bool) -> void:
 	if player_renderer:
 		player_renderer.downscroll = value
 		player_renderer.position.y = 720.0 - 100.0 if value else 100.0
-		player_renderer.splash_alpha = Settings.get_setting(&"core", "note_splash_alpha")
-		player_renderer.underlay_alpha = Settings.get_setting(&"core", "note_underlay_alpha")
 
 	if opponent_renderer:
 		opponent_renderer.downscroll = value
 		opponent_renderer.position.y = 720.0 - 100.0 if value else 100.0
-		opponent_renderer.splash_alpha = Settings.get_setting(&"core", "note_splash_alpha")
 
 	downscroll_changed.emit(value)
 

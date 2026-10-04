@@ -1,5 +1,7 @@
-class_name StrumlineRenderer2D
 extends Node2D
+
+
+const ReceptorData: Script = preload("uid://chj1hnw2lhjy4")
 
 
 @export var parent: StrumlineManager:

@@ -5,6 +5,7 @@ extends Node
 signal note_prepare(note: NoteData)
 signal note_hit(note: NoteData)
 signal note_missed(note: NoteData)
+signal notes_loaded
 
 enum ReceptorState {
 	RELEASED = 0,
@@ -23,6 +24,7 @@ var rating_manager: RatingManager
 var receptor_states: Array[ReceptorState]
 var notes: Array[NoteData]
 var notes_index: int = 0
+var last_hit_index: int = 0
 
 
 func _ready() -> void:
@@ -39,7 +41,8 @@ func _process(delta: float) -> void:
 	var note_idx := 0
 
 	while notes_index + note_idx < notes.size():
-		var note := notes[notes_index + note_idx]
+		var index := notes_index + note_idx
+		var note := notes[index]
 		if not is_note_in_range(note, time):
 			break
 
@@ -50,6 +53,7 @@ func _process(delta: float) -> void:
 		else:
 			if cpu:
 				if time >= note.time:
+					last_hit_index = index
 					hit_note(note)
 					shift_notes_index = note_idx == 0 and note.state == NoteData.NoteState.HIT
 			else:
@@ -67,6 +71,7 @@ func _process(delta: float) -> void:
 					miss_note(note)
 					shift_notes_index = note_idx == 0
 				elif time >= note.time + note.length and note.state == NoteData.NoteState.HELD:
+					last_hit_index = index
 					hit_note(note)
 					shift_notes_index = note_idx == 0
 
@@ -135,6 +140,8 @@ func load_notes(notes_array: Array) -> void:
 	if is_adding_on:
 		notes.sort_custom(Chart.sort_by_time)
 
+	notes_loaded.emit()
+
 
 func push_note(note: NoteData) -> void:
 	if notes.is_empty():
@@ -192,9 +199,11 @@ func _handle_player_input(delta: float) -> void:
 					continue
 
 				pressed[note.direction] = false
+				last_hit_index = index
 				hit_note(note)
 			NoteData.NoteState.HELD:
 				if held[note.direction]:
+					last_hit_index = index
 					hit_note(note)
 				else:
 					note.grace_timer -= delta

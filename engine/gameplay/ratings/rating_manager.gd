@@ -4,6 +4,7 @@ extends Node
 
 signal died
 signal changed
+signal applied_rating(rating: Rating, note: NoteData, health_mult: float)
 
 @export_group("Game Over", "gameover_")
 @export_file("*.tscn") var gameover_file_path: String = "uid://c05dah5aarqg8"
@@ -118,6 +119,7 @@ func _apply_rating(rating: Rating, note: NoteData, health_mult: float) -> void:
 
 	health = clampf(health + (rating.health_percent * health_mult), 0.0, 100.0)
 	_accumulated_accuracy += rating.accuracy_percent / 100.0
+	applied_rating.emit(rating, note, health_mult)
 
 
 func _died() -> void:

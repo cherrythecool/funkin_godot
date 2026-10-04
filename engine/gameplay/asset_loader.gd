@@ -99,19 +99,11 @@ func load_assets() -> void:
 		Game.instance.hud = hud
 		hud_parent.add_child(hud)
 
-		var player_renderer: StrumlineRenderer2D
-		var opponent_renderer: StrumlineRenderer2D
-
 		if "player_renderer" in hud:
-			player_renderer = hud.player_renderer
-		if "opponent_renderer" in hud:
-			opponent_renderer = hud.opponent_renderer
-
-		# Set the NoteField characters.
-		if is_instance_valid(player_renderer):
+			var player_renderer: Strumline2D = hud.player_renderer
 			player_renderer.skin = assets.get_player_note_skin()
-
-		if is_instance_valid(opponent_renderer):
+		if "opponent_renderer" in hud:
+			var opponent_renderer: Strumline2D = hud.opponent_renderer
 			opponent_renderer.skin = assets.get_opponent_note_skin()
 
 		Game.instance.pause_menu = hud_skin.get_pause_menu()

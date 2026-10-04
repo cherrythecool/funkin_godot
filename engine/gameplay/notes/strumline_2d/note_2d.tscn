@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://b6b6gdk3o56wm"]
+
+[ext_resource type="Script" uid="uid://ce3uh43cfhcji" path="res://engine/gameplay/notes/strumline_2d/note_2d.gd" id="1_74fpt"]
+[ext_resource type="Script" uid="uid://bwf4k5hxjoqaw" path="res://engine/common/atlas_texture_rect.gd" id="2_e8wmc"]
+[ext_resource type="Texture2D" uid="uid://bbc06fsifnyro" path="res://engine/gameplay/styles/default/notes.png" id="3_74fpt"]
+[ext_resource type="SpriteFrames" uid="uid://b3r2xop0whqyf" path="res://engine/gameplay/styles/default/notes.res" id="3_oo5am"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nh8mv"]
+atlas = ExtResource("3_74fpt")
+region = Rect2(207, 312, 50, 41)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c453m"]
+size = Vector2(50, 64)
+
+[node name="Note2D" type="Node2D" unique_id=407788823 node_paths=PackedStringArray("animated_node", "hold_clip", "hold_rect", "hold_tail")]
+script = ExtResource("1_74fpt")
+animated_node = NodePath("Sprite")
+hold_clip = NodePath("HoldClip")
+hold_rect = NodePath("HoldClip/Hold")
+hold_tail = NodePath("HoldClip/Hold/Tail")
+
+[node name="HoldClip" type="Control" parent="." unique_id=1645117196]
+modulate = Color(1, 1, 1, 0.70000005)
+clip_contents = true
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_right = 25.0
+offset_bottom = 428.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+
+[node name="Hold" type="TextureRect" parent="HoldClip" unique_id=956618562]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 1)
+size_flags_vertical = 3
+texture = SubResource("AtlasTexture_nh8mv")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("2_e8wmc")
+metadata/_custom_type_script = "uid://bwf4k5hxjoqaw"
+
+[node name="Tail" type="TextureRect" parent="HoldClip/Hold" unique_id=1957403273]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_right = 25.0
+offset_bottom = 45.0
+grow_horizontal = 2
+texture = SubResource("PlaceholderTexture2D_c453m")
+expand_mode = 1
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1565217370]
+scale = Vector2(0.7, 0.7)
+sprite_frames = ExtResource("3_oo5am")
+animation = &"left note"

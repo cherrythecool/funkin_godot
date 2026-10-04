@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://br57cux32f3cx"]
+
+[ext_resource type="PackedScene" uid="uid://ktlymxin48f7" path="res://engine/gameplay/notes/strumline_2d/receptor_2d.tscn" id="1_jq302"]
+[ext_resource type="Script" uid="uid://djivyhdqngiw2" path="res://engine/gameplay/notes/strumline_2d/strumline_2d.gd" id="1_pqi75"]
+[ext_resource type="PackedScene" uid="uid://b6b6gdk3o56wm" path="res://engine/gameplay/notes/strumline_2d/note_2d.tscn" id="2_nh8mv"]
+[ext_resource type="Script" uid="uid://77giku6f2gih" path="res://engine/gameplay/notes/strumline_2d/underlay.gd" id="3_m4ikx"]
+
+[node name="4KStrumline2D" type="Node2D" unique_id=518721407 node_paths=PackedStringArray("receptors", "underlay", "notes_parent")]
+script = ExtResource("1_pqi75")
+receptors = [NodePath("Receptors/Left"), NodePath("Receptors/Down"), NodePath("Receptors/Up"), NodePath("Receptors/Right")]
+underlay = NodePath("Underlay")
+notes_parent = NodePath("Notes")
+default_note_scene = ExtResource("2_nh8mv")
+
+[node name="Underlay" type="ColorRect" parent="." unique_id=380449022]
+modulate = Color(1, 1, 1, 0.25)
+offset_left = -225.0
+offset_top = -7925.0
+offset_right = 222.0
+offset_bottom = 7924.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("3_m4ikx")
+
+[node name="Receptors" type="Node2D" parent="." unique_id=1760197482]
+
+[node name="Left" parent="Receptors" unique_id=407788823 instance=ExtResource("1_jq302")]
+position = Vector2(-168, 0)
+
+[node name="Down" parent="Receptors" unique_id=1008397843 instance=ExtResource("1_jq302")]
+position = Vector2(-56, 0)
+direction = &"down"
+
+[node name="Up" parent="Receptors" unique_id=1988402986 instance=ExtResource("1_jq302")]
+position = Vector2(56, 0)
+direction = &"up"
+
+[node name="Right" parent="Receptors" unique_id=2123564056 instance=ExtResource("1_jq302")]
+position = Vector2(168, 0)
+direction = &"right"
+
+[node name="Notes" type="Node2D" parent="." unique_id=1715025514]

@@ -39,11 +39,11 @@ func _ready_post() -> void:
 
 
 func _on_beat_hit(beat: int) -> void:
-	if not is_instance_valid(Game.instance):
+	if not is_instance_valid(game):
 		return
 	if (not do_countdown) and not force_countdown:
 		return
-	if (beat >= 0 or Game.instance.song_started) and not force_countdown:
+	if (beat >= 0 or game.song_started) and not force_countdown:
 		return
 
 	if pause_countdown:

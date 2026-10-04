@@ -169,7 +169,7 @@ func sync_to_target(delta: float) -> void:
 		raw_time = audio_time
 
 
-func calculate_beat() -> void:
+func calculate_beat(trigger_hits: bool = true) -> void:
 	var last_step: int = floori(step)
 	var last_beat: int = floori(beat)
 	var last_measure: int = floori(measure)
@@ -180,7 +180,8 @@ func calculate_beat() -> void:
 		tempo = get_tempo_at_time(time, timing_changes)
 		beat = get_beat_at_time(time, timing_changes)
 
-	calculate_hits(last_step, last_beat, last_measure)
+	if trigger_hits:
+		calculate_hits(last_step, last_beat, last_measure)
 
 
 func calculate_hits(last_step: int, last_beat: int, last_measure: int) -> void:
@@ -208,7 +209,7 @@ func reset() -> void:
 	target_audio = null
 	raw_time = 0.0
 	timing_changes.clear()
-	calculate_beat()
+	calculate_beat(false)
 
 
 func reset_offset() -> void:

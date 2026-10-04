@@ -18,6 +18,7 @@ func _draw() -> void:
 		return
 	if texture is not AtlasTexture:
 		return
+
 	var item: RID = get_canvas_item()
 	RenderingServer.canvas_item_clear(item)
 

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://2441ftrjfyr7" path="res://mods/funkin/menus/options_menu/option_previews/notes.gd" id="1_508hw"]
 [ext_resource type="Script" uid="uid://3n2aou2bthat" path="res://engine/gameplay/notes/strumline_manager.gd" id="2_vt4am"]
-[ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://engine/gameplay/notes/2d_renderer/strumline_renderer_2d.gd" id="3_litst"]
+[ext_resource type="Script" uid="uid://rh4jeluc5vy5" path="res://engine/gameplay/notes/old_strumline_renderer/strumline_renderer_2d.gd" id="3_litst"]
 [ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://engine/gameplay/styles/default/note_skin.tres" id="4_litst"]
-[ext_resource type="Script" uid="uid://chj1hnw2lhjy4" path="res://engine/gameplay/notes/2d_renderer/receptor_data.gd" id="4_oelvf"]
+[ext_resource type="Script" uid="uid://chj1hnw2lhjy4" path="res://engine/gameplay/notes/old_strumline_renderer/receptor_data.gd" id="4_oelvf"]
 
 [sub_resource type="Resource" id="Resource_oelvf"]
 script = ExtResource("4_oelvf")
