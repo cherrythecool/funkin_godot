@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlujs5oq03c3a"
-path="res://.godot/imported/burps.png-c893f11c6382589b9ed75437c5a8a263.ctex"
+uid="uid://biscaiy3svebp"
+path="res://.godot/imported/interface.png-fc8c979073d8440f6751f2d46175bf51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mods/funkin/characters/pico/burps.png"
-dest_files=["res://.godot/imported/burps.png-c893f11c6382589b9ed75437c5a8a263.ctex"]
+source_file="res://mods/funkin/menus/options_menu/categories/icons/interface.png"
+dest_files=["res://.godot/imported/interface.png-fc8c979073d8440f6751f2d46175bf51.ctex"]
 
 [params]
 

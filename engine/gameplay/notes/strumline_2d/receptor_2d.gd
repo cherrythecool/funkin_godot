@@ -70,6 +70,7 @@ func play_splash() -> void:
 		return
 
 	splash.play(&"%s_%d" % [direction, randi_range(1, splash_variations)])
+	splash.frame = 0
 	splash.show()
 
 

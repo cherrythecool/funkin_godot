@@ -8,13 +8,13 @@ static var target_scene := DEFAULT_TARGET_SCENE
 static var selected := 0
 
 @export var interface: Control
-@export var categories: HBoxContainer
+@export var categories: Control
 @export var section: Node2D
 @export var options_label: AnimatedSprite2D
-@export var section_label: Alphabet
+@export var scroll_container: ScrollContainer
 
-var section_tween: Tween
 var active: bool = true
+var lerped_vertical_scroll: float = 0.0
 
 
 func _ready() -> void:
@@ -30,6 +30,13 @@ func _ready() -> void:
 
 	for child: CategoryIcon in categories.get_children():
 		child._ready()
+
+
+func _process(delta: float) -> void:
+	var child: CategoryIcon = categories.get_child(selected)
+	var max_scroll := scroll_container.get_v_scroll_bar().max_value - scroll_container.get_rect().size.y
+	lerped_vertical_scroll = lerpf(lerped_vertical_scroll, minf(child.position.y, max_scroll), GameUtils.lerp_weight(delta, 6.0))
+	scroll_container.scroll_vertical = int(lerped_vertical_scroll)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -54,23 +61,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func change_selection(amount: int = 0) -> void:
 	selected = wrapi(selected + amount, 0, categories.get_child_count())
-	section_label.text = categories.get_child(selected).name.to_upper()
 
 	if amount != 0:
 		MenuAudio.scroll.play()
-
-		section_label.position.y = 40.0
-		section_label.modulate.a = 0.75
-
-		if is_instance_valid(section_tween) and section_tween.is_running():
-			section_tween.kill()
-
-		section_tween = create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT).set_parallel()
-		section_tween.tween_property(section_label, ^"position:y", 48.0, 0.5)
-		section_tween.tween_property(section_label, ^"modulate:a", 1.0, 0.5).set_trans(Tween.TRANS_CUBIC)
-	else:
-		section_label.position.y = 48.0
-		section_label.modulate.a = 1.0
 
 	for i: int in categories.get_child_count():
 		var child: CategoryIcon = categories.get_child(i)

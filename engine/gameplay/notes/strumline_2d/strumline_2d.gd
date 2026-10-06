@@ -45,6 +45,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if not parent:
+		return
+
 	spawn_notes()
 
 	for receptor: Receptor2D in receptors:
@@ -195,10 +198,14 @@ func _set_parent(new_parent: StrumlineManager) -> void:
 	if parent:
 		parent.note_hit.disconnect(_on_note_hit)
 		parent.notes_loaded.disconnect(_on_notes_loaded)
+		parent.notes_pushed.disconnect(_on_notes_pushed)
+		parent.notes_cleared.disconnect(_on_notes_cleared)
 
 	parent = new_parent
 	parent.note_hit.connect(_on_note_hit)
 	parent.notes_loaded.connect(_on_notes_loaded)
+	parent.notes_pushed.connect(_on_notes_pushed)
+	parent.notes_cleared.connect(_on_notes_cleared)
 
 	if underlay:
 		underlay.visible = not parent.cpu
@@ -222,6 +229,21 @@ func _on_notes_loaded() -> void:
 
 	notes_have_spawned.resize(parent.notes.size())
 	notes_have_spawned.fill(false)
+
+
+func _on_notes_pushed() -> void:
+	notes_have_spawned.resize(parent.notes.size())
+
+
+func _on_notes_cleared() -> void:
+	for receptor: Receptor2D in receptors:
+		for note: Note2D in receptor.notes:
+			if is_instance_valid(note):
+				note.queue_free()
+
+		receptor.notes.clear()
+
+	notes_have_spawned.clear()
 
 
 func _on_applied_rating(rating: Rating, note: NoteData, _health_mult: float) -> void:

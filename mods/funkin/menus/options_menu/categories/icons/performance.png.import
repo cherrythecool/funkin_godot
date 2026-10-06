@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnka7ac5j5g3t"
-path="res://.godot/imported/car_sprites.png-bd7655fcdc14697567ddcf774f1a97d2.ctex"
+uid="uid://v7siuh5apkbv"
+path="res://.godot/imported/performance.png-5578b142b433f538f606f1d31bf3b96e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mods/funkin/characters/bf/car_sprites.png"
-dest_files=["res://.godot/imported/car_sprites.png-bd7655fcdc14697567ddcf774f1a97d2.ctex"]
+source_file="res://mods/funkin/menus/options_menu/categories/icons/performance.png"
+dest_files=["res://.godot/imported/performance.png-5578b142b433f538f606f1d31bf3b96e.ctex"]
 
 [params]
 
 compress/mode=0
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

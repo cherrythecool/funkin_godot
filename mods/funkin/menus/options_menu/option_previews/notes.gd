@@ -2,7 +2,7 @@ extends Node2D
 
 
 @export var manager: StrumlineManager
-@export var renderer: StrumlineRenderer2D
+@export var renderer: Strumline2D
 
 var lane: int = 0
 

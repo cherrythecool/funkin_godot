@@ -13,13 +13,13 @@ func _ready() -> void:
 	if category == null:
 		category = load("uid://di58m2bnkbajd")
 
-	sprite.modulate.a = target_alpha
+	modulate.a = target_alpha
 	sprite.scale = Vector2.ONE * target_scale
 
 
 func _process(delta: float) -> void:
-	sprite.modulate.a = lerpf(
-		sprite.modulate.a,
+	modulate.a = lerpf(
+		modulate.a,
 		target_alpha,
 		GameUtils.lerp_weight(delta, 9.0),
 	)

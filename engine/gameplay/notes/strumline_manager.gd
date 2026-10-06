@@ -6,6 +6,8 @@ signal note_prepare(note: NoteData)
 signal note_hit(note: NoteData)
 signal note_missed(note: NoteData)
 signal notes_loaded
+signal notes_pushed
+signal notes_cleared
 
 enum ReceptorState {
 	RELEASED = 0,
@@ -146,6 +148,7 @@ func load_notes(notes_array: Array) -> void:
 func push_note(note: NoteData) -> void:
 	if notes.is_empty():
 		notes.push_back(note)
+		notes_pushed.emit()
 	else:
 		var sort := notes[notes.size() - 1].time > note.time
 		notes.push_back(note)
@@ -153,11 +156,15 @@ func push_note(note: NoteData) -> void:
 		if sort:
 			notes_index = 0
 			notes.sort_custom(Chart.sort_by_time)
+			notes_loaded.emit()
+		else:
+			notes_pushed.emit()
 
 
 func clear_notes() -> void:
 	notes.clear()
 	notes_index = 0
+	notes_cleared.emit()
 
 
 func skip_missed_notes(time_range: float) -> void:

@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1g4r4a6hsts0"
-path="res://.godot/imported/categories.png-9cfa8a59d8e0d1a6d474dd65e7ed78da.ctex"
+uid="uid://dg0x07jx35ofv"
+path="res://.godot/imported/gameplay.png-6377d37a230ecc63ec7d346a760c53ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mods/funkin/menus/options_menu/categories/icons/categories.png"
-dest_files=["res://.godot/imported/categories.png-9cfa8a59d8e0d1a6d474dd65e7ed78da.ctex"]
+source_file="res://mods/funkin/menus/options_menu/categories/icons/gameplay.png"
+dest_files=["res://.godot/imported/gameplay.png-6377d37a230ecc63ec7d346a760c53ad.ctex"]
 
 [params]
 
 compress/mode=0
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

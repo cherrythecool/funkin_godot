@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5d570p7xukkx"
-path="res://.godot/imported/censored_singing.png-a843aca9ebfb9e4045b2c38c54a9ffcf.ctex"
+uid="uid://cyfyieehcigol"
+path="res://.godot/imported/accessibility.png-5a7c69d5263b2ed455b771acb665cb5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mods/funkin/characters/pico/censored_singing.png"
-dest_files=["res://.godot/imported/censored_singing.png-a843aca9ebfb9e4045b2c38c54a9ffcf.ctex"]
+source_file="res://mods/funkin/menus/options_menu/categories/icons/accessibility.png"
+dest_files=["res://.godot/imported/accessibility.png-5a7c69d5263b2ed455b771acb665cb5f.ctex"]
 
 [params]
 

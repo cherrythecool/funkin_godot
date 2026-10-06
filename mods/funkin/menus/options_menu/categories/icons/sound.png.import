@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h0puuo14gqyi"
-path="res://.godot/imported/cheer_sprites.png-e408dc3e88257d561432d5ee891dc917.ctex"
+uid="uid://dbf8cwnfufj3f"
+path="res://.godot/imported/sound.png-c9904379e8a33392e5f7fc21c801f2f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mods/funkin/characters/bf/cheer_sprites.png"
-dest_files=["res://.godot/imported/cheer_sprites.png-e408dc3e88257d561432d5ee891dc917.ctex"]
+source_file="res://mods/funkin/menus/options_menu/categories/icons/sound.png"
+dest_files=["res://.godot/imported/sound.png-c9904379e8a33392e5f7fc21c801f2f0.ctex"]
 
 [params]
 
