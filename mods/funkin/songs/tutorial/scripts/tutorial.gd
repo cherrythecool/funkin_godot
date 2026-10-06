@@ -8,12 +8,11 @@ func _ready() -> void:
 
 	spectator.offset_camera_position(Vector2(0.0, -50.0))
 
-	if opponent.name == &"null":
-		opponent = spectator
-		spectator = null
+	opponent = spectator
+	spectator = null
 
-		camera.position_target = opponent.get_camera_position()
-		camera.position = camera.position_target
+	camera.position_target = opponent.get_camera_position()
+	camera.position = camera.position_target
 
-		game.hud.health_bar.reload_icons()
-		opponent.strumline = game.strumlines[&"opponent"]
+	game.hud.health_bar.reload_icons()
+	opponent.strumline = game.strumlines[&"opponent"]

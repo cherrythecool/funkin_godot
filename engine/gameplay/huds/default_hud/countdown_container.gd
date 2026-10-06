@@ -88,6 +88,11 @@ func play_countdown_sound(index: int) -> void:
 	if not is_instance_valid(countdown_sounds[index]):
 		return
 
+	# haven't really thought as to why this happens but uh...
+	# i've seen it as an error before so ig this should fix it
+	if not is_inside_tree():
+		return
+
 	var player := AudioStreamPlayer.new()
 	player.stream = countdown_sounds[index]
 	player.bus = &"SFX"
