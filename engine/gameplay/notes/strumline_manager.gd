@@ -136,7 +136,6 @@ func load_notes(notes_array: Array) -> void:
 
 	for note: NoteData in notes_array:
 		note.state = NoteData.NoteState.ALIVE
-		note.strumline = strumline
 		note_prepare.emit(note)
 
 	if is_adding_on:

@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://4gefr8chrmni" path="res://mods/funkin/menus/character_select/background/fg_blur.png" id="9_okqu4"]
 [ext_resource type="Texture2D" uid="uid://dshobl0rx8nhg" path="res://mods/funkin/menus/character_select/background/choose_dark.png" id="12_rgimu"]
 [ext_resource type="Texture2D" uid="uid://c7u4qpyu0eogq" path="res://mods/funkin/menus/character_select/background/choose_dipshit.png" id="13_3wfvo"]
-[ext_resource type="Shader" uid="uid://m135j34o0ros" path="res://engine/common/shaders/blend_modes.gdshader" id="15_8pm5i"]
+[ext_resource type="Shader" uid="uid://m135j34o0ros" path="res://engine/common/shaders/emulated_blend_modes.gdshader" id="15_8pm5i"]
 [ext_resource type="Shader" uid="uid://ctlwv54e12i3j" path="res://mods/funkin/menus/character_select/mosaic_shader.gdshader" id="15_cggar"]
 [ext_resource type="Texture2D" uid="uid://86qag6byq5lj" path="res://mods/funkin/menus/character_select/characters/bf/title.png" id="16_3ax17"]
 [ext_resource type="Script" uid="uid://u0ic25erbfqp" path="res://engine/common/backbuffer_copy_control.gd" id="16_lycc1"]
