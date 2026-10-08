@@ -1,4 +1,4 @@
-class_name GameUtils
+class_name FunkinUtils
 extends Object
 
 
@@ -12,10 +12,10 @@ const KNOWN_TWEEN_TYPES: Dictionary[StringName, Tween.TransitionType] = {
 	&"expo": Tween.TRANS_EXPO,
 	&"elastic": Tween.TRANS_ELASTIC,
 
-	# NOTE: This *may* be supported by HaxeFlixel, but is not
-	# natively by Godot. It could technically be added with
-	# custom tween functions, but that is not currently top
-	# priority, so this is the "solution" for now.
+	# NOTE: this is supported by haxeflixel normally, but is not
+	# normally by godot. it could prolly be added with
+	# custom tween functions, i don't rlly wanna so... take my
+	# random bs instead lol
 	&"smoothStep": Tween.TRANS_CUBIC,
 	&"smootherStep": Tween.TRANS_CIRC,
 }
@@ -46,12 +46,12 @@ static func free_from_array(nodes: Array[Node], immediate: bool = false) -> void
 static func get_ease_from_str(string: String) -> Tween.EaseType:
 	if string.ends_with("Out"):
 		return Tween.EASE_OUT
-	if string.ends_with("InOut"):
+	elif string.ends_with("InOut"):
 		return Tween.EASE_IN_OUT
-	if string.ends_with("OutIn"):
+	elif string.ends_with("OutIn"):
 		return Tween.EASE_OUT_IN
-
-	return Tween.EASE_IN
+	else:
+		return Tween.EASE_IN
 
 
 static func get_trans_from_str(string: String) -> Tween.TransitionType:
@@ -95,7 +95,7 @@ static func keycode_to_character(input: Key) -> String:
 static func keycode_string_to_character(input: String) -> String:
 	match input.to_lower():
 		"apostrophe":
-			return '"'
+			return "'"
 		"backslash":
 			return "\\"
 		"comma":

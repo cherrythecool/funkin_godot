@@ -45,6 +45,9 @@ func apply_skin(skin: NoteSkin) -> void:
 	if animated_node is CanvasItem:
 		animated_node.scale = skin.note_scale
 
+	if (not is_instance_valid(data)) or data.state != NoteData.NoteState.HELD:
+		hold_clip.modulate.a = skin.sustain_alpha
+
 	hold_clip.size.x = skin.sustain_size
 	hold_clip.position.x = -hold_clip.size.x / 2.0
 
@@ -52,7 +55,11 @@ func apply_skin(skin: NoteSkin) -> void:
 	hold_tail.position.x = (hold_clip.size.x - hold_tail.size.x) / 2.0
 
 	hold_frames = skin.get_note_frames()
+
 	update_hold()
+
+	hold_tail.size.y = hold_tail.texture.get_height() * skin.note_scale.y
+	hold_rect.offset_bottom = -hold_tail.size.y
 
 
 func update_hold() -> void:
@@ -61,8 +68,8 @@ func update_hold() -> void:
 			hold_frames = animated_node.sprite_frames
 
 	if hold_frames:
-		hold_rect.texture = hold_frames.get_frame_texture(&"%s sustain" % direction, 0)
 		hold_tail.texture = hold_frames.get_frame_texture(&"%s sustain end" % direction, 0)
+		hold_rect.texture = hold_frames.get_frame_texture(&"%s sustain" % direction, 0)
 
 
 func play_animation(anim_name: StringName, force: bool = false) -> void:

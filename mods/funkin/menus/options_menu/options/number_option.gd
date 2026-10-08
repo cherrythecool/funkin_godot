@@ -56,7 +56,7 @@ var value: float:
 
 
 func _ready() -> void:
-	value = Settings.get_setting(file, key)
+	value = SaveData.get_save_value(file, key)
 	assert(is_instance_valid(root), "No root given to number option. This could cause issues, so here is your error.")
 
 
@@ -114,7 +114,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func set_value(value_: Variant) -> void:
-	Settings.set_setting(file, key, value_)
+	SaveData.set_save_value(file, key, value_)
 
 
 func _value_changed() -> void:

@@ -66,6 +66,10 @@ func get_distance_from_time(time: float) -> float:
 	return time * get_scroll_speed() * FNF_SCROLL_DISTANCE_MULT
 
 
+func get_note_hold_height(note: Note2D) -> float:
+	return get_distance_from_time(note.data.length + note.sustain_offset)
+
+
 func get_all_notes() -> Array[Note2D]:
 	var array: Array[Note2D] = []
 	for receptor: Receptor2D in receptors:
@@ -107,7 +111,7 @@ func spawn_notes() -> void:
 		if note.length <= 0.0:
 			note_node.hold_clip.hide()
 		else:
-			note_node.hold_clip.size.y = get_distance_from_time(note.length)
+			note_node.hold_clip.size.y = get_note_hold_height(note_node)
 
 		note_node.apply_skin(skin)
 
@@ -133,6 +137,10 @@ func update_notes(notes: Array[Note2D]) -> void:
 		var note := note_node.data
 		note_node.global_position = receptors[note.direction].global_position
 		note_node.hold_clip.scale.y = -1.0 if downscroll else 1.0
+
+		var clip_height := get_note_hold_height(note_node)
+		if note_node.hold_clip.size.y != clip_height:
+			note_node.hold_clip.size.y = clip_height
 
 		match note_node.data.state:
 			NoteData.NoteState.HIT, NoteData.NoteState.MISSED:
@@ -188,7 +196,7 @@ func _on_note_hit(note_data: NoteData) -> void:
 		return
 
 	note_node.sustain_offset = note_data.time - time
-	note_node.hold_clip.size.y = get_distance_from_time(note_data.length + note_node.sustain_offset)
+	note_node.hold_clip.size.y = get_note_hold_height(note_node)
 
 
 func _set_parent(new_parent: StrumlineManager) -> void:

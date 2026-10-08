@@ -77,7 +77,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _load_first_song():
 			MenuAudio.confirm.play()
 
-			if Settings.get_setting(&"core", "flashing_lights"):
+			if SaveData.get_save_value(&"core", "flashing_lights"):
 				week_flash_timer.start()
 				week_flash_timer.timeout.emit()
 

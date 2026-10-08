@@ -15,22 +15,22 @@ var prop_tweens: Array[Tween] = [null, null, null, null]
 func update_props(assets: StoryWeekProps) -> void:
 	var force_reload: bool = (not is_instance_valid(last_props))
 	if force_reload or last_props.backdrop != assets.backdrop:
-		GameUtils.free_children_from(backdrop)
+		FunkinUtils.free_children_from(backdrop)
 		if is_instance_valid(assets.backdrop):
 			add_prop_to(backdrop, assets.backdrop)
 
 	if force_reload or last_props.left != assets.left:
-		GameUtils.free_children_from(left)
+		FunkinUtils.free_children_from(left)
 		if is_instance_valid(assets.left):
 			add_prop_to(left, assets.left)
 
 	if force_reload or last_props.center != assets.center:
-		GameUtils.free_children_from(center)
+		FunkinUtils.free_children_from(center)
 		if is_instance_valid(assets.center):
 			add_prop_to(center, assets.center)
 
 	if force_reload or last_props.right != assets.right:
-		GameUtils.free_children_from(right)
+		FunkinUtils.free_children_from(right)
 		if is_instance_valid(assets.right):
 			add_prop_to(right, assets.right)
 
@@ -76,7 +76,7 @@ func tween_prop_in(index: int, x: float, start: Vector2) -> void:
 			parent = right
 	parent.position = start
 
-	var tween: Tween = GameUtils.replace_tween(self, prop_tweens[index])\
+	var tween: Tween = FunkinUtils.replace_tween(self, prop_tweens[index])\
 		.set_ease(Tween.EASE_OUT)\
 		.set_trans(Tween.TRANS_EXPO)\
 		.set_parallel()
@@ -97,7 +97,7 @@ func tween_prop_out(index: int) -> void:
 		3:
 			parent = right
 
-	var tween: Tween = GameUtils.replace_tween(self, prop_tweens[index])\
+	var tween: Tween = FunkinUtils.replace_tween(self, prop_tweens[index])\
 		.set_ease(Tween.EASE_IN_OUT)\
 		.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(parent, ^"modulate:a", 0.0, 1.25)

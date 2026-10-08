@@ -16,5 +16,5 @@ func _process(delta: float) -> void:
 
 	global_position = global_position.lerp(
 		target.global_position,
-		GameUtils.lerp_weight(delta, speed)
+		FunkinUtils.lerp_weight(delta, speed)
 	)

@@ -20,7 +20,7 @@ var texture_mem_peak := 0.0
 
 
 func _ready() -> void:
-	Settings.setting_changed.connect(_on_setting_changed)
+	SaveData.save_changed.connect(_on_save_changed)
 	_update_settings()
 
 	timer.start()
@@ -29,17 +29,17 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"toggle_debug"):
-		Settings.set_setting(&"core", "overlay_visible", not visible)
+		SaveData.set_save_value(&"core", "overlay_visible", not visible)
 	elif event.is_action_pressed(&"toggle_extra_info"):
 		if info_mode == "minimal":
 			info_mode = "full"
 		else:
 			info_mode = "minimal"
 
-		Settings.set_setting(&"core", "overlay_mode", info_mode)
+		SaveData.set_save_value(&"core", "overlay_mode", info_mode)
 
 
-func _on_setting_changed(file: StringName, key: Variant) -> void:
+func _on_save_changed(file: StringName, key: Variant) -> void:
 	if file != &"core" or (key != "overlay_visible" and key != "overlay_mode"):
 		return
 
@@ -47,8 +47,8 @@ func _on_setting_changed(file: StringName, key: Variant) -> void:
 
 
 func _update_settings() -> void:
-	visible = Settings.get_setting(&"core", "overlay_visible", false)
-	info_mode = Settings.get_setting(&"core", "overlay_mode", "minimal")
+	visible = SaveData.get_save_value(&"core", "overlay_visible", false)
+	info_mode = SaveData.get_save_value(&"core", "overlay_mode", "minimal")
 
 	match info_mode:
 		"full":

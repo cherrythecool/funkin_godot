@@ -24,8 +24,8 @@ var hue_shift: float = 0.0
 
 
 func _ready() -> void:
-	if not Settings.user_had_core_settings:
-		Settings.user_had_core_settings = true
+	if not SaveData.had_core_save:
+		SaveData.had_core_save = true
 		SceneManager.swap_to_file("uid://dasf7d5k8p30f")
 		return
 
@@ -69,7 +69,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			transitioning = true
 			MenuAudio.confirm.play()
 
-			if Settings.get_setting(&"core", "flashing_lights"):
+			if SaveData.get_save_value(&"core", "flashing_lights"):
 				flash.color = Color(Color.WHITE, 0.5)
 			else:
 				flash.color = Color.TRANSPARENT
@@ -77,7 +77,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 			enter_animation.play(&"press")
 
-			flash_tween = GameUtils.replace_tween(self, flash_tween)
+			flash_tween = FunkinUtils.replace_tween(self, flash_tween)
 			flash_tween.tween_property(flash, ^"color:a", 0.0, 1.0)
 			flash_tween.tween_callback(SceneManager.transition_to_file.bind("uid://b7fwxsepnt38j"))
 
@@ -134,7 +134,7 @@ func skip_intro() -> void:
 
 	post_intro.visible = true
 
-	if Settings.get_setting(&"core", "flashing_lights"):
+	if SaveData.get_save_value(&"core", "flashing_lights"):
 		flash.color = Color(Color.WHITE, 0.5)
-		flash_tween = GameUtils.replace_tween(self, flash_tween)
+		flash_tween = FunkinUtils.replace_tween(self, flash_tween)
 		flash_tween.tween_property(flash, ^"color:a", 0.0, 1.0)

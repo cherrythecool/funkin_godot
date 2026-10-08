@@ -12,15 +12,15 @@ extends Option
 
 var value: Variant:
 	set(new_value):
-		if new_value != Settings.get_setting(file, key):
-			Settings.set_setting(file, key, new_value)
+		if new_value != SaveData.get_save_value(file, key):
+			SaveData.set_save_value(file, key, new_value)
 
 		value = new_value
 		value_label.text = str(value) if display_raw else format_value()
 
 
 func _ready() -> void:
-	value = Settings.get_setting(file, key)
+	value = SaveData.get_save_value(file, key)
 
 
 func _select() -> void:

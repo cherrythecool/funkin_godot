@@ -30,16 +30,16 @@ general/ios/mix_with_others=true
 [autoload]
 
 Global="*res://engine/globals/global.gd"
+SaveData="*res://engine/globals/save_data.gd"
+Controls="*res://engine/globals/controls.gd"
+Highscores="*uid://cv8u1jf0lprio"
 MenuAudio="*res://engine/globals/menu_sounds/menu_sounds.tscn"
 Conductor="*uid://djsxumpddydxq"
-Scores="*res://engine/save/scores.gd"
-Controls="*res://engine/save/controls.gd"
-ModSwitcher="*uid://dubyatkw6h7m2"
-SoundTray="*uid://bhbryleu1jjq0"
 SceneManager="*uid://cmy8a7dh1kvs4"
+SoundTray="*uid://bhbryleu1jjq0"
 DebugOverlay="*res://engine/globals/debug_overlay/debug_overlay.tscn"
+ModSwitcher="*uid://dubyatkw6h7m2"
 TouchControls="*res://engine/gameplay/touch_controls/touch_controls.tscn"
-Settings="*res://engine/save/settings.gd"
 
 [debug]
 

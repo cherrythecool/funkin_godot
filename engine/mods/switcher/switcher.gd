@@ -27,13 +27,13 @@ func _ready() -> void:
 
 	hide()
 
-	Settings.set_default_settings(&"module", {
+	SaveData.set_default_save(&"module", {
 		"current_module": "funkin",
 	})
 
-	Settings.load_settings(&"module")
-	Settings.setting_changed.connect(_on_setting_changed)
-	current_module = Settings.get_setting(&"module", "current_module")
+	SaveData.load_save(&"module")
+	SaveData.save_changed.connect(_on_save_changed)
+	current_module = SaveData.get_save_value(&"module", "current_module")
 
 	load_mods_folder()
 	load_modules_list()
@@ -68,7 +68,7 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed(&"menu_accept"):
 		get_viewport().set_input_as_handled()
 		hide()
-		Settings.set_setting(&"module", "current_module", current_modules[selected])
+		SaveData.set_save_value(&"module", "current_module", current_modules[selected])
 		SceneManager.swap_to_file("res://engine/main.tscn")
 	elif event.is_action_pressed(&"menu_cancel"):
 		get_viewport().set_input_as_handled()
@@ -131,7 +131,7 @@ func module_pck_filter(path: String) -> bool:
 
 
 func recreate_panels() -> void:
-	GameUtils.free_children_from(mod_container)
+	FunkinUtils.free_children_from(mod_container)
 
 	for module: String in current_modules:
 		var panel := module_panel.instantiate()
@@ -180,6 +180,6 @@ func _on_open_folder_pressed() -> void:
 	OS.shell_show_in_file_manager(dir.get_current_dir())
 
 
-func _on_setting_changed(file: StringName, key: Variant) -> void:
+func _on_save_changed(file: StringName, key: Variant) -> void:
 	if file == &"module" and key == "current_module":
-		current_module = Settings.get_setting(&"module", "current_module")
+		current_module = SaveData.get_save_value(&"module", "current_module")

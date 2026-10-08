@@ -15,14 +15,11 @@ extends Resource
 @export_group("Sustains", "sustain_")
 @export_range(0.0, 1.0, 0.001) var sustain_alpha: float = 0.7
 @export_range(0.0, 100.0, 1.0, "or_greater") var sustain_size: float = 35.0
-@export var sustain_texture_offset: Rect2 = Rect2(0.0, 0.0, 0.0, -2.0)
 @export var sustain_tile_texture: bool = false
 @export var sustain_tile_mirroring: bool = false
 
 @export_subgroup("Sustain Tails", "sustain_tail_")
-@export var sustain_tail_texture_offset: Rect2 = Rect2(0.0, 0.0, 0.0, 0.0)
 @export_range(0.0, 100.0, 1.0, "or_greater") var sustain_tail_size: float = 35.0
-@export var sustain_tail_offset: float = 0.0
 
 @export_group("Note Splashes", "splash_")
 @export var splash_frames: SpriteFrames = null
@@ -43,18 +40,21 @@ extends Resource
 func get_receptor_frames() -> SpriteFrames:
 	if not is_instance_valid(receptor_frames):
 		receptor_frames = load("uid://y8en4nx7mbuw")
+
 	return receptor_frames
 
 
 func get_note_frames() -> SpriteFrames:
 	if not is_instance_valid(note_frames):
 		note_frames = load("uid://b3r2xop0whqyf")
+
 	return note_frames
 
 
 func get_splash_frames() -> SpriteFrames:
 	if not is_instance_valid(splash_frames):
 		splash_frames = load("uid://c6o1lsakoino4")
+
 	return splash_frames
 
 

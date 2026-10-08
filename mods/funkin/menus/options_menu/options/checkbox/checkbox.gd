@@ -18,14 +18,14 @@ extends Option
 var toggled: bool:
 	set(value):
 		if strings.size() >= 2:
-			Settings.set_setting(file, key, strings[int(value)])
+			SaveData.set_save_value(file, key, strings[int(value)])
 		else:
-			Settings.set_setting(file, key, value)
+			SaveData.set_save_value(file, key, value)
 	get:
 		if strings.size() >= 2:
-			return Settings.get_setting(file, key) == strings[1]
+			return SaveData.get_save_value(file, key) == strings[1]
 		else:
-			return Settings.get_setting(file, key)
+			return SaveData.get_save_value(file, key)
 
 
 func _ready() -> void:

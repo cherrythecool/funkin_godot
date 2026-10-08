@@ -35,7 +35,7 @@ func _ready() -> void:
 func transition_to_file(scene_path: String) -> void:
 	_reset_transition()
 
-	if Settings.get_setting(&"core", "skip_scene_transitions") or not is_instance_valid(transition_player):
+	if SaveData.get_save_value(&"core", "skip_scene_transitions") or not is_instance_valid(transition_player):
 		swap_to_file(scene_path)
 		return
 

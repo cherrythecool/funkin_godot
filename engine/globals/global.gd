@@ -5,12 +5,14 @@ var fullscreened: bool = false:
 	set(value):
 		if main_window.unresizable:
 			return
+
 		if not Engine.is_embedded_in_editor():
 			main_window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN if value else Window.MODE_WINDOWED
 	get:
 		if Engine.is_embedded_in_editor():
 			return false
-		return main_window.mode != Window.MODE_WINDOWED
+		else:
+			return main_window.mode != Window.MODE_WINDOWED
 
 var game_size: Vector2:
 	get:
@@ -35,22 +37,21 @@ func _ready() -> void:
 	main_window.focus_exited.connect(_on_focus_exit)
 
 	version = ProjectSettings.get_setting("application/config/version")
-
-	Settings.setting_changed.connect(_on_setting_changed)
-	Settings.settings_loaded.connect(_on_settings_loaded)
-
 	is_mobile = DisplayServer.is_touchscreen_available() and OS.has_feature("mobile")
+
+	SaveData.save_changed.connect(_on_save_changed)
+	SaveData.save_loaded.connect(_on_save_loaded)
 
 
 func _on_focus_enter() -> void:
-	if not Settings.get_setting(&"core", "pause_when_unfocused"):
+	if not SaveData.get_save_value(&"core", "pause_when_unfocused"):
 		return
 
 	get_tree().paused = was_paused
 
 
 func _on_focus_exit() -> void:
-	if not Settings.get_setting(&"core", "pause_when_unfocused"):
+	if not SaveData.get_save_value(&"core", "pause_when_unfocused"):
 		return
 
 	was_paused = get_tree().paused
@@ -61,19 +62,16 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_echo() or not event.is_pressed():
 		return
 
-	get_viewport().set_input_as_handled()
-
 	if event.is_action(&"menu_fullscreen"):
 		fullscreened = not fullscreened
-		return
-
-	if event.is_action(&"menu_reload"):
+		get_viewport().set_input_as_handled()
+	elif event.is_action(&"menu_reload"):
 		SceneManager.reload_current_scene()
-		return
+		get_viewport().set_input_as_handled()
 
 
-func _on_setting_changed(file: StringName, key: Variant) -> void:
-	var value: Variant = Settings.get_setting(file, key)
+func _on_save_changed(file: StringName, key: Variant) -> void:
+	var value: Variant = SaveData.get_save_value(file, key)
 	if file != &"core" or value == null:
 		return
 
@@ -87,15 +85,15 @@ func _on_setting_changed(file: StringName, key: Variant) -> void:
 				DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
 
-func _on_settings_loaded(file: StringName) -> void:
+func _on_save_loaded(file: StringName) -> void:
 	if file != &"core":
 		return
 
 	use_high_dpi = (
-		not Engine.is_embedded_in_editor() and
+		(not Engine.is_embedded_in_editor()) and
 		OS.has_feature("pc") and
 		ProjectSettings.get_setting("display/window/dpi/allow_hidpi", true) and
-		Settings.get_setting(&"core", "scale_with_dpi", true)
+		SaveData.get_save_value(&"core", "scale_with_dpi", true)
 	)
 
 	if use_high_dpi:

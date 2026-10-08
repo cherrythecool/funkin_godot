@@ -35,7 +35,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var child: CategoryIcon = categories.get_child(selected)
 	var max_scroll := scroll_container.get_v_scroll_bar().max_value - scroll_container.get_rect().size.y
-	lerped_vertical_scroll = lerpf(lerped_vertical_scroll, minf(child.position.y, max_scroll), GameUtils.lerp_weight(delta, 6.0))
+	lerped_vertical_scroll = lerpf(lerped_vertical_scroll, minf(child.position.y, max_scroll), FunkinUtils.lerp_weight(delta, 6.0))
 	scroll_container.scroll_vertical = int(lerped_vertical_scroll)
 
 
@@ -87,7 +87,7 @@ func deselect_current() -> void:
 
 	tween.tween_property(interface, ^"position:x", 0.0, 0.5)
 	tween.tween_property(section, ^"position:x", 1920.0, 0.5)
-	tween.tween_callback(GameUtils.free_from_array.bind(children)).set_delay(0.5)
+	tween.tween_callback(FunkinUtils.free_from_array.bind(children)).set_delay(0.5)
 
 
 func select_current() -> void:

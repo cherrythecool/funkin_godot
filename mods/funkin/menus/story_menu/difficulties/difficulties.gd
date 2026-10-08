@@ -73,7 +73,7 @@ func tween_difficulty_sprite() -> void:
 	difficulty_sprite.scale.x = 0.95
 	difficulty_sprite.scale.y = 1.05
 
-	tween = GameUtils.replace_tween(self, tween)\
+	tween = FunkinUtils.replace_tween(self, tween)\
 		.set_parallel()\
 		.set_ease(Tween.EASE_OUT)
 	tween.tween_property(difficulty_sprite, 'modulate:a', 1.0, 0.25).set_trans(Tween.TRANS_CUBIC)
@@ -89,7 +89,7 @@ func calculate_high_score() -> void:
 
 	for raw_song: String in week.songs:
 		var song: String = raw_song + suffix
-		if not Scores.has_score(song, difficulty):
+		if not Highscores.has_score(song, difficulty):
 			high_score.text = 'High Score: N/A'
 			break
-		target_score += Scores.get_score(song, difficulty).get('score', 0)
+		target_score += Highscores.get_score(song, difficulty).get('score', 0)

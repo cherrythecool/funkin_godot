@@ -51,7 +51,7 @@ func _on_difficulty_changed(new_difficulty: StringName) -> void:
 	reset_panel.song = song
 	reset_panel.difficulty = difficulty
 
-	score_data = Scores.get_score(song, difficulty)
+	score_data = Highscores.get_score(song, difficulty)
 	score_panel.refresh(score_data)
 
 	if difficulty_count > 1:

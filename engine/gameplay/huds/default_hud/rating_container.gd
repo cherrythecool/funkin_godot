@@ -69,7 +69,7 @@ func _on_note_hit(note: NoteData) -> void:
 	if rating_textures.has(rating.name):
 		rating_sprite.texture = rating_textures[rating.name]
 
-	modulate.a = Settings.get_setting(&"core", "rating_alpha")
+	modulate.a = SaveData.get_save_value(&"core", "rating_alpha")
 	scale = Vector2.ONE * 1.1
 	tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, 'scale', Vector2.ONE, 0.15)

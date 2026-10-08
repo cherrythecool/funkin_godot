@@ -33,9 +33,9 @@ var volume: float = -1.0:
 			linear_to_db(value),
 		)
 
-		var buses: Dictionary = Settings.get_setting(&"core", "volume", {})
+		var buses: Dictionary = SaveData.get_save_value(&"core", "volume", {})
 		buses[&"Master"] = value
-		Settings.set_setting(&"core", "volume", buses)
+		SaveData.set_save_value(&"core", "volume", buses)
 
 		if volume > 0.0:
 			muted = false
@@ -47,7 +47,8 @@ var shake_timer: float = 0.0
 
 func _ready() -> void:
 	hide()
-	Settings.settings_loaded.connect(_on_settings_loaded)
+
+	SaveData.save_loaded.connect(_on_save_loaded)
 
 
 func _physics_process(delta: float) -> void:
@@ -115,11 +116,11 @@ func _input(event: InputEvent) -> void:
 	bars.modulate = Color.INDIAN_RED if muted else Color.WHITE
 
 
-func _on_settings_loaded(file: StringName) -> void:
+func _on_save_loaded(file: StringName) -> void:
 	if file != &"core":
 		return
 
-	var buses: Dictionary = Settings.get_setting(&"core", "volume", {})
+	var buses: Dictionary = SaveData.get_save_value(&"core", "volume", {})
 	for bus: String in buses.keys():
 		var bus_index: int = AudioServer.get_bus_index(bus)
 		if bus_index < 0:

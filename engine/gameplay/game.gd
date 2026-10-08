@@ -216,8 +216,8 @@ func load_chart() -> void:
 			load_settings[&"song_difficulty"],
 		)
 
-	var custom_speed: float = Settings.get_setting(&"core", "note_scroll_value")
-	match Settings.get_setting(&"core", "note_scroll_method"):
+	var custom_speed: float = SaveData.get_save_value(&"core", "note_scroll_value")
+	match SaveData.get_save_value(&"core", "note_scroll_method"):
 		"chart_multiplier":
 			scroll_speed = chart.scroll_speed * custom_speed
 		"constant":

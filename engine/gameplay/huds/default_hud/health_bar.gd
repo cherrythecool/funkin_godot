@@ -46,7 +46,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if rating_manager:
-		lerped_health = lerpf(lerped_health, rating_manager.get_health_percent(), GameUtils.lerp_weight(delta, 5.0))
+		lerped_health = lerpf(lerped_health, rating_manager.get_health_percent(), FunkinUtils.lerp_weight(delta, 5.0))
 
 	if tracking_song_health:
 		last_song_health = lerped_health

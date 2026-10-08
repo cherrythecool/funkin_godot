@@ -100,10 +100,10 @@ func _process(delta: float) -> void:
 	for i: int in character_options.get_child_count():
 		var icon: Node2D = character_options.get_child(i)
 		if i == selected_x + (selected_y * 3):
-			selector.global_position = selector.global_position.lerp(icon.global_position, GameUtils.lerp_weight(delta, 12.0))
-			icon.scale = icon.scale.lerp(Vector2.ONE * 1.15, GameUtils.lerp_weight(delta, 9.0))
+			selector.global_position = selector.global_position.lerp(icon.global_position, FunkinUtils.lerp_weight(delta, 12.0))
+			icon.scale = icon.scale.lerp(Vector2.ONE * 1.15, FunkinUtils.lerp_weight(delta, 9.0))
 		else:
-			icon.scale = icon.scale.lerp(Vector2.ONE, GameUtils.lerp_weight(delta, 9.0))
+			icon.scale = icon.scale.lerp(Vector2.ONE, FunkinUtils.lerp_weight(delta, 9.0))
 
 	if "smoothed_offset" in camera_2d:
 		camera_2d.smoothed_offset = get_camera_offset()
@@ -229,7 +229,7 @@ func _on_confirm_finished() -> void:
 
 	transitioning = true
 
-	if not Settings.get_setting(&"core", "skip_scene_transitions"):
+	if not SaveData.get_save_value(&"core", "skip_scene_transitions"):
 		camera_2d.set_script(null)
 		camera_2d.limit_enabled = false
 

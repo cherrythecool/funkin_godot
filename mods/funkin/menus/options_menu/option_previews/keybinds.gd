@@ -12,7 +12,7 @@ var selecting: bool = false
 
 
 func _ready() -> void:
-	var binds: Dictionary = Settings.get_setting(&"core", "controls_keybinds")
+	var binds: Dictionary = SaveData.get_save_value(&"core", "controls_keybinds")
 	keys = keys.filter(func(node: Node) -> bool:
 		return node is HBoxContainer
 	)
@@ -40,10 +40,10 @@ func _input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 	var input := event as InputEventKey
-	var binds: Dictionary = Settings.get_setting(&"core", "controls_keybinds")
+	var binds: Dictionary = SaveData.get_save_value(&"core", "controls_keybinds")
 	binds[key][selected] = input.keycode
 	button.text = OS.get_keycode_string(input.keycode).to_upper()
-	Settings.set_setting(&"core", "controls_keybinds", binds)
+	SaveData.set_save_value(&"core", "controls_keybinds", binds)
 
 	selecting = false
 

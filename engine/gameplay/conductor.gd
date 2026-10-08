@@ -98,7 +98,7 @@ func _ready() -> void:
 	if not is_instance_valid(instance):
 		instance = self
 
-	Settings.setting_changed.connect(_on_setting_changed)
+	SaveData.save_changed.connect(_on_save_changed)
 	SceneManager.scene_changed.connect(_on_scene_changed)
 
 
@@ -114,9 +114,9 @@ func _process(delta: float) -> void:
 	calculate_beat()
 
 
-func _on_setting_changed(file: StringName, key: Variant) -> void:
+func _on_save_changed(file: StringName, key: Variant) -> void:
 	if file == &"core" and key == "note_offset":
-		manual_offset = Settings.get_setting(file, key) / 1000.0
+		manual_offset = SaveData.get_save_value(file, key) / 1000.0
 
 
 func _on_scene_changed() -> void:
@@ -162,7 +162,7 @@ func get_beat_at_time(time_: float, timing_changes_: Array[TimingChange]) -> flo
 
 
 func sync_to_target(delta: float) -> void:
-	var audio_time := GameUtils.get_accurate_time(target_audio)
+	var audio_time := FunkinUtils.get_accurate_time(target_audio)
 	if target_audio.playing and absf(raw_time - audio_time) < 0.5:
 		raw_time = maxf(audio_time, raw_time + (delta * 0.9))
 	else:

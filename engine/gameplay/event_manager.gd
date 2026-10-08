@@ -54,7 +54,7 @@ func _on_chart_loaded(chart: Chart) -> void:
 
 
 func _load_events() -> void:
-	GameUtils.free_from_array(loaded_events)
+	FunkinUtils.free_from_array(loaded_events)
 	loaded_events.clear()
 
 	var already_loaded_names: Array[StringName] = []

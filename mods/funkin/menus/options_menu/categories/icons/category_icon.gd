@@ -21,10 +21,10 @@ func _process(delta: float) -> void:
 	modulate.a = lerpf(
 		modulate.a,
 		target_alpha,
-		GameUtils.lerp_weight(delta, 9.0),
+		FunkinUtils.lerp_weight(delta, 9.0),
 	)
 
 	sprite.scale = sprite.scale.lerp(
 		Vector2.ONE * target_scale,
-		GameUtils.lerp_weight(delta, 10.0),
+		FunkinUtils.lerp_weight(delta, 10.0),
 	)

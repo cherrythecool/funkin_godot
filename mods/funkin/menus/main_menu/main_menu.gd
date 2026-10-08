@@ -58,7 +58,7 @@ func _on_press(item: MainMenuButton) -> void:
 
 
 func _press_animation() -> void:
-	if Settings.get_setting(&"core", "flashing_lights"):
+	if SaveData.get_save_value(&"core", "flashing_lights"):
 		background_animations.play(&"loop")
 
 	var tween := create_tween()\

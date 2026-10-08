@@ -8,9 +8,9 @@ var lane: int = 0
 
 
 func _ready() -> void:
-	Settings.setting_changed.connect(_on_setting_changed)
+	SaveData.save_changed.connect(_on_save_changed)
 	Conductor.instance.beat_hit.connect(_on_beat_hit)
-	renderer.scroll_speed = Settings.get_setting(&"core", "note_scroll_value")
+	renderer.scroll_speed = SaveData.get_save_value(&"core", "note_scroll_value")
 
 
 func _process(_delta: float) -> void:
@@ -34,6 +34,6 @@ func _on_beat_hit(beat: int) -> void:
 	lane = wrapi(lane + 1, 0, 4)
 
 
-func _on_setting_changed(file: StringName, key: Variant) -> void:
+func _on_save_changed(file: StringName, key: Variant) -> void:
 	if file == &"core" and key == "note_scroll_value":
-		renderer.scroll_speed = Settings.get_setting(file, key, 0.0)
+		renderer.scroll_speed = SaveData.get_save_value(file, key, 0.0)

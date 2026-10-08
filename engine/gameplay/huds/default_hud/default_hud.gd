@@ -50,8 +50,8 @@ func _ready() -> void:
 
 	Conductor.beat_hit.connect(_on_beat_hit)
 
-	downscroll = Settings.get_setting(&"core", "downscroll")
-	middlescroll = Settings.get_setting(&"core", "middlescroll")
+	downscroll = SaveData.get_save_value(&"core", "downscroll")
+	middlescroll = SaveData.get_save_value(&"core", "middlescroll")
 
 
 func _on_setup() -> void:
@@ -111,7 +111,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			countdown_container.visible = toggle_visible
 
 		if time_bar:
-			time_bar.visible = toggle_visible and Settings.get_setting(&"core", "time_bar_show")
+			time_bar.visible = toggle_visible and SaveData.get_save_value(&"core", "time_bar_show")
 
 
 func _on_first_opponent_note(_note: NoteData) -> void:

@@ -141,9 +141,9 @@ func _on_song_finished() -> void:
 	var song: StringName = Game.load_settings[&"song_name"]
 	var difficulty: StringName = Game.load_settings[&"song_difficulty"]
 
-	var current_score: Dictionary = Scores.get_score(song, difficulty)
-	if (not Scores.has_score(song, difficulty)) or score > current_score["score"]:
-		Scores.set_score(song, difficulty, {
+	var current_score: Dictionary = Highscores.get_score(song, difficulty)
+	if (not Highscores.has_score(song, difficulty)) or score > current_score["score"]:
+		Highscores.set_score(song, difficulty, {
 			"score": score,
 			"misses": misses,
 			"accuracy": get_accuracy(),

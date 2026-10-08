@@ -10,15 +10,15 @@ extends Option
 
 var value: float:
 	set(new_value):
-		if new_value != Settings.get_setting(&"core", key):
-			Settings.set_setting(&"core", key, new_value)
+		if new_value != SaveData.get_save_value(&"core", key):
+			SaveData.set_save_value(&"core", key, new_value)
 
 		value = new_value
 		value_label.text = str(value) if display_float else str(int(value))
 
 
 func _ready() -> void:
-	value = Settings.get_setting(&"core", key)
+	value = SaveData.get_save_value(&"core", key)
 
 
 func _select() -> void:

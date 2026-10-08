@@ -1,114 +1,109 @@
 extends Node
 
 
-var user_had_core_settings: bool
+var had_core_save: bool
 
-var _settings: Dictionary[StringName, Dictionary] = {}
-var _default_settings: Dictionary[StringName, Dictionary] = {}
+var _saves: Dictionary[StringName, Dictionary] = {}
+var _default_saves: Dictionary[StringName, Dictionary] = {}
 
-signal setting_changed(file: StringName, key: Variant)
-signal settings_loaded(file: StringName)
-signal settings_saved(file: StringName)
+signal save_changed(file: StringName, key: Variant)
+signal save_loaded(file: StringName)
+signal save_saved(file: StringName)
 
 signal defaults_changed(file: StringName)
 
 
-func _init() -> void:
-	user_had_core_settings = has_settings(&"core")
-	set_default_settings(&"core", _get_core_defaults())
-	_settings[&"core"] = _default_settings[&"core"]
-
-
 func _ready() -> void:
-	load_settings(&"core")
+	had_core_save = has_save(&"core")
+	set_default_save(&"core", _get_core_defaults())
+	load_save(&"core")
 
 
-func get_settings_path(file: StringName) -> String:
-	return "user://%s_settings.json" % [file]
+func get_saves_path(file: StringName) -> String:
+	return "user://%s_save.json" % [file]
 
 
-func has_settings(file: StringName) -> bool:
-	var path := get_settings_path(file)
+func has_save(file: StringName) -> bool:
+	var path := get_saves_path(file)
 	return FileAccess.file_exists(path)
 
 
-func load_settings(file: StringName) -> void:
-	_settings[file] = get_default_settings(file)
+func load_save(file: StringName) -> void:
+	_saves[file] = get_default_save(file)
 
-	var path := get_settings_path(file)
+	var path := get_saves_path(file)
 	if not FileAccess.file_exists(path):
-		settings_loaded.emit(file)
-		save_settings(file)
+		save_loaded.emit(file)
+		save(file)
 		return
 
-	var raw_settings := FileAccess.get_file_as_string(path)
+	var raw_saves := FileAccess.get_file_as_string(path)
 	var json := JSON.new()
-	var parse_error := json.parse(raw_settings)
+	var parse_error := json.parse(raw_saves)
 
 	if parse_error != OK:
-		printerr("Failed to parse settings '%s' with error code %s!" % [
+		printerr("Failed to parse saves '%s' with error code %s!" % [
 			file,
 			parse_error,
 		])
 		return
 
 	if json.data is not Dictionary or json.data == null:
-		push_warning("Cannot load settings of a type other than Dictionary (or one that is null).")
+		push_warning("Cannot load saves of a type other than Dictionary (or one that is null).")
 		return
 
-	var settings: Dictionary = json.data as Dictionary
-	for key: Variant in settings.keys():
-		set_setting(file, key, settings[key], false)
+	var saves: Dictionary = json.data as Dictionary
+	for key: Variant in saves.keys():
+		set_save_value(file, key, saves[key], false)
 
-	save_settings(file)
-
-	settings_loaded.emit(file)
-
-
-func set_setting(file: StringName, key: Variant, value: Variant, save: bool = true) -> void:
-	var settings := get_settings(file)
-	settings[key] = value
-	setting_changed.emit(file, key)
-
-	if save:
-		save_settings(file)
+	save(file)
+	save_loaded.emit(file)
 
 
-func get_setting(file: StringName, key: Variant, default: Variant = null) -> Variant:
-	var settings := get_settings(file)
-	return settings.get(key, default)
+func set_save_value(file: StringName, key: Variant, value: Variant, save_: bool = true) -> void:
+	var saves := get_save(file)
+	saves[key] = value
+	save_changed.emit(file, key)
+
+	if save_:
+		save(file)
 
 
-func save_settings(file: StringName) -> void:
-	var path := get_settings_path(file)
-	var settings := get_settings(file)
+func get_save_value(file: StringName, key: Variant, default: Variant = null) -> Variant:
+	var saves := get_save(file)
+	return saves.get(key, default)
+
+
+func save(file: StringName) -> void:
+	var path := get_saves_path(file)
+	var saves := get_save(file)
 	var file_access := FileAccess.open(path, FileAccess.WRITE)
 	file_access.resize(0)
 
-	var saved := file_access.store_string(JSON.stringify(settings, "    "))
+	var saved := file_access.store_string(JSON.stringify(saves, "    "))
 	if not saved:
-		printerr("Settings at path '%s' failed to save with error code %s!" % [
+		printerr("saves at path '%s' failed to save with error code %s!" % [
 			path,
 			file_access.get_error(),
 		])
 		return
 
-	settings_saved.emit(file)
+	save_saved.emit(file)
 
 
-func get_settings(file: StringName) -> Dictionary:
-	assert(_settings.has(file), "Settings must exist to access them.")
-	return _settings[file]
+func get_save(file: StringName) -> Dictionary:
+	assert(_saves.has(file), "saves must exist to access them.")
+	return _saves[file]
 
 
-func set_default_settings(file: StringName, settings: Dictionary) -> void:
-	_default_settings[file] = settings
+func set_default_save(file: StringName, saves: Dictionary) -> void:
+	_default_saves[file] = saves
 	defaults_changed.emit(file)
 
 
-func get_default_settings(file: StringName) -> Dictionary:
-	assert(_default_settings.has(file), "Default settings must exist to access them.")
-	return _default_settings[file]
+func get_default_save(file: StringName) -> Dictionary:
+	assert(_default_saves.has(file), "Default saves must exist to access them.")
+	return _default_saves[file]
 
 
 func _get_core_defaults() -> Dictionary:

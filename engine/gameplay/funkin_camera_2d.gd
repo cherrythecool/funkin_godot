@@ -81,9 +81,9 @@ func _process(delta: float) -> void:
 		camera_zoom = zoom
 
 	if position_lerps:
-		position = position.lerp(position_target, GameUtils.lerp_weight(delta, 3.0 * position_lerp_speed))
+		position = position.lerp(position_target, FunkinUtils.lerp_weight(delta, 3.0 * position_lerp_speed))
 	if zoom_lerps:
-		zoom = zoom.lerp(zoom_target, GameUtils.lerp_weight(delta, 3.0 * zoom_lerp_speed))
+		zoom = zoom.lerp(zoom_target, FunkinUtils.lerp_weight(delta, 3.0 * zoom_lerp_speed))
 
 
 func _on_beat_hit(beat: int) -> void:
@@ -134,8 +134,8 @@ func _on_event_hit(event: EventData) -> void:
 
 			var steps: float = event.data.get(&"duration")
 			pan_event_tween = create_tween()
-			pan_event_tween.set_ease(GameUtils.get_ease_from_str(ease_string))
-			pan_event_tween.set_trans(GameUtils.get_trans_from_str(ease_string))
+			pan_event_tween.set_ease(FunkinUtils.get_ease_from_str(ease_string))
+			pan_event_tween.set_trans(FunkinUtils.get_trans_from_str(ease_string))
 			pan_event_tween.tween_property(
 				self,
 				^"position_lerps",
@@ -187,10 +187,10 @@ func _on_event_hit(event: EventData) -> void:
 
 			zoom_event_tween = create_tween().set_parallel()
 			zoom_event_tween.set_ease(
-				GameUtils.get_ease_from_str(ease_string)
+				FunkinUtils.get_ease_from_str(ease_string)
 			)
 			zoom_event_tween.set_trans(
-				GameUtils.get_trans_from_str(ease_string)
+				FunkinUtils.get_trans_from_str(ease_string)
 			)
 			zoom_event_tween.tween_property(
 				self,

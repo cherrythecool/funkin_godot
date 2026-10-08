@@ -9,7 +9,7 @@ extends ProgressBar
 
 
 func _ready() -> void:
-	visible = Settings.get_setting(&"core", "time_bar_show")
+	visible = SaveData.get_save_value(&"core", "time_bar_show")
 	update_bar_and_label()
 
 
@@ -34,4 +34,4 @@ func update_bar_and_label() -> void:
 		value = time
 
 	max_value = length
-	time_label.text = GameUtils.format_time(maxf(length - value, 0.0) / Conductor.rate)
+	time_label.text = FunkinUtils.format_time(maxf(length - value, 0.0) / Conductor.rate)

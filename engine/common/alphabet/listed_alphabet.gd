@@ -18,7 +18,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	position = position.lerp(
 		get_target_position(),
-		GameUtils.lerp_weight(delta, rate),
+		FunkinUtils.lerp_weight(delta, rate),
 	)
 
 
