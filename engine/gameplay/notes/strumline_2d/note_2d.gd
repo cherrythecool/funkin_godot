@@ -52,7 +52,8 @@ func apply_skin(skin: NoteSkin) -> void:
 	hold_clip.position.x = -hold_clip.size.x / 2.0
 
 	hold_tail.size.x = skin.sustain_tail_size
-	hold_tail.position.x = (hold_clip.size.x - hold_tail.size.x) / 2.0
+	hold_tail.offset_left = -skin.sustain_tail_size / 2.0
+	hold_tail.offset_right = skin.sustain_tail_size / 2.0
 
 	hold_frames = skin.get_note_frames()
 
@@ -60,6 +61,15 @@ func apply_skin(skin: NoteSkin) -> void:
 
 	hold_tail.size.y = hold_tail.texture.get_height() * skin.note_scale.y
 	hold_rect.offset_bottom = -hold_tail.size.y
+	
+	if skin.sustain_tile_texture:
+		hold_rect.stretch_mode = TextureRect.STRETCH_TILE
+
+		if hold_rect is AtlasTextureRect:
+			hold_rect.tile_y = true
+	
+	if skin.sustain_tile_mirroring and hold_rect is AtlasTextureRect:
+		hold_rect.mirror_every_other = true
 
 
 func update_hold() -> void:

@@ -35,7 +35,12 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 	if data["song"] is Dictionary:
 		song_data = data["song"]
 	else:
+		# psych 1.0 and stuff mostly
 		song_data = data
+	
+	# only seen this on like psych 1.0 or nmv charts so
+	# unless it gets used for smth else in future then yeah
+	if song_data.has("format"):
 		notes_use_must_hit = false
 
 	chart.scroll_speed = song_data.get("speed", 1.0)
@@ -112,7 +117,7 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 				else:
 					side = &"opponent" if direction < key_count else &"player"
 			else:
-				side = &"opponent" if direction < key_count else &"player"
+				side = &"player" if direction < key_count else &"opponent"
 
 			note_data.strumline = side
 

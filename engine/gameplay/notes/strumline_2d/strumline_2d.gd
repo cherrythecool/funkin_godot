@@ -16,7 +16,7 @@ const FNF_SCROLL_DISTANCE_MULT: float = 450.0
 
 @export_group("References")
 
-@export var receptors: Array[Receptor2D] = [null, null, null, null]
+@export var receptors: Array[Receptor2D] = []
 @export var underlay: CanvasItem
 
 @export_group("Notes")
@@ -84,13 +84,13 @@ func spawn_notes() -> void:
 
 	while parent.notes_index + loop_idx < notes_have_spawned.size():
 		var note_index := parent.notes_index + loop_idx
-		if notes_have_spawned[note_index]:
-			loop_idx += 1
-			continue
-
 		var note := parent.notes[note_index]
 		if time < note.time - (notes_spawn_window / get_scroll_speed()):
 			break
+
+		if notes_have_spawned[note_index]:
+			loop_idx += 1
+			continue
 
 		if note.direction > receptors.size() - 1:
 			printerr("Tried to spawn note with direction %d, outside range of receptors (%d)" % [
@@ -106,7 +106,6 @@ func spawn_notes() -> void:
 		note_node.direction = receptor.direction
 		note_node.data = note
 		note_node.index = note_index
-		notes_parent.add_child(note_node)
 
 		if note.length <= 0.0:
 			note_node.hold_clip.hide()
@@ -116,8 +115,9 @@ func spawn_notes() -> void:
 		note_node.apply_skin(skin)
 
 		receptor.notes.append(note_node)
-		notes_have_spawned[note_index] = true
+		notes_parent.add_child(note_node)
 
+		notes_have_spawned[note_index] = true
 		loop_idx += 1
 
 
@@ -156,6 +156,9 @@ func update_notes(notes: Array[Note2D]) -> void:
 
 
 func update_skin() -> void:
+	if not is_instance_valid(skin):
+		return
+
 	for receptor: Receptor2D in receptors:
 		receptor.apply_skin(skin)
 

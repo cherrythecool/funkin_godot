@@ -44,8 +44,6 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not visible:
-		return
 	if not active:
 		return
 	if not event.is_pressed():

@@ -45,9 +45,8 @@ var volume: float = -1.0:
 var shake_timer: float = 0.0
 
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	hide()
-
 	SaveData.save_loaded.connect(_on_save_loaded)
 
 

@@ -58,10 +58,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -25.0
-offset_right = 25.0
+offset_left = -17.0
+offset_right = 17.5
 offset_bottom = 45.0
-grow_horizontal = 2
 texture = SubResource("PlaceholderTexture2D_c453m")
 expand_mode = 1
 

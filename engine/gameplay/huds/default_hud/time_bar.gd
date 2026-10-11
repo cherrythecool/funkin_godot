@@ -10,7 +10,7 @@ extends ProgressBar
 
 func _ready() -> void:
 	visible = SaveData.get_save_value(&"core", "time_bar_show")
-	update_bar_and_label()
+	update_bar_and_label.call_deferred()
 
 
 func _process(_delta: float) -> void:

@@ -2,11 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://ktlymxin48f7" path="res://engine/gameplay/notes/strumline_2d/receptor_2d.tscn" id="1_jq302"]
 [ext_resource type="Script" uid="uid://djivyhdqngiw2" path="res://engine/gameplay/notes/strumline_2d/strumline_2d.gd" id="1_pqi75"]
+[ext_resource type="Resource" uid="uid://fctf0ejurlbg" path="res://engine/gameplay/styles/default/note_skin.tres" id="2_82lgc"]
 [ext_resource type="PackedScene" uid="uid://b6b6gdk3o56wm" path="res://engine/gameplay/notes/strumline_2d/note_2d.tscn" id="2_nh8mv"]
 [ext_resource type="Script" uid="uid://77giku6f2gih" path="res://engine/gameplay/notes/strumline_2d/underlay.gd" id="3_m4ikx"]
 
 [node name="4KStrumline2D" type="Node2D" unique_id=518721407 node_paths=PackedStringArray("receptors", "underlay", "notes_parent")]
 script = ExtResource("1_pqi75")
+skin = ExtResource("2_82lgc")
 receptors = [NodePath("Receptors/Left"), NodePath("Receptors/Down"), NodePath("Receptors/Up"), NodePath("Receptors/Right")]
 underlay = NodePath("Underlay")
 notes_parent = NodePath("Notes")

@@ -9,7 +9,7 @@
 script = ExtResource("1_yox26")
 receptor_frames = ExtResource("1_0nxoh")
 note_frames = ExtResource("1_1yw7k")
-sustain_texture_offset = Rect2(0, 2, 0, -4)
-sustain_tail_texture_offset = Rect2(0, 1, 0, -1)
+sustain_tile_texture = true
+sustain_tile_mirroring = true
 splash_frames = ExtResource("4_kcys0")
 metadata/_custom_type_script = "uid://dfdr435gif8gk"
