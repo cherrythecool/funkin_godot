@@ -15,17 +15,20 @@ enum NoteState {
 @export var length: float
 
 @export var type: StringName
-@export var type_data: Dictionary[StringName, Variant] = {
-	&"use_custom_sing": false,
-	&"custom_sing": &"",
-	&"sing_prefix": &"sing_",
-	&"sing_suffix": &"",
+@export var custom_type_data: Dictionary[StringName, Variant] = {}
 
-	&"use_custom_miss": false,
-	&"custom_miss": &"",
-	&"miss_prefix": &"sing_",
-	&"miss_suffix": &"_miss",
-}
+@export_group("Singing Type Info")
+@export var sing_animations := true
+@export var sing_prefix := &"sing_"
+@export var sing_suffix := &""
+@export var use_custom_sing := false
+@export var custom_sing_anim := &""
+
+@export var miss_animations := true
+@export var miss_prefix := &"sing_"
+@export var miss_suffix := &"_miss"
+@export var use_custom_miss := false
+@export var custom_miss_anim := &""
 
 @export_group("Gameplay Type Info")
 @export var should_hit: bool = true
