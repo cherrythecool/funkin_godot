@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dubyatkw6h7m2"]
 
-[ext_resource type="Script" uid="uid://d0a7jysvvuotb" path="res://engine/mods/switcher/switcher.gd" id="1_p5b5k"]
-[ext_resource type="PackedScene" uid="uid://bqv4nkj1rm3om" path="res://engine/mods/switcher/listed_mod.tscn" id="2_kc7kk"]
+[ext_resource type="Script" uid="uid://d0a7jysvvuotb" path="res://engine/mods/switcher.gd" id="1_p5b5k"]
+[ext_resource type="PackedScene" uid="uid://bqv4nkj1rm3om" path="res://engine/mods/listed_mod.tscn" id="2_kc7kk"]
 [ext_resource type="FontFile" uid="uid://cuh8h453towpc" path="res://engine/common/fonts/red_hat_mono.ttf" id="3_kc7kk"]
-[ext_resource type="Texture2D" uid="uid://mwxbaajkt3nh" path="res://engine/mods/switcher/folder_icon.svg" id="4_kc7kk"]
+[ext_resource type="Texture2D" uid="uid://mwxbaajkt3nh" path="res://engine/mods/folder_icon.svg" id="4_kc7kk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgwie"]
 bg_color = Color(0.0703125, 0.069488525, 0.069488525, 1)
