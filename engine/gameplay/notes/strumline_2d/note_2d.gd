@@ -45,6 +45,9 @@ func apply_skin(skin: NoteSkin) -> void:
 	if animated_node is CanvasItem:
 		animated_node.scale = skin.note_scale
 
+	if not hold_clip.visible:
+		return
+
 	if (not is_instance_valid(data)) or data.state != NoteData.NoteState.HELD:
 		hold_clip.modulate.a = skin.sustain_alpha
 
@@ -56,18 +59,18 @@ func apply_skin(skin: NoteSkin) -> void:
 	hold_tail.offset_right = skin.sustain_tail_size / 2.0
 
 	hold_frames = skin.get_note_frames()
-
 	update_hold()
 
-	hold_tail.size.y = hold_tail.texture.get_height() * skin.note_scale.y
-	hold_rect.offset_bottom = -hold_tail.size.y
-	
+	var tail_height := hold_tail.texture.get_height() * skin.note_scale.y
+	hold_rect.offset_bottom = -tail_height
+	hold_tail.offset_bottom = tail_height
+
 	if skin.sustain_tile_texture:
 		hold_rect.stretch_mode = TextureRect.STRETCH_TILE
 
 		if hold_rect is AtlasTextureRect:
 			hold_rect.tile_y = true
-	
+
 	if skin.sustain_tile_mirroring and hold_rect is AtlasTextureRect:
 		hold_rect.mirror_every_other = true
 
