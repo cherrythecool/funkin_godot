@@ -34,7 +34,6 @@ var events_index: int = 0
 
 var song_started: bool = false
 
-## Each note type is stored here for use in any note field.
 var note_types: Dictionary[StringName, PackedScene] = {}
 
 var playing: bool = true

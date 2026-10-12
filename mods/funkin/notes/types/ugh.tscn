@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://mgb8oeyeusml"]
+
+[ext_resource type="Script" uid="uid://cdunxycyb3trq" path="res://mods/funkin/notes/types/ugh.gd" id="1_2jdna"]
+
+[node name="UghNote" type="Node" unique_id=1795425636]
+script = ExtResource("1_2jdna")
+metadata/_custom_type_script = "uid://ccygr6542u5ga"

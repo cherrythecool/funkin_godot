@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://50phib2adpch"]
+
+[ext_resource type="Script" uid="uid://domqcjqths273" path="res://mods/funkin/notes/types/no_animation.gd" id="1_4d33g"]
+
+[node name="NoAnimation" type="Node" unique_id=1341286286]
+script = ExtResource("1_4d33g")
+metadata/_custom_type_script = "uid://ccygr6542u5ga"

@@ -157,18 +157,22 @@ func _on_note_hit(note: NoteData) -> void:
 
 	sing_timer = 0.0
 
-	var sing_anim := &""
+	var direction := StringName(sing_directions[note.direction % sing_directions.size()])
+	var anim := &""
 	if note.use_custom_sing:
-		sing_anim = note.custom_sing_anim
+		anim = note.custom_sing_anim
 	else:
-		var direction := StringName(sing_directions[note.direction % sing_directions.size()])
 		if swap_sing_animations and swapped_directions.has(direction):
 			direction = swapped_directions.get(direction)
 
-		sing_anim = direction
+		anim = direction
 
-	sing_anim = note.sing_prefix + sing_anim + note.sing_suffix
-	play_anim(sing_anim, true)
+	anim = note.sing_prefix + anim + note.sing_suffix
+
+	if has_anim(anim):
+		play_anim(anim, true)
+	else:
+		play_anim(&"sing_%s" % direction)
 
 
 func _on_note_missed(note: NoteData) -> void:
@@ -180,15 +184,19 @@ func _on_note_missed(note: NoteData) -> void:
 
 	sing_timer = 0.0
 
-	var sing_anim := &""
+	var direction := StringName(sing_directions[note.direction % sing_directions.size()])
+	var anim := &""
 	if note.use_custom_miss:
-		sing_anim = note.custom_miss_anim
+		anim = note.custom_miss_anim
 	else:
-		var direction := StringName(sing_directions[note.direction % sing_directions.size()])
 		if swap_sing_animations and swapped_directions.has(direction):
 			direction = swapped_directions.get(direction)
 
-		sing_anim = direction
+		anim = direction
 
-	sing_anim = note.miss_prefix + sing_anim + note.miss_suffix
-	play_anim(sing_anim, true)
+	anim = note.miss_prefix + anim + note.miss_suffix
+
+	if has_anim(anim):
+		play_anim(anim, true)
+	else:
+		play_anim(&"sing_%s_miss" % direction)

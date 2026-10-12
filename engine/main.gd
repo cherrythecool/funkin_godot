@@ -1,4 +1,4 @@
-class_name ModuleLoader
+class_name ModLoader
 extends Node
 
 

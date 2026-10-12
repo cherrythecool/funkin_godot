@@ -11,11 +11,13 @@ extends Node
 @export var assets: SongAssets
 
 @export var song_player: AudioStreamPlayer
+
+@export_group("Parents of Assets")
 @export var characters_parent: Node
 @export var stage_parent: Node
 @export var hud_parent: Node
-
 @export var scripts_parent: Node
+@export var note_types_parent: Node
 
 
 func _ready() -> void:
@@ -33,6 +35,13 @@ func _ready() -> void:
 		song_difficulty = Game.load_settings[&"song_difficulty"]
 		song_folder = Game.load_settings[&"songs_folder"]
 
+	if Game.instance:
+		Game.instance.chart_loaded.connect(load_note_types)
+
+
+func clear_assets() -> void:
+	assets = null
+
 
 func load_assets() -> void:
 	if ResourceLoader.exists("%s/%s/assets.tres" % [song_folder, song_name]):
@@ -48,6 +57,7 @@ func load_assets() -> void:
 	var opponent: Character = Game.instance.opponent
 	var spectator: Character = Game.instance.spectator
 
+	# loading characters
 	if is_instance_valid(characters_parent):
 		player = assets.get_player().instantiate()
 		if Game.instance.strumlines.has(&"player"):
@@ -58,6 +68,8 @@ func load_assets() -> void:
 			opponent.strumline = Game.instance.strumlines[&"opponent"]
 
 		spectator = assets.get_spectator().instantiate()
+		if Game.instance.strumlines.has(&"spectator"):
+			spectator.strumline = Game.instance.strumlines[&"spectator"]
 
 		Game.instance.player = player
 		Game.instance.opponent = opponent
@@ -67,6 +79,7 @@ func load_assets() -> void:
 		characters_parent.add_child(player)
 		characters_parent.add_child(opponent)
 
+	# loading stage
 	if is_instance_valid(stage_parent):
 		var stage: Stage = assets.get_stage().instantiate()
 		Game.instance.stage = stage
@@ -90,6 +103,7 @@ func load_assets() -> void:
 		if is_instance_valid(stage_parent):
 			stage_parent.add_child(stage)
 
+	# loading hud
 	if is_instance_valid(hud_parent):
 		var hud: Node = assets.get_hud().instantiate()
 		var hud_skin := assets.get_hud_skin()
@@ -108,11 +122,6 @@ func load_assets() -> void:
 
 		Game.instance.pause_menu = hud_skin.get_pause_menu()
 
-	for key: StringName in assets.note_types.keys():
-		var scene: PackedScene = assets.note_types.get(key)
-		if is_instance_valid(scene):
-			Game.instance.note_types[key] = scene
-
 
 func load_scripts(song: String, songs_folder: String) -> void:
 	if not is_instance_valid(scripts_parent):
@@ -127,7 +136,7 @@ func load_scripts(song: String, songs_folder: String) -> void:
 		if resource is PackedScene:
 			var script: PackedScene = resource as PackedScene
 			var script_instance: Node = script.instantiate()
-			add_child(script_instance)
+			scripts_parent.add_child(script_instance)
 
 	if not is_instance_valid(assets):
 		return
@@ -137,4 +146,43 @@ func load_scripts(song: String, songs_folder: String) -> void:
 			continue
 
 		var script_instance: Node = script.instantiate()
-		add_child(script_instance)
+		scripts_parent.add_child(script_instance)
+
+
+func load_note_types(chart: Chart) -> void:
+	var types: Array[StringName] = []
+	for strumline: Strumline in chart.strumlines.values():
+		for type: StringName in strumline.note_types:
+			if type not in types:
+				types.append(type)
+
+	if types.is_empty() or not is_instance_valid(note_types_parent):
+		return
+
+	if is_instance_valid(assets):
+		for type: StringName in assets.note_types:
+			if type in types:
+				var note_type := assets.note_types[type].instantiate()
+				note_types_parent.add_child(note_type)
+				types.erase(type)
+
+	# js in case that was all, no need to dir search
+	if types.is_empty():
+		return
+
+	# load types from notes/types folder in module by default
+	var types_path := "res://mods/%s/notes/types" % ModSwitcher.current_module
+	var files := ResourceLoader.list_directory(types_path)
+	for file: String in files:
+		var type_name := file.get_file().get_basename()
+		if type_name not in types:
+			type_name = type_name.to_snake_case()
+
+		if type_name not in types:
+			continue
+
+		var resource: Resource = load("%s/%s" % [types_path, file])
+		if resource is PackedScene:
+			var note_type := (resource as PackedScene).instantiate()
+			note_types_parent.add_child(note_type)
+			types.erase(type_name)

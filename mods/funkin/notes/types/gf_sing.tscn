@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://h2k3ev53mnt4"]
+
+[ext_resource type="Script" uid="uid://ij14s85wltfc" path="res://mods/funkin/notes/types/gf_sing.gd" id="1_h0126"]
+
+[node name="GFNote" type="Node" unique_id=1933115541]
+script = ExtResource("1_h0126")
+metadata/_custom_type_script = "uid://ccygr6542u5ga"
