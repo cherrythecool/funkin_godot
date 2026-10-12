@@ -15,9 +15,19 @@ enum NoteState {
 @export var length: float
 
 @export var type: StringName
-@export var type_data: Dictionary[StringName, Variant]
+@export var type_data: Dictionary[StringName, Variant] = {
+	&"use_custom_sing": false,
+	&"custom_sing": &"",
+	&"sing_prefix": &"sing_",
+	&"sing_suffix": &"",
 
-@export_group("Basic Type Info")
+	&"use_custom_miss": false,
+	&"custom_miss": &"",
+	&"miss_prefix": &"sing_",
+	&"miss_suffix": &"_miss",
+}
+
+@export_group("Gameplay Type Info")
 @export var should_hit: bool = true
 @export var hit_health_multiplier: float = 1.0
 @export var miss_health_multiplier: float = 1.0

@@ -26,17 +26,24 @@ extends Node2D
 @export var swap_sing_animations: bool = false
 
 @export_group("Animations")
+
+## An empty string means this charaacter will sing no matter
+## the [code].strumline[/code] of any note being hit. If not empty, it
+## will only sing when the note being hit has a matching
+## [code].strumline[/code] value. (Also applies to missing)
+@export var target_strumline_id: StringName = &""
+
 @export var sing_directions: Array[String] = ["left", "down", "up", "right"]
 @export var dances: bool = true
 @export var dance_steps: Array[StringName] = [&"idle"]
 @export_range(0.0, 1024.0, 0.01) var sing_steps: float = 8.0
-var dance_step: int = 0
 
 @export_group("Death")
 @export_file("*.tscn") var death_character: String = "uid://w4v0gymuehdt"
 @export var gameover_assets: GameoverAssets
 
 var animation: StringName = &""
+var dance_step: int = 0
 var singing: bool = false
 var sing_timer: float = 0.0
 var in_special_anim: bool = false
@@ -101,29 +108,19 @@ func play_anim(anim: StringName, force: bool = false, special: bool = false) -> 
 
 
 func has_anim(anim: StringName) -> bool:
-	if not is_instance_valid(animation_player):
-		return false
-
-	return animation_player.has_animation(anim)
+	return animation_player and animation_player.has_animation(anim)
 
 
 func dance(force: bool = false) -> void:
-	if not dances:
-		return
-	if singing and not force:
-		return
-	if dance_steps.is_empty():
-		return
-	if dance_steps.size() > 1:
-		var base: int = dance_step + 1
-		if is_instance_valid(Conductor.instance):
-			base = floori(Conductor.instance.beat)
-
-		dance_step = wrapi(base, 0, dance_steps.size())
-		play_anim(dance_steps[dance_step], force)
+	if (not dances) or (singing and not force) or dance_steps.is_empty():
 		return
 
-	play_anim(dance_steps[0], force)
+	var base: int = dance_step + 1
+	if Conductor.instance:
+		base = floori(Conductor.instance.beat)
+
+	dance_step = wrapi(base, 0, dance_steps.size())
+	play_anim(dance_steps[dance_step], force)
 
 
 func set_character_material(new_material: Material) -> void:
@@ -132,7 +129,7 @@ func set_character_material(new_material: Material) -> void:
 
 
 func get_camera_position() -> Vector2:
-	if not is_instance_valid(camera_offset):
+	if not camera_offset:
 		return Vector2.ZERO
 	else:
 		return camera_offset.global_position
@@ -152,21 +149,42 @@ func _on_beat_hit(_beat: int) -> void:
 func _on_note_hit(note: NoteData) -> void:
 	if note.state != NoteData.NoteState.ALIVE and sing_timer * 4.0 < 1.0:
 		return
+	if (not target_strumline_id.is_empty()) and note.strumline != target_strumline_id:
+		return
 
 	sing_timer = 0.0
 
-	var direction := StringName(sing_directions[note.direction % sing_directions.size()])
-	if swap_sing_animations and swapped_directions.has(direction):
-		direction = swapped_directions.get(direction)
+	var sing_anim := &""
+	var type := note.type_data
+	if type.get(&"use_custom_sing", false):
+		sing_anim = type.get(&"custom_sing", &"")
+	else:
+		var direction := StringName(sing_directions[note.direction % sing_directions.size()])
+		if swap_sing_animations and swapped_directions.has(direction):
+			direction = swapped_directions.get(direction)
 
-	play_anim(&"sing_%s" % direction.to_lower(), true)
+		sing_anim = direction
+
+	sing_anim = type.get(&"sing_prefix", &"") + sing_anim + type.get(&"sing_suffix", &"")
+	play_anim(sing_anim, true)
 
 
 func _on_note_missed(note: NoteData) -> void:
+	if (not target_strumline_id.is_empty()) and note.strumline != target_strumline_id:
+		return
+
 	sing_timer = 0.0
 
-	var direction := StringName(sing_directions[note.direction % sing_directions.size()])
-	if swap_sing_animations and swapped_directions.has(direction):
-		direction = swapped_directions.get(direction)
+	var sing_anim := &""
+	var type := note.type_data
+	if type.get(&"use_custom_miss", false):
+		sing_anim = type.get(&"custom_miss", &"")
+	else:
+		var direction := StringName(sing_directions[note.direction % sing_directions.size()])
+		if swap_sing_animations and swapped_directions.has(direction):
+			direction = swapped_directions.get(direction)
 
-	play_anim(&"sing_%s_miss" % direction.to_lower(), true)
+		sing_anim = direction
+
+	sing_anim = type.get(&"miss_prefix", &"") + sing_anim + type.get(&"miss_suffix", &"")
+	play_anim(sing_anim, true)
