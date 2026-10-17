@@ -63,6 +63,9 @@ static func get_trans_from_str(string: String) -> Tween.TransitionType:
 
 
 static func get_accurate_time(player: AudioStreamPlayer) -> float:
+	if not is_instance_valid(player):
+		return 0.0
+
 	return (
 		player.get_playback_position() +
 		(AudioServer.get_time_since_last_mix() * player.pitch_scale)

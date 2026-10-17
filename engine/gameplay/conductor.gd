@@ -163,10 +163,18 @@ func get_beat_at_time(time_: float, timing_changes_: Array[TimingChange]) -> flo
 
 func sync_to_target(delta: float) -> void:
 	var audio_time := FunkinUtils.get_accurate_time(target_audio)
-	if target_audio.playing and absf(raw_time - audio_time) < 0.5:
-		raw_time = maxf(audio_time, raw_time + (delta * 0.9))
-	else:
+
+	if not target_audio.playing:
 		raw_time = audio_time
+		return
+
+	var desync := audio_time - raw_time
+	if absf(desync) > MAX_DESYNC:
+		raw_time = audio_time
+	else:
+		# if shit starts desyncing over time try to like move the time over
+		# smoothly over time rather than just snapping 24/7 with no other solution (above)
+		raw_time += delta + (desync * minf(delta, 1.0))
 
 
 func calculate_beat(trigger_hits: bool = true) -> void:
