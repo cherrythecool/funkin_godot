@@ -11,8 +11,17 @@ const FNF_SCROLL_DISTANCE_MULT: float = 450.0
 	set = _set_skin
 
 @export var use_game_scroll_speed: bool = true
-@export var scroll_speed: float = 1.0
-@export var downscroll: bool = false
+@export var scroll_speed: float = 1.0:
+	set(value):
+		if scroll_speed != value:
+			scroll_speed = value
+			_update_holds = true
+
+@export var downscroll: bool = false:
+	set(value):
+		if downscroll != value:
+			downscroll = value
+			_update_holds = true
 
 @export_group("References")
 
@@ -29,6 +38,9 @@ const FNF_SCROLL_DISTANCE_MULT: float = 450.0
 @export var other_note_scenes: Dictionary[StringName, PackedScene] = {}
 
 var notes_have_spawned: Array[bool] = []
+
+var _spawning_index := 0
+var _update_holds := false
 
 
 func _ready() -> void:
@@ -50,24 +62,25 @@ func _process(_delta: float) -> void:
 
 	spawn_notes()
 
-	for receptor: Receptor2D in receptors:
-		update_notes(receptor.notes)
-
 	for i: int in receptors.size():
+		var receptor: Receptor2D = receptors[i]
+		update_notes(receptor, receptor.notes)
+
 		var parent_state := parent.receptor_states[i]
-		var receptor := receptors[i]
-
-		if receptor.get_animation_from_state(parent_state) != receptor.last_played_anim:
+		var animation_state := receptor.get_animation_from_state(parent_state)
+		if animation_state != receptor.last_played_anim:
 			if (not parent.cpu) or (parent.cpu and not receptor.is_playing()):
-				receptor.play_animation(receptor.get_animation_from_state(parent_state))
+				receptor.play_animation(animation_state)
+
+	_update_holds = false
 
 
-func get_distance_from_time(time: float) -> float:
-	return time * get_scroll_speed() * FNF_SCROLL_DISTANCE_MULT
+func get_distance_from_time(time: float, real_scroll_speed: float) -> float:
+	return time * real_scroll_speed * FNF_SCROLL_DISTANCE_MULT
 
 
-func get_note_hold_height(note: Note2D) -> float:
-	return get_distance_from_time(note.data.length + note.sustain_offset)
+func get_note_hold_height(note: Note2D, real_scroll_speed: float) -> float:
+	return get_distance_from_time(note.data.length + note.sustain_offset, real_scroll_speed)
 
 
 func get_all_notes() -> Array[Note2D]:
@@ -79,17 +92,24 @@ func get_all_notes() -> Array[Note2D]:
 
 
 func spawn_notes() -> void:
-	var time := parent.get_time()
-	var loop_idx := 0
+	var note_count := parent.notes.size()
+	if note_count == 0:
+		return
 
-	while parent.notes_index + loop_idx < notes_have_spawned.size():
-		var note_index := parent.notes_index + loop_idx
-		var note := parent.notes[note_index]
-		if time < note.time - (notes_spawn_window / get_scroll_speed()):
+	var time := parent.get_time()
+	var real_scroll_speed := get_scroll_speed()
+	var spawn_until := time + (notes_spawn_window / real_scroll_speed)
+	_spawning_index = maxi(_spawning_index, parent.notes_index)
+
+	while _spawning_index < note_count:
+		var note := parent.notes[_spawning_index]
+		if note.time > spawn_until:
 			break
 
-		if notes_have_spawned[note_index]:
-			loop_idx += 1
+		var current_index := _spawning_index
+		_spawning_index += 1
+
+		if notes_have_spawned[current_index]:
 			continue
 
 		if note.direction > receptors.size() - 1:
@@ -97,62 +117,74 @@ func spawn_notes() -> void:
 				note.direction,
 				receptors.size(),
 			])
-
-			loop_idx += 1
 			continue
 
 		var receptor := receptors[note.direction]
 		var note_node: Note2D = default_note_scene.instantiate()
 		note_node.direction = receptor.direction
 		note_node.data = note
-		note_node.index = note_index
+		note_node.index = current_index
 
 		if note.length <= 0.0:
 			note_node.hold_clip.hide()
 		else:
-			note_node.hold_clip.size.y = get_note_hold_height(note_node)
+			note_node.hold_clip.size.y = get_note_hold_height(note_node, real_scroll_speed)
+			note_node.hold_clip.scale.y = -1.0 if downscroll else 1.0
 
 		note_node.apply_skin(skin)
 
-		receptor.notes.append(note_node)
+		receptor.notes.push_back(note_node)
 		notes_parent.add_child(note_node)
-
-		notes_have_spawned[note_index] = true
-		loop_idx += 1
+		notes_have_spawned[current_index] = true
 
 
-func update_notes(notes: Array[Note2D]) -> void:
+func update_notes(receptor: Receptor2D, notes: Array[Note2D]) -> void:
 	var time := parent.get_time()
+	var real_scroll_speed := get_scroll_speed()
+	var receptor_position := receptor.position
+	var scroll_scale := -1.0 if downscroll else 1.0
 
-	for note_node: Note2D in notes:
+	var note_index: int = 0
+	while note_index < notes.size():
+		var note_node := notes[note_index]
 		if not is_instance_valid(note_node):
-			notes.erase(note_node)
+			notes.remove_at(note_index)
 			continue
 
 		if note_node.index < parent.notes_index:
 			note_node.queue_free()
-			notes.erase(note_node)
+			notes.remove_at(note_index)
 			continue
 
 		var note := note_node.data
-		note_node.global_position = receptors[note.direction].global_position
-		note_node.hold_clip.scale.y = -1.0 if downscroll else 1.0
+		if _update_holds and note.length > 0.0:
+			note_node.hold_clip.scale.y = scroll_scale
 
-		var clip_height := get_note_hold_height(note_node)
-		if note_node.hold_clip.size.y != clip_height:
-			note_node.hold_clip.size.y = clip_height
+			var clip_height := get_note_hold_height(note_node, real_scroll_speed)
+			if note_node.hold_clip.size.y != clip_height:
+				note_node.hold_clip.size.y = clip_height
 
 		match note_node.data.state:
 			NoteData.NoteState.HIT, NoteData.NoteState.MISSED:
 				note_node.queue_free()
-				notes.erase(note_node)
+				notes.remove_at(note_index)
+				continue
 			NoteData.NoteState.HELD:
 				if note_node.animated_node is CanvasItem:
 					note_node.animated_node.visible = false
 
-				note_node.hold_rect.position.y = get_distance_from_time(note.time - note_node.sustain_offset - time)
+				note_node.position = receptor_position
+				note_node.hold_rect.position.y = get_distance_from_time(note.time - note_node.sustain_offset - time, real_scroll_speed)
 			NoteData.NoteState.ALIVE:
-				note_node.position.y += get_distance_from_time(note.time - time) * (-1.0 if downscroll else 1.0)
+				note_node.position = (
+					receptor_position +
+					Vector2(
+						0,
+						get_distance_from_time(note.time - time, real_scroll_speed) * scroll_scale
+					)
+				)
+
+		note_index += 1
 
 
 func update_skin() -> void:
@@ -191,7 +223,7 @@ func _on_note_hit(note_data: NoteData) -> void:
 	var note_node: Note2D = receptor.notes[0]
 	if note_data.length <= 0.0:
 		note_node.queue_free()
-		receptor.notes.erase(note_node)
+		receptor.notes.remove_at(0)
 		return
 
 	var time := parent.get_time()
@@ -199,7 +231,7 @@ func _on_note_hit(note_data: NoteData) -> void:
 		return
 
 	note_node.sustain_offset = note_data.time - time
-	note_node.hold_clip.size.y = get_note_hold_height(note_node)
+	note_node.hold_clip.size.y = get_note_hold_height(note_node, get_scroll_speed())
 
 
 func _set_parent(new_parent: StrumlineManager) -> void:
@@ -213,13 +245,15 @@ func _set_parent(new_parent: StrumlineManager) -> void:
 		parent.notes_cleared.disconnect(_on_notes_cleared)
 
 	parent = new_parent
-	parent.note_hit.connect(_on_note_hit)
-	parent.notes_loaded.connect(_on_notes_loaded)
-	parent.notes_pushed.connect(_on_notes_pushed)
-	parent.notes_cleared.connect(_on_notes_cleared)
 
-	if underlay:
-		underlay.visible = not parent.cpu
+	if parent:
+		parent.note_hit.connect(_on_note_hit)
+		parent.notes_loaded.connect(_on_notes_loaded)
+		parent.notes_pushed.connect(_on_notes_pushed)
+		parent.notes_cleared.connect(_on_notes_cleared)
+
+		if underlay:
+			underlay.visible = not parent.cpu
 
 
 func _set_skin(new_skin: NoteSkin) -> void:
@@ -240,6 +274,7 @@ func _on_notes_loaded() -> void:
 
 	notes_have_spawned.resize(parent.notes.size())
 	notes_have_spawned.fill(false)
+	_spawning_index = 0
 
 
 func _on_notes_pushed() -> void:
@@ -255,6 +290,7 @@ func _on_notes_cleared() -> void:
 		receptor.notes.clear()
 
 	notes_have_spawned.clear()
+	_spawning_index = 0
 
 
 func _on_applied_rating(rating: Rating, note: NoteData, _health_mult: float) -> void:
