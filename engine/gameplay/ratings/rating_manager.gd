@@ -28,10 +28,10 @@ signal applied_rating(rating: Rating, note: NoteData, health_mult: float)
 @export var ratings: Array[Rating] = []
 @export var miss_rating: Rating = null
 
-var score := 0
-var misses := 0
-var combo := 0
-var health := 50.0
+var score: int = 0
+var misses: int = 0
+var combo: int = 0
+var health: float = 50.0
 
 var _accumulated_accuracy := 0.0
 var _total_notes_hit := 0
