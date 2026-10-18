@@ -49,6 +49,8 @@ func _ready() -> void:
 		_on_game_scroll_speed_changed(game.scroll_speed)
 		game.scroll_speed_changed.connect(_on_game_scroll_speed_changed)
 
+	Conductor.rate_changed.connect(_on_conductor_rate_changed)
+
 	var rating_manager: RatingManager = get_tree().get_first_node_in_group(&"RatingManager")
 	if rating_manager:
 		rating_manager.applied_rating.connect(_on_applied_rating)
@@ -64,7 +66,7 @@ func _process(_delta: float) -> void:
 
 	for i: int in receptors.size():
 		var receptor: Receptor2D = receptors[i]
-		update_notes(receptor, receptor.notes)
+		update_notes(receptor)
 
 		var parent_state := parent.receptor_states[i]
 		var animation_state := receptor.get_animation_from_state(parent_state)
@@ -138,11 +140,12 @@ func spawn_notes() -> void:
 		notes_have_spawned[current_index] = true
 
 
-func update_notes(receptor: Receptor2D, notes: Array[Note2D]) -> void:
+func update_notes(receptor: Receptor2D) -> void:
 	var time := parent.get_time()
 	var real_scroll_speed := get_scroll_speed()
 	var receptor_position := receptor.position
 	var scroll_scale := -1.0 if downscroll else 1.0
+	var notes := receptor.notes
 
 	var note_index: int = 0
 	while note_index < notes.size():
@@ -304,3 +307,7 @@ func _on_applied_rating(rating: Rating, note: NoteData, _health_mult: float) -> 
 
 func _on_game_scroll_speed_changed(value: float) -> void:
 	scroll_speed = value
+
+
+func _on_conductor_rate_changed(_rate: float) -> void:
+	_update_holds = true

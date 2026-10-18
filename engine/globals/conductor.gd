@@ -12,6 +12,11 @@ static var audio_offset: float:
 static var manual_offset: float = 0.0
 static var offset: float = audio_offset + manual_offset
 
+signal step_hit(step: int)
+signal beat_hit(beat: int)
+signal measure_hit(measure: int)
+signal rate_changed(rate: float)
+
 @export var rate: float = 1.0:
 	set(value):
 		Engine.time_scale = maxf(value, 0.0)
@@ -81,11 +86,6 @@ var target_length: float:
 			return target_audio.stream.get_length()
 		else:
 			return 1.0
-
-signal step_hit(step: int)
-signal beat_hit(beat: int)
-signal measure_hit(measure: int)
-signal rate_changed(rate: float)
 
 
 func _exit_tree() -> void:
