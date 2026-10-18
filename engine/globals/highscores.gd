@@ -8,6 +8,17 @@ func _ready() -> void:
 	SaveData.set_default_save(&"scores", {"scores": {}})
 	SaveData.load_save(&"scores")
 
+	var scores: Dictionary = SaveData.get_save_value(&"scores", "scores")
+	for key: String in scores:
+		if scores[key]["score"] is String and scores[key]["score"] == "N/A":
+			continue
+
+		# thanks json parser
+		scores[key]["score"] = int(scores[key]["score"])
+		scores[key]["misses"] = int(scores[key]["misses"])
+
+	SaveData.set_save_value(&"scores", "scores", scores, false)
+
 
 func get_score(song: StringName, difficulty: StringName) -> Dictionary:
 	return SaveData.get_save_value(&"scores", "scores").get(_get_score_key(song, difficulty), {

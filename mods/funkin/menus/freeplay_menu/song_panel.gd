@@ -5,7 +5,7 @@ extends Control
 
 @export var song_label: Label
 @export var difficulty_label: Label
-@export var score_panel: Panel
+@export var stats_panel: Panel
 @export var reset_panel: Panel
 
 var song: StringName
@@ -52,7 +52,7 @@ func _on_difficulty_changed(new_difficulty: StringName) -> void:
 	reset_panel.difficulty = difficulty
 
 	score_data = Highscores.get_score(song, difficulty)
-	score_panel.refresh(score_data)
+	stats_panel.refresh(score_data)
 
 	if difficulty_count > 1:
 		difficulty_label.text = '< %s >' % difficulty.to_lower().to_upper()

@@ -1,7 +1,7 @@
 extends Panel
 
 
-@export var info_panel: Panel
+@export var song_panel: Panel
 
 var song := &""
 var difficulty := &""
@@ -24,4 +24,4 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if axis == 1:
 		Highscores.reset_score(song, difficulty)
-		info_panel._on_difficulty_changed(difficulty)
+		song_panel._on_difficulty_changed(difficulty)

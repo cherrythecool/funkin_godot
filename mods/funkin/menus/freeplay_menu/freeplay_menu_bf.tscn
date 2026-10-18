@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://mods/funkin/menus/background.png" id="1_2q4rq"]
 [ext_resource type="Script" uid="uid://buarre8s3ld28" path="res://mods/funkin/menus/freeplay_menu/freeplay_menu.gd" id="1_p2lt6"]
-[ext_resource type="Script" uid="uid://4r8crqqwxnyk" path="res://mods/funkin/menus/freeplay_menu/info_panel.gd" id="4_5dymk"]
+[ext_resource type="Script" uid="uid://4r8crqqwxnyk" path="res://mods/funkin/menus/freeplay_menu/song_panel.gd" id="4_5dymk"]
 [ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://engine/common/fonts/vcr_osd_mono.ttf" id="5_q45ui"]
-[ext_resource type="Script" uid="uid://di5oncp1uonwm" path="res://mods/funkin/menus/freeplay_menu/score_panel.gd" id="6_mti1l"]
+[ext_resource type="Script" uid="uid://di5oncp1uonwm" path="res://mods/funkin/menus/freeplay_menu/stats_panel.gd" id="6_mti1l"]
 [ext_resource type="Script" uid="uid://b3d82j8exp4ge" path="res://mods/funkin/menus/freeplay_menu/reset_panel.gd" id="7_detv5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4xxx"]
@@ -74,7 +74,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="SongPanel" type="Panel" parent="InfoRoot/VBoxContainer" unique_id=760316165 node_paths=PackedStringArray("parent", "song_label", "difficulty_label", "score_panel", "reset_panel")]
+[node name="SongPanel" type="Panel" parent="InfoRoot/VBoxContainer" unique_id=760316165 node_paths=PackedStringArray("parent", "song_label", "difficulty_label", "stats_panel", "reset_panel")]
 custom_minimum_size = Vector2(256, 48)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -83,7 +83,7 @@ script = ExtResource("4_5dymk")
 parent = NodePath("../../..")
 song_label = NodePath("VBoxContainer/SongName")
 difficulty_label = NodePath("VBoxContainer/Difficulty")
-score_panel = NodePath("../StatsPanel")
+stats_panel = NodePath("../StatsPanel")
 reset_panel = NodePath("../ResetPanel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InfoRoot/VBoxContainer/SongPanel" unique_id=307622429]
@@ -204,14 +204,14 @@ label_settings = SubResource("LabelSettings_s0bc2")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="ResetPanel" type="Panel" parent="InfoRoot/VBoxContainer" unique_id=644795363 node_paths=PackedStringArray("info_panel")]
+[node name="ResetPanel" type="Panel" parent="InfoRoot/VBoxContainer" unique_id=644795363 node_paths=PackedStringArray("song_panel")]
 custom_minimum_size = Vector2(256, 96)
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_i7glp")
 script = ExtResource("7_detv5")
-info_panel = NodePath("../StatsPanel")
+song_panel = NodePath("../SongPanel")
 
 [node name="Question" type="Label" parent="InfoRoot/VBoxContainer/ResetPanel" unique_id=43930808]
 layout_mode = 1
