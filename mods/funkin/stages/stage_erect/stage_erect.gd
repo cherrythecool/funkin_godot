@@ -2,12 +2,12 @@ extends Stage
 
 
 func hue_character(character: Character, hue: float, sat: float, cont: float, bright: float) -> void:
-	var new_material: ShaderMaterial = ShaderMaterial.new()
-	new_material.shader = load('uid://bgwusoh6kicj3')
-	new_material.set_shader_parameter('hue', hue)
-	new_material.set_shader_parameter('saturation', sat)
-	new_material.set_shader_parameter('contrast', cont)
-	new_material.set_shader_parameter('brightness', bright)
+	var new_material := ShaderMaterial.new()
+	new_material.shader = load("uid://bgwusoh6kicj3")
+	new_material.set_shader_parameter(&"hue", hue)
+	new_material.set_shader_parameter(&"saturation", sat)
+	new_material.set_shader_parameter(&"contrast", cont)
+	new_material.set_shader_parameter(&"brightness", bright)
 	character.set_character_material(new_material)
 
 

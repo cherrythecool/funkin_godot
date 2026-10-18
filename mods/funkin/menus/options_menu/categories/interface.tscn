@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://mods/funkin/menus/options_menu/options/checkbox/checkbox.gd" id="2_422dy"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://engine/common/alphabet/alphabet.gd" id="3_ih51s"]
 [ext_resource type="SpriteFrames" uid="uid://oksqh74ocs1w" path="res://mods/funkin/menus/options_menu/options/checkbox/checkbox.res" id="4_abqtr"]
-[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="5_fu6tn"]
 [ext_resource type="Script" uid="uid://dpnfmug35vwfs" path="res://mods/funkin/menus/options_menu/options/number_option.gd" id="6_1836p"]
 
 [node name="Interface" type="Node2D" unique_id=2111672686 node_paths=PackedStringArray("options")]
@@ -111,7 +110,6 @@ scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_abqtr")
 animation = &"selected"
 offset = Vector2(-5, -35)
-script = ExtResource("5_fu6tn")
 
 [node name="SkipSceneTransitions" type="Node2D" parent="." unique_id=2138152291 node_paths=PackedStringArray("alphabet", "checkbox")]
 position = Vector2(117, 286)
@@ -132,7 +130,6 @@ scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_abqtr")
 animation = &"selected"
 offset = Vector2(-5, -35)
-script = ExtResource("5_fu6tn")
 
 [connection signal="animation_finished" from="ShowTimeBar/Checkbox" to="ShowTimeBar" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="SkipSceneTransitions/Checkbox" to="SkipSceneTransitions" method="_on_checkbox_animation_finished"]

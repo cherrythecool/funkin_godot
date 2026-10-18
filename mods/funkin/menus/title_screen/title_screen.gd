@@ -9,7 +9,7 @@ static var in_intro: bool = true
 
 @export var post_intro: Node2D
 @export var girlfriend_animation: AnimationPlayer
-@export var logo_sprite: AnimatedSprite
+@export var logo_sprite: AnimatedSprite2D
 @export var enter_animation: AnimationPlayer
 @export var flash: ColorRect
 

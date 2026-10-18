@@ -313,13 +313,13 @@ func get_sustain_texture(direction: int, frame: int, is_tail: bool) -> Texture2D
 
 	frame = clampi(frame, 0, note_frames.get_frame_count(anim_name))
 
-	var texture := note_frames.get_frame_texture(anim_name, frame).duplicate()
-	if texture is AtlasTexture:
-		var offset := skin.sustain_tail_texture_offset if is_tail else skin.sustain_texture_offset
-		texture.region = Rect2(
-			texture.region.position + offset.position,
-			texture.region.size + offset.size,
-		)
+	var texture := note_frames.get_frame_texture(anim_name, frame)#.duplicate()
+	#if texture is AtlasTexture:
+		#var offset: Vector2 = skin.sustain_tail_texture_offset if is_tail else skin.sustain_texture_offset
+		#texture.region = Rect2(
+			#texture.region.position + offset.position,
+			#texture.region.size + offset.size,
+		#)
 
 	texture.set_meta(&"frame", frame)
 	cache[direction] = texture

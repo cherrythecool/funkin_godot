@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://1xupndy1w5yk" path="res://mods/funkin/menus/options_menu/options/checkbox/checkbox.gd" id="4_2w5sj"]
 [ext_resource type="PackedScene" uid="uid://c54n5pwgvqym0" path="res://mods/funkin/menus/options_menu/option_previews/keybinds.tscn" id="4_yikju"]
 [ext_resource type="SpriteFrames" uid="uid://oksqh74ocs1w" path="res://mods/funkin/menus/options_menu/options/checkbox/checkbox.res" id="5_pu18o"]
-[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="6_ubeli"]
 [ext_resource type="Script" uid="uid://dpnfmug35vwfs" path="res://mods/funkin/menus/options_menu/options/number_option.gd" id="7_gp12a"]
 [ext_resource type="Script" uid="uid://be4ehaog85mta" path="res://mods/funkin/menus/options_menu/options/offset_option.gd" id="7_wvbcq"]
 [ext_resource type="Script" uid="uid://cvona80crsbei" path="res://mods/funkin/menus/options_menu/options/list.gd" id="8_8o1re"]
@@ -58,7 +57,6 @@ scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("5_pu18o")
 animation = &"selected"
 offset = Vector2(-5, -35)
-script = ExtResource("6_ubeli")
 
 [node name="Middlescroll" type="Node2D" parent="ListParent/Options" unique_id=788844534 node_paths=PackedStringArray("alphabet", "checkbox")]
 position = Vector2(6, 192)
@@ -77,7 +75,6 @@ position = Vector2(351, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("5_pu18o")
 animation = &"unselected"
-script = ExtResource("6_ubeli")
 
 [node name="Offset" type="Node2D" parent="ListParent/Options" unique_id=1554961303 node_paths=PackedStringArray("root", "value_label", "current_preview")]
 position = Vector2(9, 288)

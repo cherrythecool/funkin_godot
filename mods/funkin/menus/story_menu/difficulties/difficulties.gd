@@ -8,10 +8,10 @@ static var selected: int = 1
 
 @export var weeks: Node
 @export var high_score: Label
-@export var left_arrow: AnimatedSprite
-@export var right_arrow: AnimatedSprite
+@export var left_arrow: AnimatedSprite2D
+@export var right_arrow: AnimatedSprite2D
 @export var difficulty_sprite: Sprite2D
-@export var animated_difficulty: AnimatedSprite
+@export var animated_difficulty: AnimatedSprite2D
 
 var difficulties: PackedStringArray = []
 var tween: Tween = null

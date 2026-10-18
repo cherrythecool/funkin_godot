@@ -3,7 +3,7 @@ extends Option
 
 
 @export var alphabet: Alphabet
-@export var checkbox: AnimatedSprite
+@export var checkbox: AnimatedSprite2D
 
 @export var file: StringName = &"core"
 @export var key: StringName = &"centered_receptors"

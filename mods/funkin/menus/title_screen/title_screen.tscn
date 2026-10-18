@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dno3ea8v3s7gx" path="res://mods/funkin/menus/title_screen/title_screen.gd" id="1_0m8ln"]
 [ext_resource type="SpriteFrames" uid="uid://dkgusfub7fbij" path="res://mods/funkin/menus/title_screen/gf.res" id="1_ii0wr"]
 [ext_resource type="Material" uid="uid://bo61teq831cd6" path="res://mods/funkin/menus/title_screen/hue_shift.tres" id="2_grdy1"]
-[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="3_s2rvo"]
 [ext_resource type="SpriteFrames" uid="uid://srbxpow67jf1" path="res://mods/funkin/menus/title_screen/logo.res" id="5_nv456"]
 [ext_resource type="SpriteFrames" uid="uid://diaqnypewr3ov" path="res://mods/funkin/menus/title_screen/enter.res" id="6_hraot"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://engine/common/alphabet/alphabet.gd" id="7_al1xt"]
@@ -127,17 +126,19 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:playing")
+tracks/2/path = NodePath("Sprite")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [{
+"args": [],
+"method": &"pause"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_j1s0s"]
@@ -168,17 +169,22 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 14]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:playing")
+tracks/2/path = NodePath("Sprite")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.583333),
+"times": PackedFloat32Array(0, 0.5833333),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}, {
+"args": [],
+"method": &"pause"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_mh840"]
@@ -209,17 +215,22 @@ tracks/1/keys = {
 "update": 1,
 "values": [15, 29]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:playing")
+tracks/2/path = NodePath("Sprite")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.583333),
+"times": PackedFloat32Array(0, 0.5833333),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}, {
+"args": [],
+"method": &"pause"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j25c3"]
@@ -246,26 +257,28 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:playing")
+tracks/1/path = NodePath("Sprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [8]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:frame")
+tracks/2/path = NodePath("Sprite")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
+"values": [{
+"args": [],
+"method": &"pause"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_lm570"]
@@ -296,17 +309,19 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:playing")
+tracks/2/path = NodePath("Sprite")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_qdiad"]
@@ -338,17 +353,22 @@ tracks/1/keys = {
 "update": 0,
 "values": [0, 8]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:playing")
+tracks/2/path = NodePath("Sprite")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}, {
+"args": [],
+"method": &"pause"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4274r"]
@@ -399,7 +419,6 @@ position = Vector2(891, 373)
 material = ExtResource("2_grdy1")
 sprite_frames = ExtResource("1_ii0wr")
 animation = &"gfDance"
-script = ExtResource("3_s2rvo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AfterIntro/GF" unique_id=201242509]
 libraries/ = SubResource("AnimationLibrary_j25c3")
@@ -411,7 +430,6 @@ position = Vector2(354, 246)
 material = ExtResource("2_grdy1")
 sprite_frames = ExtResource("5_nv456")
 animation = &"bump"
-script = ExtResource("3_s2rvo")
 
 [node name="Enter" type="Node2D" parent="AfterIntro" unique_id=497100013]
 position = Vector2(805, 636)
@@ -421,7 +439,6 @@ material = ExtResource("2_grdy1")
 sprite_frames = ExtResource("6_hraot")
 animation = &"Press Enter to Begin"
 frame = 8
-script = ExtResource("3_s2rvo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AfterIntro/Enter" unique_id=1284167027]
 libraries/ = SubResource("AnimationLibrary_4274r")

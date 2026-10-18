@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bp07frgyvgscl" path="res://mods/funkin/menus/story_menu/weeks.gd" id="4_owtj4"]
 [ext_resource type="Texture2D" uid="uid://g4kew3bfwjeq" path="res://mods/funkin/menus/story_menu/weeks/week1.png" id="5_1dfdl"]
 [ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://engine/common/fonts/vcr_osd_mono.ttf" id="5_4wpxw"]
-[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="5_61vqd"]
 [ext_resource type="SpriteFrames" uid="uid://dgm7jwe1ek04e" path="res://mods/funkin/menus/story_menu/difficulties/arrows.res" id="6_kynlf"]
 [ext_resource type="Script" uid="uid://btmma2a3qu1e6" path="res://mods/funkin/menus/story_menu/week_node.gd" id="6_qh5s5"]
 [ext_resource type="PackedScene" uid="uid://cl6aifhbol57q" path="res://mods/funkin/menus/story_menu/props/bf/bf.tscn" id="8_2yyv5"]
@@ -331,19 +330,16 @@ texture = ExtResource("4_j0vh7")
 visible = false
 sprite_frames = ExtResource("27_hkev1")
 animation = &"idle"
-script = ExtResource("5_61vqd")
 
 [node name="LeftArrow" type="AnimatedSprite2D" parent="BottomArea/Difficulties" unique_id=1559551709]
 position = Vector2(32, 96)
 sprite_frames = ExtResource("6_kynlf")
 animation = &"leftIdle"
-script = ExtResource("5_61vqd")
 
 [node name="RightArrow" type="AnimatedSprite2D" parent="BottomArea/Difficulties" unique_id=1207021250]
 position = Vector2(408, 96)
 sprite_frames = ExtResource("6_kynlf")
 animation = &"rightIdle"
-script = ExtResource("5_61vqd")
 
 [node name="BlackGradient" type="TextureRect" parent="BottomArea" unique_id=247310096]
 layout_mode = 1
