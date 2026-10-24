@@ -182,7 +182,7 @@ func _create_character(x: float, y: float, character: String) -> Array:
 		skin.optimized_map.get(character)
 	)
 
-	var node: AnimatedSprite2D = AnimatedSprite2D.new()
+	var node := AnimatedSprite2D.new()
 	node.use_parent_material = true
 	node.centered = false
 	node.sprite_frames = skin.sprite_frames

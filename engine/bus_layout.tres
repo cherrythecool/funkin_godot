@@ -2,8 +2,8 @@
 
 [sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_gcjdw"]
 resource_name = "SpectrumAnalyzer"
-buffer_length = 1.0
-fft_size = 0
+buffer_length = 0.3
+fft_size = 1
 
 [resource]
 bus/1/name = &"Music"

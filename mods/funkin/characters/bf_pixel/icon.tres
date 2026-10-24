@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HealthIcon" format=3 uid="uid://ca7n1235bwa72"]
+
+[ext_resource type="Script" uid="uid://b7lu04jsahckp" path="res://engine/gameplay/characters/health_icon.gd" id="1_k7kpd"]
+[ext_resource type="Texture2D" uid="uid://827umg3700yo" path="res://mods/funkin/characters/bf_pixel/icon.png" id="2_42djl"]
+
+[resource]
+script = ExtResource("1_k7kpd")
+texture = ExtResource("2_42djl")
+color = Color(0.48235294, 0.8392157, 0.9647059, 1)
+filter = 1
+scale = Vector2(4.688, 4.688)

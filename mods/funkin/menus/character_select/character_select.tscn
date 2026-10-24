@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dwv1twuy3tllg" path="res://mods/funkin/menus/character_select/characters/pico/title.png" id="3_tmmlt"]
 [ext_resource type="AudioStream" uid="uid://6wvkbito7xw2" path="res://mods/funkin/menus/character_select/cancel.ogg" id="4_1u4p0"]
 [ext_resource type="PackedScene" uid="uid://c6to8sv86340c" path="res://mods/funkin/menus/character_select/characters/pico/pico.tscn" id="4_rmxm4"]
-[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="4_xae3q"]
 [ext_resource type="PackedScene" uid="uid://b6oapcexvu5n" path="res://mods/funkin/menus/character_select/characters/nene/nene.tscn" id="5_2th8n"]
 [ext_resource type="Texture2D" uid="uid://cavibbv2delc2" path="res://mods/funkin/menus/character_select/background/curtains.png" id="5_xae3q"]
 [ext_resource type="Texture2D" uid="uid://dkhehc56csbb2" path="res://mods/funkin/menus/character_select/background/character_light.png" id="6_u125y"]
@@ -167,7 +166,7 @@ fade_rect = NodePath("FadeRect")
 speakers = NodePath("MainScene/StageSpeakers/Sprite")
 character_selector = NodePath("SelectionHUD")
 choose_dipshit = NodePath("SelectionHUD/Text")
-dipshit_backing = NodePath("SelectionHUD/TextGlow")
+dipshit_backing = NodePath("SelectionHUD/TextShadow")
 character_options = NodePath("SelectionHUD/CharacterOptions")
 selector = NodePath("SelectionHUD/Selector")
 title = NodePath("MainScene/CharacterNameSprite")
@@ -216,14 +215,12 @@ loop = true
 autoplay = &"crowd"
 centered = false
 
-[node name="Stage" type="AnimatedSprite2D" parent="MainScene" unique_id=488027129]
+[node name="Stage" type="AnimatedSprite2D" parent="MainScene" unique_id=408776011]
 position = Vector2(-40, 391)
 sprite_frames = ExtResource("7_5ydai")
 animation = &"stage full instance 1"
 autoplay = "stage full instance 1"
 centered = false
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
 [node name="Curtains" type="Parallax2D" parent="MainScene" unique_id=1077082251]
 scroll_scale = Vector2(1.4, 1.4)
@@ -302,25 +299,21 @@ modulate = Color(1, 1, 1, 0.5)
 position = Vector2(-3, 296)
 texture = ExtResource("12_rgimu")
 
-[node name="TextGlow" type="AnimatedSprite2D" parent="SelectionHUD" unique_id=603914883]
+[node name="TextGlow" type="AnimatedSprite2D" parent="SelectionHUD" unique_id=1000938082]
 material = SubResource("CanvasItemMaterial_cggar")
 position = Vector2(-208, -65)
 sprite_frames = ExtResource("16_twrlh")
 animation = &"CHOOSE vertical offset instance 1"
 autoplay = "CHOOSE vertical offset instance 1"
 centered = false
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="TextShadow" type="AnimatedSprite2D" parent="SelectionHUD" unique_id=414269233]
+[node name="TextShadow" type="AnimatedSprite2D" parent="SelectionHUD" unique_id=273842877]
 material = SubResource("CanvasItemMaterial_cggar")
 position = Vector2(-204, -17)
 sprite_frames = ExtResource("17_0awtx")
 animation = &"CHOOSE horizontal offset instance 1"
 autoplay = "CHOOSE horizontal offset instance 1"
 centered = false
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
 [node name="Text" type="Sprite2D" parent="SelectionHUD" unique_id=1883424809]
 position = Vector2(-201, -13)
@@ -329,77 +322,59 @@ centered = false
 
 [node name="CharacterOptions" type="Node2D" parent="SelectionHUD" unique_id=1414144150]
 
-[node name="1" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=1598004148]
+[node name="1" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=1765328847]
 material = SubResource("ShaderMaterial_q65u0")
 position = Vector2(-120.5, 198)
 sprite_frames = SubResource("SpriteFrames_sayuy")
 animation = &"lock"
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="2" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=1870947418]
+[node name="2" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=164795013]
 material = SubResource("ShaderMaterial_apdom")
 position = Vector2(-11.5, 198)
 sprite_frames = SubResource("SpriteFrames_sayuy")
 animation = &"lock"
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="3" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=1030401433]
+[node name="3" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=489816379]
 material = SubResource("ShaderMaterial_8pn6j")
 position = Vector2(108.5, 198)
 sprite_frames = SubResource("SpriteFrames_sayuy")
 animation = &"lock"
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="4" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=742736969]
+[node name="4" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=520576162]
 position = Vector2(-108.5, 322)
 sprite_frames = ExtResource("18_q65u0")
 animation = &"PICO ICON"
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 metadata/key = &"pico"
 
-[node name="5" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=1643131191]
+[node name="5" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=1494102221]
 position = Vector2(0, 322)
 sprite_frames = ExtResource("22_twrlh")
 animation = &"BF ICON"
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 metadata/key = &"bf"
 
-[node name="6" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=1787080575]
+[node name="6" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=1268794391]
 material = SubResource("ShaderMaterial_pwyd4")
 position = Vector2(108.5, 321)
 sprite_frames = SubResource("SpriteFrames_sayuy")
 animation = &"lock"
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="7" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=1816187321]
+[node name="7" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=1435043754]
 material = SubResource("ShaderMaterial_7ptoq")
 position = Vector2(-114.5, 428)
 sprite_frames = SubResource("SpriteFrames_sayuy")
 animation = &"lock"
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="8" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=668129910]
+[node name="8" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=340074258]
 material = SubResource("ShaderMaterial_5ydai")
 position = Vector2(-3.5, 428)
 sprite_frames = SubResource("SpriteFrames_sayuy")
 animation = &"lock"
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
-[node name="9" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=559906107]
+[node name="9" type="AnimatedSprite2D" parent="SelectionHUD/CharacterOptions" unique_id=2046762495]
 material = SubResource("ShaderMaterial_twrlh")
 position = Vector2(114.5, 428)
 sprite_frames = SubResource("SpriteFrames_sayuy")
 animation = &"lock"
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
 [node name="SelectorFarBack" type="Sprite2D" parent="SelectionHUD" unique_id=849339914 node_paths=PackedStringArray("target")]
 modulate = Color(0.235294, 0.454902, 0.968627, 1)
@@ -419,12 +394,10 @@ script = ExtResource("22_pwyd4")
 target = NodePath("../Selector")
 speed = 20.0
 
-[node name="Selector" type="AnimatedSprite2D" parent="SelectionHUD" unique_id=723663316]
+[node name="Selector" type="AnimatedSprite2D" parent="SelectionHUD" unique_id=446672872]
 position = Vector2(-2, 323)
 sprite_frames = ExtResource("26_twrlh")
 animation = &"idle"
-script = ExtResource("4_xae3q")
-metadata/_custom_type_script = "uid://xcwf8fppek0h"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=472909301]
 position = Vector2(640, 360)

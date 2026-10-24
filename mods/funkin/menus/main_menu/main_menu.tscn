@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://bcq8cfghjibg1" path="res://mods/funkin/menus/main_menu/background_pink.png" id="2_dbg3w"]
 [ext_resource type="Script" uid="uid://xx5djqhvae85" path="res://mods/funkin/menus/main_menu/button_scene.gd" id="4_4uv5u"]
 [ext_resource type="SpriteFrames" uid="uid://f3lhnid62rym" path="res://mods/funkin/menus/main_menu/buttons.res" id="4_c5hes"]
-[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="4_emyfo"]
 [ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://engine/common/fonts/vcr_osd_mono.ttf" id="4_pi00p"]
 [ext_resource type="Script" uid="uid://dk4levnj7ihug" path="res://mods/funkin/menus/main_menu/transgender_flag.gd" id="5_jicku"]
 [ext_resource type="Script" uid="uid://c1hs6aw4yq5p" path="res://mods/funkin/menus/main_menu/button_freeplay.gd" id="7_1hnlc"]
@@ -170,7 +169,6 @@ position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"storymode idle"
 autoplay = "storymode idle"
-script = ExtResource("4_emyfo")
 
 [node name="Freeplay" type="Control" parent="HUD/ScrollContainer/ButtonContainer" unique_id=1818888720 node_paths=PackedStringArray("sprite")]
 custom_minimum_size = Vector2(0, 122)
@@ -185,7 +183,6 @@ position = Vector2(0, 61)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"freeplay idle"
 autoplay = "freeplay idle"
-script = ExtResource("4_emyfo")
 
 [node name="Credits" type="Control" parent="HUD/ScrollContainer/ButtonContainer" unique_id=461284960 node_paths=PackedStringArray("sprite")]
 custom_minimum_size = Vector2(0, 124)
@@ -201,7 +198,6 @@ position = Vector2(0, 62)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"credits idle"
 autoplay = "credits idle"
-script = ExtResource("4_emyfo")
 
 [node name="Options" type="Control" parent="HUD/ScrollContainer/ButtonContainer" unique_id=161792120 node_paths=PackedStringArray("sprite")]
 custom_minimum_size = Vector2(0, 111)
@@ -217,4 +213,3 @@ position = Vector2(0, 55)
 sprite_frames = ExtResource("4_c5hes")
 animation = &"options idle"
 autoplay = "options idle"
-script = ExtResource("4_emyfo")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vmkdpwy1ub1g"
-path="res://.godot/imported/car_sprites.png-389b861488f3e1e915dfb6f6665d6d26.ctex"
+uid="uid://cpbtif72iy7cl"
+path="res://.godot/imported/retry.png-308d1c421502f730f537911048be6c8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mods/funkin/characters/gf/car_sprites.png"
-dest_files=["res://.godot/imported/car_sprites.png-389b861488f3e1e915dfb6f6665d6d26.ctex"]
+source_file="res://mods/funkin/characters/pico/gameover/retry.png"
+dest_files=["res://.godot/imported/retry.png-308d1c421502f730f537911048be6c8c.ctex"]
 
 [params]
 

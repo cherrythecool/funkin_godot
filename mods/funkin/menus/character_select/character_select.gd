@@ -14,9 +14,9 @@ static var selected_y: int = 1
 @export_subgroup("HUD")
 @export var character_selector: Node2D
 @export var choose_dipshit: Sprite2D
-@export var dipshit_backing: AnimatedSprite
+@export var dipshit_backing: AnimatedSprite2D
 @export var character_options: Node2D
-@export var selector: AnimatedSprite
+@export var selector: AnimatedSprite2D
 
 @export_subgroup("Characters on Stage")
 @export var title: Sprite2D
@@ -132,9 +132,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 			var index: int = selected_x + (selected_y * 3)
 			# TODO: make this a script or smth so better customization
-			var icon: AnimatedSprite = character_options.get_child(index)
-			icon.playing = false
-			icon.frame = 0
+			var icon: AnimatedSprite2D = character_options.get_child(index)
+			icon.stop()
 
 			await spectator_anim.animation_finished
 
@@ -207,7 +206,7 @@ func get_camera_offset() -> Vector2:
 	)
 
 
-func finish_selection(icon: AnimatedSprite, scene_path: String) -> void:
+func finish_selection(icon: AnimatedSprite2D, scene_path: String) -> void:
 	MainMenu.freeplay_scene = scene_path
 
 	if music_tween and music_tween.is_running():
@@ -220,7 +219,7 @@ func finish_selection(icon: AnimatedSprite, scene_path: String) -> void:
 	player_anim.play(&'confirm')
 	spectator_anim.play(&'confirm')
 	selector.play(&'confirm')
-	icon.playing = true
+	icon.play()
 
 
 func _on_confirm_finished() -> void:

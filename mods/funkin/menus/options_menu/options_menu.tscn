@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://c3x06i25jm34a" path="res://mods/funkin/menus/background_inverted.png" id="2_6b80i"]
 [ext_resource type="SpriteFrames" uid="uid://f3lhnid62rym" path="res://mods/funkin/menus/main_menu/buttons.res" id="3_yv0yv"]
 [ext_resource type="Script" uid="uid://y6vnycva8tfq" path="res://mods/funkin/menus/options_menu/options_label.gd" id="4_6ck0r"]
-[ext_resource type="Script" uid="uid://xcwf8fppek0h" path="res://engine/common/animated_sprite.gd" id="4_k5v7g"]
 [ext_resource type="Script" uid="uid://b6ydf4mbyjiwc" path="res://engine/common/alphabet/alphabet.gd" id="5_qlnc3"]
 [ext_resource type="SpriteFrames" uid="uid://bymdbkfdll73j" path="res://mods/funkin/menus/options_menu/categories/icons/icons.res" id="6_lf7w2"]
 [ext_resource type="PackedScene" uid="uid://drcqw4es4j7q4" path="res://mods/funkin/menus/options_menu/categories/accessibility.tscn" id="7_0g68v"]
@@ -64,7 +63,6 @@ position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"gameplay"
 autoplay = "gameplay"
-script = ExtResource("4_k5v7g")
 
 [node name="Label" type="Node2D" parent="Categories/ScrollContainer/VBox/Gameplay" unique_id=713277252]
 position = Vector2(369, 75)
@@ -84,7 +82,6 @@ position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"interface"
 autoplay = "interface"
-script = ExtResource("4_k5v7g")
 
 [node name="Label" type="Node2D" parent="Categories/ScrollContainer/VBox/Interface" unique_id=1382033397]
 position = Vector2(380, 75)
@@ -104,7 +101,6 @@ position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"performance"
 autoplay = "performance"
-script = ExtResource("4_k5v7g")
 
 [node name="Label" type="Node2D" parent="Categories/ScrollContainer/VBox/Performance" unique_id=2056110518]
 position = Vector2(434, 75)
@@ -124,7 +120,6 @@ position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"sound"
 autoplay = "sound"
-script = ExtResource("4_k5v7g")
 
 [node name="Label" type="Node2D" parent="Categories/ScrollContainer/VBox/Sound" unique_id=1989601646]
 position = Vector2(290, 75)
@@ -144,7 +139,6 @@ position = Vector2(75, 75)
 sprite_frames = ExtResource("6_lf7w2")
 animation = &"accessibility"
 autoplay = "accessibility"
-script = ExtResource("4_k5v7g")
 
 [node name="Label" type="Node2D" parent="Categories/ScrollContainer/VBox/Accessibility" unique_id=994589360]
 position = Vector2(466, 75)

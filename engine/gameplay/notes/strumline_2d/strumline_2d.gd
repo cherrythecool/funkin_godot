@@ -146,17 +146,17 @@ func update_notes(receptor: Receptor2D) -> void:
 	var receptor_position := receptor.position
 	var scroll_scale := -1.0 if downscroll else 1.0
 	var notes := receptor.notes
+	var parent_index := parent.notes_index
+	var notes_to_remove: Array[Note2D] = []
 
-	var note_index: int = 0
-	while note_index < notes.size():
-		var note_node := notes[note_index]
+	for note_node: Note2D in notes:
 		if not is_instance_valid(note_node):
-			notes.remove_at(note_index)
+			notes_to_remove.push_back(note_node)
 			continue
 
-		if note_node.index < parent.notes_index:
+		if note_node.index < parent_index:
 			note_node.queue_free()
-			notes.remove_at(note_index)
+			notes_to_remove.push_back(note_node)
 			continue
 
 		var note := note_node.data
@@ -167,27 +167,30 @@ func update_notes(receptor: Receptor2D) -> void:
 			if note_node.hold_clip.size.y != clip_height:
 				note_node.hold_clip.size.y = clip_height
 
-		match note_node.data.state:
-			NoteData.NoteState.HIT, NoteData.NoteState.MISSED:
-				note_node.queue_free()
-				notes.remove_at(note_index)
-				continue
-			NoteData.NoteState.HELD:
-				if note_node.animated_node is CanvasItem:
-					note_node.animated_node.visible = false
+		if (
+			note_node.data.state == NoteData.NoteState.HIT or
+			note_node.data.state == NoteData.NoteState.MISSED
+		):
+			note_node.queue_free()
+			notes_to_remove.push_back(note_node)
+			continue
+		elif note_node.data.state == NoteData.NoteState.HELD:
+			if note_node.animated_node is CanvasItem:
+				note_node.animated_node.visible = false
 
-				note_node.position = receptor_position
-				note_node.hold_rect.position.y = get_distance_from_time(note.time - note_node.sustain_offset - time, real_scroll_speed)
-			NoteData.NoteState.ALIVE:
-				note_node.position = (
-					receptor_position +
-					Vector2(
-						0,
-						get_distance_from_time(note.time - time, real_scroll_speed) * scroll_scale
-					)
+			note_node.position = receptor_position
+			note_node.hold_rect.position.y = get_distance_from_time(note.time - note_node.sustain_offset - time, real_scroll_speed)
+		elif note_node.data.state == NoteData.NoteState.ALIVE:
+			note_node.position = (
+				receptor_position +
+				Vector2(
+					0,
+					get_distance_from_time(note.time - time, real_scroll_speed) * scroll_scale
 				)
+			)
 
-		note_index += 1
+	for removed: Note2D in notes_to_remove:
+		notes.erase(removed)
 
 
 func update_skin() -> void:
@@ -197,7 +200,8 @@ func update_skin() -> void:
 	for receptor: Receptor2D in receptors:
 		receptor.apply_skin(skin)
 
-	for note: Note2D in get_all_notes():
+	var all_notes := get_all_notes()
+	for note: Note2D in all_notes:
 		note.apply_skin(skin)
 
 

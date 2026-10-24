@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjr2icyay130e"
-path="res://.godot/imported/hair_blowing.png-d02a1d99b36f4d9fd351df06fa90ff3a.ctex"
+uid="uid://dgemt7gejwlj8"
+path="res://.godot/imported/main.png-4ffa817a61b94f096f6e053ecb1d4851.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mods/funkin/characters/nene/hair_blowing.png"
-dest_files=["res://.godot/imported/hair_blowing.png-d02a1d99b36f4d9fd351df06fa90ff3a.ctex"]
+source_file="res://mods/funkin/characters/pico/gameover/main.png"
+dest_files=["res://.godot/imported/main.png-4ffa817a61b94f096f6e053ecb1d4851.ctex"]
 
 [params]
 
 compress/mode=0
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

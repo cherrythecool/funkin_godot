@@ -27,7 +27,7 @@ func _on_event_hit(event: EventData) -> void:
 		return
 
 	var side: StringName = event.data.get(&"side")
-	# prevent middle character from fucking with us :+1:
+	# 👀
 	if side != &"player" and side != &"opponent":
 		return
 

@@ -3,7 +3,7 @@ class_name CategoryIcon
 
 
 @export var category: PackedScene = null
-@export var sprite: AnimatedSprite
+@export var sprite: AnimatedSprite2D
 
 var target_alpha: float = 0.6
 var target_scale: float = 0.8

@@ -3,7 +3,7 @@ extends Control
 
 
 @export var animation_name: StringName = &'story_mode'
-@export var sprite: AnimatedSprite
+@export var sprite: AnimatedSprite2D
 
 
 ## This function is triggered when the `menu_accept` action is

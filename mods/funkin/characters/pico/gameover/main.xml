@@ -2,7 +2,7 @@
 <!--
 Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
 -->
-<TextureAtlas imagePath="Pico_Death.png" width="6371" height="3442">
+<TextureAtlas imagePath="main.png" width="6371" height="3442">
 	<SubTexture name="Pico Death Stab0001" x="5584" y="1027" width="518" height="490" frameX="-124" frameY="-87" frameWidth="1061" frameHeight="615"/>
 	<SubTexture name="Pico Death Stab0002" x="4517" y="2250" width="563" height="519" frameX="-124" frameY="-58" frameWidth="1061" frameHeight="615"/>
 	<SubTexture name="Pico Death Stab0003" x="5176" y="525" width="547" height="499" frameX="-140" frameY="-78" frameWidth="1061" frameHeight="615"/>

@@ -1,5 +1,4 @@
-@tool
-extends AnimatedSprite
+extends AnimatedSprite2D
 
 
 var timer: float = 0.0
