@@ -35,7 +35,7 @@ layout_mode = 1
 anchors_preset = -1
 
 [node name="RatingContainer" parent="." unique_id=1940396623 instance=ExtResource("4_h3rog")]
-position = Vector2(640, 328)
+position = Vector2(640, 360)
 
 [node name="CountdownContainer" type="Marker2D" parent="." unique_id=1614052304]
 position = Vector2(640, 360)

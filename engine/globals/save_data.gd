@@ -145,6 +145,7 @@ func _get_core_defaults() -> Dictionary:
 
 		"rating_alpha": 1.0,
 		"time_bar_show": true,
+		"ms_label_show": true,
 		"skip_scene_transitions": false,
 
 		"performance_mode": false,

@@ -8,7 +8,7 @@
 
 [node name="Stage" type="Node2D" unique_id=238825755 node_paths=PackedStringArray("spawn_spectator", "spawn_player", "spawn_opponent")]
 script = ExtResource("1_j6jli")
-default_zoom = 0.9
+default_zoom = 1.1
 spawn_spectator = NodePath("SpectatorSpawn")
 spawn_player = NodePath("PlayerSpawn")
 spawn_opponent = NodePath("OpponentSpawn")

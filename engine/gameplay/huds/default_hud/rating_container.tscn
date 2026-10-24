@@ -11,29 +11,30 @@ font_size = 64
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
-[node name="RatingContainer" type="Node2D" unique_id=1940396623 node_paths=PackedStringArray("rating_sprite", "combo_node", "difference_label")]
+[node name="RatingContainer" type="Node2D" unique_id=1940396623 node_paths=PackedStringArray("rating_sprite", "combo_node", "ms_label")]
 script = ExtResource("1_pyogd")
 rating_sprite = NodePath("Rating")
 combo_node = NodePath("Combo")
-difference_label = NodePath("DifferenceLabel")
+ms_label = NodePath("MSLabel")
 
 [node name="Rating" type="Sprite2D" parent="." unique_id=403727332]
+position = Vector2(0, -45.350006)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_fejtq")
 
 [node name="Combo" type="Node2D" parent="." unique_id=72799944]
-position = Vector2(0, 75)
+position = Vector2(0, 29.649994)
 scale = Vector2(0.5, 0.5)
 
 [node name="1" type="Sprite2D" parent="Combo" unique_id=852011492]
 texture = ExtResource("3_uonfa")
 hframes = 10
 
-[node name="DifferenceLabel" type="Label" parent="." unique_id=419103817]
+[node name="MSLabel" type="Label" parent="." unique_id=419103817]
 offset_left = -640.0
-offset_top = 106.0
+offset_top = 59.649994
 offset_right = 640.0
-offset_bottom = 143.0
+offset_bottom = 108.649994
 pivot_offset = Vector2(640, 24.5)
 text = "0ms"
 label_settings = SubResource("LabelSettings_6egcm")

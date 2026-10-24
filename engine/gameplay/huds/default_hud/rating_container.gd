@@ -1,10 +1,14 @@
 extends Node2D
 
 
-@export var target: StringName = &"player"
+# no clue if this number is 'correct' btw but it looks close enough
+# just used to offset rating & combo when u turn off ms label to make
+# it look centered still
+const MS_LABEL_OFFSET: float = 12.0
+
 @export var rating_sprite: Sprite2D
 @export var combo_node: Node2D
-@export var difference_label: Label
+@export var ms_label: Label
 
 @export var hud_skin: HUDSkin:
 	set(value):
@@ -32,6 +36,12 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	rating_manager = get_tree().get_first_node_in_group(&"RatingManager")
+	rating_manager.applied_rating.connect(_on_applied_rating)
+	ms_label.visible = SaveData.get_save_value(&"core", "ms_label_show")
+
+	if not ms_label.visible:
+		rating_sprite.position.y += MS_LABEL_OFFSET
+		combo_node.position.y += MS_LABEL_OFFSET
 
 
 func _on_hud_setup() -> void:
@@ -41,28 +51,23 @@ func _on_hud_setup() -> void:
 		combo_node.texture_filter = hud_skin.combo_filter
 		combo_node.scale = hud_skin.combo_scale
 
-	if target in game.strumlines:
-		var strums := game.strumlines[target]
-		strums.note_hit.connect(_on_note_hit)
-		strums.note_missed.connect(_on_note_missed)
 
+func _on_applied_rating(rating: Rating, note: NoteData, _health_mult: float) -> void:
+	if rating == rating_manager.miss_rating:
+		if tween and tween.is_running():
+			tween.kill()
 
-func _on_note_hit(note: NoteData) -> void:
-	if (
-		note.state != NoteData.NoteState.ALIVE or
-		game.strumlines[target].cpu or
-		not rating_manager
-	):
+		modulate.a = 0.0
 		return
 
 	var time_difference: float = Conductor.time - note.time
-	difference_label.text = "%.2fms" % [time_difference * 1000.0]
-	difference_label.modulate = (
-		Color(0.515, 0.74, 0.962, 1.0) if time_difference < 0.0
-		else Color(0.964, 0.514, 0.797, 1.0)
-	)
+	if ms_label.visible:
+		ms_label.text = "%.2fms" % [time_difference * 1000.0]
+		ms_label.modulate = (
+			Color(0.515, 0.74, 0.962, 1.0) if time_difference < 0.0
+			else Color(0.964, 0.514, 0.797, 1.0)
+		)
 
-	var rating := rating_manager.get_rating(absf(time_difference))
 	if rating_textures.has(rating.name):
 		rating_sprite.texture = rating_textures[rating.name]
 
@@ -74,12 +79,12 @@ func _on_note_hit(note: NoteData) -> void:
 
 	modulate.a = SaveData.get_save_value(&"core", "rating_alpha")
 	rating_sprite.scale = rating_scale * 1.15
-	difference_label.scale = Vector2.ONE * 1.175
+	ms_label.scale = Vector2.ONE * 1.175
 
 	tween = FunkinUtils.replace_tween(self, tween)
 	tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT).set_parallel()
 	tween.tween_property(rating_sprite, ^"scale", rating_scale, 0.35)
-	tween.tween_property(difference_label, ^"scale", Vector2.ONE, 0.5)
+	tween.tween_property(ms_label, ^"scale", Vector2.ONE, 0.5)
 	tween.tween_property(self, ^"modulate:a", 0.0, 0.6).set_delay(0.55)
 
 	var previous_str := "%03d" % [rating_manager.combo - 1]
@@ -122,10 +127,3 @@ func update_combo() -> void:
 			number.show()
 		else:
 			number.hide()
-
-
-func _on_note_missed(_note: NoteData) -> void:
-	if tween and tween.is_running():
-		tween.kill()
-
-	modulate.a = 0.0

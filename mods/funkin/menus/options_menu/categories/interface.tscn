@@ -9,8 +9,8 @@
 [node name="Interface" type="Node2D" unique_id=2111672686 node_paths=PackedStringArray("options")]
 position = Vector2(-320, 0)
 script = ExtResource("1_6p62e")
-options = [NodePath("LaneAlpha"), NodePath("RatingAlpha"), NodePath("SplashAlpha"), NodePath("ShowTimeBar"), NodePath("SkipSceneTransitions")]
-max_distance = 320.0
+options = [NodePath("LaneAlpha"), NodePath("RatingAlpha"), NodePath("SplashAlpha"), NodePath("ShowTimeBar"), NodePath("ShowMSLabel"), NodePath("SkipSceneTransitions")]
+max_distance = 100.0
 
 [node name="LaneAlpha" type="Node2D" parent="." unique_id=925156825 node_paths=PackedStringArray("root", "value_label")]
 position = Vector2(6, -146)
@@ -92,7 +92,7 @@ script = ExtResource("3_ih51s")
 text = "0%"
 
 [node name="ShowTimeBar" type="Node2D" parent="." unique_id=1465903622 node_paths=PackedStringArray("alphabet", "checkbox")]
-position = Vector2(-34, 188)
+position = Vector2(-34, 149)
 script = ExtResource("2_422dy")
 alphabet = NodePath("Label")
 checkbox = NodePath("Checkbox")
@@ -111,8 +111,28 @@ sprite_frames = ExtResource("4_abqtr")
 animation = &"selected"
 offset = Vector2(-5, -35)
 
+[node name="ShowMSLabel" type="Node2D" parent="." unique_id=1263203009 node_paths=PackedStringArray("alphabet", "checkbox")]
+position = Vector2(-37, 250)
+script = ExtResource("2_422dy")
+alphabet = NodePath("Label")
+checkbox = NodePath("Checkbox")
+key = &"ms_label_show"
+
+[node name="Label" type="Node2D" parent="ShowMSLabel" unique_id=2026125139]
+position = Vector2(99, 0)
+script = ExtResource("3_ih51s")
+text = "Show MS Label"
+centered = true
+
+[node name="Checkbox" type="AnimatedSprite2D" parent="ShowMSLabel" unique_id=1652115076]
+position = Vector2(468, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("4_abqtr")
+animation = &"selected"
+offset = Vector2(-5, -35)
+
 [node name="SkipSceneTransitions" type="Node2D" parent="." unique_id=2138152291 node_paths=PackedStringArray("alphabet", "checkbox")]
-position = Vector2(117, 286)
+position = Vector2(117, 379)
 script = ExtResource("2_422dy")
 alphabet = NodePath("Label")
 checkbox = NodePath("Checkbox")
@@ -132,4 +152,5 @@ animation = &"selected"
 offset = Vector2(-5, -35)
 
 [connection signal="animation_finished" from="ShowTimeBar/Checkbox" to="ShowTimeBar" method="_on_checkbox_animation_finished"]
+[connection signal="animation_finished" from="ShowMSLabel/Checkbox" to="ShowMSLabel" method="_on_checkbox_animation_finished"]
 [connection signal="animation_finished" from="SkipSceneTransitions/Checkbox" to="SkipSceneTransitions" method="_on_checkbox_animation_finished"]
