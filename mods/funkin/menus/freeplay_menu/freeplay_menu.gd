@@ -5,6 +5,7 @@ extends Node
 static var index: int = 0
 static var difficulty_index: int = 0
 
+@export var open_character_select := true
 @export var list: Array[String] = []
 @export_dir var songs_folder: String = "res://mods/funkin/songs":
 	set(v):
@@ -90,7 +91,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action(&"menu_accept"):
 		active = false
 		select_song.call_deferred()
-	if event.is_action(&"freeplay_open_characters"):
+	if event.is_action(&"freeplay_open_characters") and open_character_select:
 		active = false
 		MenuAudio.cancel.play()
 		SceneManager.transition_to_file("uid://62vvv8x8t7nm")
@@ -201,7 +202,7 @@ func load_song(i: int) -> void:
 	song_nodes.push_back(node)
 	songs_parent.add_child(node)
 
-	var icon: Sprite2D = HealthIcon.create_sprite(meta.icon)
+	var icon := HealthIcon.create_sprite(meta.icon)
 	# 37.5 = 150.0 * 0.25
 	icon.position = Vector2(node.size.x + 75.0, 37.5)
 	node.add_child(icon)

@@ -33,21 +33,30 @@ func get_opponent() -> PackedScene:
 	if is_instance_valid(opponent):
 		return opponent
 
-	return load("uid://cdlt4jc7j8122")
+	if ResourceUID.has_id(ResourceUID.text_to_id("uid://cdlt4jc7j8122")):
+		return load("uid://cdlt4jc7j8122")
+	else:
+		return load("uid://bu44d2he2dxm3")
 
 
 func get_spectator() -> PackedScene:
 	if is_instance_valid(spectator):
 		return spectator
 
-	return load("uid://bragoy3tisav2")
+	if ResourceUID.has_id(ResourceUID.text_to_id("uid://bragoy3tisav2")):
+		return load("uid://bragoy3tisav2")
+	else:
+		return load("uid://bu44d2he2dxm3")
 
 
 func get_stage() -> PackedScene:
 	if is_instance_valid(stage):
 		return stage
 
-	return load("uid://0ih6j18ov417")
+	if ResourceUID.has_id(ResourceUID.text_to_id("uid://0ih6j18ov417")):
+		return load("uid://0ih6j18ov417")
+	else:
+		return load("uid://m26q2fyumltr")
 
 
 func get_hud_skin() -> HUDSkin:
