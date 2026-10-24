@@ -24,17 +24,8 @@ func update_score_label() -> void:
 
 	var accuracy_string: String = "N/A"
 	if rating_manager._total_notes_hit > 0:
-		var decimal_points := 2
-		if rating_manager.get_accuracy() >= 100.0:
-			decimal_points = 2
-		elif rating_manager.get_accuracy() >= 99.9:
-			decimal_points = 5
-		elif rating_manager.get_accuracy() >= 99.0:
-			decimal_points = 3
-
-		accuracy_string = "%.*f%%" % [
-			decimal_points,
-			floorf(rating_manager.get_accuracy() * 100000.0) / 100000.0,
+		accuracy_string = "%.2f%%" % [
+			floorf(rating_manager.get_accuracy() * 100.0) / 100.0,
 		]
 
 	text = "Score:%d %s Misses:%d %s Accuracy:%s (%s)" % [

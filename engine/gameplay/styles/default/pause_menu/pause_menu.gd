@@ -96,7 +96,11 @@ func close(was_input: bool = true) -> void:
 
 	hide()
 	active = false
-	set_shit_back_up.call_deferred()
+
+	if was_input:
+		set_shit_back_up.call_deferred()
+	else:
+		set_shit_back_up()
 
 	if was_input:
 		queue_free()

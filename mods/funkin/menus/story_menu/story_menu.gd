@@ -82,17 +82,20 @@ func _unhandled_input(event: InputEvent) -> void:
 				week_flash_timer.timeout.emit()
 
 			if is_instance_valid(props.props[2]):
+				var og_scale: Vector2 = props.props[2].scale
+				props.props[2].play_anim(&"confirm", true)
+				props.props[2].scale *= 1.15
+
+				var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+				tween.tween_property(props.props[2], ^"scale", og_scale, 0.7)
+				await get_tree().create_timer(0.5, false).timeout
+
 				props.tween_prop_out(1)
 				props.tween_prop_out(3)
-
-				var og_scale: Vector2 = props.props[2].scale
-				props.props[2].scale *= 1.1
-
-				var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
-				tween.tween_property(props.props[2], ^"scale", og_scale, 0.5)
-
-				props.props[2].play_anim(&"confirm", true)
-				await props.props[2].animation_finished
+				tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel()
+				tween.tween_property(props.props[2], ^"modulate:a", 0.0, 1.25)
+				tween.tween_property(props.props[2], ^"position:y", 400, 1.0).set_delay(0.25)
+				await get_tree().create_timer(1.0, false).timeout
 
 			Game.load_settings[&"exit_scene_path"] = get_tree().current_scene.scene_file_path
 			SceneManager.transition_to_file(

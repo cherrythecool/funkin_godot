@@ -22,7 +22,7 @@ signal applied_rating(rating: Rating, note: NoteData, health_mult: float)
 	80.0: &"B",
 	90.0: &"A",
 	99.0: &"S",
-	100.0: &"S+",
+	100.0: &"P",
 }
 
 @export var ratings: Array[Rating] = []

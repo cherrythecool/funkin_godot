@@ -99,6 +99,8 @@ func tween_prop_out(index: int) -> void:
 
 	var tween: Tween = FunkinUtils.replace_tween(self, prop_tweens[index])\
 		.set_ease(Tween.EASE_IN_OUT)\
-		.set_trans(Tween.TRANS_CUBIC)
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_parallel()
+	tween.tween_property(parent, ^"position:y", 600.0, 1.0)
 	tween.tween_property(parent, ^"modulate:a", 0.0, 1.25)
 	prop_tweens[index] = tween
