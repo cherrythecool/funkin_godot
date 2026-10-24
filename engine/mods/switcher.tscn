@@ -6,12 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://mwxbaajkt3nh" path="res://engine/mods/folder_icon.svg" id="4_kc7kk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgwie"]
-bg_color = Color(0.0703125, 0.069488525, 0.069488525, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.19921875, 0.19921875, 0.19921875, 1)
+bg_color = Color(0, 0, 0, 0.5)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
