@@ -74,7 +74,7 @@ offset_top = 32.0
 offset_right = 640.0
 offset_bottom = 67.0
 grow_horizontal = 2
-pivot_offset = Vector2(640, 17.5)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "Score:0 - Misses:0 - Accuracy:N/A (N/A)
 "
 label_settings = SubResource("LabelSettings_ku58i")

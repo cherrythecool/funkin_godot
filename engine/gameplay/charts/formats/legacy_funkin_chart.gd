@@ -35,9 +35,9 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 	if data["song"] is Dictionary:
 		song_data = data["song"]
 	else:
-		# psych 1.0 and stuff mostly
+		# psych 1.0!!!!!!!!!!!!!!!!!!!!
 		song_data = data
-	
+
 	# only seen this on like psych 1.0 or nmv charts so
 	# unless it gets used for smth else in future then yeah
 	if song_data.has("format"):

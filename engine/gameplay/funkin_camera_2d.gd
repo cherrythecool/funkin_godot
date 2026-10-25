@@ -38,6 +38,7 @@ var game: Game:
 		return Game.instance
 
 var zoom_event_tween: Tween
+var zoom_event_target: float = 0.0
 var pan_event_tween: Tween
 
 
@@ -156,23 +157,33 @@ func _on_event_hit(event: EventData) -> void:
 				true,
 				0.0
 			)
-		&"zoomcamera":
-			var data: Dictionary = event.data.get(&"values")
-			var steps: int = data.get("duration", 32)
-			var ease_string: String = data.get("ease", "expoOut")
-			var data_zoom: float = data.get("zoom", 1.05)
+		&"camera zoom":
+			var data: Dictionary = event.data
+			var steps: int = data[&"duration"]
+			var ease_string: String = data[&"ease_string"]
+			var data_zoom: float = data[&"target_zoom"]
+			var multiply_zoom: bool = data[&"multiplicative"]
 
-			if is_instance_valid(zoom_event_tween):
-				zoom_event_tween.kill()
-
-			match data.get("mode", "direct"):
-				"stage":
+			match data[&"mode"]:
+				CameraZoom.ZoomMode.STAGE:
 					if game.stage:
 						zoom_stage_target = game.stage.default_zoom
 
 					data_zoom *= zoom_stage_target
-				"direct":
+				CameraZoom.ZoomMode.DIRECT, _:
 					pass
+
+			if zoom_event_tween:
+				zoom_event_tween.kill()
+
+			if multiply_zoom:
+				if zoom_event_target != 0.0:
+					data_zoom *= zoom_event_target
+				else:
+					# just in case
+					data_zoom *= (zoom_target.x + zoom_target.y) / 2.0
+
+			zoom_event_target = data_zoom
 
 			if ease_string == "INSTANT":
 				zoom_target = Vector2.ONE * data_zoom
@@ -181,9 +192,6 @@ func _on_event_hit(event: EventData) -> void:
 
 			if not is_instance_valid(conductor):
 				return
-
-			if ease_string != "linear" and data.has("easeDir"):
-				ease_string += data.get("easeDir")
 
 			zoom_event_tween = create_tween().set_parallel()
 			zoom_event_tween.set_ease(
@@ -212,6 +220,7 @@ func _on_game_ready_post() -> void:
 
 	if is_instance_valid(game.stage):
 		zoom_target = Vector2.ONE * game.stage.default_zoom
+		zoom_event_target = game.stage.default_zoom
 		zoom = zoom_target
 		position_lerp_speed = game.stage.camera_speed
 

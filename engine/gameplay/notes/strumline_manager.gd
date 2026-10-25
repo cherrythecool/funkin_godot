@@ -40,10 +40,9 @@ func _process(delta: float) -> void:
 		receptor_states.fill(ReceptorState.RELEASED)
 
 	var time := get_time()
-	var note_idx := 0
-
-	while notes_index + note_idx < notes.size():
-		var index := notes_index + note_idx
+	var note_range := range(notes_index, notes.size())
+	for index: int in note_range:
+		var note_idx := index - notes_index
 		var note := notes[index]
 		if not is_note_in_range(note, time):
 			break
@@ -79,8 +78,6 @@ func _process(delta: float) -> void:
 
 		if shift_notes_index:
 			notes_index += 1
-		else:
-			note_idx += 1
 
 	if not cpu:
 		_handle_player_input(delta)
@@ -194,7 +191,8 @@ func _handle_player_input(delta: float) -> void:
 			receptor_states[i] = ReceptorState.PRESSED
 
 	var time := get_time()
-	for index: int in range(notes_index, notes.size()):
+	var note_range := range(notes_index, notes.size())
+	for index: int in note_range:
 		var note := notes[index]
 		if not is_note_in_range(note, time):
 			break

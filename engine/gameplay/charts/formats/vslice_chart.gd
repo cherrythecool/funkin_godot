@@ -62,13 +62,34 @@ static func load_vslice(song_folder: String, difficulty: StringName) -> Chart:
 
 	if data.has("events"):
 		for event: Dictionary in data["events"]:
-			if event.get("e") == "FocusCamera":
+			var event_name: String = event.get("e")
+			var event_time := float(event.get("t")) / 1000.0
+
+			if event_name == "FocusCamera":
 				chart.events.push_back(_parse_focus_camera(event))
+			elif event_name == "ZoomCamera":
+				var values: Dictionary = event.get("v")
+				var steps: int = values.get("duration", 32)
+				var ease_string: String = values.get("ease", "expoOut")
+				var data_zoom: float = values.get("zoom", 1.05)
+
+				if ease_string != "INSTANT" and ease_string != "linear" and "easeDir" in values:
+					ease_string += str(values.get("easeDir"))
+
+				chart.events.push_back(
+					CameraZoom.new(
+						event_time,
+						data_zoom,
+						float(steps),
+						ease_string,
+						CameraZoom.ZoomMode.STAGE if values.get("mode", "direct") == "stage" else CameraZoom.ZoomMode.DIRECT,
+					)
+				)
 			else:
 				chart.events.push_back(
 					DynamicEvent.new(
-						event.get("e"),
-						float(event.get("t") / 1000.0),
+						event_name,
+						event_time,
 						event.get("v"),
 					)
 				)

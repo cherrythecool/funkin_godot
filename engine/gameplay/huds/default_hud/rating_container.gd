@@ -9,6 +9,7 @@ const MS_LABEL_OFFSET: float = 12.0
 @export var rating_sprite: Sprite2D
 @export var combo_node: Node2D
 @export var ms_label: Label
+@export var override_ms_label_visible := false
 
 @export var hud_skin: HUDSkin:
 	set(value):
@@ -37,7 +38,9 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	rating_manager = get_tree().get_first_node_in_group(&"RatingManager")
 	rating_manager.applied_rating.connect(_on_applied_rating)
-	ms_label.visible = SaveData.get_save_value(&"core", "ms_label_show")
+
+	if not override_ms_label_visible:
+		ms_label.visible = SaveData.get_save_value(&"core", "ms_label_show")
 
 	if not ms_label.visible:
 		rating_sprite.position.y += MS_LABEL_OFFSET

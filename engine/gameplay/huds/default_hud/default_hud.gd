@@ -21,8 +21,8 @@ var middlescroll: bool = false:
 @export var player_renderer: Strumline2D
 @export var opponent_renderer: Strumline2D
 
-@export var health_bar: HealthBar
-@export var countdown_container: CountdownContainer
+@export var health_bar: CanvasItem
+@export var countdown_container: CanvasItem
 @export var time_bar: ProgressBar
 @export var rating_container: Node2D
 

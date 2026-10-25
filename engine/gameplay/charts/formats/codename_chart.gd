@@ -123,12 +123,16 @@ static func parse_events(chart: Chart, events: Array, sides: Array[StringName]) 
 				if str(params[2]) != "camGame":
 					continue
 
-				chart.events.append(DynamicEvent.new(&"ZoomCamera", time, {
-					"duration": float(params[3]),
-					"ease": str(params[4]) + str(params[5]) if params[0] else "INSTANT",
-					"mode": str(params[6]),
-					"zoom": float(params[1])
-				}))
+				chart.events.append(
+					CameraZoom.new(
+						time,
+						float(params[1]),
+						float(params[3]),
+						str(params[4]) + str(params[5]) if params[0] else "INSTANT",
+						CameraZoom.ZoomMode.STAGE if str(params[6]) == "stage" else CameraZoom.ZoomMode.DIRECT,
+						params[7] if params.size() > 7 else false,
+					)
+				)
 			"BPM Change":
 				var change := TimingChange.new()
 				change.time = time

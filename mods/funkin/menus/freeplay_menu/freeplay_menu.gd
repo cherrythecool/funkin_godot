@@ -6,13 +6,15 @@ static var index: int = 0
 static var difficulty_index: int = 0
 
 @export var open_character_select := true
-@export var list: Array[String] = []
+
 @export_dir var songs_folder: String = "res://mods/funkin/songs":
 	set(v):
 		songs_folder = v
 
 		if songs_folder.ends_with("/"):
 			songs_folder = songs_folder.left(-1)
+
+@export var list: Array[String] = []
 
 @export_group("References")
 @export var music: AudioStreamPlayer

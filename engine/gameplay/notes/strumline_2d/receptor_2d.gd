@@ -110,6 +110,9 @@ func get_animation_from_state(state: StrumlineManager.ReceptorState) -> StringNa
 
 
 func is_playing() -> bool:
+	if not animated_node:
+		return false
+
 	if "playing" in animated_node:
 		return animated_node.playing
 	elif "current_animation" in animated_node:
