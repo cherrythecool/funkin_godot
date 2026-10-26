@@ -48,8 +48,7 @@ func _process(delta: float) -> void:
 			break
 
 		var shift_notes_index := false
-		var finished := note.state == NoteData.NoteState.HIT or note.state == NoteData.NoteState.MISSED
-		if finished:
+		if note.state == NoteData.NoteState.HIT or note.state == NoteData.NoteState.MISSED:
 			shift_notes_index = note_idx == 0
 		else:
 			if cpu:
@@ -62,13 +61,13 @@ func _process(delta: float) -> void:
 					time > note.time + hit_window and
 					note.state == NoteData.NoteState.ALIVE
 				)
+
 				var sustain_missed := (
 					(note.grace_timer <= 0.0 and note.length > 0.0) and
 					note.state == NoteData.NoteState.HELD
 				)
-				var should_miss := past_hit_window or sustain_missed
 
-				if should_miss:
+				if past_hit_window or sustain_missed:
 					miss_note(note)
 					shift_notes_index = note_idx == 0
 				elif time >= note.time + note.length and note.state == NoteData.NoteState.HELD:
@@ -174,6 +173,10 @@ func skip_missed_notes(time_range: float) -> void:
 
 
 func _handle_player_input(delta: float) -> void:
+	if key_count > input_actions.size():
+		push_warning("Strumline has key count %d which is more than input action count of %d. No input allowed in this case" % [key_count, input_actions.size()])
+		return
+
 	var pressed: Array[bool]
 	pressed.resize(key_count)
 
@@ -197,22 +200,21 @@ func _handle_player_input(delta: float) -> void:
 		if not is_note_in_range(note, time):
 			break
 
-		match note.state:
-			NoteData.NoteState.ALIVE:
-				if not pressed[note.direction]:
-					continue
+		if note.state == NoteData.NoteState.ALIVE:
+			if not pressed[note.direction]:
+				continue
 
-				pressed[note.direction] = false
+			pressed[note.direction] = false
+			last_hit_index = index
+			hit_note(note)
+		elif note.state == NoteData.NoteState.HELD:
+			if held[note.direction]:
 				last_hit_index = index
 				hit_note(note)
-			NoteData.NoteState.HELD:
-				if held[note.direction]:
-					last_hit_index = index
-					hit_note(note)
-				else:
-					note.grace_timer -= delta
+			else:
+				note.grace_timer -= delta
 
-				held[note.direction] = false
+			held[note.direction] = false
 
-				if note.grace_timer <= 0.0:
-					miss_note(note)
+			if note.grace_timer <= 0.0:
+				miss_note(note)

@@ -19,6 +19,9 @@ var current_modules: Array
 
 
 func _ready() -> void:
+	if is_queued_for_deletion():
+		return
+
 	if OS.has_feature("mobile"):
 		mods_path = "user://mods"
 
@@ -92,7 +95,6 @@ func load_mods_folder() -> void:
 	dir.make_dir("mods")
 
 	var mods_dir := DirAccess.open(mods_path)
-
 	if not mods_dir:
 		printerr("Failed to open mods directory! Cannot load any modules!")
 		return
@@ -122,8 +124,8 @@ func load_modules_list() -> void:
 func module_path_filter(path: String) -> bool:
 	if not path.ends_with("/"):
 		return false
-
-	return ResourceLoader.exists("res://mods/%smodule.tscn" % path)
+	else:
+		return ResourceLoader.exists("res://mods/%smodule.tscn" % path)
 
 
 func module_pck_filter(path: String) -> bool:
