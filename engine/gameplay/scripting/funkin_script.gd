@@ -6,67 +6,67 @@ extends Node
 
 var conductor: Conductor:
 	get:
-		if is_instance_valid(Conductor.instance):
-			return Conductor.instance
-		else:
-			return null
+		return Conductor.instance
 
 var game: Game:
 	get:
-		if is_instance_valid(Game.instance):
-			return Game.instance
-		else:
-			return null
+		return Game.instance
 
 var player: Character:
 	set(value):
-		if is_instance_valid(game):
+		if game:
 			game.player = value
 	get:
-		if is_instance_valid(game):
+		if game:
 			return game.player
 		else:
 			return null
 
 var opponent: Character:
 	set(value):
-		if is_instance_valid(game):
+		if game:
 			game.opponent = value
 	get:
-		if is_instance_valid(game):
+		if game:
 			return game.opponent
 		else:
 			return null
 
 var spectator: Character:
 	set(value):
-		if is_instance_valid(game):
+		if game:
 			game.spectator = value
 	get:
-		if is_instance_valid(game):
+		if game:
 			return game.spectator
 		else:
 			return null
 
 var stage: Stage:
 	set(value):
-		if is_instance_valid(game):
+		if game:
 			game.stage = value
 	get:
-		if is_instance_valid(game):
+		if game:
 			return game.stage
 		else:
 			return null
 
 var camera: FunkinCamera2D:
 	get:
-		if is_instance_valid(FunkinCamera2D.instance):
-			return FunkinCamera2D.instance
+		return FunkinCamera2D.instance
+
+
+var hud: Node:
+	get:
+		if game:
+			return game.hud
 		else:
 			return null
 
 
 var event_manager: EventManager
+var rating_manager: RatingManager
 
 
 func _init() -> void:
@@ -123,12 +123,12 @@ func _on_note_missed(note: NoteData, strumline_key: StringName) -> void:
 
 
 func _initialize_variables() -> void:
-	if is_instance_valid(conductor):
+	if conductor:
 		conductor.beat_hit.connect(_on_beat_hit)
 		conductor.step_hit.connect(_on_step_hit)
 		conductor.measure_hit.connect(_on_measure_hit)
 
-	if is_instance_valid(game):
+	if game:
 		game.ready_post.connect(_ready_post)
 		game.song_start.connect(_on_song_start)
 		game.song_finished.connect(_on_song_finished)

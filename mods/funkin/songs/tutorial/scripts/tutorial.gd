@@ -2,7 +2,7 @@ extends FunkinScript
 
 
 func _ready() -> void:
-	if not (is_instance_valid(spectator) and is_instance_valid(player)):
+	if (not spectator) or (not player):
 		queue_free()
 		return
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://12gni0aoyu7u"]
 
-[ext_resource type="Shader" uid="uid://c5yog0baapoao" path="res://mods/funkin/songs/test/scripts/shader.gdshader" id="1_jo7ew"]
+[ext_resource type="Shader" uid="uid://c5yog0baapoao" path="res://engine/common/shaders/screen_grayscale.gdshader" id="1_jo7ew"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h30eh"]
 shader = ExtResource("1_jo7ew")

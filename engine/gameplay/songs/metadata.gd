@@ -13,7 +13,7 @@ extends Resource
 ]
 @export var difficulty_song_overrides: Dictionary[String, StringName] = {}
 
-@export_group("Game Properties")
+@export_group("Game Metadata")
 @export var skip_countdown: bool = false
 @export_file("*.tscn") var scene_path: String
 
