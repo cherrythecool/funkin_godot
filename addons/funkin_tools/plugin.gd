@@ -30,4 +30,4 @@ func _get_plugin_name() -> String:
 
 
 func _get_plugin_icon() -> Texture2D:
-	return EditorInterface.get_editor_theme().get_icon("GDScript", "EditorIcons")
+	return load("res://addons/funkin_tools/plugin_icon.svg")
