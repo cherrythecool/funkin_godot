@@ -45,5 +45,32 @@ func reset_score(song: StringName, difficulty: StringName) -> void:
 	SaveData.set_save_value(&"scores", "scores", scores)
 
 
+func get_collective_score(songs: Array[StringName], difficulty: StringName) -> Dictionary:
+	var total_score := 0
+	var total_misses := 0
+	var had_score := false
+
+	for song_name: StringName in songs:
+		if not has_score(song_name, difficulty):
+			continue
+		else:
+			had_score = true
+
+		var high_score := Highscores.get_score(song_name, difficulty)
+		total_score += int(high_score.get("score", 0))
+		total_misses += int(high_score.get("misses", 0))
+
+	if had_score:
+		return {
+			"score": total_score,
+			"misses": total_misses,
+		}
+	else:
+		return {
+			"score": "N/A",
+			"misses": "N/A",
+		}
+
+
 func _get_score_key(song: StringName, difficulty: StringName) -> String:
 	return "%s/%s" % [song, difficulty]

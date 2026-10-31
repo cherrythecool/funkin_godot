@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://3rua2gpac5p8"]
 
 [ext_resource type="Texture2D" uid="uid://coli0ye4bsyff" path="res://mods/funkin/menus/background.png" id="1_2q4rq"]
-[ext_resource type="Script" uid="uid://buarre8s3ld28" path="res://mods/funkin/menus/freeplay_menu/freeplay_menu.gd" id="1_p2lt6"]
+[ext_resource type="Script" uid="uid://buarre8s3ld28" path="res://mods/funkin/menus/freeplay_menu/funkin_freeplay.gd" id="1_p2lt6"]
 [ext_resource type="Script" uid="uid://4r8crqqwxnyk" path="res://mods/funkin/menus/freeplay_menu/song_panel.gd" id="4_5dymk"]
 [ext_resource type="FontFile" uid="uid://bwdbpvqa8g3me" path="res://engine/common/fonts/vcr_osd_mono.ttf" id="5_q45ui"]
 [ext_resource type="Script" uid="uid://di5oncp1uonwm" path="res://mods/funkin/menus/freeplay_menu/stats_panel.gd" id="6_mti1l"]

@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://nnwy1kh830v"]
+
+[ext_resource type="Script" uid="uid://drdbvkho4rcvu" path="res://engine/menus/story_menu.gd" id="1_xvl4p"]
+[ext_resource type="Script" uid="uid://skomxvk1v84b" path="res://engine/menus/story_menu_week.gd" id="2_2f6yb"]
+
+[sub_resource type="Resource" id="Resource_xvl4p"]
+script = ExtResource("2_2f6yb")
+songs = Array[StringName]([&"tutorial"])
+title = "Tutorial"
+metadata/_custom_type_script = "uid://skomxvk1v84b"
+
+[sub_resource type="Resource" id="Resource_2f6yb"]
+script = ExtResource("2_2f6yb")
+songs = Array[StringName]([&"bopeebo", &"fresh", &"dad_battle"])
+difficulties = Array[StringName]([&"easy", &"normal", &"hard", &"erect", &"nightmare"])
+title = "Daddy Dearest"
+metadata/_custom_type_script = "uid://skomxvk1v84b"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fy1rs"]
+bg_color = Color(0.53125, 0.53125, 0.53125, 1)
+
+[node name="StoryMenu" type="Control" unique_id=1733449955 node_paths=PackedStringArray("weeks_container", "difficulty_options", "songs_label", "high_score_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xvl4p")
+weeks = Array[ExtResource("2_2f6yb")]([SubResource("Resource_xvl4p"), SubResource("Resource_2f6yb")])
+weeks_container = NodePath("HBoxContainer/ScrollContainer/WeeksContainer")
+difficulty_options = NodePath("HBoxContainer/Panel/VBoxContainer/DifficultyOptions")
+songs_label = NodePath("HBoxContainer/Panel/VBoxContainer/SongsLabel")
+high_score_label = NodePath("HBoxContainer/Panel/VBoxContainer/HighScoreLabel")
+
+[node name="Background" type="Panel" parent="." unique_id=251682650]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fy1rs")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=54921047]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer" unique_id=267935239]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WeeksContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer" unique_id=1596565242]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=1164968457]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel" unique_id=1633122705]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectedTitle" type="Label" parent="HBoxContainer/Panel/VBoxContainer" unique_id=548002495]
+layout_mode = 2
+text = "Selected Songs"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SongsLabel" type="Label" parent="HBoxContainer/Panel/VBoxContainer" unique_id=1906324978]
+layout_mode = 2
+text = "???"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Panel/VBoxContainer" unique_id=1811469786]
+layout_mode = 2
+
+[node name="DifficultyTitle" type="Label" parent="HBoxContainer/Panel/VBoxContainer" unique_id=2040440087]
+layout_mode = 2
+text = "Difficulty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DifficultyOptions" type="OptionButton" parent="HBoxContainer/Panel/VBoxContainer" unique_id=890410434]
+layout_mode = 2
+alignment = 1
+search_bar_enabled = true
+item_count = 1
+popup/item_0/text = "N/A"
+popup/item_0/id = 0
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/Panel/VBoxContainer" unique_id=1411081310]
+layout_mode = 2
+
+[node name="HighScoreLabel" type="Label" parent="HBoxContainer/Panel/VBoxContainer" unique_id=376872871]
+layout_mode = 2
+text = "High Score: N/A
+Misses: N/A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/Panel/VBoxContainer" unique_id=1468136208]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="HBoxContainer/Panel/VBoxContainer" unique_id=1922653600]
+layout_mode = 2
+text = "Play Songs"
+
+[connection signal="item_selected" from="HBoxContainer/Panel/VBoxContainer/DifficultyOptions" to="." method="_on_difficulty_option_selected"]
+[connection signal="pressed" from="HBoxContainer/Panel/VBoxContainer/PlayButton" to="." method="play_songs"]

@@ -23,7 +23,9 @@ static func load_from_song(song: String, songs_folder: String) -> SongMetadata:
 	if ResourceLoader.exists(path):
 		return load(path)
 	else:
-		return null
+		var meta := SongMetadata.new()
+		meta.display_name = song.to_pascal_case()
+		return meta
 
 
 func get_full_name() -> StringName:
@@ -31,3 +33,10 @@ func get_full_name() -> StringName:
 		return &"%s (%s Mix)" % [display_name, mix]
 	else:
 		return display_name
+
+
+func get_override_name(default: StringName, difficulty: StringName = &"") -> StringName:
+	if difficulty not in difficulty_song_overrides:
+		return default
+	else:
+		return difficulty_song_overrides[difficulty]

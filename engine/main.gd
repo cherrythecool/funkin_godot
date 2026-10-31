@@ -16,6 +16,8 @@ func _enter_tree() -> void:
 		ModSwitcher.queue_free()
 		SceneManager.swap_to_file(hardcoded_scene_path)
 	else:
+		await ready
+
 		var current_module: String = SaveData.get_save_value(&"module", "current_module")
 		var target_path := "res://mods/%s/module.tscn" % current_module
 

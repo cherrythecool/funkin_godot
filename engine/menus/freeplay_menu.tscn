@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://bhack4iq5f6qa"]
+
+[ext_resource type="Script" uid="uid://dgfeklq8tekp1" path="res://engine/menus/freeplay_menu.gd" id="1_ma5pb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fy1rs"]
+bg_color = Color(0.53125, 0.53125, 0.53125, 1)
+
+[node name="FreeplayMenu" type="Control" unique_id=1733449955 node_paths=PackedStringArray("songs_container", "difficulty_options", "song_label", "high_score_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ma5pb")
+songs = Array[StringName]([&"test", &"tutorial", &"bopeebo", &"fresh", &"dad_battle"])
+songs_container = NodePath("HBoxContainer/ScrollContainer/SongsContainer")
+difficulty_options = NodePath("HBoxContainer/Panel/VBoxContainer/DifficultyOptions")
+song_label = NodePath("HBoxContainer/Panel/VBoxContainer/SongLabel")
+high_score_label = NodePath("HBoxContainer/Panel/VBoxContainer/HighScoreLabel")
+
+[node name="Background" type="Panel" parent="." unique_id=251682650]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fy1rs")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=54921047]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer" unique_id=267935239]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SongsContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer" unique_id=1596565242]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=1164968457]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel" unique_id=1633122705]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectedTitle" type="Label" parent="HBoxContainer/Panel/VBoxContainer" unique_id=548002495]
+layout_mode = 2
+text = "Selected Song"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SongLabel" type="Label" parent="HBoxContainer/Panel/VBoxContainer" unique_id=1906324978]
+layout_mode = 2
+text = "???"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Panel/VBoxContainer" unique_id=1811469786]
+layout_mode = 2
+
+[node name="DifficultyTitle" type="Label" parent="HBoxContainer/Panel/VBoxContainer" unique_id=2040440087]
+layout_mode = 2
+text = "Difficulty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DifficultyOptions" type="OptionButton" parent="HBoxContainer/Panel/VBoxContainer" unique_id=890410434]
+layout_mode = 2
+alignment = 1
+search_bar_enabled = true
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/Panel/VBoxContainer" unique_id=1411081310]
+layout_mode = 2
+
+[node name="HighScoreLabel" type="Label" parent="HBoxContainer/Panel/VBoxContainer" unique_id=1812154157]
+layout_mode = 2
+text = "High Score: N/A
+Misses: N/A
+Accuracy: N/A
+Rank: N/A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/Panel/VBoxContainer" unique_id=702196574]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="HBoxContainer/Panel/VBoxContainer" unique_id=1922653600]
+layout_mode = 2
+text = "Play Song"
+
+[connection signal="item_selected" from="HBoxContainer/Panel/VBoxContainer/DifficultyOptions" to="." method="_on_difficulty_option_selected"]
+[connection signal="pressed" from="HBoxContainer/Panel/VBoxContainer/PlayButton" to="." method="play_song"]
