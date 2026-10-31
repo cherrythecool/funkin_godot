@@ -96,10 +96,8 @@ func _on_applied_rating(rating: Rating, note: NoteData, _health_mult: float) -> 
 	for number_node: Node in combo_node.get_children():
 		var number := number_node as CanvasItem
 		var index := int(number_node.name) - 1
-		if index > combo_str.length() - 1:
-			break
 
-		if int(combo_str[index]) > int(previous_str[index]):
+		if index > previous_str.length() - 1 or int(combo_str[index]) > int(previous_str[index]):
 			number.scale = Vector2.ONE * 1.25
 			tween.tween_property(number, ^"scale", Vector2.ONE, 0.5)
 		else:
