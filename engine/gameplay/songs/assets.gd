@@ -33,7 +33,7 @@ func get_opponent() -> PackedScene:
 	if is_instance_valid(opponent):
 		return opponent
 
-	if ResourceUID.has_id(ResourceUID.text_to_id("uid://cdlt4jc7j8122")):
+	if ResourceLoader.exists("uid://cdlt4jc7j8122"):
 		return load("uid://cdlt4jc7j8122")
 	else:
 		return load("uid://bu44d2he2dxm3")
@@ -43,7 +43,7 @@ func get_spectator() -> PackedScene:
 	if is_instance_valid(spectator):
 		return spectator
 
-	if ResourceUID.has_id(ResourceUID.text_to_id("uid://bragoy3tisav2")):
+	if ResourceLoader.exists("uid://bragoy3tisav2"):
 		return load("uid://bragoy3tisav2")
 	else:
 		return load("uid://bu44d2he2dxm3")
@@ -53,7 +53,7 @@ func get_stage() -> PackedScene:
 	if is_instance_valid(stage):
 		return stage
 
-	if ResourceUID.has_id(ResourceUID.text_to_id("uid://0ih6j18ov417")):
+	if ResourceLoader.exists("uid://0ih6j18ov417"):
 		return load("uid://0ih6j18ov417")
 	else:
 		return load("uid://m26q2fyumltr")

@@ -196,9 +196,11 @@ func calculate_hits(last_step: int, last_beat: int, last_measure: int) -> void:
 	if floori(step) > last_step:
 		for step_value: int in range(last_step + 1, floori(step) + 1):
 			step_hit.emit(step_value)
+
 	if floori(beat) > last_beat:
 		for beat_value: int in range(last_beat + 1, floori(beat) + 1):
 			beat_hit.emit(beat_value)
+
 	if floori(measure) > last_measure:
 		for measure_value: int in range(last_measure + 1, floori(measure) + 1):
 			measure_hit.emit(measure_value)
@@ -210,6 +212,7 @@ func append_timing_changes(events: Array[TimingChange], clear: bool = true) -> v
 
 	timing_changes.append_array(events)
 	timing_changes.sort_custom(Chart.sort_by_time)
+	tempo = get_tempo_at_time(time, timing_changes)
 
 
 func reset() -> void:

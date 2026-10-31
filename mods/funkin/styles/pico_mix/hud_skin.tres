@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cgkt2ctlovm34" path="res://engine/gameplay/styles/default/countdown/go.png" id="9_q4gaf"]
 [ext_resource type="Texture2D" uid="uid://c48jhvhvs2fdc" path="res://engine/gameplay/styles/default/ratings/good.png" id="10_m5qi8"]
 [ext_resource type="Texture2D" uid="uid://cn6fmp8et8ktw" path="res://engine/gameplay/styles/default/ratings/marvelous.png" id="11_fwoav"]
-[ext_resource type="PackedScene" uid="uid://d3n853hu8o3ik" path="res://engine/gameplay/styles/default/pause_menu/pause_menu.tscn" id="12_esein"]
+[ext_resource type="PackedScene" uid="uid://bgmp33rklesrq" path="res://mods/funkin/menus/pause_menu/funkin_pause_menu.tscn" id="12_mxo5b"]
 [ext_resource type="Texture2D" uid="uid://ccnsbyha7asga" path="res://engine/gameplay/styles/default/ratings/shit.png" id="15_bn25o"]
 [ext_resource type="Texture2D" uid="uid://gn12nu6v7fgf" path="res://engine/gameplay/styles/default/ratings/sick.png" id="16_52ypn"]
 
@@ -27,6 +27,6 @@ shit = ExtResource("15_bn25o")
 combo_atlas = ExtResource("2_31h4b")
 countdown_textures = Array[Texture2D]([null, ExtResource("7_xiy2o"), ExtResource("8_sm4mk"), ExtResource("9_q4gaf")])
 countdown_sounds = Array[AudioStream]([ExtResource("3_hmnrq"), ExtResource("4_qgq13"), ExtResource("5_02xq5"), ExtResource("6_2bn8x")])
-pause_menu = ExtResource("12_esein")
+pause_menu = ExtResource("12_mxo5b")
 pause_music = ExtResource("1_jafyk")
 metadata/_custom_type_script = "uid://bwjjpqxupvxcc"

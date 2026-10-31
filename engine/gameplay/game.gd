@@ -241,8 +241,8 @@ func load_chart() -> void:
 func init_conductor() -> void:
 	Conductor.reset()
 	Conductor.append_timing_changes(chart.timing_changes)
-	Conductor.calculate_beat(false)
 	Conductor.raw_time = (-4.0 * Conductor.beat_delta) + Conductor.offset
+	Conductor.calculate_beat(false)
 	Conductor.beat_hit.emit.call_deferred(-4)
 
 

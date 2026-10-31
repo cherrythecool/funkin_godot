@@ -45,9 +45,21 @@ var difficulty: String:
 
 var active: bool = true
 var previous_song: String
+var touch_control_button: Control
 
 signal song_changed(index: int)
 signal difficulty_changed(difficulty: StringName)
+
+
+func _enter_tree() -> void:
+	if is_instance_valid(TouchControls):
+		touch_control_button = load("uid://bq3qna7dswhop").instantiate()
+		TouchControls.menus.add_child(touch_control_button)
+
+
+func _exit_tree() -> void:
+	if touch_control_button:
+		touch_control_button.queue_free()
 
 
 func _ready() -> void:

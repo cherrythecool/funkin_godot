@@ -3,7 +3,6 @@ extends CanvasLayer
 
 @export_group("Modes")
 @export var menus: Control
-@export var freeplay: Control
 @export var game: Control
 
 @export_group("Gameplay Buttons")
@@ -49,7 +48,7 @@ func _process(delta: float) -> void:
 		menus.visible = true
 	else:
 		menus.visible = current is not Game
-	freeplay.visible = current is FreeplayMenu
+
 	game.visible = not menus.visible
 
 

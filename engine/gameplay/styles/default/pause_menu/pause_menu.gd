@@ -1,6 +1,8 @@
+class_name PauseMenu
 extends CanvasLayer
 
 
+@export_file("*.tscn") var options_menu_path: String = ""
 @export var music: AudioStreamPlayer
 
 @export var background: Control
@@ -18,17 +20,15 @@ func _ready() -> void:
 	change_selection()
 
 	background.modulate.a = 0.5
-	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
+	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(background, ^"modulate:a", 1.0, 0.5)
 
 	create_tween().tween_property(music, ^"volume_linear", 0.9, 2.0).set_delay(0.5)
 
-	if not is_instance_valid(Game.instance):
+	if not Game.instance:
 		return
 
-	if is_instance_valid(Game.instance.hud) and \
-			is_instance_valid(Game.instance.hud.get(&"hud_skin")):
+	if Game.instance.hud and Game.instance.hud.get(&"hud_skin"):
 		music.stream = Game.instance.hud.hud_skin.pause_music
 		music.play()
 
@@ -46,37 +46,16 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not active:
 		return
-	if not event.is_pressed():
-		return
-	if event.is_echo():
+	if event.is_echo() or not event.is_pressed():
 		return
 
-	if event.is_action(&"menu_down") or event.is_action(&"menu_up"):
+	if event.is_action_pressed(&"menu_down") or event.is_action_pressed(&"menu_up"):
 		change_selection(roundi(Input.get_axis(&"menu_up", &"menu_down")))
-	if event.is_action(&"menu_accept"):
+	if event.is_action_pressed(&"menu_accept"):
 		for option: ListedAlphabet in options.get_children():
-			if option.target_y != 0:
-				continue
-
-			var type: StringName = option.name.to_lower()
-			match type:
-				&"resume":
-					close()
-				&"restart":
-					close()
-					SceneManager.reload_current_scene()
-				&"options":
-					OptionsMenu.target_scene = get_tree().current_scene.scene_file_path
-					close()
-					Game.instance.back_to_menus.emit()
-					SceneManager.transition_to_file("uid://3daku38i1a50")
-				&"quit":
-					close()
-					Game.instance.finish_song(true)
-				_:
-					printerr("Pause Option %s unimplemented." % type)
-
-			return
+			if option.target_y == 0:
+				select(option.name.to_lower())
+				return
 
 
 func change_selection(amount: int = 0) -> void:
@@ -90,6 +69,24 @@ func change_selection(amount: int = 0) -> void:
 		option.modulate.a = 1.0 if option.target_y == 0 else 0.6
 
 
+func select(option: StringName) -> void:
+	match option:
+		&"resume":
+			close()
+		&"restart":
+			close()
+			SceneManager.reload_current_scene()
+		&"options":
+			close()
+			Game.instance.back_to_menus.emit()
+			SceneManager.transition_to_file(options_menu_path)
+		&"quit":
+			close()
+			Game.instance.finish_song(true)
+		_:
+			printerr("Pause Option %s unimplemented." % option)
+
+
 func close(was_input: bool = true) -> void:
 	if was_input:
 		get_viewport().set_input_as_handled()
@@ -98,15 +95,15 @@ func close(was_input: bool = true) -> void:
 	active = false
 
 	if was_input:
-		set_shit_back_up.call_deferred()
+		unpause.call_deferred()
 	else:
-		set_shit_back_up()
+		unpause()
 
 	if was_input:
 		queue_free()
 
 
-func set_shit_back_up() -> void:
+func unpause() -> void:
 	if is_instance_valid(Conductor.instance):
 		Engine.time_scale = Conductor.instance.rate
 
