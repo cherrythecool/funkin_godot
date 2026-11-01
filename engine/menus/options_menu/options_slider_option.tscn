@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dopbtajgb370f"]
+
+[ext_resource type="Script" uid="uid://byt42mo8gwign" path="res://engine/menus/options_menu/options_slider_option.gd" id="1_bn4kw"]
+
+[node name="SliderOption" type="HBoxContainer" unique_id=964513853]
+custom_minimum_size = Vector2(0, 32)
+size_flags_horizontal = 0
+theme_override_constants/separation = 16
+script = ExtResource("1_bn4kw")
+
+[node name="OptionLabel" type="Label" parent="." unique_id=89254742]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Note Offset"
+vertical_alignment = 1
+
+[node name="OptionSlider" type="HSlider" parent="." unique_id=1119934643]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+min_value = -100.0
+
+[node name="OptionValueLabel" type="Label" parent="." unique_id=1423248791]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "0 ms"
+vertical_alignment = 1

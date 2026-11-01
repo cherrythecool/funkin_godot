@@ -221,7 +221,7 @@ position = Vector2(-480, 2197)
 script = ExtResource("13_aave4")
 texture_rect = NodePath("../../InfoPanel/ContributorImage")
 label = NodePath("../../InfoPanel/ContributorLabel")
-link = "https://github.com/swordcube"
+link = "https://swordcube.gay"
 role = "think fast think stupid"
 texture = ExtResource("14_71dcr")
 target_y = 12
@@ -257,6 +257,7 @@ offset_top = 64.0
 offset_right = -16.0
 offset_bottom = -16.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_enabled = true
 expand_mode = 1
 stretch_mode = 5
 

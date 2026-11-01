@@ -1,0 +1,274 @@
+[gd_scene format=3 uid="uid://c8yym7pblb4yp"]
+
+[ext_resource type="Script" uid="uid://csmdfbrap28x" path="res://engine/menus/options_menu/options_menu.gd" id="1_11uc4"]
+[ext_resource type="Script" uid="uid://bx44hsouk8osv" path="res://engine/menus/options_menu/options_checkbox.gd" id="2_dknjw"]
+[ext_resource type="PackedScene" uid="uid://dopbtajgb370f" path="res://engine/menus/options_menu/options_slider_option.tscn" id="2_m5uhs"]
+[ext_resource type="Script" uid="uid://dj31si1cc18oc" path="res://engine/menus/options_menu/options_dropdown.gd" id="2_verhj"]
+[ext_resource type="Script" uid="uid://bhl2iiis74cam" path="res://engine/menus/options_menu/options_keybind_button.gd" id="4_j3tfk"]
+[ext_resource type="Script" uid="uid://dqo3w858ek5ar" path="res://engine/menus/options_menu/options_volume_option.gd" id="4_verhj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fy1rs"]
+bg_color = Color(0.53125, 0.53125, 0.53125, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+font_color = Color(1, 1, 1, 0.32500002)
+
+[sub_resource type="LabelSettings" id="LabelSettings_m5uhs"]
+font_size = 24
+
+[node name="OptionsMenu" type="Control" unique_id=1733449955]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_11uc4")
+
+[node name="Background" type="Panel" parent="." unique_id=251682650]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fy1rs")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1554603805]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1208637428]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel" unique_id=1665323004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="NoteLabel" type="Label" parent="MarginContainer/Panel/MarginContainer" unique_id=228464571]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "welcome to the very barebones options menu :3"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer" unique_id=267935239]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionsContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer" unique_id=1596565242]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameplayLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer" unique_id=1497918977]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Gameplay"
+label_settings = SubResource("LabelSettings_m5uhs")
+
+[node name="Downscroll" type="CheckBox" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer" unique_id=1844630715]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Downscroll"
+script = ExtResource("2_dknjw")
+
+[node name="ScrollSpeedMethod" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer" unique_id=1612619106]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/ScrollSpeedMethod" unique_id=1297644771]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Scroll Speed Method"
+vertical_alignment = 1
+
+[node name="ScrollSpeedMethodOption" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/ScrollSpeedMethod" unique_id=699530660]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "chart_multiplier"
+popup/item_0/id = 0
+popup/item_1/text = "constant"
+popup/item_1/id = 1
+script = ExtResource("2_verhj")
+
+[node name="ScrollSpeed" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer" unique_id=744266947 instance=ExtResource("2_m5uhs")]
+layout_mode = 2
+
+[node name="OptionLabel" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/ScrollSpeed" index="0" unique_id=89254742]
+text = "Scroll Speed"
+
+[node name="OptionSlider" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/ScrollSpeed" index="1" unique_id=1119934643]
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="OptionValueLabel" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/ScrollSpeed" index="2" unique_id=1423248791]
+text = "1.0 speed"
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer" unique_id=847337752]
+layout_mode = 2
+
+[node name="ControlsLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer" unique_id=1116012540]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Controls"
+label_settings = SubResource("LabelSettings_m5uhs")
+vertical_alignment = 1
+
+[node name="Controls" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer" unique_id=1489210338]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="note_left" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls" unique_id=1322957655]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_left" unique_id=195837082]
+layout_mode = 2
+text = "Left Note"
+
+[node name="0" type="Button" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_left" unique_id=814795618]
+layout_mode = 2
+text = "Left"
+script = ExtResource("4_j3tfk")
+
+[node name="1" type="Button" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_left" unique_id=1382112746]
+layout_mode = 2
+text = "D"
+script = ExtResource("4_j3tfk")
+index = 1
+
+[node name="note_down" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls" unique_id=91488226]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_down" unique_id=1229575453]
+layout_mode = 2
+text = "Down Note"
+
+[node name="0" type="Button" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_down" unique_id=644979773]
+layout_mode = 2
+text = "Down"
+script = ExtResource("4_j3tfk")
+key = "note_down"
+
+[node name="1" type="Button" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_down" unique_id=873107652]
+layout_mode = 2
+text = "F"
+script = ExtResource("4_j3tfk")
+key = "note_down"
+index = 1
+
+[node name="note_up" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls" unique_id=851827810]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_up" unique_id=1110649914]
+layout_mode = 2
+text = "Up Note"
+
+[node name="0" type="Button" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_up" unique_id=307611177]
+layout_mode = 2
+text = "Up"
+script = ExtResource("4_j3tfk")
+key = "note_up"
+
+[node name="1" type="Button" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_up" unique_id=491378460]
+layout_mode = 2
+text = "J"
+script = ExtResource("4_j3tfk")
+key = "note_up"
+index = 1
+
+[node name="note_right" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls" unique_id=1752047494]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_right" unique_id=1454861275]
+layout_mode = 2
+text = "Right Note"
+
+[node name="0" type="Button" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_right" unique_id=1816742891]
+layout_mode = 2
+text = "Right"
+script = ExtResource("4_j3tfk")
+key = "note_right"
+
+[node name="1" type="Button" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/note_right" unique_id=966715500]
+layout_mode = 2
+text = "K"
+script = ExtResource("4_j3tfk")
+key = "note_right"
+index = 1
+
+[node name="menu_fullscreen" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls" unique_id=808523332]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/menu_fullscreen" unique_id=1698575432]
+layout_mode = 2
+text = "Fullscreen Toggle"
+
+[node name="0" type="Button" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/Controls/menu_fullscreen" unique_id=715412641]
+layout_mode = 2
+text = "F11"
+script = ExtResource("4_j3tfk")
+key = "menu_fullscreen"
+
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer" unique_id=359773518]
+layout_mode = 2
+
+[node name="SoundLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer" unique_id=946029948]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Sound"
+label_settings = SubResource("LabelSettings_m5uhs")
+vertical_alignment = 1
+
+[node name="MusicVolume" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer" unique_id=964513853 instance=ExtResource("2_m5uhs")]
+layout_mode = 2
+script = ExtResource("4_verhj")
+bus_name = "Music"
+label_suffix = "%"
+
+[node name="OptionLabel" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/MusicVolume" index="0" unique_id=89254742]
+text = "Music"
+
+[node name="OptionSlider" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/MusicVolume" index="1" unique_id=1119934643]
+min_value = 0.0
+value = 100.0
+rounded = true
+
+[node name="OptionValueLabel" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/MusicVolume" index="2" unique_id=1423248791]
+text = "100% Volume"
+
+[editable path="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/ScrollSpeed"]
+[editable path="MarginContainer/Panel/MarginContainer/ScrollContainer/OptionsContainer/MusicVolume"]

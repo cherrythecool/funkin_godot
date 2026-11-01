@@ -50,7 +50,14 @@ func transition_to_file(scene_path: String) -> void:
 
 func swap_to_file(scene_path: String) -> void:
 	_target_scene_path = scene_path
-	get_tree().change_scene_to_file.call_deferred(scene_path)
+
+	var scene: PackedScene = load(scene_path)
+	if not scene:
+		return
+
+	var node: Node = scene.instantiate()
+	set.call_deferred(&"current_scene", node)
+	get_tree().change_scene_to_node.call_deferred(node)
 	scene_changed.emit.call_deferred()
 
 

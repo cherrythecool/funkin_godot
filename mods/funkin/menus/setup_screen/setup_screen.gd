@@ -22,8 +22,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		match options[selected].name.to_lower():
 			&"yes":
-				OptionsMenu.target_scene = "uid://cxk008iuw4n7u"
 				SceneManager.transition_to_file("uid://3daku38i1a50")
+				SceneManager.scene_changed.connect(func() -> void:
+					SceneManager.current_scene.target_scene = "uid://cxk008iuw4n7u"
+				, CONNECT_ONE_SHOT)
 			&"no":
 				SceneManager.transition_to_file("uid://cxk008iuw4n7u")
 

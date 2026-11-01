@@ -147,9 +147,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"game_pause"):
 		process_mode = Node.PROCESS_MODE_DISABLED
 		Conductor.active = false
-		var menu: CanvasLayer = pause_menu.instantiate()
-		add_child(menu)
-		return
+
+		if pause_menu:
+			var menu: CanvasLayer = pause_menu.instantiate()
+			add_child(menu)
 	elif event.is_action_pressed(&"menu_cancel"):
 		finish_song(true)
 

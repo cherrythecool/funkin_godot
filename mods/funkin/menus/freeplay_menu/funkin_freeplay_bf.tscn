@@ -46,6 +46,7 @@ songs_parent = NodePath("SongsParent")
 song_panel = NodePath("InfoRoot/VBoxContainer/SongPanel")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1991467741]
+bus = &"Music"
 
 [node name="TrackDelayTimer" type="Timer" parent="." unique_id=981534588]
 one_shot = true

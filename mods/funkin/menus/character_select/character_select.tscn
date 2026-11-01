@@ -187,12 +187,15 @@ bus = &"Music"
 [node name="Scroll" type="AudioStreamPlayer" parent="Sounds" unique_id=1786441825]
 stream = ExtResource("2_twrlh")
 max_polyphony = 2
+bus = &"SFX"
 
 [node name="Confirm" type="AudioStreamPlayer" parent="Sounds" unique_id=1174258553]
 stream = ExtResource("3_0awtx")
+bus = &"SFX"
 
 [node name="Cancel" type="AudioStreamPlayer" parent="Sounds" unique_id=1690688925]
 stream = ExtResource("4_1u4p0")
+bus = &"SFX"
 
 [node name="MainScene" type="Node2D" parent="." unique_id=198543329]
 

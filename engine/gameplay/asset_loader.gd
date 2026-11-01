@@ -47,7 +47,7 @@ func load_assets() -> void:
 	if ResourceLoader.exists("%s/%s/assets.tres" % [song_folder, song_name]):
 		assets = load("%s/%s/assets.tres" % [song_folder, song_name])
 	if not is_instance_valid(assets):
-		assets = load("uid://dm8kpip52j8kf")
+		assets = SongAssets.new()
 
 	if not is_instance_valid(assets):
 		printerr("Tried to load assets without any assets!")

@@ -1,10 +1,8 @@
-class_name OptionsMenu
 extends Node2D
 
 
 const DEFAULT_TARGET_SCENE := "uid://b7fwxsepnt38j"
 
-static var target_scene := DEFAULT_TARGET_SCENE
 static var selected := 0
 
 @export var interface: Control
@@ -13,6 +11,7 @@ static var selected := 0
 @export var options_label: AnimatedSprite2D
 @export var scroll_container: ScrollContainer
 
+var target_scene := DEFAULT_TARGET_SCENE
 var active: bool = true
 var lerped_vertical_scroll: float = 0.0
 

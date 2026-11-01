@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3daku38i1a50"]
 
-[ext_resource type="Script" uid="uid://b81xaok1c5hyh" path="res://mods/funkin/menus/options_menu/options_menu.gd" id="1_cbibk"]
+[ext_resource type="Script" uid="uid://b81xaok1c5hyh" path="res://mods/funkin/menus/options_menu/funkin_options.gd" id="1_cbibk"]
 [ext_resource type="Texture2D" uid="uid://c3x06i25jm34a" path="res://mods/funkin/menus/background_inverted.png" id="2_6b80i"]
 [ext_resource type="SpriteFrames" uid="uid://f3lhnid62rym" path="res://mods/funkin/menus/main_menu/buttons.res" id="3_yv0yv"]
 [ext_resource type="Script" uid="uid://y6vnycva8tfq" path="res://mods/funkin/menus/options_menu/options_label.gd" id="4_6ck0r"]

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bgmp33rklesrq"]
 
-[ext_resource type="Script" uid="uid://b8llfaafn331b" path="res://mods/funkin/menus/pause_menu/funkin_pause_menu.gd" id="1_nctuk"]
 [ext_resource type="PackedScene" uid="uid://d3n853hu8o3ik" path="res://engine/gameplay/styles/default/pause_menu/pause_menu.tscn" id="1_xpst2"]
 
 [node name="FunkinPauseMenu" unique_id=1041939476 instance=ExtResource("1_xpst2")]
-script = ExtResource("1_nctuk")
+options_menu_path = "uid://3daku38i1a50"
