@@ -1,0 +1,3 @@
+[submodule "mods/funkin"]
+	path = mods/funkin
+	url = https://github.com/cherrythecool/funkin_module.git
