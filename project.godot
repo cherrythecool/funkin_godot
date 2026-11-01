@@ -69,7 +69,6 @@ folder_colors={
 "res://addons/": "gray",
 "res://engine/": "blue",
 "res://mods/": "purple",
-"res://mods/funkin/": "red",
 "res://plans/": "yellow",
 "res://script_templates/": "orange",
 "res://tools/": "green"
