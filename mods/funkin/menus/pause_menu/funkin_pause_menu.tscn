@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bgmp33rklesrq"]
-
-[ext_resource type="PackedScene" uid="uid://d3n853hu8o3ik" path="res://engine/gameplay/styles/default/pause_menu/pause_menu.tscn" id="1_xpst2"]
-
-[node name="FunkinPauseMenu" unique_id=1041939476 instance=ExtResource("1_xpst2")]
-options_menu_path = "uid://3daku38i1a50"

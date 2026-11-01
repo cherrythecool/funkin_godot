@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="SongAssets" format=3 uid="uid://qq0vmf8hpjwv"]
-
-[ext_resource type="Resource" uid="uid://bhsca31hmpc62" path="res://mods/funkin/styles/funkin/hud_skin.tres" id="1_gaolf"]
-[ext_resource type="Script" uid="uid://dk2lxfhv5lvf4" path="res://engine/gameplay/songs/assets.gd" id="2_7vyhy"]
-
-[resource]
-script = ExtResource("2_7vyhy")
-hud_skin = ExtResource("1_gaolf")
