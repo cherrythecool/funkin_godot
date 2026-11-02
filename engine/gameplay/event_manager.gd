@@ -58,12 +58,18 @@ func _load_events() -> void:
 	loaded_events.clear()
 
 	var already_loaded_names: Array[StringName] = []
+
 	var base_path := "res://mods/%s/events" %  ModSwitcher.current_module
 	if use_custom_events_path:
 		base_path = custom_events_path
 
 		if base_path.ends_with("/"):
 			base_path = base_path.left(-1)
+
+	var event_paths: PackedStringArray = [
+		base_path,
+		"res://engine/gameplay/events",
+	]
 
 	for event: EventData in events:
 		var event_name: StringName = event.name
@@ -72,15 +78,22 @@ func _load_events() -> void:
 
 		already_loaded_names.push_back(event_name)
 
-		var path: String = "%s/%s.tscn" % [base_path, event_name]
-		if not ResourceLoader.exists(path, "PackedScene"):
-			path = "%s/%s.tscn" % [base_path, event_name.to_snake_case()]
+		var found := false
 
-		if not ResourceLoader.exists(path, "PackedScene"):
+		for event_path: String in event_paths:
+			var path: String = "%s/%s.tscn" % [event_path, event_name]
+			if not ResourceLoader.exists(path, "PackedScene"):
+				path = "%s/%s.tscn" % [event_path, event_name.to_snake_case()]
+
+			if not ResourceLoader.exists(path, "PackedScene"):
+				continue
+
+			var scene: PackedScene = load(path)
+			var loaded_event: Node = scene.instantiate()
+			loaded_events.push_back(loaded_event)
+			add_child(loaded_event)
+			found = true
+			break
+
+		if not found:
 			push_warning("Missing event with name '%s', tried snake case as well as full event name" % event_name)
-			continue
-
-		var scene: PackedScene = load(path)
-		var loaded_event: Node = scene.instantiate()
-		loaded_events.push_back(loaded_event)
-		add_child(loaded_event)

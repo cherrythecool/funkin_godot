@@ -170,19 +170,25 @@ func load_note_types(chart: Chart) -> void:
 	if types.is_empty():
 		return
 
-	# load types from notes/types folder in module by default
-	var types_path := "res://mods/%s/notes/types" % ModSwitcher.current_module
-	var files := ResourceLoader.list_directory(types_path)
-	for file: String in files:
-		var type_name := file.get_file().get_basename()
-		if type_name not in types:
-			type_name = type_name.to_snake_case()
+	# load types from notes/types folder in module by default +
+	# base game ones if the mod doesn't override
+	var type_paths: PackedStringArray = [
+		"res://mods/%s/notes/types" % ModSwitcher.current_module,
+		"res://engine/gameplay/notes/types",
+	]
 
-		if type_name not in types:
-			continue
+	for types_path: String in type_paths:
+		var files := ResourceLoader.list_directory(types_path)
+		for file: String in files:
+			var type_name := file.get_file().get_basename()
+			if type_name not in types:
+				type_name = type_name.to_snake_case()
 
-		var resource: Resource = load("%s/%s" % [types_path, file])
-		if resource is PackedScene:
-			var note_type := (resource as PackedScene).instantiate()
-			note_types_parent.add_child(note_type)
-			types.erase(type_name)
+			if type_name not in types:
+				continue
+
+			var resource: Resource = load("%s/%s" % [types_path, file])
+			if resource is PackedScene:
+				var note_type := (resource as PackedScene).instantiate()
+				note_types_parent.add_child(note_type)
+				types.erase(type_name)
