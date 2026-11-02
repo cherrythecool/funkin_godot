@@ -8,7 +8,7 @@ func _ready() -> void:
 	var controls: Dictionary = SaveData.get_save_value(&"core", "controls_keybinds")
 	keybind_display.text = keybind_display.text.replace(
 		"{KEYBIND}",
-		FunkinUtils.keycode_to_character(controls["module_select"][0]),
+		FunkinUtils.keycode_to_character(controls["mod_switch"][0]),
 	).replace(
 		"{MODULE}",
 		ModSwitcher.current_module,

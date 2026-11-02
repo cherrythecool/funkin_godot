@@ -49,7 +49,7 @@ func _input(event: InputEvent) -> void:
 	if disabled:
 		return
 
-	if event.is_action_pressed(&"module_select"):
+	if event.is_action_pressed(&"mod_switch"):
 		visible = not visible
 
 		if visible:

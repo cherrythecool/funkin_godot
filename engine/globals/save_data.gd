@@ -129,7 +129,7 @@ func _get_core_defaults() -> Dictionary:
 			"menu_accept": [KEY_ENTER, KEY_SPACE],
 
 			"menu_fullscreen": [KEY_F11],
-			"module_select": [KEY_F9],
+			"mod_switch": [KEY_F9],
 
 			"game_pause": [KEY_ENTER, KEY_ESCAPE],
 		},
