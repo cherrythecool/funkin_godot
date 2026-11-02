@@ -2,7 +2,7 @@ class_name PauseMenu
 extends CanvasLayer
 
 
-@export_file("*.tscn") var options_menu_path: String = "uid://c8yym7pblb4yp"
+@export_file("*.tscn") var custom_options_menu_path: String = ""
 @export var music: AudioStreamPlayer
 
 @export var background: Control
@@ -87,7 +87,15 @@ func select(option: StringName) -> void:
 
 			var previous_scene := get_tree().current_scene.scene_file_path
 			SceneManager.scene_changed.connect(_on_options_scene_changed.bind(previous_scene), CONNECT_ONE_SHOT)
-			SceneManager.transition_to_file(options_menu_path)
+
+			var menu_path := custom_options_menu_path
+			if not ResourceLoader.exists(menu_path):
+				menu_path = "uid://3daku38i1a50"
+
+			if not ResourceLoader.exists(menu_path):
+				menu_path = "uid://c8yym7pblb4yp"
+
+			SceneManager.transition_to_file(menu_path)
 		&"quit":
 			close()
 			Game.instance.finish_song(true)
