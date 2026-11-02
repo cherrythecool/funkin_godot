@@ -2,6 +2,8 @@ class_name Strumline2D
 extends Node2D
 
 
+signal note_spawned(note: Note2D)
+
 const FNF_SCROLL_DISTANCE_MULT: float = 450.0
 
 @export var parent: StrumlineManager:
@@ -138,6 +140,7 @@ func spawn_notes() -> void:
 		receptor.notes.push_back(note_node)
 		notes_parent.add_child(note_node)
 		notes_have_spawned[current_index] = true
+		note_spawned.emit(note_node)
 
 
 func update_notes(receptor: Receptor2D) -> void:

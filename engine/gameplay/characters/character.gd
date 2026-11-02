@@ -124,7 +124,7 @@ func dance(force: bool = false) -> void:
 
 
 func set_character_material(new_material: Material) -> void:
-	if is_instance_valid(sprite):
+	if sprite:
 		sprite.material = new_material
 
 
@@ -136,10 +136,8 @@ func get_camera_position() -> Vector2:
 
 
 func offset_camera_position(added: Vector2) -> void:
-	if not is_instance_valid(camera_offset):
-		return
-
-	camera_offset.position += added
+	if camera_offset:
+		camera_offset.position += added
 
 
 func _on_beat_hit(_beat: int) -> void:

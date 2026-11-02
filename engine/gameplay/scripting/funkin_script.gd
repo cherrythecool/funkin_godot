@@ -112,7 +112,7 @@ func _on_event_hit(event: EventData) -> void:
 	pass
 
 
-func _on_note_prepare(note: NoteData) -> void:
+func _on_note_prepare(note: NoteData, strumline_key: StringName) -> void:
 	pass
 
 
@@ -121,6 +121,10 @@ func _on_note_hit(note: NoteData, strumline_key: StringName) -> void:
 
 
 func _on_note_missed(note: NoteData, strumline_key: StringName) -> void:
+	pass
+
+
+func _on_note_spawned(note: Note2D, strumline_key: StringName) -> void:
 	pass
 
 
@@ -138,9 +142,16 @@ func _initialize_variables() -> void:
 
 		for strumline_id: StringName in game.strumlines:
 			var strumline := game.strumlines[strumline_id]
-			strumline.note_prepare.connect(_on_note_prepare)
+			strumline.note_prepare.connect(_on_note_prepare.bind(strumline_id))
 			strumline.note_hit.connect(_on_note_hit.bind(strumline_id))
 			strumline.note_missed.connect(_on_note_missed.bind(strumline_id))
+
+	if hud:
+		if "player_renderer" in hud and hud.player_renderer is Strumline2D:
+			hud.player_renderer.note_spawned.connect(_on_note_spawned.bind(&"player"))
+
+		if "opponent_renderer" in hud and hud.opponent_renderer is Strumline2D:
+			hud.opponent_renderer.note_spawned.connect(_on_note_spawned.bind(&"opponent"))
 
 	event_manager = get_tree().get_first_node_in_group(&"EventManager")
 	if event_manager:

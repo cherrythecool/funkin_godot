@@ -1,18 +1,6 @@
 extends Control
 
 
-var game: Game
-
-var downscroll: bool = false:
-	set(value):
-		downscroll = value
-		set_downscroll(value)
-
-var middlescroll: bool = false:
-	set(value):
-		middlescroll = value
-		set_middlescroll(value)
-
 @export var bumps: bool = false
 @export var bump_amount: Vector2 = Vector2(0.03, 0.03)
 @export var bump_interval: int = 4
@@ -26,13 +14,24 @@ var middlescroll: bool = false:
 @export var time_bar: ProgressBar
 @export var rating_container: Node2D
 
-var rating_tween: Tween
-
 @export var hud_skin: HUDSkin:
 	set(v):
 		hud_skin = v
 		rating_textures = hud_skin.get_rating_textures()
 
+var game: Game
+
+var downscroll: bool = false:
+	set(value):
+		downscroll = value
+		set_downscroll(value)
+
+var middlescroll: bool = false:
+	set(value):
+		middlescroll = value
+		set_middlescroll(value)
+
+var rating_tween: Tween
 var rating_textures: Dictionary[StringName, Texture2D] = {}
 var toggle_visible := true
 
