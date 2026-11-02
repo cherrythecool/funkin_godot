@@ -1,8 +1,13 @@
-## Simple cutscene that plays a video with a
-## [VideoStreamPlayer] and then lets you play.
-class_name VideoCutscene extends BaseCutscene
+class_name VideoCutscene
+extends BaseCutscene
+## Simple cutscene class that plays a video with a
+## [VideoStreamPlayer] and then finishes.
+
 
 signal on_video_ended
+
+
+@export var video_player: VideoStreamPlayer
 
 ## Whether or not to hide the game and its hud
 ## while the video is playing.
@@ -15,49 +20,63 @@ signal on_video_ended
 ## Whether to autoplay the video once its stream is set
 @export var autoplay: bool = true
 
-@export var video_player: VideoStreamPlayer
-
 
 func _ready() -> void:
 	super()
 
+	if is_queued_for_deletion():
+		return
+
 	if autoplay:
 		play()
-	if game and hide_game:
-		game.visible = false
-		game.hud.visible = false
+
+	if hide_game:
+		if asset_loader:
+			if asset_loader.characters_parent:
+				asset_loader.characters_parent.hide()
+
+			if asset_loader.stage_parent:
+				asset_loader.stage_parent.hide()
+
+		if hud:
+			hud.hide()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not allow_skipping:
-		return
-	if event.is_echo():
-		return
-	if not event.is_pressed():
-		return
-	if event.is_action(&"menu_accept"):
+	if allow_skipping and event.is_action_pressed(&"menu_accept"):
+		get_viewport().set_input_as_handled()
 		finish()
 
-## Plays the video if it isn't already playing.[br]
-## [param]force[/param] To force the video to play regardless of whether it is already.
+
+## Plays the video if it isn't already playing.
+## [br][br]
+## Use [param force] to force the video to restart if it's already playing.
 func play(force: bool = false) -> void:
 	if video_player.is_playing():
 		if not force:
 			return
-		video_player.stop()
-	video_player.show()
+		else:
+			video_player.stop()
+
 	video_player.play()
+	video_player.show()
+
 
 ## Frees the cutscene and shows the game again
 ## if it was previously hidden.
 func finish() -> void:
 	super()
 
-	if video_player.is_playing():
-		video_player.stop()
+	video_player.stop()
 	video_player.hide()
 	on_video_ended.emit()
 
-	if game and hide_game:
-		game.visible = true
-		game.hud.visible = true
+	if hide_game:
+		if asset_loader:
+			if asset_loader.characters_parent:
+				asset_loader.characters_parent.show()
+			if asset_loader.stage_parent:
+				asset_loader.stage_parent.show()
+
+		if hud:
+			hud.show()

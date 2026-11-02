@@ -47,7 +47,7 @@ func _on_beat_hit(beat: int) -> void:
 		return
 
 	if pause_countdown:
-		Conductor.raw_time = -5.0 * Conductor.beat_delta
+		Conductor.raw_time = -4.0 * Conductor.beat_delta
 		return
 
 	beat += countdown_offset

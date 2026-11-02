@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Friday Night Funkin'"
-config/description="Friday Night Funkin' remade in Godot for extensibility and performance."
-config/version="3.0.0-dev"
+config/description="Friday Night Funkin' remade in Godot for extensibility, usability, and performance."
+config/version="3.0.0"
 config/tags=PackedStringArray("2d")
 run/main_scene="uid://bwcdjku7iww5m"
 config/quit_on_go_back=false
@@ -79,6 +79,7 @@ folder_colors={
 RatingManager=""
 EventManager=""
 AssetLoader=""
+CountdownContainer=""
 
 [gui]
 

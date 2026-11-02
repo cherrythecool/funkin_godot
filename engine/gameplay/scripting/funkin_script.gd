@@ -65,8 +65,10 @@ var hud: Node:
 			return null
 
 
+var asset_loader: AssetLoader
 var event_manager: EventManager
 var rating_manager: RatingManager
+var countdown_container: CountdownContainer
 
 
 func _init() -> void:
@@ -144,3 +146,7 @@ func _initialize_variables() -> void:
 	if event_manager:
 		event_manager.event_hit.connect(_on_event_hit)
 		event_manager.event_prepare.connect(_on_event_prepare)
+
+	asset_loader = get_tree().get_first_node_in_group(&"AssetLoader")
+	rating_manager = get_tree().get_first_node_in_group(&"RatingManager")
+	countdown_container = get_tree().get_first_node_in_group(&"CountdownContainer")

@@ -37,7 +37,7 @@ anchors_preset = -1
 [node name="RatingContainer" parent="." unique_id=1940396623 instance=ExtResource("4_h3rog")]
 position = Vector2(640, 360)
 
-[node name="CountdownContainer" type="Marker2D" parent="." unique_id=1614052304]
+[node name="CountdownContainer" type="Marker2D" parent="." unique_id=1614052304 groups=["CountdownContainer"]]
 position = Vector2(640, 360)
 script = ExtResource("9_6w54d")
 
