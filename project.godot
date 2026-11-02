@@ -70,8 +70,7 @@ folder_colors={
 "res://engine/": "blue",
 "res://mods/": "purple",
 "res://plans/": "yellow",
-"res://script_templates/": "orange",
-"res://tools/": "green"
+"res://script_templates/": "orange"
 }
 
 [global_group]

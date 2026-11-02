@@ -11,6 +11,10 @@ func update_bindings() -> void:
 
 	for action_name: String in binds.keys():
 		var action := StringName(action_name)
+		if not InputMap.has_action(action):
+			push_warning("Action %s does not exist, but it has a keybinding" % action)
+			continue
+
 		var action_events := InputMap.action_get_events(action)
 		var keycodes: Array = binds[action_name]
 
