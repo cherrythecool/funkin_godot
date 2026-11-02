@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d4lyul6n3wfmw"]
 
-[ext_resource type="Script" uid="uid://baq1jchoadbo1" path="res://engine/globals/debug_overlay/debug_overlay.gd" id="1_ctmdh"]
+[ext_resource type="Script" uid="uid://baq1jchoadbo1" path="res://engine/globals/debug_overlay.gd" id="1_ctmdh"]
 [ext_resource type="FontFile" uid="uid://cuh8h453towpc" path="res://engine/common/fonts/red_hat_mono.ttf" id="2_qk36k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j305"]

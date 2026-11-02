@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byw58vkvv3dw4"
-path="res://.godot/imported/pause_base.png-e82ba3d0b4db1c34950c8552923558ac.ctex"
+uid="uid://hmftqpu0e0vi"
+path="res://.godot/imported/accept_press.png-4b9e67d8e46ba5cd06b6c808c1453714.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://engine/gameplay/touch_controls/buttons/pause_base.png"
-dest_files=["res://.godot/imported/pause_base.png-e82ba3d0b4db1c34950c8552923558ac.ctex"]
+source_file="res://engine/globals/touch_controls/buttons/accept_press.png"
+dest_files=["res://.godot/imported/accept_press.png-4b9e67d8e46ba5cd06b6c808c1453714.ctex"]
 
 [params]
 

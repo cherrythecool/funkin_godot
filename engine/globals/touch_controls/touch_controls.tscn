@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://dln7pilk4eccf"]
 
-[ext_resource type="Script" uid="uid://chr6gh7537dwm" path="res://engine/gameplay/touch_controls/touch_controls.gd" id="1_wcbf3"]
-[ext_resource type="Texture2D" uid="uid://ciiyghjt8ttyu" path="res://engine/gameplay/touch_controls/buttons/arrow_base.png" id="2_dn4ts"]
-[ext_resource type="Texture2D" uid="uid://byw58vkvv3dw4" path="res://engine/gameplay/touch_controls/buttons/pause_base.png" id="2_mq6jc"]
-[ext_resource type="Texture2D" uid="uid://c5li7ue0ore5r" path="res://engine/gameplay/touch_controls/buttons/pause_press.png" id="3_4ikyy"]
-[ext_resource type="Texture2D" uid="uid://bjc80phtl0g5n" path="res://engine/gameplay/touch_controls/buttons/arrow_press.png" id="3_8o8lk"]
-[ext_resource type="Texture2D" uid="uid://byerpgwxncrr4" path="res://engine/gameplay/touch_controls/buttons/accept_base.png" id="4_uejki"]
-[ext_resource type="Texture2D" uid="uid://hmftqpu0e0vi" path="res://engine/gameplay/touch_controls/buttons/accept_press.png" id="5_8dfaf"]
-[ext_resource type="Texture2D" uid="uid://c87ypgu510hf0" path="res://engine/gameplay/touch_controls/buttons/mod_switcher_base.png" id="6_v7h2k"]
-[ext_resource type="Texture2D" uid="uid://d1g3lrlgghiss" path="res://engine/gameplay/touch_controls/buttons/mod_switcher_press.png" id="7_sj167"]
+[ext_resource type="Script" uid="uid://chr6gh7537dwm" path="res://engine/globals/touch_controls/touch_controls.gd" id="1_wcbf3"]
+[ext_resource type="Texture2D" uid="uid://ciiyghjt8ttyu" path="res://engine/globals/touch_controls/buttons/arrow_base.png" id="2_dn4ts"]
+[ext_resource type="Texture2D" uid="uid://byw58vkvv3dw4" path="res://engine/globals/touch_controls/buttons/pause_base.png" id="2_mq6jc"]
+[ext_resource type="Texture2D" uid="uid://c5li7ue0ore5r" path="res://engine/globals/touch_controls/buttons/pause_press.png" id="3_4ikyy"]
+[ext_resource type="Texture2D" uid="uid://bjc80phtl0g5n" path="res://engine/globals/touch_controls/buttons/arrow_press.png" id="3_8o8lk"]
+[ext_resource type="Texture2D" uid="uid://byerpgwxncrr4" path="res://engine/globals/touch_controls/buttons/accept_base.png" id="4_uejki"]
+[ext_resource type="Texture2D" uid="uid://hmftqpu0e0vi" path="res://engine/globals/touch_controls/buttons/accept_press.png" id="5_8dfaf"]
+[ext_resource type="Texture2D" uid="uid://c87ypgu510hf0" path="res://engine/globals/touch_controls/buttons/mod_switcher_base.png" id="6_v7h2k"]
+[ext_resource type="Texture2D" uid="uid://d1g3lrlgghiss" path="res://engine/globals/touch_controls/buttons/mod_switcher_press.png" id="7_sj167"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uejki"]
 radius = 28.0

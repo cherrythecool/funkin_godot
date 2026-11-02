@@ -70,7 +70,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	Input.use_accumulated_input = false
 
-	MenuAudio.music.stop()
+	MenuSounds.music.stop()
 
 	song_player.stream = Tracks.load_tracks(
 		load_settings[&"song_name"],
@@ -195,7 +195,7 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 		))
 	else:
 		if sound:
-			MenuAudio.cancel.play()
+			MenuSounds.cancel.play()
 
 		back_to_menus.emit()
 

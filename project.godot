@@ -29,17 +29,17 @@ general/ios/mix_with_others=true
 
 [autoload]
 
-Global="*res://engine/globals/global.gd"
-SaveData="*res://engine/globals/save_data.gd"
-Controls="*res://engine/globals/controls.gd"
+Global="*uid://da0p23oox4fj6"
+SaveData="*uid://bu6bpm3rsfn38"
+Controls="*uid://b11owilwvvcqk"
 Highscores="*uid://cv8u1jf0lprio"
-MenuAudio="*res://engine/globals/menu_sounds/menu_sounds.tscn"
 Conductor="*uid://djsxumpddydxq"
 SceneManager="*uid://cmy8a7dh1kvs4"
 SoundTray="*uid://bhbryleu1jjq0"
-DebugOverlay="*res://engine/globals/debug_overlay/debug_overlay.tscn"
+DebugOverlay="*uid://d4lyul6n3wfmw"
 ModSwitcher="*uid://dubyatkw6h7m2"
-TouchControls="*res://engine/gameplay/touch_controls/touch_controls.tscn"
+TouchControls="*uid://dln7pilk4eccf"
+MenuSounds="*uid://dt7vny7nmtw41"
 
 [debug]
 

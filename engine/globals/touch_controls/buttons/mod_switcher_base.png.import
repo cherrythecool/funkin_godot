@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bckbdjo1xwbjj"
-path="res://.godot/imported/button_press.png-408b98e4456a2fce57ecd9310482c2ff.ctex"
+uid="uid://c87ypgu510hf0"
+path="res://.godot/imported/mod_switcher_base.png-1d34e04da336a04c23daf2af38ffbf75.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://engine/gameplay/touch_controls/buttons/button_press.png"
-dest_files=["res://.godot/imported/button_press.png-408b98e4456a2fce57ecd9310482c2ff.ctex"]
+source_file="res://engine/globals/touch_controls/buttons/mod_switcher_base.png"
+dest_files=["res://.godot/imported/mod_switcher_base.png-1d34e04da336a04c23daf2af38ffbf75.ctex"]
 
 [params]
 

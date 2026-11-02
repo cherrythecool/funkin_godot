@@ -66,7 +66,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed(&"menu_cancel"):
 		active = false
-		MenuAudio.cancel.play()
+		MenuSounds.cancel.play()
 		FunkinCamera2D.reset_persistent_values()
 		SceneManager.transition_to_file(Game.load_settings[&"exit_scene_path"])
 

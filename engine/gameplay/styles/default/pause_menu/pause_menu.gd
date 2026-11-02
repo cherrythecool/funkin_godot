@@ -67,7 +67,7 @@ func change_selection(amount: int = 0) -> void:
 	selected = wrapi(selected + amount, 0, options.get_child_count())
 
 	if amount != 0:
-		MenuAudio.scroll.play()
+		MenuSounds.scroll.play()
 	for i: int in options.get_child_count():
 		var option: ListedAlphabet = options.get_child(i)
 		option.target_y = i - selected
