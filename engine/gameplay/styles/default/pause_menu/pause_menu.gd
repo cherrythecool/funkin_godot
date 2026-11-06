@@ -37,15 +37,18 @@ func _ready() -> void:
 		music.stream = Game.instance.hud.hud_skin.pause_music
 		music.play()
 
-	song_info.text = "%s\n(%s)" % [Game.instance.metadata.get_full_name(),
-			Game.load_settings[&"song_difficulty"].to_upper(),]
+	song_info.text = "%s\n(%s)" % [
+		Game.instance.metadata.get_full_name(),
+		Game.load_settings[&"song_difficulty"].to_upper(),
+	]
+
 	if song_info.size.x > Global.game_size.x:
 		song_info.scale = Vector2.ONE * (Global.game_size.x / song_info.size.x * 0.9)
-	song_info.position.x = Global.game_size.x - \
-			(float(song_info.size.x) * song_info.scale.x) - 16.0
+
+	song_info.position.x = Global.game_size.x - (float(song_info.size.x) * song_info.scale.x) - 16.0
+
 	mode_label.text = Game.load_settings[&"mode_name"].to_upper()
-	mode_label.position = Global.game_size - (Vector2(mode_label.size) * 0.75) - \
-			Vector2(16.0, 16.0)
+	mode_label.position = Global.game_size - (Vector2(mode_label.size) * 0.75) - Vector2(16.0, 16.0)
 
 
 func _unhandled_input(event: InputEvent) -> void:
