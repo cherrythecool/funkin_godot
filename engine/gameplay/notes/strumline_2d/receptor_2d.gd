@@ -8,10 +8,13 @@ signal animation_finished(anim_name: StringName)
 
 @export_group("Animation")
 
+@export var play_animations := true
+
 @export var sprite: AnimatedSprite2D
 
 @export var splash: AnimatedSprite2D
 @export var splash_variations: int = 2
+@export var splash_enabled := true
 
 ## Most likely an [AnimatedSprite2D] or [AnimationPlayer].
 @export var animated_node: Node:
@@ -42,7 +45,11 @@ var hold_timer: float = 0.0
 
 
 func _ready() -> void:
+	# Make sure the receptors are the right direction on ready
+	var real_play_animations := play_animations
+	play_animations = true
 	play_animation(&"static")
+	play_animations = real_play_animations
 
 
 func _process(delta: float) -> void:
@@ -66,7 +73,7 @@ func apply_skin(skin: NoteSkin) -> void:
 
 
 func play_splash() -> void:
-	if (not splash) or splash_variations < 1:
+	if (not splash) or splash_variations < 1 or (not splash_enabled):
 		return
 
 	splash.play(&"%s_%d" % [direction, randi_range(1, splash_variations)])
@@ -77,7 +84,7 @@ func play_splash() -> void:
 func play_animation(anim_name: StringName, force: bool = false) -> void:
 	last_played_anim = anim_name
 
-	if not animated_node:
+	if (not animated_node) or (not play_animations):
 		return
 
 	var target_anim := get_full_animation_name(anim_name)
