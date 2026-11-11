@@ -24,7 +24,7 @@ static func load_from_song(song: String, songs_folder: String) -> SongMetadata:
 		return load(path)
 	else:
 		var meta := SongMetadata.new()
-		meta.display_name = song.to_pascal_case()
+		meta.display_name = song.capitalize()
 		return meta
 
 

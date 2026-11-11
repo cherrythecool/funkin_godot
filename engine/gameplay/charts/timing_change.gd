@@ -4,6 +4,10 @@ extends RefCounted
 
 @export var time: float = 0.0
 
+@export var measure: float = 0.0
+@export var beat: float = 0.0
+@export var step: float = 0.0
+
 @export var bpm_changed: bool = false
 @export var bpm: float = 100.0
 

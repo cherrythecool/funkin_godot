@@ -100,7 +100,6 @@ static func load_vslice(song_folder: String, difficulty: StringName) -> Chart:
 	for note: Dictionary in data.notes.get(difficulty):
 		var note_data := NoteData.new()
 		note_data.time = note.get("t") / 1000.0
-		note_data.beat = Conductor.get_beat_at_time(note_data.time, chart.timing_changes)
 
 		if note.has("l"):
 			note_data.length = note.get("l") / 1000.0
@@ -121,6 +120,7 @@ static func load_vslice(song_folder: String, difficulty: StringName) -> Chart:
 		stacked_notes,
 	])
 
+	chart.set_timings()
 	return chart
 
 

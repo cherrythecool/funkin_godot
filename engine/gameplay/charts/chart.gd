@@ -97,3 +97,14 @@ func snap_starting_events() -> void:
 	for event: EventData in events:
 		if event.time <= 0.001 and event.trigger_before_countdown:
 			event.time = 0.0
+
+
+func set_timings() -> void:
+	for change: TimingChange in timing_changes:
+		change.measure = Conductor.get_measure_at_time(change.time, timing_changes)
+		change.beat = Conductor.get_beat_at_time(change.time, timing_changes)
+		change.step = Conductor.get_step_at_time(change.time, timing_changes)
+
+	for strumline: Strumline in strumlines.values():
+		for note: NoteData in strumline.notes:
+			NoteData.set_timings(note, timing_changes)

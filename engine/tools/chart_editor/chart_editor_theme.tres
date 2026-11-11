@@ -1,0 +1,73 @@
+[gd_resource type="Theme" format=3 uid="uid://6rs8qxcigfgu"]
+
+[ext_resource type="FontFile" uid="uid://cuh8h453towpc" path="res://engine/common/fonts/red_hat_mono.ttf" id="1_djrnc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7t1b"]
+bg_color = Color(0.23046875, 0.23046875, 0.23046875, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r008n"]
+bg_color = Color(0.023529412, 0.023529412, 0.023529412, 0.6039216)
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_djrnc"]
+bg_color = Color(0.34375, 0.34375, 0.34375, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.34509805, 0.34509805, 0.34509805, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwdsb"]
+bg_color = Color(0.23046875, 0.23046875, 0.23046875, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.23137255, 0.23137255, 0.23137255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nthf8"]
+bg_color = Color(0.28515625, 0.28515625, 0.28515625, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.28627452, 0.28627452, 0.28627452, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f061"]
+bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7a22"]
+bg_color = Color(0.16015625, 0.16015625, 0.16015625, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.77734375, 0.77734375, 0.77734375, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cynm6"]
+bg_color = Color(0.14453125, 0.14453125, 0.14453125, 1)
+
+[resource]
+default_font = ExtResource("1_djrnc")
+HBoxContainer/constants/separation = 8
+InnerPanel/base_type = &"PanelContainer"
+InnerPanel/styles/panel = SubResource("StyleBoxFlat_v7t1b")
+LabelPill/base_type = &"Label"
+LabelPill/styles/normal = SubResource("StyleBoxFlat_r008n")
+MarginContainer/constants/margin_bottom = 8
+MarginContainer/constants/margin_left = 8
+MarginContainer/constants/margin_right = 8
+MarginContainer/constants/margin_top = 8
+MenuBar/styles/hover = SubResource("StyleBoxFlat_djrnc")
+MenuBar/styles/normal = SubResource("StyleBoxFlat_gwdsb")
+MenuBar/styles/pressed = SubResource("StyleBoxFlat_nthf8")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_5f061")
+PopupMenu/colors/font_hover_color = Color(1, 1, 1, 1)
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_k7a22")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_cynm6")
+VBoxContainer/constants/separation = 8

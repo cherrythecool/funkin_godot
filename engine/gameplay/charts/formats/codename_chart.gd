@@ -68,7 +68,6 @@ static func load_codename(song_folder: String, difficulty: StringName) -> Chart:
 		for note: Dictionary in notes:
 			var note_data: NoteData = NoteData.new()
 			note_data.time = float(note.time) / 1000.0
-			note_data.beat = Conductor.get_beat_at_time(note_data.time, chart.timing_changes)
 			note_data.direction = int(note.id)
 
 			note_data.length = clampf(float(note.sLen) / 1000.0, 0.0, INF)
@@ -93,6 +92,7 @@ static func load_codename(song_folder: String, difficulty: StringName) -> Chart:
 		parse_events(chart, events.get("events", []), sides)
 
 	parse_events(chart, data.get("events", []), sides)
+	chart.set_timings()
 	return chart
 
 

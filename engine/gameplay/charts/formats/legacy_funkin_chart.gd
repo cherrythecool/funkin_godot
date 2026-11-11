@@ -47,7 +47,6 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 
 	var sections: Array = song_data["notes"]
 	var bpm: float = song_data["bpm"]
-	var beat: float = 0.0
 	var time: float = 0.0
 
 	var initial_bpm := TimingChange.new()
@@ -104,7 +103,6 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 
 			var note_data := NoteData.new()
 			note_data.time = float(note[0]) / 1000.0
-			note_data.beat = beat + ((note_data.time - time) * beat_delta)
 			note_data.length = maxf(float(note[2]) / 1000.0, 0.0)
 
 			var direction := int(note[1])
@@ -128,7 +126,6 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 
 			chart.strumlines[side].add_note(note_data)
 
-		beat += section_length
 		time += section_length * beat_delta
 
 	var events_path: String = "%s/charts/events.json" % song_folder
@@ -152,6 +149,7 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 		stacked_note_count,
 	])
 
+	chart.set_timings()
 	return chart
 
 

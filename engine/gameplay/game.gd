@@ -90,7 +90,7 @@ func _ready() -> void:
 			metadata = load("%s/%s/meta.tres" % [song_folder, song_name])
 		if not is_instance_valid(metadata):
 			metadata = SongMetadata.new()
-			metadata.display_name = song_name.to_pascal_case()
+			metadata.display_name = song_name.capitalize()
 
 	if asset_loader:
 		asset_loader.load_assets()

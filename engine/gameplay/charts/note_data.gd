@@ -10,12 +10,21 @@ enum NoteState {
 }
 
 @export var time: float
-@export var beat: float
+
 @export var direction: int
 @export var length: float
 
 @export var type: StringName
 @export var custom_type_data: Dictionary[StringName, Variant] = {}
+
+@export_group("Timing Info")
+@export var measure: float
+@export var beat: float
+@export var step: float
+
+@export var sustain_measure: float
+@export var sustain_beat: float
+@export var sustain_step: float
 
 @export_group("Singing Type Info")
 @export var sing_animations := true
@@ -43,3 +52,18 @@ enum NoteState {
 var state: NoteState = NoteState.ALIVE
 var grace_timer: float = 1.0
 var strumline: StringName
+
+
+static func set_timings(note: NoteData, timing_changes: Array[TimingChange]) -> void:
+	note.measure = Conductor.get_measure_at_time(note.time, timing_changes)
+	note.beat = Conductor.get_beat_at_time(note.time, timing_changes)
+	note.step = Conductor.get_step_at_time(note.time, timing_changes)
+
+	if note.length > 0.0:
+		note.sustain_measure = Conductor.get_measure_at_time(note.time + note.length, timing_changes)
+		note.sustain_beat = Conductor.get_beat_at_time(note.time + note.length, timing_changes)
+		note.sustain_step = Conductor.get_step_at_time(note.time + note.length, timing_changes)
+	else:
+		note.sustain_measure = note.measure
+		note.sustain_beat = note.beat
+		note.sustain_step = note.step

@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bpp8oi66lun3s"]
+
+[ext_resource type="Theme" uid="uid://6rs8qxcigfgu" path="res://engine/tools/chart_editor/chart_editor_theme.tres" id="1_d6mib"]
+[ext_resource type="Script" uid="uid://bx3u653iyy7ik" path="res://engine/tools/chart_editor/chart_editor.gd" id="2_r008n"]
+[ext_resource type="Script" uid="uid://wplptx8tu5uf" path="res://engine/tools/chart_editor/time_label.gd" id="3_d6mib"]
+[ext_resource type="Script" uid="uid://cmyp4q2ky68gd" path="res://engine/tools/chart_editor/menu_bar.gd" id="3_hpd6r"]
+[ext_resource type="Script" uid="uid://cxmcjcv8i7xlo" path="res://engine/tools/chart_editor/song_label.gd" id="3_r008n"]
+
+[node name="ChartEditor" type="Control" unique_id=1465464071 node_paths=PackedStringArray("song_player", "strumlines")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_d6mib")
+script = ExtResource("2_r008n")
+song_player = NodePath("SongPlayer")
+strumlines = NodePath("RootPanel/VBoxContainer/TheGrid/Strumlines")
+
+[node name="SongPlayer" type="AudioStreamPlayer" parent="." unique_id=1218513608]
+
+[node name="RootPanel" type="PanelContainer" parent="." unique_id=1574638739]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RootPanel" unique_id=1221809522]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="RootPanel/VBoxContainer" unique_id=586916533 node_paths=PackedStringArray("chart", "songs")]
+layout_mode = 2
+script = ExtResource("3_hpd6r")
+chart = NodePath("Chart")
+songs = NodePath("Chart/Songs")
+
+[node name="Chart" type="PopupMenu" parent="RootPanel/VBoxContainer/MenuBar" unique_id=1972094823]
+transparent_bg = false
+size = Vector2i(100, 130)
+item_count = 5
+item_0/text = "New"
+item_0/id = 0
+item_1/text = "Open"
+item_1/id = 1
+item_2/text = "Save"
+item_2/id = 2
+item_3/text = "Save As"
+item_3/id = 3
+item_4/text = "Close"
+item_4/id = 4
+
+[node name="Songs" type="PopupMenu" parent="RootPanel/VBoxContainer/MenuBar/Chart" unique_id=104801923]
+item_count = 1
+item_0/text = "Test"
+item_0/id = 0
+
+[node name="TopBar" type="PanelContainer" parent="RootPanel/VBoxContainer" unique_id=872245049]
+layout_mode = 2
+theme_type_variation = &"InnerPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="RootPanel/VBoxContainer/TopBar" unique_id=257034833]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RootPanel/VBoxContainer/TopBar/MarginContainer" unique_id=1406966081]
+layout_mode = 2
+
+[node name="SongLabel" type="Label" parent="RootPanel/VBoxContainer/TopBar/MarginContainer/HBoxContainer" unique_id=1743274103 node_paths=PackedStringArray("chart_editor")]
+layout_mode = 2
+mouse_filter = 1
+text = "Hi - Difficulty"
+script = ExtResource("3_r008n")
+chart_editor = NodePath("../../../../../..")
+
+[node name="VSeparator" type="VSeparator" parent="RootPanel/VBoxContainer/TopBar/MarginContainer/HBoxContainer" unique_id=2116253178]
+layout_mode = 2
+
+[node name="TimeLabel" type="Label" parent="RootPanel/VBoxContainer/TopBar/MarginContainer/HBoxContainer" unique_id=1824132050]
+layout_mode = 2
+script = ExtResource("3_d6mib")
+
+[node name="TheGrid" type="PanelContainer" parent="RootPanel/VBoxContainer" unique_id=603021206]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Strumlines" type="HBoxContainer" parent="RootPanel/VBoxContainer/TheGrid" unique_id=173867271]
+layout_mode = 2
+alignment = 1
