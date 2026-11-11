@@ -224,6 +224,7 @@ func load_chart() -> void:
 			scroll_speed = custom_speed
 
 	chart.sort()
+	chart_loaded.emit(chart)
 
 	for key: StringName in strumlines:
 		if not chart.strumlines.has(key):
@@ -235,8 +236,6 @@ func load_chart() -> void:
 
 		manager.key_count = chart.strumlines[key].key_count
 		manager.load_notes(chart.strumlines[key].notes)
-
-	chart_loaded.emit(chart)
 
 
 func init_conductor() -> void:

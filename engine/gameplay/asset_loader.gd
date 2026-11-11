@@ -177,18 +177,23 @@ func load_note_types(chart: Chart) -> void:
 		"res://engine/gameplay/notes/types",
 	]
 
-	for types_path: String in type_paths:
-		var files := ResourceLoader.list_directory(types_path)
-		for file: String in files:
-			var type_name := file.get_file().get_basename()
-			if type_name not in types:
-				type_name = type_name.to_snake_case()
+	var handled: Array[StringName] = [&"default"]
 
-			if type_name not in types:
+	for type: StringName in types:
+		var found := false
+		for types_path: String in type_paths:
+			var path := "%s/%s.tscn" % [types_path, type]
+			if not ResourceLoader.exists(path, "PackedScene"):
+				path = "%s/%s.tscn" % [types_path, type.to_snake_case()]
+
+			if not ResourceLoader.exists(path, "PackedScene"):
 				continue
 
-			var resource: Resource = load("%s/%s" % [types_path, file])
-			if resource is PackedScene:
-				var note_type := (resource as PackedScene).instantiate()
-				note_types_parent.add_child(note_type)
-				types.erase(type_name)
+			var scene: PackedScene = load(path)
+			var note_type := scene.instantiate()
+			note_types_parent.add_child(note_type)
+			found = true
+			break
+
+		if (not found) and type not in handled:
+			push_warning("Missing note type with name '%s', tried snake case as well as full type name" % type)

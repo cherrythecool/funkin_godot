@@ -38,6 +38,8 @@ enum NoteState {
 @export var use_custom_score: bool = false
 @export var custom_score: int = 0
 
+@export var hit_window_multiplier: float = 1.0
+
 var state: NoteState = NoteState.ALIVE
 var grace_timer: float = 1.0
 var strumline: StringName

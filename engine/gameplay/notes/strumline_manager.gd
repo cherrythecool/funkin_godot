@@ -47,21 +47,24 @@ func _process(delta: float) -> void:
 		if not is_note_in_range(note, time):
 			break
 
+		var past_hit_window := (
+			time > note.time + hit_window and
+			note.state == NoteData.NoteState.ALIVE
+		)
+
 		var shift_notes_index := false
 		if note.state == NoteData.NoteState.HIT or note.state == NoteData.NoteState.MISSED:
 			shift_notes_index = note_idx == 0
 		else:
 			if cpu:
-				if time >= note.time:
+				if time >= note.time and note.should_hit:
 					last_hit_index = index
 					hit_note(note)
 					shift_notes_index = note_idx == 0 and note.state == NoteData.NoteState.HIT
+				elif (not note.should_hit) and past_hit_window:
+					miss_note(note)
+					shift_notes_index = note_idx == 0
 			else:
-				var past_hit_window := (
-					time > note.time + hit_window and
-					note.state == NoteData.NoteState.ALIVE
-				)
-
 				var sustain_missed := (
 					(note.grace_timer <= 0.0 and note.length > 0.0) and
 					note.state == NoteData.NoteState.HELD
@@ -115,7 +118,11 @@ func miss_note(note: NoteData) -> void:
 
 
 func is_note_in_range(note: NoteData, time: float) -> bool:
-	return time >= note.time - hit_window
+	return time >= note.time - (hit_window * note.hit_window_multiplier)
+
+
+func is_note_in_hit_window(note: NoteData, time: float) -> bool:
+	return absf(note.time - time) <= (hit_window * note.hit_window_multiplier)
 
 
 func get_time() -> float:
@@ -193,6 +200,9 @@ func _handle_player_input(delta: float) -> void:
 		elif pressed[i] and receptor_states[i] == ReceptorState.RELEASED:
 			receptor_states[i] = ReceptorState.PRESSED
 
+	var closest_notes: Array[Dictionary]
+	closest_notes.resize(key_count)
+
 	var time := get_time()
 	var note_range := range(notes_index, notes.size())
 	for index: int in note_range:
@@ -200,13 +210,17 @@ func _handle_player_input(delta: float) -> void:
 		if not is_note_in_range(note, time):
 			break
 
-		if note.state == NoteData.NoteState.ALIVE:
+		if note.state == NoteData.NoteState.ALIVE and is_note_in_hit_window(note, time):
 			if not pressed[note.direction]:
 				continue
 
-			pressed[note.direction] = false
-			last_hit_index = index
-			hit_note(note)
+			var time_difference := absf(note.time - time)
+			var closest: NoteData = closest_notes[note.direction].get(&"note")
+			if (not closest) or time_difference < absf(closest.time - time):
+				closest_notes[note.direction] = {
+					&"note": note,
+					&"index": index,
+				}
 		elif note.state == NoteData.NoteState.HELD:
 			if held[note.direction]:
 				last_hit_index = index
@@ -218,3 +232,11 @@ func _handle_player_input(delta: float) -> void:
 
 			if note.grace_timer <= 0.0:
 				miss_note(note)
+
+	for i: int in key_count:
+		if not closest_notes[i].is_empty():
+			var data := closest_notes[i]
+			var note: NoteData = data[&"note"]
+			pressed[note.direction] = false
+			last_hit_index = data[&"index"]
+			hit_note(note)

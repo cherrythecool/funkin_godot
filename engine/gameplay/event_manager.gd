@@ -71,6 +71,8 @@ func _load_events() -> void:
 		"res://engine/gameplay/events",
 	]
 
+	var handled: Array[StringName] = [&"Camera Pan", &"Camera Zoom"]
+
 	for event: EventData in events:
 		var event_name: StringName = event.name
 		if already_loaded_names.has(event_name):
@@ -79,7 +81,6 @@ func _load_events() -> void:
 		already_loaded_names.push_back(event_name)
 
 		var found := false
-
 		for event_path: String in event_paths:
 			var path: String = "%s/%s.tscn" % [event_path, event_name]
 			if not ResourceLoader.exists(path, "PackedScene"):
@@ -95,5 +96,5 @@ func _load_events() -> void:
 			found = true
 			break
 
-		if not found:
+		if (not found) and event_name not in handled:
 			push_warning("Missing event with name '%s', tried snake case as well as full event name" % event_name)
