@@ -27,6 +27,9 @@ var current_scene: Node = null:
 
 var _target_scene_path := ""
 
+@warning_ignore("unused_private_class_variable")
+var _return_scene_path := ""
+
 
 func _ready() -> void:
 	_reset_transition()

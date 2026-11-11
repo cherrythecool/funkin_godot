@@ -15,11 +15,6 @@ var active: bool = true
 var selected: int = 0
 
 
-static func _on_options_scene_changed(previous_scene: String) -> void:
-	if "target_scene" in SceneManager.current_scene:
-		SceneManager.current_scene.target_scene = previous_scene
-
-
 func _ready() -> void:
 	Engine.time_scale = 1.0
 	change_selection()
@@ -87,9 +82,7 @@ func select(option: StringName) -> void:
 		&"options":
 			close()
 			Game.instance.back_to_menus.emit()
-
-			var previous_scene := get_tree().current_scene.scene_file_path
-			SceneManager.scene_changed.connect(_on_options_scene_changed.bind(previous_scene), CONNECT_ONE_SHOT)
+			SceneManager._return_scene_path = get_tree().current_scene.scene_file_path
 
 			var menu_path := custom_options_menu_path
 			if not ResourceLoader.exists(menu_path):
