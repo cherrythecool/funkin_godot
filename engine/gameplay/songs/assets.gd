@@ -33,7 +33,7 @@ func get_opponent() -> PackedScene:
 	if is_instance_valid(opponent):
 		return opponent
 
-	if ResourceLoader.exists("uid://cdlt4jc7j8122"):
+	if FunkinUtils.resource_exists_safe("uid://cdlt4jc7j8122"):
 		return load("uid://cdlt4jc7j8122")
 	else:
 		return load("uid://bu44d2he2dxm3")
@@ -43,7 +43,7 @@ func get_spectator() -> PackedScene:
 	if is_instance_valid(spectator):
 		return spectator
 
-	if ResourceLoader.exists("uid://bragoy3tisav2"):
+	if FunkinUtils.resource_exists_safe("uid://bragoy3tisav2"):
 		return load("uid://bragoy3tisav2")
 	else:
 		return load("uid://bu44d2he2dxm3")
@@ -53,7 +53,7 @@ func get_stage() -> PackedScene:
 	if is_instance_valid(stage):
 		return stage
 
-	if ResourceLoader.exists("uid://0ih6j18ov417"):
+	if FunkinUtils.resource_exists_safe("uid://0ih6j18ov417"):
 		return load("uid://0ih6j18ov417")
 	else:
 		return load("uid://m26q2fyumltr")

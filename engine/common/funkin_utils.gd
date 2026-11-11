@@ -127,3 +127,6 @@ static func keycode_string_to_character(input: String) -> String:
 			return "→"
 		_:
 			return input
+
+static func resource_exists_safe(path: String) -> bool:
+	return ResourceUID.has_id(ResourceUID.text_to_id(path)) and ResourceLoader.exists(path)
