@@ -47,6 +47,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			song_player.stream_paused = not song_player.stream_paused
 			Conductor.active = not song_player.stream_paused
 
+	if event is InputEventPanGesture:
+		if event.delta.abs().y > 0.0:
+			shift_time(-event.delta.y * Conductor.beat_delta)
+
 	if event.is_action_pressed(&"chart_scroll_up"):
 		shift_time(-Conductor.beat_delta / 4.0)
 	if event.is_action_pressed(&"chart_scroll_down"):

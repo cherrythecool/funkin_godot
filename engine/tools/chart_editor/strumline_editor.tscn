@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cqfutljqtrg70"]
 
-[ext_resource type="Script" uid="uid://c2167dyw3u3ad" path="res://engine/tools/chart_editor/strumline.gd" id="1_6lokc"]
+[ext_resource type="Script" uid="uid://c2167dyw3u3ad" path="res://engine/tools/chart_editor/strumline_editor.gd" id="1_6lokc"]
 [ext_resource type="Script" uid="uid://cfciepj21s1yu" path="res://engine/tools/chart_editor/key_label.gd" id="2_qjyff"]
 
 [node name="Strumline" type="PanelContainer" unique_id=1795869008 node_paths=PackedStringArray("key_label")]

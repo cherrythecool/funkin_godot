@@ -47,6 +47,7 @@ func _gui_input(event: InputEvent) -> void:
 		NoteData.set_timings(note, Conductor.timing_changes)
 		target.add_note(note)
 		target.sort_notes()
+
 	if event.is_action_pressed(&"chart_remove_note"):
 		pass
 
