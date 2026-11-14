@@ -200,9 +200,6 @@ func _handle_player_input(delta: float) -> void:
 		elif pressed[i] and receptor_states[i] == ReceptorState.RELEASED:
 			receptor_states[i] = ReceptorState.PRESSED
 
-	var closest_notes: Array[Dictionary]
-	closest_notes.resize(key_count)
-
 	var time := get_time()
 	var note_range := range(notes_index, notes.size())
 	for index: int in note_range:
@@ -214,13 +211,9 @@ func _handle_player_input(delta: float) -> void:
 			if not pressed[note.direction]:
 				continue
 
-			var time_difference := absf(note.time - time)
-			var closest: NoteData = closest_notes[note.direction].get(&"note")
-			if (not closest) or time_difference < absf(closest.time - time):
-				closest_notes[note.direction] = {
-					&"note": note,
-					&"index": index,
-				}
+			pressed[note.direction] = false
+			last_hit_index = index
+			hit_note(note)
 		elif note.state == NoteData.NoteState.HELD:
 			if held[note.direction]:
 				last_hit_index = index
@@ -232,11 +225,3 @@ func _handle_player_input(delta: float) -> void:
 
 			if note.grace_timer <= 0.0:
 				miss_note(note)
-
-	for i: int in key_count:
-		if not closest_notes[i].is_empty():
-			var data := closest_notes[i]
-			var note: NoteData = data[&"note"]
-			pressed[note.direction] = false
-			last_hit_index = data[&"index"]
-			hit_note(note)
