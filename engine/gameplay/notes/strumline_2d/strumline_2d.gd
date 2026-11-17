@@ -304,6 +304,8 @@ func _on_notes_cleared() -> void:
 
 
 func _on_applied_rating(rating: Rating, note: NoteData, _health_mult: float) -> void:
+	if parent.last_hit_index > parent.notes.size() - 1:
+		return
 	if parent.notes[parent.last_hit_index] != note:
 		return
 	if rating.accuracy_percent != 100.0 or note.direction >= receptors.size():

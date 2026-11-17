@@ -58,7 +58,7 @@ static func load_legacy(song_folder: String, difficulty: StringName) -> Chart:
 		chart.events.append_array(load_psych_events(song_data["events"]))
 
 	if sections.is_empty():
-		return
+		return chart
 
 	var must_hit: bool = sections[0].mustHitSection
 	chart.events.push_back(CameraPan.new(time, &"player" if must_hit else &"opponent"))

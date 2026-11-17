@@ -1,6 +1,9 @@
 extends Control
 
 
+static var chart: Chart
+static var metadata: SongMetadata
+
 signal chart_loaded
 signal time_shifted
 
@@ -17,17 +20,19 @@ var strumline_scene: PackedScene = load("uid://cqfutljqtrg70")
 
 
 func _ready() -> void:
-	chart = Chart.load_chart(
-		"%s/%s" % [
-			songs_folder,
-			song_name,
-		],
-		difficulty,
-	)
-	metadata = SongMetadata.load_from_song(song_name, songs_folder)
+	if not chart:
+		chart = Chart.load_chart(
+			"%s/%s" % [
+				songs_folder,
+				song_name,
+			],
+			difficulty,
+		)
+		metadata = SongMetadata.load_from_song(song_name, songs_folder)
 
-	chart_loaded.connect(_on_chart_loaded)
-	chart_loaded.emit()
+	if chart:
+		chart_loaded.connect(_on_chart_loaded)
+		chart_loaded.emit()
 
 	MenuSounds.music.stop()
 	song_player.stream = Tracks.load_tracks(
@@ -38,6 +43,21 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventPanGesture:
+		if event.delta.abs().y > 0.0:
+			shift_time(-event.delta.y * Conductor.beat_delta)
+
+	if event.is_action_pressed(&"chart_playtest"):
+		Game.load_settings[&"chart"] = chart
+		Game.load_settings[&"songs_folder"] = songs_folder
+		Game.load_settings[&"song_name"] = song_name
+		Game.load_settings[&"song_difficulty"] = difficulty.to_lower()
+		Game.load_settings[&"mode_name"] = "Chart Playtest"
+		Game.load_settings[&"exit_scene_path"] = get_tree().current_scene.scene_file_path
+		Game.load_settings[&"playlist"].clear()
+		SceneManager.transition_to_file(SongLoader.get_scene_path(song_name, songs_folder))
+		Conductor.active = true
+
 	if event.is_action_pressed(&"chart_play_pause"):
 		if (not song_player.playing) and (not song_player.stream_paused):
 			if Conductor.raw_time < Conductor.target_length:
@@ -46,10 +66,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			song_player.stream_paused = not song_player.stream_paused
 			Conductor.active = not song_player.stream_paused
-
-	if event is InputEventPanGesture:
-		if event.delta.abs().y > 0.0:
-			shift_time(-event.delta.y * Conductor.beat_delta)
 
 	if event.is_action_pressed(&"chart_scroll_up"):
 		shift_time(-Conductor.beat_delta / 4.0)

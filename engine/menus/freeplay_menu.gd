@@ -41,13 +41,16 @@ func select_song(song_name: StringName, meta: SongMetadata) -> void:
 
 func play_song() -> void:
 	var song_name := song_metadata.get_override_name(song, difficulty)
-	Game.load_settings[&"songs_folder"] = songs_folder
-	Game.load_settings[&"song_name"] = song_name
-	Game.load_settings[&"song_difficulty"] = difficulty.to_lower()
-	Game.load_settings[&"mode_name"] = "Freeplay"
-	Game.load_settings[&"exit_scene_path"] = get_tree().current_scene.scene_file_path
-	Game.load_settings[&"playlist"].clear()
-	SceneManager.transition_to_file(SongLoader.get_scene_path(song_name, songs_folder))
+	Game.load_songs(
+		[Game.make_playlist_entry(song_name, difficulty)],
+		difficulty,
+		songs_folder,
+		true,
+		{
+			&"mode_name": "Freeplay",
+			&"exit_scene_path": get_tree().current_scene.scene_file_path,
+		}
+	)
 
 
 func _on_difficulty_option_selected(index: int) -> void:

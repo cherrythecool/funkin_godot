@@ -60,6 +60,44 @@ signal botplay_changed(botplay: bool)
 @warning_ignore("unused_signal") signal unpaused
 
 
+static func make_playlist_entry(song_name: StringName, difficulty: StringName) -> Dictionary:
+	return {
+		&"name": song_name,
+		&"difficulty": difficulty,
+	}
+
+
+static func load_songs(
+	songs: Array[Dictionary],
+	difficulty: StringName,
+	songs_folder: String,
+	transition: bool,
+	other_settings: Dictionary[StringName, Variant] = {},
+) -> void:
+	if songs.is_empty():
+		printerr("Can't load into no songs")
+		return
+
+	var song_name: StringName = songs[0][&"name"]
+	Game.load_settings[&"songs_folder"] = songs_folder
+	Game.load_settings[&"song_name"] = song_name
+	Game.load_settings[&"song_difficulty"] = difficulty.to_lower()
+
+	var playlist: Array[Dictionary] = Game.load_settings[&"playlist"]
+	playlist.clear()
+	playlist.append_array(songs)
+	playlist.remove_at(0)
+
+	var load_path := SongLoader.get_scene_path(song_name, songs_folder)
+	if transition:
+		SceneManager.transition_to_file(load_path)
+	else:
+		SceneManager.swap_to_file(load_path)
+
+	for key: StringName in other_settings:
+		Game.load_settings[key] = other_settings[key]
+
+
 func _init() -> void:
 	instance = self
 
@@ -207,6 +245,10 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 
 
 func load_chart() -> void:
+	if &"chart" in load_settings:
+		chart = load_settings[&"chart"]
+		load_settings.erase(&"chart")
+
 	if not is_instance_valid(chart):
 		chart = Chart.load_chart(
 			"%s/%s" % [
