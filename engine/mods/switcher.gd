@@ -136,9 +136,15 @@ func recreate_panels() -> void:
 	FunkinUtils.free_children_from(mod_container)
 
 	for module: String in current_modules:
+		var metadata:ModMetaData = ModMetaData.new()
+		metadata.display_name = module
+		
+		if ResourceLoader.exists("res://mods/%s/meta.tres" % module):
+			metadata = load("res://mods/%s/meta.tres" % module)
+				
 		var panel := module_panel.instantiate()
 		panel.name = &"module_%s" % module
-		panel.get_node(^"ModuleName").text = module
+		panel.get_node(^"ModuleName").text = metadata.display_name
 		mod_container.add_child(panel)
 
 	if Global.game_size.y >= 76.0:

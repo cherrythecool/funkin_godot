@@ -1,4 +1,4 @@
-extends Node
+class_name Main extends Node
 
 
 @export_group("Hardcoded Scene", "hardcoded_")
@@ -11,6 +11,11 @@ extends Node
 @export_file("*.tscn") var hardcoded_scene_path := ""
 
 
+@export_group("Misc")
+@export var default_mod_meta:ModMetaData = ModMetaData.new()
+
+static var mod_meta:ModMetaData
+
 func _enter_tree() -> void:
 	if hardcoded_enabled:
 		ModSwitcher.queue_free()
@@ -20,7 +25,12 @@ func _enter_tree() -> void:
 
 		var current_module: String = SaveData.get_save_value(&"module", "current_module")
 		var target_path := "res://mods/%s/module.tscn" % current_module
-
+		
+		if ResourceLoader.exists("res://mods/%s/meta.tres" % current_module):
+			mod_meta = load("res://mods/%s/meta.tres" % current_module)
+		else:
+			mod_meta = default_mod_meta
+		
 		if ResourceLoader.exists(target_path):
 			SceneManager.swap_to_file(target_path)
 		else:
