@@ -27,9 +27,6 @@ var current_scene: Node = null:
 
 var _target_scene_path := ""
 
-@warning_ignore("unused_private_class_variable")
-var _return_scene_path := ""
-
 
 func _ready() -> void:
 	_reset_transition()
@@ -52,6 +49,16 @@ func transition_to_file(scene_path: String) -> void:
 
 
 func swap_to_file(scene_path: String) -> void:
+	if Main.mod_meta.default_window_title != null and Main.mod_meta.default_window_title != "":
+		get_window().title = Main.mod_meta.default_window_title
+	else:
+		if Main.mod_meta.display_name != null and Main.mod_meta.display_name != "":
+			get_window().title = Main.mod_meta.display_name
+		else:
+			get_window().title = ProjectSettings.get_setting("application/config/name", "Friday Night Funkin'")
+		
+	DisplayServer.set_icon(load(Main.mod_meta.default_window_icon))
+		
 	_target_scene_path = scene_path
 
 	var scene: PackedScene = load(scene_path)
@@ -62,8 +69,8 @@ func swap_to_file(scene_path: String) -> void:
 	set.call_deferred(&"current_scene", node)
 	get_tree().change_scene_to_node.call_deferred(node)
 	scene_changed.emit.call_deferred()
-
-
+	
+	
 func reload_current_scene() -> void:
 	_reset_transition()
 
