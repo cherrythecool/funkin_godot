@@ -193,7 +193,9 @@ func _on_event_hit(event: EventData) -> void:
 			if not is_instance_valid(conductor):
 				return
 
-			zoom_event_tween = create_tween().set_parallel()
+			zoom_target = Vector2.ONE * data_zoom
+
+			zoom_event_tween = create_tween()
 			zoom_event_tween.set_ease(
 				FunkinUtils.get_ease_from_str(ease_string)
 			)
@@ -202,15 +204,21 @@ func _on_event_hit(event: EventData) -> void:
 			)
 			zoom_event_tween.tween_property(
 				self,
-				^"zoom_target",
-				Vector2.ONE * data_zoom,
-				conductor.beat_delta / 4.0 * float(steps)
+				^"zoom_lerps",
+				false,
+				0.0,
 			)
 			zoom_event_tween.tween_property(
 				self,
 				^"zoom",
 				Vector2.ONE * data_zoom,
-				conductor.beat_delta / 4.0 * float(steps)
+				(conductor.beat_delta / 4.0) * float(steps)
+			)
+			zoom_event_tween.tween_property(
+				self,
+				^"zoom_lerps",
+				true,
+				0.0,
 			)
 
 

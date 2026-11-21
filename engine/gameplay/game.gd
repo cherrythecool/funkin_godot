@@ -216,6 +216,10 @@ func load_chart() -> void:
 			load_settings[&"song_difficulty"],
 		)
 
+	if not chart:
+		printerr("Failed to load chart for current song!")
+		return
+
 	var custom_speed: float = SaveData.get_save_value(&"core", "note_scroll_value")
 	match SaveData.get_save_value(&"core", "note_scroll_method"):
 		"chart_multiplier":

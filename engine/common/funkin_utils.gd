@@ -16,7 +16,7 @@ const KNOWN_TWEEN_TYPES: Dictionary[StringName, Tween.TransitionType] = {
 	# normally by godot. it could prolly be added with
 	# custom tween functions, i don't rlly wanna so... take my
 	# random bs instead lol
-	&"smoothStep": Tween.TRANS_CUBIC,
+	&"smoothStep": Tween.TRANS_QUAD,
 	&"smootherStep": Tween.TRANS_CIRC,
 }
 
@@ -44,12 +44,12 @@ static func free_from_array(nodes: Array[Node], immediate: bool = false) -> void
 
 
 static func get_ease_from_str(string: String) -> Tween.EaseType:
-	if string.ends_with("Out"):
-		return Tween.EASE_OUT
-	elif string.ends_with("InOut"):
+	if string.ends_with("InOut"):
 		return Tween.EASE_IN_OUT
 	elif string.ends_with("OutIn"):
 		return Tween.EASE_OUT_IN
+	elif string.ends_with("Out"):
+		return Tween.EASE_OUT
 	else:
 		return Tween.EASE_IN
 
