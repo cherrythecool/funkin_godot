@@ -4,7 +4,7 @@ extends EventData
 
 func _init(
 	time_: float = 0.0,
-	side: StringName = &"player",
+	side: StringName = &"opponent",
 	ease_string: String = "CLASSIC",
 	duration: float = 32.0,
 	offset: Vector2 = Vector2.ZERO
