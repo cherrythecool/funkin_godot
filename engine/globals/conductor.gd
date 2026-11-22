@@ -209,22 +209,17 @@ func get_time_at_beat(beat_: float, timing_changes_: Array[TimingChange]) -> flo
 		return 0.0
 
 	var time_: float = 0.0
-	var bpm: float = timing_changes_[0].bpm
-
-	var last_time: float = 0.0
-	var last_beat: float = 0.0
+	var last_change := timing_changes_[0]
 	for change: TimingChange in timing_changes_:
 		if maxf(beat_, 0.0) < change.beat:
 			break
 		if not change.bpm_changed:
 			continue
 
-		time_ += change.time - last_time
-		last_time = change.time
-		last_beat = change.beat
-		bpm = change.bpm
+		time_ += change.time - last_change.time
+		last_change = change
 
-	time_ += (beat_ - last_beat) * (60.0 / bpm)
+	time_ += (beat_ - last_change.beat) * (60.0 / last_change.bpm)
 	return time_
 
 
@@ -241,22 +236,17 @@ func get_beat_at_time(time_: float, timing_changes_: Array[TimingChange]) -> flo
 		return 0.0
 
 	var beat_: float = 0.0
-	var bpm: float = timing_changes_[0].bpm
-
-	var last_time: float = 0.0
-	var last_beat: float = 0.0
+	var last_change := timing_changes_[0]
 	for change: TimingChange in timing_changes_:
 		if maxf(time_, 0.0) < change.time:
 			break
 		if not change.bpm_changed:
 			continue
 
-		beat_ += change.beat - last_beat
-		last_time = change.time
-		last_beat = change.beat
-		bpm = change.bpm
+		beat_ += (change.time - last_change.time) / (60.0 / last_change.bpm)
+		last_change = change
 
-	beat_ += (time_ - last_time) / (60.0 / bpm)
+	beat_ += (time_ - last_change.time) / (60.0 / last_change.bpm)
 	return beat_
 
 
