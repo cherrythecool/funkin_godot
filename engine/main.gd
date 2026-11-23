@@ -10,7 +10,6 @@ class_name Main extends Node
 ## Path to the scene that will be loaded if [member hardcoded_enabled] is on.
 @export_file("*.tscn") var hardcoded_scene_path := ""
 
-
 @export_group("Misc")
 @export var default_mod_meta:ModMetaData = ModMetaData.new()
 

@@ -6,5 +6,5 @@ extends Resource
 @export var version: String = "1.0.0"
 
 @export_group("Window Info")
-@export var default_window_title: String = ""
-@export_file var default_window_icon: String = "res://"
+@export var window_title: String = ""
+@export_file var window_icon: String = "res://"
