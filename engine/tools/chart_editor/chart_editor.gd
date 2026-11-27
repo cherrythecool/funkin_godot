@@ -6,16 +6,17 @@ static var metadata: SongMetadata
 
 signal chart_loaded
 signal time_shifted
+signal snap_changed(value: float)
 
 @export var song_player: AudioStreamPlayer
 @export var strumlines: HBoxContainer
+@export var note_snap_option: OptionButton
 
 @export var song_name: StringName = &"bopeebo_erect"
 @export var difficulty: StringName = &"nightmare"
 @export var songs_folder: String = "res://mods/funkin/songs/"
 
-var chart: Chart
-var metadata: SongMetadata
+var note_snapping: float = 1.0
 var strumline_scene: PackedScene = load("uid://cqfutljqtrg70")
 
 
@@ -40,6 +41,7 @@ func _ready() -> void:
 		songs_folder,
 	)
 	song_player.finished.connect(_on_song_finished)
+	snap_changed.emit(note_snapping)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -102,6 +104,7 @@ func _on_chart_loaded() -> void:
 		strumline_node.target = strumline
 		strumline_node.target_key = strumline_key
 		time_shifted.connect(strumline_node._on_time_shifted)
+		snap_changed.connect(strumline_node._on_snap_changed)
 		strumlines.add_child(strumline_node)
 
 
@@ -110,3 +113,8 @@ func _on_song_finished() -> void:
 	Conductor.active = false
 	Conductor.raw_time = Conductor.target_length
 	Conductor.calculate_beat()
+
+
+func _on_note_snap_option_selected(index: int) -> void:
+	note_snapping = 16.0 / float(note_snap_option.get_item_text(index))
+	snap_changed.emit(note_snapping)

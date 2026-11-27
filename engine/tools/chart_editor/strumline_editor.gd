@@ -13,6 +13,7 @@ var target: Strumline
 var target_key: StringName
 var target_index: int = 0
 var mouse_active := false
+var snapping_value: float = 1.0
 
 
 func _ready() -> void:
@@ -29,14 +30,47 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	queue_redraw()
+	update_mouse_state()
 
 
 func _gui_input(event: InputEvent) -> void:
+	if (
+		event.is_action_pressed(&"chart_remove_note") or
+		(event is InputEventMouseMotion and Input.is_action_pressed(&"chart_remove_note"))
+	):
+		var draw_info := get_draw_info()
+		var grid_size: float = draw_info[&"grid_size"]
+		var note_column_offset: int = draw_info[&"note_column_offset"]
+		var snapped_mouse := get_snapped_mouse_position(grid_size, Vector2(1.0, snapping_value))
+		var snapped_grid_position := snapped_mouse / grid_size
+		var snapped_step := Conductor.step + note_column_offset + snapped_grid_position.y
+
+		var mouse := get_grid_mouse_position(grid_size)
+		var grid_position := mouse / grid_size
+		var step := Conductor.step + note_column_offset + grid_position.y
+		target_index = 0
+
+		var notes := target.notes.filter(func(note_: NoteData) -> bool:
+			return absf(note_.step - snapped_step) <= 0.25
+		)
+
+		var closest: NoteData = null
+		for note: NoteData in notes:
+			if note.direction != int(grid_position.x):
+				continue
+
+			if (not closest) or absf(note.step - step) < absf(closest.step - step):
+				closest = note
+
+		if closest:
+			target.notes.erase(closest)
+			target.sort_notes()
+
 	if event.is_action_pressed(&"chart_place_note") and target:
 		var draw_info := get_draw_info()
 		var grid_size: float = draw_info[&"grid_size"]
 		var note_column_offset: int = draw_info[&"note_column_offset"]
-		var mouse := get_snapped_mouse_position(grid_size)
+		var mouse := get_snapped_mouse_position(grid_size, Vector2(1.0, snapping_value))
 		var grid_position := mouse / grid_size
 		var step := Conductor.step + note_column_offset + grid_position.y
 		target_index = 0
@@ -47,9 +81,6 @@ func _gui_input(event: InputEvent) -> void:
 		NoteData.set_timings(note, Conductor.timing_changes)
 		target.add_note(note)
 		target.sort_notes()
-
-	if event.is_action_pressed(&"chart_remove_note"):
-		pass
 
 
 func _draw() -> void:
@@ -84,7 +115,7 @@ func _draw() -> void:
 
 	if mouse_active:
 		var rect := Rect2(
-			get_snapped_mouse_position(grid_size),
+			get_snapped_mouse_position(grid_size, Vector2(1.0, snapping_value)),
 			Vector2(grid_size, grid_size),
 		)
 		draw_rect(rect, Color.WHITE)
@@ -174,18 +205,33 @@ func _on_time_shifted() -> void:
 
 
 func get_fractional_offset(grid_size: float) -> float:
-	var current_step := Conductor.step
-	return -(current_step - int(Conductor.step)) * grid_size
+	return -wrapf(Conductor.step, 0.0, 1.0) * grid_size
 
 
-func get_snapped_mouse_position(grid_size: float) -> Vector2:
+func get_grid_mouse_position(grid_size: float) -> Vector2:
 	var fractional_offset := get_fractional_offset(grid_size)
 	var mouse_position := get_local_mouse_position()
 	var grid_position := Vector2(
-		int(mouse_position.x / grid_size),
-		int((mouse_position.y - fractional_offset) / grid_size),
+		mouse_position.x / grid_size,
+		(mouse_position.y - fractional_offset - (grid_size / 2.0)) / grid_size,
 	) * grid_size
 	return grid_position + Vector2(0, fractional_offset)
+
+
+func get_snapped_mouse_position(grid_size: float, snap: Vector2 = Vector2.ONE) -> Vector2:
+	#return Vector2(
+		#Vector2i(get_grid_mouse_position(grid_size) / (grid_size * snap))
+	#) * (grid_size * snap)
+	var fractional_offset := get_fractional_offset(grid_size)
+	var mouse_position := get_local_mouse_position()
+	var grid_position := Vector2(
+		mouse_position.x,
+		mouse_position.y - fractional_offset,
+	)
+	grid_position = Vector2i(grid_position / (grid_size * snap))
+	grid_position *= grid_size * snap
+	grid_position.y += fractional_offset
+	return grid_position
 
 
 func get_draw_info() -> Dictionary[StringName, Variant]:
@@ -215,3 +261,60 @@ func get_draw_info() -> Dictionary[StringName, Variant]:
 		&"last_column_offset": last_column_offset,
 		&"note_column_offset": note_column_offset,
 	}
+
+
+func update_mouse_state() -> void:
+	var draw_info := get_draw_info()
+	var grid_size: float = draw_info[&"grid_size"]
+	var note_column_offset: int = draw_info[&"note_column_offset"]
+	var snapped_mouse := get_grid_mouse_position(grid_size)
+	snapped_mouse.x = int(snapped_mouse.x / grid_size)
+	var snapped_grid_position := snapped_mouse / grid_size
+	var snapped_step := Conductor.step + note_column_offset + snapped_grid_position.y
+
+	var mouse := get_grid_mouse_position(grid_size)
+	var grid_position := mouse / grid_size
+	var step := Conductor.step + note_column_offset + grid_position.y
+
+	var notes := target.notes.filter(func(note_: NoteData) -> bool:
+		return absf(note_.step - snapped_step) < 0.5
+	)
+
+	var closest: NoteData = null
+	for note: NoteData in notes:
+		if note.direction != int(grid_position.x):
+			continue
+
+		if (not closest) or absf(note.step - step) < absf(closest.step - step):
+			closest = note
+
+	var hovering: bool = false
+	if closest:
+		hovering = true
+
+	var changed := false
+	if Input.is_action_just_pressed(&"chart_remove_note") or Input.is_action_just_released(&"chart_remove_note"):
+		changed = true
+	elif Input.is_action_just_pressed(&"chart_place_note") or Input.is_action_just_released(&"chart_place_note"):
+		changed = true
+	elif prev_hover != hovering:
+		changed = true
+	prev_hover = hovering
+
+	if changed:
+		var state := CURSOR_ARROW
+		if Input.is_action_pressed(&"chart_remove_note"):
+			state = CURSOR_FORBIDDEN
+		elif Input.is_action_pressed(&"chart_place_note"):
+			state = CURSOR_DRAG
+		elif hovering:
+			state = CURSOR_POINTING_HAND
+
+		mouse_default_cursor_shape = state
+
+
+var prev_hover := false
+
+
+func _on_snap_changed(value: float) -> void:
+	snapping_value = value

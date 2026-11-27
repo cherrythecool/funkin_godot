@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cmyp4q2ky68gd" path="res://engine/tools/chart_editor/menu_bar.gd" id="3_hpd6r"]
 [ext_resource type="Script" uid="uid://cxmcjcv8i7xlo" path="res://engine/tools/chart_editor/song_label.gd" id="3_r008n"]
 
-[node name="ChartEditor" type="Control" unique_id=1465464071 node_paths=PackedStringArray("song_player", "strumlines")]
+[node name="ChartEditor" type="Control" unique_id=1465464071 node_paths=PackedStringArray("song_player", "strumlines", "note_snap_option")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ theme = ExtResource("1_d6mib")
 script = ExtResource("2_r008n")
 song_player = NodePath("SongPlayer")
 strumlines = NodePath("RootPanel/VBoxContainer/TheGrid/Strumlines")
+note_snap_option = NodePath("RootPanel/VBoxContainer/TopBar/MarginContainer/HBoxContainer/NoteSnapOption")
 
 [node name="SongPlayer" type="AudioStreamPlayer" parent="." unique_id=1218513608]
 
@@ -81,6 +82,22 @@ layout_mode = 2
 layout_mode = 2
 script = ExtResource("3_d6mib")
 
+[node name="VSeparator2" type="VSeparator" parent="RootPanel/VBoxContainer/TopBar/MarginContainer/HBoxContainer" unique_id=1730710899]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="NoteSnapOption" type="OptionButton" parent="RootPanel/VBoxContainer/TopBar/MarginContainer/HBoxContainer" unique_id=1586378756]
+layout_mode = 2
+focus_mode = 0
+selected = 0
+item_count = 3
+popup/item_0/text = "16"
+popup/item_0/id = 0
+popup/item_1/text = "32"
+popup/item_1/id = 1
+popup/item_2/text = "64"
+popup/item_2/id = 2
+
 [node name="TheGrid" type="PanelContainer" parent="RootPanel/VBoxContainer" unique_id=603021206]
 layout_mode = 2
 size_flags_vertical = 3
@@ -88,3 +105,5 @@ size_flags_vertical = 3
 [node name="Strumlines" type="HBoxContainer" parent="RootPanel/VBoxContainer/TheGrid" unique_id=173867271]
 layout_mode = 2
 alignment = 1
+
+[connection signal="item_selected" from="RootPanel/VBoxContainer/TopBar/MarginContainer/HBoxContainer/NoteSnapOption" to="." method="_on_note_snap_option_selected"]
