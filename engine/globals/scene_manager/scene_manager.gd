@@ -57,13 +57,16 @@ func swap_to_file(scene_path: String) -> void:
 	var scene: PackedScene = load(scene_path)
 	if not scene:
 		return
+	
+	@warning_ignore("static_called_on_instance") # I would handle this better but idk how tbh
+	WindowManager.reset_window()
 
 	var node: Node = scene.instantiate()
 	set.call_deferred(&"current_scene", node)
 	get_tree().change_scene_to_node.call_deferred(node)
 	scene_changed.emit.call_deferred()
-
-
+	
+	
 func reload_current_scene() -> void:
 	_reset_transition()
 

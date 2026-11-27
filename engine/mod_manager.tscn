@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bwcdjku7iww5m"]
+
+[ext_resource type="Script" uid="uid://cfnxn08wihxtm" path="res://engine/mod_manager.gd" id="1_ptdog"]
+[ext_resource type="Script" uid="uid://ci3l2l4tvd7en" path="res://engine/mods/mod_data.gd" id="2_k5586"]
+
+[sub_resource type="Resource" id="Resource_ptdog"]
+script = ExtResource("2_k5586")
+display_name = "Friday Night Funkin'"
+version = "3.1.0"
+metadata/_custom_type_script = "uid://ci3l2l4tvd7en"
+
+[node name="ModManager" type="Node" unique_id=592011368]
+script = ExtResource("1_ptdog")
+default_mod_meta = SubResource("Resource_ptdog")
