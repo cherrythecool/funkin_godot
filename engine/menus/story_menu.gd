@@ -72,6 +72,7 @@ func play_songs() -> void:
 		{
 			&"mode_name": "Story Mode",
 			&"exit_scene_path": get_tree().current_scene.scene_file_path,
+			&"chart_keep": false,
 		}
 	)
 

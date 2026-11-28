@@ -49,6 +49,7 @@ func play_song() -> void:
 		{
 			&"mode_name": "Freeplay",
 			&"exit_scene_path": get_tree().current_scene.scene_file_path,
+			&"chart_keep": false,
 		}
 	)
 

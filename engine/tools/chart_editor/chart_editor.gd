@@ -3,6 +3,7 @@ extends Control
 
 static var chart: Chart
 static var metadata: SongMetadata
+static var last_play_time: float = -1
 
 signal chart_loaded
 signal time_shifted
@@ -51,12 +52,18 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed(&"chart_playtest"):
 		Game.load_settings[&"chart"] = chart
+		Game.load_settings[&"chart_keep"] = true
 		Game.load_settings[&"songs_folder"] = songs_folder
 		Game.load_settings[&"song_name"] = song_name
 		Game.load_settings[&"song_difficulty"] = difficulty.to_lower()
 		Game.load_settings[&"mode_name"] = "Chart Playtest"
 		Game.load_settings[&"exit_scene_path"] = get_tree().current_scene.scene_file_path
 		Game.load_settings[&"playlist"].clear()
+
+		last_play_time = Conductor.raw_time
+		if Input.is_action_pressed(&"shift"):
+			Game.load_settings[&"start_time"] = last_play_time
+
 		SceneManager.transition_to_file(SongLoader.get_scene_path(song_name, songs_folder))
 		Conductor.active = true
 
@@ -92,6 +99,13 @@ func _on_chart_loaded() -> void:
 	Conductor.target_audio = song_player
 	Conductor.append_timing_changes(chart.timing_changes)
 	Conductor.active = false
+
+	if last_play_time != -1:
+		Conductor.raw_time = last_play_time
+		Conductor.target_audio.play(Conductor.raw_time)
+		Conductor.target_audio.stream_paused = true
+		Conductor.calculate_beat()
+		last_play_time = -1
 
 	if not strumlines:
 		return

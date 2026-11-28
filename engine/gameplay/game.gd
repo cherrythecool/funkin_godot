@@ -9,6 +9,9 @@ static var load_settings: Dictionary[StringName, Variant] = {
 	&"songs_folder": "res://mods/funkin/songs",
 	&"exit_scene_path": "",
 	&"playlist": [] as Array[Dictionary],
+	&"chart": null,
+	&"chart_keep": false,
+	&"start_time": -1.0,
 }
 
 static var instance: Game = null
@@ -82,6 +85,7 @@ static func load_songs(
 	Game.load_settings[&"songs_folder"] = songs_folder
 	Game.load_settings[&"song_name"] = song_name
 	Game.load_settings[&"song_difficulty"] = difficulty.to_lower()
+	Game.load_settings[&"chart_keep"] = false
 
 	var playlist: Array[Dictionary] = Game.load_settings[&"playlist"]
 	playlist.clear()
@@ -177,6 +181,10 @@ func _process(_delta: float) -> void:
 	):
 		start_song()
 
+		if load_settings[&"start_time"] != -1.0:
+			skip_to(maxf(load_settings[&"start_time"] - 1.0, 0))
+			load_settings[&"start_time"] = -1.0
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not playing:
@@ -247,7 +255,9 @@ func finish_song(force: bool = false, sound: bool = true) -> void:
 func load_chart() -> void:
 	if &"chart" in load_settings:
 		chart = load_settings[&"chart"]
-		load_settings.erase(&"chart")
+
+		if not load_settings[&"chart_keep"]:
+			load_settings.erase(&"chart")
 
 	if not is_instance_valid(chart):
 		chart = Chart.load_chart(

@@ -14,6 +14,8 @@ var target_key: StringName
 var target_index: int = 0
 var mouse_active := false
 var snapping_value: float = 1.0
+var prev_hover := false
+var selected_notes: Array[NoteData] = []
 
 
 func _ready() -> void:
@@ -33,54 +35,82 @@ func _process(_delta: float) -> void:
 	update_mouse_state()
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"chart_place_note") or event.is_action_pressed(&"chart_remove_note"):
+		if event is not InputEventMouseButton:
+			return
+
+		event = event as InputEventMouseButton
+		if (
+			event.window_id == get_window().get_window_id() and
+			not get_global_rect().has_point(event.global_position)
+		):
+			selected_notes.clear()
+
+
 func _gui_input(event: InputEvent) -> void:
 	if (
 		event.is_action_pressed(&"chart_remove_note") or
 		(event is InputEventMouseMotion and Input.is_action_pressed(&"chart_remove_note"))
 	):
-		var draw_info := get_draw_info()
-		var grid_size: float = draw_info[&"grid_size"]
-		var note_column_offset: int = draw_info[&"note_column_offset"]
-		var snapped_mouse := get_snapped_mouse_position(grid_size, Vector2(1.0, snapping_value))
-		var snapped_grid_position := snapped_mouse / grid_size
-		var snapped_step := Conductor.step + note_column_offset + snapped_grid_position.y
-
-		var mouse := get_grid_mouse_position(grid_size)
-		var grid_position := mouse / grid_size
-		var step := Conductor.step + note_column_offset + grid_position.y
-		target_index = 0
-
-		var notes := target.notes.filter(func(note_: NoteData) -> bool:
-			return absf(note_.step - snapped_step) <= 0.25
-		)
-
-		var closest: NoteData = null
-		for note: NoteData in notes:
-			if note.direction != int(grid_position.x):
-				continue
-
-			if (not closest) or absf(note.step - step) < absf(closest.step - step):
-				closest = note
-
+		var closest := get_my_current_note()
 		if closest:
 			target.notes.erase(closest)
 			target.sort_notes()
 
 	if event.is_action_pressed(&"chart_place_note") and target:
-		var draw_info := get_draw_info()
-		var grid_size: float = draw_info[&"grid_size"]
-		var note_column_offset: int = draw_info[&"note_column_offset"]
-		var mouse := get_snapped_mouse_position(grid_size, Vector2(1.0, snapping_value))
-		var grid_position := mouse / grid_size
-		var step := Conductor.step + note_column_offset + grid_position.y
-		target_index = 0
+		var closest := get_my_current_note()
+		if closest:
+			selected_notes.clear()
+			selected_notes.push_back(closest)
+		else:
+			selected_notes.clear()
+			var draw_info := get_draw_info()
+			var grid_size: float = draw_info[&"grid_size"]
+			var note_column_offset: int = draw_info[&"note_column_offset"]
+			var mouse := get_snapped_mouse_position(grid_size, Vector2(1.0, snapping_value))
+			var grid_position := mouse / grid_size
+			var step := Conductor.step + note_column_offset + grid_position.y
+			target_index = 0
 
-		var note := NoteData.new()
-		note.time = Conductor.get_time_at_step(step, Conductor.timing_changes)
-		note.direction = int(grid_position.x)
-		NoteData.set_timings(note, Conductor.timing_changes)
-		target.add_note(note)
-		target.sort_notes()
+			if step < 0:
+				return
+
+			var note := NoteData.new()
+			note.time = Conductor.get_time_at_step(step, Conductor.timing_changes)
+			note.direction = int(grid_position.x)
+			NoteData.set_timings(note, Conductor.timing_changes)
+			target.add_note(note)
+			target.sort_notes()
+			selected_notes.push_back(note)
+
+
+func get_my_current_note() -> NoteData:
+	var draw_info := get_draw_info()
+	var grid_size: float = draw_info[&"grid_size"]
+	var note_column_offset: int = draw_info[&"note_column_offset"]
+	var snapped_mouse := get_snapped_mouse_position(grid_size, Vector2(1.0, snapping_value))
+	var snapped_grid_position := snapped_mouse / grid_size
+	var snapped_step := Conductor.step + note_column_offset + snapped_grid_position.y
+
+	var mouse := get_grid_mouse_position(grid_size)
+	var grid_position := mouse / grid_size
+	var step := Conductor.step + note_column_offset + grid_position.y
+	target_index = 0
+
+	var notes := target.notes.filter(func(note_: NoteData) -> bool:
+		return absf(note_.step - snapped_step) <= 0.25
+	)
+
+	var closest: NoteData = null
+	for note: NoteData in notes:
+		if note.direction != int(grid_position.x):
+			continue
+
+		if (not closest) or absf(note.step - step) < absf(closest.step - step):
+			closest = note
+
+	return closest
 
 
 func _draw() -> void:
@@ -133,6 +163,10 @@ func _draw() -> void:
 		if note_step > (last_column - note_column_offset):
 			break
 
+		var note_mod := Color.WHITE
+		if note in selected_notes:
+			note_mod = Color.DIM_GRAY
+
 		if note.length > 0.0:
 			var sustain_anim := &"%s sustain" % note_directions[note.direction]
 			var sustain_texture := note_frames.get_frame_texture(sustain_anim, 0)
@@ -155,11 +189,11 @@ func _draw() -> void:
 			if tail_rect.size.y > grid_size / 2.0:
 				var sustain_rect := tail_rect
 				sustain_rect.size.y -= grid_size / 2.0
-				draw_texture_rect(sustain_texture, sustain_rect, false)
+				draw_texture_rect(sustain_texture, sustain_rect, false, note_mod)
 
 			tail_rect.position.y += maxf(tail_rect.size.y - (grid_size / 2.0), 0.0)
 			tail_rect.size.y = minf(grid_size / 2.0, tail_rect.size.y)
-			draw_texture_rect(tail_texture, tail_rect, false)
+			draw_texture_rect(tail_texture, tail_rect, false, note_mod)
 
 		var rect := Rect2(
 			grid_size * float(note.direction),
@@ -171,7 +205,7 @@ func _draw() -> void:
 
 		var note_anim := &"%s note" % note_directions[note.direction]
 		var note_texture := note_frames.get_frame_texture(note_anim, 0)
-		draw_texture_rect(note_texture, rect, false)
+		draw_texture_rect(note_texture, rect, false, note_mod)
 
 	var line_height := 4.0
 	draw_rect(
@@ -311,9 +345,6 @@ func update_mouse_state() -> void:
 			state = CURSOR_POINTING_HAND
 
 		mouse_default_cursor_shape = state
-
-
-var prev_hover := false
 
 
 func _on_snap_changed(value: float) -> void:
